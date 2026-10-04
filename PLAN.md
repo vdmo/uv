@@ -122,6 +122,52 @@ automatic download of the server from GitHub releases.
    alpha releases since the first; later spec changes are merged after parity.
 3. Code lives in a new workspace at this directory's root.
 
+## Direction beyond parity
+
+`learn-review.md` (kept locally, not in the repository) sketches where the compiler should
+go once it is in Rust. It was written without the language specification, so it is read as
+a list of intentions and checked against what Ultraviolet actually defines.
+
+Adopted, with where each lands:
+
+| Idea | Decision |
+| --- | --- |
+| Explicit pure phases: tokens, AST, typed module, IR, backend | Already the shape of the port; kept |
+| Golden tests comparing diagnostics and IR against the old compiler | Already the method (`tools/parity.sh`); kept through M6 |
+| Single diagnostic type with human and JSON renderers | Done in M1 |
+| Invariants enforced by Rust types (private fields, transitions only through one API) | Applied when M3 ports permissions, binding state and provenance: one module owns each state machine, no pass mutates it directly |
+| IR verifier run before any backend | New work in M6: a pass over the ported IR that checks the lowering did not introduce moves, allocations or key acquisitions the typed program does not show |
+| Backend trait so LLVM is one implementation | M6: introduce the trait while porting LLVM emission; Cranelift is a later backend, not part of parity |
+| Parallel parsing and per-function work | After M3 parity; the reference already parses modules on threads |
+| Incremental query engine shared by compiler and LSP | After M4 parity. The reference LSP re-analyses the workspace on change; a query database replaces that once behaviour is locked by the protocol suite |
+| Semantic tokens, hover and signature help that show permissions, regions, keys and contracts | M4 ports what the reference server has; the richer payloads are extensions after it |
+| Fuzzing | Started: the 10,908 generated lexer and parser cases already found three reference bugs; `cargo-fuzz` targets follow |
+| Formatter, linter, REPL, flow visualisation | After M7 |
+
+Not adopted, because the language is different from what the note assumes:
+
+- **Ownership model.** The note uses `Unique / Shared / Borrowed / Phantom` with borrows
+  and lifetimes. Ultraviolet has no borrows: it has the permissions `const`, `unique` and
+  `shared`, binding state (moved, partially moved), and the key system (`%read`,
+  `%write`) for access to `shared` data. The Rust types follow the specification, not
+  Rust's own borrow checker.
+- **Regions.** The note's `Stack / Heap / Async / Foreign` kinds are not the language's.
+  Regions are lexical arenas (`region`, `frame`, `^` allocation) with provenance tracked
+  on pointers (`Ptr<T>@Valid`, `@Null`, `@Expired`).
+- **Effect system.** There is no `EffectSet` or notion of a pure procedure. The language
+  controls effects through capabilities passed as values (no ambient authority) and
+  through contracts. "Effect" highlights and completion filters are built on
+  capabilities and contracts, or not at all.
+- **Syntax in the examples** (`fn`, `Int`, `alloc T`) is not Ultraviolet.
+- **Wrapping the old compiler in a Rust shell first** (the note's phase 1) is skipped: the
+  reference is used as an oracle from outside instead.
+- **Parser combinator crates and a new `SourceMap`.** The hand-written parser and the
+  existing `SourceFile` are byte-for-byte equal to the reference; they stay.
+
+Order of work is unchanged: parity first (M3 to M7), then the items above. An improvement
+that changes observable behaviour before its milestone's gate passes would make the gate
+meaningless.
+
 ## Status
 
 M0, M1 and M2 are done. Run `tools/parity.sh` to re-check every gate (about a minute);
