@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexOutOfBounds>
+<assemblies, [ArrayIndexOutOfBounds]>
+<assembly_name, ArrayIndexOutOfBounds>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexOutOfBounds/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexOutOfBounds/Build>
+<module_list, [ArrayIndexOutOfBounds]>
+<module, ArrayIndexOutOfBounds, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexOutOfBounds/Build/Intermediate/Obj/Source/ArrayIndexOutOfBounds.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexOutOfBounds/Build/Binary/libArrayIndexOutOfBounds.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexOutOfBounds/Source/Main.uv

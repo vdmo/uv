@@ -1,0 +1,9 @@
+module AttributeDiscoveryOrder::Tests
+  ProcedureDecl [3:10-14:2] internal procedure attributeDiscoveryOrderIoUnitSucceeded
+  ProcedureDecl [16:10-23:2] internal procedure attributeDiscoveryOrderTextByte
+  ProcedureDecl [25:10-44:2] internal procedure attributeDiscoveryOrderTextEquals
+  ProcedureDecl [46:10-59:2] internal procedure attributeDiscoveryOrderReadTextEquals
+  ProcedureDecl [61:10-70:2] internal procedure attributeDiscoveryOrderWrite
+  ProcedureDecl [73:10-80:2] internal procedure attributeDiscoveryOrderFirst
+  ProcedureDecl [83:10-91:2] internal procedure attributeDiscoveryOrderSecond
+  ProcedureDecl [94:10-102:2] internal procedure attributeDiscoveryOrderThird

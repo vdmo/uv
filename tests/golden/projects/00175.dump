@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypePathUnapplied>
+<assemblies, [AsyncTypePathUnapplied]>
+<assembly_name, AsyncTypePathUnapplied>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypePathUnapplied/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypePathUnapplied/Build>
+<module_list, [AsyncTypePathUnapplied]>
+<module, AsyncTypePathUnapplied, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypePathUnapplied/Build/Intermediate/Obj/Source/AsyncTypePathUnapplied.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypePathUnapplied/Build/Binary/libAsyncTypePathUnapplied.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypePathUnapplied/Source/Main.uv

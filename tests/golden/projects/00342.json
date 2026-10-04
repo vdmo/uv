@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-1202","severity":"error","message":"Import of non-existent assembly or module (`Resolve-Import-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Modules/MissingImport/Source/Main.uv","start_line":3,"start_col":1,"end_line":3,"end_col":33},"source_line":"import DefinitelyMissing::Module","children":[]}]}

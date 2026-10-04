@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatLiteralExplicitRequirement>
+<assemblies, [FloatLiteralExplicitRequirement]>
+<assembly_name, FloatLiteralExplicitRequirement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatLiteralExplicitRequirement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatLiteralExplicitRequirement/Build>
+<module_list, [FloatLiteralExplicitRequirement]>
+<module, FloatLiteralExplicitRequirement, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatLiteralExplicitRequirement/Build/Intermediate/Obj/Source/FloatLiteralExplicitRequirement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatLiteralExplicitRequirement/Build/Binary/libFloatLiteralExplicitRequirement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatLiteralExplicitRequirement/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignConst>
+<assemblies, [AssignConst]>
+<assembly_name, AssignConst>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignConst/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignConst/Build>
+<module_list, [AssignConst]>
+<module, AssignConst, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignConst/Build/Intermediate/Obj/Source/AssignConst.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignConst/Build/Binary/libAssignConst.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/AssignConst/Source/Main.uv

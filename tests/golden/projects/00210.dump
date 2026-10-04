@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatSuffixMismatch>
+<assemblies, [FloatSuffixMismatch]>
+<assembly_name, FloatSuffixMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatSuffixMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatSuffixMismatch/Build>
+<module_list, [FloatSuffixMismatch]>
+<module, FloatSuffixMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatSuffixMismatch/Build/Intermediate/Obj/Source/FloatSuffixMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatSuffixMismatch/Build/Binary/libFloatSuffixMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/FloatSuffixMismatch/Source/Main.uv

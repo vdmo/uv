@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineArgCount>
+<assemblies, [PipelineArgCount]>
+<assembly_name, PipelineArgCount>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineArgCount/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineArgCount/Build>
+<module_list, [PipelineArgCount]>
+<module, PipelineArgCount, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineArgCount/Build/Intermediate/Obj/Source/PipelineArgCount.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineArgCount/Build/Binary/libPipelineArgCount.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineArgCount/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/ModalSpecialLowering>
+<assemblies, [ModalSpecialLowering]>
+<assembly_name, ModalSpecialLowering>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/ModalSpecialLowering/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/ModalSpecialLowering/Build>
+<module_list, [ModalSpecialLowering]>
+<module, ModalSpecialLowering, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ModalSpecialLowering/Build/Intermediate/Obj/Source/ModalSpecialLowering.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/ModalSpecialLowering/Build/Intermediate/IR/Source/ModalSpecialLowering.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/ModalSpecialLowering/Build/Library/libModalSpecialLowering.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ModalSpecialLowering/Source/Library.uv

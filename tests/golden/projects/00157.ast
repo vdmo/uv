@@ -1,0 +1,3 @@
+module AddressOfStaticHelpers
+  RecordDecl [4:8-6:2] public record AddressOfPackedPayload
+  ProcedureDecl [8:8-11:2] public procedure addressOfStaticHelpersReference

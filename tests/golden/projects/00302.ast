@@ -1,0 +1,3 @@
+module HostExportOutsideLibrary
+  ProcedureDecl [4:8-6:2] public procedure hostedValue
+  ProcedureDecl [8:8-10:2] public procedure main

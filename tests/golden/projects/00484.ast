@@ -1,0 +1,2 @@
+module MethodsAndReceiversDiagnostic
+  RecordDecl [3:8-9:2] public record MethodsAndReceiversOwner

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-PRJ-0301","severity":"error","message":"`assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)","span":null,"source_line":null,"children":[]}]}

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Modules/StaticMissingTypeAnnotation>
+<assemblies, [StaticMissingTypeAnnotation]>
+<assembly_name, StaticMissingTypeAnnotation>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Modules/StaticMissingTypeAnnotation/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Modules/StaticMissingTypeAnnotation/Build>
+<module_list, [StaticMissingTypeAnnotation]>
+<module, StaticMissingTypeAnnotation, obj, /w/target/fixtures/Fixtures/RejectedSource/Modules/StaticMissingTypeAnnotation/Build/Intermediate/Obj/Source/StaticMissingTypeAnnotation.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Modules/StaticMissingTypeAnnotation/Build/Binary/libStaticMissingTypeAnnotation.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Modules/StaticMissingTypeAnnotation/Source/Main.uv

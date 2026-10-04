@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelEscapingClosureSpawn>
+<assemblies, [ParallelEscapingClosureSpawn]>
+<assembly_name, ParallelEscapingClosureSpawn>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelEscapingClosureSpawn/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelEscapingClosureSpawn/Build>
+<module_list, [ParallelEscapingClosureSpawn]>
+<module, ParallelEscapingClosureSpawn, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelEscapingClosureSpawn/Build/Intermediate/Obj/Source/ParallelEscapingClosureSpawn.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelEscapingClosureSpawn/Build/Binary/libParallelEscapingClosureSpawn.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelEscapingClosureSpawn/Source/Main.uv

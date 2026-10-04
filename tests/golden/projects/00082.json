@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-CON-0005","severity":"warning","message":"Callee access pattern unknown; assuming full access","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning/Source/Main.uv","start_line":18,"start_col":29,"end_line":18,"end_col":47},"source_line":"        let observed: i32 = summarizeAsUnknown(target)","children":[]}]}

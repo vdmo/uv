@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgPackedUnsafe>
+<assemblies, [CallArgPackedUnsafe]>
+<assembly_name, CallArgPackedUnsafe>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgPackedUnsafe/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgPackedUnsafe/Build>
+<module_list, [CallArgPackedUnsafe]>
+<module, CallArgPackedUnsafe, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgPackedUnsafe/Build/Intermediate/Obj/Source/CallArgPackedUnsafe.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgPackedUnsafe/Build/Binary/libCallArgPackedUnsafe.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgPackedUnsafe/Source/Main.uv

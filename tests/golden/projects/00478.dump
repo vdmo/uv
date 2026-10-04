@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainGeneric>
+<assemblies, [MainGeneric]>
+<assembly_name, MainGeneric>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainGeneric/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainGeneric/Build>
+<module_list, [MainGeneric]>
+<module, MainGeneric, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainGeneric/Build/Intermediate/Obj/Source/MainGeneric.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainGeneric/Build/Binary/MainGeneric, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MainGeneric/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerToolResolveFailure>
+<assemblies, [LinkerToolResolveFailure]>
+<assembly_name, LinkerToolResolveFailure>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerToolResolveFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerToolResolveFailure/Build>
+<module_list, [LinkerToolResolveFailure]>
+<module, LinkerToolResolveFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerToolResolveFailure/Build/Intermediate/Obj/Source/LinkerToolResolveFailure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerToolResolveFailure/Build/Binary/LinkerToolResolveFailure, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerToolResolveFailure/Source/Main.uv

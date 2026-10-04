@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYield>
+<assemblies, [SyncContainsYield]>
+<assembly_name, SyncContainsYield>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYield/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYield/Build>
+<module_list, [SyncContainsYield]>
+<module, SyncContainsYield, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYield/Build/Intermediate/Obj/Source/SyncContainsYield.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYield/Build/Binary/libSyncContainsYield.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYield/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateImpureMove>
+<assemblies, [ContractPredicateImpureMove]>
+<assembly_name, ContractPredicateImpureMove>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateImpureMove/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateImpureMove/Build>
+<module_list, [ContractPredicateImpureMove]>
+<module, ContractPredicateImpureMove, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateImpureMove/Build/Intermediate/Obj/Source/ContractPredicateImpureMove.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateImpureMove/Build/Binary/libContractPredicateImpureMove.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateImpureMove/Source/Main.uv

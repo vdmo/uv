@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantDiagnostics>
+<assemblies, [InvariantDiagnostics]>
+<assembly_name, InvariantDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantDiagnostics/Build>
+<module_list, [InvariantDiagnostics]>
+<module, InvariantDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantDiagnostics/Build/Intermediate/Obj/Source/InvariantDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantDiagnostics/Build/Binary/libInvariantDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantDiagnostics/Source/Main.uv

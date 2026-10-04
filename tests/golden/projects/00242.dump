@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitDuplicate>
+<assemblies, [RecordFieldInitDuplicate]>
+<assembly_name, RecordFieldInitDuplicate>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitDuplicate/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitDuplicate/Build>
+<module_list, [RecordFieldInitDuplicate]>
+<module, RecordFieldInitDuplicate, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitDuplicate/Build/Intermediate/Obj/Source/RecordFieldInitDuplicate.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitDuplicate/Build/Binary/libRecordFieldInitDuplicate.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitDuplicate/Source/Main.uv

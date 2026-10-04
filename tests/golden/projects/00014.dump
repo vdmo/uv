@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/ArrayIndexOOBPanic>
+<assemblies, [ArrayIndexOOBPanic]>
+<assembly_name, ArrayIndexOOBPanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/ArrayIndexOOBPanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/ArrayIndexOOBPanic/Build>
+<module_list, [ArrayIndexOOBPanic]>
+<module, ArrayIndexOOBPanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ArrayIndexOOBPanic/Build/Intermediate/Obj/Source/ArrayIndexOOBPanic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/ArrayIndexOOBPanic/Build/Binary/ArrayIndexOOBPanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ArrayIndexOOBPanic/Source/Main.uv

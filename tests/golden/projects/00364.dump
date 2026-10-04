@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuIntrinsicOutside>
+<assemblies, [GpuIntrinsicOutside]>
+<assembly_name, GpuIntrinsicOutside>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuIntrinsicOutside/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuIntrinsicOutside/Build>
+<module_list, [GpuIntrinsicOutside]>
+<module, GpuIntrinsicOutside, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuIntrinsicOutside/Build/Intermediate/Obj/Source/GpuIntrinsicOutside.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuIntrinsicOutside/Build/Binary/libGpuIntrinsicOutside.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuIntrinsicOutside/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefPlaceTypingFamily>
+<assemblies, [RawDerefPlaceTypingFamily]>
+<assembly_name, RawDerefPlaceTypingFamily>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefPlaceTypingFamily/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefPlaceTypingFamily/Build>
+<module_list, [RawDerefPlaceTypingFamily]>
+<module, RawDerefPlaceTypingFamily, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefPlaceTypingFamily/Build/Intermediate/Obj/Source/RawDerefPlaceTypingFamily.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefPlaceTypingFamily/Build/Binary/libRawDerefPlaceTypingFamily.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefPlaceTypingFamily/Source/Main.uv

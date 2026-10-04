@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/CapabilityClassesDiagnostics>
+<assemblies, [CapabilityClassesDiagnostics]>
+<assembly_name, CapabilityClassesDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/CapabilityClassesDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/CapabilityClassesDiagnostics/Build>
+<module_list, [CapabilityClassesDiagnostics]>
+<module, CapabilityClassesDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/CapabilityClassesDiagnostics/Build/Intermediate/Obj/Source/CapabilityClassesDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/CapabilityClassesDiagnostics/Build/Binary/libCapabilityClassesDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/CapabilityClassesDiagnostics/Source/Main.uv

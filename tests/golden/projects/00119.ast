@@ -1,0 +1,4 @@
+module PackedFieldReferenceRequiresUnsafe
+  RecordDecl [4:8-6:2] public record PackedFieldReferencePayload
+  ProcedureDecl [8:8-10:2] public procedure packedFieldBorrowTarget
+  ProcedureDecl [12:8-16:2] public procedure packedFieldReferenceRequiresUnsafe

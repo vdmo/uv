@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteContentionWarning>
+<assemblies, [ReadThenWriteContentionWarning]>
+<assembly_name, ReadThenWriteContentionWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteContentionWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteContentionWarning/Build>
+<module_list, [ReadThenWriteContentionWarning]>
+<module, ReadThenWriteContentionWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteContentionWarning/Build/Intermediate/Obj/Source/ReadThenWriteContentionWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteContentionWarning/Build/Binary/libReadThenWriteContentionWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteContentionWarning/Source/Main.uv

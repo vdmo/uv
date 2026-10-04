@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CON-0158","severity":"error","message":"Non-uniform control flow at barrier","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierDivergence/Source/Main.uv","start_line":5,"start_col":9,"end_line":8,"end_col":10},"source_line":"        if true {","children":[{"kind":"note","message":"expr-kind=IfExpr","span":null}]}]}

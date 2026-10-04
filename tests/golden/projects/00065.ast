@@ -1,0 +1,3 @@
+module InlineAlwaysRecursive
+  ProcedureDecl [4:8-9:2] public procedure inlineAlwaysRecursive
+  ProcedureDecl [11:8-13:2] public procedure callInlineAlwaysRecursive

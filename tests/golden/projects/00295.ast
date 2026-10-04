@@ -1,0 +1,2 @@
+module ForeignEnsuresNullResult
+  ExternBlock [3:1-6:2]

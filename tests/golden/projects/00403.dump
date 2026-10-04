@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ConstMutation>
+<assemblies, [ConstMutation]>
+<assembly_name, ConstMutation>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ConstMutation/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ConstMutation/Build>
+<module_list, [ConstMutation]>
+<module, ConstMutation, obj, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ConstMutation/Build/Intermediate/Obj/Source/ConstMutation.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ConstMutation/Build/Binary/libConstMutation.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Permissions/ConstMutation/Source/Main.uv

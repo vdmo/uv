@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentProvenanceEscape>
+<assemblies, [AssignmentProvenanceEscape]>
+<assembly_name, AssignmentProvenanceEscape>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentProvenanceEscape/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentProvenanceEscape/Build>
+<module_list, [AssignmentProvenanceEscape]>
+<module, AssignmentProvenanceEscape, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentProvenanceEscape/Build/Intermediate/Obj/Source/AssignmentProvenanceEscape.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentProvenanceEscape/Build/Binary/libAssignmentProvenanceEscape.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentProvenanceEscape/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNameSet>
+<assemblies, [RecordFieldNameSet]>
+<assembly_name, RecordFieldNameSet>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNameSet/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNameSet/Build>
+<module_list, [RecordFieldNameSet]>
+<module, RecordFieldNameSet, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNameSet/Build/Intermediate/Obj/Source/RecordFieldNameSet.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNameSet/Build/Binary/libRecordFieldNameSet.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNameSet/Source/Main.uv

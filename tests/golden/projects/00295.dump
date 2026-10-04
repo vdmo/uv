@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignEnsuresNullResult>
+<assemblies, [ForeignEnsuresNullResult]>
+<assembly_name, ForeignEnsuresNullResult>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignEnsuresNullResult/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignEnsuresNullResult/Build>
+<module_list, [ForeignEnsuresNullResult]>
+<module, ForeignEnsuresNullResult, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignEnsuresNullResult/Build/Intermediate/Obj/Source/ForeignEnsuresNullResult.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignEnsuresNullResult/Build/Binary/libForeignEnsuresNullResult.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignEnsuresNullResult/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/ObjectWriteFailure>
+<assemblies, [ObjectWriteFailure]>
+<assembly_name, ObjectWriteFailure>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/ObjectWriteFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/ObjectWriteFailure/Build>
+<module_list, [ObjectWriteFailure]>
+<module, ObjectWriteFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/ObjectWriteFailure/Build/Intermediate/Obj/Source/ObjectWriteFailure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/ObjectWriteFailure/Build/Binary/ObjectWriteFailure, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/ObjectWriteFailure/Source/Main.uv

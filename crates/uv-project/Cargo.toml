@@ -1,0 +1,9 @@
+[package]
+name = "uv-project"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+toml = "0.8"
+uv-core = { path = "../uv-core" }

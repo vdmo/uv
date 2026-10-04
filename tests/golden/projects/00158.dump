@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandRequiresInput>
+<assemblies, [AllOperandRequiresInput]>
+<assembly_name, AllOperandRequiresInput>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandRequiresInput/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandRequiresInput/Build>
+<module_list, [AllOperandRequiresInput]>
+<module, AllOperandRequiresInput, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandRequiresInput/Build/Intermediate/Obj/Source/AllOperandRequiresInput.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandRequiresInput/Build/Binary/libAllOperandRequiresInput.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandRequiresInput/Source/Main.uv

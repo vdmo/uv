@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedMethodSignatureConflict>
+<assemblies, [InheritedMethodSignatureConflict]>
+<assembly_name, InheritedMethodSignatureConflict>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedMethodSignatureConflict/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedMethodSignatureConflict/Build>
+<module_list, [InheritedMethodSignatureConflict]>
+<module, InheritedMethodSignatureConflict, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedMethodSignatureConflict/Build/Intermediate/Obj/Source/InheritedMethodSignatureConflict.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedMethodSignatureConflict/Build/Binary/libInheritedMethodSignatureConflict.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedMethodSignatureConflict/Source/Main.uv

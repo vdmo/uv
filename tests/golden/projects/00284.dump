@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumFieldApply>
+<assemblies, [FfiSafeEnumFieldApply]>
+<assembly_name, FfiSafeEnumFieldApply>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumFieldApply/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumFieldApply/Build>
+<module_list, [FfiSafeEnumFieldApply]>
+<module, FfiSafeEnumFieldApply, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumFieldApply/Build/Intermediate/Obj/Source/FfiSafeEnumFieldApply.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumFieldApply/Build/Binary/libFfiSafeEnumFieldApply.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumFieldApply/Source/Main.uv

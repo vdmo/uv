@@ -1,0 +1,4 @@
+module InheritedFieldSignatureConflict
+  ClassDecl [3:10-5:2] internal class FieldConflictLeft
+  ClassDecl [7:10-9:2] internal class FieldConflictRight
+  ClassDecl [11:10-14:2] internal class InheritedFieldSignatureConflictClass

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationWellFormedness>
+<assemblies, [ProcedureDeclarationWellFormedness]>
+<assembly_name, ProcedureDeclarationWellFormedness>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationWellFormedness/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationWellFormedness/Build>
+<module_list, [ProcedureDeclarationWellFormedness]>
+<module, ProcedureDeclarationWellFormedness, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationWellFormedness/Build/Intermediate/Obj/Source/ProcedureDeclarationWellFormedness.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationWellFormedness/Build/Binary/libProcedureDeclarationWellFormedness.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationWellFormedness/Source/Main.uv

@@ -1,0 +1,4 @@
+module UnknownCalleeAccessWarning
+  RecordDecl [3:8-9:2] public record UnknownAccessTarget
+  ProcedureDecl [11:8-13:2] public procedure summarizeAsUnknown
+  ProcedureDecl [15:8-21:2] public procedure unknownCalleeAccessWarningReference

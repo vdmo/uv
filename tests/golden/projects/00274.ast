@@ -1,0 +1,2 @@
+module ErrorPredicateWellFormedness
+  ExternBlock [3:1-6:2]

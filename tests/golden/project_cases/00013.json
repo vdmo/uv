@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-PRJ-0207","severity":"error","message":"`link_kind` has invalid value or type (`WF-Assembly-LinkKind-Err`, `WF-Assembly-LinkKindType-Err`)","span":null,"source_line":null,"children":[]}]}

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2452","severity":"error","message":"Attribute not valid on target declaration kind (`Attr-Target-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutWrongTarget/Source/Main.uv","start_line":4,"start_col":8,"end_line":6,"end_col":2},"source_line":"public procedure layoutWrongTarget() -> i32 {","children":[]}]}

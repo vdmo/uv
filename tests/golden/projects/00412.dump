@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyFieldNonBitcopy>
+<assemblies, [BitcopyFieldNonBitcopy]>
+<assembly_name, BitcopyFieldNonBitcopy>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyFieldNonBitcopy/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyFieldNonBitcopy/Build>
+<module_list, [BitcopyFieldNonBitcopy]>
+<module, BitcopyFieldNonBitcopy, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyFieldNonBitcopy/Build/Intermediate/Obj/Source/BitcopyFieldNonBitcopy.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyFieldNonBitcopy/Build/Binary/libBitcopyFieldNonBitcopy.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyFieldNonBitcopy/Source/Main.uv

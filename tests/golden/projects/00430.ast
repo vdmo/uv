@@ -1,0 +1,4 @@
+module GenericInfiniteMonomorphization
+  RecordDecl [3:10-5:2] internal record InstantiationLayer
+  ProcedureDecl [7:8-9:2] public procedure expandingInstantiation
+  ProcedureDecl [11:8-13:2] public procedure genericInfiniteMonomorphizationReference

@@ -1,0 +1,2 @@
+module ParallelClosureCaptureOuterMove
+  ProcedureDecl [3:8-13:2] public procedure parallelClosureCaptureOuterMoveReference

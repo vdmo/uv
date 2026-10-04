@@ -1,0 +1,3 @@
+module FfiPassByValueRequired
+  RecordDecl [4:8-9:2] public record DroppingFfiRecord
+  ExternBlock [11:1-13:2]

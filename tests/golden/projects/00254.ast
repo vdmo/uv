@@ -1,0 +1,3 @@
+module SyncOperandYields
+  ProcedureDecl [3:8-5:2] public procedure yieldingAsyncValue
+  ProcedureDecl [7:8-10:2] public procedure syncOperandYieldsReference

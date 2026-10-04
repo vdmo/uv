@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/ContinueOutsideLoop>
+<assemblies, [ContinueOutsideLoop]>
+<assembly_name, ContinueOutsideLoop>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/ContinueOutsideLoop/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/ContinueOutsideLoop/Build>
+<module_list, [ContinueOutsideLoop]>
+<module, ContinueOutsideLoop, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/ContinueOutsideLoop/Build/Intermediate/Obj/Source/ContinueOutsideLoop.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/ContinueOutsideLoop/Build/Binary/libContinueOutsideLoop.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/ContinueOutsideLoop/Source/Main.uv

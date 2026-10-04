@@ -1,0 +1,3 @@
+module FfiSafeRecordFieldApply
+  RecordDecl [4:8-7:2] public record GenericFfiRecord
+  ExternBlock [9:1-11:2]

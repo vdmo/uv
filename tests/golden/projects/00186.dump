@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastAndTransmuteExpressionsDiagnostic>
+<assemblies, [CastAndTransmuteExpressionsDiagnostic]>
+<assembly_name, CastAndTransmuteExpressionsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastAndTransmuteExpressionsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastAndTransmuteExpressionsDiagnostic/Build>
+<module_list, [CastAndTransmuteExpressionsDiagnostic]>
+<module, CastAndTransmuteExpressionsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastAndTransmuteExpressionsDiagnostic/Build/Intermediate/Obj/Source/CastAndTransmuteExpressionsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastAndTransmuteExpressionsDiagnostic/Build/Binary/libCastAndTransmuteExpressionsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CastAndTransmuteExpressionsDiagnostic/Source/Main.uv

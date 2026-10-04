@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2453","severity":"error","message":"`align(N)` where N is not a power of two","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutInvalidAlign/Source/Main.uv","start_line":4,"start_col":8,"end_line":6,"end_col":2},"source_line":"public record LayoutInvalidAlignRecord {","children":[]}]}

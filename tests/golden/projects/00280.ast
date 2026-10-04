@@ -1,0 +1,2 @@
+module FfiReturnRegionLocalRawPtr
+  ProcedureDecl [4:8-11:2] public procedure ffiReturnRegionLocalRawPtrReference

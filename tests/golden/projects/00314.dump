@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnwindOnNonFFIProcedure>
+<assemblies, [UnwindOnNonFFIProcedure]>
+<assembly_name, UnwindOnNonFFIProcedure>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnwindOnNonFFIProcedure/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnwindOnNonFFIProcedure/Build>
+<module_list, [UnwindOnNonFFIProcedure]>
+<module, UnwindOnNonFFIProcedure, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnwindOnNonFFIProcedure/Build/Intermediate/Obj/Source/UnwindOnNonFFIProcedure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnwindOnNonFFIProcedure/Build/Binary/libUnwindOnNonFFIProcedure.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/UnwindOnNonFFIProcedure/Source/Main.uv

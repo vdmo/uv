@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmTypeMappingFailure>
+<assemblies, [LlvmTypeMappingFailure]>
+<assembly_name, LlvmTypeMappingFailure>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmTypeMappingFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmTypeMappingFailure/Build>
+<module_list, [LlvmTypeMappingFailure]>
+<module, LlvmTypeMappingFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmTypeMappingFailure/Build/Intermediate/Obj/Source/LlvmTypeMappingFailure.o, ir, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmTypeMappingFailure/Build/Intermediate/IR/Source/LlvmTypeMappingFailure.ll>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmTypeMappingFailure/Build/Library/libLlvmTypeMappingFailure.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmTypeMappingFailure/Source/Library.uv

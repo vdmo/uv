@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedLayoutOnEnum>
+<assemblies, [PackedLayoutOnEnum]>
+<assembly_name, PackedLayoutOnEnum>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedLayoutOnEnum/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedLayoutOnEnum/Build>
+<module_list, [PackedLayoutOnEnum]>
+<module, PackedLayoutOnEnum, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedLayoutOnEnum/Build/Intermediate/Obj/Source/PackedLayoutOnEnum.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedLayoutOnEnum/Build/Binary/libPackedLayoutOnEnum.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedLayoutOnEnum/Source/Main.uv

@@ -1,0 +1,2 @@
+module NullResultWellFormedness
+  ExternBlock [3:1-6:2]

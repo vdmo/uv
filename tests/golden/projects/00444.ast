@@ -1,0 +1,4 @@
+module InheritedMethodSignatureConflict
+  ClassDecl [3:10-7:2] internal class MethodConflictLeft
+  ClassDecl [9:10-13:2] internal class MethodConflictRight
+  ClassDecl [15:10-18:2] internal class InheritedMethodSignatureConflictClass

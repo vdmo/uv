@@ -1,0 +1,2 @@
+module SharedCapturingClosureYieldKeys
+  ProcedureDecl [3:8-13:2] public procedure sharedCapturingClosureYieldKeysReference

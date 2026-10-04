@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/AcceptedProjects/MacOSTargetProfile>
+<assemblies, [MacOSTargetProfile]>
+<assembly_name, MacOSTargetProfile>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/AcceptedProjects/MacOSTargetProfile/Source>
+<output_root, /w/target/fixtures/Fixtures/AcceptedProjects/MacOSTargetProfile/Build>
+<module_list, [MacOSTargetProfile]>
+<module, MacOSTargetProfile, obj, /w/target/fixtures/Fixtures/AcceptedProjects/MacOSTargetProfile/Build/Intermediate/Obj/Source/MacOSTargetProfile.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/AcceptedProjects/MacOSTargetProfile/Build/Binary/MacOSTargetProfile, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/AcceptedProjects/MacOSTargetProfile/Source/Main.uv

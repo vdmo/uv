@@ -1,0 +1,138 @@
+==================
+Newline terminates a statement
+==================
+
+procedure f() {
+    let a = 1
+    let b = 2; let c = 3
+    a
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (block
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (integer_literal))
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (integer_literal))
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (integer_literal))
+      (expression_statement
+        (identifier)))))
+
+==================
+Method chain and else continue the line
+==================
+
+procedure f() -> i32 {
+    let v = make()
+        .first()
+        ~>second(1)
+    if v {
+        1
+    }
+    else {
+        2
+    }
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (type_path
+      (identifier))
+    (block
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (method_call_expression
+          (call_expression
+            (field_expression
+              (call_expression
+                (identifier)
+                (arguments))
+              (identifier))
+            (arguments))
+          (identifier)
+          (arguments
+            (integer_literal))))
+      (expression_statement
+        (if_expression
+          (identifier)
+          (block
+            (expression_statement
+              (integer_literal)))
+          (else_clause
+            (block
+              (expression_statement
+                (integer_literal)))))))))
+
+==================
+Operator at line end continues, at line start does not
+==================
+
+procedure f() {
+    let a = 1 +
+        2
+    let b = 3
+    -b
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (block
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (binary_expression
+          (integer_literal)
+          (integer_literal)))
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (integer_literal))
+      (expression_statement
+        (unary_expression
+          (identifier))))))
+
+==================
+Comments between a line break and a continuation
+==================
+
+procedure f() {
+    value
+        // why
+        /* nested /* block */ comment */
+        .field
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (block
+      (expression_statement
+        (field_expression
+          (identifier)
+          (line_comment)
+          (block_comment)
+          (identifier))))))

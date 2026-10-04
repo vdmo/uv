@@ -1,0 +1,5 @@
+module ModalSpecialLowering
+  ModalDecl [3:8-24:2] public modal ModalSpecialLoweringState
+  ProcedureDecl [26:8-30:2] public procedure modalSpecialStateFieldReadProbe
+  ProcedureDecl [32:8-36:2] public procedure modalSpecialStateMethodProbe
+  ProcedureDecl [38:8-43:2] public procedure modalSpecialTransitionProbe

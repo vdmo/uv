@@ -1,0 +1,18 @@
+[
+  (block)
+  (record_body)
+  (enum_body)
+  (modal_body)
+  (state_block)
+  (class_body)
+  (extern_block)
+  (case_block)
+  (field_initializer_list)
+  (using_list)
+  (array_expression)
+  (arguments)
+  (parameters)
+  (race_expression)
+  (all_expression)
+  (block_comment)
+] @fold

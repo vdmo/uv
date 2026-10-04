@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedCapturingClosureYieldKeys>
+<assemblies, [SharedCapturingClosureYieldKeys]>
+<assembly_name, SharedCapturingClosureYieldKeys>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedCapturingClosureYieldKeys/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedCapturingClosureYieldKeys/Build>
+<module_list, [SharedCapturingClosureYieldKeys]>
+<module, SharedCapturingClosureYieldKeys, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedCapturingClosureYieldKeys/Build/Intermediate/Obj/Source/SharedCapturingClosureYieldKeys.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedCapturingClosureYieldKeys/Build/Binary/libSharedCapturingClosureYieldKeys.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/SharedCapturingClosureYieldKeys/Source/Main.uv

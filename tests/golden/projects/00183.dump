@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallMoveUnexpected>
+<assemblies, [CallMoveUnexpected]>
+<assembly_name, CallMoveUnexpected>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallMoveUnexpected/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallMoveUnexpected/Build>
+<module_list, [CallMoveUnexpected]>
+<module, CallMoveUnexpected, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallMoveUnexpected/Build/Intermediate/Obj/Source/CallMoveUnexpected.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallMoveUnexpected/Build/Binary/libCallMoveUnexpected.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CallMoveUnexpected/Source/Main.uv

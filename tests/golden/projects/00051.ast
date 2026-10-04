@@ -1,0 +1,21 @@
+module SharedLibraryImageLifecycleHostHarness
+  StaticDecl [3:10-3:55] internal let
+  StaticDecl [4:10-4:61] internal let
+  StaticDecl [5:10-5:66] internal let
+  TypeAliasDecl [7:10-7:75] internal type SharedLifecycleInstallProbeFunction
+  TypeAliasDecl [8:10-8:72] internal type SharedLifecycleIncrementFunction
+  TypeAliasDecl [9:10-9:55] internal type SharedLifecycleStateFunction
+  TypeAliasDecl [10:10-10:72] internal type SharedLifecycleRunLinkedFunction
+  RecordDecl [12:10-16:2] internal record SharedLifecycleBytesLayout
+  RecordDecl [18:10-21:2] internal record SharedLifecycleCString
+  ExternBlock [23:1-40:2]
+  ProcedureDecl [42:10-53:2] internal procedure sharedLifecycleAllocationSucceeded
+  ProcedureDecl [55:10-64:2] internal procedure sharedLifecycleManagedBytesPointer
+  ProcedureDecl [66:10-68:2] internal procedure sharedLifecycleMutablePointer
+  ProcedureDecl [70:10-97:2] internal procedure sharedLifecycleCString
+  ProcedureDecl [99:10-115:2] internal procedure sharedLifecycleResolveSymbol
+  ProcedureDecl [117:10-127:2] internal procedure sharedLifecycleLoadImage
+  ProcedureDecl [129:10-223:2] internal procedure sharedLifecycleExerciseRawImage
+  ProcedureDecl [225:10-252:2] internal procedure sharedLifecycleExerciseLinkedImageOnce
+  ProcedureDecl [254:10-260:2] internal procedure sharedLifecycleExerciseLinkedImage
+  ProcedureDecl [262:8-294:2] public procedure main

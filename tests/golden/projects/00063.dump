@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncStateMachineDiagnosticsTable>
+<assemblies, [AsyncStateMachineDiagnosticsTable]>
+<assembly_name, AsyncStateMachineDiagnosticsTable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncStateMachineDiagnosticsTable/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncStateMachineDiagnosticsTable/Build>
+<module_list, [AsyncStateMachineDiagnosticsTable]>
+<module, AsyncStateMachineDiagnosticsTable, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncStateMachineDiagnosticsTable/Build/Intermediate/Obj/Source/AsyncStateMachineDiagnosticsTable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncStateMachineDiagnosticsTable/Build/Binary/libAsyncStateMachineDiagnosticsTable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncStateMachineDiagnosticsTable/Source/Main.uv

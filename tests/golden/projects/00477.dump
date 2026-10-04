@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainDiagnosticReferences>
+<assemblies, [MainDiagnosticReferences]>
+<assembly_name, MainDiagnosticReferences>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainDiagnosticReferences/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainDiagnosticReferences/Build>
+<module_list, [MainDiagnosticReferences]>
+<module, MainDiagnosticReferences, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainDiagnosticReferences/Build/Intermediate/Obj/Source/MainDiagnosticReferences.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainDiagnosticReferences/Build/Binary/MainDiagnosticReferences, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MainDiagnosticReferences/Source/Main.uv

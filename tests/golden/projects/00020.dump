@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeSemantics>
+<assemblies, [AttributeSemantics]>
+<assembly_name, AttributeSemantics>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeSemantics/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeSemantics/Build>
+<module_list, [AttributeSemantics]>
+<module, AttributeSemantics, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeSemantics/Build/Intermediate/Obj/Source/AttributeSemantics.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeSemantics/Build/Intermediate/IR/Source/AttributeSemantics.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeSemantics/Build/Library/libAttributeSemantics.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AttributeSemantics/Source/Main.uv

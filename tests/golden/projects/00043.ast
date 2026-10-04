@@ -1,0 +1,9 @@
+module ModuleDiscoveryOrdering
+  ProcedureDecl [3:8-5:2] public procedure moduleDiscoveryOrderingRootValue
+module ModuleDiscoveryOrdering::Alpha
+  ProcedureDecl [3:8-5:2] public procedure moduleDiscoveryOrderingAlphaExtraValue
+  ProcedureDecl [3:8-5:2] public procedure moduleDiscoveryOrderingAlphaValue
+module ModuleDiscoveryOrdering::Beta
+  ProcedureDecl [3:8-5:2] public procedure moduleDiscoveryOrderingBetaValue
+module ModuleDiscoveryOrdering::Beta::Nested
+  ProcedureDecl [3:8-5:2] public procedure moduleDiscoveryOrderingNestedValue

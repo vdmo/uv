@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IfConditionNonBool>
+<assemblies, [IfConditionNonBool]>
+<assembly_name, IfConditionNonBool>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IfConditionNonBool/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IfConditionNonBool/Build>
+<module_list, [IfConditionNonBool]>
+<module, IfConditionNonBool, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IfConditionNonBool/Build/Intermediate/Obj/Source/IfConditionNonBool.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IfConditionNonBool/Build/Binary/libIfConditionNonBool.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/IfConditionNonBool/Source/Main.uv

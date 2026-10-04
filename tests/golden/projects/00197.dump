@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateDiscriminant>
+<assemblies, [EnumDuplicateDiscriminant]>
+<assembly_name, EnumDuplicateDiscriminant>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateDiscriminant/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateDiscriminant/Build>
+<module_list, [EnumDuplicateDiscriminant]>
+<module, EnumDuplicateDiscriminant, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateDiscriminant/Build/Intermediate/Obj/Source/EnumDuplicateDiscriminant.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateDiscriminant/Build/Binary/libEnumDuplicateDiscriminant.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateDiscriminant/Source/Main.uv

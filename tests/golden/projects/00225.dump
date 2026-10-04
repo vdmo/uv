@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullCheck>
+<assemblies, [PtrNullCheck]>
+<assembly_name, PtrNullCheck>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullCheck/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullCheck/Build>
+<module_list, [PtrNullCheck]>
+<module, PtrNullCheck, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullCheck/Build/Intermediate/Obj/Source/PtrNullCheck.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullCheck/Build/Binary/libPtrNullCheck.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullCheck/Source/Main.uv

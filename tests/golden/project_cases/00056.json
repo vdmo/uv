@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-PRJ-0206","severity":"error","message":"Ambiguous assembly root ownership for overlapping source roots (`WF-Assembly-Root-Owner-Ambiguous`)","span":null,"source_line":null,"children":[]}]}

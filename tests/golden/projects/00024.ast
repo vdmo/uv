@@ -1,0 +1,16 @@
+module ComptimeRuntimeErasure
+  StaticDecl [3:10-3:54] internal let
+  RecordDecl [6:10-9:2] internal record RuntimeErasureRecord
+  EnumDecl [12:10-15:2] internal enum RuntimeErasureEnum
+  ModalDecl [18:10-24:2] internal modal RuntimeErasureModal
+  ClassDecl [26:10-26:37] internal class RuntimeErasureForm
+  RecordDecl [28:10-30:2] internal record RuntimeErasureImplementation
+  ClassDecl [32:10-32:45] internal class RuntimeErasureDerivedClass
+  ComptimeProcedureDecl [34:1-41:2] internal comptime procedure requireRuntimeErasure
+  ComptimeProcedureDecl [43:1-49:2] internal comptime procedure chooseRuntimeErasureValue
+  DeriveTargetDecl [51:1-62:2] derive target EmitRuntimeErasureDerive
+  RecordDecl [65:10-67:2] internal record DerivedRuntimeErasure
+  ProcedureDecl [69:10-96:2] internal procedure compileTimeRuntimeErasureCapabilityAndReflectionChecks
+  ProcedureDecl [98:10-109:2] internal procedure compileTimeRuntimeErasureForms
+  ProcedureDecl [111:10-142:2] internal procedure emitRuntimeErasureQuoteSpliceItems
+  ProcedureDecl [144:8-156:2] public procedure compileTimeRuntimeErasureEntryPoint

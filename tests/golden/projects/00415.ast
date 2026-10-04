@@ -1,0 +1,2 @@
+module ClassMemberNameConflict
+  ClassDecl [3:10-9:2] internal class ConflictingMemberClass

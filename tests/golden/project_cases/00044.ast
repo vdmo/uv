@@ -1,0 +1,4 @@
+module App
+  ProcedureDecl [1:8-3:2] public procedure main
+module App::grosse
+module App::Größe

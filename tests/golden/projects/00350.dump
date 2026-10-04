@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierOutsideGpuContext>
+<assemblies, [BarrierOutsideGpuContext]>
+<assembly_name, BarrierOutsideGpuContext>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierOutsideGpuContext/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierOutsideGpuContext/Build>
+<module_list, [BarrierOutsideGpuContext]>
+<module, BarrierOutsideGpuContext, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierOutsideGpuContext/Build/Intermediate/Obj/Source/BarrierOutsideGpuContext.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierOutsideGpuContext/Build/Binary/libBarrierOutsideGpuContext.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierOutsideGpuContext/Source/Main.uv

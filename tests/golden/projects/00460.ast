@@ -1,0 +1,3 @@
+module BehavioralSubtypingDiagnostics
+  ClassDecl [3:8-6:2] public class BehavioralDiagnosticClass
+  RecordDecl [8:8-16:2] public record BehavioralDiagnosticOwner

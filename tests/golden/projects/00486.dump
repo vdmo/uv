@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingReturnType>
+<assemblies, [MissingReturnType]>
+<assembly_name, MissingReturnType>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingReturnType/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingReturnType/Build>
+<module_list, [MissingReturnType]>
+<module, MissingReturnType, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingReturnType/Build/Intermediate/Obj/Source/MissingReturnType.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingReturnType/Build/Binary/libMissingReturnType.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingReturnType/Source/Main.uv

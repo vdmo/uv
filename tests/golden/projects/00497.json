@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SEM-3012","severity":"error","message":"Duplicate method name in type","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodDuplicate/Source/Main.uv","start_line":3,"start_col":8,"end_line":13,"end_col":2},"source_line":"public record DuplicateMethodOwner {","children":[]}]}

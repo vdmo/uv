@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CON-0095","severity":"error","message":"`%speculative` not followed by `write`","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeReadMode/Source/Main.uv","start_line":6,"start_col":18,"end_line":6,"end_col":22},"source_line":"    %speculative read shared_value {","children":[]}]}

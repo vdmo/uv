@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CON-0280","severity":"error","message":"Captured binding does not outlive async","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCaptureOutlivesFrame/Source/Main.uv","start_line":7,"start_col":8,"end_line":17,"end_col":2},"source_line":"public procedure asyncCaptureOutlivesFrameReference() -> i32 {","children":[]}]}

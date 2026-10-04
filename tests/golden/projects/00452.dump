@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsOwnership>
+<assemblies, [RefinementDiagnosticsOwnership]>
+<assembly_name, RefinementDiagnosticsOwnership>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsOwnership/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsOwnership/Build>
+<module_list, [RefinementDiagnosticsOwnership]>
+<module, RefinementDiagnosticsOwnership, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsOwnership/Build/Intermediate/Obj/Source/RefinementDiagnosticsOwnership.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsOwnership/Build/Binary/libRefinementDiagnosticsOwnership.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsOwnership/Source/Main.uv

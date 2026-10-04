@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Procedures/FreeProcedureOverloadResolution>
+<assemblies, [FreeProcedureOverloadResolution]>
+<assembly_name, FreeProcedureOverloadResolution>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Procedures/FreeProcedureOverloadResolution/Source>
+<output_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Procedures/FreeProcedureOverloadResolution/Build>
+<module_list, [FreeProcedureOverloadResolution]>
+<module, FreeProcedureOverloadResolution, obj, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Procedures/FreeProcedureOverloadResolution/Build/Intermediate/Obj/Source/FreeProcedureOverloadResolution.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Procedures/FreeProcedureOverloadResolution/Build/Binary/libFreeProcedureOverloadResolution.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/BootstrapNonCompliance/Procedures/FreeProcedureOverloadResolution/Source/Main.uv

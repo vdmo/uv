@@ -1,0 +1,6 @@
+module InternalAccess
+  ImportDecl [3:8-3:31]
+  ProcedureDecl [5:8-7:2] public procedure internalAccessReference
+  ProcedureDecl [9:8-11:2] public procedure main
+module InternalProvider
+  ProcedureDecl [3:10-5:2] internal procedure internalProviderValue

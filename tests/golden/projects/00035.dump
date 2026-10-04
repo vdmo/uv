@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/IntegerOverflowPanic>
+<assemblies, [IntegerOverflowPanic]>
+<assembly_name, IntegerOverflowPanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/IntegerOverflowPanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/IntegerOverflowPanic/Build>
+<module_list, [IntegerOverflowPanic]>
+<module, IntegerOverflowPanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/IntegerOverflowPanic/Build/Intermediate/Obj/Source/IntegerOverflowPanic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/IntegerOverflowPanic/Build/Binary/IntegerOverflowPanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/IntegerOverflowPanic/Source/Main.uv

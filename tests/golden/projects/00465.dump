@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryCapability>
+<assemblies, [ContractEntryCapability]>
+<assembly_name, ContractEntryCapability>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryCapability/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryCapability/Build>
+<module_list, [ContractEntryCapability]>
+<module, ContractEntryCapability, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryCapability/Build/Intermediate/Obj/Source/ContractEntryCapability.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryCapability/Build/Binary/libContractEntryCapability.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryCapability/Source/Main.uv

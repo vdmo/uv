@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/LoopAsyncEnclosingReturn>
+<assemblies, [LoopAsyncEnclosingReturn]>
+<assembly_name, LoopAsyncEnclosingReturn>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/LoopAsyncEnclosingReturn/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/LoopAsyncEnclosingReturn/Build>
+<module_list, [LoopAsyncEnclosingReturn]>
+<module, LoopAsyncEnclosingReturn, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/LoopAsyncEnclosingReturn/Build/Intermediate/Obj/Source/LoopAsyncEnclosingReturn.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/LoopAsyncEnclosingReturn/Build/Binary/libLoopAsyncEnclosingReturn.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/LoopAsyncEnclosingReturn/Source/Main.uv

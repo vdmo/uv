@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchInferFailure>
+<assemblies, [DispatchInferFailure]>
+<assembly_name, DispatchInferFailure>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchInferFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchInferFailure/Build>
+<module_list, [DispatchInferFailure]>
+<module, DispatchInferFailure, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchInferFailure/Build/Intermediate/Obj/Source/DispatchInferFailure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchInferFailure/Build/Binary/libDispatchInferFailure.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchInferFailure/Source/Main.uv

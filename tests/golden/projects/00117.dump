@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutPackedAlignConflict>
+<assemblies, [LayoutPackedAlignConflict]>
+<assembly_name, LayoutPackedAlignConflict>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutPackedAlignConflict/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutPackedAlignConflict/Build>
+<module_list, [LayoutPackedAlignConflict]>
+<module, LayoutPackedAlignConflict, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutPackedAlignConflict/Build/Intermediate/Obj/Source/LayoutPackedAlignConflict.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutPackedAlignConflict/Build/Binary/libLayoutPackedAlignConflict.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutPackedAlignConflict/Source/Main.uv

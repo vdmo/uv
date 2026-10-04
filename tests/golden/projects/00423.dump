@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicMissingMethod>
+<assemblies, [DynamicMissingMethod]>
+<assembly_name, DynamicMissingMethod>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicMissingMethod/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicMissingMethod/Build>
+<module_list, [DynamicMissingMethod]>
+<module, DynamicMissingMethod, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicMissingMethod/Build/Intermediate/Obj/Source/DynamicMissingMethod.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicMissingMethod/Build/Binary/libDynamicMissingMethod.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicMissingMethod/Source/Main.uv

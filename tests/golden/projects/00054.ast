@@ -1,0 +1,10 @@
+module StructuredParallelLoweringEvidence
+  ProcedureDecl [3:10-17:2] internal procedure queuedCancellationRuntimeEvidence
+  ProcedureDecl [19:10-36:2] internal procedure midExecutionCancellationRuntimeEvidence
+  ProcedureDecl [38:10-41:2] internal procedure cancellationLoweringEvidence
+  ProcedureDecl [43:10-49:2] internal procedure nestedParallelLoweringEvidence
+  ProcedureDecl [51:10-54:2] internal procedure operatorUndefinedPanicValue
+  ProcedureDecl [56:10-59:2] internal procedure integerOverflowPanicValue
+  ProcedureDecl [61:10-74:2] internal procedure parallelSpawnPanicEvidence
+  ProcedureDecl [76:10-80:2] internal procedure runtimeEvidenceSucceeded
+  ProcedureDecl [82:8-99:2] public procedure main

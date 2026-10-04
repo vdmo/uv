@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/OrderedRedundantWarning>
+<assemblies, [OrderedRedundantWarning]>
+<assembly_name, OrderedRedundantWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/OrderedRedundantWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/OrderedRedundantWarning/Build>
+<module_list, [OrderedRedundantWarning]>
+<module, OrderedRedundantWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/OrderedRedundantWarning/Build/Intermediate/Obj/Source/OrderedRedundantWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/OrderedRedundantWarning/Build/Binary/libOrderedRedundantWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/OrderedRedundantWarning/Source/Main.uv

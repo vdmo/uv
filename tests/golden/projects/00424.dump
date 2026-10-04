@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicNonDispatchableRequirement>
+<assemblies, [DynamicNonDispatchableRequirement]>
+<assembly_name, DynamicNonDispatchableRequirement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicNonDispatchableRequirement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicNonDispatchableRequirement/Build>
+<module_list, [DynamicNonDispatchableRequirement]>
+<module, DynamicNonDispatchableRequirement, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicNonDispatchableRequirement/Build/Intermediate/Obj/Source/DynamicNonDispatchableRequirement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicNonDispatchableRequirement/Build/Binary/libDynamicNonDispatchableRequirement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicNonDispatchableRequirement/Source/Main.uv

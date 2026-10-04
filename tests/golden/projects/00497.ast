@@ -1,0 +1,2 @@
+module RecordMethodDuplicate
+  RecordDecl [3:8-13:2] public record DuplicateMethodOwner

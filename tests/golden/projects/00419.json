@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2500","severity":"error","message":"Duplicate procedure name in class","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassProcedureName/Source/Main.uv","start_line":3,"start_col":10,"end_line":11,"end_col":2},"source_line":"internal class DuplicateProcedureClass {","children":[]}]}

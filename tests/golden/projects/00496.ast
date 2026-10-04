@@ -1,0 +1,3 @@
+module RecordMethodCallArgumentType
+  RecordDecl [3:8-9:2] public record MethodCallOwner
+  ProcedureDecl [11:8-14:2] public procedure recordMethodCallArgumentTypeReference

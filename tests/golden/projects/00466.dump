@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryMovedParameter>
+<assemblies, [ContractEntryMovedParameter]>
+<assembly_name, ContractEntryMovedParameter>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryMovedParameter/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryMovedParameter/Build>
+<module_list, [ContractEntryMovedParameter]>
+<module, ContractEntryMovedParameter, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryMovedParameter/Build/Intermediate/Obj/Source/ContractEntryMovedParameter.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryMovedParameter/Build/Binary/libContractEntryMovedParameter.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryMovedParameter/Source/Main.uv

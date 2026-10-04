@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandYields>
+<assemblies, [RaceOperandYields]>
+<assembly_name, RaceOperandYields>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandYields/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandYields/Build>
+<module_list, [RaceOperandYields]>
+<module, RaceOperandYields, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandYields/Build/Intermediate/Obj/Source/RaceOperandYields.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandYields/Build/Binary/libRaceOperandYields.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandYields/Source/Main.uv

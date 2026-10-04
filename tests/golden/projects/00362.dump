@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureNonGpuSafe>
+<assemblies, [GpuCaptureNonGpuSafe]>
+<assembly_name, GpuCaptureNonGpuSafe>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureNonGpuSafe/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureNonGpuSafe/Build>
+<module_list, [GpuCaptureNonGpuSafe]>
+<module, GpuCaptureNonGpuSafe, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureNonGpuSafe/Build/Intermediate/Obj/Source/GpuCaptureNonGpuSafe.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureNonGpuSafe/Build/Binary/libGpuCaptureNonGpuSafe.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureNonGpuSafe/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantPublicMutableField>
+<assemblies, [InvariantPublicMutableField]>
+<assembly_name, InvariantPublicMutableField>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantPublicMutableField/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantPublicMutableField/Build>
+<module_list, [InvariantPublicMutableField]>
+<module, InvariantPublicMutableField, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantPublicMutableField/Build/Intermediate/Obj/Source/InvariantPublicMutableField.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantPublicMutableField/Build/Binary/libInvariantPublicMutableField.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantPublicMutableField/Source/Main.uv

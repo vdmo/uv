@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-CON-0009","severity":"warning","message":"Closure captures `shared` data","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Keys/SharedClosureCaptureWarning/Source/Main.uv","start_line":5,"start_col":21,"end_line":5,"end_col":33},"source_line":"    let reader = || shared_value","children":[]}]}

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"I-CON-0013","severity":"info","message":"Static key safety proven under `#dynamic`","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Source/Main.uv","start_line":10,"start_col":5,"end_line":12,"end_col":6},"source_line":"    %read values[index] {","children":[]}]}

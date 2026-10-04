@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodReceiverNotSelf>
+<assemblies, [RecordMethodReceiverNotSelf]>
+<assembly_name, RecordMethodReceiverNotSelf>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodReceiverNotSelf/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodReceiverNotSelf/Build>
+<module_list, [RecordMethodReceiverNotSelf]>
+<module, RecordMethodReceiverNotSelf, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodReceiverNotSelf/Build/Intermediate/Obj/Source/RecordMethodReceiverNotSelf.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodReceiverNotSelf/Build/Binary/libRecordMethodReceiverNotSelf.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodReceiverNotSelf/Source/Main.uv

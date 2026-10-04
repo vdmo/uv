@@ -1,0 +1,3 @@
+module ReceiverPermissionMismatch
+  RecordDecl [3:8-9:2] public record PermissionDiagnosticCell
+  ProcedureDecl [11:8-14:2] public procedure receiverPermissionMismatchReference

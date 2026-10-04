@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-PRJ-0103","severity":"error","message":"Missing required `assembly` table, empty assembly list, required keys, or required key type (`WF-Assembly-Count-Err`, `WF-Assembly-Keys-Err`, `WF-Assembly-Required-Types-Err`, `WF-Assembly-Table-Err`)","span":null,"source_line":null,"children":[]}]}

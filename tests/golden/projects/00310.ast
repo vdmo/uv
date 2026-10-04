@@ -1,0 +1,2 @@
+module RawExportUnsupportedABI
+  ProcedureDecl [4:8-6:2] public procedure rawExportUnsupportedABIReference

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsTable>
+<assemblies, [RefinementDiagnosticsTable]>
+<assembly_name, RefinementDiagnosticsTable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsTable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsTable/Build>
+<module_list, [RefinementDiagnosticsTable]>
+<module, RefinementDiagnosticsTable, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsTable/Build/Intermediate/Obj/Source/RefinementDiagnosticsTable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsTable/Build/Binary/libRefinementDiagnosticsTable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsTable/Source/Main.uv

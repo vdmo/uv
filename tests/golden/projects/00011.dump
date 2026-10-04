@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/AcceptedProjects/StructuredParallelism/ParserConformance>
+<assemblies, [StructuredParallelismConformance]>
+<assembly_name, StructuredParallelismConformance>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/AcceptedProjects/StructuredParallelism/ParserConformance/Source>
+<output_root, /w/target/fixtures/Fixtures/AcceptedProjects/StructuredParallelism/ParserConformance/Build>
+<module_list, [StructuredParallelismConformance]>
+<module, StructuredParallelismConformance, obj, /w/target/fixtures/Fixtures/AcceptedProjects/StructuredParallelism/ParserConformance/Build/Intermediate/Obj/Source/StructuredParallelismConformance.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/AcceptedProjects/StructuredParallelism/ParserConformance/Build/Library/libStructuredParallelismConformance.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/AcceptedProjects/StructuredParallelism/ParserConformance/Source/Library.uv

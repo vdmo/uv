@@ -1,0 +1,3 @@
+module ConstructionExpressionsDiagnostic
+  RecordDecl [3:8-6:2] public record ConstructionDiagnosticPayload
+  ProcedureDecl [8:8-14:2] public procedure constructionExpressionsDiagnosticReference

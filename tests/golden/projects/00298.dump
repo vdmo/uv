@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportGeneric>
+<assemblies, [HostExportGeneric]>
+<assembly_name, HostExportGeneric>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportGeneric/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportGeneric/Build>
+<module_list, [HostExportGeneric]>
+<module, HostExportGeneric, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportGeneric/Build/Intermediate/Obj/Source/HostExportGeneric.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportGeneric/Build/Binary/libHostExportGeneric.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportGeneric/Source/Main.uv

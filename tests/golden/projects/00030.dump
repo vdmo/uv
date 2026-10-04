@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/ExecutableOutput>
+<assemblies, [ExecutableOutput]>
+<assembly_name, ExecutableOutput>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/ExecutableOutput/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/ExecutableOutput/Build>
+<module_list, [ExecutableOutput]>
+<module, ExecutableOutput, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ExecutableOutput/Build/Intermediate/Obj/Source/ExecutableOutput.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/ExecutableOutput/Build/Intermediate/IR/Source/ExecutableOutput.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/ExecutableOutput/Build/Binary/ExecutableOutput, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ExecutableOutput/Source/Main.uv

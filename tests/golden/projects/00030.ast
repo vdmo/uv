@@ -1,0 +1,27 @@
+module ExecutableOutput
+  RecordDecl [3:8-7:2] public record ExecutableDomainContext
+  RecordDecl [9:8-17:2] public record ExecutableCapabilityFields
+  RecordDecl [19:8-22:2] public record ExecutableOutputContext
+  TypeAliasDecl [24:10-24:53] internal type ExecutableUnaryFunction
+  TypeAliasDecl [26:10-26:52] internal type ExecutableUnaryClosure
+  ProcedureDecl [28:10-30:2] internal procedure executableOutputFuture
+  ProcedureDecl [32:10-41:2] internal procedure executableOutputFutureValue
+  ProcedureDecl [43:10-46:2] internal procedure executableOutputDomainObserved
+  ProcedureDecl [48:10-50:2] internal procedure executablePipelineIncrement
+  ProcedureDecl [52:10-55:2] internal procedure executableEvalSigmaClosureNonCapturing
+  ProcedureDecl [57:10-64:2] internal procedure executableEvalSigmaClosureCapturing
+  ProcedureDecl [66:10-69:2] internal procedure executableEvalSigmaClosureCall
+  ProcedureDecl [71:10-76:2] internal procedure executableApplyClosure
+  ProcedureDecl [78:10-82:2] internal procedure executableEvalSigmaClosureRuntimeHelpers
+  ProcedureDecl [84:10-91:2] internal procedure executableEvalSigmaClosureCallCalleeControlValue
+  ProcedureDecl [93:10-96:2] internal procedure executableEvalSigmaClosureCallArgsControlValue
+  ProcedureDecl [98:10-102:2] internal procedure executableEvalSigmaClosureCallResolvedInternalFormRuntime
+  ProcedureDecl [104:10-107:2] internal procedure executableEvalSigmaPipelineFunc
+  ProcedureDecl [109:10-113:2] internal procedure executableEvalSigmaPipelineClosure
+  ProcedureDecl [115:10-119:2] internal procedure executableEvalSigmaPipelineCtrlLeftValue
+  ProcedureDecl [121:10-129:2] internal procedure executableEvalSigmaPipelineCtrlRightValue
+  ProcedureDecl [131:10-143:2] internal procedure executableClosureAndPipelineRuntimeOk
+  ProcedureDecl [145:10-180:2] internal procedure executableClosureAndPipelineRuntimeFailureCode
+  ProcedureDecl [182:10-198:2] internal procedure executableOutputDomainRuntimeFailureCode
+  ProcedureDecl [200:10-253:2] internal procedure executableOutputRuntimeFailureCode
+  ProcedureDecl [255:8-291:2] public procedure main

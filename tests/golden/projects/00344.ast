@@ -1,0 +1,2 @@
+module StaticMissingTypeAnnotation
+  StaticDecl [3:10-3:37] internal let

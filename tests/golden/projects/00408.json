@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-1602","severity":"error","message":"`unique` exclusion violation (aliasing or inactive use)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Permissions/UniqueInactiveUse/Source/Main.uv","start_line":14,"start_col":8,"end_line":17,"end_col":2},"source_line":"public procedure uniqueInactiveUseReference() -> i32 {","children":[]}]}

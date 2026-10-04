@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/ClassDefaultMethodFieldAccess>
+<assemblies, [ClassDefaultMethodFieldAccess]>
+<assembly_name, ClassDefaultMethodFieldAccess>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/ClassDefaultMethodFieldAccess/Source>
+<output_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/ClassDefaultMethodFieldAccess/Build>
+<module_list, [ClassDefaultMethodFieldAccess]>
+<module, ClassDefaultMethodFieldAccess, obj, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/ClassDefaultMethodFieldAccess/Build/Intermediate/Obj/Source/ClassDefaultMethodFieldAccess.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/ClassDefaultMethodFieldAccess/Build/Binary/libClassDefaultMethodFieldAccess.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/ClassDefaultMethodFieldAccess/Source/Main.uv

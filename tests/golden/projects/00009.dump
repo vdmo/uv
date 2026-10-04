@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/AcceptedProjects/PtrNullReturn>
+<assemblies, [PtrNullReturn]>
+<assembly_name, PtrNullReturn>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/AcceptedProjects/PtrNullReturn/Source>
+<output_root, /w/target/fixtures/Fixtures/AcceptedProjects/PtrNullReturn/Build>
+<module_list, [PtrNullReturn]>
+<module, PtrNullReturn, obj, /w/target/fixtures/Fixtures/AcceptedProjects/PtrNullReturn/Build/Intermediate/Obj/Source/PtrNullReturn.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/AcceptedProjects/PtrNullReturn/Build/Binary/libPtrNullReturn.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/AcceptedProjects/PtrNullReturn/Source/Library.uv

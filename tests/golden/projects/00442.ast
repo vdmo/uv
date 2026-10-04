@@ -1,0 +1,3 @@
+module ImplementationMissingRequiredField
+  ClassDecl [3:10-5:2] internal class RequiredFieldClass
+  RecordDecl [7:10-9:2] internal record MissingRequiredField

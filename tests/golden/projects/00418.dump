@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassImplementationRule>
+<assemblies, [DuplicateClassImplementationRule]>
+<assembly_name, DuplicateClassImplementationRule>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassImplementationRule/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassImplementationRule/Build>
+<module_list, [DuplicateClassImplementationRule]>
+<module, DuplicateClassImplementationRule, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassImplementationRule/Build/Intermediate/Obj/Source/DuplicateClassImplementationRule.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassImplementationRule/Build/Binary/libDuplicateClassImplementationRule.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassImplementationRule/Source/Main.uv

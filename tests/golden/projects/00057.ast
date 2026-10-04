@@ -1,0 +1,5 @@
+module GenericClassBoundMethodLookup
+  ClassDecl [3:10-7:2] internal class Readable
+  RecordDecl [9:10-11:2] internal record ReadableOwner
+  ProcedureDecl [13:10-15:2] internal procedure boundedRead
+  ProcedureDecl [17:8-20:2] public procedure genericClassBoundMethodLookupReference

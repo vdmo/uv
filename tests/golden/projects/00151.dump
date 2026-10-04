@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericInvariantSubtyping>
+<assemblies, [GenericInvariantSubtyping]>
+<assembly_name, GenericInvariantSubtyping>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericInvariantSubtyping/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericInvariantSubtyping/Build>
+<module_list, [GenericInvariantSubtyping]>
+<module, GenericInvariantSubtyping, obj, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericInvariantSubtyping/Build/Intermediate/Obj/Source/GenericInvariantSubtyping.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericInvariantSubtyping/Build/Binary/libGenericInvariantSubtyping.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericInvariantSubtyping/Source/Main.uv

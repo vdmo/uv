@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning>
+<assemblies, [SpeculativeExpensiveBodyWarning]>
+<assembly_name, SpeculativeExpensiveBodyWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning/Build>
+<module_list, [SpeculativeExpensiveBodyWarning]>
+<module, SpeculativeExpensiveBodyWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning/Build/Intermediate/Obj/Source/SpeculativeExpensiveBodyWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning/Build/Binary/libSpeculativeExpensiveBodyWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning/Source/Main.uv

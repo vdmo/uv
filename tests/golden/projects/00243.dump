@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitMissing>
+<assemblies, [RecordFieldInitMissing]>
+<assembly_name, RecordFieldInitMissing>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitMissing/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitMissing/Build>
+<module_list, [RecordFieldInitMissing]>
+<module, RecordFieldInitMissing, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitMissing/Build/Intermediate/Obj/Source/RecordFieldInitMissing.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitMissing/Build/Binary/libRecordFieldInitMissing.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldInitMissing/Source/Main.uv

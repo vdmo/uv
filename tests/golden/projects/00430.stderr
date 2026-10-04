@@ -1,0 +1,2 @@
+[uv] codegen failure at /home/runner/work/ultraviolet/ultraviolet/Bootstrap/Ultraviolet/src/05_codegen/lower/expr/call.cpp:1848
+[uv] EnsureCodegenModule: lowering failed for module 'GenericInfiniteMonomorphization' (resolve_failed=false, codegen_failed=true)

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicSelfParameterNonDispatchable>
+<assemblies, [DynamicSelfParameterNonDispatchable]>
+<assembly_name, DynamicSelfParameterNonDispatchable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicSelfParameterNonDispatchable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicSelfParameterNonDispatchable/Build>
+<module_list, [DynamicSelfParameterNonDispatchable]>
+<module, DynamicSelfParameterNonDispatchable, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicSelfParameterNonDispatchable/Build/Intermediate/Obj/Source/DynamicSelfParameterNonDispatchable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicSelfParameterNonDispatchable/Build/Binary/libDynamicSelfParameterNonDispatchable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicSelfParameterNonDispatchable/Source/Main.uv

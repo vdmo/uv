@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteAlignMismatch>
+<assemblies, [TransmuteAlignMismatch]>
+<assembly_name, TransmuteAlignMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteAlignMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteAlignMismatch/Build>
+<module_list, [TransmuteAlignMismatch]>
+<module, TransmuteAlignMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteAlignMismatch/Build/Intermediate/Obj/Source/TransmuteAlignMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteAlignMismatch/Build/Binary/libTransmuteAlignMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteAlignMismatch/Source/Main.uv

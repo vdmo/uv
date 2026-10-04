@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueMemberNotDefined>
+<assemblies, [OpaqueMemberNotDefined]>
+<assembly_name, OpaqueMemberNotDefined>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueMemberNotDefined/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueMemberNotDefined/Build>
+<module_list, [OpaqueMemberNotDefined]>
+<module, OpaqueMemberNotDefined, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueMemberNotDefined/Build/Intermediate/Obj/Source/OpaqueMemberNotDefined.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueMemberNotDefined/Build/Binary/libOpaqueMemberNotDefined.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueMemberNotDefined/Source/Main.uv

@@ -1,0 +1,13 @@
+<project_root, /w/target/prjcases/layout_dot_file>
+<assemblies, [App]>
+<assembly_name, App>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/layout_dot_file/Source>
+<output_root, /w/target/prjcases/layout_dot_file/Build>
+<module_list, [App, App::Sub]>
+<module, App, obj, /w/target/prjcases/layout_dot_file/Build/Intermediate/Obj/Source/App.o, ir, <bottom>>
+<module, App::Sub, obj, /w/target/prjcases/layout_dot_file/Build/Intermediate/Obj/Source/Sub/App_x3a_x3aSub.o, ir, <bottom>>
+<artifact, /w/target/prjcases/layout_dot_file/Build/Binary/App, import_lib, <bottom>>
+file:/w/target/prjcases/layout_dot_file/Source/Main.uv
+file:/w/target/prjcases/layout_dot_file/Source/Sub/.hidden.uv

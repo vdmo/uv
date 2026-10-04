@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchOutsideParallel>
+<assemblies, [DispatchOutsideParallel]>
+<assembly_name, DispatchOutsideParallel>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchOutsideParallel/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchOutsideParallel/Build>
+<module_list, [DispatchOutsideParallel]>
+<module, DispatchOutsideParallel, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchOutsideParallel/Build/Intermediate/Obj/Source/DispatchOutsideParallel.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchOutsideParallel/Build/Binary/libDispatchOutsideParallel.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchOutsideParallel/Source/Main.uv

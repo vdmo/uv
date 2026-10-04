@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapeDeferredAccess>
+<assemblies, [KeyEscapeDeferredAccess]>
+<assembly_name, KeyEscapeDeferredAccess>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapeDeferredAccess/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapeDeferredAccess/Build>
+<module_list, [KeyEscapeDeferredAccess]>
+<module, KeyEscapeDeferredAccess, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapeDeferredAccess/Build/Intermediate/Obj/Source/KeyEscapeDeferredAccess.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapeDeferredAccess/Build/Binary/libKeyEscapeDeferredAccess.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapeDeferredAccess/Source/Main.uv

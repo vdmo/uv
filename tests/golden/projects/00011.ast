@@ -1,0 +1,2 @@
+module StructuredParallelismConformance
+  ProcedureDecl [3:8-33:2] public procedure structuredParallelismCompilerConformanceEntryPoint

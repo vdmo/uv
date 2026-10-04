@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/DirectCallCapabilityInclusion>
+<assemblies, [DirectCallCapabilityInclusion]>
+<assembly_name, DirectCallCapabilityInclusion>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/DirectCallCapabilityInclusion/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/DirectCallCapabilityInclusion/Build>
+<module_list, [DirectCallCapabilityInclusion]>
+<module, DirectCallCapabilityInclusion, obj, /w/target/fixtures/Fixtures/RejectedSource/Permissions/DirectCallCapabilityInclusion/Build/Intermediate/Obj/Source/DirectCallCapabilityInclusion.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Permissions/DirectCallCapabilityInclusion/Build/Binary/libDirectCallCapabilityInclusion.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Permissions/DirectCallCapabilityInclusion/Source/Main.uv

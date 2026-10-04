@@ -1,0 +1,10 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlDependency>
+<assemblies, [EmitLlDependency]>
+<assembly_name, EmitLlDependency>
+<assembly_kind, dependency>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlDependency/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlDependency/Build>
+<module_list, [EmitLlDependency]>
+<module, EmitLlDependency, obj, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlDependency/Build/Intermediate/Obj/Source/EmitLlDependency.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlDependency/Build/Intermediate/IR/Source/EmitLlDependency.ll>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlDependency/Source/Library.uv

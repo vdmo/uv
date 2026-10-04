@@ -1,0 +1,4 @@
+module IfCaseUnionNonExhaustive
+  TypeAliasDecl [3:8-3:46] public type IfCaseUnionReference
+  ProcedureDecl [5:8-7:2] public procedure ifCaseUnionValueReference
+  ProcedureDecl [9:8-16:2] public procedure ifCaseUnionNonExhaustiveReference

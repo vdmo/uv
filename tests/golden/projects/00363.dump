@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureShared>
+<assemblies, [GpuCaptureShared]>
+<assembly_name, GpuCaptureShared>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureShared/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureShared/Build>
+<module_list, [GpuCaptureShared]>
+<module, GpuCaptureShared, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureShared/Build/Intermediate/Obj/Source/GpuCaptureShared.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureShared/Build/Binary/libGpuCaptureShared.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureShared/Source/Main.uv

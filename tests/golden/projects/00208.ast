@@ -1,0 +1,7 @@
+module FieldVisibility
+  UsingDecl [3:1-3:49]
+  UsingDecl [4:1-4:49]
+  ProcedureDecl [6:8-9:2] public procedure fieldVisibilityReference
+module FieldVisibility::Hidden
+  RecordDecl [3:8-5:2] public record HiddenPayload
+  ProcedureDecl [7:8-11:2] public procedure hiddenPayload

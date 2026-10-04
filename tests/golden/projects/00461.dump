@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingLiskov>
+<assemblies, [BehavioralSubtypingLiskov]>
+<assembly_name, BehavioralSubtypingLiskov>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingLiskov/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingLiskov/Build>
+<module_list, [BehavioralSubtypingLiskov]>
+<module, BehavioralSubtypingLiskov, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingLiskov/Build/Intermediate/Obj/Source/BehavioralSubtypingLiskov.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingLiskov/Build/Binary/libBehavioralSubtypingLiskov.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingLiskov/Source/Main.uv

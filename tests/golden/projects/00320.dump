@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapePrecedence>
+<assemblies, [KeyEscapePrecedence]>
+<assembly_name, KeyEscapePrecedence>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapePrecedence/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapePrecedence/Build>
+<module_list, [KeyEscapePrecedence]>
+<module, KeyEscapePrecedence, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapePrecedence/Build/Intermediate/Obj/Source/KeyEscapePrecedence.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapePrecedence/Build/Binary/libKeyEscapePrecedence.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/KeyEscapePrecedence/Source/Main.uv

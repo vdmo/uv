@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0331","severity":"error","message":"Emitted class not implemented by derive target subject","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/DeriveMissingEmittedClass/Source/Main.uv","start_line":11,"start_col":8,"end_line":13,"end_col":2},"source_line":"public record DeriveMissingEmittedClassReference {","children":[]}]}

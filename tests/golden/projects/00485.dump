@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingExplicitReturn>
+<assemblies, [MissingExplicitReturn]>
+<assembly_name, MissingExplicitReturn>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingExplicitReturn/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingExplicitReturn/Build>
+<module_list, [MissingExplicitReturn]>
+<module, MissingExplicitReturn, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingExplicitReturn/Build/Intermediate/Obj/Source/MissingExplicitReturn.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingExplicitReturn/Build/Binary/libMissingExplicitReturn.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingExplicitReturn/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamOperandNeedsInput>
+<assemblies, [RaceStreamOperandNeedsInput]>
+<assembly_name, RaceStreamOperandNeedsInput>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamOperandNeedsInput/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamOperandNeedsInput/Build>
+<module_list, [RaceStreamOperandNeedsInput]>
+<module, RaceStreamOperandNeedsInput, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamOperandNeedsInput/Build/Intermediate/Obj/Source/RaceStreamOperandNeedsInput.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamOperandNeedsInput/Build/Binary/libRaceStreamOperandNeedsInput.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamOperandNeedsInput/Source/Main.uv

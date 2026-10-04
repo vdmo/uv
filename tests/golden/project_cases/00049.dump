@@ -1,0 +1,11 @@
+<project_root, /w/target/prjcases/ok_library_static>
+<assemblies, [Lib]>
+<assembly_name, Lib>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/prjcases/ok_library_static/Source>
+<output_root, /w/target/prjcases/ok_library_static/Build>
+<module_list, [Lib]>
+<module, Lib, obj, /w/target/prjcases/ok_library_static/Build/Intermediate/Obj/Source/Lib.o, ir, /w/target/prjcases/ok_library_static/Build/Intermediate/IR/Source/Lib.bc>
+<artifact, /w/target/prjcases/ok_library_static/Build/Library/libLib.a, import_lib, <bottom>>
+file:/w/target/prjcases/ok_library_static/Source/Main.uv

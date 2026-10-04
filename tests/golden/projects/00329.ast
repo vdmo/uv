@@ -1,0 +1,2 @@
+module SpeculativeDefer
+  ProcedureDecl [3:8-12:2] public procedure speculativeDeferReference

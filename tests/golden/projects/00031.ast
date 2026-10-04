@@ -1,0 +1,11 @@
+module ExternAbiForms
+  ImportDecl [3:1-3:31]
+  UsingDecl [4:1-4:53]
+  StaticDecl [6:10-6:68] internal let
+  ExternBlock [8:1-10:2]
+  ExternBlock [12:1-14:2]
+  ExternBlock [16:1-18:2]
+  ProcedureDecl [20:8-22:2] public procedure externAbiFormsMarker
+module ExternAbiForms::Support
+  ProcedureDecl [3:8-5:2] public procedure supportValue
+  ProcedureDecl [7:8-9:2] public procedure supportUsingValue

@@ -1,0 +1,3 @@
+module IfCaseEnumNonExhaustive
+  EnumDecl [3:8-6:2] public enum IfCaseEnumReference
+  ProcedureDecl [8:8-15:2] public procedure ifCaseEnumNonExhaustiveReference

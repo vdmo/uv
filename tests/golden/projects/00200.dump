@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumInvalidDiscriminant>
+<assemblies, [EnumInvalidDiscriminant]>
+<assembly_name, EnumInvalidDiscriminant>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumInvalidDiscriminant/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumInvalidDiscriminant/Build>
+<module_list, [EnumInvalidDiscriminant]>
+<module, EnumInvalidDiscriminant, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumInvalidDiscriminant/Build/Intermediate/Obj/Source/EnumInvalidDiscriminant.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumInvalidDiscriminant/Build/Binary/libEnumInvalidDiscriminant.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumInvalidDiscriminant/Source/Main.uv

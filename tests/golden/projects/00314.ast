@@ -1,0 +1,2 @@
+module UnwindOnNonFFIProcedure
+  ProcedureDecl [4:8-6:2] public procedure unwindOnNonFFIProcedureReference

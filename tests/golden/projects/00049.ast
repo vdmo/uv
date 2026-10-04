@@ -1,0 +1,4 @@
+module RefinementRuntimePanic
+  TypeAliasDecl [3:8-3:53] public type RuntimePositiveI32
+  ProcedureDecl [6:8-9:2] public procedure refinementRuntimePanicValue
+  ProcedureDecl [11:8-14:2] public procedure main

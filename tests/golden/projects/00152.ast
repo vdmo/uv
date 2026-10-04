@@ -1,0 +1,2 @@
+module NoFloatNumericSubtyping
+  ProcedureDecl [3:10-7:2] internal procedure floatNumericSubtypingViolation

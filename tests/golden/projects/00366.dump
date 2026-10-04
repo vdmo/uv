@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrDerefHostMemory>
+<assemblies, [GpuPtrDerefHostMemory]>
+<assembly_name, GpuPtrDerefHostMemory>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrDerefHostMemory/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrDerefHostMemory/Build>
+<module_list, [GpuPtrDerefHostMemory]>
+<module, GpuPtrDerefHostMemory, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrDerefHostMemory/Build/Intermediate/Obj/Source/GpuPtrDerefHostMemory.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrDerefHostMemory/Build/Binary/libGpuPtrDerefHostMemory.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrDerefHostMemory/Source/Main.uv

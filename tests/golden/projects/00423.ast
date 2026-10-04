@@ -1,0 +1,4 @@
+module DynamicMissingMethod
+  ClassDecl [3:10-7:2] internal class DynamicLookupClass
+  RecordDecl [9:10-11:2] internal record DynamicLookupOwner
+  ProcedureDecl [13:10-17:2] internal procedure readMissingDynamicMethod

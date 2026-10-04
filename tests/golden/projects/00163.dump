@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonUsize>
+<assemblies, [ArrayIndexNonUsize]>
+<assembly_name, ArrayIndexNonUsize>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonUsize/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonUsize/Build>
+<module_list, [ArrayIndexNonUsize]>
+<module, ArrayIndexNonUsize, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonUsize/Build/Intermediate/Obj/Source/ArrayIndexNonUsize.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonUsize/Build/Binary/libArrayIndexNonUsize.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonUsize/Source/Main.uv

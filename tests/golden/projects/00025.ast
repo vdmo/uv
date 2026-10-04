@@ -1,0 +1,5 @@
+module DynamicReceiverExpiredPanic
+  ClassDecl [4:8-7:2] public class DynamicReceiverExpiredReadable
+  RecordDecl [10:8-18:2] public record DynamicReceiverExpiredOwner
+  ProcedureDecl [21:8-32:2] public procedure dynamicReceiverExpiredPanicValue
+  ProcedureDecl [35:8-38:2] public procedure main

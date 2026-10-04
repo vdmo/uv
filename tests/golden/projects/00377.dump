@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainParameter>
+<assemblies, [ParallelDomainParameter]>
+<assembly_name, ParallelDomainParameter>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainParameter/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainParameter/Build>
+<module_list, [ParallelDomainParameter]>
+<module, ParallelDomainParameter, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainParameter/Build/Intermediate/Obj/Source/ParallelDomainParameter.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainParameter/Build/Binary/libParallelDomainParameter.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainParameter/Source/Main.uv

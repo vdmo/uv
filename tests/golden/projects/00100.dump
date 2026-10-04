@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Projects/DirSeqReadFailure>
+<assemblies, [DirSeqReadFailure]>
+<assembly_name, DirSeqReadFailure>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Projects/DirSeqReadFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Projects/DirSeqReadFailure/Build>
+<module_list, [DirSeqReadFailure]>
+<module, DirSeqReadFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Projects/DirSeqReadFailure/Build/Intermediate/Obj/Source/DirSeqReadFailure.o, ir, /w/target/fixtures/Fixtures/OutputDiagnostics/Projects/DirSeqReadFailure/Build/Intermediate/IR/Source/DirSeqReadFailure.ll>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Projects/DirSeqReadFailure/Build/Binary/DirSeqReadFailure, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Projects/DirSeqReadFailure/Source/Main.uv

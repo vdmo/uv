@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/ReducedEmptyDispatchPanic>
+<assemblies, [ReducedEmptyDispatchPanic]>
+<assembly_name, ReducedEmptyDispatchPanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/ReducedEmptyDispatchPanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/ReducedEmptyDispatchPanic/Build>
+<module_list, [ReducedEmptyDispatchPanic]>
+<module, ReducedEmptyDispatchPanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ReducedEmptyDispatchPanic/Build/Intermediate/Obj/Source/ReducedEmptyDispatchPanic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/ReducedEmptyDispatchPanic/Build/Binary/ReducedEmptyDispatchPanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ReducedEmptyDispatchPanic/Source/Main.uv

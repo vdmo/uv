@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignTypeMismatch>
+<assemblies, [AssignTypeMismatch]>
+<assembly_name, AssignTypeMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignTypeMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignTypeMismatch/Build>
+<module_list, [AssignTypeMismatch]>
+<module, AssignTypeMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignTypeMismatch/Build/Intermediate/Obj/Source/AssignTypeMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignTypeMismatch/Build/Binary/libAssignTypeMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/AssignTypeMismatch/Source/Main.uv

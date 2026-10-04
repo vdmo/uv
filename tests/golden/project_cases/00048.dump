@@ -1,0 +1,11 @@
+<project_root, /w/target/prjcases/ok_library_default>
+<assemblies, [Lib]>
+<assembly_name, Lib>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/prjcases/ok_library_default/Source>
+<output_root, /w/target/prjcases/ok_library_default/Build>
+<module_list, [Lib]>
+<module, Lib, obj, /w/target/prjcases/ok_library_default/Build/Intermediate/Obj/Source/Lib.o, ir, <bottom>>
+<artifact, /w/target/prjcases/ok_library_default/Build/Binary/libLib.so, import_lib, <bottom>>
+file:/w/target/prjcases/ok_library_default/Source/Main.uv

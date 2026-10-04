@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetInferenceFailure>
+<assemblies, [LetInferenceFailure]>
+<assembly_name, LetInferenceFailure>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetInferenceFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetInferenceFailure/Build>
+<module_list, [LetInferenceFailure]>
+<module, LetInferenceFailure, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetInferenceFailure/Build/Intermediate/Obj/Source/LetInferenceFailure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetInferenceFailure/Build/Binary/libLetInferenceFailure.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/LetInferenceFailure/Source/Main.uv

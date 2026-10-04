@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupAmbiguousDefault>
+<assemblies, [MethodLookupAmbiguousDefault]>
+<assembly_name, MethodLookupAmbiguousDefault>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupAmbiguousDefault/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupAmbiguousDefault/Build>
+<module_list, [MethodLookupAmbiguousDefault]>
+<module, MethodLookupAmbiguousDefault, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupAmbiguousDefault/Build/Intermediate/Obj/Source/MethodLookupAmbiguousDefault.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupAmbiguousDefault/Build/Binary/libMethodLookupAmbiguousDefault.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupAmbiguousDefault/Source/Main.uv

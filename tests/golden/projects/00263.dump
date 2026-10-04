@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/WidenTypingDiagnosticsOwnership>
+<assemblies, [WidenTypingDiagnosticsOwnership]>
+<assembly_name, WidenTypingDiagnosticsOwnership>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/WidenTypingDiagnosticsOwnership/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/WidenTypingDiagnosticsOwnership/Build>
+<module_list, [WidenTypingDiagnosticsOwnership]>
+<module, WidenTypingDiagnosticsOwnership, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/WidenTypingDiagnosticsOwnership/Build/Intermediate/Obj/Source/WidenTypingDiagnosticsOwnership.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/WidenTypingDiagnosticsOwnership/Build/Binary/libWidenTypingDiagnosticsOwnership.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/WidenTypingDiagnosticsOwnership/Source/Main.uv

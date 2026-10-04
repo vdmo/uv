@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgCount>
+<assemblies, [AsyncTypeArgCount]>
+<assembly_name, AsyncTypeArgCount>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgCount/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgCount/Build>
+<module_list, [AsyncTypeArgCount]>
+<module, AsyncTypeArgCount, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgCount/Build/Intermediate/Obj/Source/AsyncTypeArgCount.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgCount/Build/Binary/libAsyncTypeArgCount.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgCount/Source/Main.uv

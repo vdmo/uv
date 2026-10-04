@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2624","severity":"error","message":"`FfiSafeType` record without `#layout(C)` (`FfiSafe-Record-LayoutC-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeRecordWithoutLayoutC/Source/Main.uv","start_line":7,"start_col":1,"end_line":9,"end_col":2},"source_line":"extern \"C\" {","children":[]}]}

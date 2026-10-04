@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnosticOwnership>
+<assemblies, [CapabilityIsolationDiagnosticOwnership]>
+<assembly_name, CapabilityIsolationDiagnosticOwnership>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnosticOwnership/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnosticOwnership/Build>
+<module_list, [CapabilityIsolationDiagnosticOwnership]>
+<module, CapabilityIsolationDiagnosticOwnership, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnosticOwnership/Build/Intermediate/Obj/Source/CapabilityIsolationDiagnosticOwnership.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnosticOwnership/Build/Binary/libCapabilityIsolationDiagnosticOwnership.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnosticOwnership/Source/Main.uv

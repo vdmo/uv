@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2623","severity":"error","message":"Prohibited type category in `FfiSafeType` (`FfiSafe-Prohibited-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeBoolParameter/Source/Main.uv","start_line":3,"start_col":1,"end_line":5,"end_col":2},"source_line":"extern \"C\" {","children":[]}]}

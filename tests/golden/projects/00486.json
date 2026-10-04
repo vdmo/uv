@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-1508","severity":"error","message":"Procedure declaration requires explicit return type annotation","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingReturnType/Source/Main.uv","start_line":3,"start_col":8,"end_line":5,"end_col":2},"source_line":"public procedure missingReturnTypeReference() {","children":[]}]}

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SEM-3011","severity":"error","message":"Method defined outside of type context","span":{"file":"/w/target/p1cases/import_unknown_and_cycle/B/b.uv","start_line":2,"start_col":20,"end_line":2,"end_col":29},"source_line":"public procedure b(self: i32) {","children":[]}]}

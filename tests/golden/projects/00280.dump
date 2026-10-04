@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiReturnRegionLocalRawPtr>
+<assemblies, [FfiReturnRegionLocalRawPtr]>
+<assembly_name, FfiReturnRegionLocalRawPtr>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiReturnRegionLocalRawPtr/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiReturnRegionLocalRawPtr/Build>
+<module_list, [FfiReturnRegionLocalRawPtr]>
+<module, FfiReturnRegionLocalRawPtr, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiReturnRegionLocalRawPtr/Build/Intermediate/Obj/Source/FfiReturnRegionLocalRawPtr.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiReturnRegionLocalRawPtr/Build/Binary/libFfiReturnRegionLocalRawPtr.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiReturnRegionLocalRawPtr/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteSizeMismatch>
+<assemblies, [TransmuteSizeMismatch]>
+<assembly_name, TransmuteSizeMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteSizeMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteSizeMismatch/Build>
+<module_list, [TransmuteSizeMismatch]>
+<module, TransmuteSizeMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteSizeMismatch/Build/Intermediate/Obj/Source/TransmuteSizeMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteSizeMismatch/Build/Binary/libTransmuteSizeMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteSizeMismatch/Source/Main.uv

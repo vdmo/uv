@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnOutsideParallel>
+<assemblies, [SpawnOutsideParallel]>
+<assembly_name, SpawnOutsideParallel>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnOutsideParallel/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnOutsideParallel/Build>
+<module_list, [SpawnOutsideParallel]>
+<module, SpawnOutsideParallel, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnOutsideParallel/Build/Intermediate/Obj/Source/SpawnOutsideParallel.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnOutsideParallel/Build/Binary/libSpawnOutsideParallel.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnOutsideParallel/Source/Main.uv

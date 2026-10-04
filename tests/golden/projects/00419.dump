@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassProcedureName>
+<assemblies, [DuplicateClassProcedureName]>
+<assembly_name, DuplicateClassProcedureName>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassProcedureName/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassProcedureName/Build>
+<module_list, [DuplicateClassProcedureName]>
+<module, DuplicateClassProcedureName, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassProcedureName/Build/Intermediate/Obj/Source/DuplicateClassProcedureName.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassProcedureName/Build/Binary/libDuplicateClassProcedureName.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassProcedureName/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDim3Const>
+<assemblies, [ParallelDim3Const]>
+<assembly_name, ParallelDim3Const>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDim3Const/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDim3Const/Build>
+<module_list, [ParallelDim3Const]>
+<module, ParallelDim3Const, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDim3Const/Build/Intermediate/Obj/Source/ParallelDim3Const.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDim3Const/Build/Binary/libParallelDim3Const.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDim3Const/Source/Main.uv

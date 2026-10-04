@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnInvalidPriorityOption>
+<assemblies, [SpawnInvalidPriorityOption]>
+<assembly_name, SpawnInvalidPriorityOption>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnInvalidPriorityOption/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnInvalidPriorityOption/Build>
+<module_list, [SpawnInvalidPriorityOption]>
+<module, SpawnInvalidPriorityOption, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnInvalidPriorityOption/Build/Intermediate/Obj/Source/SpawnInvalidPriorityOption.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnInvalidPriorityOption/Build/Binary/libSpawnInvalidPriorityOption.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/SpawnInvalidPriorityOption/Source/Main.uv

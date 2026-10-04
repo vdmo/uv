@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExternCallUnsafeRequirement>
+<assemblies, [ExternCallUnsafeRequirement]>
+<assembly_name, ExternCallUnsafeRequirement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExternCallUnsafeRequirement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExternCallUnsafeRequirement/Build>
+<module_list, [ExternCallUnsafeRequirement]>
+<module, ExternCallUnsafeRequirement, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExternCallUnsafeRequirement/Build/Intermediate/Obj/Source/ExternCallUnsafeRequirement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExternCallUnsafeRequirement/Build/Binary/libExternCallUnsafeRequirement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ExternCallUnsafeRequirement/Source/Main.uv

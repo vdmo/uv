@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/CancellationNoAdditionalDiagnostics>
+<assemblies, [CancellationNoAdditionalDiagnostics]>
+<assembly_name, CancellationNoAdditionalDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/CancellationNoAdditionalDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/CancellationNoAdditionalDiagnostics/Build>
+<module_list, [CancellationNoAdditionalDiagnostics]>
+<module, CancellationNoAdditionalDiagnostics, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/CancellationNoAdditionalDiagnostics/Build/Intermediate/Obj/Source/CancellationNoAdditionalDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/CancellationNoAdditionalDiagnostics/Build/Binary/libCancellationNoAdditionalDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/CancellationNoAdditionalDiagnostics/Source/Main.uv

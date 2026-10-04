@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCaptureOutlivesFrame>
+<assemblies, [AsyncCaptureOutlivesFrame]>
+<assembly_name, AsyncCaptureOutlivesFrame>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCaptureOutlivesFrame/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCaptureOutlivesFrame/Build>
+<module_list, [AsyncCaptureOutlivesFrame]>
+<module, AsyncCaptureOutlivesFrame, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCaptureOutlivesFrame/Build/Intermediate/Obj/Source/AsyncCaptureOutlivesFrame.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCaptureOutlivesFrame/Build/Binary/libAsyncCaptureOutlivesFrame.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCaptureOutlivesFrame/Source/Main.uv

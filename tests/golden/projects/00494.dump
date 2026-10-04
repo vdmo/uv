@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationsDiagnostic>
+<assemblies, [ProcedureDeclarationsDiagnostic]>
+<assembly_name, ProcedureDeclarationsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationsDiagnostic/Build>
+<module_list, [ProcedureDeclarationsDiagnostic]>
+<module, ProcedureDeclarationsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationsDiagnostic/Build/Intermediate/Obj/Source/ProcedureDeclarationsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationsDiagnostic/Build/Binary/libProcedureDeclarationsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ProcedureDeclarationsDiagnostic/Source/Main.uv

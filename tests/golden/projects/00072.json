@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-CON-0001","severity":"warning","message":"Fine-grained keys in tight loop (performance hint)","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Keys/FineGrainedLoopKeyWarning/Source/Main.uv","start_line":17,"start_col":15,"end_line":17,"end_col":35},"source_line":"        %read container.leaf.value {","children":[]}]}

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/WaitWhileKeyHeldLowering>
+<assemblies, [WaitWhileKeyHeldLowering]>
+<assembly_name, WaitWhileKeyHeldLowering>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/WaitWhileKeyHeldLowering/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/WaitWhileKeyHeldLowering/Build>
+<module_list, [WaitWhileKeyHeldLowering]>
+<module, WaitWhileKeyHeldLowering, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/WaitWhileKeyHeldLowering/Build/Intermediate/Obj/Source/WaitWhileKeyHeldLowering.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/WaitWhileKeyHeldLowering/Build/Binary/libWaitWhileKeyHeldLowering.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/WaitWhileKeyHeldLowering/Source/Main.uv

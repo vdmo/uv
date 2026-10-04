@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SYS-3346","severity":"error","message":"Unknown or unsupported library kind","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedLibraryKind/Source/Main.uv","start_line":3,"start_col":1,"end_line":6,"end_col":2},"source_line":"#library(name: \"HostFramework\", kind: \"framework\")","children":[]}]}

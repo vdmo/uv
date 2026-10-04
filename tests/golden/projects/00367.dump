@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeGenericUnbounded>
+<assemblies, [GpuSafeGenericUnbounded]>
+<assembly_name, GpuSafeGenericUnbounded>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeGenericUnbounded/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeGenericUnbounded/Build>
+<module_list, [GpuSafeGenericUnbounded]>
+<module, GpuSafeGenericUnbounded, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeGenericUnbounded/Build/Intermediate/Obj/Source/GpuSafeGenericUnbounded.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeGenericUnbounded/Build/Binary/libGpuSafeGenericUnbounded.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeGenericUnbounded/Source/Main.uv

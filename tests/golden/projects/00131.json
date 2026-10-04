@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0081","severity":"error","message":"`comptime if` condition does not have type `bool`","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/ComptimeIfConditionType/Source/Main.uv","start_line":4,"start_col":17,"end_line":4,"end_col":47},"source_line":"    let value = comptime if 1 { 1 } else { 2 }","children":[]}]}

@@ -1,0 +1,3 @@
+module RecordFieldNameSet
+  RecordDecl [3:8-6:2] public record RecordFieldNameSetPayload
+  ProcedureDecl [8:8-12:2] public procedure recordFieldNameSetReference

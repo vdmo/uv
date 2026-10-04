@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorStaticTypes>
+<assemblies, [OperatorStaticTypes]>
+<assembly_name, OperatorStaticTypes>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorStaticTypes/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorStaticTypes/Build>
+<module_list, [OperatorStaticTypes]>
+<module, OperatorStaticTypes, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorStaticTypes/Build/Intermediate/Obj/Source/OperatorStaticTypes.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorStaticTypes/Build/Binary/libOperatorStaticTypes.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorStaticTypes/Source/Main.uv

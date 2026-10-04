@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldInitNamesAndSet>
+<assemblies, [FieldInitNamesAndSet]>
+<assembly_name, FieldInitNamesAndSet>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldInitNamesAndSet/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldInitNamesAndSet/Build>
+<module_list, [FieldInitNamesAndSet]>
+<module, FieldInitNamesAndSet, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldInitNamesAndSet/Build/Intermediate/Obj/Source/FieldInitNamesAndSet.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldInitNamesAndSet/Build/Binary/libFieldInitNamesAndSet.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldInitNamesAndSet/Source/Main.uv

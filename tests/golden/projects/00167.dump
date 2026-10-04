@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCompositionDiagnosticsTable>
+<assemblies, [AsyncCompositionDiagnosticsTable]>
+<assembly_name, AsyncCompositionDiagnosticsTable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCompositionDiagnosticsTable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCompositionDiagnosticsTable/Build>
+<module_list, [AsyncCompositionDiagnosticsTable]>
+<module, AsyncCompositionDiagnosticsTable, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCompositionDiagnosticsTable/Build/Intermediate/Obj/Source/AsyncCompositionDiagnosticsTable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCompositionDiagnosticsTable/Build/Binary/libAsyncCompositionDiagnosticsTable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncCompositionDiagnosticsTable/Source/Main.uv

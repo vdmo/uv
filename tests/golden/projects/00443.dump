@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedFieldSignatureConflict>
+<assemblies, [InheritedFieldSignatureConflict]>
+<assembly_name, InheritedFieldSignatureConflict>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedFieldSignatureConflict/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedFieldSignatureConflict/Build>
+<module_list, [InheritedFieldSignatureConflict]>
+<module, InheritedFieldSignatureConflict, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedFieldSignatureConflict/Build/Intermediate/Obj/Source/InheritedFieldSignatureConflict.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedFieldSignatureConflict/Build/Binary/libInheritedFieldSignatureConflict.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedFieldSignatureConflict/Source/Main.uv

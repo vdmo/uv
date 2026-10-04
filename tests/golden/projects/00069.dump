@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Expressions/ValidTransmuteTarget>
+<assemblies, [ValidTransmuteTarget]>
+<assembly_name, ValidTransmuteTarget>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Expressions/ValidTransmuteTarget/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Expressions/ValidTransmuteTarget/Build>
+<module_list, [ValidTransmuteTarget]>
+<module, ValidTransmuteTarget, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Expressions/ValidTransmuteTarget/Build/Intermediate/Obj/Source/ValidTransmuteTarget.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Expressions/ValidTransmuteTarget/Build/Binary/libValidTransmuteTarget.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Expressions/ValidTransmuteTarget/Source/Main.uv

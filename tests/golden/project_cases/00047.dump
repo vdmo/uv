@@ -1,0 +1,10 @@
+<project_root, /w/target/prjcases/ok_dependency>
+<assemblies, [Dep]>
+<assembly_name, Dep>
+<assembly_kind, dependency>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/ok_dependency/Source>
+<output_root, /w/target/prjcases/ok_dependency/Build>
+<module_list, [Dep]>
+<module, Dep, obj, /w/target/prjcases/ok_dependency/Build/Intermediate/Obj/Source/Dep.o, ir, <bottom>>
+file:/w/target/prjcases/ok_dependency/Source/Main.uv

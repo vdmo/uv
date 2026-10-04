@@ -1,0 +1,3 @@
+module App
+  RecordDecl [3:1-5:2] internal record R
+  ProcedureDecl [6:8-8:2] public procedure main

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/AttenuationParentDropWithLiveChild>
+<assemblies, [AttenuationParentDropWithLiveChild]>
+<assembly_name, AttenuationParentDropWithLiveChild>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/AttenuationParentDropWithLiveChild/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/AttenuationParentDropWithLiveChild/Build>
+<module_list, [AttenuationParentDropWithLiveChild]>
+<module, AttenuationParentDropWithLiveChild, obj, /w/target/fixtures/Fixtures/RejectedSource/Permissions/AttenuationParentDropWithLiveChild/Build/Intermediate/Obj/Source/AttenuationParentDropWithLiveChild.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Permissions/AttenuationParentDropWithLiveChild/Build/Binary/libAttenuationParentDropWithLiveChild.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Permissions/AttenuationParentDropWithLiveChild/Source/Main.uv

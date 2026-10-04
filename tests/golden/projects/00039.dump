@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSExecutableOutput>
+<assemblies, [MacOSExecutableOutput]>
+<assembly_name, MacOSExecutableOutput>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSExecutableOutput/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSExecutableOutput/Build>
+<module_list, [MacOSExecutableOutput]>
+<module, MacOSExecutableOutput, obj, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSExecutableOutput/Build/Intermediate/Obj/Source/MacOSExecutableOutput.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSExecutableOutput/Build/Binary/MacOSExecutableOutput, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/MacOSExecutableOutput/Source/Main.uv

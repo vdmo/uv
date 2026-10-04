@@ -1,0 +1,5 @@
+module GenericCovariantSubtyping
+  TypeAliasDecl [3:10-3:32] internal type NarrowValue
+  TypeAliasDecl [5:10-5:37] internal type WideValue
+  RecordDecl [7:10-9:2] internal record CovariantBox
+  ProcedureDecl [11:10-15:2] internal procedure genericCovariantSubtypingViolation

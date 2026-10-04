@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandNonAsync>
+<assemblies, [RaceOperandNonAsync]>
+<assembly_name, RaceOperandNonAsync>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandNonAsync/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandNonAsync/Build>
+<module_list, [RaceOperandNonAsync]>
+<module, RaceOperandNonAsync, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandNonAsync/Build/Intermediate/Obj/Source/RaceOperandNonAsync.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandNonAsync/Build/Binary/libRaceOperandNonAsync.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceOperandNonAsync/Source/Main.uv

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0050","severity":"error","message":"Reflection `fields` applied to non-record type","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/IntrospectFieldsNonRecord/Source/Main.uv","start_line":10,"start_col":41,"end_line":10,"end_col":63},"source_line":"        let fields = introspect~>fields(Type::<ReflectionEnum>)","children":[]}]}

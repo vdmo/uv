@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-SRC-0101","severity":"warning","message":"UTF-8 BOM present at the start of the file","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/SourceText/LeadingBOMWarning/Source/Main.uv","start_line":1,"start_col":1,"end_line":1,"end_col":2},"source_line":"﻿//! Diagnostic source-loading specimen for leading BOM warnings.","children":[]}]}

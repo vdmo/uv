@@ -1,0 +1,3 @@
+module OperatorStaticTypes
+  EnumDecl [3:8-6:2] public enum OperatorStaticTypesPayloadEnum
+  ProcedureDecl [8:8-12:2] public procedure operatorStaticTypesReference

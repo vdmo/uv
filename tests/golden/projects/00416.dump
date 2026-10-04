@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateAssociatedTypeName>
+<assemblies, [DuplicateAssociatedTypeName]>
+<assembly_name, DuplicateAssociatedTypeName>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateAssociatedTypeName/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateAssociatedTypeName/Build>
+<module_list, [DuplicateAssociatedTypeName]>
+<module, DuplicateAssociatedTypeName, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateAssociatedTypeName/Build/Intermediate/Obj/Source/DuplicateAssociatedTypeName.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateAssociatedTypeName/Build/Binary/libDuplicateAssociatedTypeName.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateAssociatedTypeName/Source/Main.uv

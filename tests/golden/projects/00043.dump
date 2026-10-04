@@ -1,0 +1,18 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering>
+<assemblies, [ModuleDiscoveryOrdering]>
+<assembly_name, ModuleDiscoveryOrdering>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build>
+<module_list, [ModuleDiscoveryOrdering, ModuleDiscoveryOrdering::Alpha, ModuleDiscoveryOrdering::Beta, ModuleDiscoveryOrdering::Beta::Nested]>
+<module, ModuleDiscoveryOrdering, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Intermediate/Obj/Source/ModuleDiscoveryOrdering.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Intermediate/IR/Source/ModuleDiscoveryOrdering.ll>
+<module, ModuleDiscoveryOrdering::Alpha, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Intermediate/Obj/Source/Alpha/ModuleDiscoveryOrdering_x3a_x3aAlpha.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Intermediate/IR/Source/Alpha/ModuleDiscoveryOrdering_x3a_x3aAlpha.ll>
+<module, ModuleDiscoveryOrdering::Beta, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Intermediate/Obj/Source/Beta/ModuleDiscoveryOrdering_x3a_x3aBeta.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Intermediate/IR/Source/Beta/ModuleDiscoveryOrdering_x3a_x3aBeta.ll>
+<module, ModuleDiscoveryOrdering::Beta::Nested, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Intermediate/Obj/Source/Beta/Nested/ModuleDiscoveryOrdering_x3a_x3aBeta_x3a_x3aNested.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Intermediate/IR/Source/Beta/Nested/ModuleDiscoveryOrdering_x3a_x3aBeta_x3a_x3aNested.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Build/Library/libModuleDiscoveryOrdering.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Source/Library.uv
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Source/Alpha/Extra.uv
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Source/Alpha/Library.uv
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Source/Beta/Library.uv
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ModuleDiscoveryOrdering/Source/Beta/Nested/Library.uv

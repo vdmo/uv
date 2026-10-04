@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncIteratorLoopTypingFamily>
+<assemblies, [AsyncIteratorLoopTypingFamily]>
+<assembly_name, AsyncIteratorLoopTypingFamily>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncIteratorLoopTypingFamily/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncIteratorLoopTypingFamily/Build>
+<module_list, [AsyncIteratorLoopTypingFamily]>
+<module, AsyncIteratorLoopTypingFamily, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncIteratorLoopTypingFamily/Build/Intermediate/Obj/Source/AsyncIteratorLoopTypingFamily.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncIteratorLoopTypingFamily/Build/Binary/libAsyncIteratorLoopTypingFamily.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncIteratorLoopTypingFamily/Source/Main.uv

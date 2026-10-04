@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractDynamicAttribute>
+<assemblies, [ContractDynamicAttribute]>
+<assembly_name, ContractDynamicAttribute>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractDynamicAttribute/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractDynamicAttribute/Build>
+<module_list, [ContractDynamicAttribute]>
+<module, ContractDynamicAttribute, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractDynamicAttribute/Build/Intermediate/Obj/Source/ContractDynamicAttribute.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractDynamicAttribute/Build/Binary/libContractDynamicAttribute.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractDynamicAttribute/Source/Main.uv

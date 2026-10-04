@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-1912","severity":"error","message":"Explicit receiver type must be `Self` for record methods","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodsAndReceiversDiagnostic/Source/Main.uv","start_line":3,"start_col":8,"end_line":9,"end_col":2},"source_line":"public record MethodsAndReceiversOwner {","children":[]}]}

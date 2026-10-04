@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldOutsideAsync>
+<assemblies, [YieldOutsideAsync]>
+<assembly_name, YieldOutsideAsync>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldOutsideAsync/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldOutsideAsync/Build>
+<module_list, [YieldOutsideAsync]>
+<module, YieldOutsideAsync, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldOutsideAsync/Build/Intermediate/Obj/Source/YieldOutsideAsync.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldOutsideAsync/Build/Binary/libYieldOutsideAsync.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldOutsideAsync/Source/Main.uv

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SRC-0520","severity":"error","message":"Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)","span":{"file":"/w/target/p1cases/import_error_in_imported/Second/s.uv","start_line":1,"start_col":19,"end_line":1,"end_col":20},"source_line":"let also_broken = = 1","children":[]}]}

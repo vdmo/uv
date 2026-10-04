@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceTooFewArms>
+<assemblies, [RaceTooFewArms]>
+<assembly_name, RaceTooFewArms>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceTooFewArms/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceTooFewArms/Build>
+<module_list, [RaceTooFewArms]>
+<module, RaceTooFewArms, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceTooFewArms/Build/Intermediate/Obj/Source/RaceTooFewArms.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceTooFewArms/Build/Binary/libRaceTooFewArms.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceTooFewArms/Source/Main.uv

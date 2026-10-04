@@ -1,0 +1,25 @@
+module ComptimeConformance
+  StaticDecl [3:10-3:44] internal let
+  RecordDecl [5:10-8:2] internal record ComptimeLiteralRecord
+  EnumDecl [10:10-16:2] internal enum ComptimeLiteralEnum
+  ModalDecl [18:10-22:2] internal modal ComptimeLiteralModal
+  RecordDecl [25:10-28:2] internal record ComptimeConformanceRecord
+  EnumDecl [31:10-37:2] internal enum ComptimeConformanceEnum
+  ModalDecl [40:10-54:2] internal modal ComptimeConformanceModal
+  ClassDecl [56:10-56:42] internal class ComptimeConformanceForm
+  RecordDecl [58:10-60:2] internal record ComptimeConformanceImplementation
+  ClassDecl [62:10-62:37] internal class EmittedDeriveClass
+  ClassDecl [63:10-63:38] internal class RequiredDeriveClass
+  ComptimeProcedureDecl [65:1-72:2] internal comptime procedure requireComptimeConformance
+  ComptimeProcedureDecl [74:1-78:2] internal comptime procedure addComptimeConformanceValue
+  ComptimeProcedureDecl [80:1-91:2] internal comptime procedure chooseComptimeConformanceValue
+  ComptimeProcedureDecl [93:1-104:2] internal comptime procedure sourceSpanHasExtent
+  DeriveTargetDecl [106:1-117:2] derive target EmitComptimeConformanceDerive
+  DeriveTargetDecl [119:1-133:2] derive target RequireComptimeConformanceDerive
+  DeriveTargetDecl [135:1-143:2] derive target FirstTieComptimeConformanceDerive
+  DeriveTargetDecl [145:1-153:2] derive target SecondTieComptimeConformanceDerive
+  RecordDecl [161:10-163:2] internal record DerivedComptimeConformance
+  ProcedureDecl [165:10-294:2] internal procedure compileTimeCapabilityAndReflectionChecks
+  ProcedureDecl [296:10-356:2] internal procedure compileTimeFormsChecks
+  ProcedureDecl [358:10-421:2] internal procedure emitQuoteSpliceConformanceItems
+  ProcedureDecl [423:8-440:2] public procedure compileTimeConformanceEntryPoint

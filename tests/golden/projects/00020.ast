@@ -1,0 +1,14 @@
+module AttributeSemantics
+  RecordDecl [4:8-7:2] public record AttributePackedRecord
+  RecordDecl [10:8-12:2] public record AttributeAlignedRecord
+  EnumDecl [15:8-18:2] public enum AttributeSmallEnum
+  ProcedureDecl [20:8-22:2] public procedure attributePackedSize
+  ProcedureDecl [24:8-26:2] public procedure attributePackedAlign
+  ProcedureDecl [28:8-30:2] public procedure attributeAlignedSize
+  ProcedureDecl [32:8-34:2] public procedure attributeAlignedAlign
+  ProcedureDecl [36:8-38:2] public procedure attributeSmallEnumSize
+  ProcedureDecl [40:8-42:2] public procedure attributeSmallEnumAlign
+  ProcedureDecl [45:8-47:2] public procedure attributeAlwaysInlineValue
+  ProcedureDecl [50:8-52:2] public procedure attributeNeverInlineValue
+  ProcedureDecl [55:8-57:2] public procedure attributeColdValue
+  ProcedureDecl [59:8-63:2] public procedure attributeOptimizationUse

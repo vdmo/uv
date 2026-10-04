@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/StructuredParallelLoweringEvidence>
+<assemblies, [StructuredParallelLoweringEvidence]>
+<assembly_name, StructuredParallelLoweringEvidence>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/StructuredParallelLoweringEvidence/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/StructuredParallelLoweringEvidence/Build>
+<module_list, [StructuredParallelLoweringEvidence]>
+<module, StructuredParallelLoweringEvidence, obj, /w/target/fixtures/Fixtures/ArtifactProjects/StructuredParallelLoweringEvidence/Build/Intermediate/Obj/Source/StructuredParallelLoweringEvidence.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/StructuredParallelLoweringEvidence/Build/Intermediate/IR/Source/StructuredParallelLoweringEvidence.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/StructuredParallelLoweringEvidence/Build/Binary/StructuredParallelLoweringEvidence, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/StructuredParallelLoweringEvidence/Source/Main.uv

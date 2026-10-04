@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/NoMatchingOverload>
+<assemblies, [NoMatchingOverload]>
+<assembly_name, NoMatchingOverload>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/NoMatchingOverload/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/NoMatchingOverload/Build>
+<module_list, [NoMatchingOverload]>
+<module, NoMatchingOverload, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/NoMatchingOverload/Build/Intermediate/Obj/Source/NoMatchingOverload.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/NoMatchingOverload/Build/Binary/libNoMatchingOverload.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/NoMatchingOverload/Source/Main.uv

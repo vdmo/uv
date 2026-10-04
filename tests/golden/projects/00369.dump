@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeTypeDiagnostic>
+<assemblies, [GpuSafeTypeDiagnostic]>
+<assembly_name, GpuSafeTypeDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeTypeDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeTypeDiagnostic/Build>
+<module_list, [GpuSafeTypeDiagnostic]>
+<module, GpuSafeTypeDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeTypeDiagnostic/Build/Intermediate/Obj/Source/GpuSafeTypeDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeTypeDiagnostic/Build/Binary/libGpuSafeTypeDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeTypeDiagnostic/Source/Main.uv

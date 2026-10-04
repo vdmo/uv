@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSDylibLibrary>
+<assemblies, [MacOSDylibLibrary]>
+<assembly_name, MacOSDylibLibrary>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSDylibLibrary/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSDylibLibrary/Build>
+<module_list, [MacOSDylibLibrary]>
+<module, MacOSDylibLibrary, obj, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSDylibLibrary/Build/Intermediate/Obj/Source/MacOSDylibLibrary.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSDylibLibrary/Build/Binary/MacOSDylibLibrary, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/MacOSDylibLibrary/Source/Main.uv

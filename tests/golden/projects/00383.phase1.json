@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SRC-0510","severity":"error","message":"Missing statement terminator (`Missing-Terminator-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Parsing/MissingStatementTerminator/Source/Main.uv","start_line":4,"start_col":24,"end_line":4,"end_col":27},"source_line":"    let value: i32 = 1 let next: i32 = 2","children":[]}]}

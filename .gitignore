@@ -1,0 +1,13 @@
+# Build output and generated parity inputs
+/target/
+
+# Upstream checkouts and the reference release used by the parity harness.
+# See tools/capture_goldens.sh for how they are obtained.
+/ultraviolet/
+/ultraviolet-lsp/
+/reference/
+
+node_modules/
+*.o
+*.so
+*.wasm

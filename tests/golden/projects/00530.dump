@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameNoActiveRegion>
+<assemblies, [FrameNoActiveRegion]>
+<assembly_name, FrameNoActiveRegion>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameNoActiveRegion/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameNoActiveRegion/Build>
+<module_list, [FrameNoActiveRegion]>
+<module, FrameNoActiveRegion, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameNoActiveRegion/Build/Intermediate/Obj/Source/FrameNoActiveRegion.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameNoActiveRegion/Build/Binary/libFrameNoActiveRegion.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/FrameNoActiveRegion/Source/Main.uv

@@ -1,0 +1,2 @@
+module RefinementPredicateNonBool
+  TypeAliasDecl [3:8-3:52] public type NonBoolRefinement

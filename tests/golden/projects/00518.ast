@@ -1,0 +1,4 @@
+module AssignmentStatementsDiagnostic
+  RecordDecl [3:8-5:2] public record AssignmentDiagnosticTarget
+  ProcedureDecl [7:8-9:2] public procedure makeAssignmentDiagnosticTarget
+  ProcedureDecl [11:8-14:2] public procedure assignmentStatementsDiagnosticReference

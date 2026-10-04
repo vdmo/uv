@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchDependencyConflict>
+<assemblies, [DispatchDependencyConflict]>
+<assembly_name, DispatchDependencyConflict>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchDependencyConflict/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchDependencyConflict/Build>
+<module_list, [DispatchDependencyConflict]>
+<module, DispatchDependencyConflict, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchDependencyConflict/Build/Intermediate/Obj/Source/DispatchDependencyConflict.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchDependencyConflict/Build/Binary/libDispatchDependencyConflict.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchDependencyConflict/Source/Main.uv

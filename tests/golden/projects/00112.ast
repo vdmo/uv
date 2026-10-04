@@ -1,0 +1,2 @@
+module PatternDiagnosticsSupplementBareType
+  ProcedureDecl [3:8-9:2] public procedure patternDiagnosticsSupplementBareTypeReference

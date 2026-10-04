@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/BreakOutsideLoop>
+<assemblies, [BreakOutsideLoop]>
+<assembly_name, BreakOutsideLoop>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/BreakOutsideLoop/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/BreakOutsideLoop/Build>
+<module_list, [BreakOutsideLoop]>
+<module, BreakOutsideLoop, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/BreakOutsideLoop/Build/Intermediate/Obj/Source/BreakOutsideLoop.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/BreakOutsideLoop/Build/Binary/libBreakOutsideLoop.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/BreakOutsideLoop/Source/Main.uv

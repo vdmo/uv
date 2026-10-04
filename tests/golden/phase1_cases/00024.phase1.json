@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2450","severity":"error","message":"#derive(... ) requires one or more identifier arguments","span":{"file":"/w/target/p1cases/derive_second_bad/Source/Main.uv","start_line":5,"start_col":1,"end_line":5,"end_col":10},"source_line":"#derive()","children":[]}]}

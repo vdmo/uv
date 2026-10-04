@@ -1,0 +1,2 @@
+module EmitterEmitNonItem
+  ProcedureDecl [3:8-10:2] public procedure emitterEmitNonItemReference

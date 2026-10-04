@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/RawPointerNullWritePanic>
+<assemblies, [RawPointerNullWritePanic]>
+<assembly_name, RawPointerNullWritePanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/RawPointerNullWritePanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/RawPointerNullWritePanic/Build>
+<module_list, [RawPointerNullWritePanic]>
+<module, RawPointerNullWritePanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/RawPointerNullWritePanic/Build/Intermediate/Obj/Source/RawPointerNullWritePanic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/RawPointerNullWritePanic/Build/Binary/RawPointerNullWritePanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/RawPointerNullWritePanic/Source/Main.uv

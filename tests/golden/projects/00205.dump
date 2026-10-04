@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExpressionDiagnosticsSupplement>
+<assemblies, [ExpressionDiagnosticsSupplement]>
+<assembly_name, ExpressionDiagnosticsSupplement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExpressionDiagnosticsSupplement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExpressionDiagnosticsSupplement/Build>
+<module_list, [ExpressionDiagnosticsSupplement]>
+<module, ExpressionDiagnosticsSupplement, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExpressionDiagnosticsSupplement/Build/Intermediate/Obj/Source/ExpressionDiagnosticsSupplement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ExpressionDiagnosticsSupplement/Build/Binary/libExpressionDiagnosticsSupplement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ExpressionDiagnosticsSupplement/Source/Main.uv

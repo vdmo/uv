@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/NonModalImplementsModalClass>
+<assemblies, [NonModalImplementsModalClass]>
+<assembly_name, NonModalImplementsModalClass>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/NonModalImplementsModalClass/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/NonModalImplementsModalClass/Build>
+<module_list, [NonModalImplementsModalClass]>
+<module, NonModalImplementsModalClass, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/NonModalImplementsModalClass/Build/Intermediate/Obj/Source/NonModalImplementsModalClass.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/NonModalImplementsModalClass/Build/Binary/libNonModalImplementsModalClass.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/NonModalImplementsModalClass/Source/Main.uv

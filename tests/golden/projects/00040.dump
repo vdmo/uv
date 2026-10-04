@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSHostedSharedLibrary>
+<assemblies, [MacOSHostedSharedLibrary]>
+<assembly_name, MacOSHostedSharedLibrary>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSHostedSharedLibrary/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSHostedSharedLibrary/Build>
+<module_list, [MacOSHostedSharedLibrary]>
+<module, MacOSHostedSharedLibrary, obj, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSHostedSharedLibrary/Build/Intermediate/Obj/Source/MacOSHostedSharedLibrary.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSHostedSharedLibrary/Build/Binary/libMacOSHostedSharedLibrary.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/MacOSHostedSharedLibrary/Source/Library.uv

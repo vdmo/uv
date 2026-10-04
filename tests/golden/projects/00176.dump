@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgCount>
+<assemblies, [CallArgCount]>
+<assembly_name, CallArgCount>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgCount/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgCount/Build>
+<module_list, [CallArgCount]>
+<module, CallArgCount, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgCount/Build/Intermediate/Obj/Source/CallArgCount.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgCount/Build/Binary/libCallArgCount.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgCount/Source/Main.uv

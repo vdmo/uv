@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfIndexTyping>
+<assemblies, [AddressOfIndexTyping]>
+<assembly_name, AddressOfIndexTyping>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfIndexTyping/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfIndexTyping/Build>
+<module_list, [AddressOfIndexTyping]>
+<module, AddressOfIndexTyping, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfIndexTyping/Build/Intermediate/Obj/Source/AddressOfIndexTyping.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfIndexTyping/Build/Binary/libAddressOfIndexTyping.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfIndexTyping/Source/Main.uv

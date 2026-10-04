@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonConst>
+<assemblies, [ArrayIndexNonConst]>
+<assembly_name, ArrayIndexNonConst>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonConst/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonConst/Build>
+<module_list, [ArrayIndexNonConst]>
+<module, ArrayIndexNonConst, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonConst/Build/Intermediate/Obj/Source/ArrayIndexNonConst.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonConst/Build/Binary/libArrayIndexNonConst.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ArrayIndexNonConst/Source/Main.uv

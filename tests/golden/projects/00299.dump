@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMissingContext>
+<assemblies, [HostExportMissingContext]>
+<assembly_name, HostExportMissingContext>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMissingContext/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMissingContext/Build>
+<module_list, [HostExportMissingContext]>
+<module, HostExportMissingContext, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMissingContext/Build/Intermediate/Obj/Source/HostExportMissingContext.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMissingContext/Build/Binary/libHostExportMissingContext.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMissingContext/Source/Main.uv

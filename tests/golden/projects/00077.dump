@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SharedClosureCaptureWarning>
+<assemblies, [SharedClosureCaptureWarning]>
+<assembly_name, SharedClosureCaptureWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SharedClosureCaptureWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SharedClosureCaptureWarning/Build>
+<module_list, [SharedClosureCaptureWarning]>
+<module, SharedClosureCaptureWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SharedClosureCaptureWarning/Build/Intermediate/Obj/Source/SharedClosureCaptureWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SharedClosureCaptureWarning/Build/Binary/libSharedClosureCaptureWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/SharedClosureCaptureWarning/Source/Main.uv

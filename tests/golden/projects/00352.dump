@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DeterminismAndNestingDiagnostics>
+<assemblies, [DeterminismAndNestingDiagnostics]>
+<assembly_name, DeterminismAndNestingDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DeterminismAndNestingDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DeterminismAndNestingDiagnostics/Build>
+<module_list, [DeterminismAndNestingDiagnostics]>
+<module, DeterminismAndNestingDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DeterminismAndNestingDiagnostics/Build/Intermediate/Obj/Source/DeterminismAndNestingDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DeterminismAndNestingDiagnostics/Build/Binary/libDeterminismAndNestingDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/DeterminismAndNestingDiagnostics/Source/Main.uv

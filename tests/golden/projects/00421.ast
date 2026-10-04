@@ -1,0 +1,4 @@
+module DynamicClassObjectDiagnostics
+  ClassDecl [3:10-7:2] internal class DynamicDiagnosticClass
+  RecordDecl [9:10-11:2] internal record DynamicDiagnosticOwner
+  ProcedureDecl [13:10-16:2] internal procedure makeDiagnosticDynamic

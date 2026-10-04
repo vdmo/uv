@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternEmpty>
+<assemblies, [RangePatternEmpty]>
+<assembly_name, RangePatternEmpty>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternEmpty/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternEmpty/Build>
+<module_list, [RangePatternEmpty]>
+<module, RangePatternEmpty, obj, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternEmpty/Build/Intermediate/Obj/Source/RangePatternEmpty.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternEmpty/Build/Binary/libRangePatternEmpty.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternEmpty/Source/Main.uv

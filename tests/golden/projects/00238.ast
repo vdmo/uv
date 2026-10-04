@@ -1,0 +1,2 @@
+module RawDerefUnsafeRequirement
+  ProcedureDecl [3:8-5:2] public procedure rawDerefUnsafeRequirementReference

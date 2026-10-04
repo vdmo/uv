@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/DispatchDynamicKeyWarning>
+<assemblies, [DispatchDynamicKeyWarning]>
+<assembly_name, DispatchDynamicKeyWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/DispatchDynamicKeyWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/DispatchDynamicKeyWarning/Build>
+<module_list, [DispatchDynamicKeyWarning]>
+<module, DispatchDynamicKeyWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/DispatchDynamicKeyWarning/Build/Intermediate/Obj/Source/DispatchDynamicKeyWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/DispatchDynamicKeyWarning/Build/Binary/libDispatchDynamicKeyWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/DispatchDynamicKeyWarning/Source/Main.uv

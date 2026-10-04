@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicGenericMethodNonDispatchable>
+<assemblies, [DynamicGenericMethodNonDispatchable]>
+<assembly_name, DynamicGenericMethodNonDispatchable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicGenericMethodNonDispatchable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicGenericMethodNonDispatchable/Build>
+<module_list, [DynamicGenericMethodNonDispatchable]>
+<module, DynamicGenericMethodNonDispatchable, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicGenericMethodNonDispatchable/Build/Intermediate/Obj/Source/DynamicGenericMethodNonDispatchable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicGenericMethodNonDispatchable/Build/Binary/libDynamicGenericMethodNonDispatchable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicGenericMethodNonDispatchable/Source/Main.uv

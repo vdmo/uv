@@ -1,0 +1,2 @@
+module DuplicateClassProcedureName
+  ClassDecl [3:10-11:2] internal class DuplicateProcedureClass

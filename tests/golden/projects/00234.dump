@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamHandlerTypeMismatch>
+<assemblies, [RaceStreamHandlerTypeMismatch]>
+<assembly_name, RaceStreamHandlerTypeMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamHandlerTypeMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamHandlerTypeMismatch/Build>
+<module_list, [RaceStreamHandlerTypeMismatch]>
+<module, RaceStreamHandlerTypeMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamHandlerTypeMismatch/Build/Intermediate/Obj/Source/RaceStreamHandlerTypeMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamHandlerTypeMismatch/Build/Binary/libRaceStreamHandlerTypeMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RaceStreamHandlerTypeMismatch/Source/Main.uv

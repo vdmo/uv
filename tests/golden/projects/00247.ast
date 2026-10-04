@@ -1,0 +1,2 @@
+module RecordFieldVisibilityViolation
+  RecordDecl [3:10-5:2] internal record RecordVisibilityPayload

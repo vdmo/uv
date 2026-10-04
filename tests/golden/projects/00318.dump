@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/EscapingClosureSharedLifetime>
+<assemblies, [EscapingClosureSharedLifetime]>
+<assembly_name, EscapingClosureSharedLifetime>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/EscapingClosureSharedLifetime/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/EscapingClosureSharedLifetime/Build>
+<module_list, [EscapingClosureSharedLifetime]>
+<module, EscapingClosureSharedLifetime, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/EscapingClosureSharedLifetime/Build/Intermediate/Obj/Source/EscapingClosureSharedLifetime.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/EscapingClosureSharedLifetime/Build/Binary/libEscapingClosureSharedLifetime.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/EscapingClosureSharedLifetime/Source/Main.uv

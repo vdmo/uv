@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2432","severity":"error","message":"`main` is generic (has type parameters) (`Main-Generic-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Procedures/MainGeneric/Source/Main.uv","start_line":3,"start_col":8,"end_line":5,"end_col":2},"source_line":"public procedure main<TValue>(context: Context) -> i32 {","children":[]}]}

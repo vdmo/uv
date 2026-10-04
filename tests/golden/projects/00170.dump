@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncOperationEscapesRegion>
+<assemblies, [AsyncOperationEscapesRegion]>
+<assembly_name, AsyncOperationEscapesRegion>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncOperationEscapesRegion/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncOperationEscapesRegion/Build>
+<module_list, [AsyncOperationEscapesRegion]>
+<module, AsyncOperationEscapesRegion, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncOperationEscapesRegion/Build/Intermediate/Obj/Source/AsyncOperationEscapesRegion.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncOperationEscapesRegion/Build/Binary/libAsyncOperationEscapesRegion.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncOperationEscapesRegion/Source/Main.uv

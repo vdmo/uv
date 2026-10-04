@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnosticOwnership>
+<assemblies, [HostedExportDiagnosticOwnership]>
+<assembly_name, HostedExportDiagnosticOwnership>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnosticOwnership/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnosticOwnership/Build>
+<module_list, [HostedExportDiagnosticOwnership]>
+<module, HostedExportDiagnosticOwnership, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnosticOwnership/Build/Intermediate/Obj/Source/HostedExportDiagnosticOwnership.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnosticOwnership/Build/Binary/libHostedExportDiagnosticOwnership.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnosticOwnership/Source/Main.uv

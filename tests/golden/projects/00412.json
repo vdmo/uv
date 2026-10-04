@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2622","severity":"error","message":"`BitcopyType` has non-`BitcopyType` field","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyFieldNonBitcopy/Source/Main.uv","start_line":3,"start_col":10,"end_line":5,"end_col":2},"source_line":"internal record BitcopyFieldNonBitcopyPayload <: Bitcopy {","children":[]}]}

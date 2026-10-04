@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-1104","severity":"error","message":"Module path collision after NFC + case folding (`Disc-Collision`, `WF-Module-Path-Collision`)","span":null,"source_line":null,"children":[]},{"code":"W-MOD-1101","severity":"warning","message":"Potential module path collision on case-insensitive filesystem","span":null,"source_line":null,"children":[]}]}

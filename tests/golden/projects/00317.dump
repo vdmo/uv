@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/DynamicKeyStaticRequired>
+<assemblies, [DynamicKeyStaticRequired]>
+<assembly_name, DynamicKeyStaticRequired>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/DynamicKeyStaticRequired/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/DynamicKeyStaticRequired/Build>
+<module_list, [DynamicKeyStaticRequired]>
+<module, DynamicKeyStaticRequired, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/DynamicKeyStaticRequired/Build/Intermediate/Obj/Source/DynamicKeyStaticRequired.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/DynamicKeyStaticRequired/Build/Binary/libDynamicKeyStaticRequired.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/DynamicKeyStaticRequired/Source/Main.uv

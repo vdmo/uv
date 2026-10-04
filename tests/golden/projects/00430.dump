@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInfiniteMonomorphization>
+<assemblies, [GenericInfiniteMonomorphization]>
+<assembly_name, GenericInfiniteMonomorphization>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInfiniteMonomorphization/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInfiniteMonomorphization/Build>
+<module_list, [GenericInfiniteMonomorphization]>
+<module, GenericInfiniteMonomorphization, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInfiniteMonomorphization/Build/Intermediate/Obj/Source/GenericInfiniteMonomorphization.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInfiniteMonomorphization/Build/Binary/libGenericInfiniteMonomorphization.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInfiniteMonomorphization/Source/Main.uv

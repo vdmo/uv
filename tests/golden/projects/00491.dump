@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionCallerObligation>
+<assemblies, [PreconditionCallerObligation]>
+<assembly_name, PreconditionCallerObligation>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionCallerObligation/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionCallerObligation/Build>
+<module_list, [PreconditionCallerObligation]>
+<module, PreconditionCallerObligation, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionCallerObligation/Build/Intermediate/Obj/Source/PreconditionCallerObligation.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionCallerObligation/Build/Binary/libPreconditionCallerObligation.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionCallerObligation/Source/Main.uv

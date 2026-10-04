@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TST-0109","severity":"error","message":"`#test` applied outside an ordinary procedure","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Attributes/TestAttributeWrongTarget/Source/Main.uv","start_line":4,"start_col":8,"end_line":6,"end_col":2},"source_line":"public record TestAttributeWrongTarget {","children":[]}]}

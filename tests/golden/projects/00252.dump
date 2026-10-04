@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncInsideAsync>
+<assemblies, [SyncInsideAsync]>
+<assembly_name, SyncInsideAsync>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncInsideAsync/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncInsideAsync/Build>
+<module_list, [SyncInsideAsync]>
+<module, SyncInsideAsync, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncInsideAsync/Build/Intermediate/Obj/Source/SyncInsideAsync.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncInsideAsync/Build/Binary/libSyncInsideAsync.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncInsideAsync/Source/Main.uv

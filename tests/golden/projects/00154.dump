@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/RecordDiagnosticsOwnership>
+<assemblies, [RecordDiagnosticsOwnership]>
+<assembly_name, RecordDiagnosticsOwnership>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/RecordDiagnosticsOwnership/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/RecordDiagnosticsOwnership/Build>
+<module_list, [RecordDiagnosticsOwnership]>
+<module, RecordDiagnosticsOwnership, obj, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/RecordDiagnosticsOwnership/Build/Intermediate/Obj/Source/RecordDiagnosticsOwnership.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/RecordDiagnosticsOwnership/Build/Binary/libRecordDiagnosticsOwnership.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/DataTypes/RecordDiagnosticsOwnership/Source/Main.uv

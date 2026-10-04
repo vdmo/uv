@@ -1,0 +1,4 @@
+module AsyncLargeCaptureWarningEmission
+  RecordDecl [3:8-5:2] public record LargeAsyncPayload
+  ProcedureDecl [7:8-9:2] public procedure acceptsLargeAsyncPayload
+  ProcedureDecl [11:8-17:2] public procedure asyncLargeCaptureWarningEmissionReference

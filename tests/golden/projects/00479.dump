@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainMissing>
+<assemblies, [MainMissing]>
+<assembly_name, MainMissing>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainMissing/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainMissing/Build>
+<module_list, [MainMissing]>
+<module, MainMissing, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainMissing/Build/Intermediate/Obj/Source/MainMissing.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainMissing/Build/Binary/MainMissing, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MainMissing/Source/Main.uv

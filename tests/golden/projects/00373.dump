@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelClosureCaptureOuterMove>
+<assemblies, [ParallelClosureCaptureOuterMove]>
+<assembly_name, ParallelClosureCaptureOuterMove>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelClosureCaptureOuterMove/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelClosureCaptureOuterMove/Build>
+<module_list, [ParallelClosureCaptureOuterMove]>
+<module, ParallelClosureCaptureOuterMove, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelClosureCaptureOuterMove/Build/Intermediate/Obj/Source/ParallelClosureCaptureOuterMove.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelClosureCaptureOuterMove/Build/Binary/libParallelClosureCaptureOuterMove.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelClosureCaptureOuterMove/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/SuperclassCycle>
+<assemblies, [SuperclassCycle]>
+<assembly_name, SuperclassCycle>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/SuperclassCycle/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/SuperclassCycle/Build>
+<module_list, [SuperclassCycle]>
+<module, SuperclassCycle, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/SuperclassCycle/Build/Intermediate/Obj/Source/SuperclassCycle.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/SuperclassCycle/Build/Binary/libSuperclassCycle.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/SuperclassCycle/Source/Main.uv

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-SRC-0301","severity":"warning","message":"Leading zeros in decimal literal","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/SourceText/DecimalLeadingZeroWarning/Source/Main.uv","start_line":4,"start_col":12,"end_line":4,"end_col":15},"source_line":"    return 001","children":[]}]}

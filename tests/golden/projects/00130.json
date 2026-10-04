@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2451","severity":"error","message":"Unknown attribute name (`Attr-Unknown`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Attributes/UnknownAttribute/Source/Main.uv","start_line":4,"start_col":8,"end_line":6,"end_col":2},"source_line":"public procedure unknownAttributeReference() -> i32 {","children":[]}]}

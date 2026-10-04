@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestDuplicateName>
+<assemblies, [TestDuplicateName]>
+<assembly_name, TestDuplicateName>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestDuplicateName/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestDuplicateName/Build>
+<module_list, [TestDuplicateName]>
+<module, TestDuplicateName, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestDuplicateName/Build/Intermediate/Obj/Source/TestDuplicateName.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestDuplicateName/Build/Binary/libTestDuplicateName.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/TestDuplicateName/Source/Main.uv

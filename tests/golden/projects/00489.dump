@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadingDiagnosticsTable>
+<assemblies, [OverloadingDiagnosticsTable]>
+<assembly_name, OverloadingDiagnosticsTable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadingDiagnosticsTable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadingDiagnosticsTable/Build>
+<module_list, [OverloadingDiagnosticsTable]>
+<module, OverloadingDiagnosticsTable, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadingDiagnosticsTable/Build/Intermediate/Obj/Source/OverloadingDiagnosticsTable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadingDiagnosticsTable/Build/Binary/libOverloadingDiagnosticsTable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadingDiagnosticsTable/Source/Main.uv

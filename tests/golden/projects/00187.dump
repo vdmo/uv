@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastValidity>
+<assemblies, [CastValidity]>
+<assembly_name, CastValidity>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastValidity/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastValidity/Build>
+<module_list, [CastValidity]>
+<module, CastValidity, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastValidity/Build/Intermediate/Obj/Source/CastValidity.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CastValidity/Build/Binary/libCastValidity.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CastValidity/Source/Main.uv

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2455","severity":"error","message":"Conflicting layout arguments","span":{"file":"/w/target/p1cases/derive_layout_align_twice/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":28},"source_line":"#layout(align(4), align(8))","children":[]}]}

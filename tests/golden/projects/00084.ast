@@ -1,0 +1,2 @@
+module DispatchDynamicKeyWarning
+  ProcedureDecl [3:8-13:2] public procedure dispatchDynamicKeyWarningReference

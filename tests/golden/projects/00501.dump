@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ReturnAnnotationPresence>
+<assemblies, [ReturnAnnotationPresence]>
+<assembly_name, ReturnAnnotationPresence>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ReturnAnnotationPresence/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ReturnAnnotationPresence/Build>
+<module_list, [ReturnAnnotationPresence]>
+<module, ReturnAnnotationPresence, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ReturnAnnotationPresence/Build/Intermediate/Obj/Source/ReturnAnnotationPresence.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ReturnAnnotationPresence/Build/Binary/libReturnAnnotationPresence.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ReturnAnnotationPresence/Source/Main.uv

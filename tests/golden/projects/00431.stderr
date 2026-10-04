@@ -1,0 +1,2 @@
+[uv] codegen failure at /home/runner/work/ultraviolet/ultraviolet/Bootstrap/Ultraviolet/src/05_codegen/lower/expr/call.cpp:1858
+[uv] EnsureCodegenModule: lowering failed for module 'GenericInstantiationDepthLimit' (resolve_failed=false, codegen_failed=true)

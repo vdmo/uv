@@ -1,0 +1,4 @@
+module DynamicGenericMethodNonDispatchable
+  ClassDecl [3:10-7:2] internal class GenericDispatchClass
+  RecordDecl [9:10-11:2] internal record GenericDispatchOwner
+  ProcedureDecl [13:10-16:2] internal procedure makeGenericDynamic

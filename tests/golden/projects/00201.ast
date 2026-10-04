@@ -1,0 +1,3 @@
+module EnumRecordMissingField
+  EnumDecl [3:8-8:2] public enum RecordMissingFieldPayload
+  ProcedureDecl [10:8-12:2] public procedure enumRecordMissingFieldReference

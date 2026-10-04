@@ -1,0 +1,4 @@
+module NoAmbientCapabilityGlobal
+  ProcedureDecl [3:10-5:2] internal procedure noAmbientRecursiveIOProvider
+  StaticDecl [7:10-7:62] internal let
+  ProcedureDecl [9:8-11:2] public procedure noAmbientCapabilityGlobalReference

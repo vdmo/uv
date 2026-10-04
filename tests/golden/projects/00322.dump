@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/MemoryOrderingDiagnostic>
+<assemblies, [MemoryOrderingDiagnostic]>
+<assembly_name, MemoryOrderingDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/MemoryOrderingDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/MemoryOrderingDiagnostic/Build>
+<module_list, [MemoryOrderingDiagnostic]>
+<module, MemoryOrderingDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/MemoryOrderingDiagnostic/Build/Intermediate/Obj/Source/MemoryOrderingDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/MemoryOrderingDiagnostic/Build/Binary/libMemoryOrderingDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/MemoryOrderingDiagnostic/Source/Main.uv

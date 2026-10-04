@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/ComptimeRuntimeErasure>
+<assemblies, [ComptimeRuntimeErasure]>
+<assembly_name, ComptimeRuntimeErasure>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/ComptimeRuntimeErasure/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/ComptimeRuntimeErasure/Build>
+<module_list, [ComptimeRuntimeErasure]>
+<module, ComptimeRuntimeErasure, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ComptimeRuntimeErasure/Build/Intermediate/Obj/Source/ComptimeRuntimeErasure.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/ComptimeRuntimeErasure/Build/Intermediate/IR/Source/ComptimeRuntimeErasure.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/ComptimeRuntimeErasure/Build/Library/libComptimeRuntimeErasure.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ComptimeRuntimeErasure/Source/Library.uv

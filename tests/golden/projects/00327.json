@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CON-0083","severity":"error","message":"`shared $Class` where class has `~%`/`~!` methods","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Keys/SharedDynamicMutatingReceiver/Source/Main.uv","start_line":9,"start_col":8,"end_line":13,"end_col":2},"source_line":"public procedure sharedDynamicMutatingReceiverReference(","children":[]}]}

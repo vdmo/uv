@@ -1,0 +1,2 @@
+module ContractPredicateNonBool
+  ProcedureDecl [3:8-7:2] public procedure contractPredicateNonBoolReference

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodCallArgumentType>
+<assemblies, [RecordMethodCallArgumentType]>
+<assembly_name, RecordMethodCallArgumentType>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodCallArgumentType/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodCallArgumentType/Build>
+<module_list, [RecordMethodCallArgumentType]>
+<module, RecordMethodCallArgumentType, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodCallArgumentType/Build/Intermediate/Obj/Source/RecordMethodCallArgumentType.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodCallArgumentType/Build/Binary/libRecordMethodCallArgumentType.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodCallArgumentType/Source/Main.uv

@@ -1,0 +1,4 @@
+module ClassDefaultMethodFieldAccess
+  ClassDecl [3:10-9:2] internal class Inspectable
+  RecordDecl [11:10-13:2] internal record InspectableOwner
+  ProcedureDecl [15:8-18:2] public procedure classDefaultMethodFieldAccessReference

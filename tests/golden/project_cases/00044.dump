@@ -1,0 +1,15 @@
+<project_root, /w/target/prjcases/layout_unicode_dir>
+<assemblies, [App]>
+<assembly_name, App>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/layout_unicode_dir/Source>
+<output_root, /w/target/prjcases/layout_unicode_dir/Build>
+<module_list, [App, App::grosse, App::Größe]>
+<module, App, obj, /w/target/prjcases/layout_unicode_dir/Build/Intermediate/Obj/Source/App.o, ir, <bottom>>
+<module, App::grosse, obj, /w/target/prjcases/layout_unicode_dir/Build/Intermediate/Obj/Source/grosse/App_x3a_x3agrosse.o, ir, <bottom>>
+<module, App::Größe, obj, /w/target/prjcases/layout_unicode_dir/Build/Intermediate/Obj/Source/Größe/App_x3a_x3aGr_xc3_xb6_xc3_x9fe.o, ir, <bottom>>
+<artifact, /w/target/prjcases/layout_unicode_dir/Build/Binary/App, import_lib, <bottom>>
+file:/w/target/prjcases/layout_unicode_dir/Source/Main.uv
+file:/w/target/prjcases/layout_unicode_dir/Source/grosse/a.uv
+file:/w/target/prjcases/layout_unicode_dir/Source/Größe/a.uv

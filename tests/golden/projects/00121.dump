@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/ReservedVendorNamespace>
+<assemblies, [ReservedVendorNamespace]>
+<assembly_name, ReservedVendorNamespace>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/ReservedVendorNamespace/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/ReservedVendorNamespace/Build>
+<module_list, [ReservedVendorNamespace]>
+<module, ReservedVendorNamespace, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/ReservedVendorNamespace/Build/Intermediate/Obj/Source/ReservedVendorNamespace.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/ReservedVendorNamespace/Build/Binary/libReservedVendorNamespace.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/ReservedVendorNamespace/Source/Main.uv

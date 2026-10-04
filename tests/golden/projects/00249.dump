@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SuspensionFormsDiagnosticsTable>
+<assemblies, [SuspensionFormsDiagnosticsTable]>
+<assembly_name, SuspensionFormsDiagnosticsTable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SuspensionFormsDiagnosticsTable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SuspensionFormsDiagnosticsTable/Build>
+<module_list, [SuspensionFormsDiagnosticsTable]>
+<module, SuspensionFormsDiagnosticsTable, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SuspensionFormsDiagnosticsTable/Build/Intermediate/Obj/Source/SuspensionFormsDiagnosticsTable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SuspensionFormsDiagnosticsTable/Build/Binary/libSuspensionFormsDiagnosticsTable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/SuspensionFormsDiagnosticsTable/Source/Main.uv

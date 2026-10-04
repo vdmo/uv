@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierDivergence>
+<assemblies, [BarrierDivergence]>
+<assembly_name, BarrierDivergence>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierDivergence/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierDivergence/Build>
+<module_list, [BarrierDivergence]>
+<module, BarrierDivergence, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierDivergence/Build/Intermediate/Obj/Source/BarrierDivergence.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierDivergence/Build/Binary/libBarrierDivergence.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/BarrierDivergence/Source/Main.uv

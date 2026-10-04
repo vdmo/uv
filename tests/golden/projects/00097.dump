@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/DirectoryPreparationFailure>
+<assemblies, [DirectoryPreparationFailure]>
+<assembly_name, DirectoryPreparationFailure>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/DirectoryPreparationFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/DirectoryPreparationFailure/Build>
+<module_list, [DirectoryPreparationFailure]>
+<module, DirectoryPreparationFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/DirectoryPreparationFailure/Build/Intermediate/Obj/Source/DirectoryPreparationFailure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/DirectoryPreparationFailure/Build/Binary/DirectoryPreparationFailure, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/DirectoryPreparationFailure/Source/Main.uv

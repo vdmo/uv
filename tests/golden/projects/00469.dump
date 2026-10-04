@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntrySideEffect>
+<assemblies, [ContractEntrySideEffect]>
+<assembly_name, ContractEntrySideEffect>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntrySideEffect/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntrySideEffect/Build>
+<module_list, [ContractEntrySideEffect]>
+<module, ContractEntrySideEffect, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntrySideEffect/Build/Intermediate/Obj/Source/ContractEntrySideEffect.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntrySideEffect/Build/Binary/libContractEntrySideEffect.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntrySideEffect/Source/Main.uv

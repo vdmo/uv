@@ -1,0 +1,13 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldVisibility>
+<assemblies, [FieldVisibility]>
+<assembly_name, FieldVisibility>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldVisibility/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldVisibility/Build>
+<module_list, [FieldVisibility, FieldVisibility::Hidden]>
+<module, FieldVisibility, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldVisibility/Build/Intermediate/Obj/Source/FieldVisibility.o, ir, <bottom>>
+<module, FieldVisibility::Hidden, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldVisibility/Build/Intermediate/Obj/Source/Hidden/FieldVisibility_x3a_x3aHidden.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldVisibility/Build/Binary/libFieldVisibility.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldVisibility/Source/Main.uv
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/FieldVisibility/Source/Hidden/Payload.uv

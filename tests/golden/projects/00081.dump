@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleOkSuppressesReleaseWarning>
+<assemblies, [StaleOkSuppressesReleaseWarning]>
+<assembly_name, StaleOkSuppressesReleaseWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleOkSuppressesReleaseWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleOkSuppressesReleaseWarning/Build>
+<module_list, [StaleOkSuppressesReleaseWarning]>
+<module, StaleOkSuppressesReleaseWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleOkSuppressesReleaseWarning/Build/Intermediate/Obj/Source/StaleOkSuppressesReleaseWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleOkSuppressesReleaseWarning/Build/Binary/libStaleOkSuppressesReleaseWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleOkSuppressesReleaseWarning/Source/Main.uv

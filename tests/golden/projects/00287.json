@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2625","severity":"error","message":"`FfiSafeType` enum without `#layout(C)` (`FfiSafe-Enum-LayoutC-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumWithoutLayoutC/Source/Main.uv","start_line":7,"start_col":1,"end_line":9,"end_col":2},"source_line":"extern \"C\" {","children":[]}]}

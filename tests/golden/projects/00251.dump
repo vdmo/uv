@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYieldFrom>
+<assemblies, [SyncContainsYieldFrom]>
+<assembly_name, SyncContainsYieldFrom>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYieldFrom/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYieldFrom/Build>
+<module_list, [SyncContainsYieldFrom]>
+<module, SyncContainsYieldFrom, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYieldFrom/Build/Intermediate/Obj/Source/SyncContainsYieldFrom.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYieldFrom/Build/Binary/libSyncContainsYieldFrom.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncContainsYieldFrom/Source/Main.uv

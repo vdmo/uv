@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncOperandRequiresInput>
+<assemblies, [SyncOperandRequiresInput]>
+<assembly_name, SyncOperandRequiresInput>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncOperandRequiresInput/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncOperandRequiresInput/Build>
+<module_list, [SyncOperandRequiresInput]>
+<module, SyncOperandRequiresInput, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncOperandRequiresInput/Build/Intermediate/Obj/Source/SyncOperandRequiresInput.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncOperandRequiresInput/Build/Binary/libSyncOperandRequiresInput.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/SyncOperandRequiresInput/Source/Main.uv

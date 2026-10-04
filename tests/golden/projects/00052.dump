@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/SliceRangeOOBPanic>
+<assemblies, [SliceRangeOOBPanic]>
+<assembly_name, SliceRangeOOBPanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/SliceRangeOOBPanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/SliceRangeOOBPanic/Build>
+<module_list, [SliceRangeOOBPanic]>
+<module, SliceRangeOOBPanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/SliceRangeOOBPanic/Build/Intermediate/Obj/Source/SliceRangeOOBPanic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/SliceRangeOOBPanic/Build/Binary/SliceRangeOOBPanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/SliceRangeOOBPanic/Source/Main.uv

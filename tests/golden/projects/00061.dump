@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncLargeCaptureWarning>
+<assemblies, [AsyncLargeCaptureWarning]>
+<assembly_name, AsyncLargeCaptureWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncLargeCaptureWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncLargeCaptureWarning/Build>
+<module_list, [AsyncLargeCaptureWarning]>
+<module, AsyncLargeCaptureWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncLargeCaptureWarning/Build/Intermediate/Obj/Source/AsyncLargeCaptureWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncLargeCaptureWarning/Build/Binary/libAsyncLargeCaptureWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncLargeCaptureWarning/Source/Main.uv

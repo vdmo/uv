@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-CON-0020","severity":"warning","message":"Speculative block on large struct (may be inefficient)","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeLargeStructWarning/Source/Main.uv","start_line":11,"start_col":24,"end_line":11,"end_col":31},"source_line":"    %speculative write payload {","children":[]}]}

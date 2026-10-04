@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncFailedSpawnedWaitPanic>
+<assemblies, [AsyncFailedSpawnedWaitPanic]>
+<assembly_name, AsyncFailedSpawnedWaitPanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncFailedSpawnedWaitPanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncFailedSpawnedWaitPanic/Build>
+<module_list, [AsyncFailedSpawnedWaitPanic]>
+<module, AsyncFailedSpawnedWaitPanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncFailedSpawnedWaitPanic/Build/Intermediate/Obj/Source/AsyncFailedSpawnedWaitPanic.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncFailedSpawnedWaitPanic/Build/Intermediate/IR/Source/AsyncFailedSpawnedWaitPanic.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncFailedSpawnedWaitPanic/Build/Binary/AsyncFailedSpawnedWaitPanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AsyncFailedSpawnedWaitPanic/Source/Main.uv

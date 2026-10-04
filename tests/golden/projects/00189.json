@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CON-0120","severity":"error","message":"Implicit capture of `unique` binding (`Capture-Unique-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureCaptureUnique/Source/Main.uv","start_line":3,"start_col":8,"end_line":7,"end_col":2},"source_line":"public procedure closureCaptureUniqueReference() -> bool {","children":[]}]}

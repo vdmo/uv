@@ -1,0 +1,2 @@
+module ComptimeProhibitedWait
+  ProcedureDecl [3:8-8:2] public procedure comptimeProhibitedWaitReference

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMixedMode>
+<assemblies, [HostExportMixedMode]>
+<assembly_name, HostExportMixedMode>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMixedMode/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMixedMode/Build>
+<module_list, [HostExportMixedMode]>
+<module, HostExportMixedMode, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMixedMode/Build/Intermediate/Obj/Source/HostExportMixedMode.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMixedMode/Build/Binary/libHostExportMixedMode.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMixedMode/Source/Main.uv

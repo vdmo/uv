@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2002","severity":"error","message":"Duplicate variant name in enum declaration (`Enum-Variant-Dup`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateVariant/Source/Main.uv","start_line":3,"start_col":8,"end_line":6,"end_col":2},"source_line":"public enum DuplicateVariantPayload {","children":[]}]}

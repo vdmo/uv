@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/SharedLibraryImageLifecycle>
+<assemblies, [SharedLibraryImageLifecycleProvider, SharedLibraryImageLifecycleConsumer, SharedLibraryImageLifecycleHostHarness]>
+<assembly_name, SharedLibraryImageLifecycleHostHarness>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/SharedLibraryImageLifecycle/Source/SharedLibraryImageLifecycleHostHarness>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/SharedLibraryImageLifecycle/Build>
+<module_list, [SharedLibraryImageLifecycleHostHarness]>
+<module, SharedLibraryImageLifecycleHostHarness, obj, /w/target/fixtures/Fixtures/ArtifactProjects/SharedLibraryImageLifecycle/Build/Intermediate/Obj/Source/SharedLibraryImageLifecycleHostHarness/SharedLibraryImageLifecycleHostHarness.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/SharedLibraryImageLifecycle/Build/Binary/SharedLibraryImageLifecycleHostHarness, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/SharedLibraryImageLifecycle/Source/SharedLibraryImageLifecycleHostHarness/Main.uv

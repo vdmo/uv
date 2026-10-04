@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ResultGenericConstraint>
+<assemblies, [ResultGenericConstraint]>
+<assembly_name, ResultGenericConstraint>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ResultGenericConstraint/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ResultGenericConstraint/Build>
+<module_list, [ResultGenericConstraint]>
+<module, ResultGenericConstraint, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ResultGenericConstraint/Build/Intermediate/Obj/Source/ResultGenericConstraint.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ResultGenericConstraint/Build/Binary/libResultGenericConstraint.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ResultGenericConstraint/Source/Main.uv

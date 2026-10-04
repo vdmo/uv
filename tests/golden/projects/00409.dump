@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeMissingBinding>
+<assemblies, [AssociatedTypeMissingBinding]>
+<assembly_name, AssociatedTypeMissingBinding>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeMissingBinding/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeMissingBinding/Build>
+<module_list, [AssociatedTypeMissingBinding]>
+<module, AssociatedTypeMissingBinding, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeMissingBinding/Build/Intermediate/Obj/Source/AssociatedTypeMissingBinding.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeMissingBinding/Build/Binary/libAssociatedTypeMissingBinding.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeMissingBinding/Source/Main.uv

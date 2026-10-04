@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverToolResolveFailure>
+<assemblies, [ArchiverToolResolveFailure]>
+<assembly_name, ArchiverToolResolveFailure>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverToolResolveFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverToolResolveFailure/Build>
+<module_list, [ArchiverToolResolveFailure]>
+<module, ArchiverToolResolveFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverToolResolveFailure/Build/Intermediate/Obj/Source/ArchiverToolResolveFailure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverToolResolveFailure/Build/Library/libArchiverToolResolveFailure.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverToolResolveFailure/Source/Library.uv

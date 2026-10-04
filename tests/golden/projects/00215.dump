@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/InvalidCast>
+<assemblies, [InvalidCast]>
+<assembly_name, InvalidCast>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/InvalidCast/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/InvalidCast/Build>
+<module_list, [InvalidCast]>
+<module, InvalidCast, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/InvalidCast/Build/Intermediate/Obj/Source/InvalidCast.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/InvalidCast/Build/Binary/libInvalidCast.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/InvalidCast/Source/Main.uv

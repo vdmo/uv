@@ -1,0 +1,3 @@
+module ComptimePointerParameter
+  ComptimeProcedureDecl [3:1-5:2] internal comptime procedure inspectPointer
+  ProcedureDecl [7:8-9:2] public procedure comptimePointerParameterReference

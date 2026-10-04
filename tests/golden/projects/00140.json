@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0251","severity":"error","message":"Emitted AST is not an item","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/EmitterEmitNonItem/Source/Main.uv","start_line":7,"start_col":23,"end_line":7,"end_col":26},"source_line":"        emitter~>emit(ast)","children":[]}]}

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticNote>
+<assemblies, [UserDiagnosticNote]>
+<assembly_name, UserDiagnosticNote>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticNote/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticNote/Build>
+<module_list, [UserDiagnosticNote]>
+<module, UserDiagnosticNote, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticNote/Build/Intermediate/Obj/Source/UserDiagnosticNote.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticNote/Build/Binary/libUserDiagnosticNote.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticNote/Source/Main.uv

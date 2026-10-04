@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary>
+<assemblies, [EmitLlLibrary]>
+<assembly_name, EmitLlLibrary>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Build>
+<module_list, [EmitLlLibrary]>
+<module, EmitLlLibrary, obj, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Build/Intermediate/Obj/Source/EmitLlLibrary.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Build/Intermediate/IR/Source/EmitLlLibrary.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Build/Library/libEmitLlLibrary.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv

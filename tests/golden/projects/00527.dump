@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonUnit>
+<assemblies, [DeferNonUnit]>
+<assembly_name, DeferNonUnit>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonUnit/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonUnit/Build>
+<module_list, [DeferNonUnit]>
+<module, DeferNonUnit, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonUnit/Build/Intermediate/Obj/Source/DeferNonUnit.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonUnit/Build/Binary/libDeferNonUnit.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonUnit/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainNotExecutionDomain>
+<assemblies, [ParallelDomainNotExecutionDomain]>
+<assembly_name, ParallelDomainNotExecutionDomain>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainNotExecutionDomain/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainNotExecutionDomain/Build>
+<module_list, [ParallelDomainNotExecutionDomain]>
+<module, ParallelDomainNotExecutionDomain, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainNotExecutionDomain/Build/Intermediate/Obj/Source/ParallelDomainNotExecutionDomain.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainNotExecutionDomain/Build/Binary/libParallelDomainNotExecutionDomain.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelDomainNotExecutionDomain/Source/Main.uv

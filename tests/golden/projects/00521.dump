@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/BindingStatementsDiagnostic>
+<assemblies, [BindingStatementsDiagnostic]>
+<assembly_name, BindingStatementsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/BindingStatementsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/BindingStatementsDiagnostic/Build>
+<module_list, [BindingStatementsDiagnostic]>
+<module, BindingStatementsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/BindingStatementsDiagnostic/Build/Intermediate/Obj/Source/BindingStatementsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/BindingStatementsDiagnostic/Build/Binary/libBindingStatementsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/BindingStatementsDiagnostic/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueUndefinedClassType>
+<assemblies, [OpaqueUndefinedClassType]>
+<assembly_name, OpaqueUndefinedClassType>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueUndefinedClassType/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueUndefinedClassType/Build>
+<module_list, [OpaqueUndefinedClassType]>
+<module, OpaqueUndefinedClassType, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueUndefinedClassType/Build/Intermediate/Obj/Source/OpaqueUndefinedClassType.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueUndefinedClassType/Build/Binary/libOpaqueUndefinedClassType.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueUndefinedClassType/Source/Main.uv

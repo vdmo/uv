@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumWithoutLayoutC>
+<assemblies, [FfiSafeEnumWithoutLayoutC]>
+<assembly_name, FfiSafeEnumWithoutLayoutC>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumWithoutLayoutC/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumWithoutLayoutC/Build>
+<module_list, [FfiSafeEnumWithoutLayoutC]>
+<module, FfiSafeEnumWithoutLayoutC, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumWithoutLayoutC/Build/Intermediate/Obj/Source/FfiSafeEnumWithoutLayoutC.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumWithoutLayoutC/Build/Binary/libFfiSafeEnumWithoutLayoutC.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumWithoutLayoutC/Source/Main.uv

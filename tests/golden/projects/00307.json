@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SYS-3340","severity":"error","message":"`#mangle(...)` on non-FFI procedure","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/MangleOnNonFFIProcedure/Source/Main.uv","start_line":4,"start_col":8,"end_line":6,"end_col":2},"source_line":"public procedure mangleOnNonFFIProcedureReference() -> i32 {","children":[]}]}

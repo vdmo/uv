@@ -1,0 +1,11 @@
+<project_root, /w/target/prjcases/nested_roots>
+<assemblies, [App, Inner]>
+<assembly_name, App>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/nested_roots/Source>
+<output_root, /w/target/prjcases/nested_roots/Build>
+<module_list, [App]>
+<module, App, obj, /w/target/prjcases/nested_roots/Build/Intermediate/Obj/Source/App.o, ir, <bottom>>
+<artifact, /w/target/prjcases/nested_roots/Build/Binary/App, import_lib, <bottom>>
+file:/w/target/prjcases/nested_roots/Source/Main.uv

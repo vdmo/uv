@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentStatementsDiagnostic>
+<assemblies, [AssignmentStatementsDiagnostic]>
+<assembly_name, AssignmentStatementsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentStatementsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentStatementsDiagnostic/Build>
+<module_list, [AssignmentStatementsDiagnostic]>
+<module, AssignmentStatementsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentStatementsDiagnostic/Build/Intermediate/Obj/Source/AssignmentStatementsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentStatementsDiagnostic/Build/Binary/libAssignmentStatementsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/AssignmentStatementsDiagnostic/Source/Main.uv

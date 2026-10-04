@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleAfterYieldReleaseWarning>
+<assemblies, [StaleAfterYieldReleaseWarning]>
+<assembly_name, StaleAfterYieldReleaseWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleAfterYieldReleaseWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleAfterYieldReleaseWarning/Build>
+<module_list, [StaleAfterYieldReleaseWarning]>
+<module, StaleAfterYieldReleaseWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleAfterYieldReleaseWarning/Build/Intermediate/Obj/Source/StaleAfterYieldReleaseWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleAfterYieldReleaseWarning/Build/Binary/libStaleAfterYieldReleaseWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/StaleAfterYieldReleaseWarning/Source/Main.uv

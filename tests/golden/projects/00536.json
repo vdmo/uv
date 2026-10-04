@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SRC-0510","severity":"error","message":"Missing statement terminator (`Missing-Terminator-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Statements/MissingRequiredTerminator/Source/Main.uv","start_line":14,"start_col":35,"end_line":14,"end_col":41},"source_line":"    let result: i32 = alias_value return result","children":[]}]}

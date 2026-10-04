@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeDefer>
+<assemblies, [SpeculativeDefer]>
+<assembly_name, SpeculativeDefer>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeDefer/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeDefer/Build>
+<module_list, [SpeculativeDefer]>
+<module, SpeculativeDefer, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeDefer/Build/Intermediate/Obj/Source/SpeculativeDefer.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeDefer/Build/Binary/libSpeculativeDefer.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeDefer/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiPassByValueRequired>
+<assemblies, [FfiPassByValueRequired]>
+<assembly_name, FfiPassByValueRequired>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiPassByValueRequired/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiPassByValueRequired/Build>
+<module_list, [FfiPassByValueRequired]>
+<module, FfiPassByValueRequired, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiPassByValueRequired/Build/Intermediate/Obj/Source/FfiPassByValueRequired.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiPassByValueRequired/Build/Binary/libFfiPassByValueRequired.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiPassByValueRequired/Source/Main.uv

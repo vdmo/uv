@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2001","severity":"error","message":"Enum declaration contains no variants (`Enum-Empty-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumEmpty/Source/Main.uv","start_line":3,"start_col":8,"end_line":3,"end_col":32},"source_line":"public enum EmptyEnumPayload {}","children":[]}]}

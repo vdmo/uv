@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyPathsDiagnostic>
+<assemblies, [KeyPathsDiagnostic]>
+<assembly_name, KeyPathsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyPathsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyPathsDiagnostic/Build>
+<module_list, [KeyPathsDiagnostic]>
+<module, KeyPathsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyPathsDiagnostic/Build/Intermediate/Obj/Source/KeyPathsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/KeyPathsDiagnostic/Build/Binary/libKeyPathsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/KeyPathsDiagnostic/Source/Main.uv

@@ -1,0 +1,7 @@
+module App
+  ProcedureDecl [1:8-3:2] public procedure main
+module App::a
+  ProcedureDecl [1:8-3:2] public procedure main
+module App::A2::Deep
+module App::B
+  ProcedureDecl [1:8-3:2] public procedure main

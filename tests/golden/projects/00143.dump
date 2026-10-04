@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Comptime/QuoteOutsideComptime>
+<assemblies, [QuoteOutsideComptime]>
+<assembly_name, QuoteOutsideComptime>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Comptime/QuoteOutsideComptime/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Comptime/QuoteOutsideComptime/Build>
+<module_list, [QuoteOutsideComptime]>
+<module, QuoteOutsideComptime, obj, /w/target/fixtures/Fixtures/RejectedSource/Comptime/QuoteOutsideComptime/Build/Intermediate/Obj/Source/QuoteOutsideComptime.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Comptime/QuoteOutsideComptime/Build/Binary/libQuoteOutsideComptime.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Comptime/QuoteOutsideComptime/Source/Main.uv

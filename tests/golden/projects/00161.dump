@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArgsTConsRef>
+<assemblies, [ArgsTConsRef]>
+<assembly_name, ArgsTConsRef>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArgsTConsRef/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArgsTConsRef/Build>
+<module_list, [ArgsTConsRef]>
+<module, ArgsTConsRef, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArgsTConsRef/Build/Intermediate/Obj/Source/ArgsTConsRef.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArgsTConsRef/Build/Binary/libArgsTConsRef.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ArgsTConsRef/Source/Main.uv

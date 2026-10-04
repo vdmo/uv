@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SEM-2853","severity":"error","message":"Invalid predicate in `@foreign_ensures`","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignContractDiagnostics/Source/Main.uv","start_line":3,"start_col":1,"end_line":6,"end_col":2},"source_line":"extern \"C\" {","children":[]}]}

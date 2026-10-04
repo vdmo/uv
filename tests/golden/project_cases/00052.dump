@@ -1,0 +1,11 @@
+<project_root, /w/target/prjcases/ok_root_dot>
+<assemblies, [App]>
+<assembly_name, App>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/ok_root_dot>
+<output_root, /w/target/prjcases/ok_root_dot/Build>
+<module_list, [App]>
+<module, App, obj, /w/target/prjcases/ok_root_dot/Build/Intermediate/Obj/App.o, ir, <bottom>>
+<artifact, /w/target/prjcases/ok_root_dot/Build/Binary/App, import_lib, <bottom>>
+file:/w/target/prjcases/ok_root_dot/Main.uv

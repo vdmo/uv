@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-1955","severity":"error","message":"Predicate does not evaluate to `bool`","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateNonBool/Source/Main.uv","start_line":3,"start_col":8,"end_line":3,"end_col":52},"source_line":"public type NonBoolRefinement = i32 |: { self + 1 }","children":[]}]}

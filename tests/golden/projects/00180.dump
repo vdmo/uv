@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallCopyNonBitcopy>
+<assemblies, [CallCopyNonBitcopy]>
+<assembly_name, CallCopyNonBitcopy>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallCopyNonBitcopy/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallCopyNonBitcopy/Build>
+<module_list, [CallCopyNonBitcopy]>
+<module, CallCopyNonBitcopy, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallCopyNonBitcopy/Build/Intermediate/Obj/Source/CallCopyNonBitcopy.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallCopyNonBitcopy/Build/Binary/libCallCopyNonBitcopy.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CallCopyNonBitcopy/Source/Main.uv

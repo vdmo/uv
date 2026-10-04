@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/SystemExitExecutable>
+<assemblies, [SystemExitExecutable]>
+<assembly_name, SystemExitExecutable>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/SystemExitExecutable/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/SystemExitExecutable/Build>
+<module_list, [SystemExitExecutable]>
+<module, SystemExitExecutable, obj, /w/target/fixtures/Fixtures/ArtifactProjects/SystemExitExecutable/Build/Intermediate/Obj/Source/SystemExitExecutable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/SystemExitExecutable/Build/Binary/SystemExitExecutable, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/SystemExitExecutable/Source/Main.uv

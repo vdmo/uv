@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportNonPublic>
+<assemblies, [RawExportNonPublic]>
+<assembly_name, RawExportNonPublic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportNonPublic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportNonPublic/Build>
+<module_list, [RawExportNonPublic]>
+<module, RawExportNonPublic, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportNonPublic/Build/Intermediate/Obj/Source/RawExportNonPublic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportNonPublic/Build/Binary/libRawExportNonPublic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportNonPublic/Source/Main.uv

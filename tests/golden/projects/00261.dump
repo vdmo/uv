@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ValueUseNonBitcopyPlace>
+<assemblies, [ValueUseNonBitcopyPlace]>
+<assembly_name, ValueUseNonBitcopyPlace>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ValueUseNonBitcopyPlace/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ValueUseNonBitcopyPlace/Build>
+<module_list, [ValueUseNonBitcopyPlace]>
+<module, ValueUseNonBitcopyPlace, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ValueUseNonBitcopyPlace/Build/Intermediate/Obj/Source/ValueUseNonBitcopyPlace.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ValueUseNonBitcopyPlace/Build/Binary/libValueUseNonBitcopyPlace.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ValueUseNonBitcopyPlace/Source/Main.uv

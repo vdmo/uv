@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/AcceptedProjects/LoweringChecksJudgementSet>
+<assemblies, [LoweringChecksJudgementSet]>
+<assembly_name, LoweringChecksJudgementSet>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/AcceptedProjects/LoweringChecksJudgementSet/Source>
+<output_root, /w/target/fixtures/Fixtures/AcceptedProjects/LoweringChecksJudgementSet/Build>
+<module_list, [LoweringChecksJudgementSet]>
+<module, LoweringChecksJudgementSet, obj, /w/target/fixtures/Fixtures/AcceptedProjects/LoweringChecksJudgementSet/Build/Intermediate/Obj/Source/LoweringChecksJudgementSet.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/AcceptedProjects/LoweringChecksJudgementSet/Build/Binary/libLoweringChecksJudgementSet.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/AcceptedProjects/LoweringChecksJudgementSet/Source/Library.uv

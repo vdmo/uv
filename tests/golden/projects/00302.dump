@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportOutsideLibrary>
+<assemblies, [HostExportOutsideLibrary]>
+<assembly_name, HostExportOutsideLibrary>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportOutsideLibrary/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportOutsideLibrary/Build>
+<module_list, [HostExportOutsideLibrary]>
+<module, HostExportOutsideLibrary, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportOutsideLibrary/Build/Intermediate/Obj/Source/HostExportOutsideLibrary.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportOutsideLibrary/Build/Binary/HostExportOutsideLibrary, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportOutsideLibrary/Source/Main.uv

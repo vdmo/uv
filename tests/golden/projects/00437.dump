@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/HeapDeallocRawUnsafe>
+<assemblies, [HeapDeallocRawUnsafe]>
+<assembly_name, HeapDeallocRawUnsafe>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/HeapDeallocRawUnsafe/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/HeapDeallocRawUnsafe/Build>
+<module_list, [HeapDeallocRawUnsafe]>
+<module, HeapDeallocRawUnsafe, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/HeapDeallocRawUnsafe/Build/Intermediate/Obj/Source/HeapDeallocRawUnsafe.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/HeapDeallocRawUnsafe/Build/Binary/libHeapDeallocRawUnsafe.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/HeapDeallocRawUnsafe/Source/Main.uv

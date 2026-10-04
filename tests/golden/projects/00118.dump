@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutWrongTarget>
+<assemblies, [LayoutWrongTarget]>
+<assembly_name, LayoutWrongTarget>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutWrongTarget/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutWrongTarget/Build>
+<module_list, [LayoutWrongTarget]>
+<module, LayoutWrongTarget, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutWrongTarget/Build/Intermediate/Obj/Source/LayoutWrongTarget.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutWrongTarget/Build/Binary/libLayoutWrongTarget.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutWrongTarget/Source/Main.uv

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CON-0094","severity":"error","message":"Attempt to combine `%speculative` and `%release` key-block heads","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeReleaseMode/Source/Main.uv","start_line":5,"start_col":33,"end_line":5,"end_col":44},"source_line":"    %release write shared_value speculative {","children":[]}]}

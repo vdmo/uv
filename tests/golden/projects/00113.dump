@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementLetRefutable>
+<assemblies, [PatternDiagnosticsSupplementLetRefutable]>
+<assembly_name, PatternDiagnosticsSupplementLetRefutable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementLetRefutable/Source>
+<output_root, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementLetRefutable/Build>
+<module_list, [PatternDiagnosticsSupplementLetRefutable]>
+<module, PatternDiagnosticsSupplementLetRefutable, obj, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementLetRefutable/Build/Intermediate/Obj/Source/PatternDiagnosticsSupplementLetRefutable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementLetRefutable/Build/Binary/libPatternDiagnosticsSupplementLetRefutable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementLetRefutable/Source/Main.uv

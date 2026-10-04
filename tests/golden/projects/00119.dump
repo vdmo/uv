@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedFieldReferenceRequiresUnsafe>
+<assemblies, [PackedFieldReferenceRequiresUnsafe]>
+<assembly_name, PackedFieldReferenceRequiresUnsafe>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedFieldReferenceRequiresUnsafe/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedFieldReferenceRequiresUnsafe/Build>
+<module_list, [PackedFieldReferenceRequiresUnsafe]>
+<module, PackedFieldReferenceRequiresUnsafe, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedFieldReferenceRequiresUnsafe/Build/Intermediate/Obj/Source/PackedFieldReferenceRequiresUnsafe.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedFieldReferenceRequiresUnsafe/Build/Binary/libPackedFieldReferenceRequiresUnsafe.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/PackedFieldReferenceRequiresUnsafe/Source/Main.uv

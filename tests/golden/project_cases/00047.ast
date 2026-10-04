@@ -1,0 +1,2 @@
+module Dep
+  ProcedureDecl [1:8-3:2] public procedure main

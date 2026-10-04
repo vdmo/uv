@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldFromInMismatch>
+<assemblies, [YieldFromInMismatch]>
+<assembly_name, YieldFromInMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldFromInMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldFromInMismatch/Build>
+<module_list, [YieldFromInMismatch]>
+<module, YieldFromInMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldFromInMismatch/Build/Intermediate/Obj/Source/YieldFromInMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldFromInMismatch/Build/Binary/libYieldFromInMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldFromInMismatch/Source/Main.uv

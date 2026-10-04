@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":null,"severity":"note","message":"compile-time user note","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticNote/Source/Main.uv","start_line":5,"start_col":9,"end_line":5,"end_col":52},"source_line":"        diagnostics~>note(\"compile-time user note\")","children":[]}]}

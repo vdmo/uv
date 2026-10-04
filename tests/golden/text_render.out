@@ -1,0 +1,4051 @@
+### target/fixtures/Fixtures/AcceptedProjects/CrossAssemblyImplementation/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0205]: Assembly selection failed (missing target or target not found) (`Assembly-Select-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/HostedImportGraph/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0205]: Assembly selection failed (missing target or target not found) (`Assembly-Select-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestEmitIRInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0204]: `emit_ir` has invalid value or type (`WF-Assembly-EmitIR-Err`, `WF-Assembly-EmitIRType-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestEmitIRTypeInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0204]: `emit_ir` has invalid value or type (`WF-Assembly-EmitIR-Err`, `WF-Assembly-EmitIRType-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestLinkKindInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0207]: `link_kind` has invalid value or type (`WF-Assembly-LinkKind-Err`, `WF-Assembly-LinkKindType-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestLinkKindTypeInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0207]: `link_kind` has invalid value or type (`WF-Assembly-LinkKind-Err`, `WF-Assembly-LinkKindType-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestLinkKindUseInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0208]: `link_kind` is only valid when `assembly.kind = "library"` (`WF-Assembly-LinkKind-Use-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestOutDirPathInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0301]: `assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestOutDirTypeInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0301]: `assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestParseError/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0102]: `Ultraviolet.toml` is not valid TOML
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestRequiredTypesInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0103]: Missing required `assembly` table, empty assembly list, required keys, or required key type (`WF-Assembly-Count-Err`, `WF-Assembly-Keys-Err`, `WF-Assembly-Required-Types-Err`, `WF-Assembly-Table-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/OutputDiagnostics/Projects/ManifestToolchainInvalid/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0110]: Invalid `[toolchain]` section in manifest (`WF-Toolchain-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/Patterns/PatternLoweringConformance/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  PatternLoweringConformance (1 modules)
+[info][build] phase=parse-modules
+     Parsing  PatternLoweringConformance (1 modules)
+[info][build] phase=parse-modules assembly-start name=PatternLoweringConformance modules=1 source_root=/w/target/fixtures/Fixtures/Patterns/PatternLoweringConformance/Source
+[info][build] phase=parse-modules assembly-finish name=PatternLoweringConformance ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0521]: Trailing comma in single-line list (`Trailing-Comma-Err`)
+  --> /w/target/fixtures/Fixtures/Patterns/PatternLoweringConformance/Source/Library.uv:82:46
+82 |         PatternLoweringEnum::Count(enum_count,) {
+82 |                                              ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Expressions/ParsePlaceError/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  ParsePlaceError (1 modules)
+[info][build] phase=parse-modules
+     Parsing  ParsePlaceError (1 modules)
+[info][build] phase=parse-modules assembly-start name=ParsePlaceError modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Expressions/ParsePlaceError/Source
+[info][build] phase=parse-modules assembly-finish name=ParsePlaceError ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Expressions/ParsePlaceError/Source/Main.uv:4:13
+4 |     return &(1 + 2)
+4 |             ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeReadMode/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  SpeculativeReadMode (1 modules)
+[info][build] phase=parse-modules
+     Parsing  SpeculativeReadMode (1 modules)
+[info][build] phase=parse-modules assembly-start name=SpeculativeReadMode modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeReadMode/Source
+[info][build] phase=parse-modules assembly-finish name=SpeculativeReadMode ok=false parsed_modules=1 emitted_diags=1
+
+error[E-CON-0095]: `%speculative` not followed by `write`
+  --> /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeReadMode/Source/Main.uv:6:18
+6 |     %speculative read shared_value {
+6 |                  ^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeReleaseMode/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  SpeculativeReleaseMode (1 modules)
+[info][build] phase=parse-modules
+     Parsing  SpeculativeReleaseMode (1 modules)
+[info][build] phase=parse-modules assembly-start name=SpeculativeReleaseMode modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeReleaseMode/Source
+[info][build] phase=parse-modules assembly-finish name=SpeculativeReleaseMode ok=false parsed_modules=1 emitted_diags=1
+
+error[E-CON-0094]: Attempt to combine `%speculative` and `%release` key-block heads
+  --> /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeReleaseMode/Source/Main.uv:5:33
+5 |     %release write shared_value speculative {
+5 |                                 ^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Modules/ReservedModuleKeyword/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-MOD-1105]: Module path component is a reserved keyword (`Validate-Module-Keyword-Err`, `Validate-ModulePath-Reserved-Err`, `WF-Module-Path-Reserved`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Parsing/EnumCommaSeparator/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  EnumCommaSeparator (1 modules)
+[info][build] phase=parse-modules
+     Parsing  EnumCommaSeparator (1 modules)
+[info][build] phase=parse-modules assembly-start name=EnumCommaSeparator modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Parsing/EnumCommaSeparator/Source
+[info][build] phase=parse-modules assembly-finish name=EnumCommaSeparator ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Parsing/EnumCommaSeparator/Source/Main.uv:4:10
+4 |     First,
+4 |          ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Parsing/MissingStatementTerminator/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  MissingStatementTerminator (1 modules)
+[info][build] phase=parse-modules
+     Parsing  MissingStatementTerminator (1 modules)
+[info][build] phase=parse-modules assembly-start name=MissingStatementTerminator modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Parsing/MissingStatementTerminator/Source
+[info][build] phase=parse-modules assembly-finish name=MissingStatementTerminator ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0510]: Missing statement terminator (`Missing-Terminator-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Parsing/MissingStatementTerminator/Source/Main.uv:4:24
+4 |     let value: i32 = 1 let next: i32 = 2
+4 |                        ^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Patterns/ParsePatternError/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  ParsePatternError (1 modules)
+[info][build] phase=parse-modules
+     Parsing  ParsePatternError (1 modules)
+[info][build] phase=parse-modules assembly-start name=ParsePatternError modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Patterns/ParsePatternError/Source
+[info][build] phase=parse-modules assembly-finish name=ParsePatternError ok=false parsed_modules=1 emitted_diags=4
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Patterns/ParsePatternError/Source/Main.uv:4:9
+4 |     let + = 1
+4 |         ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Patterns/ParsePatternError/Source/Main.uv:4:9
+4 |     let + = 1
+4 |         ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Patterns/ParsePatternError/Source/Main.uv:4:9
+4 |     let + = 1
+4 |         ^
+error[E-SRC-0510]: Missing statement terminator (`Missing-Terminator-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Patterns/ParsePatternError/Source/Main.uv:5:5
+5 |     return 0
+5 |     ^^^^^^
+
+4 errors emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/SourceText/InvalidStringEscape/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  InvalidStringEscape (1 modules)
+[info][build] phase=parse-modules
+     Parsing  InvalidStringEscape (1 modules)
+[info][build] phase=parse-modules assembly-start name=InvalidStringEscape modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/SourceText/InvalidStringEscape/Source
+[info][build] phase=parse-modules assembly-finish name=InvalidStringEscape ok=false parsed_modules=1 emitted_diags=3
+
+error[E-SRC-0302]: Invalid escape sequence (`Lex-Char-BadEscape`, `Lex-String-BadEscape`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/InvalidStringEscape/Source/Main.uv:4:16
+4 |     return "bad\q"
+4 |                ^
+error[E-SRC-0302]: Invalid escape sequence (`Lex-Char-BadEscape`, `Lex-String-BadEscape`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/InvalidStringEscape/Source/Main.uv:8:13
+8 |     return '\q'
+8 |             ^
+error[E-SRC-0303]: Invalid character literal (`Lex-Char-Invalid`, `Lex-Char-Unterminated`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/InvalidStringEscape/Source/Main.uv:8:12
+8 |     return '\q'
+8 |            ^
+
+3 errors emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/SourceText/InvalidUTF8/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  InvalidUTF8 (1 modules)
+[info][build] phase=parse-modules
+     Parsing  InvalidUTF8 (1 modules)
+[info][build] phase=parse-modules assembly-start name=InvalidUTF8 modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/SourceText/InvalidUTF8/Source
+[info][build] phase=parse-modules assembly-finish name=InvalidUTF8 ok=false parsed_modules=0 emitted_diags=1
+
+error[E-SRC-0101]: Invalid UTF-8 byte sequence (`Step-Decode-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/SourceText/LeadingBOMEmbeddedBOM/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  LeadingBOMEmbeddedBOM (1 modules)
+[info][build] phase=parse-modules
+     Parsing  LeadingBOMEmbeddedBOM (1 modules)
+[info][build] phase=parse-modules assembly-start name=LeadingBOMEmbeddedBOM modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/SourceText/LeadingBOMEmbeddedBOM/Source
+[info][build] phase=parse-modules assembly-finish name=LeadingBOMEmbeddedBOM ok=false parsed_modules=0 emitted_diags=2
+
+warning[W-SRC-0101]: UTF-8 BOM present at the start of the file
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/LeadingBOMEmbeddedBOM/Source/Main.uv:1:1
+1 | ﻿﻿public procedure leadingBOMEmbeddedBOMReference() -> i32 {
+1 | ^
+error[E-SRC-0103]: Embedded BOM found after the first position (`Step-EmbeddedBOM-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/LeadingBOMEmbeddedBOM/Source/Main.uv:1:1
+1 | ﻿﻿public procedure leadingBOMEmbeddedBOMReference() -> i32 {
+1 | ^^^
+
+1 error, 1 warning emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/SourceText/MalformedNumericLiteral/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  MalformedNumericLiteral (1 modules)
+[info][build] phase=parse-modules
+     Parsing  MalformedNumericLiteral (1 modules)
+[info][build] phase=parse-modules assembly-start name=MalformedNumericLiteral modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/SourceText/MalformedNumericLiteral/Source
+[info][build] phase=parse-modules assembly-finish name=MalformedNumericLiteral ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/MalformedNumericLiteral/Source/Main.uv:4:12
+4 |     return 1_
+4 |            ^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/SourceText/ProhibitedControlCharacter/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  ProhibitedControlCharacter (1 modules)
+[info][build] phase=parse-modules
+     Parsing  ProhibitedControlCharacter (1 modules)
+[info][build] phase=parse-modules assembly-start name=ProhibitedControlCharacter modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/SourceText/ProhibitedControlCharacter/Source
+[info][build] phase=parse-modules assembly-finish name=ProhibitedControlCharacter ok=false parsed_modules=0 emitted_diags=1
+
+error[E-SRC-0104]: Forbidden control character or null byte (`Step-Prohibited-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/ProhibitedControlCharacter/Source/Main.uv:2:1
+2 |     return 1
+2 | ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/SourceText/UnterminatedBlockComment/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  UnterminatedBlockComment (1 modules)
+[info][build] phase=parse-modules
+     Parsing  UnterminatedBlockComment (1 modules)
+[info][build] phase=parse-modules assembly-start name=UnterminatedBlockComment modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/SourceText/UnterminatedBlockComment/Source
+[info][build] phase=parse-modules assembly-finish name=UnterminatedBlockComment ok=false parsed_modules=0 emitted_diags=1
+
+error[E-SRC-0306]: Unterminated block comment (`Block-Comment-Unterminated`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/UnterminatedBlockComment/Source/Main.uv:4:5
+4 |     /* unterminated block comment
+4 |     ^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/SourceText/UnterminatedString/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  UnterminatedString (1 modules)
+[info][build] phase=parse-modules
+     Parsing  UnterminatedString (1 modules)
+[info][build] phase=parse-modules assembly-start name=UnterminatedString modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/SourceText/UnterminatedString/Source
+[info][build] phase=parse-modules assembly-finish name=UnterminatedString ok=false parsed_modules=1 emitted_diags=3
+
+error[E-SRC-0301]: Unterminated string literal (`Lex-String-Unterminated`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/UnterminatedString/Source/Main.uv:4:29
+4 |     let text: string@View = "unterminated
+4 |                             ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/UnterminatedString/Source/Main.uv:5:5
+5 |     return 0
+5 |     ^^^^^^
+error[E-SRC-0510]: Missing statement terminator (`Missing-Terminator-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/SourceText/UnterminatedString/Source/Main.uv:6:1
+6 | }
+6 | ^
+
+3 errors emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Statements/BlocksDiagnostic/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  BlocksDiagnostic (1 modules)
+[info][build] phase=parse-modules
+     Parsing  BlocksDiagnostic (1 modules)
+[info][build] phase=parse-modules assembly-start name=BlocksDiagnostic modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Statements/BlocksDiagnostic/Source
+[info][build] phase=parse-modules assembly-finish name=BlocksDiagnostic ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Statements/BlocksDiagnostic/Source/Main.uv:4:5
+4 |     else
+4 |     ^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Statements/MissingRequiredTerminator/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  MissingRequiredTerminator (1 modules)
+[info][build] phase=parse-modules
+     Parsing  MissingRequiredTerminator (1 modules)
+[info][build] phase=parse-modules assembly-start name=MissingRequiredTerminator modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Statements/MissingRequiredTerminator/Source
+[info][build] phase=parse-modules assembly-finish name=MissingRequiredTerminator ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0510]: Missing statement terminator (`Missing-Terminator-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Statements/MissingRequiredTerminator/Source/Main.uv:14:35
+14 |     let result: i32 = alias_value return result
+14 |                                   ^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Statements/ReturnAtModuleScope/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  ReturnAtModuleScope (1 modules)
+[info][build] phase=parse-modules
+     Parsing  ReturnAtModuleScope (1 modules)
+[info][build] phase=parse-modules assembly-start name=ReturnAtModuleScope modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Statements/ReturnAtModuleScope/Source
+[info][build] phase=parse-modules assembly-finish name=ReturnAtModuleScope ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SEM-3165]: `return` at module scope
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Statements/StatementParseError/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  StatementParseError (1 modules)
+[info][build] phase=parse-modules
+     Parsing  StatementParseError (1 modules)
+[info][build] phase=parse-modules assembly-start name=StatementParseError modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Statements/StatementParseError/Source
+[info][build] phase=parse-modules assembly-finish name=StatementParseError ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Statements/StatementParseError/Source/Main.uv:4:5
+4 |     else
+4 |     ^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/fixtures/Fixtures/RejectedSource/Statements/SyncStatementRecovery/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  SyncStatementRecovery (1 modules)
+[info][build] phase=parse-modules
+     Parsing  SyncStatementRecovery (1 modules)
+[info][build] phase=parse-modules assembly-start name=SyncStatementRecovery modules=1 source_root=/w/target/fixtures/Fixtures/RejectedSource/Statements/SyncStatementRecovery/Source
+[info][build] phase=parse-modules assembly-finish name=SyncStatementRecovery ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/fixtures/Fixtures/RejectedSource/Statements/SyncStatementRecovery/Source/Main.uv:4:5
+4 |     else
+4 |     ^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_assembly_empty_array/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0103]: Missing required `assembly` table, empty assembly list, required keys, or required key type (`WF-Assembly-Count-Err`, `WF-Assembly-Keys-Err`, `WF-Assembly-Required-Types-Err`, `WF-Assembly-Table-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_assembly_key/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0104]: Unknown key in `assembly` table or unknown top-level key (`WF-TopKeys-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_assembly_mixed_array/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0103]: Missing required `assembly` table, empty assembly list, required keys, or required key type (`WF-Assembly-Count-Err`, `WF-Assembly-Keys-Err`, `WF-Assembly-Required-Types-Err`, `WF-Assembly-Table-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_assembly_string/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0103]: Missing required `assembly` table, empty assembly list, required keys, or required key type (`WF-Assembly-Count-Err`, `WF-Assembly-Keys-Err`, `WF-Assembly-Required-Types-Err`, `WF-Assembly-Table-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_build_key/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0111]: Invalid `[build]` section in manifest (`WF-Build-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_build_type/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0104]: Unknown key in `assembly` table or unknown top-level key (`WF-TopKeys-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_build_value/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0111]: Invalid `[build]` section in manifest (`WF-Build-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_dup_name/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0202]: Duplicate `assembly.name` values (`WF-Assembly-Name-Dup`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_emit_ir/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0204]: `emit_ir` has invalid value or type (`WF-Assembly-EmitIR-Err`, `WF-Assembly-EmitIRType-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_emit_ir_type/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0204]: `emit_ir` has invalid value or type (`WF-Assembly-EmitIR-Err`, `WF-Assembly-EmitIRType-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_empty/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0103]: Missing required `assembly` table, empty assembly list, required keys, or required key type (`WF-Assembly-Count-Err`, `WF-Assembly-Keys-Err`, `WF-Assembly-Required-Types-Err`, `WF-Assembly-Table-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_kind/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0201]: `assembly.kind` is not in `{ "executable", "library", "dependency" }` (`WF-Assembly-Kind-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_link_kind/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0207]: `link_kind` has invalid value or type (`WF-Assembly-LinkKind-Err`, `WF-Assembly-LinkKindType-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_link_kind_type/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0207]: `link_kind` has invalid value or type (`WF-Assembly-LinkKind-Err`, `WF-Assembly-LinkKindType-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_link_kind_use/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0208]: `link_kind` is only valid when `assembly.kind = "library"` (`WF-Assembly-LinkKind-Use-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_missing_root/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0103]: Missing required `assembly` table, empty assembly list, required keys, or required key type (`WF-Assembly-Count-Err`, `WF-Assembly-Keys-Err`, `WF-Assembly-Required-Types-Err`, `WF-Assembly-Table-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_name_empty/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0203]: `assembly.name` is not a valid identifier (`WF-Assembly-Name-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_name_ident/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0203]: `assembly.name` is not a valid identifier (`WF-Assembly-Name-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_name_keyword/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0203]: `assembly.name` is not a valid identifier (`WF-Assembly-Name-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_name_type/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0103]: Missing required `assembly` table, empty assembly list, required keys, or required key type (`WF-Assembly-Count-Err`, `WF-Assembly-Keys-Err`, `WF-Assembly-Required-Types-Err`, `WF-Assembly-Table-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_out_dir_abs/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0301]: `assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_out_dir_parent/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0301]: `assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_out_dir_type/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0301]: `assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_root_abs/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0301]: `assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_root_drive/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0301]: `assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_root_missing_dir/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0302]: `assembly.root` does not exist or is not a directory (`WF-Source-Root-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_root_parent/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0301]: `assembly.root` or `out_dir` has invalid type, is absolute, or resolves outside root (`WF-Assembly-OutDir-Path-Err`, `WF-Assembly-OutDirType-Err`, `WF-Assembly-Root-Path-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_toml/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0102]: `Ultraviolet.toml` is not valid TOML
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_toolchain_key/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0110]: Invalid `[toolchain]` section in manifest (`WF-Toolchain-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_toolchain_llvm_type/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0110]: Invalid `[toolchain]` section in manifest (`WF-Toolchain-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_toolchain_profile/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0110]: Invalid `[toolchain]` section in manifest (`WF-Toolchain-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_toolchain_profile_type/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0110]: Invalid `[toolchain]` section in manifest (`WF-Toolchain-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_toolchain_type/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0104]: Unknown key in `assembly` table or unknown top-level key (`WF-TopKeys-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/bad_top_key/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0104]: Unknown key in `assembly` table or unknown top-level key (`WF-TopKeys-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/layout_bad_ident_dir/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-MOD-1106]: Module path component is not a valid identifier (`WF-Module-Path-Ident-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/layout_case_collision/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-MOD-1104]: Module path collision after NFC + case folding (`Disc-Collision`, `WF-Module-Path-Collision`)
+warning[W-MOD-1101]: Potential module path collision on case-insensitive filesystem
+
+1 error, 1 warning emitted
+    Finished  build failed in <t>
+### target/prjcases/layout_dash_dir/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-MOD-1106]: Module path component is not a valid identifier (`WF-Module-Path-Ident-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/layout_keyword_dir/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-MOD-1105]: Module path component is a reserved keyword (`Validate-Module-Keyword-Err`, `Validate-ModulePath-Reserved-Err`, `WF-Module-Path-Reserved`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/same_roots/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0206]: Ambiguous assembly root ownership for overlapping source roots (`WF-Assembly-Root-Owner-Ambiguous`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/two_executables/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0205]: Assembly selection failed (missing target or target not found) (`Assembly-Select-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/prjcases/no_manifest/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0101]: `Ultraviolet.toml` not found at project root
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/below_cap_errors/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  below_cap_errors (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/below_cap_errors/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=198
+[info][build] phase=parse-modules abort-on-error-count errors=198
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:1:14
+1 | procedure f0(loop: i32) {
+1 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:3:14
+3 | procedure f1(loop: i32) {
+3 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:5:14
+5 | procedure f2(loop: i32) {
+5 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:7:14
+7 | procedure f3(loop: i32) {
+7 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:9:14
+9 | procedure f4(loop: i32) {
+9 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:11:14
+11 | procedure f5(loop: i32) {
+11 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:13:14
+13 | procedure f6(loop: i32) {
+13 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:15:14
+15 | procedure f7(loop: i32) {
+15 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:17:14
+17 | procedure f8(loop: i32) {
+17 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:19:14
+19 | procedure f9(loop: i32) {
+19 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:21:15
+21 | procedure f10(loop: i32) {
+21 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:23:15
+23 | procedure f11(loop: i32) {
+23 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:25:15
+25 | procedure f12(loop: i32) {
+25 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:27:15
+27 | procedure f13(loop: i32) {
+27 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:29:15
+29 | procedure f14(loop: i32) {
+29 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:31:15
+31 | procedure f15(loop: i32) {
+31 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:33:15
+33 | procedure f16(loop: i32) {
+33 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:35:15
+35 | procedure f17(loop: i32) {
+35 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:37:15
+37 | procedure f18(loop: i32) {
+37 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:39:15
+39 | procedure f19(loop: i32) {
+39 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:41:15
+41 | procedure f20(loop: i32) {
+41 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:43:15
+43 | procedure f21(loop: i32) {
+43 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:45:15
+45 | procedure f22(loop: i32) {
+45 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:47:15
+47 | procedure f23(loop: i32) {
+47 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:49:15
+49 | procedure f24(loop: i32) {
+49 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:51:15
+51 | procedure f25(loop: i32) {
+51 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:53:15
+53 | procedure f26(loop: i32) {
+53 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:55:15
+55 | procedure f27(loop: i32) {
+55 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:57:15
+57 | procedure f28(loop: i32) {
+57 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:59:15
+59 | procedure f29(loop: i32) {
+59 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:61:15
+61 | procedure f30(loop: i32) {
+61 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:63:15
+63 | procedure f31(loop: i32) {
+63 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:65:15
+65 | procedure f32(loop: i32) {
+65 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:67:15
+67 | procedure f33(loop: i32) {
+67 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:69:15
+69 | procedure f34(loop: i32) {
+69 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:71:15
+71 | procedure f35(loop: i32) {
+71 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:73:15
+73 | procedure f36(loop: i32) {
+73 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:75:15
+75 | procedure f37(loop: i32) {
+75 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:77:15
+77 | procedure f38(loop: i32) {
+77 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:79:15
+79 | procedure f39(loop: i32) {
+79 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:81:15
+81 | procedure f40(loop: i32) {
+81 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:83:15
+83 | procedure f41(loop: i32) {
+83 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:85:15
+85 | procedure f42(loop: i32) {
+85 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:87:15
+87 | procedure f43(loop: i32) {
+87 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:89:15
+89 | procedure f44(loop: i32) {
+89 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:91:15
+91 | procedure f45(loop: i32) {
+91 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:93:15
+93 | procedure f46(loop: i32) {
+93 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:95:15
+95 | procedure f47(loop: i32) {
+95 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:97:15
+97 | procedure f48(loop: i32) {
+97 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:99:15
+99 | procedure f49(loop: i32) {
+99 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:101:15
+101 | procedure f50(loop: i32) {
+101 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:103:15
+103 | procedure f51(loop: i32) {
+103 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:105:15
+105 | procedure f52(loop: i32) {
+105 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:107:15
+107 | procedure f53(loop: i32) {
+107 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:109:15
+109 | procedure f54(loop: i32) {
+109 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:111:15
+111 | procedure f55(loop: i32) {
+111 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:113:15
+113 | procedure f56(loop: i32) {
+113 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:115:15
+115 | procedure f57(loop: i32) {
+115 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:117:15
+117 | procedure f58(loop: i32) {
+117 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:119:15
+119 | procedure f59(loop: i32) {
+119 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:121:15
+121 | procedure f60(loop: i32) {
+121 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:123:15
+123 | procedure f61(loop: i32) {
+123 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:125:15
+125 | procedure f62(loop: i32) {
+125 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:127:15
+127 | procedure f63(loop: i32) {
+127 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:129:15
+129 | procedure f64(loop: i32) {
+129 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:131:15
+131 | procedure f65(loop: i32) {
+131 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:133:15
+133 | procedure f66(loop: i32) {
+133 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:135:15
+135 | procedure f67(loop: i32) {
+135 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:137:15
+137 | procedure f68(loop: i32) {
+137 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:139:15
+139 | procedure f69(loop: i32) {
+139 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:141:15
+141 | procedure f70(loop: i32) {
+141 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:143:15
+143 | procedure f71(loop: i32) {
+143 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:145:15
+145 | procedure f72(loop: i32) {
+145 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:147:15
+147 | procedure f73(loop: i32) {
+147 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:149:15
+149 | procedure f74(loop: i32) {
+149 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:151:15
+151 | procedure f75(loop: i32) {
+151 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:153:15
+153 | procedure f76(loop: i32) {
+153 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:155:15
+155 | procedure f77(loop: i32) {
+155 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:157:15
+157 | procedure f78(loop: i32) {
+157 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:159:15
+159 | procedure f79(loop: i32) {
+159 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:161:15
+161 | procedure f80(loop: i32) {
+161 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:163:15
+163 | procedure f81(loop: i32) {
+163 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:165:15
+165 | procedure f82(loop: i32) {
+165 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:167:15
+167 | procedure f83(loop: i32) {
+167 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:169:15
+169 | procedure f84(loop: i32) {
+169 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:171:15
+171 | procedure f85(loop: i32) {
+171 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:173:15
+173 | procedure f86(loop: i32) {
+173 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:175:15
+175 | procedure f87(loop: i32) {
+175 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:177:15
+177 | procedure f88(loop: i32) {
+177 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:179:15
+179 | procedure f89(loop: i32) {
+179 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:181:15
+181 | procedure f90(loop: i32) {
+181 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:183:15
+183 | procedure f91(loop: i32) {
+183 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:185:15
+185 | procedure f92(loop: i32) {
+185 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:187:15
+187 | procedure f93(loop: i32) {
+187 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:189:15
+189 | procedure f94(loop: i32) {
+189 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:191:15
+191 | procedure f95(loop: i32) {
+191 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:193:15
+193 | procedure f96(loop: i32) {
+193 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:195:15
+195 | procedure f97(loop: i32) {
+195 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:197:15
+197 | procedure f98(loop: i32) {
+197 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/below_cap_errors/Source/Main.uv:1:14
+1 | procedure f0(loop: i32) {
+1 |              ^^^^^^^^^
+
+100 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_deprecated_bad/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_deprecated_bad (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_deprecated_bad/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2450]: Malformed #deprecated syntax
+  --> /w/target/p1cases/derive_deprecated_bad/Source/Main.uv:2:1
+2 | #deprecated(1, 2)
+2 | ^^^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_deprecated_ok/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_deprecated_ok (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_deprecated_ok/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/derive_duplicate/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_duplicate (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_duplicate/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-CTE-0312]: Duplicate derive target in one derive attribute
+  --> /w/target/p1cases/derive_duplicate/Source/Main.uv:1:1
+1 | #derive(Eq, Eq)
+1 | ^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_dynamic_ok/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_dynamic_ok (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_dynamic_ok/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/derive_empty/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_empty (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_empty/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2450]: #derive(... ) requires one or more identifier arguments
+  --> /w/target/p1cases/derive_empty/Source/Main.uv:1:1
+1 | #derive()
+1 | ^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_ffi_by_value_modal/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_ffi_by_value_modal (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_ffi_by_value_modal/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2452]: Attribute 'ffi_pass_by_value' cannot be applied here
+  --> /w/target/p1cases/derive_ffi_by_value_modal/Source/Main.uv:2:1
+2 | #ffi_pass_by_value
+2 | ^^^^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_keyed_arg/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_keyed_arg (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_keyed_arg/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2450]: #derive(... ) requires one or more identifier arguments
+  --> /w/target/p1cases/derive_keyed_arg/Source/Main.uv:1:1
+1 | #derive(target: Eq)
+1 | ^^^^^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_align/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_align (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_align/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/derive_layout_align_bad/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_align_bad (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_align_bad/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2453]: Invalid layout align argument
+  --> /w/target/p1cases/derive_layout_align_bad/Source/Main.uv:2:1
+2 | #layout(align(3))
+2 | ^^^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_align_twice/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_align_twice (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_align_twice/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2455]: Conflicting layout arguments
+  --> /w/target/p1cases/derive_layout_align_twice/Source/Main.uv:2:1
+2 | #layout(align(4), align(8))
+2 | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_dup_c/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_dup_c (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_dup_c/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2455]: Conflicting layout arguments
+  --> /w/target/p1cases/derive_layout_dup_c/Source/Main.uv:2:1
+2 | #layout(C, C)
+2 | ^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_empty/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_empty (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_empty/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=1
+
+error[E-MOD-2450]: Malformed attribute syntax
+  --> /w/target/p1cases/derive_layout_empty/Source/Main.uv:2:9
+2 | #layout()
+2 |         ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_enum_disc/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_enum_disc (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_enum_disc/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/derive_layout_keyed/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_keyed (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_keyed/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=3
+
+error[E-MOD-2450]: Malformed attribute syntax
+  --> /w/target/p1cases/derive_layout_keyed/Source/Main.uv:2:9
+2 | #layout(kind: C)
+2 |         ^^^^
+error[E-MOD-2450]: Malformed attribute syntax
+  --> /w/target/p1cases/derive_layout_keyed/Source/Main.uv:2:9
+2 | #layout(kind: C)
+2 |         ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/derive_layout_keyed/Source/Main.uv:2:9
+2 | #layout(kind: C)
+2 |         ^^^^
+
+3 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_ok/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_ok (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_ok/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/derive_layout_packed_align/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_packed_align (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_packed_align/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2455]: Conflicting layout arguments
+  --> /w/target/p1cases/derive_layout_packed_align/Source/Main.uv:2:1
+2 | #layout(packed, align(4))
+2 | ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_packed_enum/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_packed_enum (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_packed_enum/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2454]: layout(packed) is valid only on records
+  --> /w/target/p1cases/derive_layout_packed_enum/Source/Main.uv:2:1
+2 | #layout(packed)
+2 | ^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_record_disc/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_record_disc (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_record_disc/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2455]: Conflicting layout arguments
+  --> /w/target/p1cases/derive_layout_record_disc/Source/Main.uv:2:1
+2 | #layout(u8)
+2 | ^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_layout_unknown/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_layout_unknown (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_layout_unknown/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=3
+
+error[E-MOD-2450]: Malformed attribute syntax
+  --> /w/target/p1cases/derive_layout_unknown/Source/Main.uv:2:9
+2 | #layout(rust)
+2 |         ^^^^
+error[E-MOD-2450]: Malformed attribute syntax
+  --> /w/target/p1cases/derive_layout_unknown/Source/Main.uv:2:9
+2 | #layout(rust)
+2 |         ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/derive_layout_unknown/Source/Main.uv:2:9
+2 | #layout(rust)
+2 |         ^^^^
+
+3 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_no_args/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_no_args (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_no_args/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2450]: #derive(... ) requires one or more identifier arguments
+  --> /w/target/p1cases/derive_no_args/Source/Main.uv:1:1
+1 | #derive
+1 | ^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_ok/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_ok (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_ok/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/derive_reflect_args/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_reflect_args (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_reflect_args/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2450]: Malformed #reflect syntax
+  --> /w/target/p1cases/derive_reflect_args/Source/Main.uv:2:1
+2 | #reflect(x)
+2 | ^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_second_bad/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_second_bad (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_second_bad/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2450]: #derive(... ) requires one or more identifier arguments
+  --> /w/target/p1cases/derive_second_bad/Source/Main.uv:5:1
+5 | #derive()
+5 | ^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_stops_before_later_assembly/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_stops_before_later_assembly (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_stops_before_later_assembly/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2450]: #derive(... ) requires one or more identifier arguments
+  --> /w/target/p1cases/derive_stops_before_later_assembly/Source/Main.uv:1:1
+1 | #derive()
+1 | ^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_string_arg/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_string_arg (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_string_arg/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2450]: #derive(... ) requires one or more identifier arguments
+  --> /w/target/p1cases/derive_string_arg/Source/Main.uv:1:1
+1 | #derive("Eq")
+1 | ^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_vendor_attr/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_vendor_attr (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_vendor_attr/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-CNF-0402]: Unknown attribute: ultraviolet::thing
+  --> /w/target/p1cases/derive_vendor_attr/Source/Main.uv:2:1
+2 | #ultraviolet::thing
+2 | ^^^^^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_with_bad_target_attr/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_with_bad_target_attr (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_with_bad_target_attr/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2452]: Attribute 'inline' cannot be applied here
+  --> /w/target/p1cases/derive_with_bad_target_attr/Source/Main.uv:2:1
+2 | #inline
+2 | ^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_with_library_attr/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_with_library_attr (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_with_library_attr/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-SYS-3345]: Attribute 'library' cannot be applied here
+  --> /w/target/p1cases/derive_with_library_attr/Source/Main.uv:2:1
+2 | #library(name: "c")
+2 | ^^^^^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_with_test_attr/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_with_test_attr (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_with_test_attr/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-TST-0109]: Attribute 'test' cannot be applied here
+  --> /w/target/p1cases/derive_with_test_attr/Source/Main.uv:1:1
+1 | #test
+1 | ^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/derive_with_unknown_attr/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  derive_with_unknown_attr (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/derive_with_unknown_attr/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-MOD-2451]: Unknown attribute: bogus
+  --> /w/target/p1cases/derive_with_unknown_attr/Source/Main.uv:2:1
+2 | #bogus
+2 | ^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/docs_only/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  docs_only (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/docs_only/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/empty_file/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  empty_file (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/empty_file/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/error_item_only/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  error_item_only (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/error_item_only/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/error_item_only/Source/Main.uv:1:1
+1 | @@@
+1 | ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/exactly_cap_errors/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  exactly_cap_errors (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/exactly_cap_errors/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=200
+[info][build] phase=parse-modules abort-on-error-count errors=200
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:1:14
+1 | procedure f0(loop: i32) {
+1 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:3:14
+3 | procedure f1(loop: i32) {
+3 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:5:14
+5 | procedure f2(loop: i32) {
+5 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:7:14
+7 | procedure f3(loop: i32) {
+7 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:9:14
+9 | procedure f4(loop: i32) {
+9 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:11:14
+11 | procedure f5(loop: i32) {
+11 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:13:14
+13 | procedure f6(loop: i32) {
+13 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:15:14
+15 | procedure f7(loop: i32) {
+15 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:17:14
+17 | procedure f8(loop: i32) {
+17 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:19:14
+19 | procedure f9(loop: i32) {
+19 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:21:15
+21 | procedure f10(loop: i32) {
+21 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:23:15
+23 | procedure f11(loop: i32) {
+23 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:25:15
+25 | procedure f12(loop: i32) {
+25 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:27:15
+27 | procedure f13(loop: i32) {
+27 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:29:15
+29 | procedure f14(loop: i32) {
+29 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:31:15
+31 | procedure f15(loop: i32) {
+31 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:33:15
+33 | procedure f16(loop: i32) {
+33 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:35:15
+35 | procedure f17(loop: i32) {
+35 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:37:15
+37 | procedure f18(loop: i32) {
+37 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:39:15
+39 | procedure f19(loop: i32) {
+39 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:41:15
+41 | procedure f20(loop: i32) {
+41 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:43:15
+43 | procedure f21(loop: i32) {
+43 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:45:15
+45 | procedure f22(loop: i32) {
+45 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:47:15
+47 | procedure f23(loop: i32) {
+47 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:49:15
+49 | procedure f24(loop: i32) {
+49 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:51:15
+51 | procedure f25(loop: i32) {
+51 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:53:15
+53 | procedure f26(loop: i32) {
+53 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:55:15
+55 | procedure f27(loop: i32) {
+55 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:57:15
+57 | procedure f28(loop: i32) {
+57 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:59:15
+59 | procedure f29(loop: i32) {
+59 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:61:15
+61 | procedure f30(loop: i32) {
+61 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:63:15
+63 | procedure f31(loop: i32) {
+63 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:65:15
+65 | procedure f32(loop: i32) {
+65 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:67:15
+67 | procedure f33(loop: i32) {
+67 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:69:15
+69 | procedure f34(loop: i32) {
+69 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:71:15
+71 | procedure f35(loop: i32) {
+71 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:73:15
+73 | procedure f36(loop: i32) {
+73 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:75:15
+75 | procedure f37(loop: i32) {
+75 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:77:15
+77 | procedure f38(loop: i32) {
+77 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:79:15
+79 | procedure f39(loop: i32) {
+79 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:81:15
+81 | procedure f40(loop: i32) {
+81 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:83:15
+83 | procedure f41(loop: i32) {
+83 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:85:15
+85 | procedure f42(loop: i32) {
+85 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:87:15
+87 | procedure f43(loop: i32) {
+87 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:89:15
+89 | procedure f44(loop: i32) {
+89 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:91:15
+91 | procedure f45(loop: i32) {
+91 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:93:15
+93 | procedure f46(loop: i32) {
+93 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:95:15
+95 | procedure f47(loop: i32) {
+95 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:97:15
+97 | procedure f48(loop: i32) {
+97 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:99:15
+99 | procedure f49(loop: i32) {
+99 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:101:15
+101 | procedure f50(loop: i32) {
+101 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:103:15
+103 | procedure f51(loop: i32) {
+103 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:105:15
+105 | procedure f52(loop: i32) {
+105 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:107:15
+107 | procedure f53(loop: i32) {
+107 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:109:15
+109 | procedure f54(loop: i32) {
+109 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:111:15
+111 | procedure f55(loop: i32) {
+111 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:113:15
+113 | procedure f56(loop: i32) {
+113 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:115:15
+115 | procedure f57(loop: i32) {
+115 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:117:15
+117 | procedure f58(loop: i32) {
+117 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:119:15
+119 | procedure f59(loop: i32) {
+119 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:121:15
+121 | procedure f60(loop: i32) {
+121 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:123:15
+123 | procedure f61(loop: i32) {
+123 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:125:15
+125 | procedure f62(loop: i32) {
+125 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:127:15
+127 | procedure f63(loop: i32) {
+127 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:129:15
+129 | procedure f64(loop: i32) {
+129 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:131:15
+131 | procedure f65(loop: i32) {
+131 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:133:15
+133 | procedure f66(loop: i32) {
+133 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:135:15
+135 | procedure f67(loop: i32) {
+135 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:137:15
+137 | procedure f68(loop: i32) {
+137 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:139:15
+139 | procedure f69(loop: i32) {
+139 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:141:15
+141 | procedure f70(loop: i32) {
+141 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:143:15
+143 | procedure f71(loop: i32) {
+143 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:145:15
+145 | procedure f72(loop: i32) {
+145 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:147:15
+147 | procedure f73(loop: i32) {
+147 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:149:15
+149 | procedure f74(loop: i32) {
+149 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:151:15
+151 | procedure f75(loop: i32) {
+151 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:153:15
+153 | procedure f76(loop: i32) {
+153 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:155:15
+155 | procedure f77(loop: i32) {
+155 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:157:15
+157 | procedure f78(loop: i32) {
+157 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:159:15
+159 | procedure f79(loop: i32) {
+159 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:161:15
+161 | procedure f80(loop: i32) {
+161 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:163:15
+163 | procedure f81(loop: i32) {
+163 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:165:15
+165 | procedure f82(loop: i32) {
+165 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:167:15
+167 | procedure f83(loop: i32) {
+167 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:169:15
+169 | procedure f84(loop: i32) {
+169 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:171:15
+171 | procedure f85(loop: i32) {
+171 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:173:15
+173 | procedure f86(loop: i32) {
+173 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:175:15
+175 | procedure f87(loop: i32) {
+175 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:177:15
+177 | procedure f88(loop: i32) {
+177 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:179:15
+179 | procedure f89(loop: i32) {
+179 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:181:15
+181 | procedure f90(loop: i32) {
+181 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:183:15
+183 | procedure f91(loop: i32) {
+183 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:185:15
+185 | procedure f92(loop: i32) {
+185 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:187:15
+187 | procedure f93(loop: i32) {
+187 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:189:15
+189 | procedure f94(loop: i32) {
+189 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:191:15
+191 | procedure f95(loop: i32) {
+191 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:193:15
+193 | procedure f96(loop: i32) {
+193 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:195:15
+195 | procedure f97(loop: i32) {
+195 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:197:15
+197 | procedure f98(loop: i32) {
+197 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/exactly_cap_errors/Source/Main.uv:199:15
+199 | procedure f99(loop: i32) {
+199 |               ^^^^
+
+100 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/import_chain/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  import_chain (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/import_chain/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+     Parsing  Mid (1 modules)
+[info][build] phase=parse-modules assembly-start name=Mid modules=1 source_root=/w/target/p1cases/import_chain/Mid
+[info][build] phase=parse-modules assembly-finish name=Mid ok=true parsed_modules=1 emitted_diags=0
+     Parsing  Zed (1 modules)
+[info][build] phase=parse-modules assembly-start name=Zed modules=1 source_root=/w/target/p1cases/import_chain/Zed
+[info][build] phase=parse-modules assembly-finish name=Zed ok=false parsed_modules=1 emitted_diags=2
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/import_chain/Zed/z.uv:1:22
+1 | public procedure zed(loop: i32) {
+1 |                      ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/import_chain/Zed/z.uv:1:22
+1 | public procedure zed(loop: i32) {
+1 |                      ^^^^^^^^^
+
+2 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/import_error_in_imported/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  import_error_in_imported (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/import_error_in_imported/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+     Parsing  Second (1 modules)
+[info][build] phase=parse-modules assembly-start name=Second modules=1 source_root=/w/target/p1cases/import_error_in_imported/Second
+[info][build] phase=parse-modules assembly-finish name=Second ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/import_error_in_imported/Second/s.uv:1:19
+1 | let also_broken = = 1
+1 |                   ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/import_error_in_root/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  import_error_in_root (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/import_error_in_root/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/import_error_in_root/Source/Main.uv:2:14
+2 | let broken = = 1
+2 |              ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/import_error_in_unreachable/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  import_error_in_unreachable (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/import_error_in_unreachable/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+     Parsing  First (1 modules)
+[info][build] phase=parse-modules assembly-start name=First modules=1 source_root=/w/target/p1cases/import_error_in_unreachable/First
+[info][build] phase=parse-modules assembly-finish name=First ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/import_error_in_unreachable/First/f.uv:1:14
+1 | let broken = = 1
+1 |              ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/import_submodule/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  import_submodule (2 modules)
+[info][build] phase=parse-modules
+     Parsing  App (2 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=2 source_root=/w/target/p1cases/import_submodule/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=2 emitted_diags=0
+     Parsing  Lib (2 modules)
+[info][build] phase=parse-modules assembly-start name=Lib modules=2 source_root=/w/target/p1cases/import_submodule/Lib
+[info][build] phase=parse-modules assembly-finish name=Lib ok=false parsed_modules=2 emitted_diags=2
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/import_submodule/Lib/Inner/i.uv:1:20
+1 | public procedure i(loop: i32) {
+1 |                    ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/import_submodule/Lib/Inner/i.uv:1:20
+1 | public procedure i(loop: i32) {
+1 |                    ^^^^^^^^^
+
+2 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/import_unknown_and_cycle/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  import_unknown_and_cycle (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/import_unknown_and_cycle/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+     Parsing  A (1 modules)
+[info][build] phase=parse-modules assembly-start name=A modules=1 source_root=/w/target/p1cases/import_unknown_and_cycle/A
+[info][build] phase=parse-modules assembly-finish name=A ok=true parsed_modules=1 emitted_diags=0
+     Parsing  B (1 modules)
+[info][build] phase=parse-modules assembly-start name=B modules=1 source_root=/w/target/p1cases/import_unknown_and_cycle/B
+[info][build] phase=parse-modules assembly-finish name=B ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SEM-3011]: Method defined outside of type context
+  --> /w/target/p1cases/import_unknown_and_cycle/B/b.uv:2:20
+2 | public procedure b(self: i32) {
+2 |                    ^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_class/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_class (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_class/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=10
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:2:15
+2 |     procedure loop(~) -> i32
+2 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:3:10
+3 |     type record
+3 |          ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:4:5
+4 |     if: i32
+4 |     ^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:5:6
+5 |     @enum {
+5 |      ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:6:9
+6 |         let: i32
+6 |         ^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:2:5
+2 |     procedure loop(~) -> i32
+2 |     
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:3:5
+3 |     type record
+3 |     
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:4:5
+4 |     if: i32
+4 |     
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:5:5
+5 |     @enum {
+5 |     
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_class/Source/Main.uv:6:9
+6 |         let: i32
+6 |         
+
+10 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_closure/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_closure (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_closure/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=8
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_closure/Source/Main.uv:2:14
+2 |     let g = |loop, record: i32| loop
+2 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_closure/Source/Main.uv:2:20
+2 |     let g = |loop, record: i32| loop
+2 |                    ^^^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_closure/Source/Main.uv:2:37
+2 |     let g = |loop, record: i32| loop
+2 |                                     
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_closure/Source/Main.uv:3:5
+3 |     let h = |x| { let enum = x
+3 |     ^^^
+error[E-SRC-0510]: Missing statement terminator (`Missing-Terminator-Err`)
+  --> /w/target/p1cases/kw_closure/Source/Main.uv:3:5
+3 |     let h = |x| { let enum = x
+3 |     ^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_closure/Source/Main.uv:4:9
+4 |         enum }
+4 |         ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_closure/Source/Main.uv:5:1
+5 | }
+5 | ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_closure/Source/Main.uv:2:13
+2 |     let g = |loop, record: i32| loop
+2 |             
+
+8 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_comptime_procedure/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_comptime_procedure (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_comptime_procedure/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=6
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_comptime_procedure/Source/Main.uv:1:20
+1 | comptime procedure loop(if: i32) -> i32 {
+1 |                    ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_comptime_procedure/Source/Main.uv:1:25
+1 | comptime procedure loop(if: i32) -> i32 {
+1 |                         ^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_comptime_procedure/Source/Main.uv:2:9
+2 |     let enum = 1
+2 |         ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_comptime_procedure/Source/Main.uv:3:12
+3 |     return enum
+3 |            ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_comptime_procedure/Source/Main.uv:1:1
+1 | comptime procedure loop(if: i32) -> i32 {
+1 | ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_comptime_procedure/Source/Main.uv:1:25
+1 | comptime procedure loop(if: i32) -> i32 {
+1 |                         ^^^^^^^
+
+6 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_derive_target/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_derive_target (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_derive_target/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=3
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_derive_target/Source/Main.uv:1:15
+1 | derive target loop(target: Type) {
+1 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_derive_target/Source/Main.uv:2:9
+2 |     let record = 1
+2 |         ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_derive_target/Source/Main.uv:1:1
+1 | derive target loop(target: Type) {
+1 | ^
+
+3 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_duplicate_span/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_duplicate_span (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_duplicate_span/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=2
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_duplicate_span/Source/Main.uv:2:9
+2 |     let loop = 1
+2 |         ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_duplicate_span/Source/Main.uv:3:9
+3 |     let loop = 2
+3 |         ^^^^
+
+2 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_enum/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_enum (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_enum/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=7
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_enum/Source/Main.uv:1:6
+1 | enum let {
+1 |      ^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_enum/Source/Main.uv:2:5
+2 |     var
+2 |     ^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_enum/Source/Main.uv:3:5
+3 |     record(i32)
+3 |     ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_enum/Source/Main.uv:4:13
+4 |     Named { loop: i32, y: i32 }
+4 |             ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_enum/Source/Main.uv:1:1
+1 | enum let {
+1 | ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_enum/Source/Main.uv:3:5
+3 |     record(i32)
+3 |     ^^^^^^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_enum/Source/Main.uv:4:13
+4 |     Named { loop: i32, y: i32 }
+4 |             ^^^^^^^^^
+
+7 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_extern/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_extern (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_extern/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=4
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_extern/Source/Main.uv:2:15
+2 |     procedure loop(if: i32) -> i32
+2 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_extern/Source/Main.uv:2:20
+2 |     procedure loop(if: i32) -> i32
+2 |                    ^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_extern/Source/Main.uv:2:5
+2 |     procedure loop(if: i32) -> i32
+2 |     
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_extern/Source/Main.uv:2:20
+2 |     procedure loop(if: i32) -> i32
+2 |                    ^^^^^^^
+
+4 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_generic_param/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_generic_param (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_generic_param/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=9
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:1:13
+1 | procedure f<enum>(x: enum) {
+1 |             ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:1:22
+1 | procedure f<enum>(x: enum) {
+1 |                      ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:1:22
+1 | procedure f<enum>(x: enum) {
+1 |                      ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:1:22
+1 | procedure f<enum>(x: enum) {
+1 |                      ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:1:22
+1 | procedure f<enum>(x: enum) {
+1 |                      ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:1:26
+1 | procedure f<enum>(x: enum) {
+1 |                          ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:1:26
+1 | procedure f<enum>(x: enum) {
+1 |                          ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:1:26
+1 | procedure f<enum>(x: enum) {
+1 |                          ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_generic_param/Source/Main.uv:2:1
+2 | }
+2 | ^
+
+9 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_import_alias/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_import_alias (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_import_alias/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=2
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_import_alias/Source/Main.uv:1:15
+1 | import App as loop
+1 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_import_alias/Source/Main.uv:1:1
+1 | import App as loop
+1 | ^^^^^^^^^^^^^^^^^^
+
+2 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_let_binding/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_let_binding (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_let_binding/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=5
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_let_binding/Source/Main.uv:2:9
+2 |     let record = 1
+2 |         ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_let_binding/Source/Main.uv:3:9
+3 |     var enum: i32 = 2
+3 |         ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_let_binding/Source/Main.uv:4:10
+4 |     let (modal, class) = (1, 2)
+4 |          ^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_let_binding/Source/Main.uv:4:17
+4 |     let (modal, class) = (1, 2)
+4 |                 ^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_let_binding/Source/Main.uv:3:9
+3 |     var enum: i32 = 2
+3 |         ^^^^^^^^^
+
+5 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_modal/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_modal (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_modal/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=8
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_modal/Source/Main.uv:2:6
+2 |     @loop {
+2 |      ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_modal/Source/Main.uv:3:9
+3 |         if: i32
+3 |         ^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_modal/Source/Main.uv:4:19
+4 |         procedure record(~) {
+4 |                   ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_modal/Source/Main.uv:6:20
+6 |         transition enum() -> @Done {
+6 |                    ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_modal/Source/Main.uv:2:5
+2 |     @loop {
+2 |     
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_modal/Source/Main.uv:3:9
+3 |         if: i32
+3 |         ^^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_modal/Source/Main.uv:4:9
+4 |         procedure record(~) {
+4 |         ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_modal/Source/Main.uv:6:9
+6 |         transition enum() -> @Done {
+6 |         ^
+
+8 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_nested_exprs/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_nested_exprs (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_nested_exprs/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=14
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:2:21
+2 |     let a = [ { let loop = 1
+2 |                     ^^^^
+error[E-SRC-0510]: Missing statement terminator (`Missing-Terminator-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:3:9
+3 |         loop }, 2 ]
+3 |         ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:4:16
+4 |     let b = g(|record| record, (1, { let enum = 2
+4 |                ^^^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:4:24
+4 |     let b = g(|record| record, (1, { let enum = 2
+4 |                        ^^^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:5:14
+5 |         enum }))
+5 |              ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:5:14
+5 |         enum }))
+5 |              ^
+error[E-SRC-0510]: Missing statement terminator (`Missing-Terminator-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:5:14
+5 |         enum }))
+5 |              ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:5:15
+5 |         enum }))
+5 |               ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:6:26
+6 |     return if true { let modal = 1
+6 |                          ^^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:7:15
+7 |         modal } else { 0 }
+7 |               ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:7:15
+7 |         modal } else { 0 }
+7 |               ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:7:15
+7 |         modal } else { 0 }
+7 |               ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:7:26
+7 |         modal } else { 0 }
+7 |                          ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_nested_exprs/Source/Main.uv:8:1
+8 | }
+8 | ^
+
+14 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_param_name/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_param_name (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_param_name/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=4
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_param_name/Source/Main.uv:1:13
+1 | procedure f(if: i32, record: i32) {
+1 |             ^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_param_name/Source/Main.uv:1:22
+1 | procedure f(if: i32, record: i32) {
+1 |                      ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_param_name/Source/Main.uv:1:13
+1 | procedure f(if: i32, record: i32) {
+1 |             ^^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_param_name/Source/Main.uv:1:22
+1 | procedure f(if: i32, record: i32) {
+1 |                      ^^^^^^^^^^^
+
+4 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_patterns/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_patterns (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_patterns/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=4
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_patterns/Source/Main.uv:2:14
+2 |     if v is (loop, record) {
+2 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_patterns/Source/Main.uv:2:20
+2 |     if v is (loop, record) {
+2 |                    ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_patterns/Source/Main.uv:4:10
+4 |     loop enum in 0..3 {
+4 |          ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_patterns/Source/Main.uv:7:10
+7 |         (modal, 1) { }
+7 |          ^^^^^
+
+4 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_procedure_name/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_procedure_name (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_procedure_name/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=2
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_procedure_name/Source/Main.uv:1:11
+1 | procedure loop() {
+1 |           ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_procedure_name/Source/Main.uv:1:1
+1 | procedure loop() {
+1 | ^
+
+2 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_record_field/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_record_field (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_record_field/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=8
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_field/Source/Main.uv:2:5
+2 |     loop: i32
+2 |     ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_field/Source/Main.uv:3:5
+3 |     return: i32 = 3
+3 |     ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_field/Source/Main.uv:4:15
+4 |     procedure break(~) {
+4 |               ^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_field/Source/Main.uv:6:10
+6 |     type enum = i32
+6 |          ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_field/Source/Main.uv:2:5
+2 |     loop: i32
+2 |     ^^^^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_field/Source/Main.uv:3:5
+3 |     return: i32 = 3
+3 |     ^^^^^^^^^^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_field/Source/Main.uv:4:5
+4 |     procedure break(~) {
+4 |     ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_field/Source/Main.uv:6:5
+6 |     type enum = i32
+6 |     ^^^^^^^^^^^^^^^
+
+8 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_record_name/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_record_name (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_record_name/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=2
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_name/Source/Main.uv:1:8
+1 | record if {
+1 |        ^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_record_name/Source/Main.uv:1:1
+1 | record if {
+1 | ^
+
+2 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_region_using/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_region_using (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_region_using/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=4
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_region_using/Source/Main.uv:2:15
+2 |     region as loop {
+2 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_region_using/Source/Main.uv:4:16
+4 |     using x as record
+4 |                ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_region_using/Source/Main.uv:2:5
+2 |     region as loop {
+2 |     ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_region_using/Source/Main.uv:4:5
+4 |     using x as record
+4 |     ^^^^^^^^^^^^^^^^^
+
+4 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_static_binding/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_static_binding (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_static_binding/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=3
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_static_binding/Source/Main.uv:1:5
+1 | let record: i32 = 1
+1 |     ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_static_binding/Source/Main.uv:2:5
+2 | var loop = 2
+2 |     ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_static_binding/Source/Main.uv:1:5
+1 | let record: i32 = 1
+1 |     ^^^^^^^^^^^
+
+3 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_type_alias/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_type_alias (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_type_alias/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=12
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:1:6
+1 | type loop = i32
+1 |      ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:11
+2 | type Pair<record> = (record, record)
+2 |           ^^^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:22
+2 | type Pair<record> = (record, record)
+2 |                      ^^^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:22
+2 | type Pair<record> = (record, record)
+2 |                      ^^^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:22
+2 | type Pair<record> = (record, record)
+2 |                      ^^^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:28
+2 | type Pair<record> = (record, record)
+2 |                            ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:28
+2 | type Pair<record> = (record, record)
+2 |                            ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:28
+2 | type Pair<record> = (record, record)
+2 |                            ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:36
+2 | type Pair<record> = (record, record)
+2 |                                    ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:36
+2 | type Pair<record> = (record, record)
+2 |                                    ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:2:36
+2 | type Pair<record> = (record, record)
+2 |                                    ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_type_alias/Source/Main.uv:1:1
+1 | type loop = i32
+1 | ^^^^^^^^^^^^^^^
+
+12 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/kw_using/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  kw_using (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/kw_using/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=4
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_using/Source/Main.uv:1:22
+1 | using App::helper as loop
+1 |                      ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_using/Source/Main.uv:2:23
+2 | using App::{helper as record, other}
+2 |                       ^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_using/Source/Main.uv:1:1
+1 | using App::helper as loop
+1 | ^^^^^^^^^^^^^^^^^^^^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/kw_using/Source/Main.uv:2:1
+2 | using App::{helper as record, other}
+2 | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+4 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/lex_error_only/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  lex_error_only (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/lex_error_only/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/lex_error_only/Source/Main.uv:1:9
+1 | let a = 0x
+1 |         ^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/library_selected_first/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+
+error[E-PRJ-0205]: Assembly selection failed (missing target or target not found) (`Assembly-Select-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/many_errors/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  many_errors (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/many_errors/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=130
+[info][build] phase=parse-modules abort-on-error-count errors=130
+
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:1:10
+1 | let v0 = 0x
+1 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:2:10
+2 | let v1 = 0x
+2 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:3:10
+3 | let v2 = 0x
+3 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:4:10
+4 | let v3 = 0x
+4 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:5:10
+5 | let v4 = 0x
+5 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:6:10
+6 | let v5 = 0x
+6 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:7:10
+7 | let v6 = 0x
+7 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:8:10
+8 | let v7 = 0x
+8 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:9:10
+9 | let v8 = 0x
+9 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:10:10
+10 | let v9 = 0x
+10 |          ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:11:11
+11 | let v10 = 0x
+11 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:12:11
+12 | let v11 = 0x
+12 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:13:11
+13 | let v12 = 0x
+13 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:14:11
+14 | let v13 = 0x
+14 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:15:11
+15 | let v14 = 0x
+15 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:16:11
+16 | let v15 = 0x
+16 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:17:11
+17 | let v16 = 0x
+17 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:18:11
+18 | let v17 = 0x
+18 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:19:11
+19 | let v18 = 0x
+19 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:20:11
+20 | let v19 = 0x
+20 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:21:11
+21 | let v20 = 0x
+21 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:22:11
+22 | let v21 = 0x
+22 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:23:11
+23 | let v22 = 0x
+23 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:24:11
+24 | let v23 = 0x
+24 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:25:11
+25 | let v24 = 0x
+25 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:26:11
+26 | let v25 = 0x
+26 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:27:11
+27 | let v26 = 0x
+27 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:28:11
+28 | let v27 = 0x
+28 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:29:11
+29 | let v28 = 0x
+29 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:30:11
+30 | let v29 = 0x
+30 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:31:11
+31 | let v30 = 0x
+31 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:32:11
+32 | let v31 = 0x
+32 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:33:11
+33 | let v32 = 0x
+33 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:34:11
+34 | let v33 = 0x
+34 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:35:11
+35 | let v34 = 0x
+35 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:36:11
+36 | let v35 = 0x
+36 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:37:11
+37 | let v36 = 0x
+37 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:38:11
+38 | let v37 = 0x
+38 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:39:11
+39 | let v38 = 0x
+39 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:40:11
+40 | let v39 = 0x
+40 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:41:11
+41 | let v40 = 0x
+41 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:42:11
+42 | let v41 = 0x
+42 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:43:11
+43 | let v42 = 0x
+43 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:44:11
+44 | let v43 = 0x
+44 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:45:11
+45 | let v44 = 0x
+45 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:46:11
+46 | let v45 = 0x
+46 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:47:11
+47 | let v46 = 0x
+47 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:48:11
+48 | let v47 = 0x
+48 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:49:11
+49 | let v48 = 0x
+49 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:50:11
+50 | let v49 = 0x
+50 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:51:11
+51 | let v50 = 0x
+51 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:52:11
+52 | let v51 = 0x
+52 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:53:11
+53 | let v52 = 0x
+53 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:54:11
+54 | let v53 = 0x
+54 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:55:11
+55 | let v54 = 0x
+55 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:56:11
+56 | let v55 = 0x
+56 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:57:11
+57 | let v56 = 0x
+57 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:58:11
+58 | let v57 = 0x
+58 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:59:11
+59 | let v58 = 0x
+59 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:60:11
+60 | let v59 = 0x
+60 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:61:11
+61 | let v60 = 0x
+61 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:62:11
+62 | let v61 = 0x
+62 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:63:11
+63 | let v62 = 0x
+63 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:64:11
+64 | let v63 = 0x
+64 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:65:11
+65 | let v64 = 0x
+65 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:66:11
+66 | let v65 = 0x
+66 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:67:11
+67 | let v66 = 0x
+67 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:68:11
+68 | let v67 = 0x
+68 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:69:11
+69 | let v68 = 0x
+69 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:70:11
+70 | let v69 = 0x
+70 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:71:11
+71 | let v70 = 0x
+71 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:72:11
+72 | let v71 = 0x
+72 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:73:11
+73 | let v72 = 0x
+73 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:74:11
+74 | let v73 = 0x
+74 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:75:11
+75 | let v74 = 0x
+75 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:76:11
+76 | let v75 = 0x
+76 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:77:11
+77 | let v76 = 0x
+77 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:78:11
+78 | let v77 = 0x
+78 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:79:11
+79 | let v78 = 0x
+79 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:80:11
+80 | let v79 = 0x
+80 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:81:11
+81 | let v80 = 0x
+81 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:82:11
+82 | let v81 = 0x
+82 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:83:11
+83 | let v82 = 0x
+83 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:84:11
+84 | let v83 = 0x
+84 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:85:11
+85 | let v84 = 0x
+85 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:86:11
+86 | let v85 = 0x
+86 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:87:11
+87 | let v86 = 0x
+87 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:88:11
+88 | let v87 = 0x
+88 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:89:11
+89 | let v88 = 0x
+89 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:90:11
+90 | let v89 = 0x
+90 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:91:11
+91 | let v90 = 0x
+91 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:92:11
+92 | let v91 = 0x
+92 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:93:11
+93 | let v92 = 0x
+93 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:94:11
+94 | let v93 = 0x
+94 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:95:11
+95 | let v94 = 0x
+95 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:96:11
+96 | let v95 = 0x
+96 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:97:11
+97 | let v96 = 0x
+97 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:98:11
+98 | let v97 = 0x
+98 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:99:11
+99 | let v98 = 0x
+99 |           ^^
+error[E-SRC-0304]: Malformed numeric literal (`Lex-Numeric-Err`)
+  --> /w/target/p1cases/many_errors/Source/Main.uv:100:11
+100 | let v99 = 0x
+100 |           ^^
+
+100 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/many_kw_binders/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  many_kw_binders (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/many_kw_binders/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=260
+[info][build] phase=parse-modules abort-on-error-count errors=260
+
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:1:14
+1 | procedure f0(loop: i32) {
+1 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:3:14
+3 | procedure f1(loop: i32) {
+3 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:5:14
+5 | procedure f2(loop: i32) {
+5 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:7:14
+7 | procedure f3(loop: i32) {
+7 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:9:14
+9 | procedure f4(loop: i32) {
+9 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:11:14
+11 | procedure f5(loop: i32) {
+11 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:13:14
+13 | procedure f6(loop: i32) {
+13 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:15:14
+15 | procedure f7(loop: i32) {
+15 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:17:14
+17 | procedure f8(loop: i32) {
+17 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:19:14
+19 | procedure f9(loop: i32) {
+19 |              ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:21:15
+21 | procedure f10(loop: i32) {
+21 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:23:15
+23 | procedure f11(loop: i32) {
+23 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:25:15
+25 | procedure f12(loop: i32) {
+25 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:27:15
+27 | procedure f13(loop: i32) {
+27 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:29:15
+29 | procedure f14(loop: i32) {
+29 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:31:15
+31 | procedure f15(loop: i32) {
+31 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:33:15
+33 | procedure f16(loop: i32) {
+33 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:35:15
+35 | procedure f17(loop: i32) {
+35 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:37:15
+37 | procedure f18(loop: i32) {
+37 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:39:15
+39 | procedure f19(loop: i32) {
+39 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:41:15
+41 | procedure f20(loop: i32) {
+41 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:43:15
+43 | procedure f21(loop: i32) {
+43 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:45:15
+45 | procedure f22(loop: i32) {
+45 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:47:15
+47 | procedure f23(loop: i32) {
+47 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:49:15
+49 | procedure f24(loop: i32) {
+49 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:51:15
+51 | procedure f25(loop: i32) {
+51 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:53:15
+53 | procedure f26(loop: i32) {
+53 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:55:15
+55 | procedure f27(loop: i32) {
+55 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:57:15
+57 | procedure f28(loop: i32) {
+57 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:59:15
+59 | procedure f29(loop: i32) {
+59 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:61:15
+61 | procedure f30(loop: i32) {
+61 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:63:15
+63 | procedure f31(loop: i32) {
+63 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:65:15
+65 | procedure f32(loop: i32) {
+65 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:67:15
+67 | procedure f33(loop: i32) {
+67 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:69:15
+69 | procedure f34(loop: i32) {
+69 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:71:15
+71 | procedure f35(loop: i32) {
+71 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:73:15
+73 | procedure f36(loop: i32) {
+73 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:75:15
+75 | procedure f37(loop: i32) {
+75 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:77:15
+77 | procedure f38(loop: i32) {
+77 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:79:15
+79 | procedure f39(loop: i32) {
+79 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:81:15
+81 | procedure f40(loop: i32) {
+81 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:83:15
+83 | procedure f41(loop: i32) {
+83 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:85:15
+85 | procedure f42(loop: i32) {
+85 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:87:15
+87 | procedure f43(loop: i32) {
+87 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:89:15
+89 | procedure f44(loop: i32) {
+89 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:91:15
+91 | procedure f45(loop: i32) {
+91 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:93:15
+93 | procedure f46(loop: i32) {
+93 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:95:15
+95 | procedure f47(loop: i32) {
+95 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:97:15
+97 | procedure f48(loop: i32) {
+97 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:99:15
+99 | procedure f49(loop: i32) {
+99 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:101:15
+101 | procedure f50(loop: i32) {
+101 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:103:15
+103 | procedure f51(loop: i32) {
+103 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:105:15
+105 | procedure f52(loop: i32) {
+105 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:107:15
+107 | procedure f53(loop: i32) {
+107 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:109:15
+109 | procedure f54(loop: i32) {
+109 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:111:15
+111 | procedure f55(loop: i32) {
+111 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:113:15
+113 | procedure f56(loop: i32) {
+113 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:115:15
+115 | procedure f57(loop: i32) {
+115 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:117:15
+117 | procedure f58(loop: i32) {
+117 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:119:15
+119 | procedure f59(loop: i32) {
+119 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:121:15
+121 | procedure f60(loop: i32) {
+121 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:123:15
+123 | procedure f61(loop: i32) {
+123 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:125:15
+125 | procedure f62(loop: i32) {
+125 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:127:15
+127 | procedure f63(loop: i32) {
+127 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:129:15
+129 | procedure f64(loop: i32) {
+129 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:131:15
+131 | procedure f65(loop: i32) {
+131 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:133:15
+133 | procedure f66(loop: i32) {
+133 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:135:15
+135 | procedure f67(loop: i32) {
+135 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:137:15
+137 | procedure f68(loop: i32) {
+137 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:139:15
+139 | procedure f69(loop: i32) {
+139 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:141:15
+141 | procedure f70(loop: i32) {
+141 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:143:15
+143 | procedure f71(loop: i32) {
+143 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:145:15
+145 | procedure f72(loop: i32) {
+145 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:147:15
+147 | procedure f73(loop: i32) {
+147 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:149:15
+149 | procedure f74(loop: i32) {
+149 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:151:15
+151 | procedure f75(loop: i32) {
+151 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:153:15
+153 | procedure f76(loop: i32) {
+153 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:155:15
+155 | procedure f77(loop: i32) {
+155 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:157:15
+157 | procedure f78(loop: i32) {
+157 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:159:15
+159 | procedure f79(loop: i32) {
+159 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:161:15
+161 | procedure f80(loop: i32) {
+161 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:163:15
+163 | procedure f81(loop: i32) {
+163 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:165:15
+165 | procedure f82(loop: i32) {
+165 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:167:15
+167 | procedure f83(loop: i32) {
+167 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:169:15
+169 | procedure f84(loop: i32) {
+169 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:171:15
+171 | procedure f85(loop: i32) {
+171 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:173:15
+173 | procedure f86(loop: i32) {
+173 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:175:15
+175 | procedure f87(loop: i32) {
+175 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:177:15
+177 | procedure f88(loop: i32) {
+177 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:179:15
+179 | procedure f89(loop: i32) {
+179 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:181:15
+181 | procedure f90(loop: i32) {
+181 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:183:15
+183 | procedure f91(loop: i32) {
+183 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:185:15
+185 | procedure f92(loop: i32) {
+185 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:187:15
+187 | procedure f93(loop: i32) {
+187 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:189:15
+189 | procedure f94(loop: i32) {
+189 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:191:15
+191 | procedure f95(loop: i32) {
+191 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:193:15
+193 | procedure f96(loop: i32) {
+193 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:195:15
+195 | procedure f97(loop: i32) {
+195 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:197:15
+197 | procedure f98(loop: i32) {
+197 |               ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/many_kw_binders/Source/Main.uv:199:15
+199 | procedure f99(loop: i32) {
+199 |               ^^^^
+
+100 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/multi_file_module/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  multi_file_module (3 modules)
+[info][build] phase=parse-modules
+     Parsing  App (3 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=3 source_root=/w/target/p1cases/multi_file_module/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=3 emitted_diags=4
+
+error[E-SEM-3011]: Method defined outside of type context
+  --> /w/target/p1cases/multi_file_module/Source/A.uv:1:13
+1 | procedure f(self: i32) {
+1 |             ^^^^^^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/multi_file_module/Source/b.uv:1:11
+1 | procedure loop() {
+1 |           ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/multi_file_module/Source/b.uv:1:1
+1 | procedure loop() {
+1 | ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/multi_file_module/Source/Sub/x.uv:1:5
+1 | let record = 1
+1 |     ^^^^^^
+
+4 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/multi_file_stop_at_first_bad_module/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  multi_file_stop_at_first_bad_module (3 modules)
+[info][build] phase=parse-modules
+     Parsing  App (3 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=3 source_root=/w/target/p1cases/multi_file_stop_at_first_bad_module/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=0 emitted_diags=1
+
+error[E-SRC-0101]: Invalid UTF-8 byte sequence (`Step-Decode-Err`)
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/multi_file_syntax_errors/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  multi_file_syntax_errors (3 modules)
+[info][build] phase=parse-modules
+     Parsing  App (3 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=3 source_root=/w/target/p1cases/multi_file_syntax_errors/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=3 emitted_diags=11
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/Main.uv:4:11
+4 | procedure 1() {
+4 |           ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/Main.uv:4:11
+4 | procedure 1() {
+4 |           ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/Main.uv:4:11
+4 | procedure 1() {
+4 |           ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/Main.uv:4:11
+4 | procedure 1() {
+4 |           ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/Main.uv:5:1
+5 | }
+5 | ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/A/a.uv:1:8
+1 | record 1 {
+1 |        ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/A/a.uv:1:8
+1 | record 1 {
+1 |        ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/A/a.uv:1:8
+1 | record 1 {
+1 |        ^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/A/a.uv:2:1
+2 | }
+2 | ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/B/b.uv:1:11
+1 | procedure loop() {
+1 |           ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/multi_file_syntax_errors/Source/B/b.uv:1:1
+1 | procedure loop() {
+1 | ^
+
+11 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/no_derive_bad_attr/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  no_derive_bad_attr (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/no_derive_bad_attr/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=3
+
+error[E-MOD-2450]: Malformed attribute syntax
+  --> /w/target/p1cases/no_derive_bad_attr/Source/Main.uv:2:9
+2 | #layout(nope)
+2 |         ^^^^
+error[E-MOD-2450]: Malformed attribute syntax
+  --> /w/target/p1cases/no_derive_bad_attr/Source/Main.uv:2:9
+2 | #layout(nope)
+2 |         ^^^^
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/no_derive_bad_attr/Source/Main.uv:2:9
+2 | #layout(nope)
+2 |         ^^^^
+
+3 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/ok_plain/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  ok_plain (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/ok_plain/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/self_free_procedure/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  self_free_procedure (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/self_free_procedure/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SEM-3011]: Method defined outside of type context
+  --> /w/target/p1cases/self_free_procedure/Source/Main.uv:1:13
+1 | procedure f(self: i32) -> i32 {
+1 |             ^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/self_in_record_method/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  self_in_record_method (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/self_in_record_method/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+    Finished  build succeeded in <t>
+### target/p1cases/self_second_param/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  self_second_param (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/self_second_param/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SEM-3011]: Method defined outside of type context
+  --> /w/target/p1cases/self_second_param/Source/Main.uv:1:21
+1 | procedure f(a: i32, self: i32, self: i32) {
+1 |                     ^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/syntax_error_then_kw/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  syntax_error_then_kw (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/syntax_error_then_kw/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=false parsed_modules=1 emitted_diags=3
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/syntax_error_then_kw/Source/Main.uv:1:9
+1 | let f = = 1
+1 |         ^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/syntax_error_then_kw/Source/Main.uv:2:11
+2 | procedure loop() {
+2 |           ^^^^
+error[E-CNF-0401]: Reserved keyword used as identifier
+  --> /w/target/p1cases/syntax_error_then_kw/Source/Main.uv:2:1
+2 | procedure loop() {
+2 | ^
+
+3 errors emitted
+    Finished  build failed in <t>
+### target/p1cases/using_list_and_wildcard/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  using_list_and_wildcard (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/using_list_and_wildcard/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+     Parsing  Third (1 modules)
+[info][build] phase=parse-modules assembly-start name=Third modules=1 source_root=/w/target/p1cases/using_list_and_wildcard/Third
+[info][build] phase=parse-modules assembly-finish name=Third ok=true parsed_modules=1 emitted_diags=0
+     Parsing  Second (1 modules)
+[info][build] phase=parse-modules assembly-start name=Second modules=1 source_root=/w/target/p1cases/using_list_and_wildcard/Second
+[info][build] phase=parse-modules assembly-finish name=Second ok=false attr-validation=true parsed_modules=1 emitted_diags=0
+
+error[E-CTE-0312]: Duplicate derive target in one derive attribute
+  --> /w/target/p1cases/using_list_and_wildcard/Second/s.uv:1:1
+1 | #derive(Eq, Eq)
+1 | ^^^^^^^^^^^^^^^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/using_reaches_assembly/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  using_reaches_assembly (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/using_reaches_assembly/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=0
+     Parsing  Second (1 modules)
+[info][build] phase=parse-modules assembly-start name=Second modules=1 source_root=/w/target/p1cases/using_reaches_assembly/Second
+[info][build] phase=parse-modules assembly-finish name=Second ok=false parsed_modules=1 emitted_diags=1
+
+error[E-SRC-0520]: Generic syntax error (unexpected token) (`Parse-KeyMode-Err`, `Parse-Syntax-Err`)
+  --> /w/target/p1cases/using_reaches_assembly/Second/s.uv:3:14
+3 | let broken = = 1
+3 |              ^
+
+1 error emitted
+    Finished  build failed in <t>
+### target/p1cases/warning_only/Ultraviolet.toml
+[info][build] event=start input=Ultraviolet.toml
+[info][build] phase=project-load
+     Loading  warning_only (1 modules)
+[info][build] phase=parse-modules
+     Parsing  App (1 modules)
+[info][build] phase=parse-modules assembly-start name=App modules=1 source_root=/w/target/p1cases/warning_only/Source
+[info][build] phase=parse-modules assembly-finish name=App ok=true parsed_modules=1 emitted_diags=1
+[info][build] phase=parse-modules step=ffi-surface imports=0 exports=0
+
+warning[W-SRC-0101]: UTF-8 BOM present at the start of the file
+  --> /w/target/p1cases/warning_only/Source/Main.uv:1:1
+1 | ﻿public procedure main() -> i32 {
+1 | ^
+
+1 warning emitted
+    Finished  build succeeded in <t>

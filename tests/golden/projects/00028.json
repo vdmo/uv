@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-SYS-3355","severity":"warning","message":"`#unwind(\"abort\")` (redundant)","span":{"file":"/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv","start_line":817,"start_col":8,"end_line":820,"end_col":2},"source_line":"public procedure emitLlUnwindAbortExportProbe(index: usize) -> i32 {","children":[]}]}

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2634","severity":"error","message":"Generic `#host_export` procedure (`HostExport-Generic-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnostics/Source/Main.uv","start_line":4,"start_col":8,"end_line":6,"end_col":2},"source_line":"public procedure hostedGeneric<TValue>() -> i32 {","children":[]}]}

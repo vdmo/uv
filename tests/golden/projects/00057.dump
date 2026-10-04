@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/GenericClassBoundMethodLookup>
+<assemblies, [GenericClassBoundMethodLookup]>
+<assembly_name, GenericClassBoundMethodLookup>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/GenericClassBoundMethodLookup/Source>
+<output_root, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/GenericClassBoundMethodLookup/Build>
+<module_list, [GenericClassBoundMethodLookup]>
+<module, GenericClassBoundMethodLookup, obj, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/GenericClassBoundMethodLookup/Build/Intermediate/Obj/Source/GenericClassBoundMethodLookup.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/GenericClassBoundMethodLookup/Build/Binary/libGenericClassBoundMethodLookup.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/GenericClassBoundMethodLookup/Source/Main.uv

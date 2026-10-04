@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence>
+<assemblies, [GpuRuntimeEvidence]>
+<assembly_name, GpuRuntimeEvidence>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence/Build>
+<module_list, [GpuRuntimeEvidence]>
+<module, GpuRuntimeEvidence, obj, /w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence/Build/Intermediate/Obj/Source/GpuRuntimeEvidence.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence/Build/Intermediate/IR/Source/GpuRuntimeEvidence.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence/Build/Binary/GpuRuntimeEvidence, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence/Source/Main.uv

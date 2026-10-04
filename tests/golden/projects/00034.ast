@@ -1,0 +1,7 @@
+module IRLoweringForms
+  EnumDecl [1:8-4:2] public enum IRLoweringChoice
+  ProcedureDecl [6:8-14:2] public procedure irLoweringLoopProbe
+  ProcedureDecl [16:8-25:2] public procedure irLoweringIfCaseProbe
+  ProcedureDecl [27:8-33:2] public procedure irLoweringBranchPhiProbe
+  ProcedureDecl [35:8-50:2] public procedure irLoweringRegionFrameProbe
+  ProcedureDecl [52:8-57:2] public procedure irLoweringFormsProbe

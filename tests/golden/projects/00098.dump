@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/IRWriteFailure>
+<assemblies, [IRWriteFailure]>
+<assembly_name, IRWriteFailure>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/IRWriteFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/IRWriteFailure/Build>
+<module_list, [IRWriteFailure]>
+<module, IRWriteFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/IRWriteFailure/Build/Intermediate/Obj/Source/IRWriteFailure.o, ir, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/IRWriteFailure/Build/Intermediate/IR/Source/IRWriteFailure.ll>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/IRWriteFailure/Build/Binary/IRWriteFailure, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/OutputPipeline/IRWriteFailure/Source/Main.uv

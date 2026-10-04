@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineTypeMismatch>
+<assemblies, [PipelineTypeMismatch]>
+<assembly_name, PipelineTypeMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineTypeMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineTypeMismatch/Build>
+<module_list, [PipelineTypeMismatch]>
+<module, PipelineTypeMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineTypeMismatch/Build/Intermediate/Obj/Source/PipelineTypeMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineTypeMismatch/Build/Binary/libPipelineTypeMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineTypeMismatch/Source/Main.uv

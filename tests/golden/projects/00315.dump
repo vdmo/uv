@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/AsyncKeyRestrictionsYieldHeld>
+<assemblies, [AsyncKeyRestrictionsYieldHeld]>
+<assembly_name, AsyncKeyRestrictionsYieldHeld>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/AsyncKeyRestrictionsYieldHeld/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/AsyncKeyRestrictionsYieldHeld/Build>
+<module_list, [AsyncKeyRestrictionsYieldHeld]>
+<module, AsyncKeyRestrictionsYieldHeld, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/AsyncKeyRestrictionsYieldHeld/Build/Intermediate/Obj/Source/AsyncKeyRestrictionsYieldHeld.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/AsyncKeyRestrictionsYieldHeld/Build/Binary/libAsyncKeyRestrictionsYieldHeld.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/AsyncKeyRestrictionsYieldHeld/Source/Main.uv

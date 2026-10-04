@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchChunkType>
+<assemblies, [DispatchChunkType]>
+<assembly_name, DispatchChunkType>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchChunkType/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchChunkType/Build>
+<module_list, [DispatchChunkType]>
+<module, DispatchChunkType, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchChunkType/Build/Intermediate/Obj/Source/DispatchChunkType.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchChunkType/Build/Binary/libDispatchChunkType.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchChunkType/Source/Main.uv

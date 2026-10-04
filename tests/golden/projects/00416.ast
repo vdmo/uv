@@ -1,0 +1,2 @@
+module DuplicateAssociatedTypeName
+  ClassDecl [3:10-6:2] internal class DuplicateAssociatedTypeClass

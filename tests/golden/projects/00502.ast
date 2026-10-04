@@ -1,0 +1,2 @@
+module SelfTypeDefinition
+  RecordDecl [3:8-9:2] public record SelfTypeOwner

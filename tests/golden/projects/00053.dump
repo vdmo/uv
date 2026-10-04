@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/StaticLibraryArchive>
+<assemblies, [StaticLibraryArchive]>
+<assembly_name, StaticLibraryArchive>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/StaticLibraryArchive/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/StaticLibraryArchive/Build>
+<module_list, [StaticLibraryArchive]>
+<module, StaticLibraryArchive, obj, /w/target/fixtures/Fixtures/ArtifactProjects/StaticLibraryArchive/Build/Intermediate/Obj/Source/StaticLibraryArchive.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/StaticLibraryArchive/Build/Library/libStaticLibraryArchive.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/StaticLibraryArchive/Source/Library.uv

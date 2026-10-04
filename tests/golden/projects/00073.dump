@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/NestedReleaseInterleavingWarning>
+<assemblies, [NestedReleaseInterleavingWarning]>
+<assembly_name, NestedReleaseInterleavingWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/NestedReleaseInterleavingWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/NestedReleaseInterleavingWarning/Build>
+<module_list, [NestedReleaseInterleavingWarning]>
+<module, NestedReleaseInterleavingWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/NestedReleaseInterleavingWarning/Build/Intermediate/Obj/Source/NestedReleaseInterleavingWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/NestedReleaseInterleavingWarning/Build/Binary/libNestedReleaseInterleavingWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/NestedReleaseInterleavingWarning/Source/Main.uv

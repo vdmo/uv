@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SYS-3356","severity":"error","message":"`#unwind` on non-FFI procedure","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/UnwindOnNonFFIProcedure/Source/Main.uv","start_line":4,"start_col":8,"end_line":6,"end_col":2},"source_line":"public procedure unwindOnNonFFIProcedureReference() -> i32 {","children":[]}]}

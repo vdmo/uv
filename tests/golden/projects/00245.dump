@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNonBitcopyMove>
+<assemblies, [RecordFieldNonBitcopyMove]>
+<assembly_name, RecordFieldNonBitcopyMove>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNonBitcopyMove/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNonBitcopyMove/Build>
+<module_list, [RecordFieldNonBitcopyMove]>
+<module, RecordFieldNonBitcopyMove, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNonBitcopyMove/Build/Intermediate/Obj/Source/RecordFieldNonBitcopyMove.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNonBitcopyMove/Build/Binary/libRecordFieldNonBitcopyMove.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldNonBitcopyMove/Source/Main.uv

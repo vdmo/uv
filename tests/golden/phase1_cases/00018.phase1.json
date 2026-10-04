@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2454","severity":"error","message":"layout(packed) is valid only on records","span":{"file":"/w/target/p1cases/derive_layout_packed_enum/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":16},"source_line":"#layout(packed)","children":[]}]}

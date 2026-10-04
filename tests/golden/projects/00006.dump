@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/AcceptedProjects/KeySystemConformance>
+<assemblies, [KeySystemConformance]>
+<assembly_name, KeySystemConformance>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/AcceptedProjects/KeySystemConformance/Source>
+<output_root, /w/target/fixtures/Fixtures/AcceptedProjects/KeySystemConformance/Build>
+<module_list, [KeySystemConformance]>
+<module, KeySystemConformance, obj, /w/target/fixtures/Fixtures/AcceptedProjects/KeySystemConformance/Build/Intermediate/Obj/Source/KeySystemConformance.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/AcceptedProjects/KeySystemConformance/Build/Library/libKeySystemConformance.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/AcceptedProjects/KeySystemConformance/Source/Library.uv

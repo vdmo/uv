@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerInvocationFailure>
+<assemblies, [LinkerInvocationFailure]>
+<assembly_name, LinkerInvocationFailure>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerInvocationFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerInvocationFailure/Build>
+<module_list, [LinkerInvocationFailure]>
+<module, LinkerInvocationFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerInvocationFailure/Build/Intermediate/Obj/Source/LinkerInvocationFailure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerInvocationFailure/Build/Binary/LinkerInvocationFailure, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Linking/LinkerInvocationFailure/Source/Main.uv

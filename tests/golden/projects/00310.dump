@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportUnsupportedABI>
+<assemblies, [RawExportUnsupportedABI]>
+<assembly_name, RawExportUnsupportedABI>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportUnsupportedABI/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportUnsupportedABI/Build>
+<module_list, [RawExportUnsupportedABI]>
+<module, RawExportUnsupportedABI, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportUnsupportedABI/Build/Intermediate/Obj/Source/RawExportUnsupportedABI.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportUnsupportedABI/Build/Binary/libRawExportUnsupportedABI.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/RawExportUnsupportedABI/Source/Main.uv

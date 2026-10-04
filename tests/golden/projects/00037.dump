@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/LibraryArtifactInputs>
+<assemblies, [LibraryArtifactProvider, LibraryArtifactConsumer]>
+<assembly_name, LibraryArtifactConsumer>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/LibraryArtifactInputs/Source/LibraryArtifactConsumer>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/LibraryArtifactInputs/Build>
+<module_list, [LibraryArtifactConsumer]>
+<module, LibraryArtifactConsumer, obj, /w/target/fixtures/Fixtures/ArtifactProjects/LibraryArtifactInputs/Build/Intermediate/Obj/Source/LibraryArtifactConsumer/LibraryArtifactConsumer.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/LibraryArtifactInputs/Build/Binary/LibraryArtifactConsumer, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/LibraryArtifactInputs/Source/LibraryArtifactConsumer/Main.uv

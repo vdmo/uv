@@ -1,0 +1,2 @@
+module DispatchDependencyConflict
+  ProcedureDecl [3:8-14:2] public procedure dispatchDependencyConflictReference

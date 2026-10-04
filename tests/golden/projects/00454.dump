@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementInlineSelfConstraint>
+<assemblies, [RefinementInlineSelfConstraint]>
+<assembly_name, RefinementInlineSelfConstraint>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementInlineSelfConstraint/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementInlineSelfConstraint/Build>
+<module_list, [RefinementInlineSelfConstraint]>
+<module, RefinementInlineSelfConstraint, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementInlineSelfConstraint/Build/Intermediate/Obj/Source/RefinementInlineSelfConstraint.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementInlineSelfConstraint/Build/Binary/libRefinementInlineSelfConstraint.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementInlineSelfConstraint/Source/Main.uv

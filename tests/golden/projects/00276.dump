@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternGenericSignature>
+<assemblies, [ExternGenericSignature]>
+<assembly_name, ExternGenericSignature>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternGenericSignature/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternGenericSignature/Build>
+<module_list, [ExternGenericSignature]>
+<module, ExternGenericSignature, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternGenericSignature/Build/Intermediate/Obj/Source/ExternGenericSignature.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternGenericSignature/Build/Binary/libExternGenericSignature.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/ExternGenericSignature/Source/Main.uv

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-CON-0011","severity":"warning","message":"Access to potentially stale binding after release","span":{"file":"","start_line":0,"start_col":0,"end_line":0,"end_col":0},"source_line":null,"children":[]}]}

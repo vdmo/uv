@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-PRJ-0208","severity":"error","message":"`link_kind` is only valid when `assembly.kind = \"library\"` (`WF-Assembly-LinkKind-Use-Err`)","span":null,"source_line":null,"children":[]}]}

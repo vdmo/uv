@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationAbstractMethodSignatureMismatch>
+<assemblies, [ImplementationAbstractMethodSignatureMismatch]>
+<assembly_name, ImplementationAbstractMethodSignatureMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationAbstractMethodSignatureMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationAbstractMethodSignatureMismatch/Build>
+<module_list, [ImplementationAbstractMethodSignatureMismatch]>
+<module, ImplementationAbstractMethodSignatureMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationAbstractMethodSignatureMismatch/Build/Intermediate/Obj/Source/ImplementationAbstractMethodSignatureMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationAbstractMethodSignatureMismatch/Build/Binary/libImplementationAbstractMethodSignatureMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationAbstractMethodSignatureMismatch/Source/Main.uv

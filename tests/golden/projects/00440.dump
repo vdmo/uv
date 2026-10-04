@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationFieldTypeMismatch>
+<assemblies, [ImplementationFieldTypeMismatch]>
+<assembly_name, ImplementationFieldTypeMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationFieldTypeMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationFieldTypeMismatch/Build>
+<module_list, [ImplementationFieldTypeMismatch]>
+<module, ImplementationFieldTypeMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationFieldTypeMismatch/Build/Intermediate/Obj/Source/ImplementationFieldTypeMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationFieldTypeMismatch/Build/Binary/libImplementationFieldTypeMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationFieldTypeMismatch/Source/Main.uv

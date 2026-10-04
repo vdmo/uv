@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedLibraryKind>
+<assemblies, [UnsupportedLibraryKind]>
+<assembly_name, UnsupportedLibraryKind>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedLibraryKind/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedLibraryKind/Build>
+<module_list, [UnsupportedLibraryKind]>
+<module, UnsupportedLibraryKind, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedLibraryKind/Build/Intermediate/Obj/Source/UnsupportedLibraryKind.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedLibraryKind/Build/Binary/libUnsupportedLibraryKind.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedLibraryKind/Source/Main.uv

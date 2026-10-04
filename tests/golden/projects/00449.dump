@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideAbstractMethod>
+<assemblies, [OverrideAbstractMethod]>
+<assembly_name, OverrideAbstractMethod>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideAbstractMethod/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideAbstractMethod/Build>
+<module_list, [OverrideAbstractMethod]>
+<module, OverrideAbstractMethod, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideAbstractMethod/Build/Intermediate/Obj/Source/OverrideAbstractMethod.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideAbstractMethod/Build/Binary/libOverrideAbstractMethod.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideAbstractMethod/Source/Main.uv

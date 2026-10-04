@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationMissingRequiredField>
+<assemblies, [ImplementationMissingRequiredField]>
+<assembly_name, ImplementationMissingRequiredField>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationMissingRequiredField/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationMissingRequiredField/Build>
+<module_list, [ImplementationMissingRequiredField]>
+<module, ImplementationMissingRequiredField, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationMissingRequiredField/Build/Intermediate/Obj/Source/ImplementationMissingRequiredField.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationMissingRequiredField/Build/Binary/libImplementationMissingRequiredField.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationMissingRequiredField/Source/Main.uv

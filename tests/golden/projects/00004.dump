@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/AcceptedProjects/ExpressionSemantics>
+<assemblies, [ExpressionSemantics]>
+<assembly_name, ExpressionSemantics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/AcceptedProjects/ExpressionSemantics/Source>
+<output_root, /w/target/fixtures/Fixtures/AcceptedProjects/ExpressionSemantics/Build>
+<module_list, [ExpressionSemantics]>
+<module, ExpressionSemantics, obj, /w/target/fixtures/Fixtures/AcceptedProjects/ExpressionSemantics/Build/Intermediate/Obj/Source/ExpressionSemantics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/AcceptedProjects/ExpressionSemantics/Build/Binary/libExpressionSemantics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/AcceptedProjects/ExpressionSemantics/Source/Library.uv

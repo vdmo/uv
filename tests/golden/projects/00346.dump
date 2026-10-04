@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Names/DuplicateModuleDeclaration>
+<assemblies, [DuplicateModuleDeclaration]>
+<assembly_name, DuplicateModuleDeclaration>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Names/DuplicateModuleDeclaration/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Names/DuplicateModuleDeclaration/Build>
+<module_list, [DuplicateModuleDeclaration]>
+<module, DuplicateModuleDeclaration, obj, /w/target/fixtures/Fixtures/RejectedSource/Names/DuplicateModuleDeclaration/Build/Intermediate/Obj/Source/DuplicateModuleDeclaration.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Names/DuplicateModuleDeclaration/Build/Binary/libDuplicateModuleDeclaration.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Names/DuplicateModuleDeclaration/Source/Main.uv

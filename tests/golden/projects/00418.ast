@@ -1,0 +1,3 @@
+module DuplicateClassImplementationRule
+  ClassDecl [3:10-7:2] internal class DuplicateImplementationClass
+  RecordDecl [9:10-10:2] internal record DuplicateImplementationRuleOwner

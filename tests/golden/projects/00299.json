@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2632","severity":"error","message":"`#host_export` requires a leading `Context` bundle parameter","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMissingContext/Source/Main.uv","start_line":4,"start_col":8,"end_line":6,"end_col":2},"source_line":"public procedure hostedMissingContext(value: i32) -> i32 {","children":[]}]}

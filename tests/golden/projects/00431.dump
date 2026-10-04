@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInstantiationDepthLimit>
+<assemblies, [GenericInstantiationDepthLimit]>
+<assembly_name, GenericInstantiationDepthLimit>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInstantiationDepthLimit/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInstantiationDepthLimit/Build>
+<module_list, [GenericInstantiationDepthLimit]>
+<module, GenericInstantiationDepthLimit, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInstantiationDepthLimit/Build/Intermediate/Obj/Source/GenericInstantiationDepthLimit.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInstantiationDepthLimit/Build/Binary/libGenericInstantiationDepthLimit.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericInstantiationDepthLimit/Source/Main.uv

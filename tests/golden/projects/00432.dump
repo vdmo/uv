@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericPathMissingArguments>
+<assemblies, [GenericPathMissingArguments]>
+<assembly_name, GenericPathMissingArguments>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericPathMissingArguments/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericPathMissingArguments/Build>
+<module_list, [GenericPathMissingArguments]>
+<module, GenericPathMissingArguments, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericPathMissingArguments/Build/Intermediate/Obj/Source/GenericPathMissingArguments.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericPathMissingArguments/Build/Binary/libGenericPathMissingArguments.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericPathMissingArguments/Source/Main.uv

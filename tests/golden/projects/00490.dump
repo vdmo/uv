@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PostconditionsDiagnostic>
+<assemblies, [PostconditionsDiagnostic]>
+<assembly_name, PostconditionsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PostconditionsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PostconditionsDiagnostic/Build>
+<module_list, [PostconditionsDiagnostic]>
+<module, PostconditionsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PostconditionsDiagnostic/Build/Intermediate/Obj/Source/PostconditionsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PostconditionsDiagnostic/Build/Binary/libPostconditionsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/PostconditionsDiagnostic/Source/Main.uv

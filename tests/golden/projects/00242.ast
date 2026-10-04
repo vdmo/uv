@@ -1,0 +1,3 @@
+module RecordFieldInitDuplicate
+  RecordDecl [3:8-6:2] public record DuplicateFieldPayload
+  ProcedureDecl [8:8-14:2] public procedure recordFieldInitDuplicateReference

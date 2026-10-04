@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SYS-3345","severity":"error","message":"Attribute 'library' cannot be applied here","span":{"file":"/w/target/p1cases/derive_with_library_attr/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":20},"source_line":"#library(name: \"c\")","children":[]}]}

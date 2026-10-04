@@ -1,0 +1,2 @@
+module EnumEmpty
+  EnumDecl [3:8-3:32] public enum EmptyEnumPayload

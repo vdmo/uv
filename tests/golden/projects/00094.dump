@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/EmitLLVMRenderFailure>
+<assemblies, [EmitLLVMRenderFailure]>
+<assembly_name, EmitLLVMRenderFailure>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/EmitLLVMRenderFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/EmitLLVMRenderFailure/Build>
+<module_list, [EmitLLVMRenderFailure]>
+<module, EmitLLVMRenderFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/EmitLLVMRenderFailure/Build/Intermediate/Obj/Source/EmitLLVMRenderFailure.o, ir, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/EmitLLVMRenderFailure/Build/Intermediate/IR/Source/EmitLLVMRenderFailure.bc>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/EmitLLVMRenderFailure/Build/Library/libEmitLLVMRenderFailure.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/EmitLLVMRenderFailure/Source/Library.uv

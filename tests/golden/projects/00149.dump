@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericContravariantSubtyping>
+<assemblies, [GenericContravariantSubtyping]>
+<assembly_name, GenericContravariantSubtyping>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericContravariantSubtyping/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericContravariantSubtyping/Build>
+<module_list, [GenericContravariantSubtyping]>
+<module, GenericContravariantSubtyping, obj, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericContravariantSubtyping/Build/Intermediate/Obj/Source/GenericContravariantSubtyping.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericContravariantSubtyping/Build/Binary/libGenericContravariantSubtyping.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericContravariantSubtyping/Source/Main.uv

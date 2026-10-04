@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMoveContext>
+<assemblies, [HostExportMoveContext]>
+<assembly_name, HostExportMoveContext>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMoveContext/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMoveContext/Build>
+<module_list, [HostExportMoveContext]>
+<module, HostExportMoveContext, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMoveContext/Build/Intermediate/Obj/Source/HostExportMoveContext.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMoveContext/Build/Binary/libHostExportMoveContext.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/HostExportMoveContext/Source/Main.uv

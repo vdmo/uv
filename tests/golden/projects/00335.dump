@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeOutsideWrite>
+<assemblies, [SpeculativeOutsideWrite]>
+<assembly_name, SpeculativeOutsideWrite>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeOutsideWrite/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeOutsideWrite/Build>
+<module_list, [SpeculativeOutsideWrite]>
+<module, SpeculativeOutsideWrite, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeOutsideWrite/Build/Intermediate/Obj/Source/SpeculativeOutsideWrite.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeOutsideWrite/Build/Binary/libSpeculativeOutsideWrite.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeOutsideWrite/Source/Main.uv

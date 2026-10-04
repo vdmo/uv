@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeDiagnostics>
+<assemblies, [FfiSafeDiagnostics]>
+<assembly_name, FfiSafeDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeDiagnostics/Build>
+<module_list, [FfiSafeDiagnostics]>
+<module, FfiSafeDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeDiagnostics/Build/Intermediate/Obj/Source/FfiSafeDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeDiagnostics/Build/Binary/libFfiSafeDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeDiagnostics/Source/Main.uv

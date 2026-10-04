@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2450","severity":"error","message":"Malformed attribute syntax","span":{"file":"/w/target/p1cases/derive_layout_empty/Source/Main.uv","start_line":2,"start_col":9,"end_line":2,"end_col":10},"source_line":"#layout()","children":[]}]}

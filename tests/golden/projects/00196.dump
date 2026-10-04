@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ControlExpressionDiagnosticOwnership>
+<assemblies, [ControlExpressionDiagnosticOwnership]>
+<assembly_name, ControlExpressionDiagnosticOwnership>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ControlExpressionDiagnosticOwnership/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ControlExpressionDiagnosticOwnership/Build>
+<module_list, [ControlExpressionDiagnosticOwnership]>
+<module, ControlExpressionDiagnosticOwnership, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ControlExpressionDiagnosticOwnership/Build/Intermediate/Obj/Source/ControlExpressionDiagnosticOwnership.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ControlExpressionDiagnosticOwnership/Build/Binary/libControlExpressionDiagnosticOwnership.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ControlExpressionDiagnosticOwnership/Source/Main.uv

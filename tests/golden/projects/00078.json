@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-CON-0021","severity":"warning","message":"Speculative block body may be expensive to re-execute","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning/Source/Main.uv","start_line":15,"start_col":5,"end_line":18,"end_col":6},"source_line":"    %speculative write counter {","children":[]}]}

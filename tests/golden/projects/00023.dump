@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/CastPanic>
+<assemblies, [CastPanic]>
+<assembly_name, CastPanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/CastPanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/CastPanic/Build>
+<module_list, [CastPanic]>
+<module, CastPanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/CastPanic/Build/Intermediate/Obj/Source/CastPanic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/CastPanic/Build/Binary/CastPanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/CastPanic/Source/Main.uv

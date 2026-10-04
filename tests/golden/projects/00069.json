@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-SAF-0100","severity":"warning","message":"`transmute` target type is known to admit invalid bit patterns","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Expressions/ValidTransmuteTarget/Source/Main.uv","start_line":4,"start_col":21,"end_line":4,"end_col":45},"source_line":"    return unsafe { transmute<u8, bool>(2u8) }","children":[]}]}

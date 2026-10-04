@@ -1,0 +1,2 @@
+module KeyPathsDiagnostic
+  ProcedureDecl [3:8-8:2] public procedure keyPathsDiagnosticReference

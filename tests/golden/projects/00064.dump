@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/StaleValueMarkIRDiagnostics>
+<assemblies, [StaleValueMarkIRDiagnostics]>
+<assembly_name, StaleValueMarkIRDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/StaleValueMarkIRDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Async/StaleValueMarkIRDiagnostics/Build>
+<module_list, [StaleValueMarkIRDiagnostics]>
+<module, StaleValueMarkIRDiagnostics, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Async/StaleValueMarkIRDiagnostics/Build/Intermediate/Obj/Source/StaleValueMarkIRDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Async/StaleValueMarkIRDiagnostics/Build/Binary/libStaleValueMarkIRDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Async/StaleValueMarkIRDiagnostics/Source/Main.uv

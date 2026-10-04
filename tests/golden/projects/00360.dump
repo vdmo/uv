@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ExecutionDomainsDiagnostics>
+<assemblies, [ExecutionDomainsDiagnostics]>
+<assembly_name, ExecutionDomainsDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ExecutionDomainsDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ExecutionDomainsDiagnostics/Build>
+<module_list, [ExecutionDomainsDiagnostics]>
+<module, ExecutionDomainsDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ExecutionDomainsDiagnostics/Build/Intermediate/Obj/Source/ExecutionDomainsDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ExecutionDomainsDiagnostics/Build/Binary/libExecutionDomainsDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/ExecutionDomainsDiagnostics/Source/Main.uv

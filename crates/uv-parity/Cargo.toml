@@ -1,0 +1,10 @@
+[package]
+name = "uv-parity"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+uv-core = { path = "../uv-core" }
+uv-source = { path = "../uv-source" }

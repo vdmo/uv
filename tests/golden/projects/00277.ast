@@ -1,0 +1,3 @@
+module FfiArgRegionLocalRawPtr
+  ExternBlock [3:1-5:2]
+  ProcedureDecl [7:8-16:2] public procedure ffiArgRegionLocalRawPtrReference

@@ -1,0 +1,2 @@
+module HashWithoutEq
+  RecordDecl [3:10-10:2] internal record HashWithoutEqValue

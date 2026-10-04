@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ReceiverPermissionMismatch>
+<assemblies, [ReceiverPermissionMismatch]>
+<assembly_name, ReceiverPermissionMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ReceiverPermissionMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ReceiverPermissionMismatch/Build>
+<module_list, [ReceiverPermissionMismatch]>
+<module, ReceiverPermissionMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ReceiverPermissionMismatch/Build/Intermediate/Obj/Source/ReceiverPermissionMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Permissions/ReceiverPermissionMismatch/Build/Binary/libReceiverPermissionMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Permissions/ReceiverPermissionMismatch/Source/Main.uv

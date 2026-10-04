@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SRC-0104","severity":"error","message":"Forbidden control character or null byte (`Step-Prohibited-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/SourceText/ProhibitedControlCharacter/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":2},"source_line":"\u0001    return 1","children":[]}]}

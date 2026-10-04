@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutInvalidAlign>
+<assemblies, [LayoutInvalidAlign]>
+<assembly_name, LayoutInvalidAlign>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutInvalidAlign/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutInvalidAlign/Build>
+<module_list, [LayoutInvalidAlign]>
+<module, LayoutInvalidAlign, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutInvalidAlign/Build/Intermediate/Obj/Source/LayoutInvalidAlign.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutInvalidAlign/Build/Binary/libLayoutInvalidAlign.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutInvalidAlign/Source/Main.uv

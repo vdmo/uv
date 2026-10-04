@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateImpure>
+<assemblies, [RefinementPredicateImpure]>
+<assembly_name, RefinementPredicateImpure>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateImpure/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateImpure/Build>
+<module_list, [RefinementPredicateImpure]>
+<module, RefinementPredicateImpure, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateImpure/Build/Intermediate/Obj/Source/RefinementPredicateImpure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateImpure/Build/Binary/libRefinementPredicateImpure.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateImpure/Source/Main.uv

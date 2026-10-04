@@ -1,0 +1,326 @@
+==================
+Imports and using
+==================
+
+import Geometry::Shapes as shapes
+using Geometry::Shapes::area
+using Geometry::Shapes::{ area, perimeter as p }
+public using Geometry::*
+
+---
+
+(source_file
+  (import_declaration
+    (module_path
+      (identifier)
+      (identifier))
+    (identifier))
+  (using_declaration
+    (identifier)
+    (identifier)
+    (identifier))
+  (using_declaration
+    (identifier)
+    (identifier)
+    (using_list
+      (using_specifier
+        (identifier))
+      (using_specifier
+        (identifier)
+        (identifier))))
+  (using_declaration
+    (visibility)
+    (identifier)))
+
+==================
+Record, enum, modal, class
+==================
+
+#derive(Eq)
+public record Point<T; U = i32> <: Printable {
+    public x: T
+    #y: U = 0
+    public procedure norm(~) -> T
+    |: self.x > 0 |= @result >= 0
+    {
+        return self.x
+    }
+}
+
+enum Shape {
+    Circle(f32)
+    Square { side: f32 }
+    Empty = 3
+}
+
+modal Connection {
+    @Closed {
+        transition open(path: string) -> @Open {
+            return Connection@Open { handle: 1 }
+        }
+    }
+    @Open {
+        handle: i32
+    }
+}
+
+class Printable {
+    procedure print(~) -> ()
+    type Output = string
+}
+
+---
+
+(source_file
+  (attribute
+    (attribute_name
+      (identifier))
+    (attribute_arguments
+      (attribute_argument
+        (identifier))))
+  (record_declaration
+    (visibility)
+    (identifier)
+    (generic_parameters
+      (generic_parameter
+        (identifier))
+      (generic_parameter
+        (identifier)
+        (type_path
+          (identifier))))
+    (implements_clause
+      (class_bound
+        (type_path
+          (identifier))))
+    (record_body
+      (field_declaration
+        (visibility)
+        (identifier)
+        (type_path
+          (identifier)))
+      (field_declaration
+        (key_boundary)
+        (identifier)
+        (type_path
+          (identifier))
+        (integer_literal))
+      (procedure_declaration
+        (visibility)
+        (identifier)
+        (parameters
+          (receiver))
+        (type_path
+          (identifier))
+        (contract_clause
+          (binary_expression
+            (field_expression
+              (identifier)
+              (identifier))
+            (integer_literal))
+          (binary_expression
+            (contract_intrinsic
+              (identifier))
+            (integer_literal)))
+        (block
+          (return_statement
+            (field_expression
+              (identifier)
+              (identifier)))))))
+  (enum_declaration
+    (identifier)
+    (enum_body
+      (variant
+        (identifier)
+        (variant_tuple_payload
+          (type_path
+            (identifier))))
+      (variant
+        (identifier)
+        (variant_record_payload
+          (field_declaration
+            (identifier)
+            (type_path
+              (identifier)))))
+      (variant
+        (identifier)
+        (integer_literal))))
+  (modal_declaration
+    (identifier)
+    (modal_body
+      (state_block
+        (identifier)
+        (transition_declaration
+          (identifier)
+          (parameters
+            (parameter
+              (identifier)
+              (type_path
+                (identifier))))
+          (identifier)
+          (block
+            (return_statement
+              (record_literal
+                (state_name
+                  (identifier)
+                  (identifier))
+                (field_initializer_list
+                  (field_initializer
+                    (identifier)
+                    (integer_literal))))))))
+      (state_block
+        (identifier)
+        (field_declaration
+          (identifier)
+          (type_path
+            (identifier))))))
+  (class_declaration
+    (identifier)
+    (class_body
+      (procedure_signature
+        (identifier)
+        (parameters
+          (receiver))
+        (unit_type))
+      (associated_type
+        (identifier)
+        (type_path
+          (identifier))))))
+
+==================
+Extern block with foreign contracts
+==================
+
+extern "C" {
+    public procedure read(fd: i32, buffer: *mut u8) -> isize
+        |: @foreign_assumes(fd >= 0)
+        |: @foreign_ensures(@error: @result < 0)
+}
+
+---
+
+(source_file
+  (extern_block
+    (string_literal
+      (string_content))
+    (procedure_signature
+      (visibility)
+      (identifier)
+      (parameters
+        (parameter
+          (identifier)
+          (type_path
+            (identifier)))
+        (parameter
+          (identifier)
+          (raw_pointer_type
+            (type_path
+              (identifier)))))
+      (type_path
+        (identifier))
+      (foreign_contract
+        (identifier)
+        (binary_expression
+          (identifier)
+          (integer_literal)))
+      (foreign_contract
+        (identifier)
+        (contract_intrinsic
+          (identifier))
+        (binary_expression
+          (contract_intrinsic
+            (identifier))
+          (integer_literal))))))
+
+==================
+Types
+==================
+
+type A = [f32; 256]
+type B = (i32, unique string@View)
+type C = |i32, move u8| -> bool [shared: { limit: i32 }]
+type D = Ptr<Map<u64, Vec<u8>>>@Valid
+type E = u32 |: { self < 256u32 }
+type F = i32 | string | ()
+type G = (i32;)
+type H = $Printable
+
+---
+
+(source_file
+  (type_alias_declaration
+    (identifier)
+    (array_type
+      (type_path
+        (identifier))
+      (integer_literal)))
+  (type_alias_declaration
+    (identifier)
+    (tuple_type
+      (type_path
+        (identifier))
+      (permission_type
+        (state_type
+          (type_path
+            (identifier))
+          (identifier)))))
+  (type_alias_declaration
+    (identifier)
+    (closure_type
+      (type_path
+        (identifier))
+      (type_path
+        (identifier))
+      (type_path
+        (identifier))
+      (closure_dependencies
+        (identifier)
+        (type_path
+          (identifier)))))
+  (type_alias_declaration
+    (identifier)
+    (state_type
+      (generic_type
+        (type_path
+          (identifier))
+        (generic_arguments
+          (generic_type
+            (type_path
+              (identifier))
+            (generic_arguments
+              (type_path
+                (identifier))
+              (generic_type
+                (type_path
+                  (identifier))
+                (generic_arguments
+                  (type_path
+                    (identifier))))))))
+      (identifier)))
+  (type_alias_declaration
+    (identifier)
+    (refinement_type
+      (type_path
+        (identifier))
+      (predicate_block
+        (binary_expression
+          (identifier)
+          (integer_literal)))))
+  (type_alias_declaration
+    (identifier)
+    (union_type
+      (union_type
+        (type_path
+          (identifier))
+        (type_path
+          (identifier)))
+      (unit_type)))
+  (type_alias_declaration
+    (identifier)
+    (tuple_type
+      (type_path
+        (identifier))))
+  (type_alias_declaration
+    (identifier)
+    (dynamic_type
+      (type_path
+        (identifier)))))

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumTupleArity>
+<assemblies, [EnumTupleArity]>
+<assembly_name, EnumTupleArity>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumTupleArity/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumTupleArity/Build>
+<module_list, [EnumTupleArity]>
+<module, EnumTupleArity, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumTupleArity/Build/Intermediate/Obj/Source/EnumTupleArity.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumTupleArity/Build/Binary/libEnumTupleArity.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumTupleArity/Source/Main.uv

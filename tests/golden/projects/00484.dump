@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodsAndReceiversDiagnostic>
+<assemblies, [MethodsAndReceiversDiagnostic]>
+<assembly_name, MethodsAndReceiversDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodsAndReceiversDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodsAndReceiversDiagnostic/Build>
+<module_list, [MethodsAndReceiversDiagnostic]>
+<module, MethodsAndReceiversDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodsAndReceiversDiagnostic/Build/Intermediate/Obj/Source/MethodsAndReceiversDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodsAndReceiversDiagnostic/Build/Binary/libMethodsAndReceiversDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodsAndReceiversDiagnostic/Source/Main.uv

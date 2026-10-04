@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedExternABI>
+<assemblies, [UnsupportedExternABI]>
+<assembly_name, UnsupportedExternABI>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedExternABI/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedExternABI/Build>
+<module_list, [UnsupportedExternABI]>
+<module, UnsupportedExternABI, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedExternABI/Build/Intermediate/Obj/Source/UnsupportedExternABI.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedExternABI/Build/Binary/libUnsupportedExternABI.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/UnsupportedExternABI/Source/Main.uv

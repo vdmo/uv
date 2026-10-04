@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/InvalidUnwindMode>
+<assemblies, [InvalidUnwindMode]>
+<assembly_name, InvalidUnwindMode>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/InvalidUnwindMode/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/InvalidUnwindMode/Build>
+<module_list, [InvalidUnwindMode]>
+<module, InvalidUnwindMode, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/InvalidUnwindMode/Build/Intermediate/Obj/Source/InvalidUnwindMode.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/InvalidUnwindMode/Build/Binary/libInvalidUnwindMode.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/InvalidUnwindMode/Source/Main.uv

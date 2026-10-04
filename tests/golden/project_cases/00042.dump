@@ -1,0 +1,9 @@
+<project_root, /w/target/prjcases/layout_no_sources>
+<assemblies, [App]>
+<assembly_name, App>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/layout_no_sources/Source>
+<output_root, /w/target/prjcases/layout_no_sources/Build>
+<module_list, []>
+<artifact, /w/target/prjcases/layout_no_sources/Build/Binary/App, import_lib, <bottom>>

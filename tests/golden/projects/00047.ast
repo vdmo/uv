@@ -1,0 +1,3 @@
+module RawPointerNullWritePanic
+  ProcedureDecl [5:8-10:2] public procedure rawPointerNullWritePanicValue
+  ProcedureDecl [13:8-17:2] public procedure main

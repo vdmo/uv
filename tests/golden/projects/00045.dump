@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/RawDylibLibrary>
+<assemblies, [RawDylibLibrary]>
+<assembly_name, RawDylibLibrary>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/RawDylibLibrary/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/RawDylibLibrary/Build>
+<module_list, [RawDylibLibrary]>
+<module, RawDylibLibrary, obj, /w/target/fixtures/Fixtures/ArtifactProjects/RawDylibLibrary/Build/Intermediate/Obj/Source/RawDylibLibrary.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/RawDylibLibrary/Build/Binary/RawDylibLibrary, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/RawDylibLibrary/Source/Main.uv

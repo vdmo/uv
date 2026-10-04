@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfStaticHelpers>
+<assemblies, [AddressOfStaticHelpers]>
+<assembly_name, AddressOfStaticHelpers>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfStaticHelpers/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfStaticHelpers/Build>
+<module_list, [AddressOfStaticHelpers]>
+<module, AddressOfStaticHelpers, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfStaticHelpers/Build/Intermediate/Obj/Source/AddressOfStaticHelpers.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfStaticHelpers/Build/Binary/libAddressOfStaticHelpers.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AddressOfStaticHelpers/Source/Main.uv

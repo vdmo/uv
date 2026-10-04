@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignNotPlace>
+<assemblies, [AssignNotPlace]>
+<assembly_name, AssignNotPlace>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignNotPlace/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignNotPlace/Build>
+<module_list, [AssignNotPlace]>
+<module, AssignNotPlace, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignNotPlace/Build/Intermediate/Obj/Source/AssignNotPlace.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignNotPlace/Build/Binary/libAssignNotPlace.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/AssignNotPlace/Source/Main.uv

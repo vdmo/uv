@@ -1,0 +1,2 @@
+module OrderedRedundantWarning
+  ProcedureDecl [3:8-9:2] public procedure orderedRedundantWarningReference

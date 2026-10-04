@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArraySliceIndexDiagnostics>
+<assemblies, [ArraySliceIndexDiagnostics]>
+<assembly_name, ArraySliceIndexDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArraySliceIndexDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArraySliceIndexDiagnostics/Build>
+<module_list, [ArraySliceIndexDiagnostics]>
+<module, ArraySliceIndexDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArraySliceIndexDiagnostics/Build/Intermediate/Obj/Source/ArraySliceIndexDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ArraySliceIndexDiagnostics/Build/Binary/libArraySliceIndexDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ArraySliceIndexDiagnostics/Source/Main.uv

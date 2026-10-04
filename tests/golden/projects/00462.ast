@@ -1,0 +1,3 @@
+module BehavioralSubtypingPostcondition
+  ClassDecl [3:8-6:2] public class PostconditionClass
+  RecordDecl [8:8-16:2] public record WeakerPostconditionOwner

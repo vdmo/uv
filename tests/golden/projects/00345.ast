@@ -1,0 +1,5 @@
+module UsingListDuplicate
+  UsingDecl [3:1-3:69]
+  ProcedureDecl [5:8-7:2] public procedure usingListDuplicateReference
+module UsingListDuplicate::Provider
+  ProcedureDecl [3:8-5:2] public procedure exportedValue

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/MangleOnNonFFIProcedure>
+<assemblies, [MangleOnNonFFIProcedure]>
+<assembly_name, MangleOnNonFFIProcedure>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/MangleOnNonFFIProcedure/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/MangleOnNonFFIProcedure/Build>
+<module_list, [MangleOnNonFFIProcedure]>
+<module, MangleOnNonFFIProcedure, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/MangleOnNonFFIProcedure/Build/Intermediate/Obj/Source/MangleOnNonFFIProcedure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/MangleOnNonFFIProcedure/Build/Binary/libMangleOnNonFFIProcedure.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/MangleOnNonFFIProcedure/Source/Main.uv

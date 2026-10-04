@@ -1,0 +1,3 @@
+module OverrideAbstractMethod
+  ClassDecl [3:10-5:2] internal class AbstractOverrideClass
+  RecordDecl [7:10-11:2] internal record OverrideAbstractOwner

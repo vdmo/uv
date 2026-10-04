@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2455","severity":"error","message":"Conflicting layout arguments","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Attributes/LayoutPackedAlignConflict/Source/Main.uv","start_line":4,"start_col":8,"end_line":7,"end_col":2},"source_line":"public record LayoutPackedAlignConflictRecord {","children":[]}]}

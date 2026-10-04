@@ -1,0 +1,2 @@
+module KeyEscapeDeferredAccess
+  ProcedureDecl [3:8-11:2] public procedure keyEscapeDeferredAccessReference

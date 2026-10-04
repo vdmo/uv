@@ -1,0 +1,2 @@
+module BarrierDivergence
+  ProcedureDecl [3:8-11:2] public procedure barrierDivergenceReference

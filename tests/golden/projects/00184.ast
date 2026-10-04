@@ -1,0 +1,2 @@
+module CallNonFunction
+  ProcedureDecl [3:8-6:2] public procedure callNonFunctionReference

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/SourceText/LeadingBOMWarning>
+<assemblies, [LeadingBOMWarning]>
+<assembly_name, LeadingBOMWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/SourceText/LeadingBOMWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/SourceText/LeadingBOMWarning/Build>
+<module_list, [LeadingBOMWarning]>
+<module, LeadingBOMWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/SourceText/LeadingBOMWarning/Build/Intermediate/Obj/Source/LeadingBOMWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/SourceText/LeadingBOMWarning/Build/Binary/libLeadingBOMWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/SourceText/LeadingBOMWarning/Source/Main.uv

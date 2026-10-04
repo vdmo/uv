@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-MOD-2452","severity":"warning","message":"`inline(always)` but inlining failed","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Attributes/InlineAlwaysRecursive/Source/Main.uv","start_line":4,"start_col":8,"end_line":9,"end_col":2},"source_line":"public procedure inlineAlwaysRecursive(value: i32) -> i32 {","children":[]}]}

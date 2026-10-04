@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0020","severity":"error","message":"Compile-time block contains prohibited runtime construct","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/ComptimeProhibitedWait/Source/Main.uv","start_line":5,"start_col":26,"end_line":5,"end_col":32},"source_line":"        let value: i32 = wait 1","children":[]}]}

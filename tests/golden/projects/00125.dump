@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestInvalidProcedureShape>
+<assemblies, [TestInvalidProcedureShape]>
+<assembly_name, TestInvalidProcedureShape>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestInvalidProcedureShape/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestInvalidProcedureShape/Build>
+<module_list, [TestInvalidProcedureShape]>
+<module, TestInvalidProcedureShape, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestInvalidProcedureShape/Build/Intermediate/Obj/Source/TestInvalidProcedureShape.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestInvalidProcedureShape/Build/Binary/libTestInvalidProcedureShape.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/TestInvalidProcedureShape/Source/Main.uv

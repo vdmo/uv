@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0034","severity":"error","message":"Compile-time procedure referenced from runtime context","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/RuntimeCallsComptimeProcedure/Source/Main.uv","start_line":8,"start_col":12,"end_line":8,"end_col":22},"source_line":"    return buildValue()","children":[]}]}

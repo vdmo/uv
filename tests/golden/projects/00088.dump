@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverInvocationFailure>
+<assemblies, [ArchiverInvocationFailure]>
+<assembly_name, ArchiverInvocationFailure>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverInvocationFailure/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverInvocationFailure/Build>
+<module_list, [ArchiverInvocationFailure]>
+<module, ArchiverInvocationFailure, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverInvocationFailure/Build/Intermediate/Obj/Source/ArchiverInvocationFailure.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverInvocationFailure/Build/Library/libArchiverInvocationFailure.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Linking/ArchiverInvocationFailure/Source/Library.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericCovariantSubtyping>
+<assemblies, [GenericCovariantSubtyping]>
+<assembly_name, GenericCovariantSubtyping>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericCovariantSubtyping/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericCovariantSubtyping/Build>
+<module_list, [GenericCovariantSubtyping]>
+<module, GenericCovariantSubtyping, obj, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericCovariantSubtyping/Build/Intermediate/Obj/Source/GenericCovariantSubtyping.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericCovariantSubtyping/Build/Binary/libGenericCovariantSubtyping.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/DataTypes/GenericCovariantSubtyping/Source/Main.uv

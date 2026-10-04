@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeDiagnosticsTable>
+<assemblies, [AsyncTypeDiagnosticsTable]>
+<assembly_name, AsyncTypeDiagnosticsTable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeDiagnosticsTable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeDiagnosticsTable/Build>
+<module_list, [AsyncTypeDiagnosticsTable]>
+<module, AsyncTypeDiagnosticsTable, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeDiagnosticsTable/Build/Intermediate/Obj/Source/AsyncTypeDiagnosticsTable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeDiagnosticsTable/Build/Binary/libAsyncTypeDiagnosticsTable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeDiagnosticsTable/Source/Main.uv

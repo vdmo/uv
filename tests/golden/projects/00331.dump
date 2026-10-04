@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeImpureCall>
+<assemblies, [SpeculativeImpureCall]>
+<assembly_name, SpeculativeImpureCall>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeImpureCall/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeImpureCall/Build>
+<module_list, [SpeculativeImpureCall]>
+<module, SpeculativeImpureCall, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeImpureCall/Build/Intermediate/Obj/Source/SpeculativeImpureCall.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeImpureCall/Build/Binary/libSpeculativeImpureCall.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeImpureCall/Source/Main.uv

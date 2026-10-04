@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SEM-2808","severity":"error","message":"Contract predicate must have type `bool`","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateNonBool/Source/Main.uv","start_line":3,"start_col":8,"end_line":7,"end_col":2},"source_line":"public procedure contractPredicateNonBoolReference(value: i32) -> i32","children":[]}]}

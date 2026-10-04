@@ -1,0 +1,2 @@
+module SpeculativeNestedKeyBlock
+  ProcedureDecl [3:8-11:2] public procedure speculativeNestedKeyBlockReference

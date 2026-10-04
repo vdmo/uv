@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ExplicitReturnDefinition>
+<assemblies, [ExplicitReturnDefinition]>
+<assembly_name, ExplicitReturnDefinition>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ExplicitReturnDefinition/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ExplicitReturnDefinition/Build>
+<module_list, [ExplicitReturnDefinition]>
+<module, ExplicitReturnDefinition, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ExplicitReturnDefinition/Build/Intermediate/Obj/Source/ExplicitReturnDefinition.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ExplicitReturnDefinition/Build/Binary/libExplicitReturnDefinition.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ExplicitReturnDefinition/Source/Main.uv

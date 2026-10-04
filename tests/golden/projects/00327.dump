@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedDynamicMutatingReceiver>
+<assemblies, [SharedDynamicMutatingReceiver]>
+<assembly_name, SharedDynamicMutatingReceiver>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedDynamicMutatingReceiver/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedDynamicMutatingReceiver/Build>
+<module_list, [SharedDynamicMutatingReceiver]>
+<module, SharedDynamicMutatingReceiver, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedDynamicMutatingReceiver/Build/Intermediate/Obj/Source/SharedDynamicMutatingReceiver.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/SharedDynamicMutatingReceiver/Build/Binary/libSharedDynamicMutatingReceiver.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/SharedDynamicMutatingReceiver/Source/Main.uv

@@ -1,0 +1,2 @@
+module TestInvalidProcedureShape
+  ProcedureDecl [4:8-8:2] public procedure testInvalidProcedureShapeReference

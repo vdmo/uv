@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericTypeApplyArgCount>
+<assemblies, [GenericTypeApplyArgCount]>
+<assembly_name, GenericTypeApplyArgCount>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericTypeApplyArgCount/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericTypeApplyArgCount/Build>
+<module_list, [GenericTypeApplyArgCount]>
+<module, GenericTypeApplyArgCount, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericTypeApplyArgCount/Build/Intermediate/Obj/Source/GenericTypeApplyArgCount.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericTypeApplyArgCount/Build/Binary/libGenericTypeApplyArgCount.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericTypeApplyArgCount/Source/Main.uv

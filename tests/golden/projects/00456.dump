@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateNonBool>
+<assemblies, [RefinementPredicateNonBool]>
+<assembly_name, RefinementPredicateNonBool>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateNonBool/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateNonBool/Build>
+<module_list, [RefinementPredicateNonBool]>
+<module, RefinementPredicateNonBool, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateNonBool/Build/Intermediate/Obj/Source/RefinementPredicateNonBool.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateNonBool/Build/Binary/libRefinementPredicateNonBool.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementPredicateNonBool/Source/Main.uv

@@ -1,0 +1,17 @@
+<project_root, /w/target/prjcases/layout_nested>
+<assemblies, [App]>
+<assembly_name, App>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/layout_nested/Source>
+<output_root, /w/target/prjcases/layout_nested/Build>
+<module_list, [App, App::a, App::A2::Deep, App::B]>
+<module, App, obj, /w/target/prjcases/layout_nested/Build/Intermediate/Obj/Source/App.o, ir, <bottom>>
+<module, App::a, obj, /w/target/prjcases/layout_nested/Build/Intermediate/Obj/Source/a/App_x3a_x3aa.o, ir, <bottom>>
+<module, App::A2::Deep, obj, /w/target/prjcases/layout_nested/Build/Intermediate/Obj/Source/A2/Deep/App_x3a_x3aA2_x3a_x3aDeep.o, ir, <bottom>>
+<module, App::B, obj, /w/target/prjcases/layout_nested/Build/Intermediate/Obj/Source/B/App_x3a_x3aB.o, ir, <bottom>>
+<artifact, /w/target/prjcases/layout_nested/Build/Binary/App, import_lib, <bottom>>
+file:/w/target/prjcases/layout_nested/Source/Main.uv
+file:/w/target/prjcases/layout_nested/Source/a/Main.uv
+file:/w/target/prjcases/layout_nested/Source/A2/Deep/x.uv
+file:/w/target/prjcases/layout_nested/Source/B/Main.uv

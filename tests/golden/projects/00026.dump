@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitBcLibrary>
+<assemblies, [EmitBcLibrary]>
+<assembly_name, EmitBcLibrary>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitBcLibrary/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmitBcLibrary/Build>
+<module_list, [EmitBcLibrary]>
+<module, EmitBcLibrary, obj, /w/target/fixtures/Fixtures/ArtifactProjects/EmitBcLibrary/Build/Intermediate/Obj/Source/EmitBcLibrary.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/EmitBcLibrary/Build/Intermediate/IR/Source/EmitBcLibrary.bc>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/EmitBcLibrary/Build/Library/libEmitBcLibrary.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/EmitBcLibrary/Source/Library.uv

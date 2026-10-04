@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/FlowProofRuntimeErasure>
+<assemblies, [FlowProofRuntimeErasure]>
+<assembly_name, FlowProofRuntimeErasure>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/FlowProofRuntimeErasure/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/FlowProofRuntimeErasure/Build>
+<module_list, [FlowProofRuntimeErasure]>
+<module, FlowProofRuntimeErasure, obj, /w/target/fixtures/Fixtures/ArtifactProjects/FlowProofRuntimeErasure/Build/Intermediate/Obj/Source/FlowProofRuntimeErasure.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/FlowProofRuntimeErasure/Build/Intermediate/IR/Source/FlowProofRuntimeErasure.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/FlowProofRuntimeErasure/Build/Library/libFlowProofRuntimeErasure.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/FlowProofRuntimeErasure/Source/Library.uv

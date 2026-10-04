@@ -1,0 +1,2 @@
+module SliceIndexNonUsize
+  ProcedureDecl [3:8-8:2] public procedure sliceIndexNonUsizeReference

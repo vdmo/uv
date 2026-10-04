@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo>
+<assemblies, [DynamicKeyRuntimeInfo]>
+<assembly_name, DynamicKeyRuntimeInfo>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Build>
+<module_list, [DynamicKeyRuntimeInfo]>
+<module, DynamicKeyRuntimeInfo, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Build/Intermediate/Obj/Source/DynamicKeyRuntimeInfo.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Build/Binary/libDynamicKeyRuntimeInfo.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Source/Main.uv

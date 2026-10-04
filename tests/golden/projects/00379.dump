@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelWorkgroupSize>
+<assemblies, [ParallelWorkgroupSize]>
+<assembly_name, ParallelWorkgroupSize>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelWorkgroupSize/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelWorkgroupSize/Build>
+<module_list, [ParallelWorkgroupSize]>
+<module, ParallelWorkgroupSize, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelWorkgroupSize/Build/Intermediate/Obj/Source/ParallelWorkgroupSize.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelWorkgroupSize/Build/Binary/libParallelWorkgroupSize.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/ParallelWorkgroupSize/Source/Main.uv

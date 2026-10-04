@@ -1,0 +1,3 @@
+module PreconditionCallerObligation
+  ProcedureDecl [3:8-7:2] public procedure requiresPositiveCallerValue
+  ProcedureDecl [9:8-11:2] public procedure preconditionCallerObligationReference

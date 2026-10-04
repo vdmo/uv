@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/UnionDirectAccess>
+<assemblies, [UnionDirectAccess]>
+<assembly_name, UnionDirectAccess>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/UnionDirectAccess/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/UnionDirectAccess/Build>
+<module_list, [UnionDirectAccess]>
+<module, UnionDirectAccess, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/UnionDirectAccess/Build/Intermediate/Obj/Source/UnionDirectAccess.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/UnionDirectAccess/Build/Binary/libUnionDirectAccess.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/UnionDirectAccess/Source/Main.uv

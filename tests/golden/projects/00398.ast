@@ -1,0 +1,2 @@
+module RangePatternsDiagnostic
+  ProcedureDecl [3:8-10:2] public procedure rangePatternsDiagnosticReference

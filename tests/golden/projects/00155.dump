@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/TypeAliasCycle>
+<assemblies, [TypeAliasCycle]>
+<assembly_name, TypeAliasCycle>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/TypeAliasCycle/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/TypeAliasCycle/Build>
+<module_list, [TypeAliasCycle]>
+<module, TypeAliasCycle, obj, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/TypeAliasCycle/Build/Intermediate/Obj/Source/TypeAliasCycle.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/TypeAliasCycle/Build/Binary/libTypeAliasCycle.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/DataTypes/TypeAliasCycle/Source/Main.uv

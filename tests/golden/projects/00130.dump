@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/UnknownAttribute>
+<assemblies, [UnknownAttribute]>
+<assembly_name, UnknownAttribute>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/UnknownAttribute/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/UnknownAttribute/Build>
+<module_list, [UnknownAttribute]>
+<module, UnknownAttribute, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/UnknownAttribute/Build/Intermediate/Obj/Source/UnknownAttribute.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/UnknownAttribute/Build/Binary/libUnknownAttribute.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/UnknownAttribute/Source/Main.uv

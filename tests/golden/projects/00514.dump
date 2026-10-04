@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignImmutableLet>
+<assemblies, [AssignImmutableLet]>
+<assembly_name, AssignImmutableLet>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignImmutableLet/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignImmutableLet/Build>
+<module_list, [AssignImmutableLet]>
+<module, AssignImmutableLet, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignImmutableLet/Build/Intermediate/Obj/Source/AssignImmutableLet.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/AssignImmutableLet/Build/Binary/libAssignImmutableLet.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/AssignImmutableLet/Source/Main.uv

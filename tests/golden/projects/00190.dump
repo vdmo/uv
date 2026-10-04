@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureMoveCaptureImmovable>
+<assemblies, [ClosureMoveCaptureImmovable]>
+<assembly_name, ClosureMoveCaptureImmovable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureMoveCaptureImmovable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureMoveCaptureImmovable/Build>
+<module_list, [ClosureMoveCaptureImmovable]>
+<module, ClosureMoveCaptureImmovable, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureMoveCaptureImmovable/Build/Intermediate/Obj/Source/ClosureMoveCaptureImmovable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureMoveCaptureImmovable/Build/Binary/libClosureMoveCaptureImmovable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureMoveCaptureImmovable/Source/Main.uv

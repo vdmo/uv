@@ -1,0 +1,15 @@
+<project_root, /w/target/prjcases/layout_order>
+<assemblies, [App]>
+<assembly_name, App>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/layout_order/Source>
+<output_root, /w/target/prjcases/layout_order/Build>
+<module_list, [App]>
+<module, App, obj, /w/target/prjcases/layout_order/Build/Intermediate/Obj/Source/App.o, ir, <bottom>>
+<artifact, /w/target/prjcases/layout_order/Build/Binary/App, import_lib, <bottom>>
+file:/w/target/prjcases/layout_order/Source/_x.uv
+file:/w/target/prjcases/layout_order/Source/A.uv
+file:/w/target/prjcases/layout_order/Source/a2.uv
+file:/w/target/prjcases/layout_order/Source/b.uv
+file:/w/target/prjcases/layout_order/Source/Z.uv

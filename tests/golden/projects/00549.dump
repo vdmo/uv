@@ -1,0 +1,13 @@
+<project_root, /w/target/fixtures/shapes>
+<assemblies, [Shapes]>
+<assembly_name, Shapes>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/shapes/Source>
+<output_root, /w/target/fixtures/shapes/Build>
+<module_list, [Shapes, Shapes::Geometry]>
+<module, Shapes, obj, /w/target/fixtures/shapes/Build/Intermediate/Obj/Source/Shapes.o, ir, <bottom>>
+<module, Shapes::Geometry, obj, /w/target/fixtures/shapes/Build/Intermediate/Obj/Source/Geometry/Shapes_x3a_x3aGeometry.o, ir, <bottom>>
+<artifact, /w/target/fixtures/shapes/Build/Binary/libShapes.so, import_lib, <bottom>>
+file:/w/target/fixtures/shapes/Source/Main.uv
+file:/w/target/fixtures/shapes/Source/Geometry/Main.uv

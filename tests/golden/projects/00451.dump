@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideNoConcrete>
+<assemblies, [OverrideNoConcrete]>
+<assembly_name, OverrideNoConcrete>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideNoConcrete/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideNoConcrete/Build>
+<module_list, [OverrideNoConcrete]>
+<module, OverrideNoConcrete, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideNoConcrete/Build/Intermediate/Obj/Source/OverrideNoConcrete.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideNoConcrete/Build/Binary/libOverrideNoConcrete.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideNoConcrete/Source/Main.uv

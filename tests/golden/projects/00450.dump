@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideMissingOnDefault>
+<assemblies, [OverrideMissingOnDefault]>
+<assembly_name, OverrideMissingOnDefault>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideMissingOnDefault/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideMissingOnDefault/Build>
+<module_list, [OverrideMissingOnDefault]>
+<module, OverrideMissingOnDefault, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideMissingOnDefault/Build/Intermediate/Obj/Source/OverrideMissingOnDefault.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideMissingOnDefault/Build/Binary/libOverrideMissingOnDefault.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideMissingOnDefault/Source/Main.uv

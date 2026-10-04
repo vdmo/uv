@@ -1,0 +1,846 @@
+### 1 | --help
+rc=0
+--stdout--
+Ultraviolet - Ultraviolet language compiler
+
+
+USAGE
+  uvc build <file> [options]
+  uvc test [target] [options]
+  uvc init [directory]
+  uvc clean [file]
+
+OPTIONS
+  -h, --help                 Show this help message
+  -V, --version              Show version information
+  -v, --verbose              Show detailed build information
+  --color <auto|always|never> Control colored output (default: auto)
+  --check                    Type-check only (no code generation or linking)
+  --assembly <name>          Select assembly to build (auto-selects if only one
+                             executable exists)
+  --target-profile <profile> Select target profile: x86_64-sysv,
+                             x86_64-win64, aarch64-aapcs64,
+                             aarch64-darwin
+  --test <name>              With `test`, run tests matching a procedure,
+                             display, or fully-qualified test name
+  --coverage <anchor>        With `test`, run tests covering the obligation
+                             anchor
+  --opt-level <level>        Select codegen optimization: O0, O1, O2, O3, Os, Oz
+  --out-dir <path>           Override output directory (default: Build/)
+  --diag-json                Output diagnostics as JSON
+  --profile-compiler[=json]  Emit compiler timing/profile JSON Lines to stderr
+  --dump                     Dump project structure
+  --dump-ast                 Dump parsed AST for project modules
+  --emit-ir                  Emit textual IR to stdout
+  --build-progress <on|off>  Enable/disable build progress display
+  --incremental <on|off>     Enable/disable incremental compilation
+  --max-errors <N|inf>       Abort compilation after N errors (default: 100)
+  --no-crash-report          Disable built-in crash report generation
+
+  --runtime-lib <path>       Path to active language runtime library
+  --link-debug               Enable linker debug output
+  --no-link-debug            Disable linker debug output
+
+  --log                      Show runtime log records on console
+  --log-file <path>          Write runtime logs to the exact path provided
+  --trace                    Show all runtime trace records (not just log category)
+  --trace-filter <classes>   Filter trace categories: log,diagnostic,runtime,all (comma-separated)
+  --trace-level <level>      Filter minimum trace level: trace, info, warning, error
+  --conformance <path>       Write compiler conformance trace to <out-dir>/Logs/Conformance/<basename(path)>
+
+  --debug <subsystems|help>  Enable debug output or print subsystem help
+
+MANIFEST (Ultraviolet.toml)
+  [toolchain]
+    runtime_lib = "path"     Runtime library path (overridden by --runtime-lib)
+    target_profile = "x86_64-sysv"  Default target profile (overridden by --target-profile)
+
+  [build]
+    incremental = true       Enable incremental compilation (overridden by --incremental)
+    progress = true          Enable build progress (overridden by --build-progress)
+
+ENVIRONMENT
+  NO_COLOR                   Disable colored output (see https://no-color.org)
+  CLICOLOR_FORCE             Force colored output even when not a TTY
+  CLICOLOR                   Set to 0 to disable colored output
+  UV_RUNTIME_SINK       Runtime sink override: console|file|both
+  UV_RUNTIME_PATH       Runtime file sink path (used with sink=file|both)
+  UV_RUNTIME_ROOT       Runtime source-root prefix to strip from file paths
+  UV_RUNTIME_FILTER     Runtime category filter: log,diagnostic,runtime,all
+  UV_RUNTIME_LEVEL      Runtime min level: trace|info|warning|error
+  UV_RUNTIME_RULE       Runtime rule-id substring filter
+  UV_RUNTIME_FILE       Runtime file substring filter
+  UV_RUNTIME_LABEL      Runtime label substring filter
+  UV_RUNTIME_FAIL_ONLY  Runtime filter to cmp=fail records only (1/0)
+  UV_RUNTIME_BREAK_ON_FAIL Runtime break on cmp=fail (1/0)
+
+EXIT CODES
+  0  Compilation succeeded
+  1  Compilation failed (errors emitted)
+  2  Invalid command-line arguments
+--stderr--
+
+### 2 | -h
+rc=0
+--stdout--
+Ultraviolet - Ultraviolet language compiler
+
+
+USAGE
+  uvc build <file> [options]
+  uvc test [target] [options]
+  uvc init [directory]
+  uvc clean [file]
+
+OPTIONS
+  -h, --help                 Show this help message
+  -V, --version              Show version information
+  -v, --verbose              Show detailed build information
+  --color <auto|always|never> Control colored output (default: auto)
+  --check                    Type-check only (no code generation or linking)
+  --assembly <name>          Select assembly to build (auto-selects if only one
+                             executable exists)
+  --target-profile <profile> Select target profile: x86_64-sysv,
+                             x86_64-win64, aarch64-aapcs64,
+                             aarch64-darwin
+  --test <name>              With `test`, run tests matching a procedure,
+                             display, or fully-qualified test name
+  --coverage <anchor>        With `test`, run tests covering the obligation
+                             anchor
+  --opt-level <level>        Select codegen optimization: O0, O1, O2, O3, Os, Oz
+  --out-dir <path>           Override output directory (default: Build/)
+  --diag-json                Output diagnostics as JSON
+  --profile-compiler[=json]  Emit compiler timing/profile JSON Lines to stderr
+  --dump                     Dump project structure
+  --dump-ast                 Dump parsed AST for project modules
+  --emit-ir                  Emit textual IR to stdout
+  --build-progress <on|off>  Enable/disable build progress display
+  --incremental <on|off>     Enable/disable incremental compilation
+  --max-errors <N|inf>       Abort compilation after N errors (default: 100)
+  --no-crash-report          Disable built-in crash report generation
+
+  --runtime-lib <path>       Path to active language runtime library
+  --link-debug               Enable linker debug output
+  --no-link-debug            Disable linker debug output
+
+  --log                      Show runtime log records on console
+  --log-file <path>          Write runtime logs to the exact path provided
+  --trace                    Show all runtime trace records (not just log category)
+  --trace-filter <classes>   Filter trace categories: log,diagnostic,runtime,all (comma-separated)
+  --trace-level <level>      Filter minimum trace level: trace, info, warning, error
+  --conformance <path>       Write compiler conformance trace to <out-dir>/Logs/Conformance/<basename(path)>
+
+  --debug <subsystems|help>  Enable debug output or print subsystem help
+
+MANIFEST (Ultraviolet.toml)
+  [toolchain]
+    runtime_lib = "path"     Runtime library path (overridden by --runtime-lib)
+    target_profile = "x86_64-sysv"  Default target profile (overridden by --target-profile)
+
+  [build]
+    incremental = true       Enable incremental compilation (overridden by --incremental)
+    progress = true          Enable build progress (overridden by --build-progress)
+
+ENVIRONMENT
+  NO_COLOR                   Disable colored output (see https://no-color.org)
+  CLICOLOR_FORCE             Force colored output even when not a TTY
+  CLICOLOR                   Set to 0 to disable colored output
+  UV_RUNTIME_SINK       Runtime sink override: console|file|both
+  UV_RUNTIME_PATH       Runtime file sink path (used with sink=file|both)
+  UV_RUNTIME_ROOT       Runtime source-root prefix to strip from file paths
+  UV_RUNTIME_FILTER     Runtime category filter: log,diagnostic,runtime,all
+  UV_RUNTIME_LEVEL      Runtime min level: trace|info|warning|error
+  UV_RUNTIME_RULE       Runtime rule-id substring filter
+  UV_RUNTIME_FILE       Runtime file substring filter
+  UV_RUNTIME_LABEL      Runtime label substring filter
+  UV_RUNTIME_FAIL_ONLY  Runtime filter to cmp=fail records only (1/0)
+  UV_RUNTIME_BREAK_ON_FAIL Runtime break on cmp=fail (1/0)
+
+EXIT CODES
+  0  Compilation succeeded
+  1  Compilation failed (errors emitted)
+  2  Invalid command-line arguments
+--stderr--
+
+### 3 | --version
+rc=0
+--stdout--
+Ultraviolet 0.4.0-alpha
+Ultraviolet Language Compiler
+Spec: Ultraviolet Language Specification
+--stderr--
+
+### 4 | -V
+rc=0
+--stdout--
+Ultraviolet 0.4.0-alpha
+Ultraviolet Language Compiler
+Spec: Ultraviolet Language Specification
+--stderr--
+
+### 5 | --debug help
+rc=0
+--stdout--
+ultraviolet debug subsystems
+
+Use --debug <name[,name...]> to enable subsystem traces.
+
+  lex        Lexer diagnostics and tokenization traces
+  parse      Parser item-level traces
+  phases     Frontend phase sequencing
+  pipeline   Top-level driver pipeline and build coordination
+  output     Output pipeline, artifacts, and incremental decisions
+  link       Linker and archiver debugging
+  sema       Semantic-analysis progress and diagnostics
+  codegen    IR lowering and code generation traces
+  typeperf   Semantic-analysis performance counters
+  obj        Object emission and object-model details
+  binop      Binary operator lowering/debugging
+  call       Call resolution and lowering
+  loop       Loop lowering/debugging
+  parallel   Parallel lowering/debugging
+  return     Return-path lowering/debugging
+  union      Union lowering/debugging
+  wait       Wait lowering/debugging
+  propagate  Propagate lowering/debugging
+  spawn      Spawn lowering/debugging
+  method     Method resolution/debugging
+  shadow     Shadowing and pattern-shadow diagnostics
+  all        Enable all debug subsystems
+--stderr--
+
+### 6 | --debug=help
+rc=0
+--stdout--
+ultraviolet debug subsystems
+
+Use --debug <name[,name...]> to enable subsystem traces.
+
+  lex        Lexer diagnostics and tokenization traces
+  parse      Parser item-level traces
+  phases     Frontend phase sequencing
+  pipeline   Top-level driver pipeline and build coordination
+  output     Output pipeline, artifacts, and incremental decisions
+  link       Linker and archiver debugging
+  sema       Semantic-analysis progress and diagnostics
+  codegen    IR lowering and code generation traces
+  typeperf   Semantic-analysis performance counters
+  obj        Object emission and object-model details
+  binop      Binary operator lowering/debugging
+  call       Call resolution and lowering
+  loop       Loop lowering/debugging
+  parallel   Parallel lowering/debugging
+  return     Return-path lowering/debugging
+  union      Union lowering/debugging
+  wait       Wait lowering/debugging
+  propagate  Propagate lowering/debugging
+  spawn      Spawn lowering/debugging
+  method     Method resolution/debugging
+  shadow     Shadowing and pattern-shadow diagnostics
+  all        Enable all debug subsystems
+--stderr--
+
+### 7 | 
+rc=2
+--stdout--
+
+--stderr--
+error: no input file specified
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 8 | build
+rc=2
+--stdout--
+
+--stderr--
+error: no input file specified
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 9 | foo
+rc=2
+--stdout--
+
+--stderr--
+E-CLI-0001 (error): unknown command
+### 10 | foo --diag-json
+rc=2
+--stdout--
+{"diagnostics":[{"code":"E-CLI-0001","severity":"error","message":"unknown command","span":null,"source_line":null,"children":[]}]}
+--stderr--
+
+### 11 | --diag-json foo
+rc=2
+--stdout--
+{"diagnostics":[{"code":"E-CLI-0001","severity":"error","message":"unknown command","span":null,"source_line":null,"children":[]}]}
+--stderr--
+
+### 12 | build a b
+rc=2
+--stdout--
+
+--stderr--
+error: multiple input paths not supported; got 'a' and 'b'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 13 | build x --colour never
+rc=2
+--stdout--
+
+--stderr--
+error: unknown option: --colour; did you mean '--color'?
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 14 | build x --chek
+rc=2
+--stdout--
+
+--stderr--
+error: unknown option: --chek; did you mean '--check'?
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 15 | build x -x
+rc=2
+--stdout--
+
+--stderr--
+error: unknown option: -x
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 16 | build x --color
+rc=2
+--stdout--
+
+--stderr--
+error: --color requires an argument (auto|always|never)
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 17 | build x --color purple
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --color value; expected 'auto', 'always', or 'never'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 18 | build x --color=purple
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --color value; expected 'auto', 'always', or 'never'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 19 | build x --target-profile
+rc=2
+--stdout--
+
+--stderr--
+error: --target-profile requires a profile argument
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 20 | build x --target-profile riscv
+rc=2
+--stdout--
+
+--stderr--
+error: invalid target profile; expected one of: x86_64-sysv, x86_64-win64, aarch64-aapcs64, aarch64-darwin
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 21 | build x --target-profile=riscv
+rc=2
+--stdout--
+
+--stderr--
+error: invalid target profile; expected one of: x86_64-sysv, x86_64-win64, aarch64-aapcs64, aarch64-darwin
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 22 | build x --opt-level
+rc=2
+--stdout--
+
+--stderr--
+error: --opt-level requires a value (O0|O1|O2|O3|Os|Oz)
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 23 | build x --opt-level O9
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --opt-level value; expected one of: O0, O1, O2, O3, Os, Oz
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 24 | build x --opt-level=fast
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --opt-level value; expected one of: O0, O1, O2, O3, Os, Oz
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 25 | build x --max-errors
+rc=2
+--stdout--
+
+--stderr--
+error: --max-errors requires a value (N|inf)
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 26 | build x --max-errors -1
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --max-errors value; expected non-negative integer or inf
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 27 | build x --max-errors=ten
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --max-errors value; expected non-negative integer or inf
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 28 | build x --max-errors 99999999999999999999999999
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --max-errors value; expected non-negative integer or inf
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 29 | build x --debug
+rc=2
+--stdout--
+
+--stderr--
+error: --debug requires a comma-separated list of subsystems or 'help'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 30 | build x --debug nope
+rc=2
+--stdout--
+
+--stderr--
+error: unknown debug subsystem 'nope'; expected one of: lex, parse, phases, pipeline, output, link, sema, codegen, typeperf, obj, binop, call, loop, parallel, return, union, wait, propagate, spawn, method, shadow, all
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 31 | build x --debug=lex,nope
+rc=2
+--stdout--
+
+--stderr--
+error: unknown debug subsystem 'nope'; expected one of: lex, parse, phases, pipeline, output, link, sema, codegen, typeperf, obj, binop, call, loop, parallel, return, union, wait, propagate, spawn, method, shadow, all
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 32 | build x --debug ,
+rc=2
+--stdout--
+
+--stderr--
+error: --debug requires a comma-separated list of subsystems or 'help'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 33 | build x --no-output
+rc=2
+--stdout--
+
+--stderr--
+error: --no-output requires --debug to be set
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 34 | build x --build-progress maybe
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --build-progress value; expected 'on' or 'off'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 35 | build x --build-progress
+rc=2
+--stdout--
+
+--stderr--
+error: --build-progress requires an argument (on|off)
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 36 | build x --incremental=perhaps
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --incremental value; expected 'on' or 'off'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 37 | build x --link-debug=perhaps
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --link-debug value; expected 'on' or 'off'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 38 | build x --trace-filter nope
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --trace-filter value; expected comma-separated classes from log,diagnostic,runtime,all
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 39 | build x --trace-filter
+rc=2
+--stdout--
+
+--stderr--
+error: --trace-filter requires classes (log,diagnostic,runtime,all)
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 40 | build x --trace-level loud
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --trace-level value; expected trace, info, warning, or error
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 41 | build x --log-file=
+rc=2
+--stdout--
+
+--stderr--
+error: --log-file path must not be empty
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 42 | build x --runtime-lib=
+rc=2
+--stdout--
+
+--stderr--
+error: --runtime-lib path must not be empty
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 43 | build x --out-dir=
+rc=2
+--stdout--
+
+--stderr--
+error: --out-dir path must not be empty
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 44 | build x --out-dir
+rc=2
+--stdout--
+
+--stderr--
+error: --out-dir requires a path argument
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 45 | build x --assembly
+rc=2
+--stdout--
+
+--stderr--
+error: --assembly requires a name argument
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 46 | build x --conformance
+rc=2
+--stdout--
+
+--stderr--
+error: --conformance requires a path argument
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 47 | build x --profile-compiler=xml
+rc=2
+--stdout--
+
+--stderr--
+error: invalid --profile-compiler value; expected 'json'
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 48 | build x --test
+rc=2
+--stdout--
+
+--stderr--
+error: --test requires a name argument
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 49 | build x --coverage
+rc=2
+--stdout--
+
+--stderr--
+error: --coverage requires an obligation anchor argument
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 50 | build x --test-harness-dir
+rc=2
+--stdout--
+
+--stderr--
+error: --test-harness-dir requires a path argument
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.
+### 51 | build --help x
+rc=0
+--stdout--
+Ultraviolet - Ultraviolet language compiler
+
+
+USAGE
+  uvc build <file> [options]
+  uvc test [target] [options]
+  uvc init [directory]
+  uvc clean [file]
+
+OPTIONS
+  -h, --help                 Show this help message
+  -V, --version              Show version information
+  -v, --verbose              Show detailed build information
+  --color <auto|always|never> Control colored output (default: auto)
+  --check                    Type-check only (no code generation or linking)
+  --assembly <name>          Select assembly to build (auto-selects if only one
+                             executable exists)
+  --target-profile <profile> Select target profile: x86_64-sysv,
+                             x86_64-win64, aarch64-aapcs64,
+                             aarch64-darwin
+  --test <name>              With `test`, run tests matching a procedure,
+                             display, or fully-qualified test name
+  --coverage <anchor>        With `test`, run tests covering the obligation
+                             anchor
+  --opt-level <level>        Select codegen optimization: O0, O1, O2, O3, Os, Oz
+  --out-dir <path>           Override output directory (default: Build/)
+  --diag-json                Output diagnostics as JSON
+  --profile-compiler[=json]  Emit compiler timing/profile JSON Lines to stderr
+  --dump                     Dump project structure
+  --dump-ast                 Dump parsed AST for project modules
+  --emit-ir                  Emit textual IR to stdout
+  --build-progress <on|off>  Enable/disable build progress display
+  --incremental <on|off>     Enable/disable incremental compilation
+  --max-errors <N|inf>       Abort compilation after N errors (default: 100)
+  --no-crash-report          Disable built-in crash report generation
+
+  --runtime-lib <path>       Path to active language runtime library
+  --link-debug               Enable linker debug output
+  --no-link-debug            Disable linker debug output
+
+  --log                      Show runtime log records on console
+  --log-file <path>          Write runtime logs to the exact path provided
+  --trace                    Show all runtime trace records (not just log category)
+  --trace-filter <classes>   Filter trace categories: log,diagnostic,runtime,all (comma-separated)
+  --trace-level <level>      Filter minimum trace level: trace, info, warning, error
+  --conformance <path>       Write compiler conformance trace to <out-dir>/Logs/Conformance/<basename(path)>
+
+  --debug <subsystems|help>  Enable debug output or print subsystem help
+
+MANIFEST (Ultraviolet.toml)
+  [toolchain]
+    runtime_lib = "path"     Runtime library path (overridden by --runtime-lib)
+    target_profile = "x86_64-sysv"  Default target profile (overridden by --target-profile)
+
+  [build]
+    incremental = true       Enable incremental compilation (overridden by --incremental)
+    progress = true          Enable build progress (overridden by --build-progress)
+
+ENVIRONMENT
+  NO_COLOR                   Disable colored output (see https://no-color.org)
+  CLICOLOR_FORCE             Force colored output even when not a TTY
+  CLICOLOR                   Set to 0 to disable colored output
+  UV_RUNTIME_SINK       Runtime sink override: console|file|both
+  UV_RUNTIME_PATH       Runtime file sink path (used with sink=file|both)
+  UV_RUNTIME_ROOT       Runtime source-root prefix to strip from file paths
+  UV_RUNTIME_FILTER     Runtime category filter: log,diagnostic,runtime,all
+  UV_RUNTIME_LEVEL      Runtime min level: trace|info|warning|error
+  UV_RUNTIME_RULE       Runtime rule-id substring filter
+  UV_RUNTIME_FILE       Runtime file substring filter
+  UV_RUNTIME_LABEL      Runtime label substring filter
+  UV_RUNTIME_FAIL_ONLY  Runtime filter to cmp=fail records only (1/0)
+  UV_RUNTIME_BREAK_ON_FAIL Runtime break on cmp=fail (1/0)
+
+EXIT CODES
+  0  Compilation succeeded
+  1  Compilation failed (errors emitted)
+  2  Invalid command-line arguments
+--stderr--
+
+### 52 | --phase1-onlyy build x
+rc=2
+--stdout--
+
+--stderr--
+error: unknown option: --phase1-onlyy; did you mean '--phase1-only'?
+usage: uvc <command> [options]
+       uvc build <file> [options]
+       uvc test [target] [options]
+       uvc init [directory]
+       uvc clean [file]
+Try 'uvc --help' for more information.

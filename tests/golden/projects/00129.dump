@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestUnknownCoverageReference>
+<assemblies, [TestUnknownCoverageReference]>
+<assembly_name, TestUnknownCoverageReference>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestUnknownCoverageReference/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestUnknownCoverageReference/Build>
+<module_list, [TestUnknownCoverageReference]>
+<module, TestUnknownCoverageReference, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestUnknownCoverageReference/Build/Intermediate/Obj/Source/TestUnknownCoverageReference.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestUnknownCoverageReference/Build/Binary/libTestUnknownCoverageReference.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/TestUnknownCoverageReference/Source/Main.uv

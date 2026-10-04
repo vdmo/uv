@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameTargetNotActive>
+<assemblies, [FrameTargetNotActive]>
+<assembly_name, FrameTargetNotActive>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameTargetNotActive/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameTargetNotActive/Build>
+<module_list, [FrameTargetNotActive]>
+<module, FrameTargetNotActive, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameTargetNotActive/Build/Intermediate/Obj/Source/FrameTargetNotActive.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/FrameTargetNotActive/Build/Binary/libFrameTargetNotActive.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/FrameTargetNotActive/Source/Main.uv

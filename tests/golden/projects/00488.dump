@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadResolutionBeforeCallTyping>
+<assemblies, [OverloadResolutionBeforeCallTyping]>
+<assembly_name, OverloadResolutionBeforeCallTyping>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadResolutionBeforeCallTyping/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadResolutionBeforeCallTyping/Build>
+<module_list, [OverloadResolutionBeforeCallTyping]>
+<module, OverloadResolutionBeforeCallTyping, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadResolutionBeforeCallTyping/Build/Intermediate/Obj/Source/OverloadResolutionBeforeCallTyping.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadResolutionBeforeCallTyping/Build/Binary/libOverloadResolutionBeforeCallTyping.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/OverloadResolutionBeforeCallTyping/Source/Main.uv

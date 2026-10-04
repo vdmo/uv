@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorOperandMismatch>
+<assemblies, [OperatorOperandMismatch]>
+<assembly_name, OperatorOperandMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorOperandMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorOperandMismatch/Build>
+<module_list, [OperatorOperandMismatch]>
+<module, OperatorOperandMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorOperandMismatch/Build/Intermediate/Obj/Source/OperatorOperandMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorOperandMismatch/Build/Binary/libOperatorOperandMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/OperatorOperandMismatch/Source/Main.uv

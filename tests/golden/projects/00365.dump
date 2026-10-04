@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrAddrSpace>
+<assemblies, [GpuPtrAddrSpace]>
+<assembly_name, GpuPtrAddrSpace>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrAddrSpace/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrAddrSpace/Build>
+<module_list, [GpuPtrAddrSpace]>
+<module, GpuPtrAddrSpace, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrAddrSpace/Build/Intermediate/Obj/Source/GpuPtrAddrSpace.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrAddrSpace/Build/Binary/libGpuPtrAddrSpace.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuPtrAddrSpace/Source/Main.uv

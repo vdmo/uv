@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureParamInferenceRequirement>
+<assemblies, [ClosureParamInferenceRequirement]>
+<assembly_name, ClosureParamInferenceRequirement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureParamInferenceRequirement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureParamInferenceRequirement/Build>
+<module_list, [ClosureParamInferenceRequirement]>
+<module, ClosureParamInferenceRequirement, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureParamInferenceRequirement/Build/Intermediate/Obj/Source/ClosureParamInferenceRequirement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureParamInferenceRequirement/Build/Binary/libClosureParamInferenceRequirement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureParamInferenceRequirement/Source/Main.uv

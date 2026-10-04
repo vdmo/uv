@@ -1,0 +1,2 @@
+module ArraySliceIndexDiagnostics
+  ProcedureDecl [3:8-6:2] public procedure arraySliceIndexDiagnosticsReference

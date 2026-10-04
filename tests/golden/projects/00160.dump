@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllocImplicitNoRegion>
+<assemblies, [AllocImplicitNoRegion]>
+<assembly_name, AllocImplicitNoRegion>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllocImplicitNoRegion/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllocImplicitNoRegion/Build>
+<module_list, [AllocImplicitNoRegion]>
+<module, AllocImplicitNoRegion, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllocImplicitNoRegion/Build/Intermediate/Obj/Source/AllocImplicitNoRegion.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllocImplicitNoRegion/Build/Binary/libAllocImplicitNoRegion.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AllocImplicitNoRegion/Source/Main.uv

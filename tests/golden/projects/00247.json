@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-1906","severity":"error","message":"Field visibility exceeds record visibility (`FieldVisOk-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldVisibilityViolation/Source/Main.uv","start_line":3,"start_col":10,"end_line":5,"end_col":2},"source_line":"internal record RecordVisibilityPayload {","children":[]}]}

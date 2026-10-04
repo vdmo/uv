@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionsDiagnostic>
+<assemblies, [PreconditionsDiagnostic]>
+<assembly_name, PreconditionsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionsDiagnostic/Build>
+<module_list, [PreconditionsDiagnostic]>
+<module, PreconditionsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionsDiagnostic/Build/Intermediate/Obj/Source/PreconditionsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionsDiagnostic/Build/Binary/libPreconditionsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/PreconditionsDiagnostic/Source/Main.uv

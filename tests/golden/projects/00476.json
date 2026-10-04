@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SEM-2824","severity":"error","message":"Public mutable field on type with invariant","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Procedures/InvariantPublicMutableField/Source/Main.uv","start_line":3,"start_col":8,"end_line":5,"end_col":24},"source_line":"public record InvariantPublicOwner {","children":[]}]}

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallStaticJudgementsAndArgumentTyping>
+<assemblies, [CallStaticJudgementsAndArgumentTyping]>
+<assembly_name, CallStaticJudgementsAndArgumentTyping>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallStaticJudgementsAndArgumentTyping/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallStaticJudgementsAndArgumentTyping/Build>
+<module_list, [CallStaticJudgementsAndArgumentTyping]>
+<module, CallStaticJudgementsAndArgumentTyping, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallStaticJudgementsAndArgumentTyping/Build/Intermediate/Obj/Source/CallStaticJudgementsAndArgumentTyping.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallStaticJudgementsAndArgumentTyping/Build/Binary/libCallStaticJudgementsAndArgumentTyping.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CallStaticJudgementsAndArgumentTyping/Source/Main.uv

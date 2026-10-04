@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeFence>
+<assemblies, [SpeculativeFence]>
+<assembly_name, SpeculativeFence>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeFence/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeFence/Build>
+<module_list, [SpeculativeFence]>
+<module, SpeculativeFence, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeFence/Build/Intermediate/Obj/Source/SpeculativeFence.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeFence/Build/Binary/libSpeculativeFence.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeFence/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodWellFormedness>
+<assemblies, [RecordMethodWellFormedness]>
+<assembly_name, RecordMethodWellFormedness>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodWellFormedness/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodWellFormedness/Build>
+<module_list, [RecordMethodWellFormedness]>
+<module, RecordMethodWellFormedness, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodWellFormedness/Build/Intermediate/Obj/Source/RecordMethodWellFormedness.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodWellFormedness/Build/Binary/libRecordMethodWellFormedness.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodWellFormedness/Source/Main.uv

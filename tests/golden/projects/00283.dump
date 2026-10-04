@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumApplyGenericUnbounded>
+<assemblies, [FfiSafeEnumApplyGenericUnbounded]>
+<assembly_name, FfiSafeEnumApplyGenericUnbounded>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumApplyGenericUnbounded/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumApplyGenericUnbounded/Build>
+<module_list, [FfiSafeEnumApplyGenericUnbounded]>
+<module, FfiSafeEnumApplyGenericUnbounded, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumApplyGenericUnbounded/Build/Intermediate/Obj/Source/FfiSafeEnumApplyGenericUnbounded.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumApplyGenericUnbounded/Build/Binary/libFfiSafeEnumApplyGenericUnbounded.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeEnumApplyGenericUnbounded/Source/Main.uv

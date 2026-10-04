@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnostics>
+<assemblies, [CapabilityIsolationDiagnostics]>
+<assembly_name, CapabilityIsolationDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnostics/Build>
+<module_list, [CapabilityIsolationDiagnostics]>
+<module, CapabilityIsolationDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnostics/Build/Intermediate/Obj/Source/CapabilityIsolationDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnostics/Build/Binary/libCapabilityIsolationDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnostics/Source/Main.uv

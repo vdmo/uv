@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SRC-0304","severity":"error","message":"Malformed numeric literal (`Lex-Numeric-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/SourceText/MalformedNumericLiteral/Source/Main.uv","start_line":4,"start_col":12,"end_line":4,"end_col":14},"source_line":"    return 1_","children":[]}]}

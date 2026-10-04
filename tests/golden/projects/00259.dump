@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleIndexOutOfBounds>
+<assemblies, [TupleIndexOutOfBounds]>
+<assembly_name, TupleIndexOutOfBounds>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleIndexOutOfBounds/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleIndexOutOfBounds/Build>
+<module_list, [TupleIndexOutOfBounds]>
+<module, TupleIndexOutOfBounds, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleIndexOutOfBounds/Build/Intermediate/Obj/Source/TupleIndexOutOfBounds.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleIndexOutOfBounds/Build/Binary/libTupleIndexOutOfBounds.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleIndexOutOfBounds/Source/Main.uv

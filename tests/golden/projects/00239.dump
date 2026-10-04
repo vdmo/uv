@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultConstructionEligibility>
+<assemblies, [RecordDefaultConstructionEligibility]>
+<assembly_name, RecordDefaultConstructionEligibility>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultConstructionEligibility/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultConstructionEligibility/Build>
+<module_list, [RecordDefaultConstructionEligibility]>
+<module, RecordDefaultConstructionEligibility, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultConstructionEligibility/Build/Intermediate/Obj/Source/RecordDefaultConstructionEligibility.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultConstructionEligibility/Build/Binary/libRecordDefaultConstructionEligibility.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultConstructionEligibility/Source/Main.uv

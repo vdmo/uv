@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-1921","severity":"error","message":"Enum discriminant literal is invalid (`Enum-Disc-Invalid`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumInvalidDiscriminant/Source/Main.uv","start_line":3,"start_col":8,"end_line":5,"end_col":2},"source_line":"public enum InvalidDiscriminantPayload {","children":[]}]}

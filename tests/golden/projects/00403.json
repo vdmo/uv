@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-1601","severity":"error","message":"Mutation through `const` path","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Permissions/ConstMutation/Source/Main.uv","start_line":9,"start_col":5,"end_line":9,"end_col":19},"source_line":"    cell.value = 2","children":[{"kind":"note","message":"statement failed typing: AssignStmt","span":null}]}]}

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0070","severity":"error","message":"compile-time user diagnostic","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/UserDiagnosticError/Source/Main.uv","start_line":5,"start_col":9,"end_line":5,"end_col":59},"source_line":"        diagnostics~>error(\"compile-time user diagnostic\")","children":[]}]}

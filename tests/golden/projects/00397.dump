@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternNonConst>
+<assemblies, [RangePatternNonConst]>
+<assembly_name, RangePatternNonConst>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternNonConst/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternNonConst/Build>
+<module_list, [RangePatternNonConst]>
+<module, RangePatternNonConst, obj, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternNonConst/Build/Intermediate/Obj/Source/RangePatternNonConst.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternNonConst/Build/Binary/libRangePatternNonConst.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternNonConst/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferDiagnostic>
+<assemblies, [DeferDiagnostic]>
+<assembly_name, DeferDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferDiagnostic/Build>
+<module_list, [DeferDiagnostic]>
+<module, DeferDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferDiagnostic/Build/Intermediate/Obj/Source/DeferDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferDiagnostic/Build/Binary/libDeferDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/DeferDiagnostic/Source/Main.uv

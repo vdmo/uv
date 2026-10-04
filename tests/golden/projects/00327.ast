@@ -1,0 +1,3 @@
+module SharedDynamicMutatingReceiver
+  ClassDecl [3:8-7:2] public class SharedDynamicReceiverClass
+  ProcedureDecl [9:8-13:2] public procedure sharedDynamicMutatingReceiverReference

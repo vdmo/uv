@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/ConflictDetectionDiagnostic>
+<assemblies, [ConflictDetectionDiagnostic]>
+<assembly_name, ConflictDetectionDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/ConflictDetectionDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/ConflictDetectionDiagnostic/Build>
+<module_list, [ConflictDetectionDiagnostic]>
+<module, ConflictDetectionDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/ConflictDetectionDiagnostic/Build/Intermediate/Obj/Source/ConflictDetectionDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/ConflictDetectionDiagnostic/Build/Binary/libConflictDetectionDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/ConflictDetectionDiagnostic/Source/Main.uv

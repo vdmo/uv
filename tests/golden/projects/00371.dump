@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/NestedGpuParallel>
+<assemblies, [NestedGpuParallel]>
+<assembly_name, NestedGpuParallel>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/NestedGpuParallel/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/NestedGpuParallel/Build>
+<module_list, [NestedGpuParallel]>
+<module, NestedGpuParallel, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/NestedGpuParallel/Build/Intermediate/Obj/Source/NestedGpuParallel.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/NestedGpuParallel/Build/Binary/libNestedGpuParallel.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/NestedGpuParallel/Source/Main.uv

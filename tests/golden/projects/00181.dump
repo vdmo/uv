@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallExpressionsDiagnostic>
+<assemblies, [CallExpressionsDiagnostic]>
+<assembly_name, CallExpressionsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallExpressionsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallExpressionsDiagnostic/Build>
+<module_list, [CallExpressionsDiagnostic]>
+<module, CallExpressionsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallExpressionsDiagnostic/Build/Intermediate/Obj/Source/CallExpressionsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallExpressionsDiagnostic/Build/Binary/libCallExpressionsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CallExpressionsDiagnostic/Source/Main.uv

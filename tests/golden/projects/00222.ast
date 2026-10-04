@@ -1,0 +1,3 @@
+module PipelineArgCount
+  ProcedureDecl [3:8-5:2] public procedure addPair
+  ProcedureDecl [7:8-9:2] public procedure pipelineArgCountReference

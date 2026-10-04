@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicClassObjectDiagnostics>
+<assemblies, [DynamicClassObjectDiagnostics]>
+<assembly_name, DynamicClassObjectDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicClassObjectDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicClassObjectDiagnostics/Build>
+<module_list, [DynamicClassObjectDiagnostics]>
+<module, DynamicClassObjectDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicClassObjectDiagnostics/Build/Intermediate/Obj/Source/DynamicClassObjectDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicClassObjectDiagnostics/Build/Binary/libDynamicClassObjectDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicClassObjectDiagnostics/Source/Main.uv

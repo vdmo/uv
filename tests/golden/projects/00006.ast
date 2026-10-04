@@ -1,0 +1,15 @@
+module KeySystemConformance
+  RecordDecl [3:8-5:2] public record KeySystemConformanceLeaf
+  RecordDecl [7:10-10:2] internal record KeySystemConformanceContainer
+  ProcedureDecl [12:8-21:2] public procedure keySystemOrdinaryLoweringReference
+  ProcedureDecl [23:10-26:2] internal procedure keySystemImplicitSharedAccessReference
+  ProcedureDecl [28:10-39:2] internal procedure keySystemInlineCoarsenedReference
+  ProcedureDecl [41:8-46:2] public procedure keySystemDirectCalleeAccess
+  ProcedureDecl [48:8-59:2] public procedure keySystemNestedReleaseConformanceReference
+  ProcedureDecl [61:8-80:2] public procedure keySystemMemoryOrderingConformanceReference
+  ProcedureDecl [82:8-90:2] public procedure keySystemDynamicStaticSafeReference
+  ProcedureDecl [93:8-122:2] public procedure keySystemDynamicRuntimeSyncReference
+  ProcedureDecl [125:10-133:2] internal procedure keySystemDynamicEquivalentIndexProofReference
+  ProcedureDecl [136:10-144:2] internal procedure keySystemDynamicDisjointIndexProofReference
+  ProcedureDecl [146:8-155:2] public procedure keySystemSpeculativeLoweringReference
+  ProcedureDecl [157:8-171:2] public procedure keySystemConformanceEntryPoint

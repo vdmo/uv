@@ -1,0 +1,2 @@
+module GpuSafeTypeDiagnostic
+  ProcedureDecl [3:8-8:2] public procedure gpuSafeTypeDiagnosticReference

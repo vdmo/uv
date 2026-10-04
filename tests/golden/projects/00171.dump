@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTryInfallible>
+<assemblies, [AsyncTryInfallible]>
+<assembly_name, AsyncTryInfallible>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTryInfallible/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTryInfallible/Build>
+<module_list, [AsyncTryInfallible]>
+<module, AsyncTryInfallible, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTryInfallible/Build/Intermediate/Obj/Source/AsyncTryInfallible.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTryInfallible/Build/Binary/libAsyncTryInfallible.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTryInfallible/Source/Main.uv

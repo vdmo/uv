@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefUnsafeRequirement>
+<assemblies, [RawDerefUnsafeRequirement]>
+<assembly_name, RawDerefUnsafeRequirement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefUnsafeRequirement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefUnsafeRequirement/Build>
+<module_list, [RawDerefUnsafeRequirement]>
+<module, RawDerefUnsafeRequirement, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefUnsafeRequirement/Build/Intermediate/Obj/Source/RawDerefUnsafeRequirement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefUnsafeRequirement/Build/Binary/libRawDerefUnsafeRequirement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RawDerefUnsafeRequirement/Source/Main.uv

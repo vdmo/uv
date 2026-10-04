@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeRecordWithoutLayoutC>
+<assemblies, [FfiSafeRecordWithoutLayoutC]>
+<assembly_name, FfiSafeRecordWithoutLayoutC>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeRecordWithoutLayoutC/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeRecordWithoutLayoutC/Build>
+<module_list, [FfiSafeRecordWithoutLayoutC]>
+<module, FfiSafeRecordWithoutLayoutC, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeRecordWithoutLayoutC/Build/Intermediate/Obj/Source/FfiSafeRecordWithoutLayoutC.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeRecordWithoutLayoutC/Build/Binary/libFfiSafeRecordWithoutLayoutC.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeRecordWithoutLayoutC/Source/Main.uv

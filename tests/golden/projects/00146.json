@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0230","severity":"error","message":"Splice type incompatible with quote context","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/SpliceTypeMismatch/Source/Main.uv","start_line":5,"start_col":32,"end_line":5,"end_col":33},"source_line":"        let ast = quote type { $(1) }","children":[]}]}

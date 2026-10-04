@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnostics>
+<assemblies, [HostedExportDiagnostics]>
+<assembly_name, HostedExportDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnostics/Build>
+<module_list, [HostedExportDiagnostics]>
+<module, HostedExportDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnostics/Build/Intermediate/Obj/Source/HostedExportDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnostics/Build/Binary/libHostedExportDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/HostedExportDiagnostics/Source/Main.uv

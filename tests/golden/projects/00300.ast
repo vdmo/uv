@@ -1,0 +1,4 @@
+module HostExportMixedMode
+  RecordDecl [3:8-5:2] public record HostedMixedContext
+  ProcedureDecl [8:8-10:2] public procedure hostedValue
+  ProcedureDecl [13:8-15:2] public procedure rawValue

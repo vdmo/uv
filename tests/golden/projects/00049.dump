@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic>
+<assemblies, [RefinementRuntimePanic]>
+<assembly_name, RefinementRuntimePanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Build>
+<module_list, [RefinementRuntimePanic]>
+<module, RefinementRuntimePanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Build/Intermediate/Obj/Source/RefinementRuntimePanic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Build/Binary/RefinementRuntimePanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultInit>
+<assemblies, [RecordDefaultInit]>
+<assembly_name, RecordDefaultInit>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultInit/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultInit/Build>
+<module_list, [RecordDefaultInit]>
+<module, RecordDefaultInit, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultInit/Build/Intermediate/Obj/Source/RecordDefaultInit.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultInit/Build/Binary/libRecordDefaultInit.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordDefaultInit/Source/Main.uv

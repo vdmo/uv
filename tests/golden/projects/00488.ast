@@ -1,0 +1,4 @@
+module OverloadResolutionBeforeCallTyping
+  ProcedureDecl [3:8-5:2] public procedure selectedBeforeCallTyping
+  ProcedureDecl [7:8-12:2] public procedure selectedBeforeCallTyping
+  ProcedureDecl [14:8-16:2] public procedure overloadResolutionBeforeCallTypingReference

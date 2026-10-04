@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignContractDiagnostics>
+<assemblies, [ForeignContractDiagnostics]>
+<assembly_name, ForeignContractDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignContractDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignContractDiagnostics/Build>
+<module_list, [ForeignContractDiagnostics]>
+<module, ForeignContractDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignContractDiagnostics/Build/Intermediate/Obj/Source/ForeignContractDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignContractDiagnostics/Build/Binary/libForeignContractDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/ForeignContractDiagnostics/Source/Main.uv

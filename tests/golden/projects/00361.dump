@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureHeapProvenance>
+<assemblies, [GpuCaptureHeapProvenance]>
+<assembly_name, GpuCaptureHeapProvenance>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureHeapProvenance/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureHeapProvenance/Build>
+<module_list, [GpuCaptureHeapProvenance]>
+<module, GpuCaptureHeapProvenance, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureHeapProvenance/Build/Intermediate/Obj/Source/GpuCaptureHeapProvenance.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureHeapProvenance/Build/Binary/libGpuCaptureHeapProvenance.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuCaptureHeapProvenance/Source/Main.uv

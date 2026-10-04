@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/IRLoweringForms>
+<assemblies, [IRLoweringForms]>
+<assembly_name, IRLoweringForms>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/IRLoweringForms/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/IRLoweringForms/Build>
+<module_list, [IRLoweringForms]>
+<module, IRLoweringForms, obj, /w/target/fixtures/Fixtures/ArtifactProjects/IRLoweringForms/Build/Intermediate/Obj/Source/IRLoweringForms.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/IRLoweringForms/Build/Intermediate/IR/Source/IRLoweringForms.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/IRLoweringForms/Build/Library/libIRLoweringForms.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/IRLoweringForms/Source/Library.uv

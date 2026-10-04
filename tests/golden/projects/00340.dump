@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/YieldFromWhileKeyHeld>
+<assemblies, [YieldFromWhileKeyHeld]>
+<assembly_name, YieldFromWhileKeyHeld>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/YieldFromWhileKeyHeld/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/YieldFromWhileKeyHeld/Build>
+<module_list, [YieldFromWhileKeyHeld]>
+<module, YieldFromWhileKeyHeld, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/YieldFromWhileKeyHeld/Build/Intermediate/Obj/Source/YieldFromWhileKeyHeld.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/YieldFromWhileKeyHeld/Build/Binary/libYieldFromWhileKeyHeld.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/YieldFromWhileKeyHeld/Source/Main.uv

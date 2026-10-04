@@ -1,0 +1,8 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmptyDependencyObject>
+<assemblies, [EmptyDependencyObject]>
+<assembly_name, EmptyDependencyObject>
+<assembly_kind, dependency>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmptyDependencyObject/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/EmptyDependencyObject/Build>
+<module_list, []>

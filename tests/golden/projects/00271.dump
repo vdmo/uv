@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/BoundaryUnwindingNoAdditionalDiagnostics>
+<assemblies, [BoundaryUnwindingNoAdditionalDiagnostics]>
+<assembly_name, BoundaryUnwindingNoAdditionalDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/BoundaryUnwindingNoAdditionalDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/BoundaryUnwindingNoAdditionalDiagnostics/Build>
+<module_list, [BoundaryUnwindingNoAdditionalDiagnostics]>
+<module, BoundaryUnwindingNoAdditionalDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/BoundaryUnwindingNoAdditionalDiagnostics/Build/Intermediate/Obj/Source/BoundaryUnwindingNoAdditionalDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/BoundaryUnwindingNoAdditionalDiagnostics/Build/Binary/libBoundaryUnwindingNoAdditionalDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/BoundaryUnwindingNoAdditionalDiagnostics/Source/Main.uv

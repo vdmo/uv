@@ -1,0 +1,4 @@
+module DeriveMissingRequiredClass
+  ClassDecl [3:10-4:2] internal class RequiredDeriveClass
+  DeriveTargetDecl [6:1-8:2] derive target NeedsRequiredClass
+  RecordDecl [11:8-13:2] public record DeriveMissingRequiredClassReference

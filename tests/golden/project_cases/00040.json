@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-1105","severity":"error","message":"Module path component is a reserved keyword (`Validate-Module-Keyword-Err`, `Validate-ModulePath-Reserved-Err`, `WF-Module-Path-Reserved`)","span":null,"source_line":null,"children":[]}]}

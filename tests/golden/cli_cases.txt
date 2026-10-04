@@ -1,0 +1,52 @@
+--help
+-h
+--version
+-V
+--debug help
+--debug=help
+
+build
+foo
+foo --diag-json
+--diag-json foo
+build a b
+build x --colour never
+build x --chek
+build x -x
+build x --color
+build x --color purple
+build x --color=purple
+build x --target-profile
+build x --target-profile riscv
+build x --target-profile=riscv
+build x --opt-level
+build x --opt-level O9
+build x --opt-level=fast
+build x --max-errors
+build x --max-errors -1
+build x --max-errors=ten
+build x --max-errors 99999999999999999999999999
+build x --debug
+build x --debug nope
+build x --debug=lex,nope
+build x --debug ,
+build x --no-output
+build x --build-progress maybe
+build x --build-progress
+build x --incremental=perhaps
+build x --link-debug=perhaps
+build x --trace-filter nope
+build x --trace-filter
+build x --trace-level loud
+build x --log-file=
+build x --runtime-lib=
+build x --out-dir=
+build x --out-dir
+build x --assembly
+build x --conformance
+build x --profile-compiler=xml
+build x --test
+build x --coverage
+build x --test-harness-dir
+build --help x
+--phase1-onlyy build x

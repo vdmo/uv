@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/ModalAndSpecialTypes/SpecialModalRecordLiteral>
+<assemblies, [SpecialModalRecordLiteral]>
+<assembly_name, SpecialModalRecordLiteral>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/ModalAndSpecialTypes/SpecialModalRecordLiteral/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/ModalAndSpecialTypes/SpecialModalRecordLiteral/Build>
+<module_list, [SpecialModalRecordLiteral]>
+<module, SpecialModalRecordLiteral, obj, /w/target/fixtures/Fixtures/RejectedSource/ModalAndSpecialTypes/SpecialModalRecordLiteral/Build/Intermediate/Obj/Source/SpecialModalRecordLiteral.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/ModalAndSpecialTypes/SpecialModalRecordLiteral/Build/Binary/libSpecialModalRecordLiteral.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/ModalAndSpecialTypes/SpecialModalRecordLiteral/Source/Main.uv

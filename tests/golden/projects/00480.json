@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2430","severity":"error","message":"Multiple `main` procedures defined (`Main-Multiple`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Procedures/MainMultiple/Source/Main.uv","start_line":7,"start_col":8,"end_line":9,"end_col":2},"source_line":"public procedure main(context: Context) -> i32 {","children":[]}]}

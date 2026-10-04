@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingPrecondition>
+<assemblies, [BehavioralSubtypingPrecondition]>
+<assembly_name, BehavioralSubtypingPrecondition>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingPrecondition/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingPrecondition/Build>
+<module_list, [BehavioralSubtypingPrecondition]>
+<module, BehavioralSubtypingPrecondition, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingPrecondition/Build/Intermediate/Obj/Source/BehavioralSubtypingPrecondition.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingPrecondition/Build/Binary/libBehavioralSubtypingPrecondition.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingPrecondition/Source/Main.uv

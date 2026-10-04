@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchRequiresParallelContext>
+<assemblies, [DispatchRequiresParallelContext]>
+<assembly_name, DispatchRequiresParallelContext>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchRequiresParallelContext/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchRequiresParallelContext/Build>
+<module_list, [DispatchRequiresParallelContext]>
+<module, DispatchRequiresParallelContext, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchRequiresParallelContext/Build/Intermediate/Obj/Source/DispatchRequiresParallelContext.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchRequiresParallelContext/Build/Binary/libDispatchRequiresParallelContext.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/DispatchRequiresParallelContext/Source/Main.uv

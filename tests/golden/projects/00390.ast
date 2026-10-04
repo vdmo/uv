@@ -1,0 +1,3 @@
+module IfCaseEnumRefutablePayloadCoverage
+  EnumDecl [4:8-7:2] public enum RefutablePayloadCoverage
+  ProcedureDecl [9:8-19:2] public procedure refutablePayloadCoverageReference

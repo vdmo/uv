@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2453","severity":"error","message":"Invalid layout align argument","span":{"file":"/w/target/p1cases/derive_layout_align_bad/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":18},"source_line":"#layout(align(3))","children":[]}]}

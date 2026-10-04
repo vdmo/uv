@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryNonBitcopy>
+<assemblies, [ContractEntryNonBitcopy]>
+<assembly_name, ContractEntryNonBitcopy>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryNonBitcopy/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryNonBitcopy/Build>
+<module_list, [ContractEntryNonBitcopy]>
+<module, ContractEntryNonBitcopy, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryNonBitcopy/Build/Intermediate/Obj/Source/ContractEntryNonBitcopy.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryNonBitcopy/Build/Binary/libContractEntryNonBitcopy.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractEntryNonBitcopy/Source/Main.uv

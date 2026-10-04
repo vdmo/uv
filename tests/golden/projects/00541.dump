@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/StatementDiagnosticsSupplement>
+<assemblies, [StatementDiagnosticsSupplement]>
+<assembly_name, StatementDiagnosticsSupplement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/StatementDiagnosticsSupplement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/StatementDiagnosticsSupplement/Build>
+<module_list, [StatementDiagnosticsSupplement]>
+<module, StatementDiagnosticsSupplement, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/StatementDiagnosticsSupplement/Build/Intermediate/Obj/Source/StatementDiagnosticsSupplement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/StatementDiagnosticsSupplement/Build/Binary/libStatementDiagnosticsSupplement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/StatementDiagnosticsSupplement/Source/Main.uv

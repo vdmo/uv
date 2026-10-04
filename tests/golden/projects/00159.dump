@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandYields>
+<assemblies, [AllOperandYields]>
+<assembly_name, AllOperandYields>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandYields/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandYields/Build>
+<module_list, [AllOperandYields]>
+<module, AllOperandYields, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandYields/Build/Intermediate/Obj/Source/AllOperandYields.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandYields/Build/Binary/libAllOperandYields.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AllOperandYields/Source/Main.uv

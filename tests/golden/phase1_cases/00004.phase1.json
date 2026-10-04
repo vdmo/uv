@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0312","severity":"error","message":"Duplicate derive target in one derive attribute","span":{"file":"/w/target/p1cases/derive_duplicate/Source/Main.uv","start_line":1,"start_col":1,"end_line":1,"end_col":16},"source_line":"#derive(Eq, Eq)","children":[]}]}

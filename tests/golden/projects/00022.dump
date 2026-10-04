@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness>
+<assemblies, [AttributeTestHarness]>
+<assembly_name, AttributeTestHarness>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness/Build>
+<module_list, [AttributeTestHarness::Tests]>
+<module, AttributeTestHarness::Tests, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness/Build/Intermediate/Obj/Source/Tests/AttributeTestHarness_x3a_x3aTests.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness/Build/Binary/libAttributeTestHarness.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness/Source/Tests/Harness.uv

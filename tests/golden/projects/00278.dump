@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiAttributeDiagnostics>
+<assemblies, [FfiAttributeDiagnostics]>
+<assembly_name, FfiAttributeDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiAttributeDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiAttributeDiagnostics/Build>
+<module_list, [FfiAttributeDiagnostics]>
+<module, FfiAttributeDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiAttributeDiagnostics/Build/Intermediate/Obj/Source/FfiAttributeDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiAttributeDiagnostics/Build/Binary/libFfiAttributeDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiAttributeDiagnostics/Source/Main.uv

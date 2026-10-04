@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureAndPipelineExpressionsDiagnostic>
+<assemblies, [ClosureAndPipelineExpressionsDiagnostic]>
+<assembly_name, ClosureAndPipelineExpressionsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureAndPipelineExpressionsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureAndPipelineExpressionsDiagnostic/Build>
+<module_list, [ClosureAndPipelineExpressionsDiagnostic]>
+<module, ClosureAndPipelineExpressionsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureAndPipelineExpressionsDiagnostic/Build/Intermediate/Obj/Source/ClosureAndPipelineExpressionsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureAndPipelineExpressionsDiagnostic/Build/Binary/libClosureAndPipelineExpressionsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureAndPipelineExpressionsDiagnostic/Source/Main.uv

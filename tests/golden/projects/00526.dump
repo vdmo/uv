@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonLocal>
+<assemblies, [DeferNonLocal]>
+<assembly_name, DeferNonLocal>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonLocal/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonLocal/Build>
+<module_list, [DeferNonLocal]>
+<module, DeferNonLocal, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonLocal/Build/Intermediate/Obj/Source/DeferNonLocal.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonLocal/Build/Binary/libDeferNonLocal.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/DeferNonLocal/Source/Main.uv

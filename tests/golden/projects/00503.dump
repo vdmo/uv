@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/UnsatisfiedPrecondition>
+<assemblies, [UnsatisfiedPrecondition]>
+<assembly_name, UnsatisfiedPrecondition>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/UnsatisfiedPrecondition/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/UnsatisfiedPrecondition/Build>
+<module_list, [UnsatisfiedPrecondition]>
+<module, UnsatisfiedPrecondition, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/UnsatisfiedPrecondition/Build/Intermediate/Obj/Source/UnsatisfiedPrecondition.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/UnsatisfiedPrecondition/Build/Binary/libUnsatisfiedPrecondition.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/UnsatisfiedPrecondition/Source/Main.uv

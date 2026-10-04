@@ -1,0 +1,3 @@
+module ImplementationDefaultMethodSignatureMismatch
+  ClassDecl [3:10-7:2] internal class DefaultSignatureClass
+  RecordDecl [9:10-13:2] internal record DefaultSignatureOwner

@@ -1,0 +1,4 @@
+module AttributeMetadataDiscovery::Tests
+  ProcedureDecl [4:10-8:2] internal procedure attributeMetadataBareFallback
+  ProcedureDecl [11:10-15:2] internal procedure attributeMetadataExplicitDisplay
+  ProcedureDecl [18:10-22:2] internal procedure attributeMetadataCoverageOrder

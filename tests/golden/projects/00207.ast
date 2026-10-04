@@ -1,0 +1,3 @@
+module FieldInitNamesAndSet
+  RecordDecl [3:8-6:2] public record FieldInitNamePayload
+  ProcedureDecl [8:8-14:2] public procedure fieldInitNamesAndSetReference

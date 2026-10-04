@@ -1,0 +1,3 @@
+module SliceRangeOOBPanic
+  ProcedureDecl [4:8-8:2] public procedure sliceRangeOOBPanicValue
+  ProcedureDecl [11:8-14:2] public procedure main

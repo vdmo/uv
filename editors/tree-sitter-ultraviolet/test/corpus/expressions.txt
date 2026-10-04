@@ -1,0 +1,318 @@
+==================
+Comparison is not a generic call
+==================
+
+procedure f() -> bool {
+    return a < b && c > (d)
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (type_path
+      (identifier))
+    (block
+      (return_statement
+        (binary_expression
+          (binary_expression
+            (identifier)
+            (identifier))
+          (binary_expression
+            (identifier)
+            (parenthesized_expression
+              (identifier))))))))
+
+==================
+Generic call and generic modal literal
+==================
+
+procedure f() {
+    let a = make<i32, Vec<u8>>(1)
+    let b = Box<i32>@Full { value: 1 }
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (block
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (generic_call
+          (identifier)
+          (generic_arguments
+            (type_path
+              (identifier))
+            (generic_type
+              (type_path
+                (identifier))
+              (generic_arguments
+                (type_path
+                  (identifier)))))
+          (arguments
+            (integer_literal))))
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (record_literal
+          (state_name
+            (generic_name
+              (identifier)
+              (generic_arguments
+                (type_path
+                  (identifier))))
+            (identifier))
+          (field_initializer_list
+            (field_initializer
+              (identifier)
+              (integer_literal))))))))
+
+==================
+Condition followed by a block, record literal elsewhere
+==================
+
+procedure f() {
+    if ready { go() }
+    loop index < limit { step() }
+    let p = Point { x: 1, y: 2 }
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (block
+      (expression_statement
+        (if_expression
+          (identifier)
+          (block
+            (expression_statement
+              (call_expression
+                (identifier)
+                (arguments))))))
+      (expression_statement
+        (loop_expression
+          (binary_expression
+            (identifier)
+            (identifier))
+          (block
+            (expression_statement
+              (call_expression
+                (identifier)
+                (arguments))))))
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (record_literal
+          (identifier)
+          (field_initializer_list
+            (field_initializer
+              (identifier)
+              (integer_literal))
+            (field_initializer
+              (identifier)
+              (integer_literal))))))))
+
+==================
+Case analysis
+==================
+
+procedure f(v: Shape) -> i32 {
+    return if v is {
+        Shape::Circle(r) { r }
+        Geometry::Shape::Square { side } { side }
+        @Open { handle } { handle }
+        : i32 { 0 }
+        else { 1 }
+    }
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters
+      (parameter
+        (identifier)
+        (type_path
+          (identifier))))
+    (type_path
+      (identifier))
+    (block
+      (return_statement
+        (if_expression
+          (identifier)
+          (case_block
+            (case_arm
+              (enum_pattern
+                (identifier)
+                (identifier)
+                (identifier_pattern
+                  (identifier)))
+              (block
+                (expression_statement
+                  (identifier))))
+            (case_arm
+              (enum_pattern
+                (identifier)
+                (identifier)
+                (identifier)
+                (field_pattern
+                  (identifier)))
+              (block
+                (expression_statement
+                  (identifier))))
+            (case_arm
+              (modal_pattern
+                (identifier)
+                (field_pattern
+                  (identifier)))
+              (block
+                (expression_statement
+                  (identifier))))
+            (case_arm
+              (type_case
+                (type_path
+                  (identifier)))
+              (block
+                (expression_statement
+                  (integer_literal))))
+            (else_clause
+              (block
+                (expression_statement
+                  (integer_literal))))))))))
+
+==================
+Option list is not an index
+==================
+
+procedure f() {
+    let total = dispatch i in 0usize..4usize [reduce: +, ordered] { i }
+    let item = values[index]
+    parallel ctx.cpu() [cancel: token] { spawn [name: "w"] { work() } }
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (block
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (dispatch_expression
+          (identifier_pattern
+            (identifier))
+          (range_expression
+            (integer_literal)
+            (integer_literal))
+          (option_list
+            (option
+              (identifier))
+            (option
+              (identifier)))
+          (block
+            (expression_statement
+              (identifier)))))
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (index_expression
+          (identifier)
+          (identifier)))
+      (expression_statement
+        (parallel_expression
+          (call_expression
+            (field_expression
+              (identifier)
+              (identifier))
+            (arguments))
+          (option_list
+            (option
+              (identifier)
+              (identifier)))
+          (block
+            (expression_statement
+              (spawn_expression
+                (option_list
+                  (option
+                    (identifier)
+                    (string_literal
+                      (string_content))))
+                (block
+                  (expression_statement
+                    (call_expression
+                      (identifier)
+                      (arguments))))))))))))
+
+==================
+Key blocks, regions and attributes
+==================
+
+procedure f() {
+    %write shared.#field, items[#i] [ordered] {
+        shared.field = 1
+    }
+    region as scratch {
+        let p = scratch ^ make()
+    }
+    #relaxed
+    let x = (#seqcst counter)
+}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (block
+      (key_block_statement
+        (key_path
+          (identifier)
+          (identifier))
+        (key_path
+          (identifier)
+          (identifier))
+        (option_list
+          (option
+            (identifier)))
+        (block
+          (assignment_statement
+            (field_expression
+              (identifier)
+              (identifier))
+            (integer_literal))))
+      (region_statement
+        (identifier)
+        (block
+          (let_statement
+            (identifier_pattern
+              (identifier))
+            (alloc_expression
+              (identifier)
+              (call_expression
+                (identifier)
+                (arguments))))))
+      (attribute
+        (attribute_name
+          (identifier)))
+      (let_statement
+        (identifier_pattern
+          (identifier))
+        (parenthesized_expression
+          (attribute
+            (attribute_name
+              (identifier)))
+          (identifier))))))

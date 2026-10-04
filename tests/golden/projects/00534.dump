@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetRefutablePattern>
+<assemblies, [LetRefutablePattern]>
+<assembly_name, LetRefutablePattern>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetRefutablePattern/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetRefutablePattern/Build>
+<module_list, [LetRefutablePattern]>
+<module, LetRefutablePattern, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetRefutablePattern/Build/Intermediate/Obj/Source/LetRefutablePattern.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/LetRefutablePattern/Build/Binary/libLetRefutablePattern.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/LetRefutablePattern/Source/Main.uv

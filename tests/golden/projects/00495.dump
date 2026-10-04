@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodBodyExplicitReturn>
+<assemblies, [RecordMethodBodyExplicitReturn]>
+<assembly_name, RecordMethodBodyExplicitReturn>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodBodyExplicitReturn/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodBodyExplicitReturn/Build>
+<module_list, [RecordMethodBodyExplicitReturn]>
+<module, RecordMethodBodyExplicitReturn, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodBodyExplicitReturn/Build/Intermediate/Obj/Source/RecordMethodBodyExplicitReturn.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodBodyExplicitReturn/Build/Binary/libRecordMethodBodyExplicitReturn.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodBodyExplicitReturn/Source/Main.uv

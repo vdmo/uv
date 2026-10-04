@@ -1,0 +1,14 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations>
+<assemblies, [AsyncObligations]>
+<assembly_name, AsyncObligations>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Build>
+<module_list, [AsyncObligations]>
+<module, AsyncObligations, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Build/Intermediate/Obj/Source/AsyncObligations.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Build/Intermediate/IR/Source/AsyncObligations.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Build/Binary/AsyncObligations, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Source/CombinatorRuntimeForms.uv
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Source/CompositionForms.uv
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Source/IterationAndUntilForms.uv
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Source/Main.uv

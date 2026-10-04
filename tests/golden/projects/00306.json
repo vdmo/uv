@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SYS-3355","severity":"error","message":"Unknown unwind mode (`UnwindMode-Invalid-Err`)","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/FFI/InvalidUnwindMode/Source/Main.uv","start_line":5,"start_col":8,"end_line":7,"end_col":2},"source_line":"public procedure invalidUnwindModeReference() -> i32 {","children":[]}]}

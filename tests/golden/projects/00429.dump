@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericClassBoundNonClass>
+<assemblies, [GenericClassBoundNonClass]>
+<assembly_name, GenericClassBoundNonClass>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericClassBoundNonClass/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericClassBoundNonClass/Build>
+<module_list, [GenericClassBoundNonClass]>
+<module, GenericClassBoundNonClass, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericClassBoundNonClass/Build/Intermediate/Obj/Source/GenericClassBoundNonClass.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericClassBoundNonClass/Build/Binary/libGenericClassBoundNonClass.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/GenericClassBoundNonClass/Source/Main.uv

@@ -1,0 +1,2 @@
+module FoundationalClassNameReserved
+  ClassDecl [3:8-4:2] public class Bitcopy

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternsDiagnostic>
+<assemblies, [RangePatternsDiagnostic]>
+<assembly_name, RangePatternsDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternsDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternsDiagnostic/Build>
+<module_list, [RangePatternsDiagnostic]>
+<module, RangePatternsDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternsDiagnostic/Build/Intermediate/Obj/Source/RangePatternsDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternsDiagnostic/Build/Binary/libRangePatternsDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Patterns/RangePatternsDiagnostic/Source/Main.uv

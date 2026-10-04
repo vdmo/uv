@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleAccessNonTuple>
+<assemblies, [TupleAccessNonTuple]>
+<assembly_name, TupleAccessNonTuple>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleAccessNonTuple/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleAccessNonTuple/Build>
+<module_list, [TupleAccessNonTuple]>
+<module, TupleAccessNonTuple, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleAccessNonTuple/Build/Intermediate/Obj/Source/TupleAccessNonTuple.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleAccessNonTuple/Build/Binary/libTupleAccessNonTuple.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/TupleAccessNonTuple/Source/Main.uv

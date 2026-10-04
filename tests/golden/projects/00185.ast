@@ -1,0 +1,3 @@
+module CallStaticJudgementsAndArgumentTyping
+  ProcedureDecl [3:8-5:2] public procedure oneCallArgument
+  ProcedureDecl [7:8-9:2] public procedure callStaticJudgementsAndArgumentTypingReference

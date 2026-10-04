@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeRecordFieldDiagnostic>
+<assemblies, [GpuSafeRecordFieldDiagnostic]>
+<assembly_name, GpuSafeRecordFieldDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeRecordFieldDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeRecordFieldDiagnostic/Build>
+<module_list, [GpuSafeRecordFieldDiagnostic]>
+<module, GpuSafeRecordFieldDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeRecordFieldDiagnostic/Build/Intermediate/Obj/Source/GpuSafeRecordFieldDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeRecordFieldDiagnostic/Build/Binary/libGpuSafeRecordFieldDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/GpuSafeRecordFieldDiagnostic/Source/Main.uv

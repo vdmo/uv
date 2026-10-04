@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullSynthesis>
+<assemblies, [PtrNullSynthesis]>
+<assembly_name, PtrNullSynthesis>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullSynthesis/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullSynthesis/Build>
+<module_list, [PtrNullSynthesis]>
+<module, PtrNullSynthesis, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullSynthesis/Build/Intermediate/Obj/Source/PtrNullSynthesis.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullSynthesis/Build/Binary/libPtrNullSynthesis.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullSynthesis/Source/Main.uv

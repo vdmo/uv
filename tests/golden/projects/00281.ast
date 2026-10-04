@@ -1,0 +1,2 @@
+module FfiSafeBoolParameter
+  ExternBlock [3:1-5:2]

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeUnboundMember>
+<assemblies, [AssociatedTypeUnboundMember]>
+<assembly_name, AssociatedTypeUnboundMember>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeUnboundMember/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeUnboundMember/Build>
+<module_list, [AssociatedTypeUnboundMember]>
+<module, AssociatedTypeUnboundMember, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeUnboundMember/Build/Intermediate/Obj/Source/AssociatedTypeUnboundMember.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeUnboundMember/Build/Binary/libAssociatedTypeUnboundMember.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeUnboundMember/Source/Main.uv

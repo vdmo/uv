@@ -1,0 +1,4 @@
+module DeriveMissingEmittedClass
+  ClassDecl [3:10-4:2] internal class EmittedDeriveClass
+  DeriveTargetDecl [6:1-8:2] derive target EmitsRequiredClass
+  RecordDecl [11:8-13:2] public record DeriveMissingEmittedClassReference

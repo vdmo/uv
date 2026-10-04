@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ErrorPredicateWellFormedness>
+<assemblies, [ErrorPredicateWellFormedness]>
+<assembly_name, ErrorPredicateWellFormedness>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ErrorPredicateWellFormedness/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ErrorPredicateWellFormedness/Build>
+<module_list, [ErrorPredicateWellFormedness]>
+<module, ErrorPredicateWellFormedness, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/ErrorPredicateWellFormedness/Build/Intermediate/Obj/Source/ErrorPredicateWellFormedness.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/ErrorPredicateWellFormedness/Build/Binary/libErrorPredicateWellFormedness.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/ErrorPredicateWellFormedness/Source/Main.uv

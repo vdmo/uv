@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementTypedIncompatible>
+<assemblies, [PatternDiagnosticsSupplementTypedIncompatible]>
+<assembly_name, PatternDiagnosticsSupplementTypedIncompatible>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementTypedIncompatible/Source>
+<output_root, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementTypedIncompatible/Build>
+<module_list, [PatternDiagnosticsSupplementTypedIncompatible]>
+<module, PatternDiagnosticsSupplementTypedIncompatible, obj, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementTypedIncompatible/Build/Intermediate/Obj/Source/PatternDiagnosticsSupplementTypedIncompatible.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementTypedIncompatible/Build/Binary/libPatternDiagnosticsSupplementTypedIncompatible.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/Patterns/PatternDiagnosticsSupplementTypedIncompatible/Source/Main.uv

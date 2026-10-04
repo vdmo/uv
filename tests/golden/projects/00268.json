@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CON-0210","severity":"error","message":"`yield` outside async-returning procedure","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Expressions/YieldOutsideAsync/Source/Main.uv","start_line":4,"start_col":5,"end_line":4,"end_col":12},"source_line":"    yield 1","children":[{"kind":"note","message":"expr-kind=Expr","span":null}]}]}

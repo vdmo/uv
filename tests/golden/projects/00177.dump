@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgNotPlace>
+<assemblies, [CallArgNotPlace]>
+<assembly_name, CallArgNotPlace>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgNotPlace/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgNotPlace/Build>
+<module_list, [CallArgNotPlace]>
+<module, CallArgNotPlace, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgNotPlace/Build/Intermediate/Obj/Source/CallArgNotPlace.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgNotPlace/Build/Binary/libCallArgNotPlace.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/CallArgNotPlace/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeIncompatible>
+<assemblies, [RuntimeIncompatible]>
+<assembly_name, RuntimeIncompatible>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeIncompatible/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeIncompatible/Build>
+<module_list, [RuntimeIncompatible]>
+<module, RuntimeIncompatible, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeIncompatible/Build/Intermediate/Obj/Source/RuntimeIncompatible.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeIncompatible/Build/Binary/RuntimeIncompatible, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeIncompatible/Source/Main.uv

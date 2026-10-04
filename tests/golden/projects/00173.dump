@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgIllFormed>
+<assemblies, [AsyncTypeArgIllFormed]>
+<assembly_name, AsyncTypeArgIllFormed>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgIllFormed/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgIllFormed/Build>
+<module_list, [AsyncTypeArgIllFormed]>
+<module, AsyncTypeArgIllFormed, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgIllFormed/Build/Intermediate/Obj/Source/AsyncTypeArgIllFormed.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgIllFormed/Build/Binary/libAsyncTypeArgIllFormed.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncTypeArgIllFormed/Source/Main.uv

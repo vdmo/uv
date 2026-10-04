@@ -1,0 +1,3 @@
+module RecordFieldInitMissing
+  RecordDecl [3:8-6:2] public record MissingFieldPayload
+  ProcedureDecl [8:8-12:2] public procedure recordFieldInitMissingReference

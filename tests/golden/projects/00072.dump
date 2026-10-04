@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/FineGrainedLoopKeyWarning>
+<assemblies, [FineGrainedLoopKeyWarning]>
+<assembly_name, FineGrainedLoopKeyWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/FineGrainedLoopKeyWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/FineGrainedLoopKeyWarning/Build>
+<module_list, [FineGrainedLoopKeyWarning]>
+<module, FineGrainedLoopKeyWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/FineGrainedLoopKeyWarning/Build/Intermediate/Obj/Source/FineGrainedLoopKeyWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/FineGrainedLoopKeyWarning/Build/Binary/libFineGrainedLoopKeyWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/FineGrainedLoopKeyWarning/Source/Main.uv

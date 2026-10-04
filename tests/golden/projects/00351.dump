@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/CaptureSemanticsDiagnostics>
+<assemblies, [CaptureSemanticsDiagnostics]>
+<assembly_name, CaptureSemanticsDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/CaptureSemanticsDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/CaptureSemanticsDiagnostics/Build>
+<module_list, [CaptureSemanticsDiagnostics]>
+<module, CaptureSemanticsDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/CaptureSemanticsDiagnostics/Build/Intermediate/Obj/Source/CaptureSemanticsDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Parallelism/CaptureSemanticsDiagnostics/Build/Binary/libCaptureSemanticsDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Parallelism/CaptureSemanticsDiagnostics/Source/Main.uv

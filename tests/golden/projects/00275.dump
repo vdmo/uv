@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternCallSafety>
+<assemblies, [ExternCallSafety]>
+<assembly_name, ExternCallSafety>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternCallSafety/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternCallSafety/Build>
+<module_list, [ExternCallSafety]>
+<module, ExternCallSafety, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternCallSafety/Build/Intermediate/Obj/Source/ExternCallSafety.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/ExternCallSafety/Build/Binary/libExternCallSafety.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/ExternCallSafety/Source/Main.uv

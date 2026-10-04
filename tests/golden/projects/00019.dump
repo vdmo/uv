@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeMetadataDiscovery>
+<assemblies, [AttributeMetadataDiscovery]>
+<assembly_name, AttributeMetadataDiscovery>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeMetadataDiscovery/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeMetadataDiscovery/Build>
+<module_list, [AttributeMetadataDiscovery::Tests]>
+<module, AttributeMetadataDiscovery::Tests, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeMetadataDiscovery/Build/Intermediate/Obj/Source/Tests/AttributeMetadataDiscovery_x3a_x3aTests.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeMetadataDiscovery/Build/Binary/libAttributeMetadataDiscovery.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AttributeMetadataDiscovery/Source/Tests/Metadata.uv

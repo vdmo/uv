@@ -1,0 +1,3 @@
+module GenericPathMissingArguments
+  RecordDecl [3:10-5:2] internal record ValueBox
+  ProcedureDecl [7:8-9:2] public procedure genericPathMissingArgumentsReference

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicUndefinedClassType>
+<assemblies, [DynamicUndefinedClassType]>
+<assembly_name, DynamicUndefinedClassType>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicUndefinedClassType/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicUndefinedClassType/Build>
+<module_list, [DynamicUndefinedClassType]>
+<module, DynamicUndefinedClassType, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicUndefinedClassType/Build/Intermediate/Obj/Source/DynamicUndefinedClassType.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicUndefinedClassType/Build/Binary/libDynamicUndefinedClassType.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicUndefinedClassType/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeIncompleteLayout>
+<assemblies, [FfiSafeIncompleteLayout]>
+<assembly_name, FfiSafeIncompleteLayout>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeIncompleteLayout/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeIncompleteLayout/Build>
+<module_list, [FfiSafeIncompleteLayout]>
+<module, FfiSafeIncompleteLayout, obj, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeIncompleteLayout/Build/Intermediate/Obj/Source/FfiSafeIncompleteLayout.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeIncompleteLayout/Build/Binary/libFfiSafeIncompleteLayout.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeIncompleteLayout/Source/Main.uv

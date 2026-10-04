@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0220","severity":"error","message":"Quoted content is syntactically invalid or category-ambiguous","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/InvalidQuotedContent/Source/Main.uv","start_line":5,"start_col":32,"end_line":5,"end_col":33},"source_line":"        let ast = quote type { 1 + }","children":[]}]}

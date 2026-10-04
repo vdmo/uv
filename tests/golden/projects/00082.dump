@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning>
+<assemblies, [UnknownCalleeAccessWarning]>
+<assembly_name, UnknownCalleeAccessWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning/Build>
+<module_list, [UnknownCalleeAccessWarning]>
+<module, UnknownCalleeAccessWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning/Build/Intermediate/Obj/Source/UnknownCalleeAccessWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning/Build/Binary/libUnknownCalleeAccessWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning/Source/Main.uv

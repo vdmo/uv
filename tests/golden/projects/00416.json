@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2504","severity":"error","message":"Duplicate associated type name in class","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateAssociatedTypeName/Source/Main.uv","start_line":3,"start_col":10,"end_line":6,"end_col":2},"source_line":"internal class DuplicateAssociatedTypeClass {","children":[]}]}

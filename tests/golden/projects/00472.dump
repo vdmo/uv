@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractResultOutsidePostcondition>
+<assemblies, [ContractResultOutsidePostcondition]>
+<assembly_name, ContractResultOutsidePostcondition>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractResultOutsidePostcondition/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractResultOutsidePostcondition/Build>
+<module_list, [ContractResultOutsidePostcondition]>
+<module, ContractResultOutsidePostcondition, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractResultOutsidePostcondition/Build/Intermediate/Obj/Source/ContractResultOutsidePostcondition.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractResultOutsidePostcondition/Build/Binary/libContractResultOutsidePostcondition.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractResultOutsidePostcondition/Source/Main.uv

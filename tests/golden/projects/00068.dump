@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticWarning>
+<assemblies, [UserDiagnosticWarning]>
+<assembly_name, UserDiagnosticWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticWarning/Build>
+<module_list, [UserDiagnosticWarning]>
+<module, UserDiagnosticWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticWarning/Build/Intermediate/Obj/Source/UserDiagnosticWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticWarning/Build/Binary/libUserDiagnosticWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticWarning/Source/Main.uv

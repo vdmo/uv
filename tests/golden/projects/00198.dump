@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateVariant>
+<assemblies, [EnumDuplicateVariant]>
+<assembly_name, EnumDuplicateVariant>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateVariant/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateVariant/Build>
+<module_list, [EnumDuplicateVariant]>
+<module, EnumDuplicateVariant, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateVariant/Build/Intermediate/Obj/Source/EnumDuplicateVariant.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateVariant/Build/Binary/libEnumDuplicateVariant.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumDuplicateVariant/Source/Main.uv

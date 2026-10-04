@@ -1,0 +1,2 @@
+module UnknownDeriveTarget
+  RecordDecl [4:8-6:2] public record UnknownDeriveTargetReference

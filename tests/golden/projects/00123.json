@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TST-0102","severity":"error","message":"Duplicate `#test` name argument","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Attributes/TestDuplicateName/Source/Main.uv","start_line":4,"start_col":8,"end_line":8,"end_col":2},"source_line":"public procedure testDuplicateNameReference() -> bool","children":[]}]}

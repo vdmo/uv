@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/ReturnUnitMismatch>
+<assemblies, [ReturnUnitMismatch]>
+<assembly_name, ReturnUnitMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/ReturnUnitMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/ReturnUnitMismatch/Build>
+<module_list, [ReturnUnitMismatch]>
+<module, ReturnUnitMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/ReturnUnitMismatch/Build/Intermediate/Obj/Source/ReturnUnitMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/ReturnUnitMismatch/Build/Binary/libReturnUnitMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/ReturnUnitMismatch/Source/Main.uv

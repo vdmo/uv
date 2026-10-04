@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncDiagnosticsSupplement>
+<assemblies, [AsyncDiagnosticsSupplement]>
+<assembly_name, AsyncDiagnosticsSupplement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncDiagnosticsSupplement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncDiagnosticsSupplement/Build>
+<module_list, [AsyncDiagnosticsSupplement]>
+<module, AsyncDiagnosticsSupplement, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncDiagnosticsSupplement/Build/Intermediate/Obj/Source/AsyncDiagnosticsSupplement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncDiagnosticsSupplement/Build/Binary/libAsyncDiagnosticsSupplement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncDiagnosticsSupplement/Source/Main.uv

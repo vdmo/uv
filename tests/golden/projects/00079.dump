@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeLargeStructWarning>
+<assemblies, [SpeculativeLargeStructWarning]>
+<assembly_name, SpeculativeLargeStructWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeLargeStructWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeLargeStructWarning/Build>
+<module_list, [SpeculativeLargeStructWarning]>
+<module, SpeculativeLargeStructWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeLargeStructWarning/Build/Intermediate/Obj/Source/SpeculativeLargeStructWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeLargeStructWarning/Build/Binary/libSpeculativeLargeStructWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeLargeStructWarning/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureCaptureUnique>
+<assemblies, [ClosureCaptureUnique]>
+<assembly_name, ClosureCaptureUnique>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureCaptureUnique/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureCaptureUnique/Build>
+<module_list, [ClosureCaptureUnique]>
+<module, ClosureCaptureUnique, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureCaptureUnique/Build/Intermediate/Obj/Source/ClosureCaptureUnique.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureCaptureUnique/Build/Binary/libClosureCaptureUnique.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/ClosureCaptureUnique/Source/Main.uv

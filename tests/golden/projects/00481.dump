@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainSignature>
+<assemblies, [MainSignature]>
+<assembly_name, MainSignature>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainSignature/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainSignature/Build>
+<module_list, [MainSignature]>
+<module, MainSignature, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainSignature/Build/Intermediate/Obj/Source/MainSignature.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MainSignature/Build/Binary/MainSignature, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MainSignature/Source/Main.uv

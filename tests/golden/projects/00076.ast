@@ -1,0 +1,2 @@
+module ReadThenWriteExplicitWarning
+  ProcedureDecl [3:8-9:2] public procedure readThenWriteExplicitWarningReference

@@ -1,0 +1,13 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/ExternAbiForms>
+<assemblies, [ExternAbiForms]>
+<assembly_name, ExternAbiForms>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/ExternAbiForms/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/ExternAbiForms/Build>
+<module_list, [ExternAbiForms, ExternAbiForms::Support]>
+<module, ExternAbiForms, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ExternAbiForms/Build/Intermediate/Obj/Source/ExternAbiForms.o, ir, <bottom>>
+<module, ExternAbiForms::Support, obj, /w/target/fixtures/Fixtures/ArtifactProjects/ExternAbiForms/Build/Intermediate/Obj/Source/Support/ExternAbiForms_x3a_x3aSupport.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/ExternAbiForms/Build/Binary/libExternAbiForms.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ExternAbiForms/Source/Library.uv
+file:/w/target/fixtures/Fixtures/ArtifactProjects/ExternAbiForms/Source/Support/Library.uv

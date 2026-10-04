@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TST-0107","severity":"error","message":"Unknown audit coverage reference","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Attributes/TestUnknownCoverageReference/Source/Main.uv","start_line":4,"start_col":8,"end_line":8,"end_col":2},"source_line":"public procedure testUnknownCoverageReferenceReference() -> bool","children":[]}]}

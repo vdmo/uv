@@ -1,0 +1,3 @@
+module NonModalImplementsModalClass
+  ClassDecl [3:10-7:2] internal class ModalOnlyClass
+  RecordDecl [9:10-11:2] internal record NonModalImplementation

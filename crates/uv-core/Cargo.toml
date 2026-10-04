@@ -1,0 +1,13 @@
+[package]
+name = "uv-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+libc = "0.2"
+# The specification pins Unicode 15.0. These exact versions carry Unicode 15.0 data.
+unicode-ident = "=1.0.11"
+unicode-normalization = "=0.1.22"
+unicode-script = "=0.5.5"
+unicode-security = "=0.1.0"

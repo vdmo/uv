@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodDuplicate>
+<assemblies, [RecordMethodDuplicate]>
+<assembly_name, RecordMethodDuplicate>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodDuplicate/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodDuplicate/Build>
+<module_list, [RecordMethodDuplicate]>
+<module, RecordMethodDuplicate, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodDuplicate/Build/Intermediate/Obj/Source/RecordMethodDuplicate.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodDuplicate/Build/Binary/libRecordMethodDuplicate.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodDuplicate/Source/Main.uv

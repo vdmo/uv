@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateNonBool>
+<assemblies, [ContractPredicateNonBool]>
+<assembly_name, ContractPredicateNonBool>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateNonBool/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateNonBool/Build>
+<module_list, [ContractPredicateNonBool]>
+<module, ContractPredicateNonBool, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateNonBool/Build/Intermediate/Obj/Source/ContractPredicateNonBool.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateNonBool/Build/Binary/libContractPredicateNonBool.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractPredicateNonBool/Source/Main.uv

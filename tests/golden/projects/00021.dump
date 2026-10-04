@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestAuthorityAndShape>
+<assemblies, [AttributeTestAuthorityAndShape]>
+<assembly_name, AttributeTestAuthorityAndShape>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestAuthorityAndShape/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestAuthorityAndShape/Build>
+<module_list, [AttributeTestAuthorityAndShape::Tests]>
+<module, AttributeTestAuthorityAndShape::Tests, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestAuthorityAndShape/Build/Intermediate/Obj/Source/Tests/AttributeTestAuthorityAndShape_x3a_x3aTests.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestAuthorityAndShape/Build/Binary/libAttributeTestAuthorityAndShape.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestAuthorityAndShape/Source/Tests/AuthorityAndShape.uv

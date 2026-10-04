@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupDiagnostics>
+<assemblies, [MethodLookupDiagnostics]>
+<assembly_name, MethodLookupDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupDiagnostics/Build>
+<module_list, [MethodLookupDiagnostics]>
+<module, MethodLookupDiagnostics, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupDiagnostics/Build/Intermediate/Obj/Source/MethodLookupDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupDiagnostics/Build/Binary/libMethodLookupDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupDiagnostics/Source/Main.uv

@@ -1,0 +1,4 @@
+module CallArgPackedUnsafe
+  RecordDecl [4:8-6:2] public record PackedArgumentPayload
+  ProcedureDecl [8:8-10:2] public procedure borrowedPackedValue
+  ProcedureDecl [12:8-15:2] public procedure callArgPackedUnsafeReference

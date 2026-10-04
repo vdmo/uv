@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeWait>
+<assemblies, [SpeculativeWait]>
+<assembly_name, SpeculativeWait>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeWait/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeWait/Build>
+<module_list, [SpeculativeWait]>
+<module, SpeculativeWait, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeWait/Build/Intermediate/Obj/Source/SpeculativeWait.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeWait/Build/Binary/libSpeculativeWait.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeWait/Source/Main.uv

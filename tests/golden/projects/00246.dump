@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldUnknown>
+<assemblies, [RecordFieldUnknown]>
+<assembly_name, RecordFieldUnknown>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldUnknown/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldUnknown/Build>
+<module_list, [RecordFieldUnknown]>
+<module, RecordFieldUnknown, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldUnknown/Build/Intermediate/Obj/Source/RecordFieldUnknown.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldUnknown/Build/Binary/libRecordFieldUnknown.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/RecordFieldUnknown/Source/Main.uv

@@ -1,0 +1,3 @@
+module GenericRecordLiteralExpectedType
+  RecordDecl [3:10-6:2] internal record Carrier
+  ProcedureDecl [8:8-11:2] public procedure genericRecordLiteralExpectedTypeReference

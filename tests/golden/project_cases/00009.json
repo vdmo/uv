@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-PRJ-0204","severity":"error","message":"`emit_ir` has invalid value or type (`WF-Assembly-EmitIR-Err`, `WF-Assembly-EmitIRType-Err`)","span":null,"source_line":null,"children":[]}]}

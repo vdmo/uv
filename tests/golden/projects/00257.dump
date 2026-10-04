@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteUnsafe>
+<assemblies, [TransmuteUnsafe]>
+<assembly_name, TransmuteUnsafe>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteUnsafe/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteUnsafe/Build>
+<module_list, [TransmuteUnsafe]>
+<module, TransmuteUnsafe, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteUnsafe/Build/Intermediate/Obj/Source/TransmuteUnsafe.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteUnsafe/Build/Binary/libTransmuteUnsafe.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/TransmuteUnsafe/Source/Main.uv

@@ -1,0 +1,2 @@
+module PackedLayoutOnEnum
+  EnumDecl [4:8-6:2] public enum PackedLayoutEnum

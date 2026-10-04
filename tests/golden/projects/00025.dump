@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/DynamicReceiverExpiredPanic>
+<assemblies, [DynamicReceiverExpiredPanic]>
+<assembly_name, DynamicReceiverExpiredPanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/DynamicReceiverExpiredPanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/DynamicReceiverExpiredPanic/Build>
+<module_list, [DynamicReceiverExpiredPanic]>
+<module, DynamicReceiverExpiredPanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/DynamicReceiverExpiredPanic/Build/Intermediate/Obj/Source/DynamicReceiverExpiredPanic.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/DynamicReceiverExpiredPanic/Build/Intermediate/IR/Source/DynamicReceiverExpiredPanic.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/DynamicReceiverExpiredPanic/Build/Binary/DynamicReceiverExpiredPanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/DynamicReceiverExpiredPanic/Source/Main.uv

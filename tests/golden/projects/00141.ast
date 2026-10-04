@@ -1,0 +1,3 @@
+module IntrospectFieldsNonRecord
+  EnumDecl [4:8-6:2] public enum ReflectionEnum
+  ProcedureDecl [8:8-13:2] public procedure introspectFieldsNonRecordReference

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSStaticLibraryArchive>
+<assemblies, [MacOSStaticLibraryArchive]>
+<assembly_name, MacOSStaticLibraryArchive>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSStaticLibraryArchive/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSStaticLibraryArchive/Build>
+<module_list, [MacOSStaticLibraryArchive]>
+<module, MacOSStaticLibraryArchive, obj, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSStaticLibraryArchive/Build/Intermediate/Obj/Source/MacOSStaticLibraryArchive.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/MacOSStaticLibraryArchive/Build/Library/libMacOSStaticLibraryArchive.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/MacOSStaticLibraryArchive/Source/Library.uv

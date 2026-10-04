@@ -1,0 +1,11 @@
+<project_root, /w/target/prjcases/ok_unicode_name>
+<assemblies, [Café]>
+<assembly_name, Café>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/prjcases/ok_unicode_name/Source>
+<output_root, /w/target/prjcases/ok_unicode_name/Build>
+<module_list, [Café]>
+<module, Café, obj, /w/target/prjcases/ok_unicode_name/Build/Intermediate/Obj/Source/Caf_xc3_xa9.o, ir, <bottom>>
+<artifact, /w/target/prjcases/ok_unicode_name/Build/Binary/Café, import_lib, <bottom>>
+file:/w/target/prjcases/ok_unicode_name/Source/Main.uv

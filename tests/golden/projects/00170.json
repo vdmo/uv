@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CON-0281","severity":"error","message":"Async operation escapes its region","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Expressions/AsyncOperationEscapesRegion/Source/Main.uv","start_line":7,"start_col":8,"end_line":13,"end_col":2},"source_line":"public procedure asyncOperationEscapesRegionReference() -> i32 {","children":[]}]}

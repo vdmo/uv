@@ -1,0 +1,9 @@
+module AttributeTestAuthorityAndShape::Tests
+  ProcedureDecl [3:10-14:2] internal procedure attributeAuthorityIoUnitSucceeded
+  ProcedureDecl [16:10-27:2] internal procedure attributeAuthorityDurationSucceeded
+  ProcedureDecl [29:10-36:2] internal procedure attributeAuthorityTextByte
+  ProcedureDecl [38:10-57:2] internal procedure attributeAuthorityTextEquals
+  ProcedureDecl [59:10-71:2] internal procedure attributeAuthorityReadTextEquals
+  ProcedureDecl [73:10-78:2] internal procedure attributeAuthorityTargetProfileKnown
+  ProcedureDecl [81:10-85:2] internal procedure attributeShapeNoParameter
+  ProcedureDecl [88:10-116:2] internal procedure attributeAuthorityParameter

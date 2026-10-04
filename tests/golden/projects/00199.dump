@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumEmpty>
+<assemblies, [EnumEmpty]>
+<assembly_name, EnumEmpty>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumEmpty/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumEmpty/Build>
+<module_list, [EnumEmpty]>
+<module, EnumEmpty, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumEmpty/Build/Intermediate/Obj/Source/EnumEmpty.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumEmpty/Build/Binary/libEnumEmpty.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/EnumEmpty/Source/Main.uv

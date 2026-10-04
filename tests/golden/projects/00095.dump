@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmToolResolveOwnership>
+<assemblies, [LlvmToolResolveOwnership]>
+<assembly_name, LlvmToolResolveOwnership>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmToolResolveOwnership/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmToolResolveOwnership/Build>
+<module_list, [LlvmToolResolveOwnership]>
+<module, LlvmToolResolveOwnership, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmToolResolveOwnership/Build/Intermediate/Obj/Source/LlvmToolResolveOwnership.o, ir, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmToolResolveOwnership/Build/Intermediate/IR/Source/LlvmToolResolveOwnership.bc>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmToolResolveOwnership/Build/Library/libLlvmToolResolveOwnership.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Lowering/LlvmToolResolveOwnership/Source/Library.uv

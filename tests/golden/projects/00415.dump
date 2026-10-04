@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ClassMemberNameConflict>
+<assemblies, [ClassMemberNameConflict]>
+<assembly_name, ClassMemberNameConflict>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ClassMemberNameConflict/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ClassMemberNameConflict/Build>
+<module_list, [ClassMemberNameConflict]>
+<module, ClassMemberNameConflict, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ClassMemberNameConflict/Build/Intermediate/Obj/Source/ClassMemberNameConflict.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ClassMemberNameConflict/Build/Binary/libClassMemberNameConflict.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ClassMemberNameConflict/Source/Main.uv

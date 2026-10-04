@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueReturnMissingImplementation>
+<assemblies, [OpaqueReturnMissingImplementation]>
+<assembly_name, OpaqueReturnMissingImplementation>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueReturnMissingImplementation/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueReturnMissingImplementation/Build>
+<module_list, [OpaqueReturnMissingImplementation]>
+<module, OpaqueReturnMissingImplementation, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueReturnMissingImplementation/Build/Intermediate/Obj/Source/OpaqueReturnMissingImplementation.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueReturnMissingImplementation/Build/Binary/libOpaqueReturnMissingImplementation.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueReturnMissingImplementation/Source/Main.uv

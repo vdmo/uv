@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/AcceptedProjects/ComptimeConformance>
+<assemblies, [ComptimeConformance]>
+<assembly_name, ComptimeConformance>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/AcceptedProjects/ComptimeConformance/Source>
+<output_root, /w/target/fixtures/Fixtures/AcceptedProjects/ComptimeConformance/Build>
+<module_list, [ComptimeConformance]>
+<module, ComptimeConformance, obj, /w/target/fixtures/Fixtures/AcceptedProjects/ComptimeConformance/Build/Intermediate/Obj/Source/ComptimeConformance.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/AcceptedProjects/ComptimeConformance/Build/Library/libComptimeConformance.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/AcceptedProjects/ComptimeConformance/Source/Library.uv

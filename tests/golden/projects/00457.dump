@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementStaticDefaultRequirement>
+<assemblies, [RefinementStaticDefaultRequirement]>
+<assembly_name, RefinementStaticDefaultRequirement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementStaticDefaultRequirement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementStaticDefaultRequirement/Build>
+<module_list, [RefinementStaticDefaultRequirement]>
+<module, RefinementStaticDefaultRequirement, obj, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementStaticDefaultRequirement/Build/Intermediate/Obj/Source/RefinementStaticDefaultRequirement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementStaticDefaultRequirement/Build/Binary/libRefinementStaticDefaultRequirement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementStaticDefaultRequirement/Source/Main.uv

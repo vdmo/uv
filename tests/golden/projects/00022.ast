@@ -1,0 +1,2 @@
+module AttributeTestHarness::Tests
+  ProcedureDecl [4:10-13:2] internal procedure attributeHarnessRecordsAuthority

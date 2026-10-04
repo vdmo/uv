@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-CON-0009","severity":"warning","message":"Closure captures `shared` data","span":{"file":"/w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Source/Main.uv","start_line":395,"start_col":48,"end_line":400,"end_col":6},"source_line":"    let producer = || -> Async<i32, (), (), !> {","children":[]}]}

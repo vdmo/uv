@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineNotCallable>
+<assemblies, [PipelineNotCallable]>
+<assembly_name, PipelineNotCallable>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineNotCallable/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineNotCallable/Build>
+<module_list, [PipelineNotCallable]>
+<module, PipelineNotCallable, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineNotCallable/Build/Intermediate/Obj/Source/PipelineNotCallable.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineNotCallable/Build/Binary/libPipelineNotCallable.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/PipelineNotCallable/Source/Main.uv

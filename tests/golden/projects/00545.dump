@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/UnsafeRequiredOperationOwnershipDiagnostic>
+<assemblies, [UnsafeRequiredOperationOwnershipDiagnostic]>
+<assembly_name, UnsafeRequiredOperationOwnershipDiagnostic>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/UnsafeRequiredOperationOwnershipDiagnostic/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/UnsafeRequiredOperationOwnershipDiagnostic/Build>
+<module_list, [UnsafeRequiredOperationOwnershipDiagnostic]>
+<module, UnsafeRequiredOperationOwnershipDiagnostic, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/UnsafeRequiredOperationOwnershipDiagnostic/Build/Intermediate/Obj/Source/UnsafeRequiredOperationOwnershipDiagnostic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/UnsafeRequiredOperationOwnershipDiagnostic/Build/Binary/libUnsafeRequiredOperationOwnershipDiagnostic.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/UnsafeRequiredOperationOwnershipDiagnostic/Source/Main.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/MethodNotFound>
+<assemblies, [MethodNotFound]>
+<assembly_name, MethodNotFound>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/MethodNotFound/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/MethodNotFound/Build>
+<module_list, [MethodNotFound]>
+<module, MethodNotFound, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/MethodNotFound/Build/Intermediate/Obj/Source/MethodNotFound.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/MethodNotFound/Build/Binary/libMethodNotFound.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/MethodNotFound/Source/Main.uv

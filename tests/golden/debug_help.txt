@@ -1,0 +1,26 @@
+ultraviolet debug subsystems
+
+Use --debug <name[,name...]> to enable subsystem traces.
+
+  lex        Lexer diagnostics and tokenization traces
+  parse      Parser item-level traces
+  phases     Frontend phase sequencing
+  pipeline   Top-level driver pipeline and build coordination
+  output     Output pipeline, artifacts, and incremental decisions
+  link       Linker and archiver debugging
+  sema       Semantic-analysis progress and diagnostics
+  codegen    IR lowering and code generation traces
+  typeperf   Semantic-analysis performance counters
+  obj        Object emission and object-model details
+  binop      Binary operator lowering/debugging
+  call       Call resolution and lowering
+  loop       Loop lowering/debugging
+  parallel   Parallel lowering/debugging
+  return     Return-path lowering/debugging
+  union      Union lowering/debugging
+  wait       Wait lowering/debugging
+  propagate  Propagate lowering/debugging
+  spawn      Spawn lowering/debugging
+  method     Method resolution/debugging
+  shadow     Shadowing and pattern-shadow diagnostics
+  all        Enable all debug subsystems

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2455","severity":"error","message":"Conflicting layout arguments","span":{"file":"/w/target/p1cases/derive_layout_record_disc/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":12},"source_line":"#layout(u8)","children":[]}]}

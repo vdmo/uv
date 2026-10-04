@@ -1,0 +1,9 @@
+[package]
+name = "uv-analysis"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+uv-core = { path = "../uv-core" }
+uv-source = { path = "../uv-source" }

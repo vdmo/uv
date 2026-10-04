@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/NoAmbientCapabilityGlobal>
+<assemblies, [NoAmbientCapabilityGlobal]>
+<assembly_name, NoAmbientCapabilityGlobal>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/NoAmbientCapabilityGlobal/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/NoAmbientCapabilityGlobal/Build>
+<module_list, [NoAmbientCapabilityGlobal]>
+<module, NoAmbientCapabilityGlobal, obj, /w/target/fixtures/Fixtures/RejectedSource/Permissions/NoAmbientCapabilityGlobal/Build/Intermediate/Obj/Source/NoAmbientCapabilityGlobal.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Permissions/NoAmbientCapabilityGlobal/Build/Binary/libNoAmbientCapabilityGlobal.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Permissions/NoAmbientCapabilityGlobal/Source/Main.uv

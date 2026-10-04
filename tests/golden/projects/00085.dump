@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/PanicHandlingNoAdditionalDiagnostics>
+<assemblies, [PanicHandlingNoAdditionalDiagnostics]>
+<assembly_name, PanicHandlingNoAdditionalDiagnostics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/PanicHandlingNoAdditionalDiagnostics/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/PanicHandlingNoAdditionalDiagnostics/Build>
+<module_list, [PanicHandlingNoAdditionalDiagnostics]>
+<module, PanicHandlingNoAdditionalDiagnostics, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/PanicHandlingNoAdditionalDiagnostics/Build/Intermediate/Obj/Source/PanicHandlingNoAdditionalDiagnostics.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/PanicHandlingNoAdditionalDiagnostics/Build/Binary/libPanicHandlingNoAdditionalDiagnostics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/PanicHandlingNoAdditionalDiagnostics/Source/Main.uv

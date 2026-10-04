@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeNestedKeyBlock>
+<assemblies, [SpeculativeNestedKeyBlock]>
+<assembly_name, SpeculativeNestedKeyBlock>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeNestedKeyBlock/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeNestedKeyBlock/Build>
+<module_list, [SpeculativeNestedKeyBlock]>
+<module, SpeculativeNestedKeyBlock, obj, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeNestedKeyBlock/Build/Intermediate/Obj/Source/SpeculativeNestedKeyBlock.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeNestedKeyBlock/Build/Binary/libSpeculativeNestedKeyBlock.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Keys/SpeculativeNestedKeyBlock/Source/Main.uv

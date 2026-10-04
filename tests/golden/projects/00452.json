@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-1954","severity":"error","message":"Impure expression in refinement predicate","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsOwnership/Source/Main.uv","start_line":7,"start_col":8,"end_line":8,"end_col":66},"source_line":"public type RefinementDiagnosticsOwnershipType =","children":[]}]}

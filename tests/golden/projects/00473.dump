@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/DuplicateErasedOverloadSignature>
+<assemblies, [DuplicateErasedOverloadSignature]>
+<assembly_name, DuplicateErasedOverloadSignature>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/DuplicateErasedOverloadSignature/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Procedures/DuplicateErasedOverloadSignature/Build>
+<module_list, [DuplicateErasedOverloadSignature]>
+<module, DuplicateErasedOverloadSignature, obj, /w/target/fixtures/Fixtures/RejectedSource/Procedures/DuplicateErasedOverloadSignature/Build/Intermediate/Obj/Source/DuplicateErasedOverloadSignature.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Procedures/DuplicateErasedOverloadSignature/Build/Binary/libDuplicateErasedOverloadSignature.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Procedures/DuplicateErasedOverloadSignature/Source/Main.uv

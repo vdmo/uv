@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDynamicSemantics>
+<assemblies, [AttributeDynamicSemantics]>
+<assembly_name, AttributeDynamicSemantics>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDynamicSemantics/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDynamicSemantics/Build>
+<module_list, [AttributeDynamicSemantics::Tests]>
+<module, AttributeDynamicSemantics::Tests, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDynamicSemantics/Build/Intermediate/Obj/Source/Tests/AttributeDynamicSemantics_x3a_x3aTests.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDynamicSemantics/Build/Binary/libAttributeDynamicSemantics.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AttributeDynamicSemantics/Source/Tests/DynamicSemantics.uv

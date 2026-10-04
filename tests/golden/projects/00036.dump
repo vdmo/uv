@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/LexerTokenizerOutput>
+<assemblies, [LexerTokenizerOutput]>
+<assembly_name, LexerTokenizerOutput>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/LexerTokenizerOutput/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/LexerTokenizerOutput/Build>
+<module_list, [LexerTokenizerOutput]>
+<module, LexerTokenizerOutput, obj, /w/target/fixtures/Fixtures/ArtifactProjects/LexerTokenizerOutput/Build/Intermediate/Obj/Source/LexerTokenizerOutput.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/LexerTokenizerOutput/Build/Intermediate/IR/Source/LexerTokenizerOutput.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/LexerTokenizerOutput/Build/Library/libLexerTokenizerOutput.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/LexerTokenizerOutput/Source/Library.uv

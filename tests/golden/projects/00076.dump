@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteExplicitWarning>
+<assemblies, [ReadThenWriteExplicitWarning]>
+<assembly_name, ReadThenWriteExplicitWarning>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteExplicitWarning/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteExplicitWarning/Build>
+<module_list, [ReadThenWriteExplicitWarning]>
+<module, ReadThenWriteExplicitWarning, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteExplicitWarning/Build/Intermediate/Obj/Source/ReadThenWriteExplicitWarning.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteExplicitWarning/Build/Binary/libReadThenWriteExplicitWarning.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteExplicitWarning/Source/Main.uv

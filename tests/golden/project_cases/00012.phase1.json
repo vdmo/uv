@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-PRJ-0201","severity":"error","message":"`assembly.kind` is not in `{ \"executable\", \"library\", \"dependency\" }` (`WF-Assembly-Kind-Err`)","span":null,"source_line":null,"children":[]}]}

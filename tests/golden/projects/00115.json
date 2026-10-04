@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SRC-0521","severity":"error","message":"Trailing comma in single-line list (`Trailing-Comma-Err`)","span":{"file":"/w/target/fixtures/Fixtures/Patterns/PatternLoweringConformance/Source/Library.uv","start_line":82,"start_col":46,"end_line":82,"end_col":47},"source_line":"        PatternLoweringEnum::Count(enum_count,) {","children":[]}]}

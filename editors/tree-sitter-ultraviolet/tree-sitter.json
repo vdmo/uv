@@ -1,0 +1,25 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "ultraviolet",
+      "camelcase": "Ultraviolet",
+      "title": "Ultraviolet",
+      "scope": "source.ultraviolet",
+      "file-types": ["uv"],
+      "injection-regex": "^(ultraviolet|uv)$",
+      "class-name": "TreeSitterUltraviolet",
+      "highlights": "queries/highlights.scm",
+      "locals": "queries/locals.scm",
+      "injections": "queries/injections.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.4.0",
+    "license": "Apache-2.0",
+    "description": "Tree-sitter grammar for the Ultraviolet language.",
+    "links": {
+      "repository": "https://github.com/blacklight-foundation/ultraviolet-lsp"
+    }
+  }
+}

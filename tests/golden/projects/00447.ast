@@ -1,0 +1,4 @@
+module OpaqueReturnMissingImplementation
+  ClassDecl [3:10-5:2] internal class OpaqueRequiredClass
+  RecordDecl [7:10-9:2] internal record OpaqueUnrelatedOwner
+  ProcedureDecl [11:10-13:2] internal procedure makeInvalidOpaque

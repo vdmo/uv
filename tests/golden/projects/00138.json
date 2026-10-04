@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0320","severity":"error","message":"Derive target body violates compile-time restrictions","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Comptime/DeriveTargetProhibitedWait/Source/Main.uv","start_line":5,"start_col":22,"end_line":5,"end_col":28},"source_line":"    let value: i32 = wait 1","children":[]}]}

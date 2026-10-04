@@ -1,0 +1,2 @@
+module BitcopyDropConflict
+  RecordDecl [3:10-8:2] internal record BitcopyDropConflictOwner

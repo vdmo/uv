@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"W-CTE-0071","severity":"warning","message":"compile-time user warning","span":{"file":"/w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticWarning/Source/Main.uv","start_line":5,"start_col":9,"end_line":5,"end_col":58},"source_line":"        diagnostics~>warning(\"compile-time user warning\")","children":[]}]}

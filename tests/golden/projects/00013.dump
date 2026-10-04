@@ -1,0 +1,10 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AArch64DependencyObject>
+<assemblies, [AArch64DependencyObject]>
+<assembly_name, AArch64DependencyObject>
+<assembly_kind, dependency>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AArch64DependencyObject/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AArch64DependencyObject/Build>
+<module_list, [AArch64DependencyObject]>
+<module, AArch64DependencyObject, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AArch64DependencyObject/Build/Intermediate/Obj/Source/AArch64DependencyObject.o, ir, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AArch64DependencyObject/Source/Library.uv

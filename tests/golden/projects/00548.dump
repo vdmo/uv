@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/VarAnnotationMismatch>
+<assemblies, [VarAnnotationMismatch]>
+<assembly_name, VarAnnotationMismatch>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/VarAnnotationMismatch/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Statements/VarAnnotationMismatch/Build>
+<module_list, [VarAnnotationMismatch]>
+<module, VarAnnotationMismatch, obj, /w/target/fixtures/Fixtures/RejectedSource/Statements/VarAnnotationMismatch/Build/Intermediate/Obj/Source/VarAnnotationMismatch.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Statements/VarAnnotationMismatch/Build/Binary/libVarAnnotationMismatch.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Statements/VarAnnotationMismatch/Source/Main.uv

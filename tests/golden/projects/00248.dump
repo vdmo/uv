@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SliceIndexNonUsize>
+<assemblies, [SliceIndexNonUsize]>
+<assembly_name, SliceIndexNonUsize>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SliceIndexNonUsize/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SliceIndexNonUsize/Build>
+<module_list, [SliceIndexNonUsize]>
+<module, SliceIndexNonUsize, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SliceIndexNonUsize/Build/Intermediate/Obj/Source/SliceIndexNonUsize.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/SliceIndexNonUsize/Build/Binary/libSliceIndexNonUsize.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/SliceIndexNonUsize/Source/Main.uv

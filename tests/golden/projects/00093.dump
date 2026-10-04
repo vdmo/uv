@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeLibMissing>
+<assemblies, [RuntimeLibMissing]>
+<assembly_name, RuntimeLibMissing>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeLibMissing/Source>
+<output_root, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeLibMissing/Build>
+<module_list, [RuntimeLibMissing]>
+<module, RuntimeLibMissing, obj, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeLibMissing/Build/Intermediate/Obj/Source/RuntimeLibMissing.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeLibMissing/Build/Binary/RuntimeLibMissing, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/OutputDiagnostics/Linking/RuntimeLibMissing/Source/Main.uv

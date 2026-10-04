@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestAttributeWrongTarget>
+<assemblies, [TestAttributeWrongTarget]>
+<assembly_name, TestAttributeWrongTarget>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestAttributeWrongTarget/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestAttributeWrongTarget/Build>
+<module_list, [TestAttributeWrongTarget]>
+<module, TestAttributeWrongTarget, obj, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestAttributeWrongTarget/Build/Intermediate/Obj/Source/TestAttributeWrongTarget.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Attributes/TestAttributeWrongTarget/Build/Binary/libTestAttributeWrongTarget.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Attributes/TestAttributeWrongTarget/Source/Main.uv

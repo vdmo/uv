@@ -1,0 +1,6 @@
+module GenericContravariantSubtyping
+  TypeAliasDecl [3:10-3:32] internal type NarrowValue
+  TypeAliasDecl [5:10-5:37] internal type WideValue
+  RecordDecl [7:10-9:2] internal record ContravariantSink
+  ProcedureDecl [11:10-13:2] internal procedure acceptsNarrowValue
+  ProcedureDecl [15:10-21:2] internal procedure genericContravariantSubtypingViolation

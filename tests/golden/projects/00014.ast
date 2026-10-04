@@ -1,0 +1,3 @@
+module ArrayIndexOOBPanic
+  ProcedureDecl [5:8-8:2] public procedure arrayIndexOOBPanicValue
+  ProcedureDecl [11:8-14:2] public procedure main

@@ -1,0 +1,2 @@
+module RangePatternNonConst
+  ProcedureDecl [3:8-10:2] public procedure rangePatternNonConstReference

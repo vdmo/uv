@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols>
+<assemblies, [RuntimeInterfaceSymbols]>
+<assembly_name, RuntimeInterfaceSymbols>
+<assembly_kind, library>
+<link_kind, static>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols/Build>
+<module_list, [RuntimeInterfaceSymbols]>
+<module, RuntimeInterfaceSymbols, obj, /w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols/Build/Intermediate/Obj/Source/RuntimeInterfaceSymbols.o, ir, /w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols/Build/Intermediate/IR/Source/RuntimeInterfaceSymbols.ll>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols/Build/Library/libRuntimeInterfaceSymbols.a, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols/Source/Library.uv

@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/ProjectFilesInvalidPath>
+<assemblies, [ProjectFilesInvalidPath]>
+<assembly_name, ProjectFilesInvalidPath>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/ProjectFilesInvalidPath/Source>
+<output_root, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/ProjectFilesInvalidPath/Build>
+<module_list, [ProjectFilesInvalidPath]>
+<module, ProjectFilesInvalidPath, obj, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/ProjectFilesInvalidPath/Build/Intermediate/Obj/Source/ProjectFilesInvalidPath.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/ProjectFilesInvalidPath/Build/Binary/libProjectFilesInvalidPath.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/DiagnosticSource/Comptime/ProjectFilesInvalidPath/Source/Main.uv

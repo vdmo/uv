@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/SharedMutationWithoutKey>
+<assemblies, [SharedMutationWithoutKey]>
+<assembly_name, SharedMutationWithoutKey>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/SharedMutationWithoutKey/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Permissions/SharedMutationWithoutKey/Build>
+<module_list, [SharedMutationWithoutKey]>
+<module, SharedMutationWithoutKey, obj, /w/target/fixtures/Fixtures/RejectedSource/Permissions/SharedMutationWithoutKey/Build/Intermediate/Obj/Source/SharedMutationWithoutKey.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Permissions/SharedMutationWithoutKey/Build/Binary/libSharedMutationWithoutKey.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Permissions/SharedMutationWithoutKey/Source/Main.uv

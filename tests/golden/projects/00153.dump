@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/NoIntegerNumericSubtyping>
+<assemblies, [NoIntegerNumericSubtyping]>
+<assembly_name, NoIntegerNumericSubtyping>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/NoIntegerNumericSubtyping/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/NoIntegerNumericSubtyping/Build>
+<module_list, [NoIntegerNumericSubtyping]>
+<module, NoIntegerNumericSubtyping, obj, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/NoIntegerNumericSubtyping/Build/Intermediate/Obj/Source/NoIntegerNumericSubtyping.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/DataTypes/NoIntegerNumericSubtyping/Build/Binary/libNoIntegerNumericSubtyping.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/DataTypes/NoIntegerNumericSubtyping/Source/Main.uv

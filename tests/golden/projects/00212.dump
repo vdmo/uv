@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IndexClassification>
+<assemblies, [IndexClassification]>
+<assembly_name, IndexClassification>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IndexClassification/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IndexClassification/Build>
+<module_list, [IndexClassification]>
+<module, IndexClassification, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IndexClassification/Build/Intermediate/Obj/Source/IndexClassification.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/IndexClassification/Build/Binary/libIndexClassification.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/IndexClassification/Source/Main.uv

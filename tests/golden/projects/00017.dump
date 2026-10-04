@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDiscoveryOrder>
+<assemblies, [AttributeDiscoveryOrder]>
+<assembly_name, AttributeDiscoveryOrder>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDiscoveryOrder/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDiscoveryOrder/Build>
+<module_list, [AttributeDiscoveryOrder::Tests]>
+<module, AttributeDiscoveryOrder::Tests, obj, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDiscoveryOrder/Build/Intermediate/Obj/Source/Tests/AttributeDiscoveryOrder_x3a_x3aTests.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/AttributeDiscoveryOrder/Build/Binary/libAttributeDiscoveryOrder.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/AttributeDiscoveryOrder/Source/Tests/DiscoveryOrder.uv

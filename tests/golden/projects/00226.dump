@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullExpectedRequirement>
+<assemblies, [PtrNullExpectedRequirement]>
+<assembly_name, PtrNullExpectedRequirement>
+<assembly_kind, library>
+<link_kind, shared>
+<source_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullExpectedRequirement/Source>
+<output_root, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullExpectedRequirement/Build>
+<module_list, [PtrNullExpectedRequirement]>
+<module, PtrNullExpectedRequirement, obj, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullExpectedRequirement/Build/Intermediate/Obj/Source/PtrNullExpectedRequirement.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullExpectedRequirement/Build/Binary/libPtrNullExpectedRequirement.so, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/RejectedSource/Expressions/PtrNullExpectedRequirement/Source/Main.uv

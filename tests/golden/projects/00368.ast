@@ -1,0 +1,3 @@
+module GpuSafeRecordFieldDiagnostic
+  RecordDecl [3:8-5:2] public record GpuRecordFieldPayload
+  ProcedureDecl [7:8-15:2] public procedure gpuSafeRecordFieldDiagnosticReference

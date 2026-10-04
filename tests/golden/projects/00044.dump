@@ -1,0 +1,11 @@
+<project_root, /w/target/fixtures/Fixtures/ArtifactProjects/OperatorUndefinedPanic>
+<assemblies, [OperatorUndefinedPanic]>
+<assembly_name, OperatorUndefinedPanic>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/fixtures/Fixtures/ArtifactProjects/OperatorUndefinedPanic/Source>
+<output_root, /w/target/fixtures/Fixtures/ArtifactProjects/OperatorUndefinedPanic/Build>
+<module_list, [OperatorUndefinedPanic]>
+<module, OperatorUndefinedPanic, obj, /w/target/fixtures/Fixtures/ArtifactProjects/OperatorUndefinedPanic/Build/Intermediate/Obj/Source/OperatorUndefinedPanic.o, ir, <bottom>>
+<artifact, /w/target/fixtures/Fixtures/ArtifactProjects/OperatorUndefinedPanic/Build/Binary/OperatorUndefinedPanic, import_lib, <bottom>>
+file:/w/target/fixtures/Fixtures/ArtifactProjects/OperatorUndefinedPanic/Source/Main.uv

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TYP-2621","severity":"error","message":"Type satisfies both `BitcopyType` and `DropType`","span":{"file":"/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyDropConflict/Source/Main.uv","start_line":3,"start_col":10,"end_line":8,"end_col":2},"source_line":"internal record BitcopyDropConflictOwner {","children":[]}]}
