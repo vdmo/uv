@@ -55,6 +55,8 @@
 #include "04_analysis/typing/type_decls.h"
 #include "04_analysis/typing/type_predicates.h"
 #include "04_analysis/typing/type_wf.h"
+#include "04_analysis/typing/literals.h"
+#include "04_analysis/typing/type_pattern.h"
 #include <algorithm>
 #include <unordered_map>
 
@@ -500,6 +502,7 @@ bool HasErrorDiag(const core::DiagnosticStream& diags) {
 bool g_types_mode = false;
 bool g_rel_mode = false;
 bool g_val_mode = false;
+bool g_pat_mode = false;
 
 void PrintKey(const analysis::TypeKey& key);
 void PrintAtom(const analysis::KeyAtom& atom) {
@@ -1445,6 +1448,37 @@ int DumpConsts(const std::string& label, const std::string& path) {
       std::cout << "\traw=";
       PrintHex(bits);
     }
+    {
+      // The literal's own type, and where it may stand: the first field lists the
+      // expected types that accept it, the second those that reject it with a rule.
+      static const analysis::ScopeContext empty_ctx;
+      ast::LiteralExpr literal;
+      literal.literal = token;
+      const auto typed = analysis::TypeLiteralExpr(empty_ctx, literal);
+      std::cout << "\ttype=" << (typed.ok ? Escape(analysis::TypeToString(typed.type)) : "fail:" + DiagOr(typed.diag_id));
+      std::vector<std::pair<std::string, analysis::TypeRef>> expected;
+      for (const char* prim : kPrims) expected.emplace_back(prim, analysis::MakeTypePrim(prim));
+      expected.emplace_back("view", analysis::MakeTypeString(analysis::StringState::View));
+      expected.emplace_back("managed", analysis::MakeTypeString(analysis::StringState::Managed));
+      expected.emplace_back("text", analysis::MakeTypeString(std::nullopt));
+      expected.emplace_back("raw", raw);
+      expected.emplace_back("uniq-raw", analysis::MakeTypePerm(analysis::Permission::Unique, raw));
+      expected.emplace_back("ptr", analysis::MakeTypePtr(analysis::MakeTypePrim("u8"), std::nullopt));
+      expected.emplace_back("uniq-i64", analysis::MakeTypePerm(analysis::Permission::Unique, analysis::MakeTypePrim("i64")));
+      expected.emplace_back("const-f64", analysis::MakeTypePerm(analysis::Permission::Const, analysis::MakeTypePrim("f64")));
+      expected.emplace_back("const-view", analysis::MakeTypePerm(analysis::Permission::Const,
+                                                                 analysis::MakeTypeString(analysis::StringState::View)));
+      expected.emplace_back("none", nullptr);
+      std::string accepted, rejected;
+      for (const auto& [name, type] : expected) {
+        const auto checked = analysis::CheckLiteralExpr(empty_ctx, literal, type);
+        if (checked.ok) accepted += " " + name;
+        else if (checked.diag_id) rejected += " " + name + ":" + std::string(*checked.diag_id);
+      }
+      std::cout << "\tok=" << accepted << "\tno=" << rejected << "\tnull="
+                << (analysis::NullLiteralExpected(raw) ? '1' : '0')
+                << (analysis::NullLiteralExpected(expected[0].second) ? '1' : '0');
+    }
     if (token.kind == lexer::TokenKind::StringLiteral) {
       std::cout << "\tstr=";
       PrintHex(analysis::layout::DecodeStringLiteralBytes(token.lexeme));
@@ -1596,6 +1630,95 @@ void DumpValues(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_
   }
 }
 
+// ---- patterns; see `pattern_common.cpp` ----
+
+// The patterns written directly in a body: those of its bindings, and of the pattern
+// forms that are a statement, a binding's initialiser or the block's tail.
+void CollectExprPatterns(const ast::ExprPtr& expr, std::vector<ast::PatternPtr>& out) {
+  if (!expr) return;
+  if (const auto* node = std::get_if<ast::IfCaseExpr>(&expr->node)) {
+    for (const auto& clause : node->cases) out.push_back(clause.pattern);
+  } else if (const auto* node = std::get_if<ast::IfIsExpr>(&expr->node)) {
+    out.push_back(node->pattern);
+  } else if (const auto* node = std::get_if<ast::LoopIterExpr>(&expr->node)) {
+    out.push_back(node->pattern);
+  }
+}
+
+void CollectBlockPatterns(const std::shared_ptr<ast::Block>& block, std::vector<ast::PatternPtr>& out) {
+  if (!block) return;
+  for (const auto& stmt : block->stmts) {
+    if (const auto* node = std::get_if<ast::LetStmt>(&stmt)) {
+      out.push_back(node->binding.pat);
+      CollectExprPatterns(node->binding.init, out);
+    } else if (const auto* node = std::get_if<ast::VarStmt>(&stmt)) {
+      out.push_back(node->binding.pat);
+      CollectExprPatterns(node->binding.init, out);
+    } else if (const auto* node = std::get_if<ast::ExprStmt>(&stmt)) {
+      CollectExprPatterns(node->value, out);
+    }
+  }
+  CollectExprPatterns(block->tail_opt, out);
+}
+
+void DumpPatterns(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
+  for (const auto& module : ctx.sigma.mods) {
+    std::cout << "X\t";
+    D(std::cout, module.path);
+    std::cout << '\n';
+    ctx.current_module = module.path;
+    const auto names = name_maps.find(analysis::PathKeyOf(module.path));
+    ctx.scopes = {analysis::Scope{},
+                  names == name_maps.end() ? analysis::Scope{} : names->second,
+                  analysis::UniverseBindings()};
+    std::vector<analysis::TypeRef> types;
+    for (const auto& written : CollectWrittenTypes(module)) {
+      const auto lowered = analysis::LowerType(ctx, written.type);
+      if (lowered.ok) types.push_back(lowered.type);
+    }
+    std::vector<ast::PatternPtr> patterns;
+    for (const auto& item : module.items) {
+      if (const auto* node = std::get_if<ast::StaticDecl>(&item)) {
+        patterns.push_back(node->binding.pat);
+      } else if (const auto* node = std::get_if<ast::ProcedureDecl>(&item)) {
+        CollectBlockPatterns(node->body, patterns);
+      } else if (const auto* node = std::get_if<ast::RecordDecl>(&item)) {
+        for (const auto& member : node->members) {
+          if (const auto* method = std::get_if<ast::MethodDecl>(&member)) CollectBlockPatterns(method->body, patterns);
+        }
+      }
+    }
+    const std::size_t type_count = std::min<std::size_t>(types.size(), 48);
+    const std::size_t pattern_count = std::min<std::size_t>(patterns.size(), 96);
+    for (std::size_t j = 0; j < type_count; ++j) {
+      std::cout << "PY\t" << j << '\t' << Escape(analysis::TypeToString(types[j])) << '\n';
+    }
+    for (std::size_t i = 0; i < pattern_count; ++i) {
+      const auto& pattern = patterns[i];
+      std::cout << "PT\t" << i << '\t' << (pattern ? pattern->node.index() : 99);
+      for (std::size_t j = 0; j < type_count; ++j) {
+        const auto typed = analysis::TypePatternAgainstType(ctx, pattern, types[j]);
+        const bool irrefutable = analysis::IrrefutablePattern(ctx, pattern, types[j]);
+        const bool covers = analysis::EnumPatternCoversVariant(ctx, pattern, types[j]);
+        const bool covers_state = analysis::ModalPatternCoversState(ctx, pattern, types[j]);
+        // The common outcome, a pattern that does not fit and names no rule, is left out.
+        if (!typed.ok && !typed.diag_id && !irrefutable && !covers && !covers_state) continue;
+        std::cout << '\t' << j << ':';
+        if (typed.ok) {
+          std::cout << "ok";
+          for (const auto& [name, type] : typed.bindings) {
+            std::cout << ' ' << name << '=' << Escape(analysis::TypeToString(type));
+          }
+        } else {
+          std::cout << "fail " << DiagOr(typed.diag_id);
+        }
+        std::cout << " /" << (irrefutable ? 'i' : '-') << (covers ? 'e' : '-') << (covers_state ? 'm' : '-');
+      }
+      std::cout << '\n';
+    }
+  }
+}
+
 // Runs the reference front end on a project through name resolution, in the order the
 // driver does: compile-time pass, module visibility, name maps, module resolution. The
 // driver's check of compile-time procedure signatures (which needs the type checker) is
@@ -1681,7 +1804,9 @@ int DumpResolve(const std::vector<std::string>& block) {
     // As the driver does: the declaration tables are rebuilt from the resolved modules.
     ctx.sigma.mods = resolved.modules;
     analysis::PopulateSigma(ctx);
-    if (g_val_mode) {
+    if (g_pat_mode) {
+      DumpPatterns(ctx, name_maps.name_maps);
+    } else if (g_val_mode) {
       DumpValues(ctx, name_maps.name_maps);
     } else if (g_rel_mode) {
       DumpRelations(ctx, name_maps.name_maps);
@@ -1760,7 +1885,8 @@ int main(int argc, char** argv) {
   }
   g_rel_mode = argc >= 3 && std::string_view(argv[1]) == "relations";
   g_val_mode = argc >= 3 && std::string_view(argv[1]) == "values";
-  g_types_mode = g_rel_mode || g_val_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
+  g_pat_mode = argc >= 3 && std::string_view(argv[1]) == "patterns";
+  g_types_mode = g_rel_mode || g_val_mode || g_pat_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
   const bool resolve_mode =
       g_types_mode || (argc >= 3 && std::string_view(argv[1]) == "resolve");
   if (resolve_mode || (argc >= 3 && std::string_view(argv[1]) == "comptime")) {

@@ -211,6 +211,8 @@ Gates, all passing:
 | Same, 35 targeted cases (each structural subtyping rule, variance, aliases, refinements, class hierarchies and their failures, the predicates, generic parameter lists and inference, 78 contracts for the prover) | identical, 35 |
 | Constant encoding: every literal token encoded as each primitive type and as a raw pointer, and the bytes of every string literal; the corpus, the lexical stress cases and 235 targeted files | identical on 1585 of 1585, 4906 of 4908 (the reference crashes on 2), and 235 of 235 |
 | Value bytes and validity: for the types of every module, values built from the type are encoded and the result judged, with a value of a neighbouring type and five byte patterns; every project that resolves and the four case sets | identical on 545 of 546, 121 of 144, 410 of 410, 51 of 54 and 35 of 35; the reference crashes on the rest |
+| Literal typing: the type of every literal token and its check against 30 expected types; same three sets as constant encoding | identical (part of the constant-encoding dumps) |
+| Pattern typing: every pattern written in a module's bodies against each of the module's types, with irrefutability and coverage; every project that resolves, the compile-time and name-resolution cases, and 8 targeted cases | identical on 546 of 546, 143 of 144 (the reference crashes on 1), 410 of 410 and 8 of 8 |
 | `--phase1-only`: JSON diagnostics, exit status and `--dump-ast` listing | identical, 549 fixtures, 58 manifest cases, 78 module-level cases |
 | `--check`: JSON diagnostics and exit status for projects rejected in phase 1 | identical, 32 fixtures and 41 manifest cases |
 | `--check`: phase-1 diagnostics for every other project | identical, 534 |
@@ -239,8 +241,8 @@ M3 is split into slices, each gated on its own against the oracle before the nex
 | --- | --- | --- | --- |
 | M3.1 compile-time pass (`uv-comptime`) | `03_comptime` | 10.6k | done |
 | M3.2 name resolution (`uv-analysis::resolve`) | `04_analysis/resolve`, built-in declarations from `caps`, `memory`, `typing` | 13k | done |
-| M3.3 typing context, generics, modal, composite, layout | `typing` (core), `generics`, `modal`, `composite`, `layout` | about 45k | in progress, see below |
-| M3.4 expression, statement and declaration typing | `typing` (rest) | about 40k | |
+| M3.3 typing context, generics, modal, composite, layout | `typing` (core), `generics`, `modal`, `composite`, `layout` | about 45k | done, with the gaps noted below |
+| M3.4 expression, statement and declaration typing | `typing` (rest) | about 52k | in progress, see below |
 | M3.5 memory, provenance, capabilities, keys, contracts | `memory`, `provenance`, `caps`, `keys`, `contracts` | 36k | |
 | M3.6 driver phases 2 and 3 end to end | `06_driver` (sema section), `conformance` | | gate: `--check --diag-json` identical on every fixture |
 
@@ -376,6 +378,35 @@ Things about the reference's constant encoding that M3.4 and code generation inh
 - Float digits go through `strtod` in the reference and Rust's parser here. Both round
   decimal forms correctly (2,724 literals in the gate agree); `strtod` would also take
   hexadecimal floats, which the lexer never produces.
+
+M3.4 is the largest slice: about 52k lines of reference in `typing/expr`, `typing/stmt`,
+`typing/item`, `typing/pattern` and the files beside them. Expressions, statements and
+blocks type each other through callbacks, so most of it can only be compared once it is
+all there. It is cut so that everything that can be compared alone is compared first:
+
+| Part | Reference source | Lines | State |
+| --- | --- | --- | --- |
+| a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | literals and patterns done; the rest next |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | |
+| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
+
+Part b calls into code that belongs to M3.5 (`memory/regions`, `memory/calls`,
+`memory/borrow_bind`, `contracts/contract_check`, `keys/key_paths`, `caps`); what it needs
+from there is ported with it.
+
+What M3.4a has so far:
+
+- `uv-analysis::typing::literals`: the type of a literal, the check of a literal against
+  an expected type, and where `null` is expected. Compared for every literal token of the
+  corpus, the lexical cases and the 235 literal files, against 30 expected types each.
+- `uv-analysis::typing::pattern`: typing a pattern against a type (with the merging of
+  bindings across union members), irrefutability, and whether an enum or modal pattern
+  covers its variant or state. The oracle gained a `patterns` mode that types each
+  pattern written in a module's bodies against each of the module's types;
+  `tools/gen_pattern_cases.py` writes 8 cases with 134 patterns.
+- `uv-analysis::typing::expr_result`: the result of typing an expression. It keeps the
+  reference's shape (a flag, an optional rule, a type, detail) rather than a `Result`,
+  because the reference sets these independently and 36k lines of callers read them.
 
 Two pieces of reference behaviour are reproduced on purpose.
 

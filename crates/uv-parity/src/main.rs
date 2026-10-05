@@ -71,6 +71,13 @@ use uv_analysis::layout::value_bits::{
     decode_string_literal_bytes, encode_const, valid_value, value_bits, EnumPayloadVal, RawPtrVal, Value, ValueRangeKind,
 };
 use uv_analysis::typing::type_lookup::lookup_enum_decl;
+use uv_analysis::typing::literals::{check_literal_expr, null_literal_expected, type_literal_expr};
+use uv_analysis::typing::types::{make_type_perm, make_type_ptr};
+use uv_source::ast::LiteralExpr;
+use uv_analysis::typing::pattern::{
+    enum_pattern_covers_variant, irrefutable_pattern, modal_pattern_covers_state, type_pattern_against_type,
+};
+use uv_source::ast::{BlockPtr, ExprNode, ExprPtr, PatternNode, PatternPtr, Stmt};
 use uv_analysis::typing::types::{make_type_raw_ptr, PtrState, RawPtrQual};
 use uv_source::ast::{
     ASTItem, ClassItem, ExternItem, GenericParams, Param, Receiver, RecordMember, StateMember, TypeParam, TypePtr,
@@ -419,7 +426,9 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
         }
         ctx.sigma.mods = resolved.modules;
         populate_sigma(&mut ctx);
-        if mode == "values" {
+        if mode == "patterns" {
+            dump_patterns(out, &mut ctx, &name_maps.name_maps);
+        } else if mode == "values" {
             dump_values(out, &mut ctx, &name_maps.name_maps);
         } else if mode == "relations" {
             dump_relations(out, &mut ctx, &name_maps.name_maps);
@@ -1051,6 +1060,10 @@ fn dump_contract(out: &mut String, owner: &str, contract: &Option<ContractClause
     out.push('\n');
 }
 
+fn flag_bit(out: &mut String, set: bool) {
+    out.push(if set { '1' } else { '0' });
+}
+
 fn flag(out: &mut String, set: bool, mark: char) {
     out.push(if set { mark } else { '-' });
 }
@@ -1616,6 +1629,42 @@ fn dump_consts(out: &mut String, label: &str, path: &str) -> Result<(), String> 
         if bits.is_some() {
             let _ = write!(out, "\traw={}", hex(&bits));
         }
+        let literal = LiteralExpr { literal: token.clone() };
+        let typed = type_literal_expr(&literal);
+        if typed.ok {
+            let _ = write!(out, "\ttype={}", escape(&type_to_string(&typed.r#type)));
+        } else {
+            let _ = write!(out, "\ttype=fail:{}", diag_or(typed.diag_id));
+        }
+        let mut expected: Vec<(&str, TypeRef)> = PRIMS.iter().map(|prim| (*prim, make_type_prim(prim))).collect();
+        let view = make_type_string(Some(StringState::View));
+        expected.extend([
+            ("view", view.clone()),
+            ("managed", make_type_string(Some(StringState::Managed))),
+            ("text", make_type_string(None)),
+            ("raw", raw.clone()),
+            ("uniq-raw", make_type_perm(Permission::Unique, raw.clone())),
+            ("ptr", make_type_ptr(make_type_prim("u8"), None)),
+            ("uniq-i64", make_type_perm(Permission::Unique, make_type_prim("i64"))),
+            ("const-f64", make_type_perm(Permission::Const, make_type_prim("f64"))),
+            ("const-view", make_type_perm(Permission::Const, view)),
+            ("none", None),
+        ]);
+        let (mut accepted, mut rejected) = (String::new(), String::new());
+        for (name, ty) in &expected {
+            match check_literal_expr(&literal, ty) {
+                Ok(()) => {
+                    let _ = write!(accepted, " {name}");
+                }
+                Err(Some(diag_id)) => {
+                    let _ = write!(rejected, " {name}:{diag_id}");
+                }
+                Err(None) => {}
+            }
+        }
+        let _ = write!(out, "\tok={accepted}\tno={rejected}\tnull=");
+        flag_bit(out, null_literal_expected(&raw));
+        flag_bit(out, null_literal_expected(&expected[0].1));
         if token.kind == K::StringLiteral {
             let _ = write!(out, "\tstr={}", hex(&decode_string_literal_bytes(&token.lexeme)));
         }
@@ -1732,6 +1781,116 @@ fn dump_values(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMap
                     flag(out, valid_value(ctx, ty, &vec![0; size + 1]), 'l');
                 }
                 None => out.push('-'),
+            }
+            out.push('\n');
+        }
+    }
+}
+
+// ---- patterns; see `DumpPatterns` in the oracle ----
+
+fn collect_expr_patterns(expr: &ExprPtr, out: &mut Vec<PatternPtr>) {
+    match expr.as_deref().map(|expr| &expr.node) {
+        Some(ExprNode::IfCaseExpr(node)) => out.extend(node.cases.iter().map(|clause| clause.pattern.clone())),
+        Some(ExprNode::IfIsExpr(node)) => out.push(node.pattern.clone()),
+        Some(ExprNode::LoopIterExpr(node)) => out.push(node.pattern.clone()),
+        _ => {}
+    }
+}
+
+fn collect_block_patterns(block: &BlockPtr, out: &mut Vec<PatternPtr>) {
+    let Some(block) = block.as_deref() else {
+        return;
+    };
+    for stmt in &block.stmts {
+        match stmt {
+            Stmt::LetStmt(node) => {
+                out.push(node.binding.pat.clone());
+                collect_expr_patterns(&node.binding.init, out);
+            }
+            Stmt::VarStmt(node) => {
+                out.push(node.binding.pat.clone());
+                collect_expr_patterns(&node.binding.init, out);
+            }
+            Stmt::ExprStmt(node) => collect_expr_patterns(&node.value, out),
+            _ => {}
+        }
+    }
+    collect_expr_patterns(&block.tail_opt, out);
+}
+
+/// The position of a pattern's form among the reference's alternatives.
+fn pattern_index(pattern: &PatternPtr) -> usize {
+    match pattern.as_deref().map(|pattern| &pattern.node) {
+        None => 99,
+        Some(PatternNode::LiteralPattern(_)) => 0,
+        Some(PatternNode::WildcardPattern(_)) => 1,
+        Some(PatternNode::IdentifierPattern(_)) => 2,
+        Some(PatternNode::TypedPattern(_)) => 3,
+        Some(PatternNode::SpliceExprNode(_)) => 4,
+        Some(PatternNode::TuplePattern(_)) => 5,
+        Some(PatternNode::RecordPattern(_)) => 6,
+        Some(PatternNode::EnumPattern(_)) => 7,
+        Some(PatternNode::ModalPattern(_)) => 8,
+        Some(PatternNode::RangePattern(_)) => 9,
+    }
+}
+
+fn dump_patterns(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
+    for index in 0..ctx.sigma.mods.len() {
+        let module = ctx.sigma.mods[index].clone();
+        dump_line("X", &module.path, out);
+        ctx.current_module = module.path.clone();
+        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        ctx.scopes = vec![Scope::new(), names, universe_bindings()];
+        let ctx = &*ctx;
+        let types: Vec<TypeRef> =
+            collect_written_types(&module).iter().filter_map(|(_, written)| lower_type(ctx, written).ok()).collect();
+        let mut patterns: Vec<PatternPtr> = Vec::new();
+        for item in &module.items {
+            match item {
+                ASTItem::StaticDecl(node) => patterns.push(node.binding.pat.clone()),
+                ASTItem::ProcedureDecl(node) => collect_block_patterns(&node.body, &mut patterns),
+                ASTItem::RecordDecl(node) => {
+                    for member in &node.members {
+                        if let RecordMember::MethodDecl(method) = member {
+                            collect_block_patterns(&method.body, &mut patterns);
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+        let types = &types[..types.len().min(48)];
+        for (j, ty) in types.iter().enumerate() {
+            let _ = writeln!(out, "PY\t{j}\t{}", escape(&type_to_string(ty)));
+        }
+        for (i, pattern) in patterns.iter().enumerate().take(96) {
+            let _ = write!(out, "PT\t{i}\t{}", pattern_index(pattern));
+            for (j, ty) in types.iter().enumerate() {
+                let typed = type_pattern_against_type(ctx, pattern, ty);
+                let irrefutable = irrefutable_pattern(ctx, pattern, ty);
+                let covers = enum_pattern_covers_variant(ctx, pattern, ty);
+                let covers_state = modal_pattern_covers_state(ctx, pattern, ty);
+                if matches!(typed, Err(None)) && !irrefutable && !covers && !covers_state {
+                    continue;
+                }
+                let _ = write!(out, "\t{j}:");
+                match &typed {
+                    Ok(bindings) => {
+                        out.push_str("ok");
+                        for (name, ty) in bindings {
+                            let _ = write!(out, " {name}={}", escape(&type_to_string(ty)));
+                        }
+                    }
+                    Err(diag_id) => {
+                        let _ = write!(out, "fail {}", diag_or(*diag_id));
+                    }
+                }
+                out.push_str(" /");
+                flag(out, irrefutable, 'i');
+                flag(out, covers, 'e');
+                flag(out, covers_state, 'm');
             }
             out.push('\n');
         }
@@ -1872,7 +2031,7 @@ fn run() -> Result<(), String> {
             dump_sigma(&mut out);
             stdout.write_all(out.as_bytes()).map_err(|err| err.to_string())
         }
-        Some(mode @ ("comptime" | "resolve" | "types" | "relations" | "values")) if args.len() >= 3 => {
+        Some(mode @ ("comptime" | "resolve" | "types" | "relations" | "values" | "patterns")) if args.len() >= 3 => {
             let list = std::fs::read_to_string(&args[2]).map_err(|err| err.to_string())?;
             let mut block: Vec<&str> = Vec::new();
             for line in list.lines() {

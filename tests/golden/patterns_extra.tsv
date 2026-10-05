@@ -1,0 +1,389 @@
+F	/w/target/patcases/bindings/Ultraviolet.toml
+X	["App"]
+PY	0	i32
+PY	1	i32
+PY	2	i32
+PY	3	bool
+PY	4	T
+PY	5	i32
+PY	6	i32
+PY	7	bool
+PY	8	i32
+PY	9	i32
+PY	10	T
+PY	11	T
+PY	12	(T, bool)
+PY	13	i32
+PY	14	(i32, bool)
+PY	15	T
+PY	16	i32
+PY	17	unique i32
+PY	18	shared App::Point
+PY	19	App::Point
+PY	20	(i32, bool)
+PY	21	bool | i32
+PY	22	const (i32, bool)
+PY	23	()
+PY	24	App::Shape
+PY	25	unique (i32, App::Point)
+PY	26	i32
+PY	27	i32
+PY	28	i32
+PT	0	2	0:ok chosen=i32 /i--	1:ok chosen=i32 /i--	2:ok chosen=i32 /i--	3:ok chosen=bool /i--	4:ok chosen=T /i--	5:ok chosen=i32 /i--	6:ok chosen=i32 /i--	7:ok chosen=bool /i--	8:ok chosen=i32 /i--	9:ok chosen=i32 /i--	10:ok chosen=T /i--	11:ok chosen=T /i--	12:ok chosen=(T, bool) /i--	13:ok chosen=i32 /i--	14:ok chosen=(i32, bool) /i--	15:ok chosen=T /i--	16:ok chosen=i32 /i--	17:ok chosen=unique i32 /i--	18:ok chosen=shared App::Point /i--	19:ok chosen=App::Point /i--	20:ok chosen=(i32, bool) /i--	21:ok chosen=bool | i32 /i--	22:ok chosen=const (i32, bool) /i--	23:ok chosen=() /i--	24:ok chosen=App::Shape /i--	25:ok chosen=unique (i32, App::Point) /i--	26:ok chosen=i32 /i--	27:ok chosen=i32 /i--	28:ok chosen=i32 /i--
+PT	1	1	0:ok /i--	1:ok /i--	2:ok /i--	3:ok /i--	4:ok /i--	5:ok /i--	6:ok /i--	7:ok /i--	8:ok /i--	9:ok /i--	10:ok /i--	11:ok /i--	12:ok /i--	13:ok /i--	14:ok /i--	15:ok /i--	16:ok /i--	17:ok /i--	18:ok /i--	19:ok /i--	20:ok /i--	21:ok /i--	22:ok /i--	23:ok /i--	24:ok /i--	25:ok /i--	26:ok /i--	27:ok /i--	28:ok /i--
+PT	2	2	0:ok x=i32 /i--	1:ok x=i32 /i--	2:ok x=i32 /i--	3:ok x=bool /i--	4:ok x=T /i--	5:ok x=i32 /i--	6:ok x=i32 /i--	7:ok x=bool /i--	8:ok x=i32 /i--	9:ok x=i32 /i--	10:ok x=T /i--	11:ok x=T /i--	12:ok x=(T, bool) /i--	13:ok x=i32 /i--	14:ok x=(i32, bool) /i--	15:ok x=T /i--	16:ok x=i32 /i--	17:ok x=unique i32 /i--	18:ok x=shared App::Point /i--	19:ok x=App::Point /i--	20:ok x=(i32, bool) /i--	21:ok x=bool | i32 /i--	22:ok x=const (i32, bool) /i--	23:ok x=() /i--	24:ok x=App::Shape /i--	25:ok x=unique (i32, App::Point) /i--	26:ok x=i32 /i--	27:ok x=i32 /i--	28:ok x=i32 /i--
+PT	3	3	0:ok x=i32 /i--	1:ok x=i32 /i--	2:ok x=i32 /i--	5:ok x=i32 /i--	6:ok x=i32 /i--	8:ok x=i32 /i--	9:ok x=i32 /i--	13:ok x=i32 /i--	16:ok x=i32 /i--	17:ok x=unique i32 /i--	21:ok x=i32 /---	26:ok x=i32 /i--	27:ok x=i32 /i--	28:ok x=i32 /i--
+PT	4	3	3:ok x=bool /i--	7:ok x=bool /i--	21:ok x=bool /---
+PT	5	3	0:ok /i--	1:ok /i--	2:ok /i--	5:ok /i--	6:ok /i--	8:ok /i--	9:ok /i--	13:ok /i--	16:ok /i--	17:ok /i--	21:ok /---	26:ok /i--	27:ok /i--	28:ok /i--
+PT	6	3	18:ok p=shared App::Point /i--	19:ok p=App::Point /i--
+PT	7	3	14:ok t=(i32, bool) /i--	20:ok t=(i32, bool) /i--	22:ok t=const (i32, bool) /i--
+PT	8	3
+PT	9	3	21:fail - /i--
+F	/w/target/patcases/enums/Ultraviolet.toml
+X	["App"]
+PY	0	i32
+PY	1	i32
+PY	2	i32
+PY	3	bool
+PY	4	T
+PY	5	i32
+PY	6	i32
+PY	7	bool
+PY	8	i32
+PY	9	i32
+PY	10	T
+PY	11	T
+PY	12	(T, bool)
+PY	13	i32
+PY	14	(i32, bool)
+PY	15	T
+PY	16	App::Shape
+PY	17	unique App::Shape
+PY	18	App::Opt<i32>
+PY	19	App::Opt<App::Point>
+PY	20	App::Opt<(i32, bool)>
+PY	21	App::Opt
+PY	22	App::Opt<i32, bool>
+PY	23	App::Point
+PY	24	i32 | App::Shape
+PY	25	App::Opt<App::Shape>
+PY	26	const App::Opt<i32>
+PY	27	i32
+PY	28	i32
+PY	29	i32
+PT	0	2	0:ok chosen=i32 /i--	1:ok chosen=i32 /i--	2:ok chosen=i32 /i--	3:ok chosen=bool /i--	4:ok chosen=T /i--	5:ok chosen=i32 /i--	6:ok chosen=i32 /i--	7:ok chosen=bool /i--	8:ok chosen=i32 /i--	9:ok chosen=i32 /i--	10:ok chosen=T /i--	11:ok chosen=T /i--	12:ok chosen=(T, bool) /i--	13:ok chosen=i32 /i--	14:ok chosen=(i32, bool) /i--	15:ok chosen=T /i--	16:ok chosen=App::Shape /i--	17:ok chosen=unique App::Shape /i--	18:ok chosen=App::Opt<i32> /i--	19:ok chosen=App::Opt<App::Point> /i--	20:ok chosen=App::Opt<(i32, bool)> /i--	21:ok chosen=App::Opt /i--	22:ok chosen=App::Opt<i32, bool> /i--	23:ok chosen=App::Point /i--	24:ok chosen=i32 | App::Shape /i--	25:ok chosen=App::Opt<App::Shape> /i--	26:ok chosen=const App::Opt<i32> /i--	27:ok chosen=i32 /i--	28:ok chosen=i32 /i--	29:ok chosen=i32 /i--
+PT	1	7	16:ok /-e-	17:ok /---	24:ok /---
+PT	2	7	16:ok r=i32 /-e-	17:ok r=unique i32 /---	24:ok r=i32 /---
+PT	3	7	16:ok /---	17:ok /---	24:ok /---
+PT	4	7	16:ok /-e-	17:ok /---	24:ok /---
+PT	5	7
+PT	6	7
+PT	7	7	16:ok a=i32 b=bool /-e-	17:ok a=unique i32 b=unique bool /---	24:ok a=i32 b=bool /---
+PT	8	7
+PT	9	7	16:ok a=i32 /---	17:ok a=unique i32 /---	24:ok a=i32 /---
+PT	10	7	16:ok w=i32 h=i32 /-e-	17:ok w=unique i32 h=unique i32 /---	24:ok w=i32 h=i32 /---
+PT	11	7	16:ok w=i32 /-e-	17:ok w=unique i32 /---	24:ok w=i32 /---
+PT	12	7	16:ok h=i32 /---	17:ok h=unique i32 /---	24:ok h=i32 /---
+PT	13	7
+PT	14	7
+PT	15	7
+PT	16	7
+PT	17	7	18:ok /-e-	19:ok /-e-	20:ok /-e-	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---	25:ok /-e-	26:ok /---
+PT	18	7	18:ok v=i32 /-e-	19:ok v=App::Point /-e-	20:ok v=(i32, bool) /-e-	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---	25:ok v=App::Shape /-e-	26:ok v=const i32 /---
+PT	19	7	19:ok x=i32 y=i32 /-e-	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---
+PT	20	7	20:ok a=i32 b=bool /-e-	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---
+PT	21	7	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---	25:ok r=i32 /---
+PT	22	7	18:ok left=i32 right=(i32, bool) /-e-	19:ok left=App::Point right=(App::Point, bool) /-e-	20:ok left=(i32, bool) right=((i32, bool), bool) /-e-	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---	25:ok left=App::Shape right=(App::Shape, bool) /-e-	26:ok left=const i32 right=const (i32, bool) /---
+PT	23	7	18:ok left=i32 a=i32 b=bool /-e-	19:ok left=App::Point a=App::Point b=bool /-e-	20:ok left=(i32, bool) a=(i32, bool) b=bool /-e-	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---	25:ok left=App::Shape a=App::Shape b=bool /-e-	26:ok left=const i32 a=const i32 b=const bool /---
+PT	24	7	18:ok right=(i32, bool) /---	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---	26:ok right=const (i32, bool) /---
+PT	25	7	18:ok /---	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---	26:ok /---
+PT	26	7	18:ok /-e-	19:ok /-e-	20:ok /-e-	21:fail E-TYP-2303 /---	22:fail E-TYP-2303 /---	25:ok /-e-	26:ok /---
+F	/w/target/patcases/literals/Ultraviolet.toml
+X	["App"]
+PY	0	i32
+PY	1	i32
+PY	2	i32
+PY	3	bool
+PY	4	T
+PY	5	i32
+PY	6	i32
+PY	7	bool
+PY	8	i32
+PY	9	i32
+PY	10	T
+PY	11	T
+PY	12	(T, bool)
+PY	13	i32
+PY	14	(i32, bool)
+PY	15	T
+PY	16	i32
+PY	17	i8
+PY	18	u8
+PY	19	u64
+PY	20	f32
+PY	21	f64
+PY	22	bool
+PY	23	char
+PY	24	string@View
+PY	25	string
+PY	26	()
+PY	27	unique i32
+PY	28	bool | i32
+PY	29	i32 where { ... }
+PY	30	(i32, bool)
+PY	31	i32
+PY	32	i32
+PY	33	i32
+PT	0	2	0:ok chosen=i32 /i--	1:ok chosen=i32 /i--	2:ok chosen=i32 /i--	3:ok chosen=bool /i--	4:ok chosen=T /i--	5:ok chosen=i32 /i--	6:ok chosen=i32 /i--	7:ok chosen=bool /i--	8:ok chosen=i32 /i--	9:ok chosen=i32 /i--	10:ok chosen=T /i--	11:ok chosen=T /i--	12:ok chosen=(T, bool) /i--	13:ok chosen=i32 /i--	14:ok chosen=(i32, bool) /i--	15:ok chosen=T /i--	16:ok chosen=i32 /i--	17:ok chosen=i8 /i--	18:ok chosen=u8 /i--	19:ok chosen=u64 /i--	20:ok chosen=f32 /i--	21:ok chosen=f64 /i--	22:ok chosen=bool /i--	23:ok chosen=char /i--	24:ok chosen=string@View /i--	25:ok chosen=string /i--	26:ok chosen=() /i--	27:ok chosen=unique i32 /i--	28:ok chosen=bool | i32 /i--	29:ok chosen=i32 where { ... } /i--	30:ok chosen=(i32, bool) /i--	31:ok chosen=i32 /i--	32:ok chosen=i32 /i--	33:ok chosen=i32 /i--
+PT	1	0	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	27:ok /---	28:ok /---	31:ok /---	32:ok /---	33:ok /---
+PT	2	0	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	27:ok /---	28:ok /---	31:ok /---	32:ok /---	33:ok /---
+PT	3	0	18:ok /---
+PT	4	0
+PT	5	0	20:ok /---
+PT	6	0	21:ok /---
+PT	7	0	3:ok /---	7:ok /---	22:ok /---	28:ok /---
+PT	8	0	23:ok /---
+PT	9	0	24:ok /---	25:ok /---
+PT	10	0	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	27:ok /---	28:ok /---	31:ok /---	32:ok /---	33:ok /---
+PT	11	0
+F	/w/target/patcases/modals/Ultraviolet.toml
+X	["App"]
+PY	0	i32
+PY	1	i32
+PY	2	i32
+PY	3	bool
+PY	4	T
+PY	5	i32
+PY	6	i32
+PY	7	bool
+PY	8	i32
+PY	9	i32
+PY	10	T
+PY	11	T
+PY	12	(T, bool)
+PY	13	i32
+PY	14	(i32, bool)
+PY	15	T
+PY	16	App::Door
+PY	17	App::Door@Open
+PY	18	App::Door@Closed
+PY	19	unique App::Door
+PY	20	App::Cell<i32>
+PY	21	App::Cell<i32>@Full
+PY	22	App::Cell<App::Point>
+PY	23	App::Cell<i32>@Empty
+PY	24	App::Point
+PY	25	i32 | App::Door
+PY	26	App::Cell<(i32, bool)>@Full
+PY	27	i32
+PY	28	i32
+PY	29	i32
+PT	0	2	0:ok chosen=i32 /i--	1:ok chosen=i32 /i--	2:ok chosen=i32 /i--	3:ok chosen=bool /i--	4:ok chosen=T /i--	5:ok chosen=i32 /i--	6:ok chosen=i32 /i--	7:ok chosen=bool /i--	8:ok chosen=i32 /i--	9:ok chosen=i32 /i--	10:ok chosen=T /i--	11:ok chosen=T /i--	12:ok chosen=(T, bool) /i--	13:ok chosen=i32 /i--	14:ok chosen=(i32, bool) /i--	15:ok chosen=T /i--	16:ok chosen=App::Door /i--	17:ok chosen=App::Door@Open /i--	18:ok chosen=App::Door@Closed /i--	19:ok chosen=unique App::Door /i--	20:ok chosen=App::Cell<i32> /i--	21:ok chosen=App::Cell<i32>@Full /i--	22:ok chosen=App::Cell<App::Point> /i--	23:ok chosen=App::Cell<i32>@Empty /i--	24:ok chosen=App::Point /i--	25:ok chosen=i32 | App::Door /i--	26:ok chosen=App::Cell<(i32, bool)>@Full /i--	27:ok chosen=i32 /i--	28:ok chosen=i32 /i--	29:ok chosen=i32 /i--
+PT	1	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:ok /--m	17:ok /i-m	18:fail - /--m	19:ok /--m	20:fail - /--m	21:fail - /--m	22:fail - /--m	23:fail - /--m	24:fail - /--m	25:ok /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	2	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:ok /--m	17:fail - /--m	18:ok /i-m	19:ok /--m	20:fail - /--m	21:fail - /--m	22:fail - /--m	23:fail - /--m	24:fail - /--m	25:ok /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	3	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:ok width=i32 /--m	17:ok width=i32 /i-m	18:fail - /--m	19:ok width=unique i32 /--m	20:fail - /--m	21:fail - /--m	22:fail - /--m	23:fail - /--m	24:fail - /--m	25:ok width=i32 /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	4	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:ok width=i32 label=(i32, bool) /--m	17:ok width=i32 label=(i32, bool) /i-m	18:fail - /--m	19:ok width=unique i32 label=unique (i32, bool) /--m	20:fail - /--m	21:fail - /--m	22:fail - /--m	23:fail - /--m	24:fail - /--m	25:ok width=i32 label=(i32, bool) /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	5	8	16:ok /---	17:ok /---	19:ok /---	25:ok /---
+PT	6	8	16:ok a=i32 b=bool /--m	17:ok a=i32 b=bool /i-m	19:ok a=unique i32 b=unique bool /---	25:ok a=i32 b=bool /---
+PT	7	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:fail - /--m	17:fail - /--m	18:fail - /--m	19:fail - /--m	20:fail - /--m	21:fail - /--m	22:fail - /--m	23:fail - /--m	24:fail - /--m	25:fail - /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	8	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:fail - /--m	17:fail - /--m	18:fail - /--m	19:fail - /--m	20:fail - /--m	21:fail - /--m	22:fail - /--m	23:fail - /--m	24:fail - /--m	25:fail - /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	9	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:fail - /--m	17:fail - /--m	18:fail - /--m	19:fail - /--m	20:ok /--m	21:ok /i-m	22:ok /--m	23:fail - /--m	24:fail - /--m	25:fail - /--m	26:ok /i-m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	10	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:fail - /--m	17:fail - /--m	18:fail - /--m	19:fail - /--m	20:ok value=i32 /--m	21:ok value=i32 /i-m	22:ok value=App::Point /--m	23:fail - /--m	24:fail - /--m	25:fail - /--m	26:ok value=(i32, bool) /i-m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	11	8	22:ok x=i32 y=i32 /--m
+PT	12	8	26:ok a=i32 b=bool /i-m
+PT	13	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:fail - /--m	17:fail - /--m	18:fail - /--m	19:fail - /--m	20:ok /--m	21:fail - /--m	22:ok /--m	23:ok /i-m	24:fail - /--m	25:fail - /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	14	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:fail - /--m	17:fail - /--m	18:fail - /--m	19:fail - /--m	20:fail - /--m	21:fail - /--m	22:fail - /--m	23:fail - /--m	24:fail - /--m	25:fail - /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	15	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:ok /--m	17:ok /i-m	18:fail - /--m	19:ok /--m	20:fail - /--m	21:fail - /--m	22:fail - /--m	23:fail - /--m	24:fail - /--m	25:ok /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m	29:fail - /--m
+PT	16	3	16:ok d=App::Door@Open /---	17:ok d=App::Door@Open /i--	19:ok d=unique App::Door@Open /---	25:ok d=App::Door@Open /---
+PT	17	3	20:ok c=App::Cell<i32>@Full /---	21:ok c=App::Cell<i32>@Full /i--
+PT	18	3
+F	/w/target/patcases/ranges/Ultraviolet.toml
+X	["App"]
+PY	0	i32
+PY	1	i32
+PY	2	i32
+PY	3	bool
+PY	4	T
+PY	5	i32
+PY	6	i32
+PY	7	bool
+PY	8	i32
+PY	9	i32
+PY	10	T
+PY	11	T
+PY	12	(T, bool)
+PY	13	i32
+PY	14	(i32, bool)
+PY	15	T
+PY	16	i32
+PY	17	u8
+PY	18	i64
+PY	19	usize
+PY	20	char
+PY	21	f32
+PY	22	bool
+PY	23	unique i32
+PY	24	i32 | u8
+PY	25	(i32, i32)
+PY	26	i32
+PY	27	i32
+PY	28	i32
+PT	0	2	0:ok chosen=i32 /i--	1:ok chosen=i32 /i--	2:ok chosen=i32 /i--	3:ok chosen=bool /i--	4:ok chosen=T /i--	5:ok chosen=i32 /i--	6:ok chosen=i32 /i--	7:ok chosen=bool /i--	8:ok chosen=i32 /i--	9:ok chosen=i32 /i--	10:ok chosen=T /i--	11:ok chosen=T /i--	12:ok chosen=(T, bool) /i--	13:ok chosen=i32 /i--	14:ok chosen=(i32, bool) /i--	15:ok chosen=T /i--	16:ok chosen=i32 /i--	17:ok chosen=u8 /i--	18:ok chosen=i64 /i--	19:ok chosen=usize /i--	20:ok chosen=char /i--	21:ok chosen=f32 /i--	22:ok chosen=bool /i--	23:ok chosen=unique i32 /i--	24:ok chosen=i32 | u8 /i--	25:ok chosen=(i32, i32) /i--	26:ok chosen=i32 /i--	27:ok chosen=i32 /i--	28:ok chosen=i32 /i--
+PT	1	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	2	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	3	9	0:fail RangePattern-Empty /---	1:fail RangePattern-Empty /---	2:fail RangePattern-Empty /---	5:fail RangePattern-Empty /---	6:fail RangePattern-Empty /---	8:fail RangePattern-Empty /---	9:fail RangePattern-Empty /---	13:fail RangePattern-Empty /---	16:fail RangePattern-Empty /---	17:fail RangePattern-Empty /---	18:fail RangePattern-Empty /---	19:fail RangePattern-Empty /---	23:fail RangePattern-Empty /---	24:fail RangePattern-Empty /---	26:fail RangePattern-Empty /---	27:fail RangePattern-Empty /---	28:fail RangePattern-Empty /---
+PT	4	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	5	9	0:fail RangePattern-Empty /---	1:fail RangePattern-Empty /---	2:fail RangePattern-Empty /---	5:fail RangePattern-Empty /---	6:fail RangePattern-Empty /---	8:fail RangePattern-Empty /---	9:fail RangePattern-Empty /---	13:fail RangePattern-Empty /---	16:fail RangePattern-Empty /---	17:fail RangePattern-Empty /---	18:fail RangePattern-Empty /---	19:fail RangePattern-Empty /---	23:fail RangePattern-Empty /---	24:fail RangePattern-Empty /---	26:fail RangePattern-Empty /---	27:fail RangePattern-Empty /---	28:fail RangePattern-Empty /---
+PT	6	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	7	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	8	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	9	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	10	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	11	9	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	17:ok /---	18:ok /---	19:ok /---	23:ok /---	24:ok /---	26:ok /---	27:ok /---	28:ok /---
+F	/w/target/patcases/records/Ultraviolet.toml
+X	["App"]
+PY	0	i32
+PY	1	i32
+PY	2	i32
+PY	3	bool
+PY	4	T
+PY	5	i32
+PY	6	i32
+PY	7	bool
+PY	8	i32
+PY	9	i32
+PY	10	T
+PY	11	T
+PY	12	(T, bool)
+PY	13	i32
+PY	14	(i32, bool)
+PY	15	T
+PY	16	App::Point
+PY	17	unique App::Point
+PY	18	App::Hidden
+PY	19	App::Box<i32>
+PY	20	App::Box<App::Point>
+PY	21	App::Box<(i32, bool)>
+PY	22	App::Shape
+PY	23	(i32, i32)
+PY	24	App::Hidden | App::Point
+PY	25	shared App::Box<i32>
+PY	26	i32
+PY	27	i32
+PY	28	i32
+PT	0	6	16:ok lx=i32 ly=i32 /i--	17:ok lx=unique i32 ly=unique i32 /i--	24:ok lx=i32 ly=i32 /---
+PT	1	6
+PT	2	2	0:ok chosen=i32 /i--	1:ok chosen=i32 /i--	2:ok chosen=i32 /i--	3:ok chosen=bool /i--	4:ok chosen=T /i--	5:ok chosen=i32 /i--	6:ok chosen=i32 /i--	7:ok chosen=bool /i--	8:ok chosen=i32 /i--	9:ok chosen=i32 /i--	10:ok chosen=T /i--	11:ok chosen=T /i--	12:ok chosen=(T, bool) /i--	13:ok chosen=i32 /i--	14:ok chosen=(i32, bool) /i--	15:ok chosen=T /i--	16:ok chosen=App::Point /i--	17:ok chosen=unique App::Point /i--	18:ok chosen=App::Hidden /i--	19:ok chosen=App::Box<i32> /i--	20:ok chosen=App::Box<App::Point> /i--	21:ok chosen=App::Box<(i32, bool)> /i--	22:ok chosen=App::Shape /i--	23:ok chosen=(i32, i32) /i--	24:ok chosen=App::Hidden | App::Point /i--	25:ok chosen=shared App::Box<i32> /i--	26:ok chosen=i32 /i--	27:ok chosen=i32 /i--	28:ok chosen=i32 /i--
+PT	3	6	16:ok x=i32 y=i32 /i--	17:ok x=unique i32 y=unique i32 /i--	24:ok x=i32 y=i32 /---
+PT	4	6	16:ok x=i32 /i--	17:ok x=unique i32 /i--	24:ok x=i32 /---
+PT	5	6	16:ok y=i32 /---	17:ok y=unique i32 /---	24:ok y=i32 /---
+PT	6	6	16:ok a=i32 b=i32 /i--	17:ok a=unique i32 b=unique i32 /i--	24:ok a=i32 b=i32 /---
+PT	7	6	16:fail RecordPattern-UnknownField /---	17:fail RecordPattern-UnknownField /---	24:fail RecordPattern-UnknownField /---
+PT	8	6	16:ok /i--	17:ok /i--	24:ok /---
+PT	9	6	18:ok shown=i32 /i--	24:ok shown=i32 /---
+PT	10	6	18:ok secret=bool /i--	24:ok secret=bool /---
+PT	11	6	18:ok shown=i32 secret=bool /i--	24:ok shown=i32 secret=bool /---
+PT	12	6
+PT	13	6
+PT	14	6
+PT	15	6
+PT	16	6	16:ok /i--	17:ok /i--	24:ok /---
+PT	17	6	16:ok n=i32 y=i32 /i--	17:ok n=unique i32 y=unique i32 /i--	24:ok n=i32 y=i32 /---
+F	/w/target/patcases/tuples/Ultraviolet.toml
+X	["App"]
+PY	0	i32
+PY	1	i32
+PY	2	i32
+PY	3	bool
+PY	4	T
+PY	5	i32
+PY	6	i32
+PY	7	bool
+PY	8	i32
+PY	9	i32
+PY	10	T
+PY	11	T
+PY	12	(T, bool)
+PY	13	i32
+PY	14	(i32, bool)
+PY	15	T
+PY	16	()
+PY	17	(i32;)
+PY	18	(i32, bool)
+PY	19	(i32, bool, char)
+PY	20	((i32, bool), char)
+PY	21	unique (i32, bool)
+PY	22	(App::Point, App::Shape)
+PY	23	(i32, bool) | (i32, char)
+PY	24	(i32, i32)
+PY	25	(i32, (i32, i32))
+PY	26	i32
+PY	27	i32
+PY	28	i32
+PT	0	5	12:ok lp=T lq=bool /i--	14:ok lp=i32 lq=bool /i--	17:fail E-TYP-1803 /---	18:ok lp=i32 lq=bool /i--	19:fail E-TYP-1803 /---	20:ok lp=(i32, bool) lq=char /i--	21:ok lp=unique i32 lq=unique bool /i--	22:ok lp=App::Point lq=App::Shape /i--	23:ok lp=i32 lq=bool | char /---	24:ok lp=i32 lq=i32 /i--	25:ok lp=i32 lq=(i32, i32) /i--
+PT	1	5	12:ok /i--	14:ok /i--	17:fail E-TYP-1803 /---	18:ok /i--	19:fail E-TYP-1803 /---	20:ok /i--	21:ok /i--	22:ok /i--	23:ok /---	24:ok /i--	25:ok /i--
+PT	2	5	17:fail E-TYP-1803 /---	19:fail E-TYP-1803 /---	25:ok first=i32 second=i32 third=i32 /i--
+PT	3	2	0:ok chosen=i32 /i--	1:ok chosen=i32 /i--	2:ok chosen=i32 /i--	3:ok chosen=bool /i--	4:ok chosen=T /i--	5:ok chosen=i32 /i--	6:ok chosen=i32 /i--	7:ok chosen=bool /i--	8:ok chosen=i32 /i--	9:ok chosen=i32 /i--	10:ok chosen=T /i--	11:ok chosen=T /i--	12:ok chosen=(T, bool) /i--	13:ok chosen=i32 /i--	14:ok chosen=(i32, bool) /i--	15:ok chosen=T /i--	16:ok chosen=() /i--	17:ok chosen=(i32;) /i--	18:ok chosen=(i32, bool) /i--	19:ok chosen=(i32, bool, char) /i--	20:ok chosen=((i32, bool), char) /i--	21:ok chosen=unique (i32, bool) /i--	22:ok chosen=(App::Point, App::Shape) /i--	23:ok chosen=(i32, bool) | (i32, char) /i--	24:ok chosen=(i32, i32) /i--	25:ok chosen=(i32, (i32, i32)) /i--	26:ok chosen=i32 /i--	27:ok chosen=i32 /i--	28:ok chosen=i32 /i--
+PT	4	5	16:ok /i--
+PT	5	5	12:fail E-TYP-1803 /---	14:fail E-TYP-1803 /---	17:ok a=i32 /i--	18:fail E-TYP-1803 /---	19:fail E-TYP-1803 /---	20:fail E-TYP-1803 /---	21:fail E-TYP-1803 /---	22:fail E-TYP-1803 /---	23:fail E-TYP-1803 /---	24:fail E-TYP-1803 /---	25:fail E-TYP-1803 /---
+PT	6	5	12:ok a=T b=bool /i--	14:ok a=i32 b=bool /i--	17:fail E-TYP-1803 /---	18:ok a=i32 b=bool /i--	19:fail E-TYP-1803 /---	20:ok a=(i32, bool) b=char /i--	21:ok a=unique i32 b=unique bool /i--	22:ok a=App::Point b=App::Shape /i--	23:ok a=i32 b=bool | char /---	24:ok a=i32 b=i32 /i--	25:ok a=i32 b=(i32, i32) /i--
+PT	7	5	12:fail E-TYP-1803 /---	14:fail E-TYP-1803 /---	17:fail E-TYP-1803 /---	18:fail E-TYP-1803 /---	19:ok a=i32 b=bool c=char /i--	20:fail E-TYP-1803 /---	21:fail E-TYP-1803 /---	22:fail E-TYP-1803 /---	23:fail E-TYP-1803 /---	24:fail E-TYP-1803 /---	25:fail E-TYP-1803 /---
+PT	8	5	17:fail E-TYP-1803 /---	19:fail E-TYP-1803 /---	20:ok a=i32 b=bool c=char /i--
+PT	9	5	12:ok /i--	14:ok /i--	17:fail E-TYP-1803 /---	18:ok /i--	19:fail E-TYP-1803 /---	20:ok /i--	21:ok /i--	22:ok /i--	23:ok /---	24:ok /i--	25:ok /i--
+PT	10	5	12:ok a=T /i--	14:ok a=i32 /i--	17:fail E-TYP-1803 /---	18:ok a=i32 /i--	19:fail E-TYP-1803 /---	20:ok a=(i32, bool) /i--	21:ok a=unique i32 /i--	22:ok a=App::Point /i--	23:ok a=i32 /---	24:ok a=i32 /i--	25:ok a=i32 /i--
+PT	11	5	14:ok b=bool /---	17:fail E-TYP-1803 /---	18:ok b=bool /---	19:fail E-TYP-1803 /---	21:ok b=unique bool /---	23:ok b=bool | char /---	24:ok b=i32 /---	25:ok b=(i32, i32) /---
+PT	12	5	12:ok a=T /---	14:ok a=i32 /---	17:fail E-TYP-1803 /---	18:ok a=i32 /---	19:fail E-TYP-1803 /---	21:ok a=unique i32 /---	23:ok a=i32 /---
+PT	13	5	14:ok a=i32 b=bool /i--	17:fail E-TYP-1803 /---	18:ok a=i32 b=bool /i--	19:fail E-TYP-1803 /---	21:ok a=unique i32 b=unique bool /i--	23:ok a=i32 b=bool /---
+PT	14	5	17:fail E-TYP-1803 /---	19:fail E-TYP-1803 /---	22:ok p=App::Point /---
+PT	15	5	17:fail E-TYP-1803 /---	19:fail E-TYP-1803 /---	25:ok a=i32 b=i32 c=i32 /i--
+PT	16	5	14:ok b=bool /---	17:fail E-TYP-1803 /---	18:ok b=bool /---	19:fail E-TYP-1803 /---	21:ok b=unique bool /---	23:ok b=bool | char /---	24:ok b=i32 /---	25:ok b=(i32, i32) /---
+F	/w/target/patcases/unions/Ultraviolet.toml
+X	["App"]
+PY	0	i32
+PY	1	i32
+PY	2	i32
+PY	3	bool
+PY	4	T
+PY	5	i32
+PY	6	i32
+PY	7	bool
+PY	8	i32
+PY	9	i32
+PY	10	T
+PY	11	T
+PY	12	(T, bool)
+PY	13	i32
+PY	14	(i32, bool)
+PY	15	T
+PY	16	bool | i32
+PY	17	App::Point | App::Shape
+PY	18	i32 | (i32, bool)
+PY	19	(i32, bool) | (i32, char)
+PY	20	App::Opt<bool> | App::Opt<i32>
+PY	21	i32 | App::Hidden | App::Point
+PY	22	App::Door@Closed | App::Door@Open
+PY	23	i32 | string@View
+PY	24	App::Opt<i32> | App::Shape
+PY	25	(bool, App::Point) | (i32, App::Point)
+PY	26	i32
+PY	27	i32
+PY	28	i32
+PT	0	2	0:ok chosen=i32 /i--	1:ok chosen=i32 /i--	2:ok chosen=i32 /i--	3:ok chosen=bool /i--	4:ok chosen=T /i--	5:ok chosen=i32 /i--	6:ok chosen=i32 /i--	7:ok chosen=bool /i--	8:ok chosen=i32 /i--	9:ok chosen=i32 /i--	10:ok chosen=T /i--	11:ok chosen=T /i--	12:ok chosen=(T, bool) /i--	13:ok chosen=i32 /i--	14:ok chosen=(i32, bool) /i--	15:ok chosen=T /i--	16:ok chosen=bool | i32 /i--	17:ok chosen=App::Point | App::Shape /i--	18:ok chosen=i32 | (i32, bool) /i--	19:ok chosen=(i32, bool) | (i32, char) /i--	20:ok chosen=App::Opt<bool> | App::Opt<i32> /i--	21:ok chosen=i32 | App::Hidden | App::Point /i--	22:ok chosen=App::Door@Closed | App::Door@Open /i--	23:ok chosen=i32 | string@View /i--	24:ok chosen=App::Opt<i32> | App::Shape /i--	25:ok chosen=(bool, App::Point) | (i32, App::Point) /i--	26:ok chosen=i32 /i--	27:ok chosen=i32 /i--	28:ok chosen=i32 /i--
+PT	1	3	0:ok x=i32 /i--	1:ok x=i32 /i--	2:ok x=i32 /i--	5:ok x=i32 /i--	6:ok x=i32 /i--	8:ok x=i32 /i--	9:ok x=i32 /i--	13:ok x=i32 /i--	16:ok x=i32 /---	18:ok x=i32 /---	21:ok x=i32 /---	23:ok x=i32 /---	26:ok x=i32 /i--	27:ok x=i32 /i--	28:ok x=i32 /i--
+PT	2	3	3:ok x=bool /i--	7:ok x=bool /i--	16:ok x=bool /---
+PT	3	3
+PT	4	0	0:ok /---	1:ok /---	2:ok /---	5:ok /---	6:ok /---	8:ok /---	9:ok /---	13:ok /---	16:ok /---	18:ok /---	21:ok /---	23:ok /---	26:ok /---	27:ok /---	28:ok /---
+PT	5	0	3:ok /---	7:ok /---	16:ok /---
+PT	6	5	12:ok a=T b=bool /i--	14:ok a=i32 b=bool /i--	18:ok a=i32 b=bool /---	19:ok a=i32 b=bool | char /---	25:ok a=bool | i32 b=App::Point /---
+PT	7	5
+PT	8	6	17:ok x=i32 y=i32 /---	21:ok x=i32 y=i32 /---
+PT	9	7	17:ok r=i32 /---	24:ok r=i32 /---
+PT	10	7	20:ok v=bool | i32 /---	24:ok v=i32 /---
+PT	11	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:fail - /--m	17:fail - /--m	18:fail - /--m	19:fail - /--m	20:fail - /--m	21:fail - /--m	22:ok width=i32 /--m	23:fail - /--m	24:fail - /--m	25:fail - /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m
+PT	12	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m	13:fail - /--m	14:fail - /--m	15:fail - /--m	16:fail - /--m	17:fail - /--m	18:fail - /--m	19:fail - /--m	20:fail - /--m	21:fail - /--m	22:ok /--m	23:fail - /--m	24:fail - /--m	25:fail - /--m	26:fail - /--m	27:fail - /--m	28:fail - /--m
+PT	13	3	17:ok p=App::Point /---	21:ok p=App::Point /---
+PT	14	1	0:ok /i--	1:ok /i--	2:ok /i--	3:ok /i--	4:ok /i--	5:ok /i--	6:ok /i--	7:ok /i--	8:ok /i--	9:ok /i--	10:ok /i--	11:ok /i--	12:ok /i--	13:ok /i--	14:ok /i--	15:ok /i--	16:ok /i--	17:ok /i--	18:ok /i--	19:ok /i--	20:ok /i--	21:ok /i--	22:ok /i--	23:ok /i--	24:ok /i--	25:ok /i--	26:ok /i--	27:ok /i--	28:ok /i--
+PT	15	2	0:ok whole=i32 /i--	1:ok whole=i32 /i--	2:ok whole=i32 /i--	3:ok whole=bool /i--	4:ok whole=T /i--	5:ok whole=i32 /i--	6:ok whole=i32 /i--	7:ok whole=bool /i--	8:ok whole=i32 /i--	9:ok whole=i32 /i--	10:ok whole=T /i--	11:ok whole=T /i--	12:ok whole=(T, bool) /i--	13:ok whole=i32 /i--	14:ok whole=(i32, bool) /i--	15:ok whole=T /i--	16:ok whole=bool | i32 /i--	17:ok whole=App::Point | App::Shape /i--	18:ok whole=i32 | (i32, bool) /i--	19:ok whole=(i32, bool) | (i32, char) /i--	20:ok whole=App::Opt<bool> | App::Opt<i32> /i--	21:ok whole=i32 | App::Hidden | App::Point /i--	22:ok whole=App::Door@Closed | App::Door@Open /i--	23:ok whole=i32 | string@View /i--	24:ok whole=App::Opt<i32> | App::Shape /i--	25:ok whole=(bool, App::Point) | (i32, App::Point) /i--	26:ok whole=i32 /i--	27:ok whole=i32 /i--	28:ok whole=i32 /i--
+PT	16	0	23:ok /---
+PT	17	5	12:ok a=T p=bool /i--	14:ok a=i32 p=bool /i--	18:ok a=i32 p=bool /---	19:ok a=i32 p=bool | char /---	25:ok a=bool | i32 p=App::Point /---
+PT	18	7	20:ok /---	24:ok /---

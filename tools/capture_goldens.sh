@@ -108,6 +108,14 @@ for pair in comptime_projects:values comptime_cases:values_cases resolve_targete
     /w/reference/oracle/uv-oracle values "$ROOT/target/parity/${pair%%:*}.oracle.list" \
     | sed "s|$ROOT/|/w/|g" > "tests/golden/${pair##*:}.tsv"
 done
+# Pattern typing, on the project lists and on cases of its own.
+python3 tools/gen_pattern_cases.py
+./target/release/uv-parity comptime-list tests/golden/patterns_extra.list > target/parity/patterns_extra.oracle.list
+for pair in comptime_projects:patterns comptime_cases:patterns_cases resolve_targeted:patterns_targeted patterns_extra:patterns_extra; do
+  docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -v "$ROOT":"$ROOT" -e LD_LIBRARY_PATH="$ICU" uv-oracle \
+    /w/reference/oracle/uv-oracle patterns "$ROOT/target/parity/${pair%%:*}.oracle.list" \
+    | sed "s|$ROOT/|/w/|g" > "tests/golden/${pair##*:}.tsv"
+done
 run uv-oracle /w/reference/oracle/uv-oracle sigma > tests/golden/sigma.tsv
 run uv-oracle sh -c 'g++ -std=c++20 -O1 -o /tmp/probe /w/tools/oracle/unordered_probe.cpp && /tmp/probe' \
   > tests/golden/unordered_order.txt

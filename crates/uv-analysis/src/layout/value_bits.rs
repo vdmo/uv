@@ -262,7 +262,7 @@ fn parse_int_core(core: &str) -> Option<u128> {
     saw_digit.then_some(value)
 }
 
-fn parse_int_literal_value(lexeme: &str) -> Option<u128> {
+pub(crate) fn parse_int_literal_value(lexeme: &str) -> Option<u128> {
     if lexeme.is_empty() || lexeme.starts_with('-') {
         return None;
     }
