@@ -14,6 +14,7 @@ use crate::context::ScopeContext;
 use crate::typing::callbacks::{ExprTypeFn, IdentTypeFn, PlaceTypeFn, PlaceTypeResult};
 use crate::typing::expr_result::ExprTypeResult;
 use crate::typing::pending::{mark_proof_context_incomplete, pending};
+use crate::typing::stmt::return_stmt::type_return_stmt;
 use crate::typing::stmt_context::StmtTypeContext;
 use crate::typing::type_env::{bind_of, push_scope, TypeEnv};
 use crate::typing::type_equiv::type_equiv;
@@ -288,9 +289,14 @@ pub fn type_stmt(
     type_place_fn: PlaceTypeFn<'_>,
     env_ref: EnvRef<'_>,
 ) -> StmtTypeResult {
-    let _ = (ctx, type_ctx, type_expr_fn, type_ident_fn, type_place_fn, env_ref);
-    pending(stmt_kind(stmt));
-    StmtTypeResult::failed(None, env)
+    let _ = (type_ident_fn, type_place_fn, env_ref);
+    match stmt {
+        Stmt::ReturnStmt(node) => type_return_stmt(ctx, type_ctx, node, env, type_expr_fn),
+        _ => {
+            pending(stmt_kind(stmt));
+            StmtTypeResult::failed(None, env)
+        }
+    }
 }
 
 /// The proof facts a statement leaves for those after it are not tracked yet. A

@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: gate and block core in place, 1 of 4,569 bodies compared |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 573 of 4,569 bodies compared (12.5%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -404,9 +404,31 @@ Proof facts that statements leave for later ones (`FallthroughProofContextForStm
 not tracked yet. Until they are, a statement that would change them marks the proof
 context incomplete and any later proof that consults it makes the body pending.
 
-So far part b has the dispatch skeletons (`type_expr`, `type_stmt`), the statement
-context, and the block core: statement sequences, block typing with its result and
-break flow, and the loop result types.
+So far part b has:
+
+- the dispatch skeletons (`type_expr`, `type_place`, `type_stmt`) and the statement
+  context;
+- the block core: statement sequences, block typing with its result and break flow, the
+  loop result types;
+- checking an expression against an expected type (`check_expr`, `check_expr_against`):
+  literals, `null`, closures by arity, array literals and repeats, negated literals,
+  union membership, array-to-slice coercion, fresh aggregates under a permission, moved
+  unique values, and the final `E-SEM-2526`;
+- `return`, with outcome introduction (`outcome`) and array coercion
+  (`composite::arrays_slices`);
+- `move`, `copy`, and names bound in the environment as values and places.
+
+Known gaps inside what is ported, each of which makes a body pending when reached
+rather than answering: names of module-level declarations (`ValuePathType`), the proof
+of a refinement predicate, postconditions at `return`, closure capture analysis,
+provenance of returned pointers, opaque return types, attributed expressions, and the
+shared-access check under held keys.
+
+Two things the gate does not exercise yet, because the oracle's harness leaves them
+unset as well: the store of expression types (`ctx.expr_types`), which the reference
+also reads back as a cache when checking an expression a second time, and the dynamic
+contract context. Both have to be set up the way the driver does before part c is
+gated.
 
 Part b calls into code that belongs to M3.5 (`memory/regions`, `memory/calls`,
 `memory/borrow_bind`, `contracts/contract_check`, `keys/key_paths`, `caps`); what it needs

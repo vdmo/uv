@@ -38,6 +38,8 @@ pub struct StmtTypeContext<'t> {
     /// The caller's environment, which typing a statement or block updates in place:
     /// the callbacks that type sub-expressions read it too.
     pub env_ref: Option<Rc<RefCell<TypeEnv>>>,
+    /// The body returns an opaque type, whose underlying type the first `return` fixes.
+    pub opaque_return: bool,
     pub in_parallel: bool,
     pub parallel_domain: TypeRef,
     pub keys_held: bool,
