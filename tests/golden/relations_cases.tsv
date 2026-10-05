@@ -21,6 +21,14 @@ SB	1	0111	0111	1111
 SB	2	0111	0111	1111	
 SB	3	0111	0111	1111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	1000
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	0111
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	0111
+SV	3	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	3	0111
 FI	Bitcopy	1111
 FI	Clone	1111
 FI	Drop	0000
@@ -35,6 +43,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -59,6 +69,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -75,6 +87,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -91,6 +105,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -107,6 +123,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -121,6 +139,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -141,6 +161,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -155,6 +177,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -179,6 +203,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	11	11	11	
 SB	1	11	11	11	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	11
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	11
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -203,6 +231,14 @@ SB	1	1101	1101	1101
 SB	2	0010	0010	0000	
 SB	3	1101	1101	1101	
 MI	8	M::A<>-	M::F<i32;>-	M::F<string;>-	M::G<i32;>-	M::G<string;>-	M::G<i32;i32;>-	M::G<i32;string;>-	M::G<string;i32;>-	10T8
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1101
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=string => (i32, string, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=string 2=i32 => (i32, string, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	ok 0=string => (string, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=i32 1=string => (i32, string, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	1101
+SV	2	ok 0=string => (string, $t1, $t2, $t3)	ok 0=string 1=i32 => (string, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 2=string => (string, i32, string, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=string 3=string => (string, string, string, string)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 => (string, i32, $t2, $t3)	ok 0=string 1=$t0 => (string, string, $t2, $t3)	fail Syn-Call-Err
+SU	2	0010
+SV	3	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	3	1101
 FI	Bitcopy	1101
 FI	Clone	1101
 FI	Drop	0000
@@ -223,6 +259,12 @@ SB	0	100	100	000
 SB	1	011	011	011	
 SB	2	011	011	011	
 MI	8	M::A<>-	M::F<i32;>-	M::F<string;>-	M::G<i32;>-	M::G<string;>-	M::G<i32;i32;>-	M::G<i32;string;>-	M::G<string;i32;>-	10T8
+SV	0	ok 0=string => (string, $t1, $t2, $t3)	ok 0=string 1=i32 => (string, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 2=string => (string, i32, string, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=string 3=string => (string, string, string, string)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 => (string, i32, $t2, $t3)	ok 0=string 1=$t0 => (string, string, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	011
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=string => (i32, string, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=string 2=i32 => (i32, string, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	ok 0=string => (string, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=i32 1=string => (i32, string, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	011
 FI	Bitcopy	011
 FI	Clone	011
 FI	Drop	000
@@ -258,6 +300,16 @@ SB	2	00100	00100	00000
 SB	3	11011	11011	11011	
 SB	4	11011	11011	11011	
 MI	7	M::A<>-	M::F<i32;>-	M::F<string;>-	M::G<i32;>-	M::G<string;>-	M::G<i32;i32;>-	M::G<string;string;>-	10T7
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	11011
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=string => (i32, string, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=string 2=i32 => (i32, string, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	ok 0=string => (string, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=i32 1=string => (i32, string, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	11011
+SV	2	ok 0=string => (string, $t1, $t2, $t3)	ok 0=string 1=i32 => (string, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 2=string => (string, i32, string, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=string 3=string => (string, string, string, string)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 => (string, i32, $t2, $t3)	ok 0=string 1=$t0 => (string, string, $t2, $t3)	fail Syn-Call-Err
+SU	2	00100
+SV	3	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	3	11011
+SV	4	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	4	11011
 FI	Bitcopy	11011
 FI	Clone	11011
 FI	Drop	00000
@@ -282,6 +334,14 @@ SB	1	0110	0110	1001
 SB	2	0110	0110	1001	
 SB	3	1001	1001	1111	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;bool;>-	M::G<i32;i32;>-	10T7
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1001
+SV	1	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=bool 1=bool 2=bool => (bool, bool, bool, $t3)	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	fail Syn-Call-Err	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	1	0110
+SV	2	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	2	0110
+SV	3	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	3	1001
 FI	Bitcopy	1111
 FI	Clone	1111
 FI	Drop	0000
@@ -312,6 +372,16 @@ SB	2	10101	10101	10101
 SB	3	01010	01010	00000	
 SB	4	10101	10101	10101	
 MI	7	M::A<>-	M::F<i32;>-	M::F<string;>-	M::G<i32;>-	M::G<string;>-	M::G<i32;i32;>-	M::G<string;string;>-	10T7
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=string => (i32, string, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=string 2=i32 => (i32, string, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	ok 0=string => (string, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=i32 1=string => (i32, string, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	10101
+SV	1	ok 0=string => (string, $t1, $t2, $t3)	ok 0=string 1=i32 => (string, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 2=string => (string, i32, string, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=string 3=string => (string, string, string, string)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 => (string, i32, $t2, $t3)	ok 0=string 1=$t0 => (string, string, $t2, $t3)	fail Syn-Call-Err
+SU	1	01010
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=string => (i32, string, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=string 2=i32 => (i32, string, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	ok 0=string => (string, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=i32 1=string => (i32, string, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	10101
+SV	3	ok 0=string => (string, $t1, $t2, $t3)	ok 0=string 1=i32 => (string, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 2=string => (string, i32, string, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=string 3=string => (string, string, string, string)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=string 1=i32 => (string, i32, $t2, $t3)	ok 0=string 1=$t0 => (string, string, $t2, $t3)	fail Syn-Call-Err
+SU	3	01010
+SV	4	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	4	10101
 FI	Bitcopy	10101
 FI	Clone	10101
 FI	Drop	00000
@@ -332,6 +402,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -352,6 +426,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -368,6 +446,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -388,6 +470,14 @@ SB	1	1100	1100	0011
 SB	2	0011	0011	1111	
 SB	3	0011	0011	1111	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=bool 1=bool 2=bool => (bool, bool, bool, $t3)	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	fail Syn-Call-Err	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	ok 0=bool 1=bool => (bool, bool, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	1100
+SV	1	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	1	1100
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	0011
+SV	3	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	3	0011
 FI	Bitcopy	1111
 FI	Clone	1111
 FI	Drop	0000
@@ -408,6 +498,12 @@ SB	0	100	100	011
 SB	1	010	010	111	
 SB	2	001	001	111	
 MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<usize;>-	M::G<bool;>-	M::G<i32;>-	M::G<usize;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<usize;usize;>-	10T10
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=usize => (bool, usize, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=usize 2=bool => (bool, usize, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=usize => (usize, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=usize => (bool, usize, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=usize => (usize, $t1, $t2, $t3)	ok 0=usize 1=i32 => (usize, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=usize 1=i32 2=usize => (usize, i32, usize, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=usize 3=usize => (usize, usize, usize, usize)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=usize 1=i32 => (usize, i32, $t2, $t3)	ok 0=usize 1=$t0 => (usize, usize, $t2, $t3)	fail Syn-Call-Err
+SU	1	010
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	001
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -424,6 +520,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -448,6 +548,16 @@ SB	2	01111	01111	11111
 SB	3	01111	01111	11111	
 SB	4	01111	01111	11111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10000
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01111
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	01111
+SV	3	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	3	01111
+SV	4	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	4	01111
 FI	Bitcopy	11111
 FI	Clone	11111
 FI	Drop	00000
@@ -468,6 +578,14 @@ SB	1	0111	0111	1111
 SB	2	0111	0111	1111	
 SB	3	0111	0111	1111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	1000
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	0111
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	0111
+SV	3	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	3	0111
 FI	Bitcopy	1111
 FI	Clone	1111
 FI	Drop	0000
@@ -486,6 +604,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -500,6 +622,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -516,6 +640,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -530,6 +656,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -544,6 +672,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -558,6 +688,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -572,6 +704,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -586,6 +720,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -600,6 +736,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -614,6 +752,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -640,6 +780,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -654,6 +796,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -668,6 +812,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -682,6 +828,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -702,6 +850,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -728,6 +878,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -744,6 +896,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -758,6 +912,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -772,6 +928,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -786,6 +944,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -804,6 +964,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -820,6 +982,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -836,6 +1002,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -852,6 +1022,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -866,6 +1040,8 @@ X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 SB	0	1	1	1	
 MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+SV	0	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	0	1
 FI	Bitcopy	1
 FI	Clone	1
 FI	Drop	0
@@ -882,6 +1058,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -900,6 +1080,12 @@ SB	0	100	100	011
 SB	1	011	011	111	
 SB	2	011	011	111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	011
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	011
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -915,6 +1101,10 @@ W	other_made->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -937,6 +1127,10 @@ W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32(
 SB	0	10	10	01	
 SB	1	01	01	11	
 MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	10
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	01
 FI	Bitcopy	11
 FI	Clone	11
 FI	Drop	00
@@ -957,6 +1151,12 @@ SB	0	100	100	011
 SB	1	011	011	111	
 SB	2	011	011	111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	011
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	011
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -977,6 +1177,12 @@ SB	0	100	100	001
 SB	1	010	010	000	
 SB	2	001	001	101	
 MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<(i32, bool);>-	M::G<bool;>-	M::G<i32;>-	M::G<(i32, bool);>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<(i32, bool);(i32, bool);>-	10T10
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=(i32, bool) => (bool, (i32, bool), $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=(i32, bool) 2=bool => (bool, (i32, bool), bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=(i32, bool) => ((i32, bool), $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=(i32, bool) => (bool, (i32, bool), $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=(i32, bool) => ((i32, bool), $t1, $t2, $t3)	ok 0=(i32, bool) 1=i32 => ((i32, bool), i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=(i32, bool) 1=i32 2=(i32, bool) => ((i32, bool), i32, (i32, bool), $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=(i32, bool) 3=(i32, bool) => ((i32, bool), (i32, bool), (i32, bool), (i32, bool))	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=(i32, bool) 1=i32 => ((i32, bool), i32, $t2, $t3)	ok 0=(i32, bool) 1=$t0 => ((i32, bool), (i32, bool), $t2, $t3)	fail Syn-Call-Err
+SU	1	010
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	001
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -1023,6 +1229,12 @@ SB	0	100	100	011
 SB	1	011	011	111	
 SB	2	011	011	111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	011
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	011
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -1057,6 +1269,12 @@ SB	0	100	100	001
 SB	1	010	010	000	
 SB	2	001	001	101	
 MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<(i32, i32) -> i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<(i32, i32) -> i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<(i32, i32) -> i32;(i32, i32) -> i32;>-	10T10
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=(i32, i32) -> i32 => (bool, (i32, i32) -> i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=(i32, i32) -> i32 2=bool => (bool, (i32, i32) -> i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=(i32, i32) -> i32 => ((i32, i32) -> i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=(i32, i32) -> i32 => (bool, (i32, i32) -> i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=(i32, i32) -> i32 => ((i32, i32) -> i32, $t1, $t2, $t3)	ok 0=(i32, i32) -> i32 1=i32 => ((i32, i32) -> i32, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=(i32, i32) -> i32 1=i32 2=(i32, i32) -> i32 => ((i32, i32) -> i32, i32, (i32, i32) -> i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=(i32, i32) -> i32 3=(i32, i32) -> i32 => ((i32, i32) -> i32, (i32, i32) -> i32, (i32, i32) -> i32, (i32, i32) -> i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=(i32, i32) -> i32 1=i32 => ((i32, i32) -> i32, i32, $t2, $t3)	ok 0=(i32, i32) -> i32 1=$t0 => ((i32, i32) -> i32, (i32, i32) -> i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	010
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	001
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -1077,6 +1295,14 @@ SB	1	0111	0111	1111
 SB	2	0111	0111	1111	
 SB	3	0111	0111	1111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	1000
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	0111
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	0111
+SV	3	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	3	0111
 FI	Bitcopy	1111
 FI	Clone	1111
 FI	Drop	0000
@@ -1099,6 +1325,12 @@ SB	0	100	100	011
 SB	1	010	010	111	
 SB	2	001	001	111	
 MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<usize;>-	M::G<bool;>-	M::G<i32;>-	M::G<usize;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<usize;usize;>-	10T10
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=usize => (bool, usize, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=usize 2=bool => (bool, usize, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=usize => (usize, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=usize => (bool, usize, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=usize => (usize, $t1, $t2, $t3)	ok 0=usize 1=i32 => (usize, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=usize 1=i32 2=usize => (usize, i32, usize, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=usize 3=usize => (usize, usize, usize, usize)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=usize 1=i32 => (usize, i32, $t2, $t3)	ok 0=usize 1=$t0 => (usize, usize, $t2, $t3)	fail Syn-Call-Err
+SU	1	010
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	001
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -1117,6 +1349,12 @@ SB	0	100	100	011
 SB	1	011	011	111	
 SB	2	011	011	111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	011
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	011
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -1135,6 +1373,12 @@ SB	0	100	100	001
 SB	1	010	010	000	
 SB	2	001	001	101	
 MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<(i32, bool);>-	M::G<bool;>-	M::G<i32;>-	M::G<(i32, bool);>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<(i32, bool);(i32, bool);>-	10T10
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=(i32, bool) => (bool, (i32, bool), $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=(i32, bool) 2=bool => (bool, (i32, bool), bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=(i32, bool) => ((i32, bool), $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=(i32, bool) => (bool, (i32, bool), $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=(i32, bool) => ((i32, bool), $t1, $t2, $t3)	ok 0=(i32, bool) 1=i32 => ((i32, bool), i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=(i32, bool) 1=i32 2=(i32, bool) => ((i32, bool), i32, (i32, bool), $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=(i32, bool) 3=(i32, bool) => ((i32, bool), (i32, bool), (i32, bool), (i32, bool))	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=(i32, bool) 1=i32 => ((i32, bool), i32, $t2, $t3)	ok 0=(i32, bool) 1=$t0 => ((i32, bool), (i32, bool), $t2, $t3)	fail Syn-Call-Err
+SU	1	010
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	001
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000
@@ -1153,6 +1397,12 @@ SB	0	100	100	011
 SB	1	011	011	111	
 SB	2	011	011	111	
 MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+SV	0	ok 0=bool => (bool, $t1, $t2, $t3)	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=bool 1=i32 2=bool => (bool, i32, bool, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=bool 3=bool => (bool, bool, bool, bool)	ok 0=i32 => (i32, $t1, $t2, $t3)	fail Syn-Call-Err	ok 0=bool 1=i32 => (bool, i32, $t2, $t3)	ok 0=bool 1=$t0 => (bool, bool, $t2, $t3)	fail Syn-Call-Err
+SU	0	100
+SV	1	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	fail Syn-Call-Err	ok => ($t0, $t1, $t2, $t3)	ok 0=i32 1=i32 2=i32 => (i32, i32, i32, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=i32 => (i32, i32, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	1	011
+SV	2	ok 0=i32 => (i32, $t1, $t2, $t3)	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool 2=i32 => (i32, bool, i32, $t3)	fail Syn-Call-Err	ok 0=$t1 1=$t2 2=i32 3=i32 => (i32, i32, i32, i32)	fail Syn-Call-Err	fail Syn-Call-Err	ok 0=i32 1=bool => (i32, bool, $t2, $t3)	ok 0=i32 1=$t0 => (i32, i32, $t2, $t3)	fail Syn-Call-Err
+SU	2	011
 FI	Bitcopy	111
 FI	Clone	111
 FI	Drop	000

@@ -56,6 +56,8 @@
 #include "04_analysis/typing/type_predicates.h"
 #include "04_analysis/typing/type_wf.h"
 #include "04_analysis/typing/literals.h"
+#include "04_analysis/typing/type_infer.h"
+#include "04_analysis/memory/regions.h"
 #include "04_analysis/typing/type_pattern.h"
 #include <algorithm>
 #include <unordered_map>
@@ -1176,6 +1178,63 @@ void DumpInstantiationSet(const std::vector<analysis::TypeRef>& types) {
   std::cout << processed << '\n';
 }
 
+// Constraint sets built from two of the module's types and fresh type variables, and
+// what solving each yields.
+void DumpSolving(const analysis::ScopeContext& ctx, const std::vector<analysis::TypeRef>& types) {
+  using namespace analysis;
+  const std::size_t count = std::min<std::size_t>(types.size(), 24);
+  const auto var = [](std::uint32_t id) { return MakeTypeVar(id); };
+  const auto eq = [](TypeRef lhs, TypeRef rhs) { return Constraint{std::move(lhs), std::move(rhs), false}; };
+  const auto sub = [](TypeRef lhs, TypeRef rhs) { return Constraint{std::move(lhs), std::move(rhs), true}; };
+  for (std::size_t i = 0; i < count; ++i) {
+    const TypeRef a = types[i];
+    const TypeRef b = types[(i + 1) % types.size()];
+    const std::vector<ConstraintSet> sets = {
+        {eq(var(0), a)},
+        {eq(MakeTypeTuple({var(0), var(1)}), MakeTypeTuple({a, b}))},
+        {eq(var(0), a), eq(var(0), b)},
+        {sub(var(0), a), sub(b, var(1)), eq(var(1), var(0))},
+        {eq(var(0), MakeTypeTuple({var(0), a}))},
+        {sub(a, b)},
+        {eq(MakeTypeSlice(var(0)), MakeTypeSlice(a)),
+         eq(MakeTypeRawPtr(RawPtrQual::Imm, var(1)), MakeTypeRawPtr(RawPtrQual::Imm, b)),
+         eq(MakeTypePtr(var(2), PtrState::Valid), MakeTypePtr(a, PtrState::Valid))},
+        {eq(MakeTypeFunc({TypeFuncParam{std::nullopt, var(0)}}, var(1)), MakeTypeFunc({TypeFuncParam{std::nullopt, a}}, b)),
+         eq(var(0), var(1))},
+        {eq(var(0), var(1)), eq(var(1), var(2)), eq(var(2), a),
+         eq(MakeTypePerm(Permission::Unique, var(3)), MakeTypePerm(Permission::Unique, var(0)))},
+        {eq(MakeTypeUnion({var(0), a}), MakeTypeUnion({b, a}))},
+        {eq(MakeTypeRange(var(0)), MakeTypeRange(a)), eq(a, var(1)), eq(MakeTypeArray(var(0), 3), MakeTypeArray(b, 3))},
+        {eq(MakeTypeClosure({{false, var(0)}}, var(1), std::nullopt), MakeTypeClosure({{false, a}}, b, std::nullopt))},
+        {eq(var(1), var(0)), eq(var(0), var(1)), eq(var(0), a)},
+        {eq(MakeTypePerm(Permission::Unique, var(0)), a), eq(MakeTypeArray(var(1), 2), b), eq(MakeTypeTuple({var(2), var(3)}), a)},
+    };
+    std::cout << "SV\t" << i;
+    for (const auto& set : sets) {
+      const auto solved = Solve(ctx, set);
+      std::cout << '\t';
+      if (!solved.ok) {
+        std::cout << "fail " << DiagOr(solved.diag_id);
+        continue;
+      }
+      std::cout << "ok";
+      for (std::uint32_t id = 0; id < 4; ++id) {
+        const auto it = solved.subst.find(id);
+        if (it != solved.subst.end()) std::cout << ' ' << id << '=' << TypeText(it->second);
+      }
+      std::cout << " => "
+                << TypeText(ApplySubstitution(MakeTypeTuple({var(0), var(1), var(2), var(3)}), solved.subst));
+    }
+    std::cout << '\n';
+    std::cout << "SU\t" << i << '\t';
+    for (std::size_t j = 0; j < count; ++j) {
+      const auto solved = Solve(ctx, {eq(a, types[j])});
+      std::cout << (solved.ok ? '1' : (solved.diag_id == std::optional<std::string_view>{"Syn-Call-Err"} ? '0' : '?'));
+    }
+    std::cout << '\n';
+  }
+}
+
 void DumpRelations(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
   static const char* const kFoundational[] = {"Bitcopy", "Clone", "Drop", "FfiSafe", "GpuSafe", "Eq",
                                                "Discrete", "Hash", "Iterator"};
@@ -1257,6 +1316,7 @@ void DumpRelations(analysis::ScopeContext& ctx, const analysis::NameMapTable& na
       std::cout << "SB\t" << i << '\t' << sub << '\t' << arg << '\t' << cast << '\t' << diags << '\n';
     }
     DumpInstantiationSet(types);
+    DumpSolving(ctx, types);
     for (const char* name : kFoundational) {
       std::cout << "FI\t" << name << '\t';
       for (std::size_t i = 0; i < count; ++i) {
@@ -1661,7 +1721,71 @@ void CollectBlockPatterns(const std::shared_ptr<ast::Block>& block, std::vector<
   CollectExprPatterns(block->tail_opt, out);
 }
 
+std::string IntroText(const analysis::IntroResult& res) {
+  return res.ok ? "ok" : "fail:" + DiagOr(res.diag_id);
+}
+
+// The environment operations, on the bindings a pattern introduces.
+void DumpEnvScript(std::size_t i, std::size_t j, const std::vector<std::pair<std::string, analysis::TypeRef>>& binds) {
+  using namespace analysis;
+  const TypeEnv e0 = PushScope(TypeEnv{});
+  const auto r1 = IntroAll(e0, binds, ast::Mutability::Let, false);
+  const TypeEnv e1 = PushScope(r1.ok ? r1.env : e0);
+  const auto r2 = IntroAll(e1, binds, ast::Mutability::Var, true);
+  const auto r3 = IntroAll(e1, binds, ast::Mutability::Let, false);
+  const TypeEnv env = r2.ok ? r2.env : e1;
+  const auto r4 = IntroAll(env, binds, ast::Mutability::Var, true);
+  const auto r5 = IntroAll(TypeEnv{}, binds, ast::Mutability::Let, false);
+  std::cout << "PE\t" << i << '\t' << j << '\t' << IntroText(r1) << ' ' << IntroText(r2) << ' ' << IntroText(r3) << ' '
+            << IntroText(r4) << ' ' << IntroText(r5) << '\t';
+  if (!binds.empty()) {
+    const auto& name = binds[0].first;
+    if (const auto bound = BindOf(env, name)) {
+      std::cout << (bound->mut == ast::Mutability::Var ? 'V' : 'L') << ' ' << TypeText(bound->type) << ' '
+                << TypeText(StableBindingType(*bound));
+    } else {
+      std::cout << "unbound";
+    }
+    const auto outer = MutOf(r1.ok ? r1.env : e0, name);
+    std::cout << ' ' << (outer ? (*outer == ast::Mutability::Var ? 'V' : 'L') : '-')
+              << (HasHeapProvenance(env, name) ? 'h' : '-');
+  }
+  std::cout << '\t' << PopScope(env).scopes.size() << ProjectTypeEnvToDepth(env, 1).scopes.size()
+            << ProjectTypeEnvToDepth(env, 5).scopes.size() << PopScope(PopScope(PopScope(env))).scopes.size()
+            << (GpuContext(env) ? 'g' : '-') << '\n';
+}
+
+// Reserved names, provenance seeds and staleness: independent of the module.
+void DumpEnvFixed() {
+  using namespace analysis;
+  const std::vector<std::pair<std::string, TypeRef>> reserved = {{"gen_tmp", MakeTypePrim("i32")}};
+  const TypeEnv e0 = PushScope(TypeEnv{});
+  std::cout << "PG\t" << IntroText(IntroAll(e0, reserved, ast::Mutability::Let, false)) << ' '
+            << IntroText(IntroAll(e0, reserved, ast::Mutability::Let, true)) << ' '
+            << IntroText(IntroAll(e0, {}, ast::Mutability::Var, true)) << '\t';
+  for (const auto kind : {ProvenanceKind::Global, ProvenanceKind::Stack, ProvenanceKind::Heap, ProvenanceKind::Region,
+                          ProvenanceKind::Bottom, ProvenanceKind::Param}) {
+    TypeBinding binding;
+    ApplyBindingProvenanceSeed(binding, kind, std::string("Arena"));
+    std::cout << static_cast<int>(binding.provenance_kind) << (binding.provenance_region ? *binding.provenance_region : "-")
+              << static_cast<int>(NormalizeBindingProvenanceSeed(kind)) << ' ';
+  }
+  TypeEnv env = PushScope(e0);
+  TypeBinding derived;
+  derived.derived_from_shared = true;
+  ApplyBindingProvenanceSeed(derived, ProvenanceKind::Heap);
+  env.scopes[0].emplace(IdKeyOf("outer"), derived);
+  env.scopes[1].emplace(IdKeyOf("inner"), TypeBinding{});
+  env.parallel_context = ParallelContextKind::Gpu;
+  MarkSharedDerivedBindingsStale(env);
+  std::cout << '\t' << (BindOf(env, "outer")->stale_after_release ? 's' : '-')
+            << (BindOf(env, "inner")->stale_after_release ? 's' : '-') << (HasHeapProvenance(env, "outer") ? 'h' : '-')
+            << (HasHeapProvenance(env, "inner") ? 'h' : '-') << (HasHeapProvenance(env, "none") ? 'h' : '-')
+            << (GpuContext(env) ? 'g' : '-') << (ParallelContext(env) ? 'p' : '-') << '\n';
+}
+
 void DumpPatterns(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
+  DumpEnvFixed();
   for (const auto& module : ctx.sigma.mods) {
     std::cout << "X\t";
     D(std::cout, module.path);
@@ -1715,6 +1839,32 @@ void DumpPatterns(analysis::ScopeContext& ctx, const analysis::NameMapTable& nam
         std::cout << " /" << (irrefutable ? 'i' : '-') << (covers ? 'e' : '-') << (covers_state ? 'm' : '-');
       }
       std::cout << '\n';
+      std::vector<analysis::IdKey> names;
+      if (pattern) analysis::CollectPatNames(*pattern, names);
+      std::cout << "PN\t" << i << '\t';
+      for (const auto& name : names) std::cout << name << ',';
+      std::cout << '\t' << (analysis::DistinctNames(names) ? 'd' : '-') << '\n';
+      // The same pattern as a binding. Its commonest rejection is printed once.
+      std::cout << "PS\t" << i;
+      std::optional<std::size_t> first_ok;
+      std::vector<std::pair<std::string, analysis::TypeRef>> first_binds;
+      for (std::size_t j = 0; j < type_count; ++j) {
+        const auto typed = analysis::TypePattern(ctx, pattern, types[j]);
+        if (!typed.ok && (!typed.diag_id || (*typed.diag_id == "Let-Refutable-Pattern-Err" && j != 0))) continue;
+        std::cout << '\t' << j << ':';
+        if (typed.ok) {
+          std::cout << "ok";
+          for (const auto& [name, type] : typed.bindings) std::cout << ' ' << name << '=' << Escape(analysis::TypeToString(type));
+          if (!first_ok) {
+            first_ok = j;
+            first_binds = typed.bindings;
+          }
+        } else {
+          std::cout << "fail " << DiagOr(typed.diag_id);
+        }
+      }
+      std::cout << '\n';
+      if (first_ok) DumpEnvScript(i, *first_ok, first_binds);
     }
   }
 }

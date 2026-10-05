@@ -7,6 +7,7 @@ STOP	resolve
 F	/w/target/rescases/binary_chain_nested/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/binary_chain_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -22,11 +23,21 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok a=i32 /i--	1:ok a=i32 /i--	2:ok a=i32 /i--	3:ok a=i32 /i--	4:ok a=i32 /i--	5:ok a=i32 /i--	6:ok a=i32 /i--	7:ok a=i32 /i--	8:ok a=i32 /i--	9:ok a=i32 /i--	10:ok a=i32 /i--	11:ok a=i32 /i--	12:ok a=i32 /i--
+PN	1	a,	d
+PS	1	0:ok a=i32	1:ok a=i32	2:ok a=i32	3:ok a=i32	4:ok a=i32	5:ok a=i32	6:ok a=i32	7:ok a=i32	8:ok a=i32	9:ok a=i32	10:ok a=i32	11:ok a=i32	12:ok a=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/block_name_out_of_scope/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/bytes_builtin_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -42,8 +53,17 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok a=i32 /i--	1:ok a=i32 /i--	2:ok a=i32 /i--	3:ok a=i32 /i--	4:ok a=i32 /i--	5:ok a=i32 /i--	6:ok a=i32 /i--	7:ok a=i32 /i--	8:ok a=i32 /i--	9:ok a=i32 /i--	10:ok a=i32 /i--	11:ok a=i32 /i--	12:ok a=i32 /i--
+PN	1	a,	d
+PS	1	0:ok a=i32	1:ok a=i32	2:ok a=i32	3:ok a=i32	4:ok a=i32	5:ok a=i32	6:ok a=i32	7:ok a=i32	8:ok a=i32	9:ok a=i32	10:ok a=i32	11:ok a=i32	12:ok a=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/bytes_builtin_wrong_namespace/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/class_assoc_default_missing/Ultraviolet.toml
@@ -53,6 +73,7 @@ STOP	resolve
 F	/w/target/rescases/class_method_body/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/class_method_self_type/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	Self
 PY	1	Self
@@ -60,6 +81,7 @@ PY	2	i32
 F	/w/target/rescases/class_super_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/comptime_capabilities/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -75,16 +97,25 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok a=i32 /i--	1:ok a=i32 /i--	2:ok a=i32 /i--	3:ok a=i32 /i--	4:ok a=i32 /i--	5:ok a=i32 /i--	6:ok a=i32 /i--	7:ok a=i32 /i--	8:ok a=i32 /i--	9:ok a=i32 /i--	10:ok a=i32 /i--	11:ok a=i32 /i--	12:ok a=i32 /i--
+PN	1	a,	d
+PS	1	0:ok a=i32	1:ok a=i32	2:ok a=i32	3:ok a=i32	4:ok a=i32	5:ok a=i32	6:ok a=i32	7:ok a=i32	8:ok a=i32	9:ok a=i32	10:ok a=i32	11:ok a=i32	12:ok a=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/comptime_proc_body_missing/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 F	/w/target/rescases/comptime_proc_dup/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/comptime_proc_missing_type/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 F	/w/target/rescases/comptime_proc_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	usize
 PY	1	i32
@@ -93,6 +124,7 @@ STOP	names
 F	/w/target/rescases/contract_entry/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/contract_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -102,17 +134,21 @@ STOP	resolve
 F	/w/target/rescases/contract_pre_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/contract_result_in_pre/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 F	/w/target/rescases/derive_target_dup/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 F	/w/target/rescases/derive_target_missing/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 F	/w/target/rescases/derive_target_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 F	/w/target/rescases/dup_alias_record/Ultraviolet.toml
@@ -122,6 +158,7 @@ STOP	names
 F	/w/target/rescases/dup_extern/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/dup_extern_proc/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -141,6 +178,7 @@ STOP	names
 F	/w/target/rescases/dup_record_enum/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/dup_record_proc/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -148,15 +186,20 @@ PY	2	i32
 F	/w/target/rescases/dup_static/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/dup_static_proc/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	3	0:ok value=i32 /i--	1:ok value=i32 /i--
+PN	0	value,	d
+PS	0	0:ok value=i32	1:ok value=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/dup_static_tuple/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/dup_var_same_scope/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/emit_granted/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -172,7 +215,11 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/emit_in_comptime_procedure/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -188,7 +235,11 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/emit_in_ct_statement/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -204,7 +255,11 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/emit_in_nested_comptime/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -220,7 +275,11 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/emit_other_method/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -236,7 +295,11 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/emit_with_files_only/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -252,9 +315,13 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/enum_arg_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_builtin_alloc_error/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -270,8 +337,15 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok e=i32 /i--	1:ok e=i32 /i--	2:ok e=i32 /i--	3:ok e=i32 /i--	4:ok e=i32 /i--	5:ok e=i32 /i--	6:ok e=i32 /i--	7:ok e=i32 /i--	8:ok e=i32 /i--	9:ok e=i32 /i--	10:ok e=i32 /i--	11:ok e=i32 /i--	12:ok e=i32 /i--
+PN	1	e,	d
+PS	1	0:ok e=i32	1:ok e=i32	2:ok e=i32	3:ok e=i32	4:ok e=i32	5:ok e=i32	6:ok e=i32	7:ok e=i32	8:ok e=i32	9:ok e=i32	10:ok e=i32	11:ok e=i32	12:ok e=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/enum_builtin_io_error/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -287,8 +361,17 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok e=i32 /i--	1:ok e=i32 /i--	2:ok e=i32 /i--	3:ok e=i32 /i--	4:ok e=i32 /i--	5:ok e=i32 /i--	6:ok e=i32 /i--	7:ok e=i32 /i--	8:ok e=i32 /i--	9:ok e=i32 /i--	10:ok e=i32 /i--	11:ok e=i32 /i--	12:ok e=i32 /i--
+PN	1	e,	d
+PS	1	0:ok e=i32	1:ok e=i32	2:ok e=i32	3:ok e=i32	4:ok e=i32	5:ok e=i32	6:ok e=i32	7:ok e=i32	8:ok e=i32	9:ok e=i32	10:ok e=i32	11:ok e=i32	12:ok e=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok k=i32 /i--	1:ok k=i32 /i--	2:ok k=i32 /i--	3:ok k=i32 /i--	4:ok k=i32 /i--	5:ok k=i32 /i--	6:ok k=i32 /i--	7:ok k=i32 /i--	8:ok k=i32 /i--	9:ok k=i32 /i--	10:ok k=i32 /i--	11:ok k=i32 /i--	12:ok k=i32 /i--
+PN	2	k,	d
+PS	2	0:ok k=i32	1:ok k=i32	2:ok k=i32	3:ok k=i32	4:ok k=i32	5:ok k=i32	6:ok k=i32	7:ok k=i32	8:ok k=i32	9:ok k=i32	10:ok k=i32	11:ok k=i32	12:ok k=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/enum_builtin_outcome/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_builtin_priority/Ultraviolet.toml
@@ -310,6 +393,7 @@ STOP	resolve
 F	/w/target/rescases/enum_pattern_tuple_two/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_qualified/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -325,10 +409,23 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok s=i32 /i--	1:ok s=i32 /i--	2:ok s=i32 /i--	3:ok s=i32 /i--	4:ok s=i32 /i--	5:ok s=i32 /i--	6:ok s=i32 /i--	7:ok s=i32 /i--	8:ok s=i32 /i--	9:ok s=i32 /i--	10:ok s=i32 /i--	11:ok s=i32 /i--	12:ok s=i32 /i--
+PN	1	s,	d
+PS	1	0:ok s=i32	1:ok s=i32	2:ok s=i32	3:ok s=i32	4:ok s=i32	5:ok s=i32	6:ok s=i32	7:ok s=i32	8:ok s=i32	9:ok s=i32	10:ok s=i32	11:ok s=i32	12:ok s=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok t=i32 /i--	1:ok t=i32 /i--	2:ok t=i32 /i--	3:ok t=i32 /i--	4:ok t=i32 /i--	5:ok t=i32 /i--	6:ok t=i32 /i--	7:ok t=i32 /i--	8:ok t=i32 /i--	9:ok t=i32 /i--	10:ok t=i32 /i--	11:ok t=i32 /i--	12:ok t=i32 /i--
+PN	2	t,	d
+PS	2	0:ok t=i32	1:ok t=i32	2:ok t=i32	3:ok t=i32	4:ok t=i32	5:ok t=i32	6:ok t=i32	7:ok t=i32	8:ok t=i32	9:ok t=i32	10:ok t=i32	11:ok t=i32	12:ok t=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	2	0:ok u=i32 /i--	1:ok u=i32 /i--	2:ok u=i32 /i--	3:ok u=i32 /i--	4:ok u=i32 /i--	5:ok u=i32 /i--	6:ok u=i32 /i--	7:ok u=i32 /i--	8:ok u=i32 /i--	9:ok u=i32 /i--	10:ok u=i32 /i--	11:ok u=i32 /i--	12:ok u=i32 /i--
+PN	3	u,	d
+PS	3	0:ok u=i32	1:ok u=i32	2:ok u=i32	3:ok u=i32	4:ok u=i32	5:ok u=i32	6:ok u=i32	7:ok u=i32	8:ok u=i32	9:ok u=i32	10:ok u=i32	11:ok u=i32	12:ok u=i32
+PE	3	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/enum_record/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -344,10 +441,17 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok s=i32 /i--	1:ok s=i32 /i--	2:ok s=i32 /i--	3:ok s=i32 /i--	4:ok s=i32 /i--	5:ok s=i32 /i--	6:ok s=i32 /i--	7:ok s=i32 /i--	8:ok s=i32 /i--	9:ok s=i32 /i--	10:ok s=i32 /i--	11:ok s=i32 /i--	12:ok s=i32 /i--
+PN	1	s,	d
+PS	1	0:ok s=i32	1:ok s=i32	2:ok s=i32	3:ok s=i32	4:ok s=i32	5:ok s=i32	6:ok s=i32	7:ok s=i32	8:ok s=i32	9:ok s=i32	10:ok s=i32	11:ok s=i32	12:ok s=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/enum_record_as_tuple/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_tuple/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -363,12 +467,19 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok s=i32 /i--	1:ok s=i32 /i--	2:ok s=i32 /i--	3:ok s=i32 /i--	4:ok s=i32 /i--	5:ok s=i32 /i--	6:ok s=i32 /i--	7:ok s=i32 /i--	8:ok s=i32 /i--	9:ok s=i32 /i--	10:ok s=i32 /i--	11:ok s=i32 /i--	12:ok s=i32 /i--
+PN	1	s,	d
+PS	1	0:ok s=i32	1:ok s=i32	2:ok s=i32	3:ok s=i32	4:ok s=i32	5:ok s=i32	6:ok s=i32	7:ok s=i32	8:ok s=i32	9:ok s=i32	10:ok s=i32	11:ok s=i32	12:ok s=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/enum_tuple_as_record/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_tuple_as_unit/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_unit/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -384,7 +495,13 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok s=i32 /i--	1:ok s=i32 /i--	2:ok s=i32 /i--	3:ok s=i32 /i--	4:ok s=i32 /i--	5:ok s=i32 /i--	6:ok s=i32 /i--	7:ok s=i32 /i--	8:ok s=i32 /i--	9:ok s=i32 /i--	10:ok s=i32 /i--	11:ok s=i32 /i--	12:ok s=i32 /i--
+PN	1	s,	d
+PS	1	0:ok s=i32	1:ok s=i32	2:ok s=i32	3:ok s=i32	4:ok s=i32	5:ok s=i32	6:ok s=i32	7:ok s=i32	8:ok s=i32	9:ok s=i32	10:ok s=i32	11:ok s=i32	12:ok s=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/enum_unit_as_tuple/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/error_in_record_then_proc/Ultraviolet.toml
@@ -402,15 +519,28 @@ STOP	resolve
 F	/w/target/rescases/errors_in_two_modules/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/expr_type_vs_module/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 PY	3	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--	2:ok a=i32 /i--	3:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32	2:ok a=i32	3:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok c=i32 /i--	1:ok c=i32 /i--	2:ok c=i32 /i--	3:ok c=i32 /i--
+PN	2	c,	d
+PS	2	0:ok c=i32	1:ok c=i32	2:ok c=i32	3:ok c=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	2	0:ok d=i32 /i--	1:ok d=i32 /i--	2:ok d=i32 /i--	3:ok d=i32 /i--
+PN	3	d,	d
+PS	3	0:ok d=i32	1:ok d=i32	2:ok d=i32	3:ok d=i32
+PE	3	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -424,9 +554,13 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/extern_foreign_contract_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/extern_foreign_contract_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -438,11 +572,13 @@ STOP	resolve
 F	/w/target/rescases/extern_missing_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/extern_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 F	/w/target/rescases/extern_unknown_abi/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -450,20 +586,28 @@ PY	2	i32
 F	/w/target/rescases/field_init_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/field_init_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	3	0:ok base=i32 /i--	1:ok base=i32 /i--
+PN	0	base,	d
+PS	0	0:ok base=i32	1:ok base=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/forward_reference_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 PY	3	i32
 PT	0	3
+PN	0	p,	d
+PS	0	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err
 F	/w/target/rescases/frame_plain/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_alias_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	(TValue, TValue)
 PY	1	i32
@@ -472,26 +616,31 @@ STOP	resolve
 F	/w/target/rescases/generic_call_missing_callee/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_class_method/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	TOther
 PY	1	TValue
 PY	2	i32
 F	/w/target/rescases/generic_dup_param/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	TValue
 PY	1	i32
 PY	2	i32
 F	/w/target/rescases/generic_enum_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	TValue
 PY	1	i32
 F	/w/target/rescases/generic_modal_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	TValue
 PY	1	i32
 F	/w/target/rescases/generic_param_not_in_sibling/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_proc_bound_missing/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	TValue
 PY	1	TValue
@@ -501,12 +650,17 @@ STOP	resolve
 F	/w/target/rescases/generic_proc_default_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_proc_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	TValue
 PY	1	TValue
 PY	2	i32
 PT	0	3	0:ok held=TValue /i--	1:ok held=TValue /i--
+PN	0	held,	d
+PS	0	0:ok held=TValue	1:ok held=TValue	2:fail Pat-Typed-Err
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V TValue TValue L-	1120-
 F	/w/target/rescases/generic_proc_param_shadows_param/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	value
 PY	1	i32
@@ -514,6 +668,7 @@ PY	2	i32
 F	/w/target/rescases/generic_record_method_own_param/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_record_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	TValue
 PY	1	TValue
@@ -553,6 +708,7 @@ STOP	resolve
 F	/w/target/rescases/if_case_arm_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/if_case_arm_scopes/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -568,10 +724,23 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok pair=i32 /i--	1:ok pair=i32 /i--	2:ok pair=i32 /i--	3:ok pair=i32 /i--	4:ok pair=i32 /i--	5:ok pair=i32 /i--	6:ok pair=i32 /i--	7:ok pair=i32 /i--	8:ok pair=i32 /i--	9:ok pair=i32 /i--	10:ok pair=i32 /i--	11:ok pair=i32 /i--	12:ok pair=i32 /i--
+PN	1	pair,	d
+PS	1	0:ok pair=i32	1:ok pair=i32	2:ok pair=i32	3:ok pair=i32	4:ok pair=i32	5:ok pair=i32	6:ok pair=i32	7:ok pair=i32	8:ok pair=i32	9:ok pair=i32	10:ok pair=i32	11:ok pair=i32	12:ok pair=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	5
+PN	3	a,	d
+PS	3
 PT	4	5
+PN	4	a,	d
+PS	4
 F	/w/target/rescases/if_case_bare_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/if_case_dup/Ultraviolet.toml
@@ -579,6 +748,7 @@ STOP	resolve
 F	/w/target/rescases/if_case_else_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/if_case_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -594,9 +764,20 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	0	0:ok /---	1:ok /---	2:ok /---	3:ok /---	4:ok /---	5:ok /---	6:ok /---	7:ok /---	8:ok /---	9:ok /---	10:ok /---	11:ok /---	12:ok /---
+PN	2		d
+PS	2	0:fail Let-Refutable-Pattern-Err
 PT	3	3	0:ok value=i32 /i--	1:ok value=i32 /i--	2:ok value=i32 /i--	3:ok value=i32 /i--	4:ok value=i32 /i--	5:ok value=i32 /i--	6:ok value=i32 /i--	7:ok value=i32 /i--	8:ok value=i32 /i--	9:ok value=i32 /i--	10:ok value=i32 /i--	11:ok value=i32 /i--	12:ok value=i32 /i--
+PN	3	value,	d
+PS	3	0:ok value=i32	1:ok value=i32	2:ok value=i32	3:ok value=i32	4:ok value=i32	5:ok value=i32	6:ok value=i32	7:ok value=i32	8:ok value=i32	9:ok value=i32	10:ok value=i32	11:ok value=i32	12:ok value=i32
+PE	3	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/if_case_typed_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/if_is_bare_alias/Ultraviolet.toml
@@ -610,6 +791,7 @@ STOP	resolve
 F	/w/target/rescases/if_is_binding_shadow/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/if_is_typed/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -625,16 +807,32 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	3	0:ok value=i32 /i--	1:ok value=i32 /i--	2:ok value=i32 /i--	3:ok value=i32 /i--	4:ok value=i32 /i--	5:ok value=i32 /i--	6:ok value=i32 /i--	7:ok value=i32 /i--	8:ok value=i32 /i--	9:ok value=i32 /i--	10:ok value=i32 /i--	11:ok value=i32 /i--	12:ok value=i32 /i--
+PN	2	value,	d
+PS	2	0:ok value=i32	1:ok value=i32	2:ok value=i32	3:ok value=i32	4:ok value=i32	5:ok value=i32	6:ok value=i32	7:ok value=i32	8:ok value=i32	9:ok value=i32	10:ok value=i32	11:ok value=i32	12:ok value=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/if_is_typed_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/import_alias/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -648,11 +846,15 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/import_alias_as_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/import_alias_as_value/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/import_alias_conflict_decl/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -669,6 +871,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/import_alias_reserved/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/import_conflict_using/Ultraviolet.toml
@@ -678,12 +883,21 @@ STOP	names
 F	/w/target/rescases/import_missing_alias/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/import_module/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	b,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err
 PT	2	2	0:ok c=i32 /i--	1:ok c=i32 /i--
+PN	2	c,	d
+PS	2	0:ok c=i32	1:ok c=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -697,11 +911,18 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/import_relative/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -715,7 +936,11 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/import_self/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -731,13 +956,20 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/import_twice/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/import_two_aliases/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -751,20 +983,31 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/invariant_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/invariant_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 F	/w/target/rescases/let_uses_itself/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/lib_import_alias/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -778,6 +1021,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["Lib"]
 PY	0	i32
 PY	1	i32
@@ -789,6 +1035,7 @@ STOP	names
 F	/w/target/rescases/lib_pattern_without_import/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/lib_public_using/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -804,6 +1051,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["Lib"]
 PY	0	i32
 PY	1	i32
@@ -813,10 +1063,14 @@ PY	4	i32
 F	/w/target/rescases/lib_type_without_import/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/lib_using_import_after/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -830,6 +1084,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["Lib"]
 PY	0	i32
 PY	1	i32
@@ -845,10 +1102,14 @@ STOP	resolve
 F	/w/target/rescases/lib_using_wildcard_without_import/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/lib_using_with_import/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -862,6 +1123,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["Lib"]
 PY	0	i32
 PY	1	i32
@@ -871,12 +1135,21 @@ PY	4	i32
 F	/w/target/rescases/lib_using_without_import/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/lib_with_import/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	b,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err
 PT	2	2	0:ok c=i32 /i--	1:ok c=i32 /i--
+PN	2	c,	d
+PS	2	0:ok c=i32	1:ok c=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -890,6 +1163,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["Lib"]
 PY	0	i32
 PY	1	i32
@@ -901,6 +1177,7 @@ STOP	resolve
 F	/w/target/rescases/loop_binding_dup/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/loop_binding_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -916,8 +1193,17 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok xs=i32 /i--	1:ok xs=i32 /i--	2:ok xs=i32 /i--	3:ok xs=i32 /i--	4:ok xs=i32 /i--	5:ok xs=i32 /i--	6:ok xs=i32 /i--	7:ok xs=i32 /i--	8:ok xs=i32 /i--	9:ok xs=i32 /i--	10:ok xs=i32 /i--	11:ok xs=i32 /i--	12:ok xs=i32 /i--
+PN	1	xs,	d
+PS	1	0:ok xs=i32	1:ok xs=i32	2:ok xs=i32	3:ok xs=i32	4:ok xs=i32	5:ok xs=i32	6:ok xs=i32	7:ok xs=i32	8:ok xs=i32	9:ok xs=i32	10:ok xs=i32	11:ok xs=i32	12:ok xs=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok item=i32 /i--	1:ok item=i32 /i--	2:ok item=i32 /i--	3:ok item=i32 /i--	4:ok item=i32 /i--	5:ok item=i32 /i--	6:ok item=i32 /i--	7:ok item=i32 /i--	8:ok item=i32 /i--	9:ok item=i32 /i--	10:ok item=i32 /i--	11:ok item=i32 /i--	12:ok item=i32 /i--
+PN	2	item,	d
+PS	2	0:ok item=i32	1:ok item=i32	2:ok item=i32	3:ok item=i32	4:ok item=i32	5:ok item=i32	6:ok item=i32	7:ok item=i32	8:ok item=i32	9:ok item=i32	10:ok item=i32	11:ok item=i32	12:ok item=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/loop_binding_out_of_scope/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/loop_binding_shadow/Ultraviolet.toml
@@ -925,6 +1211,7 @@ STOP	resolve
 F	/w/target/rescases/loop_invariant_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/loop_invariant_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -940,8 +1227,15 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok a=i32 /i--	1:ok a=i32 /i--	2:ok a=i32 /i--	3:ok a=i32 /i--	4:ok a=i32 /i--	5:ok a=i32 /i--	6:ok a=i32 /i--	7:ok a=i32 /i--	8:ok a=i32 /i--	9:ok a=i32 /i--	10:ok a=i32 /i--	11:ok a=i32 /i--	12:ok a=i32 /i--
+PN	1	a,	d
+PS	1	0:ok a=i32	1:ok a=i32	2:ok a=i32	3:ok a=i32	4:ok a=i32	5:ok a=i32	6:ok a=i32	7:ok a=i32	8:ok a=i32	9:ok a=i32	10:ok a=i32	11:ok a=i32	12:ok a=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/loop_iter_invariant_sees_binding/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -957,8 +1251,17 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok xs=i32 /i--	1:ok xs=i32 /i--	2:ok xs=i32 /i--	3:ok xs=i32 /i--	4:ok xs=i32 /i--	5:ok xs=i32 /i--	6:ok xs=i32 /i--	7:ok xs=i32 /i--	8:ok xs=i32 /i--	9:ok xs=i32 /i--	10:ok xs=i32 /i--	11:ok xs=i32 /i--	12:ok xs=i32 /i--
+PN	1	xs,	d
+PS	1	0:ok xs=i32	1:ok xs=i32	2:ok xs=i32	3:ok xs=i32	4:ok xs=i32	5:ok xs=i32	6:ok xs=i32	7:ok xs=i32	8:ok xs=i32	9:ok xs=i32	10:ok xs=i32	11:ok xs=i32	12:ok xs=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok item=i32 /i--	1:ok item=i32 /i--	2:ok item=i32 /i--	3:ok item=i32 /i--	4:ok item=i32 /i--	5:ok item=i32 /i--	6:ok item=i32 /i--	7:ok item=i32 /i--	8:ok item=i32 /i--	9:ok item=i32 /i--	10:ok item=i32 /i--	11:ok item=i32 /i--	12:ok item=i32 /i--
+PN	2	item,	d
+PS	2	0:ok item=i32	1:ok item=i32	2:ok item=i32	3:ok item=i32	4:ok item=i32	5:ok item=i32	6:ok item=i32	7:ok item=i32	8:ok item=i32	9:ok item=i32	10:ok item=i32	11:ok item=i32	12:ok item=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/loop_typed_binding_missing_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/method_body_missing/Ultraviolet.toml
@@ -968,23 +1271,27 @@ STOP	resolve
 F	/w/target/rescases/method_local_shadows_self/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/method_param_dup_self/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 PY	3	i32
 F	/w/target/rescases/method_self_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	App::R
 PY	3	i32
 F	/w/target/rescases/method_tilde_value/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 F	/w/target/rescases/modal_state_literal/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1000,7 +1307,13 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok d=i32 /i--	1:ok d=i32 /i--	2:ok d=i32 /i--	3:ok d=i32 /i--	4:ok d=i32 /i--	5:ok d=i32 /i--	6:ok d=i32 /i--	7:ok d=i32 /i--	8:ok d=i32 /i--	9:ok d=i32 /i--	10:ok d=i32 /i--	11:ok d=i32 /i--	12:ok d=i32 /i--
+PN	1	d,	d
+PS	1	0:ok d=i32	1:ok d=i32	2:ok d=i32	3:ok d=i32	4:ok d=i32	5:ok d=i32	6:ok d=i32	7:ok d=i32	8:ok d=i32	9:ok d=i32	10:ok d=i32	11:ok d=i32	12:ok d=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/modal_state_literal_field_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/modal_state_literal_missing/Ultraviolet.toml
@@ -1010,14 +1323,27 @@ STOP	resolve
 F	/w/target/rescases/module_enum_paths/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/module_enum_pattern/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok k=i32 /i--	1:ok k=i32 /i--
+PN	0	k,	d
+PS	0	0:ok k=i32	1:ok k=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	7
+PN	2		d
+PS	2	0:fail Let-Refutable-Pattern-Err
 PT	3	7
+PN	3	n,	d
+PS	3	0:fail Let-Refutable-Pattern-Err
 PT	4	7
+PN	4	value,	d
+PS	4	0:fail Let-Refutable-Pattern-Err
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1031,12 +1357,21 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/module_item_internal/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	b,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1050,16 +1385,26 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/module_item_private/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/module_item_private_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/module_path_without_import/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1073,13 +1418,25 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/module_pattern_enum_not_variant/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok k=i32 /i--	1:ok k=i32 /i--
+PN	0	k,	d
+PS	0	0:ok k=i32	1:ok k=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	7
+PN	2	value,	d
+PS	2	0:fail Let-Refutable-Pattern-Err
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1093,15 +1450,27 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/module_pattern_not_record/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/module_record_pattern/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok r=i32 /i--	1:ok r=i32 /i--
+PN	0	r,	d
+PS	0	0:ok r=i32	1:ok r=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	6
+PN	2	value,	d
+PS	2
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1115,6 +1484,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/module_shadowed_by_local/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/name_in_array/Ultraviolet.toml
@@ -1176,11 +1548,18 @@ STOP	resolve
 F	/w/target/rescases/name_missing_in_tail/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/nested_modules/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1194,6 +1573,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util" "Deep"]
 PY	0	i32
 PY	1	i32
@@ -1204,6 +1586,7 @@ STOP	resolve
 F	/w/target/rescases/pat_enum_missing_type_tuple/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pat_enum_missing_variant/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1219,10 +1602,22 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok s=i32 /i--	1:ok s=i32 /i--	2:ok s=i32 /i--	3:ok s=i32 /i--	4:ok s=i32 /i--	5:ok s=i32 /i--	6:ok s=i32 /i--	7:ok s=i32 /i--	8:ok s=i32 /i--	9:ok s=i32 /i--	10:ok s=i32 /i--	11:ok s=i32 /i--	12:ok s=i32 /i--
+PN	1	s,	d
+PS	1	0:ok s=i32	1:ok s=i32	2:ok s=i32	3:ok s=i32	4:ok s=i32	5:ok s=i32	6:ok s=i32	7:ok s=i32	8:ok s=i32	9:ok s=i32	10:ok s=i32	11:ok s=i32	12:ok s=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	7
+PN	3		d
+PS	3	0:fail Let-Refutable-Pattern-Err
 F	/w/target/rescases/pat_enum_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1238,12 +1633,28 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok s=i32 /i--	1:ok s=i32 /i--	2:ok s=i32 /i--	3:ok s=i32 /i--	4:ok s=i32 /i--	5:ok s=i32 /i--	6:ok s=i32 /i--	7:ok s=i32 /i--	8:ok s=i32 /i--	9:ok s=i32 /i--	10:ok s=i32 /i--	11:ok s=i32 /i--	12:ok s=i32 /i--
+PN	1	s,	d
+PS	1	0:ok s=i32	1:ok s=i32	2:ok s=i32	3:ok s=i32	4:ok s=i32	5:ok s=i32	6:ok s=i32	7:ok s=i32	8:ok s=i32	9:ok s=i32	10:ok s=i32	11:ok s=i32	12:ok s=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	7
+PN	3		d
+PS	3	0:fail Let-Refutable-Pattern-Err
 PT	4	7
+PN	4	r,	d
+PS	4	0:fail Let-Refutable-Pattern-Err
 PT	5	7
+PN	5	width,height,	d
+PS	5	0:fail Let-Refutable-Pattern-Err
 F	/w/target/rescases/pat_enum_qualified/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1259,10 +1670,22 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok s=i32 /i--	1:ok s=i32 /i--	2:ok s=i32 /i--	3:ok s=i32 /i--	4:ok s=i32 /i--	5:ok s=i32 /i--	6:ok s=i32 /i--	7:ok s=i32 /i--	8:ok s=i32 /i--	9:ok s=i32 /i--	10:ok s=i32 /i--	11:ok s=i32 /i--	12:ok s=i32 /i--
+PN	1	s,	d
+PS	1	0:ok s=i32	1:ok s=i32	2:ok s=i32	3:ok s=i32	4:ok s=i32	5:ok s=i32	6:ok s=i32	7:ok s=i32	8:ok s=i32	9:ok s=i32	10:ok s=i32	11:ok s=i32	12:ok s=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	7
+PN	3		d
+PS	3	0:fail Let-Refutable-Pattern-Err
 F	/w/target/rescases/pat_enum_record_named_like_variant/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1279,10 +1702,22 @@ PY	11	i32
 PY	12	i32
 PY	13	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--	13:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32	13:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok s=i32 /i--	1:ok s=i32 /i--	2:ok s=i32 /i--	3:ok s=i32 /i--	4:ok s=i32 /i--	5:ok s=i32 /i--	6:ok s=i32 /i--	7:ok s=i32 /i--	8:ok s=i32 /i--	9:ok s=i32 /i--	10:ok s=i32 /i--	11:ok s=i32 /i--	12:ok s=i32 /i--	13:ok s=i32 /i--
+PN	1	s,	d
+PS	1	0:ok s=i32	1:ok s=i32	2:ok s=i32	3:ok s=i32	4:ok s=i32	5:ok s=i32	6:ok s=i32	7:ok s=i32	8:ok s=i32	9:ok s=i32	10:ok s=i32	11:ok s=i32	12:ok s=i32	13:ok s=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--	13:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32	13:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	7
+PN	3	value,	d
+PS	3	0:fail Let-Refutable-Pattern-Err
 F	/w/target/rescases/pat_modal_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1298,12 +1733,27 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	d,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 PT	2	3
+PN	2	w,	d
+PS	2	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 PT	3	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	3	b,	d
+PS	3	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	3	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	4	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m
+PN	4	width,	d
+PS	4	0:fail Let-Refutable-Pattern-Err
 PT	5	8	0:fail - /--m	1:fail - /--m	2:fail - /--m	3:fail - /--m	4:fail - /--m	5:fail - /--m	6:fail - /--m	7:fail - /--m	8:fail - /--m	9:fail - /--m	10:fail - /--m	11:fail - /--m	12:fail - /--m
+PN	5		d
+PS	5	0:fail Let-Refutable-Pattern-Err
 F	/w/target/rescases/pat_range/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1319,11 +1769,20 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	1	b,	d
+PS	1	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	9	0:ok /---	1:ok /---	2:ok /---	3:ok /---	4:ok /---	5:ok /---	6:ok /---	7:ok /---	8:ok /---	9:ok /---	10:ok /---	11:ok /---	12:ok /---
+PN	2		d
+PS	2	0:fail Let-Refutable-Pattern-Err
 F	/w/target/rescases/pat_record_missing_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pat_record_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1339,10 +1798,22 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok p=i32 /i--	1:ok p=i32 /i--	2:ok p=i32 /i--	3:ok p=i32 /i--	4:ok p=i32 /i--	5:ok p=i32 /i--	6:ok p=i32 /i--	7:ok p=i32 /i--	8:ok p=i32 /i--	9:ok p=i32 /i--	10:ok p=i32 /i--	11:ok p=i32 /i--	12:ok p=i32 /i--
+PN	1	p,	d
+PS	1	0:ok p=i32	1:ok p=i32	2:ok p=i32	3:ok p=i32	4:ok p=i32	5:ok p=i32	6:ok p=i32	7:ok p=i32	8:ok p=i32	9:ok p=i32	10:ok p=i32	11:ok p=i32	12:ok p=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	6
+PN	3	px,py,	d
+PS	3
 F	/w/target/rescases/pat_record_qualified/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1358,14 +1829,26 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok p=i32 /i--	1:ok p=i32 /i--	2:ok p=i32 /i--	3:ok p=i32 /i--	4:ok p=i32 /i--	5:ok p=i32 /i--	6:ok p=i32 /i--	7:ok p=i32 /i--	8:ok p=i32 /i--	9:ok p=i32 /i--	10:ok p=i32 /i--	11:ok p=i32 /i--	12:ok p=i32 /i--
+PN	1	p,	d
+PS	1	0:ok p=i32	1:ok p=i32	2:ok p=i32	3:ok p=i32	4:ok p=i32	5:ok p=i32	6:ok p=i32	7:ok p=i32	8:ok p=i32	9:ok p=i32	10:ok p=i32	11:ok p=i32	12:ok p=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	6
+PN	3	x,y,	d
+PS	3
 F	/w/target/rescases/pat_record_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pat_record_qualified_not_record/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pat_record_shorthand/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1381,14 +1864,26 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok p=i32 /i--	1:ok p=i32 /i--	2:ok p=i32 /i--	3:ok p=i32 /i--	4:ok p=i32 /i--	5:ok p=i32 /i--	6:ok p=i32 /i--	7:ok p=i32 /i--	8:ok p=i32 /i--	9:ok p=i32 /i--	10:ok p=i32 /i--	11:ok p=i32 /i--	12:ok p=i32 /i--
+PN	1	p,	d
+PS	1	0:ok p=i32	1:ok p=i32	2:ok p=i32	3:ok p=i32	4:ok p=i32	5:ok p=i32	6:ok p=i32	7:ok p=i32	8:ok p=i32	9:ok p=i32	10:ok p=i32	11:ok p=i32	12:ok p=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	3	6
+PN	3	x,y,	d
+PS	3
 F	/w/target/rescases/pattern_dup_nested/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pattern_dup_tuple/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pattern_tuple_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1404,15 +1899,29 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	5
+PN	1	a,b,	d
+PS	1
 PT	2	2	0:ok c=i32 /i--	1:ok c=i32 /i--	2:ok c=i32 /i--	3:ok c=i32 /i--	4:ok c=i32 /i--	5:ok c=i32 /i--	6:ok c=i32 /i--	7:ok c=i32 /i--	8:ok c=i32 /i--	9:ok c=i32 /i--	10:ok c=i32 /i--	11:ok c=i32 /i--	12:ok c=i32 /i--
+PN	2	c,	d
+PS	2	0:ok c=i32	1:ok c=i32	2:ok c=i32	3:ok c=i32	4:ok c=i32	5:ok c=i32	6:ok c=i32	7:ok c=i32	8:ok c=i32	9:ok c=i32	10:ok c=i32	11:ok c=i32	12:ok c=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/pattern_tuple_variant_vs_module_record/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 PT	0	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--
+PN	0	b,	d
+PS	0	0:ok b=i32	1:ok b=i32	2:ok b=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	7
+PN	1	value,	d
+PS	1	0:fail Let-Refutable-Pattern-Err
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1426,17 +1935,26 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/pattern_type_vs_module_enum/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pattern_type_vs_module_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pattern_type_vs_module_record/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 PT	0	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--
+PN	0	b,	d
+PS	0	0:ok b=i32	1:ok b=i32	2:ok b=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	6
+PN	1	value,	d
+PS	1
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1450,15 +1968,24 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/pattern_typed/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pattern_variant_vs_module_enum/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 PT	0	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--
+PN	0	b,	d
+PS	0	0:ok b=i32	1:ok b=i32	2:ok b=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	7
+PN	1	value,	d
+PS	1	0:fail Let-Refutable-Pattern-Err
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -1472,9 +1999,13 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/pattern_variant_vs_module_record/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pattern_wildcard/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1490,11 +2021,21 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	1	0:ok /i--	1:ok /i--	2:ok /i--	3:ok /i--	4:ok /i--	5:ok /i--	6:ok /i--	7:ok /i--	8:ok /i--	9:ok /i--	10:ok /i--	11:ok /i--	12:ok /i--
+PN	1		d
+PS	1	0:ok	1:ok	2:ok	3:ok	4:ok	5:ok	6:ok	7:ok	8:ok	9:ok	10:ok	11:ok	12:ok
+PE	1	0	ok ok ok ok ok		1120-
 PT	2	1	0:ok /i--	1:ok /i--	2:ok /i--	3:ok /i--	4:ok /i--	5:ok /i--	6:ok /i--	7:ok /i--	8:ok /i--	9:ok /i--	10:ok /i--	11:ok /i--	12:ok /i--
+PN	2		d
+PS	2	0:ok	1:ok	2:ok	3:ok	4:ok	5:ok	6:ok	7:ok	8:ok	9:ok	10:ok	11:ok	12:ok
+PE	2	0	ok ok ok ok ok		1120-
 F	/w/target/rescases/proc_overload_then_record/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/proc_overloads/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1509,6 +2050,7 @@ STOP	resolve
 F	/w/target/rescases/qualified_module_missing_name/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/qualified_proc/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1524,12 +2066,19 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok a=i32 /i--	1:ok a=i32 /i--	2:ok a=i32 /i--	3:ok a=i32 /i--	4:ok a=i32 /i--	5:ok a=i32 /i--	6:ok a=i32 /i--	7:ok a=i32 /i--	8:ok a=i32 /i--	9:ok a=i32 /i--	10:ok a=i32 /i--	11:ok a=i32 /i--	12:ok a=i32 /i--
+PN	1	a,	d
+PS	1	0:ok a=i32	1:ok a=i32	2:ok a=i32	3:ok a=i32	4:ok a=i32	5:ok a=i32	6:ok a=i32	7:ok a=i32	8:ok a=i32	9:ok a=i32	10:ok a=i32	11:ok a=i32	12:ok a=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/qualified_proc_arg_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/qualified_proc_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/qualified_static/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1545,12 +2094,19 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok a=i32 /i--	1:ok a=i32 /i--	2:ok a=i32 /i--	3:ok a=i32 /i--	4:ok a=i32 /i--	5:ok a=i32 /i--	6:ok a=i32 /i--	7:ok a=i32 /i--	8:ok a=i32 /i--	9:ok a=i32 /i--	10:ok a=i32 /i--	11:ok a=i32 /i--	12:ok a=i32 /i--
+PN	1	a,	d
+PS	1	0:ok a=i32	1:ok a=i32	2:ok a=i32	3:ok a=i32	4:ok a=i32	5:ok a=i32	6:ok a=i32	7:ok a=i32	8:ok a=i32	9:ok a=i32	10:ok a=i32	11:ok a=i32	12:ok a=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/qualified_static_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/qualified_type_as_value/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/record_as_value/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1566,8 +2122,15 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok p=i32 /i--	1:ok p=i32 /i--	2:ok p=i32 /i--	3:ok p=i32 /i--	4:ok p=i32 /i--	5:ok p=i32 /i--	6:ok p=i32 /i--	7:ok p=i32 /i--	8:ok p=i32 /i--	9:ok p=i32 /i--	10:ok p=i32 /i--	11:ok p=i32 /i--	12:ok p=i32 /i--
+PN	1	p,	d
+PS	1	0:ok p=i32	1:ok p=i32	2:ok p=i32	3:ok p=i32	4:ok p=i32	5:ok p=i32	6:ok p=i32	7:ok p=i32	8:ok p=i32	9:ok p=i32	10:ok p=i32	11:ok p=i32	12:ok p=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/record_call_form/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1583,8 +2146,15 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok p=i32 /i--	1:ok p=i32 /i--	2:ok p=i32 /i--	3:ok p=i32 /i--	4:ok p=i32 /i--	5:ok p=i32 /i--	6:ok p=i32 /i--	7:ok p=i32 /i--	8:ok p=i32 /i--	9:ok p=i32 /i--	10:ok p=i32 /i--	11:ok p=i32 /i--	12:ok p=i32 /i--
+PN	1	p,	d
+PS	1	0:ok p=i32	1:ok p=i32	2:ok p=i32	3:ok p=i32	4:ok p=i32	5:ok p=i32	6:ok p=i32	7:ok p=i32	8:ok p=i32	9:ok p=i32	10:ok p=i32	11:ok p=i32	12:ok p=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/record_call_form_builtin/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1600,9 +2170,19 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok o=i32 /i--	1:ok o=i32 /i--	2:ok o=i32 /i--	3:ok o=i32 /i--	4:ok o=i32 /i--	5:ok o=i32 /i--	6:ok o=i32 /i--	7:ok o=i32 /i--	8:ok o=i32 /i--	9:ok o=i32 /i--	10:ok o=i32 /i--	11:ok o=i32 /i--	12:ok o=i32 /i--
+PN	1	o,	d
+PS	1	0:ok o=i32	1:ok o=i32	2:ok o=i32	3:ok o=i32	4:ok o=i32	5:ok o=i32	6:ok o=i32	7:ok o=i32	8:ok o=i32	9:ok o=i32	10:ok o=i32	11:ok o=i32	12:ok o=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok d=i32 /i--	1:ok d=i32 /i--	2:ok d=i32 /i--	3:ok d=i32 /i--	4:ok d=i32 /i--	5:ok d=i32 /i--	6:ok d=i32 /i--	7:ok d=i32 /i--	8:ok d=i32 /i--	9:ok d=i32 /i--	10:ok d=i32 /i--	11:ok d=i32 /i--	12:ok d=i32 /i--
+PN	2	d,	d
+PS	2	0:ok d=i32	1:ok d=i32	2:ok d=i32	3:ok d=i32	4:ok d=i32	5:ok d=i32	6:ok d=i32	7:ok d=i32	8:ok d=i32	9:ok d=i32	10:ok d=i32	11:ok d=i32	12:ok d=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/record_call_form_qualified/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1618,12 +2198,20 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok p=i32 /i--	1:ok p=i32 /i--	2:ok p=i32 /i--	3:ok p=i32 /i--	4:ok p=i32 /i--	5:ok p=i32 /i--	6:ok p=i32 /i--	7:ok p=i32 /i--	8:ok p=i32 /i--	9:ok p=i32 /i--	10:ok p=i32 /i--	11:ok p=i32 /i--	12:ok p=i32 /i--
+PN	1	p,	d
+PS	1	0:ok p=i32	1:ok p=i32	2:ok p=i32	3:ok p=i32	4:ok p=i32	5:ok p=i32	6:ok p=i32	7:ok p=i32	8:ok p=i32	9:ok p=i32	10:ok p=i32	11:ok p=i32	12:ok p=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/record_implements_missing/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 F	/w/target/rescases/record_implements_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1632,6 +2220,7 @@ PY	3	i32
 F	/w/target/rescases/record_implements_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/record_literal/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1647,8 +2236,15 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok p=i32 /i--	1:ok p=i32 /i--	2:ok p=i32 /i--	3:ok p=i32 /i--	4:ok p=i32 /i--	5:ok p=i32 /i--	6:ok p=i32 /i--	7:ok p=i32 /i--	8:ok p=i32 /i--	9:ok p=i32 /i--	10:ok p=i32 /i--	11:ok p=i32 /i--	12:ok p=i32 /i--
+PN	1	p,	d
+PS	1	0:ok p=i32	1:ok p=i32	2:ok p=i32	3:ok p=i32	4:ok p=i32	5:ok p=i32	6:ok p=i32	7:ok p=i32	8:ok p=i32	9:ok p=i32	10:ok p=i32	11:ok p=i32	12:ok p=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/record_literal_builtin/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1664,12 +2260,19 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok o=i32 /i--	1:ok o=i32 /i--	2:ok o=i32 /i--	3:ok o=i32 /i--	4:ok o=i32 /i--	5:ok o=i32 /i--	6:ok o=i32 /i--	7:ok o=i32 /i--	8:ok o=i32 /i--	9:ok o=i32 /i--	10:ok o=i32 /i--	11:ok o=i32 /i--	12:ok o=i32 /i--
+PN	1	o,	d
+PS	1	0:ok o=i32	1:ok o=i32	2:ok o=i32	3:ok o=i32	4:ok o=i32	5:ok o=i32	6:ok o=i32	7:ok o=i32	8:ok o=i32	9:ok o=i32	10:ok o=i32	11:ok o=i32	12:ok o=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/record_literal_field_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/record_literal_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/record_literal_qualified/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1685,12 +2288,19 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok p=i32 /i--	1:ok p=i32 /i--	2:ok p=i32 /i--	3:ok p=i32 /i--	4:ok p=i32 /i--	5:ok p=i32 /i--	6:ok p=i32 /i--	7:ok p=i32 /i--	8:ok p=i32 /i--	9:ok p=i32 /i--	10:ok p=i32 /i--	11:ok p=i32 /i--	12:ok p=i32 /i--
+PN	1	p,	d
+PS	1	0:ok p=i32	1:ok p=i32	2:ok p=i32	3:ok p=i32	4:ok p=i32	5:ok p=i32	6:ok p=i32	7:ok p=i32	8:ok p=i32	9:ok p=i32	10:ok p=i32	11:ok p=i32	12:ok p=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/record_literal_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/region_alias_dup/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/region_alias_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1706,9 +2316,13 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/region_alias_out_of_scope/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/region_alias_reused/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1724,11 +2338,15 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/region_body_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/region_frame_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/region_frame_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1744,6 +2362,9 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/reserved_local_gen/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/reserved_local_root/Ultraviolet.toml
@@ -1777,6 +2398,7 @@ STOP	resolve
 F	/w/target/rescases/shadow_universe_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/sibling_blocks_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1792,17 +2414,22 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/sibling_module_names/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/state_method_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/state_method_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PY	2	i32
 PY	3	i32
 F	/w/target/rescases/state_method_self_type/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	Self
 PY	1	i32
@@ -1813,6 +2440,7 @@ STOP	resolve
 F	/w/target/rescases/string_builtin_missing_name/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/string_builtin_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1828,8 +2456,17 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok a=i32 /i--	1:ok a=i32 /i--	2:ok a=i32 /i--	3:ok a=i32 /i--	4:ok a=i32 /i--	5:ok a=i32 /i--	6:ok a=i32 /i--	7:ok a=i32 /i--	8:ok a=i32 /i--	9:ok a=i32 /i--	10:ok a=i32 /i--	11:ok a=i32 /i--	12:ok a=i32 /i--
+PN	1	a,	d
+PS	1	0:ok a=i32	1:ok a=i32	2:ok a=i32	3:ok a=i32	4:ok a=i32	5:ok a=i32	6:ok a=i32	7:ok a=i32	8:ok a=i32	9:ok a=i32	10:ok a=i32	11:ok a=i32	12:ok a=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/string_builtin_wrong_namespace/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/suggest_far_none/Ultraviolet.toml
@@ -1871,6 +2508,7 @@ STOP	resolve
 F	/w/target/rescases/type_alignof_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_builtin_names/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1886,16 +2524,30 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	a,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 PT	2	3
+PN	2	b,	d
+PS	2	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 PT	3	3
+PN	3	c,	d
+PS	3	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 PT	4	3
+PN	4	d,	d
+PS	4	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 PT	5	3
+PN	5	e,	d
+PS	5	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 F	/w/target/rescases/type_cast_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_class_as_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_dynamic_missing/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1911,8 +2563,14 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	a,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 F	/w/target/rescases/type_dynamic_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1928,9 +2586,18 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	a,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 PT	2	3
+PN	2	b,	d
+PS	2	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 PT	3	3
+PN	3	c,	d
+PS	3	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 F	/w/target/rescases/type_dynamic_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_missing_alias/Ultraviolet.toml
@@ -1972,6 +2639,7 @@ STOP	resolve
 F	/w/target/rescases/type_missing_variant_tuple/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_modal_state_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -1987,12 +2655,18 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	a,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 F	/w/target/rescases/type_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_qualified_module_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_qualified_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2008,10 +2682,16 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	a,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 F	/w/target/rescases/type_refine_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_refine_self/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2027,10 +2707,17 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	a,	d
+PS	1	0:ok a=i32 where { ... }	1:ok a=i32 where { ... }	2:ok a=i32 where { ... }	3:ok a=i32 where { ... }	4:ok a=i32 where { ... }	5:ok a=i32 where { ... }	6:ok a=i32 where { ... }	7:ok a=i32 where { ... }	8:ok a=i32 where { ... }	9:ok a=i32 where { ... }	10:ok a=i32 where { ... }	11:ok a=i32 where { ... }	12:ok a=i32 where { ... }
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 where { ... } i32 where { ... } L-	1120-
 F	/w/target/rescases/type_refine_shadow_self/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_self_outside/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2046,7 +2733,12 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	a,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err	2:fail Pat-Typed-Err	3:fail Pat-Typed-Err	4:fail Pat-Typed-Err	5:fail Pat-Typed-Err	6:fail Pat-Typed-Err	7:fail Pat-Typed-Err	8:fail Pat-Typed-Err	9:fail Pat-Typed-Err	10:fail Pat-Typed-Err	11:fail Pat-Typed-Err	12:fail Pat-Typed-Err
 F	/w/target/rescases/type_sizeof_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_transmute_missing/Ultraviolet.toml
@@ -2054,6 +2746,7 @@ STOP	resolve
 F	/w/target/rescases/type_value_as_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_alias_keyword_like/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2070,9 +2763,13 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_alias_universe/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_conflict_decl/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2090,13 +2787,20 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_conflict_decl_before/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_cycle/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "A"]
 PY	0	i32
 PY	1	i32
@@ -2116,15 +2820,22 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_decl_then_wildcard/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_enum_variant_path/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_item/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -2138,9 +2849,13 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_item_alias/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_item_class/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2157,13 +2872,20 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_item_enum/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_item_internal/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -2177,6 +2899,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_item_missing/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_item_module_itself/Ultraviolet.toml
@@ -2188,10 +2913,14 @@ STOP	names
 F	/w/target/rescases/using_item_private_type/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_item_relative/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -2205,11 +2934,18 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_item_static/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -2223,11 +2959,17 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_item_type/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	3
+PN	0	a,	d
+PS	0	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -2241,13 +2983,25 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_list/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	b,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err
 PT	2	2	0:ok c=i32 /i--	1:ok c=i32 /i--
+PN	2	c,	d
+PS	2	0:ok c=i32	1:ok c=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -2261,12 +3015,21 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_list_alias/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	b,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -2280,6 +3043,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_list_dup/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_list_dup_alias/Ultraviolet.toml
@@ -2291,10 +3057,14 @@ STOP	names
 F	/w/target/rescases/using_list_private/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_list_same_item_two_names/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Util"]
 PY	0	i32
 PY	1	i32
@@ -2308,11 +3078,15 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_local_dup_alias/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_local_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_local_ok/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2328,8 +3102,17 @@ PY	10	i32
 PY	11	i32
 PY	12	i32
 PT	0	3	0:ok limit=i32 /i--	1:ok limit=i32 /i--	2:ok limit=i32 /i--	3:ok limit=i32 /i--	4:ok limit=i32 /i--	5:ok limit=i32 /i--	6:ok limit=i32 /i--	7:ok limit=i32 /i--	8:ok limit=i32 /i--	9:ok limit=i32 /i--	10:ok limit=i32 /i--	11:ok limit=i32 /i--	12:ok limit=i32 /i--
+PN	0	limit,	d
+PS	0	0:ok limit=i32	1:ok limit=i32	2:ok limit=i32	3:ok limit=i32	4:ok limit=i32	5:ok limit=i32	6:ok limit=i32	7:ok limit=i32	8:ok limit=i32	9:ok limit=i32	10:ok limit=i32	11:ok limit=i32	12:ok limit=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	2	0:ok source_value=i32 /i--	1:ok source_value=i32 /i--	2:ok source_value=i32 /i--	3:ok source_value=i32 /i--	4:ok source_value=i32 /i--	5:ok source_value=i32 /i--	6:ok source_value=i32 /i--	7:ok source_value=i32 /i--	8:ok source_value=i32 /i--	9:ok source_value=i32 /i--	10:ok source_value=i32 /i--	11:ok source_value=i32 /i--	12:ok source_value=i32 /i--
+PN	1	source_value,	d
+PS	1	0:ok source_value=i32	1:ok source_value=i32	2:ok source_value=i32	3:ok source_value=i32	4:ok source_value=i32	5:ok source_value=i32	6:ok source_value=i32	7:ok source_value=i32	8:ok source_value=i32	9:ok source_value=i32	10:ok source_value=i32	11:ok source_value=i32	12:ok source_value=i32
+PE	1	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	2	2	0:ok b=i32 /i--	1:ok b=i32 /i--	2:ok b=i32 /i--	3:ok b=i32 /i--	4:ok b=i32 /i--	5:ok b=i32 /i--	6:ok b=i32 /i--	7:ok b=i32 /i--	8:ok b=i32 /i--	9:ok b=i32 /i--	10:ok b=i32 /i--	11:ok b=i32 /i--	12:ok b=i32 /i--
+PN	2	b,	d
+PS	2	0:ok b=i32	1:ok b=i32	2:ok b=i32	3:ok b=i32	4:ok b=i32	5:ok b=i32	6:ok b=i32	7:ok b=i32	8:ok b=i32	9:ok b=i32	10:ok b=i32	11:ok b=i32	12:ok b=i32
+PE	2	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_local_shadow_outer/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_public_list_of_internal/Ultraviolet.toml
@@ -2337,6 +3120,7 @@ STOP	names
 F	/w/target/rescases/using_public_of_internal/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_public_of_public/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Util"]
@@ -2352,9 +3136,13 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_public_wildcard/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_public_wildcard_all_public/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 X	["App" "Open"]
@@ -2374,11 +3162,18 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_reexport_chain/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Mid"]
 X	["App" "Util"]
 PY	0	i32
@@ -2393,11 +3188,18 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_reexport_internal_chain/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 X	["App" "Mid"]
 X	["App" "Util"]
 PY	0	i32
@@ -2412,14 +3214,23 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_reexport_private_chain/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_reexport_wildcard_chain/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
 PT	0	2	0:ok a=i32 /i--	1:ok a=i32 /i--
+PN	0	a,	d
+PS	0	0:ok a=i32	1:ok a=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 PT	1	3
+PN	1	b,	d
+PS	1	0:fail Pat-Typed-Err	1:fail Pat-Typed-Err
 X	["App" "Mid"]
 X	["App" "Util"]
 PY	0	i32
@@ -2434,6 +3245,9 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_reserved_alias/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_twice_same/Ultraviolet.toml
@@ -2443,6 +3257,7 @@ STOP	names
 F	/w/target/rescases/using_wildcard/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_wildcard_conflict_decl/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2460,9 +3275,13 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_wildcard_module_missing/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/using_wildcard_private_api/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2479,7 +3298,11 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_wildcard_public_api/Ultraviolet.toml
+PG	fail:Intro-Reserved-Gen-Err fail:Shadow-Reserved-Gen-Err ok	0-0 1-1 2-2 3Arena3 1-1 5-5 	s-h--gp
 X	["App"]
 PY	0	i32
 PY	1	i32
@@ -2496,5 +3319,8 @@ PY	8	i32
 PY	9	i32
 PY	10	i32
 PT	0	3	0:ok level=i32 /i--	1:ok level=i32 /i--	2:ok level=i32 /i--	3:ok level=i32 /i--	4:ok level=i32 /i--	5:ok level=i32 /i--	6:ok level=i32 /i--	7:ok level=i32 /i--	8:ok level=i32 /i--	9:ok level=i32 /i--	10:ok level=i32 /i--
+PN	0	level,	d
+PS	0	0:ok level=i32	1:ok level=i32	2:ok level=i32	3:ok level=i32	4:ok level=i32	5:ok level=i32	6:ok level=i32	7:ok level=i32	8:ok level=i32	9:ok level=i32	10:ok level=i32
+PE	0	0	ok ok fail:Intro-Outer-Err fail:- fail:-	V i32 i32 L-	1120-
 F	/w/target/rescases/using_wildcards_same_name/Ultraviolet.toml
 STOP	names

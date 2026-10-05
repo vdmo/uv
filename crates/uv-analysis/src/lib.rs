@@ -9,6 +9,7 @@ pub mod contracts;
 pub mod ffi;
 pub mod generics;
 pub mod layout;
+pub mod memory;
 pub mod modal;
 pub mod resolve;
 pub mod typing;

@@ -386,7 +386,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
-| a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | literals and patterns done; the rest next |
+| a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
 | b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
@@ -394,7 +394,7 @@ Part b calls into code that belongs to M3.5 (`memory/regions`, `memory/calls`,
 `memory/borrow_bind`, `contracts/contract_check`, `keys/key_paths`, `caps`); what it needs
 from there is ported with it.
 
-What M3.4a has so far:
+What M3.4a added:
 
 - `uv-analysis::typing::literals`: the type of a literal, the check of a literal against
   an expected type, and where `null` is expected. Compared for every literal token of the
@@ -404,6 +404,17 @@ What M3.4a has so far:
   covers its variant or state. The oracle gained a `patterns` mode that types each
   pattern written in a module's bodies against each of the module's types;
   `tools/gen_pattern_cases.py` writes 8 cases with 134 patterns.
+- `uv-analysis::typing::solve`: applying a substitution of type variables, unification
+  with the occurs check, and solving a list of equality and subtyping constraints.
+  Compared in the `relations` mode on fourteen constraint sets built from each pair of
+  neighbouring types of every module, and on the equation of every pair.
+- `uv-analysis::typing::type_env`: bindings and scopes, introducing and shadowing
+  names, lookups, provenance seeds, staleness, the names of a pattern, and the typing of
+  a binding pattern (which, unlike a matching pattern, admits only irrefutable forms).
+  Compared in the `patterns` mode: every pattern is also typed as a binding, and the
+  bindings of the first type that accepts it are run through a fixed script of
+  environment operations. `EmitStaleBindingReferenceWarning` needs the statement
+  context and comes with part b.
 - `uv-analysis::typing::expr_result`: the result of typing an expression. It keeps the
   reference's shape (a flag, an optional rule, a type, detail) rather than a `Result`,
   because the reference sets these independently and 36k lines of callers read them.

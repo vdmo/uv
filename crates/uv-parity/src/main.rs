@@ -74,6 +74,18 @@ use uv_analysis::typing::type_lookup::lookup_enum_decl;
 use uv_analysis::typing::literals::{check_literal_expr, null_literal_expected, type_literal_expr};
 use uv_analysis::typing::types::{make_type_perm, make_type_ptr};
 use uv_source::ast::LiteralExpr;
+use uv_analysis::memory::regions::ProvenanceKind;
+use uv_analysis::typing::type_env::{
+    apply_binding_provenance_seed, bind_of, collect_pat_names, distinct_names, gpu_context, has_heap_provenance,
+    intro_all, mark_shared_derived_bindings_stale, mut_of, normalize_binding_provenance_seed, pop_scope,
+    project_type_env_to_depth, push_scope, stable_binding_type, type_pattern, BindingProvenanceSeedKind,
+    ParallelContextKind, TypeBinding, TypeEnv,
+};
+use uv_source::ast::Mutability;
+use uv_analysis::typing::solve::{apply_substitution, solve, Constraint};
+use uv_analysis::typing::types::{
+    make_type, make_type_array, make_type_closure, make_type_func, make_type_slice, make_type_union, TypeFuncParam,
+};
 use uv_analysis::typing::pattern::{
     enum_pattern_covers_variant, irrefutable_pattern, modal_pattern_covers_state, type_pattern_against_type,
 };
@@ -1262,6 +1274,79 @@ fn dump_instantiation_set(out: &mut String, types: &[TypeRef]) {
     let _ = writeln!(out, "{}", mono.instantiations().values().filter(|entry| entry.processed).count());
 }
 
+fn dump_solving(out: &mut String, ctx: &ScopeContext<'_>, types: &[TypeRef]) {
+    let count = types.len().min(24);
+    let var = |id: u32| make_type(TypeNode::Var(id));
+    let eq = |lhs: TypeRef, rhs: TypeRef| Constraint { lhs, rhs, requires_subtyping: false };
+    let sub = |lhs: TypeRef, rhs: TypeRef| Constraint { lhs, rhs, requires_subtyping: true };
+    let range = |base: TypeRef| make_type(TypeNode::Range(base));
+    let func = |param: TypeRef, ret: TypeRef| make_type_func(vec![TypeFuncParam { mode: None, r#type: param }], ret);
+    let closure = |param: TypeRef, ret: TypeRef| make_type_closure(vec![(false, param)], ret, None);
+    let unique = |base: TypeRef| make_type_perm(Permission::Unique, base);
+    for i in 0..count {
+        let a = &types[i];
+        let b = &types[(i + 1) % types.len()];
+        let (a, b) = (|| a.clone(), || b.clone());
+        let valid = Some(PtrState::Valid);
+        let sets: Vec<Vec<Constraint>> = vec![
+            vec![eq(var(0), a())],
+            vec![eq(make_type_tuple(vec![var(0), var(1)]), make_type_tuple(vec![a(), b()]))],
+            vec![eq(var(0), a()), eq(var(0), b())],
+            vec![sub(var(0), a()), sub(b(), var(1)), eq(var(1), var(0))],
+            vec![eq(var(0), make_type_tuple(vec![var(0), a()]))],
+            vec![sub(a(), b())],
+            vec![
+                eq(make_type_slice(var(0)), make_type_slice(a())),
+                eq(make_type_raw_ptr(RawPtrQual::Imm, var(1)), make_type_raw_ptr(RawPtrQual::Imm, b())),
+                eq(make_type_ptr(var(2), valid), make_type_ptr(a(), valid)),
+            ],
+            vec![eq(func(var(0), var(1)), func(a(), b())), eq(var(0), var(1))],
+            vec![eq(var(0), var(1)), eq(var(1), var(2)), eq(var(2), a()), eq(unique(var(3)), unique(var(0)))],
+            vec![eq(make_type_union(vec![var(0), a()]), make_type_union(vec![b(), a()]))],
+            vec![
+                eq(range(var(0)), range(a())),
+                eq(a(), var(1)),
+                eq(make_type_array(var(0), 3, None), make_type_array(b(), 3, None)),
+            ],
+            vec![eq(closure(var(0), var(1)), closure(a(), b()))],
+            vec![eq(var(1), var(0)), eq(var(0), var(1)), eq(var(0), a())],
+            vec![
+                eq(unique(var(0)), a()),
+                eq(make_type_array(var(1), 2, None), b()),
+                eq(make_type_tuple(vec![var(2), var(3)]), a()),
+            ],
+        ];
+        let _ = write!(out, "SV\t{i}");
+        for set in &sets {
+            out.push('\t');
+            match solve(ctx, set) {
+                Err(diag_id) => {
+                    let _ = write!(out, "fail {}", diag_or(diag_id));
+                }
+                Ok(subst) => {
+                    out.push_str("ok");
+                    for id in 0..4u32 {
+                        if let Some(bound) = subst.get(&id) {
+                            let _ = write!(out, " {id}={}", type_text(bound));
+                        }
+                    }
+                    let all = make_type_tuple(vec![var(0), var(1), var(2), var(3)]);
+                    let _ = write!(out, " => {}", type_text(&apply_substitution(&all, &subst)));
+                }
+            }
+        }
+        let _ = write!(out, "\nSU\t{i}\t");
+        for other in &types[..count] {
+            out.push(match solve(ctx, &[eq(a(), other.clone())]) {
+                Ok(_) => '1',
+                Err(Some("Syn-Call-Err")) => '0',
+                Err(_) => '?',
+            });
+        }
+        out.push('\n');
+    }
+}
+
 fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
     const FOUNDATIONAL: [&str; 9] =
         ["Bitcopy", "Clone", "Drop", "FfiSafe", "GpuSafe", "Eq", "Discrete", "Hash", "Iterator"];
@@ -1373,6 +1458,7 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
             }
         };
         dump_instantiation_set(out, &types);
+        dump_solving(out, ctx, &types);
         for name in FOUNDATIONAL {
             let _ = write!(out, "FI\t{name}\t");
             implements(out, &[name.to_string()]);
@@ -1836,7 +1922,118 @@ fn pattern_index(pattern: &PatternPtr) -> usize {
     }
 }
 
+fn intro_text(res: &Result<TypeEnv, Option<&'static str>>) -> String {
+    match res {
+        Ok(_) => "ok".to_string(),
+        Err(diag_id) => format!("fail:{}", diag_or(*diag_id)),
+    }
+}
+
+fn mut_char(mutability: Mutability) -> char {
+    if mutability == Mutability::Var {
+        'V'
+    } else {
+        'L'
+    }
+}
+
+fn dump_env_script(out: &mut String, i: usize, j: usize, binds: &[(String, TypeRef)]) {
+    let e0 = push_scope(&TypeEnv::default());
+    let r1 = intro_all(&e0, binds, Mutability::Let, false);
+    let outer_env = r1.clone().unwrap_or_else(|_| e0.clone());
+    let e1 = push_scope(&outer_env);
+    let r2 = intro_all(&e1, binds, Mutability::Var, true);
+    let r3 = intro_all(&e1, binds, Mutability::Let, false);
+    let env = r2.clone().unwrap_or_else(|_| e1.clone());
+    let r4 = intro_all(&env, binds, Mutability::Var, true);
+    let r5 = intro_all(&TypeEnv::default(), binds, Mutability::Let, false);
+    let _ = write!(
+        out,
+        "PE\t{i}\t{j}\t{} {} {} {} {}\t",
+        intro_text(&r1),
+        intro_text(&r2),
+        intro_text(&r3),
+        intro_text(&r4),
+        intro_text(&r5)
+    );
+    if let Some((name, _)) = binds.first() {
+        match bind_of(&env, name) {
+            Some(bound) => {
+                let _ = write!(
+                    out,
+                    "{} {} {}",
+                    mut_char(bound.r#mut),
+                    type_text(&bound.r#type),
+                    type_text(stable_binding_type(bound))
+                );
+            }
+            None => out.push_str("unbound"),
+        }
+        out.push(' ');
+        out.push(mut_of(&outer_env, name).map_or('-', mut_char));
+        flag(out, has_heap_provenance(&env, name), 'h');
+    }
+    let _ = write!(
+        out,
+        "\t{}{}{}{}",
+        pop_scope(&env).scopes.len(),
+        project_type_env_to_depth(&env, 1).scopes.len(),
+        project_type_env_to_depth(&env, 5).scopes.len(),
+        pop_scope(&pop_scope(&pop_scope(&env))).scopes.len()
+    );
+    flag(out, gpu_context(&env), 'g');
+    out.push('\n');
+}
+
+fn dump_env_fixed(out: &mut String) {
+    let reserved = vec![("gen_tmp".to_string(), make_type_prim("i32"))];
+    let e0 = push_scope(&TypeEnv::default());
+    let _ = write!(
+        out,
+        "PG\t{} {} {}\t",
+        intro_text(&intro_all(&e0, &reserved, Mutability::Let, false)),
+        intro_text(&intro_all(&e0, &reserved, Mutability::Let, true)),
+        intro_text(&intro_all(&e0, &[], Mutability::Var, true))
+    );
+    let seed = |kind: BindingProvenanceSeedKind| kind as u8;
+    for kind in [
+        ProvenanceKind::Global,
+        ProvenanceKind::Stack,
+        ProvenanceKind::Heap,
+        ProvenanceKind::Region,
+        ProvenanceKind::Bottom,
+        ProvenanceKind::Param,
+    ] {
+        let mut binding = TypeBinding::default();
+        apply_binding_provenance_seed(&mut binding, kind, Some("Arena"));
+        let _ = write!(
+            out,
+            "{}{}{} ",
+            seed(binding.provenance_kind),
+            binding.provenance_region.as_deref().unwrap_or("-"),
+            seed(normalize_binding_provenance_seed(kind))
+        );
+    }
+    let mut env = push_scope(&e0);
+    let mut derived = TypeBinding { derived_from_shared: true, ..Default::default() };
+    apply_binding_provenance_seed(&mut derived, ProvenanceKind::Heap, None);
+    env.scopes[0].emplace("outer".to_string(), derived);
+    env.scopes[1].emplace("inner".to_string(), TypeBinding::default());
+    env.parallel_context = Some(ParallelContextKind::Gpu);
+    mark_shared_derived_bindings_stale(&mut env);
+    out.push('\t');
+    flag(out, bind_of(&env, "outer").is_some_and(|bound| bound.stale_after_release), 's');
+    flag(out, bind_of(&env, "inner").is_some_and(|bound| bound.stale_after_release), 's');
+    flag(out, has_heap_provenance(&env, "outer"), 'h');
+    flag(out, has_heap_provenance(&env, "inner"), 'h');
+    flag(out, has_heap_provenance(&env, "none"), 'h');
+    flag(out, gpu_context(&env), 'g');
+    flag(out, env.parallel_context.is_some(), 'p');
+    out.push('\n');
+}
+
 fn dump_patterns(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
+    dump_env_fixed(out);
     for index in 0..ctx.sigma.mods.len() {
         let module = ctx.sigma.mods[index].clone();
         dump_line("X", &module.path, out);
@@ -1893,6 +2090,43 @@ fn dump_patterns(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameM
                 flag(out, covers_state, 'm');
             }
             out.push('\n');
+            let mut names = Vec::new();
+            if let Some(pattern) = pattern.as_deref() {
+                collect_pat_names(pattern, &mut names);
+            }
+            let _ = write!(out, "PN\t{i}\t");
+            for name in &names {
+                let _ = write!(out, "{name},");
+            }
+            out.push('\t');
+            flag(out, distinct_names(&names), 'd');
+            let _ = write!(out, "\nPS\t{i}");
+            let mut first_ok: Option<(usize, Vec<(String, TypeRef)>)> = None;
+            for (j, ty) in types.iter().enumerate() {
+                let typed = type_pattern(ctx, pattern, ty);
+                if matches!(typed, Err(None)) || (matches!(typed, Err(Some("Let-Refutable-Pattern-Err"))) && j != 0) {
+                    continue;
+                }
+                let _ = write!(out, "\t{j}:");
+                match typed {
+                    Ok(bindings) => {
+                        out.push_str("ok");
+                        for (name, ty) in &bindings {
+                            let _ = write!(out, " {name}={}", escape(&type_to_string(ty)));
+                        }
+                        if first_ok.is_none() {
+                            first_ok = Some((j, bindings));
+                        }
+                    }
+                    Err(diag_id) => {
+                        let _ = write!(out, "fail {}", diag_or(diag_id));
+                    }
+                }
+            }
+            out.push('\n');
+            if let Some((j, bindings)) = &first_ok {
+                dump_env_script(out, i, *j, bindings);
+            }
         }
     }
 }
