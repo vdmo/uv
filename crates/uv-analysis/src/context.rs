@@ -72,6 +72,8 @@ pub struct Sigma {
     pub unsafe_spans_by_file: HashMap<String, Vec<Span>>,
     pub types: BTreeMap<PathKey, TypeDecl>,
     pub classes: BTreeMap<PathKey, ClassDecl>,
+    /// What each `opaque` return type stands for, once the type checker has found out.
+    pub opaque_underlying_by_class_path: BTreeMap<PathKey, crate::typing::types::TypeRef>,
 }
 
 /// Names to entities. Iteration follows the reference's hash table, which decides which

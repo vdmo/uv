@@ -30,6 +30,17 @@
 #include "04_analysis/resolve/resolver.h"
 #include "04_analysis/resolve/scopes_lookup.h"
 #include "04_analysis/resolve/visibility.h"
+#include "04_analysis/generics/monomorphize.h"
+#include "04_analysis/resolve/scopes.h"
+#include "04_analysis/layout/layout.h"
+#include "04_analysis/typing/type_equiv.h"
+#include "04_analysis/composite/enums.h"
+#include "04_analysis/modal/modal_widen.h"
+#include "04_analysis/typing/type_lookup.h"
+#include "04_analysis/typing/type_lower.h"
+#include "04_analysis/typing/type_stmt.h"
+#include "04_analysis/typing/types.h"
+#include "04_analysis/typing/variance.h"
 #include <algorithm>
 #include <unordered_map>
 
@@ -468,6 +479,477 @@ bool HasErrorDiag(const core::DiagnosticStream& diags) {
   return false;
 }
 
+// ---- type core ------------------------------------------------------------------
+// Every type written in a declaration (fields, parameters, returns, payloads, aliases,
+// module-level bindings) is lowered and printed with what the type core derives from it.
+
+bool g_types_mode = false;
+
+void PrintKey(const analysis::TypeKey& key);
+void PrintAtom(const analysis::KeyAtom& atom) {
+  switch (atom.kind) {
+    case analysis::KeyAtom::Kind::Number: std::cout << 'n' << atom.number; break;
+    case analysis::KeyAtom::Kind::String: std::cout << "s\"" << Escape(atom.text) << '"'; break;
+    case analysis::KeyAtom::Kind::Key:
+      if (atom.key) PrintKey(*atom.key); else std::cout << "null";
+      break;
+    case analysis::KeyAtom::Kind::KeyList:
+      std::cout << '[';
+      for (std::size_t i = 0; i < atom.key_list.size(); ++i) {
+        if (i != 0) std::cout << ' ';
+        if (atom.key_list[i]) PrintKey(*atom.key_list[i]); else std::cout << "null";
+      }
+      std::cout << ']';
+      break;
+  }
+}
+void PrintKey(const analysis::TypeKey& key) {
+  std::cout << '(';
+  for (std::size_t i = 0; i < key.atoms.size(); ++i) {
+    if (i != 0) std::cout << ' ';
+    PrintAtom(key.atoms[i]);
+  }
+  std::cout << ')';
+}
+
+struct WrittenType {
+  std::string label;
+  std::shared_ptr<ast::Type> type;
+};
+
+void CollectParams(const std::string& owner, const std::vector<ast::Param>& params,
+                   const std::shared_ptr<ast::Type>& ret, std::vector<WrittenType>& out) {
+  for (const auto& param : params) out.push_back({owner + "(" + param.name + ")", param.type});
+  if (ret) out.push_back({owner + "->", ret});
+}
+
+void CollectGenerics(const std::string& owner, const std::optional<ast::GenericParams>& params,
+                     std::vector<WrittenType>& out) {
+  if (!params) return;
+  for (const auto& param : params->params) {
+    if (param.default_type) out.push_back({owner + "<" + param.name + "=>", param.default_type});
+  }
+}
+
+std::vector<WrittenType> CollectWrittenTypes(const ast::ASTModule& module) {
+  std::vector<WrittenType> out;
+  for (const auto& item : module.items) {
+    std::visit(
+        [&](const auto& node) {
+          using T = std::decay_t<decltype(node)>;
+          if constexpr (std::is_same_v<T, ast::StaticDecl>) {
+            if (node.binding.type_opt) out.push_back({"static", node.binding.type_opt});
+          } else if constexpr (std::is_same_v<T, ast::ProcedureDecl> ||
+                               std::is_same_v<T, ast::ComptimeProcedureDecl>) {
+            CollectGenerics(node.name, node.generic_params, out);
+            CollectParams(node.name, node.params, node.return_type_opt, out);
+          } else if constexpr (std::is_same_v<T, ast::ExternBlock>) {
+            for (const auto& ext : node.items) {
+              const auto& proc = std::get<ast::ExternProcDecl>(ext);
+              CollectParams(proc.name, proc.params, proc.return_type_opt, out);
+            }
+          } else if constexpr (std::is_same_v<T, ast::RecordDecl>) {
+            CollectGenerics(node.name, node.generic_params, out);
+            for (const auto& member : node.members) {
+              if (const auto* field = std::get_if<ast::FieldDecl>(&member)) {
+                out.push_back({node.name + "." + field->name, field->type});
+              } else if (const auto* method = std::get_if<ast::MethodDecl>(&member)) {
+                CollectParams(node.name + "::" + method->name, method->params, method->return_type_opt, out);
+                if (const auto* recv = std::get_if<ast::ReceiverExplicit>(&method->receiver)) {
+                  out.push_back({node.name + "::" + method->name + "(self)", recv->type});
+                }
+              } else if (const auto* assoc = std::get_if<ast::AssociatedTypeDecl>(&member)) {
+                if (assoc->default_type) out.push_back({node.name + "::" + assoc->name, assoc->default_type});
+              }
+            }
+          } else if constexpr (std::is_same_v<T, ast::EnumDecl>) {
+            CollectGenerics(node.name, node.generic_params, out);
+            for (const auto& variant : node.variants) {
+              if (!variant.payload_opt) continue;
+              if (const auto* tuple = std::get_if<ast::VariantPayloadTuple>(&*variant.payload_opt)) {
+                for (const auto& element : tuple->elements) {
+                  out.push_back({node.name + "::" + variant.name, element});
+                }
+              } else {
+                for (const auto& field : std::get<ast::VariantPayloadRecord>(*variant.payload_opt).fields) {
+                  out.push_back({node.name + "::" + variant.name + "." + field.name, field.type});
+                }
+              }
+            }
+          } else if constexpr (std::is_same_v<T, ast::ModalDecl>) {
+            CollectGenerics(node.name, node.generic_params, out);
+            for (const auto& state : node.states) {
+              const std::string owner = node.name + "@" + state.name;
+              for (const auto& member : state.members) {
+                if (const auto* field = std::get_if<ast::StateFieldDecl>(&member)) {
+                  out.push_back({owner + "." + field->name, field->type});
+                } else if (const auto* method = std::get_if<ast::StateMethodDecl>(&member)) {
+                  CollectParams(owner + "::" + method->name, method->params, method->return_type_opt, out);
+                } else if (const auto* trans = std::get_if<ast::TransitionDecl>(&member)) {
+                  CollectParams(owner + "::" + trans->name, trans->params, nullptr, out);
+                }
+              }
+            }
+          } else if constexpr (std::is_same_v<T, ast::ClassDecl>) {
+            CollectGenerics(node.name, node.generic_params, out);
+            for (const auto& class_item : node.items) {
+              if (const auto* field = std::get_if<ast::ClassFieldDecl>(&class_item)) {
+                out.push_back({node.name + "." + field->name, field->type});
+              } else if (const auto* method = std::get_if<ast::ClassMethodDecl>(&class_item)) {
+                CollectParams(node.name + "::" + method->name, method->params, method->return_type_opt, out);
+              } else if (const auto* assoc = std::get_if<ast::AssociatedTypeDecl>(&class_item)) {
+                if (assoc->default_type) out.push_back({node.name + "::" + assoc->name, assoc->default_type});
+              } else if (const auto* abstract_field = std::get_if<ast::AbstractFieldDecl>(&class_item)) {
+                out.push_back({node.name + "." + abstract_field->name, abstract_field->type});
+              } else if (const auto* abstract_state = std::get_if<ast::AbstractStateDecl>(&class_item)) {
+                for (const auto& field : abstract_state->fields) {
+                  out.push_back({node.name + "@" + abstract_state->name + "." + field.name, field.type});
+                }
+              }
+            }
+          } else if constexpr (std::is_same_v<T, ast::TypeAliasDecl>) {
+            CollectGenerics(node.name, node.generic_params, out);
+            out.push_back({node.name, node.type});
+          }
+        },
+        item);
+  }
+  return out;
+}
+
+const char* VarianceName(analysis::Variance variance) {
+  switch (variance) {
+    case analysis::Variance::Covariant: return "+";
+    case analysis::Variance::Contravariant: return "-";
+    case analysis::Variance::Invariant: return "=";
+    case analysis::Variance::Bivariant: return "*";
+  }
+  return "?";
+}
+
+void PrintPathList(const std::vector<analysis::TypePath>& paths) {
+  for (std::size_t i = 0; i < paths.size(); ++i) {
+    if (i != 0) std::cout << ' ';
+    std::cout << core::StringOfPath(paths[i]);
+  }
+}
+
+// Instantiations of a generic declaration's member types: with no arguments (defaults
+// only), with one argument, and with an argument for every parameter.
+void DumpInstantiations(const std::string& name, const std::vector<ast::TypeParam>& params,
+                        const std::vector<analysis::TypeRef>& members) {
+  const std::vector<analysis::TypeRef> pool = {
+      analysis::MakeTypePrim("i32"), analysis::MakeTypePrim("bool"),
+      analysis::MakeTypeString(analysis::StringState::View),
+      analysis::MakeTypeTuple({analysis::MakeTypePrim("u8"), analysis::MakeTypePrim("u8")})};
+  for (const std::size_t count : {std::size_t{0}, std::size_t{1}, params.size()}) {
+    std::vector<analysis::TypeRef> args;
+    for (std::size_t i = 0; i < count; ++i) args.push_back(pool[i % pool.size()]);
+    const auto subst = analysis::BuildSubstitution(params, args);
+    std::cout << "S\t" << name << '\t' << count;
+    for (const auto& [param, type] : subst) {
+      std::cout << '\t' << param << '=' << Escape(analysis::TypeToString(type));
+    }
+    std::cout << '\n';
+    for (const auto& member : members) {
+      std::cout << "I\t" << name << '\t' << count << '\t'
+                << Escape(analysis::TypeToString(analysis::InstantiateType(member, subst))) << '\n';
+    }
+  }
+  const auto variance = analysis::ComputeVarianceContext(params, members);
+  std::cout << "V\t" << name;
+  for (const auto& [param, value] : variance.param_variance) {
+    std::cout << '\t' << param << VarianceName(value);
+  }
+  std::cout << '\n';
+}
+
+void PrintOpt(const std::optional<std::uint64_t>& value) {
+  if (value) std::cout << *value; else std::cout << '-';
+}
+void PrintLayout(const std::optional<analysis::layout::Layout>& layout) {
+  if (layout) std::cout << layout->size << '/' << layout->align; else std::cout << '-';
+}
+void PrintOffsets(const std::vector<std::uint64_t>& offsets) {
+  for (std::size_t i = 0; i < offsets.size(); ++i) {
+    if (i != 0) std::cout << ',';
+    std::cout << offsets[i];
+  }
+}
+
+// Layouts of a declaration, with its own parameters as arguments left out (defaults
+// apply) and with every parameter given a concrete argument.
+void DumpDeclLayouts(const analysis::ScopeContext& ctx, const ast::ASTItem& item) {
+  namespace layout = analysis::layout;
+  const std::vector<analysis::TypeRef> pool = {
+      analysis::MakeTypePrim("i32"), analysis::MakeTypePrim("bool"),
+      analysis::MakeTypeString(analysis::StringState::View),
+      analysis::MakeTypeTuple({analysis::MakeTypePrim("u8"), analysis::MakeTypePrim("u8")})};
+  const auto arg_lists = [&](const std::optional<ast::GenericParams>& params) {
+    std::vector<std::vector<analysis::TypeRef>> lists = {{}};
+    if (params && !params->params.empty()) {
+      std::vector<analysis::TypeRef> all;
+      for (std::size_t i = 0; i < params->params.size(); ++i) all.push_back(pool[i % pool.size()]);
+      lists.push_back(all);
+      all.push_back(pool[0]);
+      lists.push_back(all);
+    }
+    return lists;
+  };
+  std::visit(
+      [&](const auto& node) {
+        using T = std::decay_t<decltype(node)>;
+        if constexpr (std::is_same_v<T, ast::RecordDecl>) {
+          const auto options = layout::ResolveRecordLayoutOptions(node.attrs);
+          std::cout << "RO\t" << node.name << '\t' << (options.packed ? "packed" : "-") << '\t';
+          PrintOpt(options.min_align);
+          std::cout << '\n';
+          std::vector<analysis::TypeRef> fields;
+          bool ok = true;
+          for (const auto* field : analysis::RecordFields(node)) {
+            const auto lowered = layout::LowerTypeForLayout(ctx, field->type);
+            if (!lowered) { ok = false; break; }
+            fields.push_back(*lowered);
+          }
+          std::cout << "RL\t" << node.name << '\t';
+          const auto record = ok ? layout::RecordLayoutOf(ctx, fields, options) : std::nullopt;
+          if (record) {
+            PrintLayout(record->layout);
+            std::cout << '\t';
+            PrintOffsets(record->offsets);
+          } else {
+            std::cout << "-\t-";
+          }
+          std::cout << '\n';
+        } else if constexpr (std::is_same_v<T, ast::EnumDecl>) {
+          const auto options = layout::ResolveEnumLayoutOptions(node.attrs);
+          std::cout << "EO\t" << node.name << '\t' << options.disc_type.value_or("-") << '\t';
+          PrintOpt(options.min_align);
+          std::cout << '\n';
+          const auto discs = analysis::EnumDiscriminants(node);
+          std::cout << "ED\t" << node.name << '\t';
+          if (discs.ok) {
+            std::cout << discs.max_disc << '\t';
+            PrintOffsets(discs.discs);
+          } else {
+            std::cout << "fail\t" << (discs.diag_id ? std::string(*discs.diag_id) : "-") << '\t';
+            if (discs.span) PrintSpan(*discs.span); else std::cout << '-';
+          }
+          std::cout << '\n';
+          for (const auto& args : arg_lists(node.generic_params)) {
+            const auto enum_layout = layout::EnumLayoutOf(ctx, node, args, options);
+            std::cout << "EL\t" << node.name << '\t' << args.size() << '\t';
+            if (enum_layout) {
+              PrintLayout(enum_layout->layout);
+              std::cout << '\t' << enum_layout->disc_type << '\t' << enum_layout->payload_size << '/'
+                        << enum_layout->payload_align;
+            } else {
+              std::cout << "-\t-\t-";
+            }
+            std::cout << '\n';
+            for (const auto& variant : node.variants) {
+              if (!variant.payload_opt) continue;
+              const auto print_member = [&](const std::string& label,
+                                            const std::optional<layout::EnumPayloadMemberLayout>& member) {
+                std::cout << "EM\t" << node.name << "::" << variant.name << label << '\t' << args.size() << '\t';
+                if (member) {
+                  std::cout << Escape(analysis::TypeToString(member->type)) << '\t' << member->offset << '\t'
+                            << member->payload_size << '/' << member->payload_align;
+                } else {
+                  std::cout << "-\t-\t-";
+                }
+                std::cout << '\n';
+              };
+              if (const auto* tuple = std::get_if<ast::VariantPayloadTuple>(&*variant.payload_opt)) {
+                for (std::size_t i = 0; i <= tuple->elements.size(); ++i) {
+                  print_member("." + std::to_string(i),
+                               layout::EnumTuplePayloadMemberLayout(ctx, node, variant, args, i));
+                }
+                print_member(".named", layout::EnumRecordPayloadMemberLayout(ctx, node, variant, args, "x"));
+              } else {
+                for (const auto& field : std::get<ast::VariantPayloadRecord>(*variant.payload_opt).fields) {
+                  print_member("." + field.name,
+                               layout::EnumRecordPayloadMemberLayout(ctx, node, variant, args, field.name));
+                }
+                print_member(".missing",
+                             layout::EnumRecordPayloadMemberLayout(ctx, node, variant, args, "no_such_field"));
+                print_member(".0", layout::EnumTuplePayloadMemberLayout(ctx, node, variant, args, 0));
+              }
+            }
+          }
+        } else if constexpr (std::is_same_v<T, ast::ModalDecl>) {
+          const auto payload_state = analysis::PayloadState(ctx, node);
+          for (const auto& args : arg_lists(node.generic_params)) {
+            const auto modal = layout::ModalLayoutOf(ctx, node, args);
+            std::cout << "ML\t" << node.name << '\t' << args.size() << '\t'
+                      << (payload_state ? std::string(*payload_state) : "-") << '\t';
+            if (modal) {
+              PrintLayout(modal->layout);
+              std::cout << '\t' << (modal->niche ? "niche" : "tagged") << '\t';
+              PrintLayout(modal->niche_payload_layout);
+              std::cout << '\t' << modal->disc_type.value_or("-") << '\t' << modal->payload_size << '/'
+                        << modal->payload_align;
+            } else {
+              std::cout << "-\t-\t-\t-\t-";
+            }
+            std::cout << '\n';
+          }
+        }
+      },
+      item);
+}
+
+void DumpTypes(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
+  for (const auto& module : ctx.sigma.mods) {
+    std::cout << "X\t";
+    D(std::cout, module.path);
+    std::cout << '\n';
+    ctx.current_module = module.path;
+    const auto names = name_maps.find(analysis::PathKeyOf(module.path));
+    ctx.scopes = {analysis::Scope{},
+                  names == name_maps.end() ? analysis::Scope{} : names->second,
+                  analysis::UniverseBindings()};
+    std::vector<analysis::TypeRef> lowered_types;
+    for (const auto& written : CollectWrittenTypes(module)) {
+      const auto lowered = analysis::LowerType(ctx, written.type);
+      std::cout << "L\t" << Escape(written.label) << '\t';
+      if (!lowered.ok) {
+        std::cout << "fail\t" << (lowered.diag_id ? std::string(*lowered.diag_id) : "-") << '\n';
+        continue;
+      }
+      lowered_types.push_back(lowered.type);
+      std::cout << "ok\t" << Escape(analysis::TypeToString(lowered.type)) << '\t';
+      PrintKey(analysis::TypeKeyOf(lowered.type));
+      std::cout << '\t';
+      const auto paths = analysis::TypePaths(lowered.type);
+      PrintPathList(paths);
+      std::cout << '\t' << (analysis::IsRangeType(lowered.type) ? 'r' : '-')
+                << (analysis::IsRangeIndexType(lowered.type) ? 'i' : '-');
+      std::cout << '\t';
+      PrintLayout(analysis::layout::LayoutOf(ctx, lowered.type));
+      std::cout << ' ';
+      PrintOpt(analysis::layout::SizeOf(ctx, lowered.type));
+      std::cout << ' ';
+      PrintOpt(analysis::layout::AlignOf(ctx, lowered.type));
+      if (const auto for_layout = analysis::layout::LowerTypeForLayout(ctx, written.type)) {
+        std::cout << ' ' << Escape(analysis::TypeToString(*for_layout)) << ' ';
+        PrintLayout(analysis::layout::LayoutOf(ctx, *for_layout));
+      } else {
+        std::cout << " nolower";
+      }
+      if (const auto sig = analysis::AsyncSigOf(ctx, lowered.type)) {
+        std::cout << "\tasync " << Escape(analysis::TypeToString(sig->out)) << " / "
+                  << Escape(analysis::TypeToString(sig->in)) << " / "
+                  << Escape(analysis::TypeToString(sig->result)) << " / "
+                  << Escape(analysis::TypeToString(sig->err));
+      } else {
+        std::cout << "\t-";
+      }
+      std::cout << '\n';
+      if (const auto* uni = std::get_if<analysis::TypeUnion>(&lowered.type->node)) {
+        std::cout << "UL\t";
+        if (const auto union_layout = analysis::layout::UnionLayoutOf(ctx, *uni)) {
+          PrintLayout(union_layout->layout);
+          std::cout << '\t' << (union_layout->niche ? "niche" : "tagged") << '\t';
+          PrintLayout(union_layout->niche_payload_layout);
+          std::cout << '\t' << union_layout->disc_type.value_or("-") << '\t' << union_layout->payload_size
+                    << '/' << union_layout->payload_align;
+          for (const auto& member : union_layout->member_list) {
+            std::cout << '\t' << Escape(analysis::TypeToString(member));
+          }
+        } else {
+          std::cout << '-';
+        }
+        std::cout << '\n';
+      }
+      if (analysis::IsRangeType(lowered.type)) {
+        std::cout << "GL\t";
+        if (const auto range = analysis::layout::RangeLayoutOf(ctx, lowered.type)) {
+          PrintLayout(range->layout);
+          std::cout << '\t';
+          PrintOffsets(range->offsets);
+        } else {
+          std::cout << '-';
+        }
+        std::cout << '\n';
+      }
+      if (const auto* tuple = std::get_if<analysis::TypeTuple>(&lowered.type->node)) {
+        std::cout << "TL\t";
+        if (const auto tuple_layout = analysis::layout::TupleLayoutOf(ctx, tuple->elements)) {
+          PrintLayout(tuple_layout->layout);
+          std::cout << '\t';
+          PrintOffsets(tuple_layout->offsets);
+        } else {
+          std::cout << '-';
+        }
+        std::cout << '\n';
+      }
+      if (const auto lowered_async = analysis::layout::LowerAsyncType(lowered.type)) {
+        std::cout << "AL";
+        for (const auto& state : lowered_async->states) std::cout << '\t' << state;
+        std::cout << '\t' << Escape(analysis::TypeToString(lowered_async->resume_type)) << '\t';
+        PrintLayout(analysis::layout::LayoutOf(ctx, lowered_async->resume_type));
+        std::cout << '\n';
+      }
+      for (const auto& path : paths) {
+        analysis::TypePath resolved;
+        const auto* decl = analysis::LookupTypeDecl(ctx, path, &resolved);
+        std::cout << "P\t" << core::StringOfPath(path) << '\t';
+        if (decl) {
+          std::cout << decl->index() << '\t' << core::StringOfPath(resolved);
+        } else {
+          std::cout << "-\t-";
+        }
+        std::cout << '\n';
+      }
+    }
+    // Equivalence between the first types of the module, as a matrix.
+    const std::size_t count = std::min<std::size_t>(lowered_types.size(), 48);
+    for (std::size_t i = 0; i < count; ++i) {
+      std::cout << "Q\t" << i << '\t';
+      for (std::size_t j = 0; j < count; ++j) {
+        const auto equiv = analysis::TypeEquiv(lowered_types[i], lowered_types[j]);
+        std::cout << (equiv.ok ? (equiv.equiv ? '1' : '0') : 'e');
+      }
+      std::cout << '\n';
+    }
+    {
+      const auto dyn = analysis::layout::DynLayoutOf(ctx);
+      std::cout << "DL\t";
+      PrintLayout(dyn.layout);
+      for (const auto& field : dyn.fields) std::cout << '\t' << Escape(analysis::TypeToString(field));
+      std::cout << '\n';
+    }
+    for (const auto& item : module.items) DumpDeclLayouts(ctx, item);
+    for (const auto& item : module.items) {
+      std::visit(
+          [&](const auto& node) {
+            using T = std::decay_t<decltype(node)>;
+            if constexpr (std::is_same_v<T, ast::RecordDecl>) {
+              std::vector<analysis::TypeRef> members;
+              for (const auto* field : analysis::RecordFields(node)) {
+                const auto type = analysis::FieldType(node, field->name, ctx, {});
+                std::cout << "FT\t" << node.name << '.' << field->name << '\t'
+                          << (type ? Escape(analysis::TypeToString(*type)) : "-") << '\t'
+                          << (analysis::FieldVisible(ctx, node, field->name,
+                                                     analysis::TypePath{"Elsewhere", node.name})
+                                  ? "visible" : "hidden")
+                          << '\n';
+                const auto lowered = analysis::LowerType(ctx, field->type);
+                if (lowered.ok) members.push_back(lowered.type);
+              }
+              if (node.generic_params) DumpInstantiations(node.name, node.generic_params->params, members);
+            } else if constexpr (std::is_same_v<T, ast::TypeAliasDecl>) {
+              if (!node.generic_params) return;
+              const auto lowered = analysis::LowerType(ctx, node.type);
+              if (lowered.ok) DumpInstantiations(node.name, node.generic_params->params, {lowered.type});
+            }
+          },
+          item);
+    }
+  }
+}
+
 // Runs the reference front end on a project through name resolution, in the order the
 // driver does: compile-time pass, module visibility, name maps, module resolution. The
 // driver's check of compile-time procedure signatures (which needs the type checker) is
@@ -525,8 +1007,10 @@ int DumpResolve(const std::vector<std::string>& block) {
   const auto name_maps = analysis::CollectNameMaps(ctx);
   for (const auto& diag : name_maps.diags) core::Emit(diags, diag);
   const std::size_t before_resolve = diags.size();
-  PrintDiagsFull(diags);
-  DumpNameMaps(name_maps.name_maps);
+  if (!g_types_mode) {
+    PrintDiagsFull(diags);
+    DumpNameMaps(name_maps.name_maps);
+  }
   if (HasErrorDiag(diags)) {
     std::cout << "STOP\tnames\n";
     return 0;
@@ -543,6 +1027,17 @@ int DumpResolve(const std::vector<std::string>& block) {
   res_ctx.parse_diags = &no_parse_diags;
   const auto resolved = analysis::ResolveModules(res_ctx);
   (void)before_resolve;
+  if (g_types_mode) {
+    if (!resolved.ok) {
+      std::cout << "STOP\tresolve\n";
+      return 0;
+    }
+    // As the driver does: the declaration tables are rebuilt from the resolved modules.
+    ctx.sigma.mods = resolved.modules;
+    analysis::PopulateSigma(ctx);
+    DumpTypes(ctx, name_maps.name_maps);
+    return 0;
+  }
   std::cout << "RESOLVE\t" << (resolved.ok ? "ok" : "failed") << '\n';
   PrintDiagsFull(resolved.diags);
   DumpModules(resolved.modules);
@@ -611,7 +1106,9 @@ int main(int argc, char** argv) {
   if (argc >= 2 && std::string_view(argv[1]) == "sigma") {
     return DumpSigma();
   }
-  const bool resolve_mode = argc >= 3 && std::string_view(argv[1]) == "resolve";
+  g_types_mode = argc >= 3 && std::string_view(argv[1]) == "types";
+  const bool resolve_mode =
+      g_types_mode || (argc >= 3 && std::string_view(argv[1]) == "resolve");
   if (resolve_mode || (argc >= 3 && std::string_view(argv[1]) == "comptime")) {
     // argv[2] is a list of project blocks; each runs in a child process.
     std::ifstream list(argv[2]);

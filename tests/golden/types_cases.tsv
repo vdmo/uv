@@ -1,0 +1,632 @@
+F	/w/target/ctcases/attr_args_on_emit/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_bad_target_on_comptime_stmt/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_on_ct_procedure/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_unknown_on_comptime_expr/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_unknown_on_comptime_stmt/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/comptime_expr_non_expr_ast/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/comptime_proc_returns_item/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	from_proc->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	from_proc->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1000
+Q	1	0111
+Q	2	0111
+Q	3	0111
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/comptime_proc_returns_quote/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/cross_assembly_import_required/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_assembly_with_import/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_emitted_decl/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_private/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_reflect/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_chain/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/ct_if_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_false_no_else/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/ct_if_not_bool/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_true/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/ct_literalize_values/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/ct_loop/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/ct_loop_empty/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/ct_loop_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_not_iterable/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_pattern_mismatch/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_tuple/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/ct_nested_static/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/ct_proc_not_shared_across_modules/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/derive_body_fails/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_reports_error/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_restricted/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_warns/Ultraviolet.toml
+X	["App"]
+L	R.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11
+Q	1	11
+DL	16/8	* imm ()	* imm VTable
+RO	R	-	-
+RL	R	4/4	0
+FT	R.value	i32	visible
+F	/w/target/ctcases/derive_cycle/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_emitted_item_derives/Ultraviolet.toml
+X	["App"]
+L	R.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Made.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	plain_made->	ok	string	(n7 n2)		--	32/8 32 8 string 32/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1101
+Q	1	1101
+Q	2	0010
+Q	3	1101
+DL	16/8	* imm ()	* imm VTable
+RO	R	-	-
+RL	R	4/4	0
+RO	Made	-	-
+RL	Made	4/4	0
+FT	R.value	i32	visible
+FT	Made.value	i32	visible
+F	/w/target/ctcases/derive_enum_modal/Ultraviolet.toml
+X	["App"]
+L	plain_made->	ok	string	(n7 n2)		--	32/8 32 8 string 32/8	-
+L	first_made->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	011
+Q	2	011
+DL	16/8	* imm ()	* imm VTable
+EO	E	-	-
+ED	E	0	0
+EL	E	0	1/1	u8	0/1
+ML	M	0	-	1/1	tagged	-	u8	0/1
+F	/w/target/ctcases/derive_missing_emits_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_missing_requires_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_alias/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_procedure/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_order/Ultraviolet.toml
+X	["App"]
+L	R.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	second_made->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	plain_made->	ok	string	(n7 n2)		--	32/8 32 8 string 32/8	-
+L	first_made->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11011
+Q	1	11011
+Q	2	00100
+Q	3	11011
+Q	4	11011
+DL	16/8	* imm ()	* imm VTable
+RO	R	-	-
+RL	R	4/4	0
+FT	R.value	i32	visible
+F	/w/target/ctcases/derive_reflects_target/Ultraviolet.toml
+X	["App"]
+L	R.a	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	R.b	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	counted->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1001
+Q	1	0110
+Q	2	0110
+Q	3	1001
+DL	16/8	* imm ()	* imm VTable
+RO	R	-	-
+RL	R	8/4	0,4
+FT	R.a	i32	visible
+FT	R.b	bool	visible
+F	/w/target/ctcases/derive_target_ambiguous/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_target_declared_later/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_target_via_using/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_twice_same_target/Ultraviolet.toml
+X	["App"]
+L	R1.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	plain_made->	ok	string	(n7 n2)		--	32/8 32 8 string 32/8	-
+L	R2.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	plain_made->	ok	string	(n7 n2)		--	32/8 32 8 string 32/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10101
+Q	1	01010
+Q	2	10101
+Q	3	01010
+Q	4	10101
+DL	16/8	* imm ()	* imm VTable
+RO	R1	-	-
+RL	R1	4/4	0
+RO	R2	-	-
+RL	R2	4/4	0
+FT	R1.value	i32	visible
+FT	R2.value	i32	visible
+F	/w/target/ctcases/derive_unknown_target/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/diag_bad_arg/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/diag_error/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/diag_module_and_span/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/diag_note/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/diag_warning/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/emit_emits_emitter/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	outer->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	innermost->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1100
+Q	1	1100
+Q	2	0011
+Q	3	0011
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/emit_many_forms/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/emit_nested_comptime/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	nested->	ok	usize	(n0 s"usize")		--	8/8 8 8 usize 8/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/emit_non_ast/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/emit_non_item/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/emit_shared_splice/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	first->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	second->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	first->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10000
+Q	1	01111
+Q	2	01111
+Q	3	01111
+Q	4	01111
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/emit_twice_same_value/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	twice->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	twice->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1000
+Q	1	0111
+Q	2	0111
+Q	3	0111
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/emit_type_items/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/emit_without_capability/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_arith/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_arity/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_array/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_array_repeat/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_array_repeat_bad/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_block_let/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_bool/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_char_float/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_compare/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_contract_ok/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_contract_post_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_contract_pre_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_enum/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_enum_eq/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_field/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_field_missing/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_if_case/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_if_case_literal/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_if_is/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_if_is_enum/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_is_modal/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_is_record/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_no_else/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_modal/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_prohibited_deref/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_region/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_spawn/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_unsafe/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_record/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_return/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_runtime_call_of_ct_proc/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_string/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_string_value/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_suffix/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_unit/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/eval_unknown_call/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/eval_unknown_name/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/eval_wrap/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/files_all/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/files_bad_arg/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/files_unknown_method/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/files_values/Ultraviolet.toml
+X	["App"]
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/files_without_attribute/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/hygiene_seed_across_modules/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main_made->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	011
+Q	2	011
+DL	16/8	* imm ()	* imm VTable
+X	["App" "Other"]
+L	run2->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	other_made->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/quote_ambiguous/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_expr_hygiene/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_expr_value/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_invalid/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10
+Q	1	01
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/quote_not_matching_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_pattern_kind/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	made->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	011
+Q	2	011
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/quote_stmt_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_type_kind/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	Made	ok	(i32, bool)	(n1 n2 (n0 s"i32") (n0 s"bool"))		--	8/4 8 4 (i32, bool) 8/4	-
+TL	8/4	0,4
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/reflect_bad_args/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category_alias_cycle/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category_unknown_path/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/reflect_field_loop/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/reflect_fields/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_alias/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_generic_default/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_not_reflect/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_structural/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_too_many_args/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_implements/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_module_path/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_sees_emitted_type/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	Late.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	011
+Q	2	011
+DL	16/8	* imm ()	* imm VTable
+RO	Late	-	-
+RL	Late	4/4	0
+FT	Late.value	i32	visible
+F	/w/target/ctcases/reflect_states/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_states_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_type_name/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_unknown_method/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_variants/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_variants_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_context_mismatch/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_eval_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_func_type/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	Fn0	fail	-
+L	Fn2	ok	(i32, i32) -> i32	(n4 n2 n0 (n0 s"i32") n0 (n0 s"i32") (n0 s"i32"))		--	8/8 8 8 (i32, i32) -> i32 8/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/splice_ident/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	ident_proc(chosen)	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	ident_proc->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1000
+Q	1	0111
+Q	2	0111
+Q	3	0111
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/splice_ident_invalid/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_ident_not_string/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_literal_values/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	lit->	ok	usize	(n0 s"usize")		--	8/8 8 8 usize 8/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/splice_stmt_tail/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	tail->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	011
+Q	2	011
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/splice_type_from_type_literal/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	FromLiteral	ok	(i32, bool)	(n1 n2 (n0 s"i32") (n0 s"bool"))		--	8/4 8 4 (i32, bool) 8/4	-
+TL	8/4	0,4
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+F	/w/target/ctcases/splice_whole_body/Ultraviolet.toml
+X	["App"]
+L	run->	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	whole->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	011
+Q	2	011
+DL	16/8	* imm ()	* imm VTable

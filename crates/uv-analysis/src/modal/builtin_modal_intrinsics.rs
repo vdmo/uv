@@ -80,3 +80,23 @@ pub fn is_builtin_modal_static_member_name(modal_path: &[String], member_name: &
     }
     false
 }
+
+/// The representation of a built-in modal whose layout is fixed by the runtime.
+#[derive(Debug, Clone, Copy)]
+pub struct BuiltinModalLayoutInfo {
+    pub size: u64,
+    pub align: u64,
+    pub disc_prim: &'static str,
+    pub payload_size: u64,
+    pub payload_align: u64,
+}
+
+pub fn lookup_builtin_modal_layout(modal_path: &[String]) -> Option<BuiltinModalLayoutInfo> {
+    is_single_segment(modal_path, "Region").then_some(BuiltinModalLayoutInfo {
+        size: 16,
+        align: 8,
+        disc_prim: "u8",
+        payload_size: 8,
+        payload_align: 8,
+    })
+}

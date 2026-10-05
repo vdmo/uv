@@ -2,7 +2,7 @@
 //! quoted syntax, and returns the modules that the semantic phases see.
 
 mod derive;
-mod eval;
+pub mod eval;
 mod files;
 mod hygiene;
 mod pass;
@@ -10,6 +10,6 @@ mod quote;
 mod reflect;
 mod rewrite;
 mod util;
-mod value;
+pub mod value;
 
 pub use pass::{comptime_pass, execute_comptime, ComptimePassOptions, ComptimeResult};

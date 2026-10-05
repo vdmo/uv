@@ -185,6 +185,7 @@ dependencies = [
 name = "uv-analysis"
 version = "0.4.0-alpha"
 dependencies = [
+ "uv-comptime",
  "uv-core",
  "uv-project",
  "uv-source",

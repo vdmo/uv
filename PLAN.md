@@ -203,6 +203,9 @@ Gates, all passing:
 | Same, 410 targeted cases (unresolved names and suggestions, scopes, qualified forms, patterns, `using`, `import`, other assemblies, reserved names) | identical, 410 |
 | Built-in declaration table (the records, enums, modals, aliases and classes analysis registers) | identical, 52 declarations |
 | Iteration order of the reference's hash table (hash values, growth, element order after inserts, copies and assignments) | identical to a probe of its standard library |
+| Type core and layout: every type written in a declaration, lowered and printed, with its ordering key, the paths it names and what they resolve to, equivalence against the module's other types, field types, instantiations and variance, and its layout, size and alignment; every record, enum and modal declaration's layout (offsets, discriminants, payloads, niches); every project that resolves | identical on 545 of 546; the reference crashes on the other 1 |
+| Same, the compile-time and name-resolution cases | identical on 121 of 144 (the reference crashes on 23) and 410 of 410 |
+| Same, 54 targeted cases (union order, array lengths that need evaluation, refinements, generic defaults, asynchronous aliases, lookup across modules and assemblies; packing and alignment attributes, explicit and invalid discriminants, niches, recursive and generic types) | identical on 51; the reference crashes on the other 3 |
 | `--phase1-only`: JSON diagnostics, exit status and `--dump-ast` listing | identical, 549 fixtures, 58 manifest cases, 78 module-level cases |
 | `--check`: JSON diagnostics and exit status for projects rejected in phase 1 | identical, 32 fixtures and 41 manifest cases |
 | `--check`: phase-1 diagnostics for every other project | identical, 534 |
@@ -231,7 +234,7 @@ M3 is split into slices, each gated on its own against the oracle before the nex
 | --- | --- | --- | --- |
 | M3.1 compile-time pass (`uv-comptime`) | `03_comptime` | 10.6k | done |
 | M3.2 name resolution (`uv-analysis::resolve`) | `04_analysis/resolve`, built-in declarations from `caps`, `memory`, `typing` | 13k | done |
-| M3.3 typing context, generics, modal, composite, layout | `typing` (core), `generics`, `modal`, `composite`, `layout` | about 45k | next |
+| M3.3 typing context, generics, modal, composite, layout | `typing` (core), `generics`, `modal`, `composite`, `layout` | about 45k | in progress, see below |
 | M3.4 expression, statement and declaration typing | `typing` (rest) | about 40k | |
 | M3.5 memory, provenance, capabilities, keys, contracts | `memory`, `provenance`, `caps`, `keys`, `contracts` | 36k | |
 | M3.6 driver phases 2 and 3 end to end | `06_driver` (sema section), `conformance` | | gate: `--check --diag-json` identical on every fixture |
@@ -261,6 +264,38 @@ What M3.2 added:
 - The oracle gained `resolve` and `sigma` modes, and `tools/oracle/unordered_probe.cpp`;
   `tools/gen_resolve_cases.py` writes the targeted cases.
 - `uvc` still stops after phase 1, for the reason given under M3.1.
+
+M3.3 is itself in parts:
+
+| Part | Reference source | State |
+| --- | --- | --- |
+| a. Type core: semantic types, lowering, array lengths, equivalence, ordering, lookup, substitution, variance | `typing/type_refs`, `type_lower`, `const_len`, `type_equiv`, `type_lookup`, `variance`; `generics/monomorphize` (substitution); `contracts/verification` (structural equality) | done |
+| b. Layout: sizes, alignments, field offsets, discriminants, niches | `layout` (all but constant encoding), `composite/enums`, `modal/modal_widen` (payload state) | done |
+| c. Subtyping, well-formedness, predicates, modal, composite types, the rest of generics | `typing/subtyping`, `type_wf`, `type_predicates`, `modal`, `composite`, `generics` | next |
+| d. Constant encoding (the bytes of a value of each type) | `layout/layout_value_bits` | |
+
+What M3.3a added:
+
+- `uv-analysis::typing`: `types` (representation, constructors, display, ordering key,
+  canonical unions, asynchronous signatures), `type_lower`, `const_len`, `type_equiv`,
+  `type_lookup`, `variance`.
+- `uv-analysis::generics::monomorphize`: instantiation and building substitutions with
+  defaults.
+- `uv-analysis::contracts::struct_equal`: equality of syntax up to source locations,
+  which refinement types are compared with.
+- The oracle gained a `types` mode; `tools/gen_type_cases.py` writes the targeted cases.
+
+What M3.3b added:
+
+- `uv-analysis::layout`: `layout_of`, `size_of` and `align_of` for every type; record,
+  tuple, range, enum (with payload member offsets), union and modal layouts, including
+  the niche representations; the `#layout` and `#align` attributes; the lowering of
+  asynchronous types to their state machine.
+- `uv-analysis::composite::enums`: enum discriminants and their diagnostics.
+- `uv-analysis::modal::modal_widen`: which state of a modal carries the payload.
+- Type lowering now has the three flavours the reference has (ordinary, for layout, for
+  modal representation), as one function with a flavour argument.
+- The oracle's `types` mode prints layouts too.
 
 Two pieces of reference behaviour are reproduced on purpose.
 
@@ -299,6 +334,12 @@ Upstream bugs found (the Rust port deliberately differs on these inputs):
 - Name resolution: the type parameters of a record's method are not in scope while the
   method is resolved (`procedure map<TOther>(~, other: TOther)` in a record fails with
   `E-MOD-1301`), although those of class methods and free procedures are. Reproduced.
+- Type core and layout: asking for the asynchronous signature, the size or the alignment
+  of a type alias that is defined through itself (`type A = B`, `type B = A`;
+  `type A = [A; 2]`), and taking an array length from a module-level binding that is
+  defined through itself (`let N: usize = N`), all recurse until the reference crashes.
+  The Rust port stops: such an alias has no signature and no size, and the length is not
+  a constant.
 - Compile-time pass: `introspect~>category` on a cyclic type alias (`type A = B`, `type B = A`)
   recurses until the reference crashes. The Rust port stops and the evaluation fails.
 

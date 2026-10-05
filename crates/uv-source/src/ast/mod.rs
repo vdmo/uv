@@ -86,6 +86,74 @@ pub fn item_kind(item: &ASTItem) -> &'static str {
     }
 }
 
+/// The name of an expression's form, as dumps and array-length text print it. A few forms
+/// have no name in the reference and print as `UnknownExpr`.
+pub fn expr_kind(expr: &Expr) -> &'static str {
+    match &expr.node {
+        ExprNode::ErrorExpr(_) => "ErrorExpr",
+        ExprNode::LiteralExpr(_) => "LiteralExpr",
+        ExprNode::IdentifierExpr(_) => "IdentifierExpr",
+        ExprNode::QualifiedNameExpr(_) => "QualifiedNameExpr",
+        ExprNode::QualifiedApplyExpr(_) => "QualifiedApplyExpr",
+        ExprNode::PathExpr(_) => "PathExpr",
+        ExprNode::RangeExpr(_) => "RangeExpr",
+        ExprNode::BinaryExpr(_) => "BinaryExpr",
+        ExprNode::CastExpr(_) => "CastExpr",
+        ExprNode::UnaryExpr(_) => "UnaryExpr",
+        ExprNode::DerefExpr(_) => "DerefExpr",
+        ExprNode::AddressOfExpr(_) => "AddressOfExpr",
+        ExprNode::MoveExpr(_) => "MoveExpr",
+        ExprNode::CopyExpr(_) => "CopyExpr",
+        ExprNode::AllocExpr(_) => "AllocExpr",
+        ExprNode::PtrNullExpr(_) => "PtrNullExpr",
+        ExprNode::TupleExpr(_) => "TupleExpr",
+        ExprNode::ArrayExpr(_) => "ArrayExpr",
+        ExprNode::ArrayRepeatExpr(_) => "ArrayRepeatExpr",
+        ExprNode::SizeofExpr(_) => "SizeofExpr",
+        ExprNode::AlignofExpr(_) => "AlignofExpr",
+        ExprNode::RecordExpr(_) => "RecordExpr",
+        ExprNode::EnumLiteralExpr(_) => "EnumLiteralExpr",
+        ExprNode::TypeLiteralExpr(_) => "TypeLiteralExpr",
+        ExprNode::QuoteExpr(_) => "QuoteExpr",
+        ExprNode::IfExpr(_) => "IfExpr",
+        ExprNode::IfIsExpr(_) => "IfIsExpr",
+        ExprNode::IfCaseExpr(_) => "IfCaseExpr",
+        ExprNode::LoopInfiniteExpr(_) => "LoopInfiniteExpr",
+        ExprNode::LoopConditionalExpr(_) => "LoopConditionalExpr",
+        ExprNode::LoopIterExpr(_) => "LoopIterExpr",
+        ExprNode::BlockExpr(_) => "BlockExpr",
+        ExprNode::UnsafeBlockExpr(_) => "UnsafeBlockExpr",
+        ExprNode::ComptimeExpr(_) => "ComptimeExpr",
+        ExprNode::CtIfExpr(_) => "CtIfExpr",
+        ExprNode::CtLoopIterExpr(_) => "CtLoopIterExpr",
+        ExprNode::AttributedExpr(_) => "AttributedExpr",
+        ExprNode::TransmuteExpr(_) => "TransmuteExpr",
+        ExprNode::FieldAccessExpr(_) => "FieldAccessExpr",
+        ExprNode::TupleAccessExpr(_) => "TupleAccessExpr",
+        ExprNode::IndexAccessExpr(_) => "IndexAccessExpr",
+        ExprNode::CallExpr(_) => "CallExpr",
+        ExprNode::CallTypeArgsExpr(_) => "CallTypeArgsExpr",
+        ExprNode::MethodCallExpr(_) => "MethodCallExpr",
+        ExprNode::PropagateExpr(_) => "PropagateExpr",
+        ExprNode::ResultExpr(_) => "ResultExpr",
+        ExprNode::EntryExpr(_) => "EntryExpr",
+        ExprNode::YieldExpr(_) => "YieldExpr",
+        ExprNode::YieldFromExpr(_) => "YieldFromExpr",
+        ExprNode::SyncExpr(_) => "SyncExpr",
+        ExprNode::RaceExpr(_) => "RaceExpr",
+        ExprNode::AllExpr(_) => "AllExpr",
+        ExprNode::ParallelExpr(_) => "ParallelExpr",
+        ExprNode::SpawnExpr(_) => "SpawnExpr",
+        ExprNode::WaitExpr(_) => "WaitExpr",
+        ExprNode::FenceExpr(_) => "FenceExpr",
+        ExprNode::DispatchExpr(_) => "DispatchExpr",
+        ExprNode::SpliceExprNode(_)
+        | ExprNode::SpliceIdentNode(_)
+        | ExprNode::ClosureExpr(_)
+        | ExprNode::PipelineExpr(_) => "UnknownExpr",
+    }
+}
+
 fn visibility_keyword(vis: Visibility) -> &'static str {
     match vis {
         Visibility::Public => "public",

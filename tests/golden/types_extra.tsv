@@ -1,0 +1,3869 @@
+F	/w/target/typecases/array_len_bad/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	fail	ConstLen-Err
+L	T1	fail	ConstLen-Err
+L	T2	fail	ConstLen-Err
+L	T3	ok	[i32; IdentifierExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T4	fail	ConstLen-Err
+L	T5	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n18446744073709551615)		--	18446744073709551612/4 18446744073709551612 4 [i32; 18446744073709551615] 18446744073709551612/4	-
+L	T6	fail	ConstLen-Err
+L	T7	fail	ConstLen-Err
+L	T8	fail	ConstLen-Err
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111001
+Q	1	11111001
+Q	2	11111001
+Q	3	11111001
+Q	4	11111001
+Q	5	00000100
+Q	6	00000010
+Q	7	11111001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/array_len_expr/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	[i32; BinaryExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T1	fail	ConstLen-Err
+L	T2	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T3	ok	[i32; BinaryExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T4	ok	[i32; CallExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T5	fail	ConstLen-Err
+L	T6	fail	ConstLen-Err
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100001
+Q	1	1111100001
+Q	2	1111100001
+Q	3	1111100001
+Q	4	1111100001
+Q	5	0000011110
+Q	6	0000011110
+Q	7	0000011110
+Q	8	0000011110
+Q	9	1111100001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/array_len_qualified/Ultraviolet.toml
+X	["App"]
+L	A	ok	[i32; PathExpr]	(n2 (n0 s"i32") n6)		--	24/4 24 4 [i32; 6] 24/4	-
+L	B	ok	[i32; PathExpr]	(n2 (n0 s"i32") n6)		--	24/4 24 4 [i32; 6] 24/4	-
+L	C	ok	[i32; PathExpr]	(n2 (n0 s"i32") n7)		--	28/4 28 4 [i32; 7] 28/4	-
+L	E	fail	ConstLen-Err
+L	H	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n6)		--	24/4 24 4 [i32; 6] 24/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11010
+Q	1	11010
+Q	2	00100
+Q	3	11010
+Q	4	00001
+DL	16/8	* imm ()	* imm VTable
+X	["App" "Other"]
+L	Remote.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Alias	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	Later	ok	Future<App::Other::Remote>	(n5 (s"future" s"Future") [(n5 (s"app::other::remote" s"App::Other::Remote"))])	App::Other::Remote Future	--	24/8 24 8 Future<App::Other::Remote> 24/8	async () / () / App::Other::Remote / !
+AL	Suspended	Completed	Async<(), (), App::Other::Remote, !>@Completed | Async<(), (), App::Other::Remote, !>@Suspended	32/8
+P	App::Other::Remote	0	App::Other::Remote
+P	Future	3	Future
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+RO	Remote	-	-
+RL	Remote	4/4	0
+EO	Kind	-	-
+ED	Kind	0	0
+EL	Kind	0	1/1	u8	0/1
+FT	Remote.value	i32	visible
+F	/w/target/typecases/array_len_self_ref/Ultraviolet.toml
+CRASH	signal
+F	/w/target/typecases/array_len_shadowed/Ultraviolet.toml
+X	["App"]
+L	A	ok	[i32; IdentifierExpr]	(n2 (n0 s"i32") n2)		--	8/4 8 4 [i32; 2] 8/4	-
+L	B	ok	[i32; PathExpr]	(n2 (n0 s"i32") n6)		--	24/4 24 4 [i32; 6] 24/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+X	["App" "Other"]
+L	Remote.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Alias	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	Later	ok	Future<App::Other::Remote>	(n5 (s"future" s"Future") [(n5 (s"app::other::remote" s"App::Other::Remote"))])	App::Other::Remote Future	--	24/8 24 8 Future<App::Other::Remote> 24/8	async () / () / App::Other::Remote / !
+AL	Suspended	Completed	Async<(), (), App::Other::Remote, !>@Completed | Async<(), (), App::Other::Remote, !>@Suspended	32/8
+P	App::Other::Remote	0	App::Other::Remote
+P	Future	3	Future
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+RO	Remote	-	-
+RL	Remote	4/4	0
+EO	Kind	-	-
+ED	Kind	0	0
+EL	Kind	0	1/1	u8	0/1
+FT	Remote.value	i32	visible
+F	/w/target/typecases/array_len_static/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	[i32; IdentifierExpr]	(n2 (n0 s"i32") n8)		--	32/4 32 4 [i32; 8] 32/4	-
+L	T1	ok	[i32; IdentifierExpr]	(n2 (n0 s"i32") n8)		--	32/4 32 4 [i32; 8] 32/4	-
+L	T2	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n8)		--	32/4 32 4 [i32; 8] 32/4	-
+L	T3	ok	[i32; IdentifierExpr]	(n2 (n0 s"i32") n8)		--	32/4 32 4 [i32; 8] 32/4	-
+L	T4	ok	[u8; IdentifierExpr]	(n2 (n0 s"u8") n8)		--	8/1 8 1 [u8; 8] 8/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111000001
+Q	1	11111000001
+Q	2	11111000001
+Q	3	11111000001
+Q	4	11111000001
+Q	5	00000111100
+Q	6	00000111100
+Q	7	00000111100
+Q	8	00000111100
+Q	9	00000000010
+Q	10	11111000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/array_len_using/Ultraviolet.toml
+X	["App"]
+L	A	ok	[i32; IdentifierExpr]	(n2 (n0 s"i32") n6)		--	24/4 24 4 [i32; 6] 24/4	-
+L	B	ok	[i32; IdentifierExpr]	(n2 (n0 s"i32") n7)		--	28/4 28 4 [i32; 7] 28/4	-
+L	C	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n6)		--	24/4 24 4 [i32; 6] 24/4	-
+L	D	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n7)		--	28/4 28 4 [i32; 7] 28/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	10100
+Q	1	01010
+Q	2	10100
+Q	3	01010
+Q	4	00001
+DL	16/8	* imm ()	* imm VTable
+X	["App" "Other"]
+L	Remote.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Alias	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	Later	ok	Future<App::Other::Remote>	(n5 (s"future" s"Future") [(n5 (s"app::other::remote" s"App::Other::Remote"))])	App::Other::Remote Future	--	24/8 24 8 Future<App::Other::Remote> 24/8	async () / () / App::Other::Remote / !
+AL	Suspended	Completed	Async<(), (), App::Other::Remote, !>@Completed | Async<(), (), App::Other::Remote, !>@Suspended	32/8
+P	App::Other::Remote	0	App::Other::Remote
+P	Future	3	Future
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+RO	Remote	-	-
+RL	Remote	4/4	0
+EO	Kind	-	-
+ED	Kind	0	0
+EL	Kind	0	1/1	u8	0/1
+FT	Remote.value	i32	visible
+F	/w/target/typecases/arrays_slices/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T1	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T2	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T3	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n5)		--	20/4 20 4 [i32; 5] 20/4	-
+L	T4	ok	[bool; LiteralExpr]	(n2 (n0 s"bool") n4)		--	4/1 4 1 [bool; 4] 4/1	-
+L	T5	ok	[[i32; LiteralExpr]; LiteralExpr]	(n2 (n2 (n0 s"i32") n2) n3)		--	24/4 24 4 [[i32; 2]; 3] 24/4	-
+L	T6	ok	[i32]	(n3 (n0 s"i32"))		--	16/8 16 8 [i32] 16/8	-
+L	T7	ok	[[i32]]	(n3 (n3 (n0 s"i32")))		--	16/8 16 8 [[i32]] 16/8	-
+L	T8	ok	[(i32, bool); LiteralExpr]	(n2 (n1 n2 (n0 s"i32") (n0 s"bool")) n2)		--	16/4 16 4 [(i32, bool); 2] 16/4	-
+L	T9	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n0)		--	0/4 0 4 [i32; 0] 0/4	-
+L	T10	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n1000)		--	4000/4 4000 4 [i32; 1000] 4000/4	-
+L	T11	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	T12	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000000001
+Q	1	1111100000000000001
+Q	2	1111100000000000001
+Q	3	1111100000000000001
+Q	4	1111100000000000001
+Q	5	0000011100000000110
+Q	6	0000011100000000110
+Q	7	0000011100000000110
+Q	8	0000000010000000000
+Q	9	0000000001000000000
+Q	10	0000000000100000000
+Q	11	0000000000010000000
+Q	12	0000000000001000000
+Q	13	0000000000000100000
+Q	14	0000000000000010000
+Q	15	0000000000000001000
+Q	16	0000011100000000110
+Q	17	0000011100000000110
+Q	18	1111100000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/async_bad_arity/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	Sequence<i32, bool>	(n5 (s"sequence" s"Sequence") [(n0 s"i32") (n0 s"bool")])	Sequence	--	- - - Sequence<i32, bool> -	-
+P	Sequence	3	Sequence
+L	T1	ok	Stream<i32>	(n5 (s"stream" s"Stream") [(n0 s"i32")])	Stream	--	24/8 24 8 Stream<i32> 24/8	async i32 / () / () / TError
+P	Stream	3	Stream
+L	T2	ok	Pipe<i32>	(n5 (s"pipe" s"Pipe") [(n0 s"i32")])	Pipe	--	- - - Pipe<i32> -	async TOut / i32 / () / !
+P	Pipe	3	Pipe
+L	T3	ok	Exchange<i32, bool>	(n5 (s"exchange" s"Exchange") [(n0 s"i32") (n0 s"bool")])	Exchange	--	- - - Exchange<i32, bool> -	-
+P	Exchange	3	Exchange
+L	T4	ok	Future<i32, bool, char>	(n5 (s"future" s"Future") [(n0 s"i32") (n0 s"bool") (n0 s"char")])	Future	--	- - - Future<i32, bool, char> -	-
+P	Future	3	Future
+L	T5	ok	Async<i32, bool, char, u8, u16>	(n5 (s"async" s"Async") [(n0 s"i32") (n0 s"bool") (n0 s"char") (n0 s"u8") (n0 s"u16")])	Async	--	24/8 24 8 Async<i32, bool, char, u8, u16> 24/8	-
+P	Async	2	Async
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000001
+Q	1	111110000001
+Q	2	111110000001
+Q	3	111110000001
+Q	4	111110000001
+Q	5	000001000000
+Q	6	000000100000
+Q	7	000000010000
+Q	8	000000001000
+Q	9	000000000100
+Q	10	000000000010
+Q	11	111110000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/async_builtin/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	Async<i32>	(n5 (s"async" s"Async") [(n0 s"i32")])	Async	--	24/8 24 8 Async<i32> 24/8	async i32 / () / () / !
+AL	Suspended	Completed	Async<i32, (), (), !>@Completed | Async<i32, (), (), !>@Suspended	32/8
+P	Async	2	Async
+L	T1	ok	Async<i32, bool>	(n5 (s"async" s"Async") [(n0 s"i32") (n0 s"bool")])	Async	--	24/8 24 8 Async<i32, bool> 24/8	async i32 / bool / () / !
+AL	Suspended	Completed	Async<i32, bool, (), !>@Completed | Async<i32, bool, (), !>@Suspended	32/8
+P	Async	2	Async
+L	T2	ok	Async<i32, bool, char>	(n5 (s"async" s"Async") [(n0 s"i32") (n0 s"bool") (n0 s"char")])	Async	--	24/8 24 8 Async<i32, bool, char> 24/8	async i32 / bool / char / !
+AL	Suspended	Completed	Async<i32, bool, char, !>@Completed | Async<i32, bool, char, !>@Suspended	32/8
+P	Async	2	Async
+L	T3	ok	Async<i32, bool, char, u8>	(n5 (s"async" s"Async") [(n0 s"i32") (n0 s"bool") (n0 s"char") (n0 s"u8")])	Async	--	24/8 24 8 Async<i32, bool, char, u8> 24/8	async i32 / bool / char / u8
+AL	Suspended	Completed	Failed	Async<i32, bool, char, u8>@Completed | Async<i32, bool, char, u8>@Failed | Async<i32, bool, char, u8>@Suspended	32/8
+P	Async	2	Async
+L	T4	ok	Future<i32>	(n5 (s"future" s"Future") [(n0 s"i32")])	Future	--	24/8 24 8 Future<i32> 24/8	async () / () / i32 / !
+AL	Suspended	Completed	Async<(), (), i32, !>@Completed | Async<(), (), i32, !>@Suspended	32/8
+P	Future	3	Future
+L	T5	ok	Future<i32, bool>	(n5 (s"future" s"Future") [(n0 s"i32") (n0 s"bool")])	Future	--	24/8 24 8 Future<i32, bool> 24/8	async () / () / i32 / bool
+AL	Suspended	Completed	Failed	Async<(), (), i32, bool>@Completed | Async<(), (), i32, bool>@Failed | Async<(), (), i32, bool>@Suspended	32/8
+P	Future	3	Future
+L	T6	ok	Sequence<i32>	(n5 (s"sequence" s"Sequence") [(n0 s"i32")])	Sequence	--	24/8 24 8 Sequence<i32> 24/8	async i32 / () / () / !
+AL	Suspended	Completed	Async<i32, (), (), !>@Completed | Async<i32, (), (), !>@Suspended	32/8
+P	Sequence	3	Sequence
+L	T7	ok	Stream<i32, bool>	(n5 (s"stream" s"Stream") [(n0 s"i32") (n0 s"bool")])	Stream	--	24/8 24 8 Stream<i32, bool> 24/8	async i32 / () / () / bool
+AL	Suspended	Completed	Failed	Async<i32, (), (), bool>@Completed | Async<i32, (), (), bool>@Failed | Async<i32, (), (), bool>@Suspended	32/8
+P	Stream	3	Stream
+L	T8	ok	Pipe<i32, bool>	(n5 (s"pipe" s"Pipe") [(n0 s"i32") (n0 s"bool")])	Pipe	--	24/8 24 8 Pipe<i32, bool> 24/8	async bool / i32 / () / !
+AL	Suspended	Completed	Async<bool, i32, (), !>@Completed | Async<bool, i32, (), !>@Suspended	32/8
+P	Pipe	3	Pipe
+L	T9	ok	Exchange<i32>	(n5 (s"exchange" s"Exchange") [(n0 s"i32")])	Exchange	--	24/8 24 8 Exchange<i32> 24/8	async i32 / i32 / i32 / !
+AL	Suspended	Completed	Async<i32, i32, i32, !>@Completed | Async<i32, i32, i32, !>@Suspended	32/8
+P	Exchange	3	Exchange
+L	T10	ok	Async<i32>@Suspended	(n6 (s"async" s"Async") [(n0 s"i32")] s"Suspended")	Async	--	24/8 24 8 Async<i32>@Suspended 24/8	async i32 / () / () / !
+AL	Suspended	Completed	Async<i32, (), (), !>@Completed | Async<i32, (), (), !>@Suspended	32/8
+P	Async	2	Async
+L	T11	ok	Async<i32, bool, char, u8>@Completed	(n6 (s"async" s"Async") [(n0 s"i32") (n0 s"bool") (n0 s"char") (n0 s"u8")] s"Completed")	Async	--	24/8 24 8 Async<i32, bool, char, u8>@Completed 24/8	async i32 / bool / char / u8
+AL	Suspended	Completed	Failed	Async<i32, bool, char, u8>@Completed | Async<i32, bool, char, u8>@Failed | Async<i32, bool, char, u8>@Suspended	32/8
+P	Async	2	Async
+L	T12	ok	Async<i32>@Failed	(n6 (s"async" s"Async") [(n0 s"i32")] s"Failed")	Async	--	24/8 24 8 Async<i32>@Failed 24/8	async i32 / () / () / !
+AL	Suspended	Completed	Async<i32, (), (), !>@Completed | Async<i32, (), (), !>@Suspended	32/8
+P	Async	2	Async
+L	T13	ok	unique Future<i32>	(n13 n1 (n5 (s"future" s"Future") [(n0 s"i32")]))	Future	--	24/8 24 8 unique Future<i32> 24/8	-
+P	Future	3	Future
+L	T14	ok	Future<Future<i32>>	(n5 (s"future" s"Future") [(n5 (s"future" s"Future") [(n0 s"i32")])])	Future	--	32/8 32 8 Future<Future<i32>> 32/8	async () / () / Future<i32> / !
+AL	Suspended	Completed	Async<(), (), Future<i32>, !>@Completed | Async<(), (), Future<i32>, !>@Suspended	40/8
+P	Future	3	Future
+L	T15	ok	Sequence<(i32, bool)>	(n5 (s"sequence" s"Sequence") [(n1 n2 (n0 s"i32") (n0 s"bool"))])	Sequence	--	24/8 24 8 Sequence<(i32, bool)> 24/8	async (i32, bool) / () / () / !
+AL	Suspended	Completed	Async<(i32, bool), (), (), !>@Completed | Async<(i32, bool), (), (), !>@Suspended	32/8
+P	Sequence	3	Sequence
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000000000001
+Q	1	1111100000000000000001
+Q	2	1111100000000000000001
+Q	3	1111100000000000000001
+Q	4	1111100000000000000001
+Q	5	0000010000000000000000
+Q	6	0000001000000000000000
+Q	7	0000000100000000000000
+Q	8	0000000010000000000000
+Q	9	0000000001000000000000
+Q	10	0000000000100000000000
+Q	11	0000000000010000000000
+Q	12	0000000000001000000000
+Q	13	0000000000000100000000
+Q	14	0000000000000010000000
+Q	15	0000000000000001000000
+Q	16	0000000000000000100000
+Q	17	0000000000000000010000
+Q	18	0000000000000000001000
+Q	19	0000000000000000000100
+Q	20	0000000000000000000010
+Q	21	1111100000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/async_user_alias/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Task	ok	Future<i32>	(n5 (s"future" s"Future") [(n0 s"i32")])	Future	--	24/8 24 8 Future<i32> 24/8	async () / () / i32 / !
+AL	Suspended	Completed	Async<(), (), i32, !>@Completed | Async<(), (), i32, !>@Suspended	32/8
+P	Future	3	Future
+L	Job	ok	Future<TValue, bool>	(n5 (s"future" s"Future") [(n5 (s"tvalue" s"TValue")) (n0 s"bool")])	Future TValue	--	24/8 24 8 Future<TValue, bool> 24/8	async () / () / TValue / bool
+AL	Suspended	Completed	Failed	Async<(), (), TValue, bool>@Completed | Async<(), (), TValue, bool>@Failed | Async<(), (), TValue, bool>@Suspended	32/8
+P	Future	3	Future
+P	TValue	-	-
+L	Indirect	ok	App::Task	(n5 (s"app::task" s"App::Task"))	App::Task	--	24/8 24 8 App::Task 24/8	async () / () / i32 / !
+P	App::Task	3	App::Task
+L	Twice	ok	App::Job<TValue>	(n5 (s"app::job" s"App::Job") [(n5 (s"tvalue" s"TValue"))])	App::Job TValue	--	24/8 24 8 App::Job<TValue> 24/8	async () / () / TValue / bool
+P	App::Job	3	App::Job
+P	TValue	-	-
+L	NotAsync	ok	(i32, bool)	(n1 n2 (n0 s"i32") (n0 s"bool"))		--	8/4 8 4 (i32, bool) 8/4	-
+TL	8/4	0,4
+L	Mixed	ok	Stream<TSecond, TFirst>	(n5 (s"stream" s"Stream") [(n5 (s"tsecond" s"TSecond")) (n5 (s"tfirst" s"TFirst"))])	Stream TFirst TSecond	--	- - - Stream<TSecond, TFirst> -	async TSecond / () / () / TFirst
+AL	Suspended	Completed	Failed	Async<TSecond, (), (), TFirst>@Completed | Async<TSecond, (), (), TFirst>@Failed | Async<TSecond, (), (), TFirst>@Suspended	-
+P	Stream	3	Stream
+P	TFirst	-	-
+P	TSecond	-	-
+L	Defaulted	ok	App::Job<u8>	(n5 (s"app::job" s"App::Job") [(n0 s"u8")])	App::Job	--	24/8 24 8 App::Job<u8> 24/8	async () / () / u8 / bool
+P	App::Job	3	App::Job
+L	T0	ok	App::Task	(n5 (s"app::task" s"App::Task"))	App::Task	--	24/8 24 8 App::Task 24/8	async () / () / i32 / !
+P	App::Task	3	App::Task
+L	T1	ok	App::Job<i32>	(n5 (s"app::job" s"App::Job") [(n0 s"i32")])	App::Job	--	24/8 24 8 App::Job<i32> 24/8	async () / () / i32 / bool
+P	App::Job	3	App::Job
+L	T2	ok	App::Job<bool>	(n5 (s"app::job" s"App::Job") [(n0 s"bool")])	App::Job	--	24/8 24 8 App::Job<bool> 24/8	async () / () / bool / bool
+P	App::Job	3	App::Job
+L	T3	ok	App::Indirect	(n5 (s"app::indirect" s"App::Indirect"))	App::Indirect	--	24/8 24 8 App::Indirect 24/8	async () / () / i32 / !
+P	App::Indirect	3	App::Indirect
+L	T4	ok	App::Twice<i32>	(n5 (s"app::twice" s"App::Twice") [(n0 s"i32")])	App::Twice	--	24/8 24 8 App::Twice<i32> 24/8	async () / () / i32 / bool
+P	App::Twice	3	App::Twice
+L	T5	ok	App::NotAsync	(n5 (s"app::notasync" s"App::NotAsync"))	App::NotAsync	--	8/4 8 4 App::NotAsync 8/4	-
+P	App::NotAsync	3	App::NotAsync
+L	T6	ok	App::Mixed<i32, bool>	(n5 (s"app::mixed" s"App::Mixed") [(n0 s"i32") (n0 s"bool")])	App::Mixed	--	24/8 24 8 App::Mixed<i32, bool> 24/8	async bool / () / () / i32
+P	App::Mixed	3	App::Mixed
+L	T7	ok	App::Defaulted	(n5 (s"app::defaulted" s"App::Defaulted"))	App::Defaulted	--	24/8 24 8 App::Defaulted 24/8	async () / () / u8 / bool
+P	App::Defaulted	3	App::Defaulted
+L	T8	ok	App::Job<i32, bool>	(n5 (s"app::job" s"App::Job") [(n0 s"i32") (n0 s"bool")])	App::Job	--	- - - App::Job<i32, bool> -	-
+P	App::Job	3	App::Job
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000000000001
+Q	1	1111100000000000000001
+Q	2	1111100000000000000001
+Q	3	1111100000000000000001
+Q	4	1111100000000000000001
+Q	5	0000010000000000000000
+Q	6	0000001000000000000000
+Q	7	0000000100001000000000
+Q	8	0000000010000000000000
+Q	9	0000000001000000000000
+Q	10	0000000000100000000000
+Q	11	0000000000010000000000
+Q	12	0000000100001000000000
+Q	13	0000000000000100000000
+Q	14	0000000000000010000000
+Q	15	0000000000000001000000
+Q	16	0000000000000000100000
+Q	17	0000000000000000010000
+Q	18	0000000000000000001000
+Q	19	0000000000000000000100
+Q	20	0000000000000000000010
+Q	21	1111100000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+S	Job	0
+I	Job	0	Future<TValue, bool>
+S	Job	1	TValue=i32
+I	Job	1	Future<i32, bool>
+S	Job	1	TValue=i32
+I	Job	1	Future<i32, bool>
+V	Job	TValue*
+S	Twice	0
+I	Twice	0	App::Job<TValue>
+S	Twice	1	TValue=i32
+I	Twice	1	App::Job<i32>
+S	Twice	1	TValue=i32
+I	Twice	1	App::Job<i32>
+V	Twice	TValue*
+S	Mixed	0
+I	Mixed	0	Stream<TSecond, TFirst>
+S	Mixed	1	TFirst=i32
+I	Mixed	1	Stream<TSecond, i32>
+S	Mixed	2	TFirst=i32	TSecond=bool
+I	Mixed	2	Stream<bool, i32>
+V	Mixed	TFirst*	TSecond*
+F	/w/target/typecases/builtin_paths/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	Context	(n5 (s"context" s"Context"))	Context	--	96/8 96 8 Context 96/8	-
+P	Context	0	Context
+L	T1	ok	File	(n5 (s"file" s"File"))	File	--	16/8 16 8 File 16/8	-
+P	File	2	File
+L	T2	ok	File@Read	(n6 (s"file" s"File") s"Read")	File	--	8/8 8 8 File@Read 8/8	-
+P	File	2	File
+L	T3	ok	DirIter@Open	(n6 (s"diriter" s"DirIter") s"Open")	DirIter	--	8/8 8 8 DirIter@Open 8/8	-
+P	DirIter	2	DirIter
+L	T4	ok	IoError	(n5 (s"ioerror" s"IoError"))	IoError	--	1/1 1 1 IoError 1/1	-
+P	IoError	1	IoError
+L	T5	ok	Outcome<i32, IoError>	(n5 (s"outcome" s"Outcome") [(n0 s"i32") (n5 (s"ioerror" s"IoError"))])	IoError Outcome	--	8/4 8 4 Outcome<i32, IoError> 8/4	-
+P	IoError	1	IoError
+P	Outcome	1	Outcome
+L	T6	ok	Duration	(n5 (s"duration" s"Duration"))	Duration	--	16/16 16 16 Duration 16/16	-
+P	Duration	0	Duration
+L	T7	ok	Region	(n5 (s"region" s"Region"))	Region	--	16/8 16 8 Region 16/8	-
+P	Region	2	Region
+L	T8	ok	Region@Active	(n6 (s"region" s"Region") s"Active")	Region	--	16/8 16 8 Region@Active 16/8	-
+P	Region	2	Region
+L	T9	ok	RegionOptions	(n5 (s"regionoptions" s"RegionOptions"))	RegionOptions	--	40/8 40 8 RegionOptions 40/8	-
+P	RegionOptions	0	RegionOptions
+L	T10	ok	CancelToken@Active	(n6 (s"canceltoken" s"CancelToken") s"Active")	CancelToken	--	8/8 8 8 CancelToken@Active 8/8	-
+P	CancelToken	2	CancelToken
+L	T11	ok	Spawned<i32>@Ready	(n6 (s"spawned" s"Spawned") [(n0 s"i32")] s"Ready")	Spawned	--	8/8 8 8 Spawned<i32>@Ready 8/8	-
+P	Spawned	2	Spawned
+L	T12	ok	Tracked<i32, bool>	(n5 (s"tracked" s"Tracked") [(n0 s"i32") (n0 s"bool")])	Tracked	--	8/8 8 8 Tracked<i32, bool> 8/8	-
+P	Tracked	2	Tracked
+L	T13	ok	Priority	(n5 (s"priority" s"Priority"))	Priority	--	1/1 1 1 Priority 1/1	-
+P	Priority	1	Priority
+L	T14	ok	CpuSet	(n5 (s"cpuset" s"CpuSet"))	CpuSet	--	8/8 8 8 CpuSet 8/8	-
+P	CpuSet	3	CpuSet
+L	T15	ok	AllocationError	(n5 (s"allocationerror" s"AllocationError"))	AllocationError	--	16/8 16 8 AllocationError 16/8	-
+P	AllocationError	1	AllocationError
+L	T16	ok	TimeError	(n5 (s"timeerror" s"TimeError"))	TimeError	--	1/1 1 1 TimeError 1/1	-
+P	TimeError	1	TimeError
+L	T17	ok	FileKind	(n5 (s"filekind" s"FileKind"))	FileKind	--	1/1 1 1 FileKind 1/1	-
+P	FileKind	1	FileKind
+L	T18	ok	DirEntry	(n5 (s"direntry" s"DirEntry"))	DirEntry	--	56/8 56 8 DirEntry 56/8	-
+P	DirEntry	0	DirEntry
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000000000000001
+Q	1	1111100000000000000000001
+Q	2	1111100000000000000000001
+Q	3	1111100000000000000000001
+Q	4	1111100000000000000000001
+Q	5	0000010000000000000000000
+Q	6	0000001000000000000000000
+Q	7	0000000100000000000000000
+Q	8	0000000010000000000000000
+Q	9	0000000001000000000000000
+Q	10	0000000000100000000000000
+Q	11	0000000000010000000000000
+Q	12	0000000000001000000000000
+Q	13	0000000000000100000000000
+Q	14	0000000000000010000000000
+Q	15	0000000000000001000000000
+Q	16	0000000000000000100000000
+Q	17	0000000000000000010000000
+Q	18	0000000000000000001000000
+Q	19	0000000000000000000100000
+Q	20	0000000000000000000010000
+Q	21	0000000000000000000001000
+Q	22	0000000000000000000000100
+Q	23	0000000000000000000000010
+Q	24	1111100000000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/closures/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	|| -> i32	(n17 [] (n0 s"i32") n0)		--	16/8 16 8 || -> i32 16/8	-
+L	T1	ok	|i32| -> i32	(n17 [(n0) (n0 s"i32")] (n0 s"i32") n0)		--	16/8 16 8 |i32| -> i32 16/8	-
+L	T2	ok	|i32, bool| -> ()	(n17 [(n0) (n0 s"i32") (n0) (n0 s"bool")] (n0 s"()") n0)		--	16/8 16 8 |i32, bool| -> () 16/8	-
+L	T3	ok	|move i32| -> i32	(n17 [(n1) (n0 s"i32")] (n0 s"i32") n0)		--	16/8 16 8 |move i32| -> i32 16/8	-
+L	T4	ok	|| -> i32	(n17 [] (n0 s"i32") n1 [(s"value" (n13 n2 (n0 s"i32")))])		--	16/8 16 8 || -> i32 16/8	-
+L	T5	ok	|| -> i32	(n17 [] (n0 s"i32") n1 [(s"value" (n13 n2 (n0 s"i32"))) (s"other" (n13 n2 (n0 s"bool")))])		--	16/8 16 8 || -> i32 16/8	-
+L	T6	ok	|| -> i32	(n17 [] (n0 s"i32") n1 [])		--	16/8 16 8 || -> i32 16/8	-
+L	T7	ok	|| -> || -> i32	(n17 [] (n17 [] (n0 s"i32") n0) n0)		--	16/8 16 8 || -> || -> i32 16/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111000000001
+Q	1	11111000000001
+Q	2	11111000000001
+Q	3	11111000000001
+Q	4	11111000000001
+Q	5	00000100000000
+Q	6	00000010000000
+Q	7	00000001000000
+Q	8	00000000100000
+Q	9	00000000010000
+Q	10	00000000001000
+Q	11	00000000000100
+Q	12	00000000000010
+Q	13	11111000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/dynamic_opaque/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	$App::Named	(n9 (s"app::named" s"App::Named"))	App::Named	--	16/8 16 8 $App::Named 16/8	-
+P	App::Named	-	-
+L	T1	ok	$App::Named	(n9 (s"app::named" s"App::Named"))	App::Named	--	16/8 16 8 $App::Named 16/8	-
+P	App::Named	-	-
+L	T2	ok	$IO	(n9 (s"io" s"IO"))	IO	--	16/8 16 8 $IO 16/8	-
+P	IO	-	-
+L	T3	ok	$Missing	(n9 (s"missing" s"Missing"))	Missing	--	16/8 16 8 $Missing 16/8	-
+P	Missing	-	-
+L	T4	ok	opaque App::Named	(n15 (s"app::named" s"App::Named") s"/w/target/typecases/dynamic_opaque/Source/Main.uv" n380 n392)	App::Named	--	- - - opaque App::Named -	-
+P	App::Named	-	-
+L	T5	ok	opaque App::Named	(n15 (s"app::named" s"App::Named") s"/w/target/typecases/dynamic_opaque/Source/Main.uv" n412 n424)	App::Named	--	- - - opaque App::Named -	-
+P	App::Named	-	-
+L	T6	ok	$Drop	(n9 (s"drop" s"Drop"))	Drop	--	16/8 16 8 $Drop 16/8	-
+P	Drop	-	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000001
+Q	1	1111100000001
+Q	2	1111100000001
+Q	3	1111100000001
+Q	4	1111100000001
+Q	5	0000011000000
+Q	6	0000011000000
+Q	7	0000000100000
+Q	8	0000000010000
+Q	9	0000000001100
+Q	10	0000000001100
+Q	11	0000000000010
+Q	12	1111100000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/fields/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Vis.a	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Vis.b	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	Vis.c	ok	char	(n0 s"char")		--	4/4 4 4 char 4/4	-
+L	Vis.d	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n2)		--	8/4 8 4 [i32; 2] 8/4	-
+L	Vis.f	ok	App::Point	(n5 (s"app::point" s"App::Point"))	App::Point	--	8/4 8 4 App::Point 8/4	-
+P	App::Point	0	App::Point
+L	GenericVis<TOther=>	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	GenericVis.a	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	GenericVis.b	ok	TOther	(n5 (s"tother" s"TOther"))	TOther	--	- - - TOther -	-
+P	TOther	-	-
+L	GenericVis.c	ok	(TValue, TOther)	(n1 n2 (n5 (s"tvalue" s"TValue")) (n5 (s"tother" s"TOther")))	TOther TValue	--	- - - (TValue, TOther) -	-
+TL	-
+P	TOther	-	-
+P	TValue	-	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111111000000001
+Q	1	111111000000001
+Q	2	111111000000001
+Q	3	111111000000001
+Q	4	111111000000001
+Q	5	111111000000001
+Q	6	000000100010000
+Q	7	000000010000000
+Q	8	000000001000000
+Q	9	000000000100000
+Q	10	000000100010000
+Q	11	000000000001000
+Q	12	000000000000100
+Q	13	000000000000010
+Q	14	111111000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	Vis	-	-
+RL	Vis	28/4	0,4,8,12,20
+RO	GenericVis	-	-
+RL	GenericVis	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Vis.a	i32	visible
+FT	Vis.b	bool	visible
+FT	Vis.c	char	hidden
+FT	Vis.d	[i32; LiteralExpr]	visible
+FT	Vis.f	App::Point	visible
+FT	GenericVis.a	TValue	visible
+FT	GenericVis.b	bool	hidden
+FT	GenericVis.c	(TValue, bool)	visible
+S	GenericVis	0	TOther=bool
+I	GenericVis	0	TValue
+I	GenericVis	0	bool
+I	GenericVis	0	(TValue, bool)
+S	GenericVis	1	TOther=bool	TValue=i32
+I	GenericVis	1	i32
+I	GenericVis	1	bool
+I	GenericVis	1	(i32, bool)
+S	GenericVis	2	TOther=bool	TValue=i32
+I	GenericVis	2	i32
+I	GenericVis	2	bool
+I	GenericVis	2	(i32, bool)
+V	GenericVis	TOther+	TValue+
+F	/w/target/typecases/functions/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	() -> i32	(n4 n0 (n0 s"i32"))		--	8/8 8 8 () -> i32 8/8	-
+L	T1	ok	(i32) -> i32	(n4 n1 n0 (n0 s"i32") (n0 s"i32"))		--	8/8 8 8 (i32) -> i32 8/8	-
+L	T2	ok	(i32, bool) -> ()	(n4 n2 n0 (n0 s"i32") n0 (n0 s"bool") (n0 s"()"))		--	8/8 8 8 (i32, bool) -> () 8/8	-
+L	T3	ok	(move i32) -> i32	(n4 n1 n1 (n0 s"i32") (n0 s"i32"))		--	8/8 8 8 (move i32) -> i32 8/8	-
+L	T4	ok	(i32) -> (bool) -> i32	(n4 n1 n0 (n0 s"i32") (n4 n1 n0 (n0 s"bool") (n0 s"i32")))		--	8/8 8 8 (i32) -> (bool) -> i32 8/8	-
+L	T5	ok	((i32) -> i32) -> i32	(n4 n1 n0 (n4 n1 n0 (n0 s"i32") (n0 s"i32")) (n0 s"i32"))		--	8/8 8 8 ((i32) -> i32) -> i32 8/8	-
+L	T6	ok	() -> ()	(n4 n0 (n0 s"()"))		--	8/8 8 8 () -> () 8/8	-
+L	T7	ok	(App::Point) -> App::Shape	(n4 n1 n0 (n5 (s"app::point" s"App::Point")) (n5 (s"app::shape" s"App::Shape")))	App::Point App::Shape	--	8/8 8 8 (App::Point) -> App::Shape 8/8	-
+P	App::Point	0	App::Point
+P	App::Shape	1	App::Shape
+L	T8	ok	() -> !	(n4 n0 (n0 s"!"))		--	8/8 8 8 () -> ! 8/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000000001
+Q	1	111110000000001
+Q	2	111110000000001
+Q	3	111110000000001
+Q	4	111110000000001
+Q	5	000001000000000
+Q	6	000000100000000
+Q	7	000000010000000
+Q	8	000000001000000
+Q	9	000000000100000
+Q	10	000000000010000
+Q	11	000000000001000
+Q	12	000000000000100
+Q	13	000000000000010
+Q	14	111110000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/generic_alias_instantiation/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Same	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Swap	ok	(TSecond, TFirst)	(n1 n2 (n5 (s"tsecond" s"TSecond")) (n5 (s"tfirst" s"TFirst")))	TFirst TSecond	--	- - - (TSecond, TFirst) -	-
+TL	-
+P	TFirst	-	-
+P	TSecond	-	-
+L	Nest	ok	[App::Same<TValue>]	(n3 (n5 (s"app::same" s"App::Same") [(n5 (s"tvalue" s"TValue"))]))	App::Same TValue	--	16/8 16 8 [App::Same<TValue>] 16/8	-
+P	App::Same	3	App::Same
+P	TValue	-	-
+L	Fixed	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Collapse	ok	bool | i32 | TValue	(n12 [(n0 s"bool") (n0 s"i32") (n5 (s"tvalue" s"TValue"))])	TValue	--	- - - bool | i32 | TValue -	-
+UL	-
+P	TValue	-	-
+L	T0	ok	App::Same<i32>	(n5 (s"app::same" s"App::Same") [(n0 s"i32")])	App::Same	--	4/4 4 4 App::Same<i32> 4/4	-
+P	App::Same	3	App::Same
+L	T1	ok	App::Swap<i32, bool>	(n5 (s"app::swap" s"App::Swap") [(n0 s"i32") (n0 s"bool")])	App::Swap	--	8/4 8 4 App::Swap<i32, bool> 8/4	-
+P	App::Swap	3	App::Swap
+L	T2	ok	App::Nest<i32>	(n5 (s"app::nest" s"App::Nest") [(n0 s"i32")])	App::Nest	--	16/8 16 8 App::Nest<i32> 16/8	-
+P	App::Nest	3	App::Nest
+L	T3	ok	App::Fixed<i32>	(n5 (s"app::fixed" s"App::Fixed") [(n0 s"i32")])	App::Fixed	--	4/4 4 4 App::Fixed<i32> 4/4	-
+P	App::Fixed	3	App::Fixed
+L	T4	ok	App::Collapse<i32>	(n5 (s"app::collapse" s"App::Collapse") [(n0 s"i32")])	App::Collapse	--	8/4 8 4 App::Collapse<i32> 8/4	-
+P	App::Collapse	3	App::Collapse
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100010000001
+Q	1	1111100010000001
+Q	2	1111100010000001
+Q	3	1111100010000001
+Q	4	1111100010000001
+Q	5	0000010000000000
+Q	6	0000001000000000
+Q	7	0000000100000000
+Q	8	1111100010000001
+Q	9	0000000001000000
+Q	10	0000000000100000
+Q	11	0000000000010000
+Q	12	0000000000001000
+Q	13	0000000000000100
+Q	14	0000000000000010
+Q	15	1111100010000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+S	Same	0
+I	Same	0	TValue
+S	Same	1	TValue=i32
+I	Same	1	i32
+S	Same	1	TValue=i32
+I	Same	1	i32
+V	Same	TValue+
+S	Swap	0
+I	Swap	0	(TSecond, TFirst)
+S	Swap	1	TFirst=i32
+I	Swap	1	(TSecond, i32)
+S	Swap	2	TFirst=i32	TSecond=bool
+I	Swap	2	(bool, i32)
+V	Swap	TFirst+	TSecond+
+S	Nest	0
+I	Nest	0	[App::Same<TValue>]
+S	Nest	1	TValue=i32
+I	Nest	1	[App::Same<i32>]
+S	Nest	1	TValue=i32
+I	Nest	1	[App::Same<i32>]
+V	Nest	TValue*
+S	Fixed	0
+I	Fixed	0	i32
+S	Fixed	1	TValue=i32
+I	Fixed	1	i32
+S	Fixed	1	TValue=i32
+I	Fixed	1	i32
+V	Fixed	TValue*
+S	Collapse	0
+I	Collapse	0	bool | i32 | TValue
+S	Collapse	1	TValue=i32
+I	Collapse	1	bool | i32
+S	Collapse	1	TValue=i32
+I	Collapse	1	bool | i32
+V	Collapse	TValue+
+F	/w/target/typecases/generic_defaults/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	One<TValue=>	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	One.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Two<TSecond=>	ok	TFirst	(n5 (s"tfirst" s"TFirst"))	TFirst	--	- - - TFirst -	-
+P	TFirst	-	-
+L	Two.first	ok	TFirst	(n5 (s"tfirst" s"TFirst"))	TFirst	--	- - - TFirst -	-
+P	TFirst	-	-
+L	Two.second	ok	TSecond	(n5 (s"tsecond" s"TSecond"))	TSecond	--	- - - TSecond -	-
+P	TSecond	-	-
+L	Three<TSecond=>	ok	(TFirst, bool)	(n1 n2 (n5 (s"tfirst" s"TFirst")) (n0 s"bool"))	TFirst	--	- - - (TFirst, bool) -	-
+TL	-
+P	TFirst	-	-
+L	Three<TThird=>	ok	[TSecond]	(n3 (n5 (s"tsecond" s"TSecond")))	TSecond	--	16/8 16 8 [TSecond] 16/8	-
+P	TSecond	-	-
+L	Three.first	ok	TFirst	(n5 (s"tfirst" s"TFirst"))	TFirst	--	- - - TFirst -	-
+P	TFirst	-	-
+L	Three.second	ok	TSecond	(n5 (s"tsecond" s"TSecond"))	TSecond	--	- - - TSecond -	-
+P	TSecond	-	-
+L	Three.third	ok	TThird	(n5 (s"tthird" s"TThird"))	TThird	--	- - - TThird -	-
+P	TThird	-	-
+L	Shapes<TValue=>	ok	Ptr<i32>@Valid	(n10 n1 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Valid 8/8	-
+L	Shapes<TOther=>	ok	* mut u8	(n11 n1 (n0 s"u8"))		--	8/8 8 8 * mut u8 8/8	-
+L	Shapes<TLast=>	ok	string@View	(n7 n0)		--	16/8 16 8 string@View 16/8	-
+L	Shapes.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Shapes.other	ok	TOther	(n5 (s"tother" s"TOther"))	TOther	--	- - - TOther -	-
+P	TOther	-	-
+L	Shapes.last	ok	TLast	(n5 (s"tlast" s"TLast"))	TLast	--	- - - TLast -	-
+P	TLast	-	-
+L	Odd<TValue=>	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n4)		--	16/4 16 4 [i32; 4] 16/4	-
+L	Odd<TOther=>	ok	App::Wrapper<bool>	(n5 (s"app::wrapper" s"App::Wrapper") [(n0 s"bool")])	App::Wrapper	--	1/1 1 1 App::Wrapper<bool> 1/1	-
+P	App::Wrapper	0	App::Wrapper
+L	Odd<TFunc=>	ok	(i32) -> bool	(n4 n1 n0 (n0 s"i32") (n0 s"bool"))		--	8/8 8 8 (i32) -> bool 8/8	-
+L	Odd<TDyn=>	ok	$App::Named	(n9 (s"app::named" s"App::Named"))	App::Named	--	16/8 16 8 $App::Named 16/8	-
+P	App::Named	-	-
+L	Odd.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Odd.other	ok	TOther	(n5 (s"tother" s"TOther"))	TOther	--	- - - TOther -	-
+P	TOther	-	-
+L	Odd.func	ok	TFunc	(n5 (s"tfunc" s"TFunc"))	TFunc	--	- - - TFunc -	-
+P	TFunc	-	-
+L	Odd.dynamic	ok	TDyn	(n5 (s"tdyn" s"TDyn"))	TDyn	--	- - - TDyn -	-
+P	TDyn	-	-
+L	Wrapper.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Ranged<TValue=>	ok	Range<i32>	(n14 n0 (n0 s"i32"))		r-	8/4 8 4 Range<i32> 8/4	-
+GL	8/4	0,4
+L	Ranged<TUnion=>	ok	bool | i32	(n12 [(n0 s"bool") (n0 s"i32")])		--	8/4 8 4 bool | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	bool	i32
+L	Ranged<TModal=>	ok	App::Door@Open	(n6 (s"app::door" s"App::Door") s"Open")	App::Door	--	4/4 4 4 App::Door@Open 4/4	-
+P	App::Door	2	App::Door
+L	Ranged<TRefined=>	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/generic_defaults/Source/Main.uv" n1108 n1116)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	Ranged.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Ranged.union	ok	TUnion	(n5 (s"tunion" s"TUnion"))	TUnion	--	- - - TUnion -	-
+P	TUnion	-	-
+L	Ranged.state_value	ok	TModal	(n5 (s"tmodal" s"TModal"))	TModal	--	- - - TModal -	-
+P	TModal	-	-
+L	Ranged.refined	ok	TRefined	(n5 (s"trefined" s"TRefined"))	TRefined	--	- - - TRefined -	-
+P	TRefined	-	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111111000000000000000000000000000000001
+Q	1	111111000000000000000000000000000000001
+Q	2	111111000000000000000000000000000000001
+Q	3	111111000000000000000000000000000000001
+Q	4	111111000000000000000000000000000000001
+Q	5	111111000000000000000000000000000000001
+Q	6	000000100000000000100000010001000010000
+Q	7	000000011000100000000000000000000000000
+Q	8	000000011000100000000000000000000000000
+Q	9	000000000100010000000000000000000000000
+Q	10	000000000010000000000000000000000000000
+Q	11	000000000001000000000000000000000000000
+Q	12	000000011000100000000000000000000000000
+Q	13	000000000100010000000000000000000000000
+Q	14	000000000000001000000000000000000000000
+Q	15	000000000000000100000000000000000000000
+Q	16	000000000000000010000000000000000000000
+Q	17	000000000000000001000000000000000000000
+Q	18	000000100000000000100000010001000010000
+Q	19	000000000000000000010000001000000000000
+Q	20	000000000000000000001000000000000000000
+Q	21	000000000000000000000100000000000000000
+Q	22	000000000000000000000010000000000000000
+Q	23	000000000000000000000001000000000000000
+Q	24	000000000000000000000000100000000000000
+Q	25	000000100000000000100000010001000010000
+Q	26	000000000000000000010000001000000000000
+Q	27	000000000000000000000000000100000000000
+Q	28	000000000000000000000000000010000000000
+Q	29	000000100000000000100000010001000010000
+Q	30	000000000000000000000000000000100000000
+Q	31	000000000000000000000000000000010000000
+Q	32	000000000000000000000000000000001000000
+Q	33	000000000000000000000000000000000100000
+Q	34	000000100000000000100000010001000010000
+Q	35	000000000000000000000000000000000001000
+Q	36	000000000000000000000000000000000000100
+Q	37	000000000000000000000000000000000000010
+Q	38	111111000000000000000000000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	One	-	-
+RL	One	-	-
+RO	Two	-	-
+RL	Two	-	-
+RO	Three	-	-
+RL	Three	-	-
+RO	Shapes	-	-
+RL	Shapes	-	-
+RO	Odd	-	-
+RL	Odd	-	-
+RO	Wrapper	-	-
+RL	Wrapper	-	-
+RO	Ranged	-	-
+RL	Ranged	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	One.value	i32	visible
+S	One	0	TValue=i32
+I	One	0	i32
+S	One	1	TValue=i32
+I	One	1	i32
+S	One	1	TValue=i32
+I	One	1	i32
+V	One	TValue+
+FT	Two.first	TFirst	visible
+FT	Two.second	TFirst	visible
+S	Two	0	TSecond=TFirst
+I	Two	0	TFirst
+I	Two	0	TFirst
+S	Two	1	TFirst=i32	TSecond=i32
+I	Two	1	i32
+I	Two	1	i32
+S	Two	2	TFirst=i32	TSecond=bool
+I	Two	2	i32
+I	Two	2	bool
+V	Two	TFirst+	TSecond+
+FT	Three.first	TFirst	visible
+FT	Three.second	(TFirst, bool)	visible
+FT	Three.third	[(TFirst, bool)]	visible
+S	Three	0	TSecond=(TFirst, bool)	TThird=[(TFirst, bool)]
+I	Three	0	TFirst
+I	Three	0	(TFirst, bool)
+I	Three	0	[(TFirst, bool)]
+S	Three	1	TFirst=i32	TSecond=(i32, bool)	TThird=[(i32, bool)]
+I	Three	1	i32
+I	Three	1	(i32, bool)
+I	Three	1	[(i32, bool)]
+S	Three	3	TFirst=i32	TSecond=bool	TThird=string@View
+I	Three	3	i32
+I	Three	3	bool
+I	Three	3	string@View
+V	Three	TFirst+	TSecond+	TThird+
+FT	Shapes.value	Ptr<i32>@Valid	visible
+FT	Shapes.other	* mut u8	visible
+FT	Shapes.last	string@View	visible
+S	Shapes	0	TLast=string@View	TOther=* mut u8	TValue=Ptr<i32>@Valid
+I	Shapes	0	Ptr<i32>@Valid
+I	Shapes	0	* mut u8
+I	Shapes	0	string@View
+S	Shapes	1	TLast=string@View	TOther=* mut u8	TValue=i32
+I	Shapes	1	i32
+I	Shapes	1	* mut u8
+I	Shapes	1	string@View
+S	Shapes	3	TLast=string@View	TOther=bool	TValue=i32
+I	Shapes	3	i32
+I	Shapes	3	bool
+I	Shapes	3	string@View
+V	Shapes	TLast+	TOther+	TValue+
+FT	Odd.value	[i32; 0]	visible
+FT	Odd.other	App::Wrapper<bool>	visible
+FT	Odd.func	(i32) -> bool	visible
+FT	Odd.dynamic	$App::Named	visible
+S	Odd	0	TDyn=$App::Named	TFunc=(i32) -> bool	TOther=App::Wrapper<bool>	TValue=[i32; 0]
+I	Odd	0	[i32; 0]
+I	Odd	0	App::Wrapper<bool>
+I	Odd	0	(i32) -> bool
+I	Odd	0	$App::Named
+S	Odd	1	TDyn=$App::Named	TFunc=(i32) -> bool	TOther=App::Wrapper<bool>	TValue=i32
+I	Odd	1	i32
+I	Odd	1	App::Wrapper<bool>
+I	Odd	1	(i32) -> bool
+I	Odd	1	$App::Named
+S	Odd	4	TDyn=(u8, u8)	TFunc=string@View	TOther=bool	TValue=i32
+I	Odd	4	i32
+I	Odd	4	bool
+I	Odd	4	string@View
+I	Odd	4	(u8, u8)
+V	Odd	TDyn+	TFunc+	TOther+	TValue+
+FT	Wrapper.value	TValue	visible
+S	Wrapper	0
+I	Wrapper	0	TValue
+S	Wrapper	1	TValue=i32
+I	Wrapper	1	i32
+S	Wrapper	1	TValue=i32
+I	Wrapper	1	i32
+V	Wrapper	TValue+
+FT	Ranged.value	!	visible
+FT	Ranged.union	bool | i32	visible
+FT	Ranged.state_value	App::Door@Open	visible
+FT	Ranged.refined	i32 where { ... }	visible
+S	Ranged	0	TModal=App::Door@Open	TRefined=i32 where { ... }	TUnion=bool | i32	TValue=!
+I	Ranged	0	!
+I	Ranged	0	bool | i32
+I	Ranged	0	App::Door@Open
+I	Ranged	0	i32 where { ... }
+S	Ranged	1	TModal=App::Door@Open	TRefined=i32 where { ... }	TUnion=bool | i32	TValue=i32
+I	Ranged	1	i32
+I	Ranged	1	bool | i32
+I	Ranged	1	App::Door@Open
+I	Ranged	1	i32 where { ... }
+S	Ranged	4	TModal=string@View	TRefined=(u8, u8)	TUnion=bool	TValue=i32
+I	Ranged	4	i32
+I	Ranged	4	bool
+I	Ranged	4	string@View
+I	Ranged	4	(u8, u8)
+V	Ranged	TModal+	TRefined+	TUnion+	TValue+
+F	/w/target/typecases/generic_instantiation/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Holder.plain	ok	TFirst	(n5 (s"tfirst" s"TFirst"))	TFirst	--	- - - TFirst -	-
+P	TFirst	-	-
+L	Holder.pair	ok	(TFirst, TSecond)	(n1 n2 (n5 (s"tfirst" s"TFirst")) (n5 (s"tsecond" s"TSecond")))	TFirst TSecond	--	- - - (TFirst, TSecond) -	-
+TL	-
+P	TFirst	-	-
+P	TSecond	-	-
+L	Holder.array	ok	[TFirst; LiteralExpr]	(n2 (n5 (s"tfirst" s"TFirst")) n3)	TFirst	--	- - - [TFirst; 3] -	-
+P	TFirst	-	-
+L	Holder.slice	ok	[TSecond]	(n3 (n5 (s"tsecond" s"TSecond")))	TSecond	--	16/8 16 8 [TSecond] 16/8	-
+P	TSecond	-	-
+L	Holder.pointer	ok	Ptr<TFirst>@Valid	(n10 n1 (n5 (s"tfirst" s"TFirst")))	TFirst	--	8/8 8 8 Ptr<TFirst>@Valid 8/8	-
+P	TFirst	-	-
+L	Holder.raw	ok	* mut TSecond	(n11 n1 (n5 (s"tsecond" s"TSecond")))	TSecond	--	8/8 8 8 * mut TSecond 8/8	-
+P	TSecond	-	-
+L	Holder.union	ok	TFirst | TSecond	(n12 [(n5 (s"tfirst" s"TFirst")) (n5 (s"tsecond" s"TSecond"))])	TFirst TSecond	--	- - - TFirst | TSecond -	-
+UL	-
+P	TFirst	-	-
+P	TSecond	-	-
+L	Holder.union_same	ok	i32 | TFirst	(n12 [(n0 s"i32") (n5 (s"tfirst" s"TFirst"))])	TFirst	--	- - - i32 | TFirst -	-
+UL	-
+P	TFirst	-	-
+L	Holder.func	ok	(TFirst) -> TSecond	(n4 n1 n0 (n5 (s"tfirst" s"TFirst")) (n5 (s"tsecond" s"TSecond")))	TFirst TSecond	--	8/8 8 8 (TFirst) -> TSecond 8/8	-
+P	TFirst	-	-
+P	TSecond	-	-
+L	Holder.closure	ok	|TFirst| -> TSecond	(n17 [(n0) (n5 (s"tfirst" s"TFirst"))] (n5 (s"tsecond" s"TSecond")) n0)	TFirst TSecond	--	16/8 16 8 |TFirst| -> TSecond 16/8	-
+P	TFirst	-	-
+P	TSecond	-	-
+L	Holder.nested	ok	(App::Holder<TSecond, TFirst>, i32)	(n1 n2 (n5 (s"app::holder" s"App::Holder") [(n5 (s"tsecond" s"TSecond")) (n5 (s"tfirst" s"TFirst"))]) (n0 s"i32"))	App::Holder TFirst TSecond	--	- - - (App::Holder<TSecond, TFirst>, i32) -	-
+TL	-
+P	App::Holder	0	App::Holder
+P	TFirst	-	-
+P	TSecond	-	-
+L	Holder.perm	ok	unique TFirst	(n13 n1 (n5 (s"tfirst" s"TFirst")))	TFirst	--	- - - unique TFirst -	-
+P	TFirst	-	-
+L	Holder.refined	ok	TFirst where { ... }	(n16 (n5 (s"tfirst" s"TFirst")) s"/w/target/typecases/generic_instantiation/Source/Main.uv" n741 n745)	TFirst	--	- - - TFirst where { ... } -	-
+P	TFirst	-	-
+L	Holder.range	ok	(Range<TFirst>, i32)	(n1 n2 (n14 n0 (n5 (s"tfirst" s"TFirst"))) (n0 s"i32"))	TFirst	--	- - - (Range<TFirst>, i32) -	-
+TL	-
+P	TFirst	-	-
+L	Holder.qualified	ok	[App::Holder<TFirst, TFirst>]	(n3 (n5 (s"app::holder" s"App::Holder") [(n5 (s"tfirst" s"TFirst")) (n5 (s"tfirst" s"TFirst"))]))	App::Holder TFirst	--	16/8 16 8 [App::Holder<TFirst, TFirst>] 16/8	-
+P	App::Holder	0	App::Holder
+P	TFirst	-	-
+L	Holder.other	ok	App::Point	(n5 (s"app::point" s"App::Point"))	App::Point	--	8/4 8 4 App::Point 8/4	-
+P	App::Point	0	App::Point
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000000000001
+Q	1	1111100000000000000001
+Q	2	1111100000000000000001
+Q	3	1111100000000000000001
+Q	4	1111100000000000000001
+Q	5	0000010000000000000000
+Q	6	0000001000000000000000
+Q	7	0000000100000000000000
+Q	8	0000000010000000000000
+Q	9	0000000001000000000000
+Q	10	0000000000100000000000
+Q	11	0000000000010000000000
+Q	12	0000000000001000000000
+Q	13	0000000000000100000000
+Q	14	0000000000000010000000
+Q	15	0000000000000001000000
+Q	16	0000000000000000100000
+Q	17	0000000000000000010000
+Q	18	0000000000000000001000
+Q	19	0000000000000000000100
+Q	20	0000000000000000000010
+Q	21	1111100000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	Holder	-	-
+RL	Holder	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Holder.plain	TFirst	visible
+FT	Holder.pair	(TFirst, TSecond)	visible
+FT	Holder.array	[TFirst; LiteralExpr]	visible
+FT	Holder.slice	[TSecond]	visible
+FT	Holder.pointer	Ptr<TFirst>@Valid	visible
+FT	Holder.raw	* mut TSecond	visible
+FT	Holder.union	TFirst | TSecond	visible
+FT	Holder.union_same	i32 | TFirst	visible
+FT	Holder.func	(TFirst) -> TSecond	visible
+FT	Holder.closure	|TFirst| -> TSecond	visible
+FT	Holder.nested	(App::Holder<TSecond, TFirst>, i32)	visible
+FT	Holder.perm	unique TFirst	visible
+FT	Holder.refined	TFirst where { ... }	visible
+FT	Holder.range	(Range<TFirst>, i32)	visible
+FT	Holder.qualified	[App::Holder<TFirst, TFirst>]	visible
+FT	Holder.other	App::Point	visible
+S	Holder	0
+I	Holder	0	TFirst
+I	Holder	0	(TFirst, TSecond)
+I	Holder	0	[TFirst; LiteralExpr]
+I	Holder	0	[TSecond]
+I	Holder	0	Ptr<TFirst>@Valid
+I	Holder	0	* mut TSecond
+I	Holder	0	TFirst | TSecond
+I	Holder	0	i32 | TFirst
+I	Holder	0	(TFirst) -> TSecond
+I	Holder	0	|TFirst| -> TSecond
+I	Holder	0	(App::Holder<TSecond, TFirst>, i32)
+I	Holder	0	unique TFirst
+I	Holder	0	TFirst where { ... }
+I	Holder	0	(Range<TFirst>, i32)
+I	Holder	0	[App::Holder<TFirst, TFirst>]
+I	Holder	0	App::Point
+S	Holder	1	TFirst=i32
+I	Holder	1	i32
+I	Holder	1	(i32, TSecond)
+I	Holder	1	[i32; LiteralExpr]
+I	Holder	1	[TSecond]
+I	Holder	1	Ptr<i32>@Valid
+I	Holder	1	* mut TSecond
+I	Holder	1	i32 | TSecond
+I	Holder	1	i32
+I	Holder	1	(i32) -> TSecond
+I	Holder	1	|i32| -> TSecond
+I	Holder	1	(App::Holder<TSecond, i32>, i32)
+I	Holder	1	unique i32
+I	Holder	1	i32 where { ... }
+I	Holder	1	(Range<i32>, i32)
+I	Holder	1	[App::Holder<i32, i32>]
+I	Holder	1	App::Point
+S	Holder	2	TFirst=i32	TSecond=bool
+I	Holder	2	i32
+I	Holder	2	(i32, bool)
+I	Holder	2	[i32; LiteralExpr]
+I	Holder	2	[bool]
+I	Holder	2	Ptr<i32>@Valid
+I	Holder	2	* mut bool
+I	Holder	2	bool | i32
+I	Holder	2	i32
+I	Holder	2	(i32) -> bool
+I	Holder	2	|i32| -> bool
+I	Holder	2	(App::Holder<bool, i32>, i32)
+I	Holder	2	unique i32
+I	Holder	2	i32 where { ... }
+I	Holder	2	(Range<i32>, i32)
+I	Holder	2	[App::Holder<i32, i32>]
+I	Holder	2	App::Point
+V	Holder	TFirst=	TSecond=
+F	/w/target/typecases/layout_async/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Job	ok	Future<u128>	(n5 (s"future" s"Future") [(n0 s"u128")])	Future	--	32/16 32 16 Future<u128> 32/16	async () / () / u128 / !
+AL	Suspended	Completed	Async<(), (), u128, !>@Completed | Async<(), (), u128, !>@Suspended	48/16
+P	Future	3	Future
+L	Job2	ok	Stream<TValue, u8>	(n5 (s"stream" s"Stream") [(n5 (s"tvalue" s"TValue")) (n0 s"u8")])	Stream TValue	--	- - - Stream<TValue, u8> -	async TValue / () / () / u8
+AL	Suspended	Completed	Failed	Async<TValue, (), (), u8>@Completed | Async<TValue, (), (), u8>@Failed | Async<TValue, (), (), u8>@Suspended	-
+P	Stream	3	Stream
+P	TValue	-	-
+L	T0	ok	Async<u8>	(n5 (s"async" s"Async") [(n0 s"u8")])	Async	--	24/8 24 8 Async<u8> 24/8	async u8 / () / () / !
+AL	Suspended	Completed	Async<u8, (), (), !>@Completed | Async<u8, (), (), !>@Suspended	32/8
+P	Async	2	Async
+L	T1	ok	Async<u64>	(n5 (s"async" s"Async") [(n0 s"u64")])	Async	--	24/8 24 8 Async<u64> 24/8	async u64 / () / () / !
+AL	Suspended	Completed	Async<u64, (), (), !>@Completed | Async<u64, (), (), !>@Suspended	32/8
+P	Async	2	Async
+L	T2	ok	Async<u128>	(n5 (s"async" s"Async") [(n0 s"u128")])	Async	--	48/16 48 16 Async<u128> 48/16	async u128 / () / () / !
+AL	Suspended	Completed	Async<u128, (), (), !>@Completed | Async<u128, (), (), !>@Suspended	64/16
+P	Async	2	Async
+L	T3	ok	Async<(), (), u128>	(n5 (s"async" s"Async") [(n0 s"()") (n0 s"()") (n0 s"u128")])	Async	--	32/16 32 16 Async<(), (), u128> 32/16	async () / () / u128 / !
+AL	Suspended	Completed	Async<(), (), u128, !>@Completed | Async<(), (), u128, !>@Suspended	48/16
+P	Async	2	Async
+L	T4	ok	Async<(), (), (), u128>	(n5 (s"async" s"Async") [(n0 s"()") (n0 s"()") (n0 s"()") (n0 s"u128")])	Async	--	32/16 32 16 Async<(), (), (), u128> 32/16	async () / () / () / u128
+AL	Suspended	Completed	Failed	Async<(), (), (), u128>@Completed | Async<(), (), (), u128>@Failed | Async<(), (), (), u128>@Suspended	48/16
+P	Async	2	Async
+L	T5	ok	Async<u8, u8, [u8; LiteralExpr], [u8; LiteralExpr]>	(n5 (s"async" s"Async") [(n0 s"u8") (n0 s"u8") (n2 (n0 s"u8") n40) (n2 (n0 s"u8") n60)])	Async	--	64/8 64 8 Async<u8, u8, [u8; 40], [u8; 60]> 64/8	async u8 / u8 / [u8; LiteralExpr] / [u8; LiteralExpr]
+AL	Suspended	Completed	Failed	Async<u8, u8, [u8; LiteralExpr], [u8; LiteralExpr]>@Completed | Async<u8, u8, [u8; LiteralExpr], [u8; LiteralExpr]>@Failed | Async<u8, u8, [u8; LiteralExpr], [u8; LiteralExpr]>@Suspended	72/8
+P	Async	2	Async
+L	T6	ok	Future<u8>	(n5 (s"future" s"Future") [(n0 s"u8")])	Future	--	24/8 24 8 Future<u8> 24/8	async () / () / u8 / !
+AL	Suspended	Completed	Async<(), (), u8, !>@Completed | Async<(), (), u8, !>@Suspended	32/8
+P	Future	3	Future
+L	T7	ok	Future<[u64; LiteralExpr], u8>	(n5 (s"future" s"Future") [(n2 (n0 s"u64") n4) (n0 s"u8")])	Future	--	40/8 40 8 Future<[u64; 4], u8> 40/8	async () / () / [u64; LiteralExpr] / u8
+AL	Suspended	Completed	Failed	Async<(), (), [u64; LiteralExpr], u8>@Completed | Async<(), (), [u64; LiteralExpr], u8>@Failed | Async<(), (), [u64; LiteralExpr], u8>@Suspended	48/8
+P	Future	3	Future
+L	T8	ok	Sequence<u128>	(n5 (s"sequence" s"Sequence") [(n0 s"u128")])	Sequence	--	48/16 48 16 Sequence<u128> 48/16	async u128 / () / () / !
+AL	Suspended	Completed	Async<u128, (), (), !>@Completed | Async<u128, (), (), !>@Suspended	64/16
+P	Sequence	3	Sequence
+L	T9	ok	Stream<u8, [u8; LiteralExpr]>	(n5 (s"stream" s"Stream") [(n0 s"u8") (n2 (n0 s"u8") n33)])	Stream	--	40/8 40 8 Stream<u8, [u8; 33]> 40/8	async u8 / () / () / [u8; LiteralExpr]
+AL	Suspended	Completed	Failed	Async<u8, (), (), [u8; LiteralExpr]>@Completed | Async<u8, (), (), [u8; LiteralExpr]>@Failed | Async<u8, (), (), [u8; LiteralExpr]>@Suspended	48/8
+P	Stream	3	Stream
+L	T10	ok	Pipe<u8, u128>	(n5 (s"pipe" s"Pipe") [(n0 s"u8") (n0 s"u128")])	Pipe	--	48/16 48 16 Pipe<u8, u128> 48/16	async u128 / u8 / () / !
+AL	Suspended	Completed	Async<u128, u8, (), !>@Completed | Async<u128, u8, (), !>@Suspended	64/16
+P	Pipe	3	Pipe
+L	T11	ok	Exchange<u128>	(n5 (s"exchange" s"Exchange") [(n0 s"u128")])	Exchange	--	48/16 48 16 Exchange<u128> 48/16	async u128 / u128 / u128 / !
+AL	Suspended	Completed	Async<u128, u128, u128, !>@Completed | Async<u128, u128, u128, !>@Suspended	64/16
+P	Exchange	3	Exchange
+L	T12	ok	Async<u8>@Suspended	(n6 (s"async" s"Async") [(n0 s"u8")] s"Suspended")	Async	--	24/8 24 8 Async<u8>@Suspended 24/8	async u8 / () / () / !
+AL	Suspended	Completed	Async<u8, (), (), !>@Completed | Async<u8, (), (), !>@Suspended	32/8
+P	Async	2	Async
+L	T13	ok	Async<u8, u8, u8, u8>@Failed	(n6 (s"async" s"Async") [(n0 s"u8") (n0 s"u8") (n0 s"u8") (n0 s"u8")] s"Failed")	Async	--	24/8 24 8 Async<u8, u8, u8, u8>@Failed 24/8	async u8 / u8 / u8 / u8
+AL	Suspended	Completed	Failed	Async<u8, u8, u8, u8>@Completed | Async<u8, u8, u8, u8>@Failed | Async<u8, u8, u8, u8>@Suspended	32/8
+P	Async	2	Async
+L	T14	ok	App::Job	(n5 (s"app::job" s"App::Job"))	App::Job	--	32/16 32 16 App::Job 32/16	async () / () / u128 / !
+P	App::Job	3	App::Job
+L	T15	ok	App::Job2<u128>	(n5 (s"app::job2" s"App::Job2") [(n0 s"u128")])	App::Job2	--	48/16 48 16 App::Job2<u128> 48/16	async u128 / () / () / u8
+P	App::Job2	3	App::Job2
+L	T16	ok	Spawned<u8>	(n5 (s"spawned" s"Spawned") [(n0 s"u8")])	Spawned	--	8/8 8 8 Spawned<u8> 8/8	-
+P	Spawned	2	Spawned
+L	T17	ok	Spawned<u8>@Ready	(n6 (s"spawned" s"Spawned") [(n0 s"u8")] s"Ready")	Spawned	--	8/8 8 8 Spawned<u8>@Ready 8/8	-
+P	Spawned	2	Spawned
+L	T18	ok	Tracked<u8, u8>	(n5 (s"tracked" s"Tracked") [(n0 s"u8") (n0 s"u8")])	Tracked	--	8/8 8 8 Tracked<u8, u8> 8/8	-
+P	Tracked	2	Tracked
+L	T19	ok	CancelToken	(n5 (s"canceltoken" s"CancelToken"))	CancelToken	--	16/8 16 8 CancelToken 16/8	-
+P	CancelToken	2	CancelToken
+L	T20	ok	CancelToken@Active	(n6 (s"canceltoken" s"CancelToken") s"Active")	CancelToken	--	8/8 8 8 CancelToken@Active 8/8	-
+P	CancelToken	2	CancelToken
+L	T21	ok	Region	(n5 (s"region" s"Region"))	Region	--	16/8 16 8 Region 16/8	-
+P	Region	2	Region
+L	T22	ok	Region@Active	(n6 (s"region" s"Region") s"Active")	Region	--	16/8 16 8 Region@Active 16/8	-
+P	Region	2	Region
+L	T23	ok	File	(n5 (s"file" s"File"))	File	--	16/8 16 8 File 16/8	-
+P	File	2	File
+L	T24	ok	File@Read	(n6 (s"file" s"File") s"Read")	File	--	8/8 8 8 File@Read 8/8	-
+P	File	2	File
+L	T25	ok	DirIter	(n5 (s"diriter" s"DirIter"))	DirIter	--	16/8 16 8 DirIter 16/8	-
+P	DirIter	2	DirIter
+L	T26	ok	Context	(n5 (s"context" s"Context"))	Context	--	96/8 96 8 Context 96/8	-
+P	Context	0	Context
+L	T27	ok	Outcome<u8, u64>	(n5 (s"outcome" s"Outcome") [(n0 s"u8") (n0 s"u64")])	Outcome	--	16/8 16 8 Outcome<u8, u64> 16/8	-
+P	Outcome	1	Outcome
+L	T28	ok	Duration	(n5 (s"duration" s"Duration"))	Duration	--	16/16 16 16 Duration 16/16	-
+P	Duration	0	Duration
+L	T29	ok	RegionOptions	(n5 (s"regionoptions" s"RegionOptions"))	RegionOptions	--	40/8 40 8 RegionOptions 40/8	-
+P	RegionOptions	0	RegionOptions
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111000000000000000000000000000000001
+Q	1	11111000000000000000000000000000000001
+Q	2	11111000000000000000000000000000000001
+Q	3	11111000000000000000000000000000000001
+Q	4	11111000000000000000000000000000000001
+Q	5	00000100000000000000000000000000000000
+Q	6	00000010000000000000000000000000000000
+Q	7	00000001000000000000000000000000000000
+Q	8	00000000100000000000000000000000000000
+Q	9	00000000010000000000000000000000000000
+Q	10	00000000001000000000000000000000000000
+Q	11	00000000000100000000000000000000000000
+Q	12	00000000000010000000000000000000000000
+Q	13	00000000000001000000000000000000000000
+Q	14	00000000000000100000000000000000000000
+Q	15	00000000000000010000000000000000000000
+Q	16	00000000000000001000000000000000000000
+Q	17	00000000000000000100000000000000000000
+Q	18	00000000000000000010000000000000000000
+Q	19	00000000000000000001000000000000000000
+Q	20	00000000000000000000100000000000000000
+Q	21	00000000000000000000010000000000000000
+Q	22	00000000000000000000001000000000000000
+Q	23	00000000000000000000000100000000000000
+Q	24	00000000000000000000000010000000000000
+Q	25	00000000000000000000000001000000000000
+Q	26	00000000000000000000000000100000000000
+Q	27	00000000000000000000000000010000000000
+Q	28	00000000000000000000000000001000000000
+Q	29	00000000000000000000000000000100000000
+Q	30	00000000000000000000000000000010000000
+Q	31	00000000000000000000000000000001000000
+Q	32	00000000000000000000000000000000100000
+Q	33	00000000000000000000000000000000010000
+Q	34	00000000000000000000000000000000001000
+Q	35	00000000000000000000000000000000000100
+Q	36	00000000000000000000000000000000000010
+Q	37	11111000000000000000000000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+S	Job2	0
+I	Job2	0	Stream<TValue, u8>
+S	Job2	1	TValue=i32
+I	Job2	1	Stream<i32, u8>
+S	Job2	1	TValue=i32
+I	Job2	1	Stream<i32, u8>
+V	Job2	TValue*
+F	/w/target/typecases/layout_enum_attrs/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Wide::B	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	WithAlign::A	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	CEnum::B	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110001
+Q	1	111110001
+Q	2	111110001
+Q	3	111110001
+Q	4	111110001
+Q	5	000001100
+Q	6	000001100
+Q	7	000000010
+Q	8	111110001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+EO	Wide	u16	-
+ED	Wide	1	0,1
+EL	Wide	0	4/2	u16	1/1
+EM	Wide::B.0	0	u8	0	1/1
+EM	Wide::B.1	0	-	-	-
+EM	Wide::B.named	0	-	-	-
+EO	Widest	u64	-
+ED	Widest	0	0
+EL	Widest	0	8/8	u64	0/1
+EO	Signed	i8	-
+ED	Signed	127	127
+EL	Signed	0	1/1	i8	0/1
+EO	SignedOver	i8	-
+ED	SignedOver	128	128
+EL	SignedOver	0	-	-	-
+EO	Over	u8	-
+ED	Over	256	256
+EL	Over	0	-	-	-
+EO	WithAlign	u8	8
+ED	WithAlign	0	0
+EL	WithAlign	0	8/8	u8	1/1
+EM	WithAlign::A.0	0	u8	0	1/1
+EM	WithAlign::A.1	0	-	-	-
+EM	WithAlign::A.named	0	-	-	-
+EO	OnlyAlign	-	4
+ED	OnlyAlign	1	0,1
+EL	OnlyAlign	0	4/4	u8	0/1
+EO	CEnum	-	-
+ED	CEnum	1	0,1
+EL	CEnum	0	8/4	u8	4/4
+EM	CEnum::B.0	0	u32	0	4/4
+EM	CEnum::B.1	0	-	-	-
+EM	CEnum::B.named	0	-	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/layout_enum_bad_discs/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Holder::A	ok	App::Dup	(n5 (s"app::dup" s"App::Dup"))	App::Dup	--	- - - App::Dup -	-
+P	App::Dup	1	App::Dup
+L	Holder::B	ok	App::MaxThenMore	(n5 (s"app::maxthenmore" s"App::MaxThenMore"))	App::MaxThenMore	--	- - - App::MaxThenMore -	-
+P	App::MaxThenMore	1	App::MaxThenMore
+L	UsesBad.a	ok	App::Dup	(n5 (s"app::dup" s"App::Dup"))	App::Dup	--	- - - App::Dup -	-
+P	App::Dup	1	App::Dup
+L	UsesBad.b	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100001
+Q	1	1111100001
+Q	2	1111100001
+Q	3	1111100001
+Q	4	1111100001
+Q	5	0000010100
+Q	6	0000001000
+Q	7	0000010100
+Q	8	0000000010
+Q	9	1111100001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+EO	Dup	-	-
+ED	Dup	fail	E-TYP-1923	287	292	24	5	24	10
+EL	Dup	0	-	-	-
+EO	DupImplicit	-	-
+ED	DupImplicit	fail	E-TYP-1923	347	348	29	5	29	6
+EL	DupImplicit	0	-	-	-
+EO	Max	-	-
+ED	Max	18446744073709551615	18446744073709551615
+EL	Max	0	8/8	u64	0/1
+EO	MaxThenMore	-	-
+ED	MaxThenMore	fail	E-TYP-1921	438	458	35	9	35	29
+EL	MaxThenMore	0	-	-	-
+EO	TooBig	-	-
+ED	TooBig	fail	E-TYP-1921	498	518	39	9	39	29
+EL	TooBig	0	-	-	-
+EO	Holder	-	-
+ED	Holder	1	0,1
+EL	Holder	0	-	-	-
+EM	Holder::A.0	0	-	-	-
+EM	Holder::A.1	0	-	-	-
+EM	Holder::A.named	0	-	-	-
+EM	Holder::B.0	0	-	-	-
+EM	Holder::B.1	0	-	-	-
+EM	Holder::B.named	0	-	-	-
+RO	UsesBad	-	-
+RL	UsesBad	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	UsesBad.a	App::Dup	visible
+FT	UsesBad.b	u8	visible
+F	/w/target/typecases/layout_enum_generic/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Maybe::Just	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Either<TRight=>	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	Either::Left	ok	TLeft	(n5 (s"tleft" s"TLeft"))	TLeft	--	- - - TLeft -	-
+P	TLeft	-	-
+L	Either::Right	ok	TRight	(n5 (s"tright" s"TRight"))	TRight	--	- - - TRight -	-
+P	TRight	-	-
+L	Either::Both.left	ok	TLeft	(n5 (s"tleft" s"TLeft"))	TLeft	--	- - - TLeft -	-
+P	TLeft	-	-
+L	Either::Both.right	ok	TRight	(n5 (s"tright" s"TRight"))	TRight	--	- - - TRight -	-
+P	TRight	-	-
+L	Uses.a	ok	(App::Maybe<u8>;)	(n1 n1 (n5 (s"app::maybe" s"App::Maybe") [(n0 s"u8")]))	App::Maybe	--	2/1 2 1 (App::Maybe<u8>;) 2/1	-
+TL	2/1	0
+P	App::Maybe	1	App::Maybe
+L	Uses.b	ok	(App::Maybe<u64>;)	(n1 n1 (n5 (s"app::maybe" s"App::Maybe") [(n0 s"u64")]))	App::Maybe	--	16/8 16 8 (App::Maybe<u64>;) 16/8	-
+TL	16/8	0
+P	App::Maybe	1	App::Maybe
+L	Uses.c	ok	(App::Either<u8>;)	(n1 n1 (n5 (s"app::either" s"App::Either") [(n0 s"u8")]))	App::Either	--	3/1 3 1 (App::Either<u8>;) 3/1	-
+TL	3/1	0
+P	App::Either	1	App::Either
+L	Uses.d	ok	(App::Either<u64, u16>;)	(n1 n1 (n5 (s"app::either" s"App::Either") [(n0 s"u64") (n0 s"u16")]))	App::Either	--	24/8 24 8 (App::Either<u64, u16>;) 24/8	-
+TL	24/8	0
+P	App::Either	1	App::Either
+L	Uses.e	ok	[App::Maybe<App::Maybe<u8>>]	(n3 (n5 (s"app::maybe" s"App::Maybe") [(n5 (s"app::maybe" s"App::Maybe") [(n0 s"u8")])]))	App::Maybe	--	16/8 16 8 [App::Maybe<App::Maybe<u8>>] 16/8	-
+P	App::Maybe	1	App::Maybe
+L	A	ok	App::Maybe<u32>	(n5 (s"app::maybe" s"App::Maybe") [(n0 s"u32")])	App::Maybe	--	8/4 8 4 App::Maybe<u32> 8/4	-
+P	App::Maybe	1	App::Maybe
+L	B	ok	App::Either<u8, u8>	(n5 (s"app::either" s"App::Either") [(n0 s"u8") (n0 s"u8")])	App::Either	--	3/1 3 1 App::Either<u8, u8> 3/1	-
+P	App::Either	1	App::Either
+L	C	ok	App::Maybe<i32, bool>	(n5 (s"app::maybe" s"App::Maybe") [(n0 s"i32") (n0 s"bool")])	App::Maybe	--	- - - App::Maybe<i32, bool> -	-
+P	App::Maybe	1	App::Maybe
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111000000000000001
+Q	1	11111000000000000001
+Q	2	11111000000000000001
+Q	3	11111000000000000001
+Q	4	11111000000000000001
+Q	5	00000100000000000000
+Q	6	00000010000000000000
+Q	7	00000001010000000000
+Q	8	00000000101000000000
+Q	9	00000001010000000000
+Q	10	00000000101000000000
+Q	11	00000000000100000000
+Q	12	00000000000010000000
+Q	13	00000000000001000000
+Q	14	00000000000000100000
+Q	15	00000000000000010000
+Q	16	00000000000000001000
+Q	17	00000000000000000100
+Q	18	00000000000000000010
+Q	19	11111000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+EO	Maybe	-	-
+ED	Maybe	1	0,1
+EL	Maybe	0	-	-	-
+EM	Maybe::Just.0	0	-	-	-
+EM	Maybe::Just.1	0	-	-	-
+EM	Maybe::Just.named	0	-	-	-
+EL	Maybe	1	8/4	u8	4/4
+EM	Maybe::Just.0	1	i32	0	4/4
+EM	Maybe::Just.1	1	-	-	-
+EM	Maybe::Just.named	1	-	-	-
+EL	Maybe	2	-	-	-
+EM	Maybe::Just.0	2	-	-	-
+EM	Maybe::Just.1	2	-	-	-
+EM	Maybe::Just.named	2	-	-	-
+EO	Either	-	-
+ED	Either	2	0,1,2
+EL	Either	0	-	-	-
+EM	Either::Left.0	0	-	-	-
+EM	Either::Left.1	0	-	-	-
+EM	Either::Left.named	0	-	-	-
+EM	Either::Right.0	0	-	-	-
+EM	Either::Right.1	0	-	-	-
+EM	Either::Right.named	0	-	-	-
+EM	Either::Both.left	0	-	-	-
+EM	Either::Both.right	0	-	-	-
+EM	Either::Both.missing	0	-	-	-
+EM	Either::Both.0	0	-	-	-
+EL	Either	2	12/4	u8	8/4
+EM	Either::Left.0	2	i32	0	8/4
+EM	Either::Left.1	2	-	-	-
+EM	Either::Left.named	2	-	-	-
+EM	Either::Right.0	2	bool	0	8/4
+EM	Either::Right.1	2	-	-	-
+EM	Either::Right.named	2	-	-	-
+EM	Either::Both.left	2	i32	0	8/4
+EM	Either::Both.right	2	bool	4	8/4
+EM	Either::Both.missing	2	-	-	-
+EM	Either::Both.0	2	-	-	-
+EL	Either	3	-	-	-
+EM	Either::Left.0	3	-	-	-
+EM	Either::Left.1	3	-	-	-
+EM	Either::Left.named	3	-	-	-
+EM	Either::Right.0	3	-	-	-
+EM	Either::Right.1	3	-	-	-
+EM	Either::Right.named	3	-	-	-
+EM	Either::Both.left	3	-	-	-
+EM	Either::Both.right	3	-	-	-
+EM	Either::Both.missing	3	-	-	-
+EM	Either::Both.0	3	-	-	-
+RO	Uses	-	-
+RL	Uses	72/8	0,8,24,32,56
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Uses.a	(App::Maybe<u8>;)	visible
+FT	Uses.b	(App::Maybe<u64>;)	visible
+FT	Uses.c	(App::Either<u8>;)	visible
+FT	Uses.d	(App::Either<u64, u16>;)	visible
+FT	Uses.e	[App::Maybe<App::Maybe<u8>>]	visible
+F	/w/target/typecases/layout_enums/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Payloads::Small	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Payloads::Pair	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Payloads::Pair	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	Payloads::Named.a	ok	u16	(n0 s"u16")		--	2/2 2 2 u16 2/2	-
+L	Payloads::Named.b	ok	u64	(n0 s"u64")		--	8/8 8 8 u64 8/8	-
+L	Payloads::Text	ok	string@View	(n7 n0)		--	16/8 16 8 string@View 16/8	-
+L	Aligned16::A	ok	u128	(n0 s"u128")		--	16/16 16 16 u128 16/16	-
+L	Aligned16::B	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	One::Only	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Recursive::Node	ok	Ptr<App::Recursive>@Valid	(n10 n1 (n5 (s"app::recursive" s"App::Recursive")))	App::Recursive	--	8/8 8 8 Ptr<App::Recursive>@Valid 8/8	-
+P	App::Recursive	1	App::Recursive
+L	Direct::Node	ok	App::Direct	(n5 (s"app::direct" s"App::Direct"))	App::Direct	--	16/8 16 8 App::Direct 16/8	-
+P	App::Direct	1	App::Direct
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111000000001001
+Q	1	11111000000001001
+Q	2	11111000000001001
+Q	3	11111000000001001
+Q	4	11111000000001001
+Q	5	00000110000010000
+Q	6	00000110000010000
+Q	7	00000001000000000
+Q	8	00000000100000000
+Q	9	00000000010000000
+Q	10	00000000001000000
+Q	11	00000000000100000
+Q	12	00000110000010000
+Q	13	11111000000001001
+Q	14	00000000000000100
+Q	15	00000000000000010
+Q	16	11111000000001001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+EO	Units	-	-
+ED	Units	2	0,1,2
+EL	Units	0	1/1	u8	0/1
+EO	Explicit	-	-
+ED	Explicit	6	1,5,6
+EL	Explicit	0	1/1	u8	0/1
+EO	Big	-	-
+ED	Big	256	255,256
+EL	Big	0	2/2	u16	0/1
+EO	Huge	-	-
+ED	Huge	65536	65536
+EL	Huge	0	4/4	u32	0/1
+EO	Giant	-	-
+ED	Giant	4294967297	4294967296,4294967297
+EL	Giant	0	8/8	u64	0/1
+EO	Payloads	-	-
+ED	Payloads	4	0,1,2,3,4
+EL	Payloads	0	24/8	u8	16/8
+EM	Payloads::Small.0	0	u8	0	16/8
+EM	Payloads::Small.1	0	-	-	-
+EM	Payloads::Small.named	0	-	-	-
+EM	Payloads::Pair.0	0	u8	0	16/8
+EM	Payloads::Pair.1	0	u32	4	16/8
+EM	Payloads::Pair.2	0	-	-	-
+EM	Payloads::Pair.named	0	-	-	-
+EM	Payloads::Named.a	0	u16	0	16/8
+EM	Payloads::Named.b	0	u64	8	16/8
+EM	Payloads::Named.missing	0	-	-	-
+EM	Payloads::Named.0	0	-	-	-
+EM	Payloads::Text.0	0	string@View	0	16/8
+EM	Payloads::Text.1	0	-	-	-
+EM	Payloads::Text.named	0	-	-	-
+EO	Aligned16	-	-
+ED	Aligned16	1	0,1
+EL	Aligned16	0	32/16	u8	16/16
+EM	Aligned16::A.0	0	u128	0	16/16
+EM	Aligned16::A.1	0	-	-	-
+EM	Aligned16::A.named	0	-	-	-
+EM	Aligned16::B.0	0	u8	0	16/16
+EM	Aligned16::B.1	0	-	-	-
+EM	Aligned16::B.named	0	-	-	-
+EO	One	-	-
+ED	One	0	0
+EL	One	0	8/4	u8	4/4
+EM	One::Only.0	0	i32	0	4/4
+EM	One::Only.1	0	-	-	-
+EM	One::Only.named	0	-	-	-
+EO	Recursive	-	-
+ED	Recursive	1	0,1
+EL	Recursive	0	16/8	u8	8/8
+EM	Recursive::Node.0	0	Ptr<App::Recursive>@Valid	0	8/8
+EM	Recursive::Node.1	0	-	-	-
+EM	Recursive::Node.named	0	-	-	-
+EO	Direct	-	-
+ED	Direct	1	0,1
+EL	Direct	0	24/8	u8	16/8
+EM	Direct::Node.0	0	App::Direct	0	16/8
+EM	Direct::Node.1	0	-	-	-
+EM	Direct::Node.named	0	-	-	-
+EO	Hex	-	-
+ED	Hex	16	16,3,10,7
+EL	Hex	0	1/1	u8	0/1
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/layout_generic_records/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Box.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Box.tag	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Pair<TSecond=>	ok	u64	(n0 s"u64")		--	8/8 8 8 u64 8/8	-
+L	Pair.first	ok	TFirst	(n5 (s"tfirst" s"TFirst"))	TFirst	--	- - - TFirst -	-
+P	TFirst	-	-
+L	Pair.second	ok	TSecond	(n5 (s"tsecond" s"TSecond"))	TSecond	--	- - - TSecond -	-
+P	TSecond	-	-
+L	Uses.a	ok	(App::Box<u8>;)	(n1 n1 (n5 (s"app::box" s"App::Box") [(n0 s"u8")]))	App::Box	--	2/1 2 1 (App::Box<u8>;) 2/1	-
+TL	2/1	0
+P	App::Box	0	App::Box
+L	Uses.b	ok	(App::Box<u64>;)	(n1 n1 (n5 (s"app::box" s"App::Box") [(n0 s"u64")]))	App::Box	--	16/8 16 8 (App::Box<u64>;) 16/8	-
+TL	16/8	0
+P	App::Box	0	App::Box
+L	Uses.c	ok	(App::Pair<u8>;)	(n1 n1 (n5 (s"app::pair" s"App::Pair") [(n0 s"u8")]))	App::Pair	--	16/8 16 8 (App::Pair<u8>;) 16/8	-
+TL	16/8	0
+P	App::Pair	0	App::Pair
+L	Uses.d	ok	(App::Pair<u8, u8>;)	(n1 n1 (n5 (s"app::pair" s"App::Pair") [(n0 s"u8") (n0 s"u8")]))	App::Pair	--	2/1 2 1 (App::Pair<u8, u8>;) 2/1	-
+TL	2/1	0
+P	App::Pair	0	App::Pair
+L	Uses.e	ok	(App::Box<App::Box<u16>>;)	(n1 n1 (n5 (s"app::box" s"App::Box") [(n5 (s"app::box" s"App::Box") [(n0 s"u16")])]))	App::Box	--	6/2 6 2 (App::Box<App::Box<u16>>;) 6/2	-
+TL	6/2	0
+P	App::Box	0	App::Box
+L	Uses.f	ok	(App::Box<App::Pair<u8, u16>>;)	(n1 n1 (n5 (s"app::box" s"App::Box") [(n5 (s"app::pair" s"App::Pair") [(n0 s"u8") (n0 s"u16")])]))	App::Box App::Pair	--	6/2 6 2 (App::Box<App::Pair<u8, u16>>;) 6/2	-
+TL	6/2	0
+P	App::Box	0	App::Box
+P	App::Pair	0	App::Pair
+L	Uses.g	ok	(App::Pair<u8, u8, u8>;)	(n1 n1 (n5 (s"app::pair" s"App::Pair") [(n0 s"u8") (n0 s"u8") (n0 s"u8")]))	App::Pair	--	- - - (App::Pair<u8, u8, u8>;) -	-
+TL	-
+P	App::Pair	0	App::Pair
+L	Uses.h	ok	App::Box	(n5 (s"app::box" s"App::Box"))	App::Box	--	- - - App::Box -	-
+P	App::Box	0	App::Box
+L	A	ok	App::Box<[u32; LiteralExpr]>	(n5 (s"app::box" s"App::Box") [(n2 (n0 s"u32") n3)])	App::Box	--	16/4 16 4 App::Box<[u32; 3]> 16/4	-
+P	App::Box	0	App::Box
+L	B	ok	App::Pair<(), ()>	(n5 (s"app::pair" s"App::Pair") [(n0 s"()") (n0 s"()")])	App::Pair	--	0/1 0 1 App::Pair<(), ()> 0/1	-
+P	App::Pair	0	App::Pair
+L	Alias	ok	App::Box<TValue>	(n5 (s"app::box" s"App::Box") [(n5 (s"tvalue" s"TValue"))])	App::Box TValue	--	- - - App::Box<TValue> -	-
+P	App::Box	0	App::Box
+P	TValue	-	-
+L	C	ok	App::Alias<u64>	(n5 (s"app::alias" s"App::Alias") [(n0 s"u64")])	App::Alias	--	16/8 16 8 App::Alias<u64> 16/8	-
+P	App::Alias	3	App::Alias
+L	D	ok	App::Alias<u8, u8>	(n5 (s"app::alias" s"App::Alias") [(n0 s"u8") (n0 s"u8")])	App::Alias	--	- - - App::Alias<u8, u8> -	-
+P	App::Alias	3	App::Alias
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000000000000000001
+Q	1	111110000000000000000001
+Q	2	111110000000000000000001
+Q	3	111110000000000000000001
+Q	4	111110000000000000000001
+Q	5	000001000000000000000000
+Q	6	000000100000000000000000
+Q	7	000000010000000000000000
+Q	8	000000001000000000000000
+Q	9	000000000100000000000000
+Q	10	000000000010000000000000
+Q	11	000000000001000000000000
+Q	12	000000000000100000000000
+Q	13	000000000000010000000000
+Q	14	000000000000001000000000
+Q	15	000000000000000100000000
+Q	16	000000000000000010000000
+Q	17	000000000000000001000000
+Q	18	000000000000000000100000
+Q	19	000000000000000000010000
+Q	20	000000000000000000001000
+Q	21	000000000000000000000100
+Q	22	000000000000000000000010
+Q	23	111110000000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	Box	-	-
+RL	Box	-	-
+RO	Pair	-	-
+RL	Pair	-	-
+RO	Uses	-	-
+RL	Uses	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Box.value	TValue	visible
+FT	Box.tag	u8	visible
+S	Box	0
+I	Box	0	TValue
+I	Box	0	u8
+S	Box	1	TValue=i32
+I	Box	1	i32
+I	Box	1	u8
+S	Box	1	TValue=i32
+I	Box	1	i32
+I	Box	1	u8
+V	Box	TValue+
+FT	Pair.first	TFirst	visible
+FT	Pair.second	u64	visible
+S	Pair	0	TSecond=u64
+I	Pair	0	TFirst
+I	Pair	0	u64
+S	Pair	1	TFirst=i32	TSecond=u64
+I	Pair	1	i32
+I	Pair	1	u64
+S	Pair	2	TFirst=i32	TSecond=bool
+I	Pair	2	i32
+I	Pair	2	bool
+V	Pair	TFirst+	TSecond+
+FT	Uses.a	(App::Box<u8>;)	visible
+FT	Uses.b	(App::Box<u64>;)	visible
+FT	Uses.c	(App::Pair<u8>;)	visible
+FT	Uses.d	(App::Pair<u8, u8>;)	visible
+FT	Uses.e	(App::Box<App::Box<u16>>;)	visible
+FT	Uses.f	(App::Box<App::Pair<u8, u16>>;)	visible
+FT	Uses.g	(App::Pair<u8, u8, u8>;)	visible
+FT	Uses.h	App::Box	visible
+S	Alias	0
+I	Alias	0	App::Box<TValue>
+S	Alias	1	TValue=i32
+I	Alias	1	App::Box<i32>
+S	Alias	1	TValue=i32
+I	Alias	1	App::Box<i32>
+V	Alias	TValue*
+F	/w/target/typecases/layout_misc/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Count	ok	usize	(n0 s"usize")		--	8/8 8 8 usize 8/8	-
+L	Deep	ok	App::Count	(n5 (s"app::count" s"App::Count"))	App::Count	--	8/8 8 8 App::Count 8/8	-
+P	App::Count	3	App::Count
+L	T0	ok	GpuPtr<i32, Global>	(n5 (s"gpuptr" s"GpuPtr") [(n0 s"i32") (n5 (s"global" s"Global"))])	Global GpuPtr	--	8/8 8 8 GpuPtr<i32, Global> 8/8	-
+P	Global	-	-
+P	GpuPtr	-	-
+L	T1	ok	GpuPtr<i32, Shared>	(n5 (s"gpuptr" s"GpuPtr") [(n0 s"i32") (n5 (s"shared" s"Shared"))])	GpuPtr Shared	--	8/8 8 8 GpuPtr<i32, Shared> 8/8	-
+P	GpuPtr	-	-
+P	Shared	-	-
+L	T2	ok	GpuPtr<i32, Private>	(n5 (s"gpuptr" s"GpuPtr") [(n0 s"i32") (n5 (s"private" s"Private"))])	GpuPtr Private	--	8/8 8 8 GpuPtr<i32, Private> 8/8	-
+P	GpuPtr	-	-
+P	Private	-	-
+L	T3	ok	Range<u8>	(n14 n0 (n0 s"u8"))		r-	2/1 2 1 Range<u8> 2/1	-
+GL	2/1	0,1
+L	T4	ok	RangeInclusive<u64>	(n14 n1 (n0 s"u64"))		r-	16/8 16 8 RangeInclusive<u64> 16/8	-
+GL	16/8	0,8
+L	T5	ok	RangeFrom<u16>	(n14 n2 (n0 s"u16"))		r-	2/2 2 2 RangeFrom<u16> 2/2	-
+GL	2/2	0
+L	T6	ok	RangeTo<u32>	(n14 n3 (n0 s"u32"))		r-	4/4 4 4 RangeTo<u32> 4/4	-
+GL	4/4	0
+L	T7	ok	RangeToInclusive<u128>	(n14 n4 (n0 s"u128"))		r-	16/16 16 16 RangeToInclusive<u128> 16/16	-
+GL	16/16	0
+L	T8	ok	RangeFull	(n14 n5)		ri	0/1 0 1 RangeFull 0/1	-
+GL	0/1	
+L	T9	ok	unique Range<u8>	(n13 n1 (n14 n0 (n0 s"u8")))		r-	2/1 2 1 unique Range<u8> 2/1	-
+GL	2/1	0,1
+L	T10	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/layout_misc/Source/Main.uv" n696 n704)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	T11	ok	opaque App::Named	(n15 (s"app::named" s"App::Named") s"/w/target/typecases/layout_misc/Source/Main.uv" n727 n739)	App::Named	--	- - - opaque App::Named -	-
+P	App::Named	-	-
+L	T12	ok	App::Count	(n5 (s"app::count" s"App::Count"))	App::Count	--	8/8 8 8 App::Count 8/8	-
+P	App::Count	3	App::Count
+L	T13	ok	App::Deep	(n5 (s"app::deep" s"App::Deep"))	App::Deep	--	8/8 8 8 App::Deep 8/8	-
+P	App::Deep	3	App::Deep
+L	T14	ok	!	(n0 s"!")		--	0/1 0 1 ! 0/1	-
+L	T15	ok	()	(n0 s"()")		--	0/1 0 1 () 0/1	-
+L	T16	ok	(!, u8)	(n1 n2 (n0 s"!") (n0 s"u8"))		--	1/1 1 1 (!, u8) 1/1	-
+TL	1/1	0,0
+L	T17	ok	[!; LiteralExpr]	(n2 (n0 s"!") n3)		--	0/1 0 1 [!; 3] 0/1	-
+L	T18	ok	[u8; LiteralExpr]	(n2 (n0 s"u8") n0)		--	0/1 0 1 [u8; 0] 0/1	-
+L	T19	ok	[u64; LiteralExpr]	(n2 (n0 s"u64") n1000000)		--	8000000/8 8000000 8 [u64; 1000000] 8000000/8	-
+L	T20	ok	$App::Named	(n9 (s"app::named" s"App::Named"))	App::Named	--	16/8 16 8 $App::Named 16/8	-
+P	App::Named	-	-
+L	T21	ok	[$App::Named; LiteralExpr]	(n2 (n9 (s"app::named" s"App::Named")) n2)	App::Named	--	32/8 32 8 [$App::Named; 2] 32/8	-
+P	App::Named	-	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000000000000000000000001
+Q	1	111110000000000000000000000001
+Q	2	111110000000000000000000000001
+Q	3	111110000000000000000000000001
+Q	4	111110000000000000000000000001
+Q	5	000001000000000000000000000000
+Q	6	000000100000000000010000000000
+Q	7	000000010000000000000000000000
+Q	8	000000001000000000000000000000
+Q	9	000000000100000000000000000000
+Q	10	000000000010000000000000000000
+Q	11	000000000001000000000000000000
+Q	12	000000000000100000000000000000
+Q	13	000000000000010000000000000000
+Q	14	000000000000001000000000000000
+Q	15	000000000000000100000000000000
+Q	16	000000000000000010000000000000
+Q	17	000000000000000001000000000000
+Q	18	000000000000000000100000000000
+Q	19	000000100000000000010000000000
+Q	20	000000000000000000001000000000
+Q	21	000000000000000000000100000000
+Q	22	000000000000000000000010000000
+Q	23	000000000000000000000001000000
+Q	24	000000000000000000000000100000
+Q	25	000000000000000000000000010000
+Q	26	000000000000000000000000001000
+Q	27	000000000000000000000000000100
+Q	28	000000000000000000000000000010
+Q	29	111110000000000000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/layout_modals/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Two@A.value	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	Two@B.value	ok	u64	(n0 s"u64")		--	8/8 8 8 u64 8/8	-
+L	Two@B.flag	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	Niche@Some.value	ok	Ptr<i32>@Valid	(n10 n1 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Valid 8/8	-
+L	NicheThree@Some.value	ok	Ptr<i32>@Valid	(n10 n1 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Valid 8/8	-
+L	NicheTwoPayloads@A.value	ok	Ptr<i32>@Valid	(n10 n1 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Valid 8/8	-
+L	NicheTwoPayloads@B.value	ok	Ptr<u8>@Valid	(n10 n1 (n0 s"u8"))		--	8/8 8 8 Ptr<u8>@Valid 8/8	-
+L	NicheNonEmptyOther@A.value	ok	Ptr<i32>@Valid	(n10 n1 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Valid 8/8	-
+L	NicheNonEmptyOther@B.value	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	NotValidPtr@A.value	ok	Ptr<i32>	(n10 n0 (n0 s"i32"))		--	8/8 8 8 Ptr<i32> 8/8	-
+L	NicheWithMethod@A.value	ok	Ptr<i32>@Valid	(n10 n1 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Valid 8/8	-
+L	NicheWithMethod@A::get->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Single@Only.value	ok	u16	(n0 s"u16")		--	2/2 2 2 u16 2/2	-
+L	Generic@Full.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Uses.a	ok	App::Two	(n5 (s"app::two" s"App::Two"))	App::Two	--	24/8 24 8 App::Two 24/8	-
+P	App::Two	2	App::Two
+L	Uses.b	ok	App::Two@A	(n6 (s"app::two" s"App::Two") s"A")	App::Two	--	4/4 4 4 App::Two@A 4/4	-
+P	App::Two	2	App::Two
+L	Uses.c	ok	App::Two@B	(n6 (s"app::two" s"App::Two") s"B")	App::Two	--	16/8 16 8 App::Two@B 16/8	-
+P	App::Two	2	App::Two
+L	Uses.d	ok	App::Niche	(n5 (s"app::niche" s"App::Niche"))	App::Niche	--	8/8 8 8 App::Niche 8/8	-
+P	App::Niche	2	App::Niche
+L	Uses.e	ok	App::Niche@Some	(n6 (s"app::niche" s"App::Niche") s"Some")	App::Niche	--	8/8 8 8 App::Niche@Some 8/8	-
+P	App::Niche	2	App::Niche
+L	Uses.f	ok	App::Niche@None	(n6 (s"app::niche" s"App::Niche") s"None")	App::Niche	--	0/1 0 1 App::Niche@None 0/1	-
+P	App::Niche	2	App::Niche
+L	Uses.g	ok	(App::Generic<u64>;)	(n1 n1 (n5 (s"app::generic" s"App::Generic") [(n0 s"u64")]))	App::Generic	--	16/8 16 8 (App::Generic<u64>;) 16/8	-
+TL	16/8	0
+P	App::Generic	2	App::Generic
+L	Uses.h	ok	(App::Generic<u8>@Full;)	(n1 n1 (n6 (s"app::generic" s"App::Generic") [(n0 s"u8")] s"Full"))	App::Generic	--	1/1 1 1 (App::Generic<u8>@Full;) 1/1	-
+TL	1/1	0
+P	App::Generic	2	App::Generic
+L	Uses.i	ok	App::Two@Missing	(n6 (s"app::two" s"App::Two") s"Missing")	App::Two	--	- - - App::Two@Missing -	-
+P	App::Two	2	App::Two
+L	Uses.j	ok	App::AllEmpty	(n5 (s"app::allempty" s"App::AllEmpty"))	App::AllEmpty	--	1/1 1 1 App::AllEmpty 1/1	-
+P	App::AllEmpty	2	App::AllEmpty
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000000000010000000000001
+Q	1	111110000000000010000000000001
+Q	2	111110000000000010000000000001
+Q	3	111110000000000010000000000001
+Q	4	111110000000000010000000000001
+Q	5	000001000000000000000000000000
+Q	6	000000100000000000000000000000
+Q	7	000000010000000000000000000000
+Q	8	000000001110100100000000000000
+Q	9	000000001110100100000000000000
+Q	10	000000001110100100000000000000
+Q	11	000000000001000000000000000000
+Q	12	000000001110100100000000000000
+Q	13	000000000000010000000000000000
+Q	14	000000000000001000000000000000
+Q	15	000000001110100100000000000000
+Q	16	111110000000000010000000000001
+Q	17	000000000000000001000000000000
+Q	18	000000000000000000100000000000
+Q	19	000000000000000000010000000000
+Q	20	000000000000000000001000000000
+Q	21	000000000000000000000100000000
+Q	22	000000000000000000000010000000
+Q	23	000000000000000000000001000000
+Q	24	000000000000000000000000100000
+Q	25	000000000000000000000000010000
+Q	26	000000000000000000000000001000
+Q	27	000000000000000000000000000100
+Q	28	000000000000000000000000000010
+Q	29	111110000000000010000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+ML	Two	0	-	24/8	tagged	-	u8	16/8
+ML	Niche	0	Some	8/8	niche	8/8	-	8/8
+ML	NicheThree	0	-	16/8	tagged	-	u8	8/8
+ML	NicheTwoPayloads	0	-	16/8	tagged	-	u8	8/8
+ML	NicheNonEmptyOther	0	-	16/8	tagged	-	u8	8/8
+ML	NotValidPtr	0	-	16/8	tagged	-	u8	8/8
+ML	NicheWithMethod	0	A	8/8	niche	8/8	-	8/8
+ML	Single	0	-	4/2	tagged	-	u8	2/2
+ML	AllEmpty	0	-	1/1	tagged	-	u8	0/1
+ML	Generic	0	-	-	-	-	-	-
+ML	Generic	1	-	8/4	tagged	-	u8	4/4
+ML	Generic	2	-	-	-	-	-	-
+RO	Uses	-	-
+RL	Uses	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Uses.a	App::Two	visible
+FT	Uses.b	App::Two@A	visible
+FT	Uses.c	App::Two@B	visible
+FT	Uses.d	App::Niche	visible
+FT	Uses.e	App::Niche@Some	visible
+FT	Uses.f	App::Niche@None	visible
+FT	Uses.g	(App::Generic<u64>;)	visible
+FT	Uses.h	(App::Generic<u8>@Full;)	visible
+FT	Uses.i	App::Two@Missing	visible
+FT	Uses.j	App::AllEmpty	visible
+F	/w/target/typecases/layout_record_attrs/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Packed.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Packed.b	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	Packed.c	ok	u16	(n0 s"u16")		--	2/2 2 2 u16 2/2	-
+L	Aligned.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	CLayout.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	CLayout.b	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	CAligned.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	CAligned.b	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	PackedAligned.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	PackedAligned.b	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	UnderAligned.a	ok	u64	(n0 s"u64")		--	8/8 8 8 u64 8/8	-
+L	OddAligned.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	OddAligned.b	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Separated.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	HexAligned.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Holder.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Holder.packed	ok	App::Packed	(n5 (s"app::packed" s"App::Packed"))	App::Packed	--	7/1 7 1 App::Packed 7/1	-
+P	App::Packed	0	App::Packed
+L	Holder.aligned	ok	App::Aligned	(n5 (s"app::aligned" s"App::Aligned"))	App::Aligned	--	16/16 16 16 App::Aligned 16/16	-
+P	App::Aligned	0	App::Aligned
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000000000000000001
+Q	1	111110000000000000000001
+Q	2	111110000000000000000001
+Q	3	111110000000000000000001
+Q	4	111110000000000000000001
+Q	5	000001001101010011111000
+Q	6	000000100010101000000000
+Q	7	000000010000000000000000
+Q	8	000001001101010011111000
+Q	9	000001001101010011111000
+Q	10	000000100010101000000000
+Q	11	000001001101010011111000
+Q	12	000000100010101000000000
+Q	13	000001001101010011111000
+Q	14	000000100010101000000000
+Q	15	000000000000000100000000
+Q	16	000001001101010011111000
+Q	17	000001001101010011111000
+Q	18	000001001101010011111000
+Q	19	000001001101010011111000
+Q	20	000001001101010011111000
+Q	21	000000000000000000000100
+Q	22	000000000000000000000010
+Q	23	111110000000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	Packed	packed	-
+RL	Packed	7/1	0,1,5
+RO	Aligned	-	16
+RL	Aligned	16/16	0
+RO	CLayout	-	-
+RL	CLayout	8/4	0,4
+RO	CAligned	-	32
+RL	CAligned	32/32	0,4
+RO	PackedAligned	packed	-
+RL	PackedAligned	5/1	0,1
+RO	UnderAligned	-	2
+RL	UnderAligned	8/8	0
+RO	OddAligned	-	3
+RL	OddAligned	3/3	0,1
+RO	Separated	-	16
+RL	Separated	16/16	0
+RO	HexAligned	-	-
+RL	HexAligned	1/1	0
+RO	EmptyAligned	-	16
+RL	EmptyAligned	0/16	
+RO	EmptyPacked	packed	-
+RL	EmptyPacked	0/1	
+RO	Holder	-	-
+RL	Holder	32/16	0,1,16
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Packed.a	u8	visible
+FT	Packed.b	u32	visible
+FT	Packed.c	u16	visible
+FT	Aligned.a	u8	visible
+FT	CLayout.a	u8	visible
+FT	CLayout.b	u32	visible
+FT	CAligned.a	u8	visible
+FT	CAligned.b	u32	visible
+FT	PackedAligned.a	u8	visible
+FT	PackedAligned.b	u32	visible
+FT	UnderAligned.a	u64	visible
+FT	OddAligned.a	u8	visible
+FT	OddAligned.b	u8	visible
+FT	Separated.a	u8	visible
+FT	HexAligned.a	u8	visible
+FT	Holder.a	u8	visible
+FT	Holder.packed	App::Packed	visible
+FT	Holder.aligned	App::Aligned	visible
+F	/w/target/typecases/layout_records/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Bytes3.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Bytes3.b	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Bytes3.c	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Padded.a	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Padded.b	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	Padded.c	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Padded.d	ok	u64	(n0 s"u64")		--	8/8 8 8 u64 8/8	-
+L	Padded.e	ok	u16	(n0 s"u16")		--	2/2 2 2 u16 2/2	-
+L	Wide.a	ok	u128	(n0 s"u128")		--	16/16 16 16 u128 16/16	-
+L	Wide.b	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	Nested.inner	ok	App::Padded	(n5 (s"app::padded" s"App::Padded"))	App::Padded	--	32/8 32 8 App::Padded 32/8	-
+P	App::Padded	0	App::Padded
+L	Nested.tail	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	Nested.point	ok	App::Point	(n5 (s"app::point" s"App::Point"))	App::Point	--	8/4 8 4 App::Point 8/4	-
+P	App::Point	0	App::Point
+L	Texts.a	ok	string	(n7 n2)		--	32/8 32 8 string 32/8	-
+L	Texts.b	ok	string@View	(n7 n0)		--	16/8 16 8 string@View 16/8	-
+L	Texts.c	ok	string@Managed	(n7 n1)		--	24/8 24 8 string@Managed 24/8	-
+L	Texts.d	ok	bytes	(n8 n2)		--	32/8 32 8 bytes 32/8	-
+L	Texts.e	ok	bytes@View	(n8 n0)		--	16/8 16 8 bytes@View 16/8	-
+L	Texts.f	ok	bytes@Managed	(n8 n1)		--	24/8 24 8 bytes@Managed 24/8	-
+L	Pointers.a	ok	(Ptr<i32>@Valid;)	(n1 n1 (n10 n1 (n0 s"i32")))		--	8/8 8 8 (Ptr<i32>@Valid;) 8/8	-
+TL	8/8	0
+L	Pointers.b	ok	* mut u8	(n11 n1 (n0 s"u8"))		--	8/8 8 8 * mut u8 8/8	-
+L	Pointers.c	ok	(i32) -> i32	(n4 n1 n0 (n0 s"i32") (n0 s"i32"))		--	8/8 8 8 (i32) -> i32 8/8	-
+L	Pointers.d	ok	|i32| -> i32	(n17 [(n0) (n0 s"i32")] (n0 s"i32") n0)		--	16/8 16 8 |i32| -> i32 16/8	-
+L	Pointers.e	ok	[i32]	(n3 (n0 s"i32"))		--	16/8 16 8 [i32] 16/8	-
+L	Pointers.f	ok	$App::Named	(n9 (s"app::named" s"App::Named"))	App::Named	--	16/8 16 8 $App::Named 16/8	-
+P	App::Named	-	-
+L	Pointers.g	ok	usize	(n0 s"usize")		--	8/8 8 8 usize 8/8	-
+L	Pointers.h	ok	()	(n0 s"()")		--	0/1 0 1 () 0/1	-
+L	Pointers.i	ok	char	(n0 s"char")		--	4/4 4 4 char 4/4	-
+L	Pointers.j	ok	f16	(n0 s"f16")		--	2/2 2 2 f16 2/2	-
+L	Arrays.a	ok	[u8; LiteralExpr]	(n2 (n0 s"u8") n3)		--	3/1 3 1 [u8; 3] 3/1	-
+L	Arrays.b	ok	[u32; LiteralExpr]	(n2 (n0 s"u32") n2)		--	8/4 8 4 [u32; 2] 8/4	-
+L	Arrays.c	ok	[App::Padded; LiteralExpr]	(n2 (n5 (s"app::padded" s"App::Padded")) n2)	App::Padded	--	64/8 64 8 [App::Padded; 2] 64/8	-
+P	App::Padded	0	App::Padded
+L	Arrays.d	ok	[(); LiteralExpr]	(n2 (n0 s"()") n9)		--	0/1 0 1 [(); 9] 0/1	-
+L	Arrays.e	ok	[[u16; LiteralExpr]; LiteralExpr]	(n2 (n2 (n0 s"u16") n3) n2)		--	12/2 12 2 [[u16; 3]; 2] 12/2	-
+L	Tuples.a	ok	(u8, u32)	(n1 n2 (n0 s"u8") (n0 s"u32"))		--	8/4 8 4 (u8, u32) 8/4	-
+TL	8/4	0,4
+L	Tuples.b	ok	(u8;)	(n1 n1 (n0 s"u8"))		--	1/1 1 1 (u8;) 1/1	-
+TL	1/1	0
+L	Tuples.c	ok	((u8, u16), u8)	(n1 n2 (n1 n2 (n0 s"u8") (n0 s"u16")) (n0 s"u8"))		--	6/2 6 2 ((u8, u16), u8) 6/2	-
+TL	6/2	0,4
+L	Tuples.d	ok	()	(n0 s"()")		--	0/1 0 1 () 0/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111000000000000000000000000000000000000001
+Q	1	11111000000000000000000000000000000000000001
+Q	2	11111000000000000000000000000000000000000001
+Q	3	11111000000000000000000000000000000000000001
+Q	4	11111000000000000000000000000000000000000001
+Q	5	00000111101000001000000000000000000000000000
+Q	6	00000111101000001000000000000000000000000000
+Q	7	00000111101000001000000000000000000000000000
+Q	8	00000111101000001000000000000000000000000000
+Q	9	00000000010000000000000000000000000000000000
+Q	10	00000111101000001000000000000000000000000000
+Q	11	00000000000100000000000000000000000000000000
+Q	12	00000000000010000000000000000000000000000000
+Q	13	00000000000001000000000000000000000000000000
+Q	14	00000000000000100000000000000000000000000000
+Q	15	00000000000000010000000000000000000000000000
+Q	16	00000111101000001000000000000000000000000000
+Q	17	00000000000000000100000000000000000000000000
+Q	18	00000000000000000010000000000000000000000000
+Q	19	00000000000000000001000000000000000000000000
+Q	20	00000000000000000000100000000000000000000000
+Q	21	00000000000000000000010000000000000000000000
+Q	22	00000000000000000000001000000000000000000000
+Q	23	00000000000000000000000100000000000000000000
+Q	24	00000000000000000000000010000000000000000000
+Q	25	00000000000000000000000001000000000000000000
+Q	26	00000000000000000000000000100000000000000000
+Q	27	00000000000000000000000000010000000000000000
+Q	28	00000000000000000000000000001000000000000000
+Q	29	00000000000000000000000000000100000000000000
+Q	30	00000000000000000000000000000010000000000000
+Q	31	00000000000000000000000000000001000000000010
+Q	32	00000000000000000000000000000000100000000000
+Q	33	00000000000000000000000000000000010000000000
+Q	34	00000000000000000000000000000000001000000000
+Q	35	00000000000000000000000000000000000100000000
+Q	36	00000000000000000000000000000000000010000000
+Q	37	00000000000000000000000000000000000001000000
+Q	38	00000000000000000000000000000000000000100000
+Q	39	00000000000000000000000000000000000000010000
+Q	40	00000000000000000000000000000000000000001000
+Q	41	00000000000000000000000000000000000000000100
+Q	42	00000000000000000000000000000001000000000010
+Q	43	11111000000000000000000000000000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	Empty	-	-
+RL	Empty	0/1	
+RO	Bytes3	-	-
+RL	Bytes3	3/1	0,1,2
+RO	Padded	-	-
+RL	Padded	32/8	0,4,8,16,24
+RO	Wide	-	-
+RL	Wide	32/16	0,16
+RO	Nested	-	-
+RL	Nested	48/8	0,32,36
+RO	Texts	-	-
+RL	Texts	144/8	0,32,48,72,104,120
+RO	Pointers	-	-
+RL	Pointers	88/8	0,8,16,24,40,56,72,80,80,84
+RO	Arrays	-	-
+RL	Arrays	96/8	0,4,16,80,80
+RO	Tuples	-	-
+RL	Tuples	16/4	0,8,10,16
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Bytes3.a	u8	visible
+FT	Bytes3.b	u8	visible
+FT	Bytes3.c	u8	visible
+FT	Padded.a	u8	visible
+FT	Padded.b	u32	visible
+FT	Padded.c	u8	visible
+FT	Padded.d	u64	visible
+FT	Padded.e	u16	visible
+FT	Wide.a	u128	visible
+FT	Wide.b	bool	visible
+FT	Nested.inner	App::Padded	visible
+FT	Nested.tail	u8	visible
+FT	Nested.point	App::Point	visible
+FT	Texts.a	string	visible
+FT	Texts.b	string@View	visible
+FT	Texts.c	string@Managed	visible
+FT	Texts.d	bytes	visible
+FT	Texts.e	bytes@View	visible
+FT	Texts.f	bytes@Managed	visible
+FT	Pointers.a	(Ptr<i32>@Valid;)	visible
+FT	Pointers.b	* mut u8	visible
+FT	Pointers.c	(i32) -> i32	visible
+FT	Pointers.d	|i32| -> i32	visible
+FT	Pointers.e	[i32]	visible
+FT	Pointers.f	$App::Named	visible
+FT	Pointers.g	usize	visible
+FT	Pointers.h	()	visible
+FT	Pointers.i	char	visible
+FT	Pointers.j	f16	visible
+FT	Arrays.a	[u8; LiteralExpr]	visible
+FT	Arrays.b	[u32; LiteralExpr]	visible
+FT	Arrays.c	[App::Padded; LiteralExpr]	visible
+FT	Arrays.d	[(); LiteralExpr]	visible
+FT	Arrays.e	[[u16; LiteralExpr]; LiteralExpr]	visible
+FT	Tuples.a	(u8, u32)	visible
+FT	Tuples.b	(u8;)	visible
+FT	Tuples.c	((u8, u16), u8)	visible
+FT	Tuples.d	()	visible
+F	/w/target/typecases/layout_recursive/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	ListNode.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	ListNode.next	ok	Ptr<App::ListNode>	(n10 n0 (n5 (s"app::listnode" s"App::ListNode")))	App::ListNode	--	8/8 8 8 Ptr<App::ListNode> 8/8	-
+P	App::ListNode	0	App::ListNode
+L	Direct.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Direct.next	ok	App::Direct	(n5 (s"app::direct" s"App::Direct"))	App::Direct	--	16/8 16 8 App::Direct 16/8	-
+P	App::Direct	0	App::Direct
+L	MutualA.b	ok	App::MutualB	(n5 (s"app::mutualb" s"App::MutualB"))	App::MutualB	--	24/8 24 8 App::MutualB 24/8	-
+P	App::MutualB	0	App::MutualB
+L	MutualA.x	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	MutualB.a	ok	App::MutualA	(n5 (s"app::mutuala" s"App::MutualA"))	App::MutualA	--	24/8 24 8 App::MutualA 24/8	-
+P	App::MutualA	0	App::MutualA
+L	MutualB.y	ok	u64	(n0 s"u64")		--	8/8 8 8 u64 8/8	-
+L	ViaArray.items	ok	[App::ViaArray; LiteralExpr]	(n2 (n5 (s"app::viaarray" s"App::ViaArray")) n2)	App::ViaArray	--	32/8 32 8 [App::ViaArray; 2] 16/8	-
+P	App::ViaArray	0	App::ViaArray
+L	ViaTuple.pair	ok	(App::ViaTuple, u8)	(n1 n2 (n5 (s"app::viatuple" s"App::ViaTuple")) (n0 s"u8"))	App::ViaTuple	--	16/8 16 8 (App::ViaTuple, u8) 16/8	-
+TL	24/8	0,16
+P	App::ViaTuple	0	App::ViaTuple
+L	ViaUnion.either	ok	u8 | App::ViaUnion	(n12 [(n0 s"u8") (n5 (s"app::viaunion" s"App::ViaUnion"))])	App::ViaUnion	--	16/8 24 8 u8 | App::ViaUnion 16/8	-
+UL	24/8	tagged	-	u8	16/8	u8	App::ViaUnion
+P	App::ViaUnion	0	App::ViaUnion
+L	ViaSlice.items	ok	[App::ViaSlice]	(n3 (n5 (s"app::viaslice" s"App::ViaSlice")))	App::ViaSlice	--	16/8 16 8 [App::ViaSlice] 16/8	-
+P	App::ViaSlice	0	App::ViaSlice
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111111010000000001
+Q	1	111111010000000001
+Q	2	111111010000000001
+Q	3	111111010000000001
+Q	4	111111010000000001
+Q	5	111111010000000001
+Q	6	000000100000000000
+Q	7	111111010000000001
+Q	8	000000001000000000
+Q	9	000000000100000000
+Q	10	000000000010000000
+Q	11	000000000001000000
+Q	12	000000000000100000
+Q	13	000000000000010000
+Q	14	000000000000001000
+Q	15	000000000000000100
+Q	16	000000000000000010
+Q	17	111111010000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	ListNode	-	-
+RL	ListNode	16/8	0,8
+RO	Direct	-	-
+RL	Direct	24/8	0,8
+RO	MutualA	-	-
+RL	MutualA	32/8	0,24
+RO	MutualB	-	-
+RL	MutualB	32/8	0,24
+RO	ViaArray	-	-
+RL	ViaArray	16/8	0
+RO	ViaTuple	-	-
+RL	ViaTuple	16/8	0
+RO	ViaUnion	-	-
+RL	ViaUnion	16/8	0
+RO	ViaSlice	-	-
+RL	ViaSlice	16/8	0
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	ListNode.value	i32	visible
+FT	ListNode.next	Ptr<App::ListNode>	visible
+FT	Direct.value	i32	visible
+FT	Direct.next	App::Direct	visible
+FT	MutualA.b	App::MutualB	visible
+FT	MutualA.x	u8	visible
+FT	MutualB.a	App::MutualA	visible
+FT	MutualB.y	u64	visible
+FT	ViaArray.items	[App::ViaArray; LiteralExpr]	visible
+FT	ViaTuple.pair	(App::ViaTuple, u8)	visible
+FT	ViaUnion.either	u8 | App::ViaUnion	visible
+FT	ViaSlice.items	[App::ViaSlice]	visible
+F	/w/target/typecases/layout_recursive_alias_array/Ultraviolet.toml
+CRASH	signal
+F	/w/target/typecases/layout_recursive_alias_direct/Ultraviolet.toml
+CRASH	signal
+F	/w/target/typecases/layout_recursive_alias_tuple/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	A1	ok	(App::A1, u8)	(n1 n2 (n5 (s"app::a1" s"App::A1")) (n0 s"u8"))	App::A1	--	16/8 16 8 (App::A1, u8) 16/8	-
+TL	24/8	0,16
+P	App::A1	3	App::A1
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111101
+Q	1	1111101
+Q	2	1111101
+Q	3	1111101
+Q	4	1111101
+Q	5	0000010
+Q	6	1111101
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/layout_recursive_direct_record/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Direct.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Direct.next	ok	App::Direct	(n5 (s"app::direct" s"App::Direct"))	App::Direct	--	16/8 16 8 App::Direct 16/8	-
+P	App::Direct	0	App::Direct
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111101
+Q	1	11111101
+Q	2	11111101
+Q	3	11111101
+Q	4	11111101
+Q	5	11111101
+Q	6	00000010
+Q	7	11111101
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	Direct	-	-
+RL	Direct	24/8	0,8
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Direct.value	i32	visible
+FT	Direct.next	App::Direct	visible
+F	/w/target/typecases/layout_recursive_mutual_records/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	MutualA.b	ok	App::MutualB	(n5 (s"app::mutualb" s"App::MutualB"))	App::MutualB	--	24/8 24 8 App::MutualB 24/8	-
+P	App::MutualB	0	App::MutualB
+L	MutualA.x	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	MutualB.a	ok	App::MutualA	(n5 (s"app::mutuala" s"App::MutualA"))	App::MutualA	--	24/8 24 8 App::MutualA 24/8	-
+P	App::MutualA	0	App::MutualA
+L	MutualB.y	ok	u64	(n0 s"u64")		--	8/8 8 8 u64 8/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100001
+Q	1	1111100001
+Q	2	1111100001
+Q	3	1111100001
+Q	4	1111100001
+Q	5	0000010000
+Q	6	0000001000
+Q	7	0000000100
+Q	8	0000000010
+Q	9	1111100001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	MutualA	-	-
+RL	MutualA	32/8	0,24
+RO	MutualB	-	-
+RL	MutualB	32/8	0,24
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	MutualA.b	App::MutualB	visible
+FT	MutualA.x	u8	visible
+FT	MutualB.a	App::MutualA	visible
+FT	MutualB.y	u64	visible
+F	/w/target/typecases/layout_recursive_via_union/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	ViaUnion.either	ok	u8 | App::ViaUnion	(n12 [(n0 s"u8") (n5 (s"app::viaunion" s"App::ViaUnion"))])	App::ViaUnion	--	16/8 24 8 u8 | App::ViaUnion 16/8	-
+UL	24/8	tagged	-	u8	16/8	u8	App::ViaUnion
+P	App::ViaUnion	0	App::ViaUnion
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111101
+Q	1	1111101
+Q	2	1111101
+Q	3	1111101
+Q	4	1111101
+Q	5	0000010
+Q	6	1111101
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	ViaUnion	-	-
+RL	ViaUnion	16/8	0
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	ViaUnion.either	u8 | App::ViaUnion	visible
+F	/w/target/typecases/layout_unions/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Handle	ok	Ptr<i32>@Valid	(n10 n1 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Valid 8/8	-
+L	Chain	ok	App::Handle	(n5 (s"app::handle" s"App::Handle"))	App::Handle	--	8/8 8 8 App::Handle 8/8	-
+P	App::Handle	3	App::Handle
+L	Wrapped	ok	(Ptr<i32>@Valid;)	(n1 n1 (n10 n1 (n0 s"i32")))		--	8/8 8 8 (Ptr<i32>@Valid;) 8/8	-
+TL	8/8	0
+L	T0	ok	u32 | u8	(n12 [(n0 s"u32") (n0 s"u8")])		--	8/4 8 4 u32 | u8 8/4	-
+UL	8/4	tagged	-	u8	4/4	u32	u8
+L	T1	ok	() | u8	(n12 [(n0 s"()") (n0 s"u8")])		--	2/1 2 1 () | u8 2/1	-
+UL	2/1	tagged	-	u8	1/1	()	u8
+L	T2	ok	() | bool	(n12 [(n0 s"()") (n0 s"bool")])		--	2/1 2 1 () | bool 2/1	-
+UL	2/1	tagged	-	u8	1/1	()	bool
+L	T3	ok	() | Ptr<i32>@Valid	(n12 [(n0 s"()") (n10 n1 (n0 s"i32"))])		--	8/8 8 8 () | Ptr<i32>@Valid 8/8	-
+UL	8/8	niche	8/8	-	8/8	()	Ptr<i32>@Valid
+L	T4	ok	() | Ptr<i32>	(n12 [(n0 s"()") (n10 n0 (n0 s"i32"))])		--	16/8 16 8 () | Ptr<i32> 16/8	-
+UL	16/8	tagged	-	u8	8/8	()	Ptr<i32>
+L	T5	ok	() | bool | Ptr<i32>@Valid	(n12 [(n0 s"()") (n0 s"bool") (n10 n1 (n0 s"i32"))])		--	16/8 16 8 () | bool | Ptr<i32>@Valid 16/8	-
+UL	16/8	tagged	-	u8	8/8	()	bool	Ptr<i32>@Valid
+L	T6	ok	Ptr<i32>@Valid | Ptr<u8>@Valid	(n12 [(n10 n1 (n0 s"i32")) (n10 n1 (n0 s"u8"))])		--	16/8 16 8 Ptr<i32>@Valid | Ptr<u8>@Valid 16/8	-
+UL	16/8	tagged	-	u8	8/8	Ptr<i32>@Valid	Ptr<u8>@Valid
+L	T7	ok	unique () | Ptr<i32>@Valid	(n13 n1 (n12 [(n0 s"()") (n10 n1 (n0 s"i32"))]))		--	8/8 8 8 unique () | Ptr<i32>@Valid 8/8	-
+L	T8	ok	() | App::Handle	(n12 [(n0 s"()") (n5 (s"app::handle" s"App::Handle"))])	App::Handle	--	8/8 8 8 () | App::Handle 8/8	-
+UL	8/8	niche	8/8	-	8/8	()	App::Handle
+P	App::Handle	3	App::Handle
+L	T9	ok	() | App::Chain	(n12 [(n0 s"()") (n5 (s"app::chain" s"App::Chain"))])	App::Chain	--	8/8 8 8 () | App::Chain 8/8	-
+UL	8/8	niche	8/8	-	8/8	()	App::Chain
+P	App::Chain	3	App::Chain
+L	T10	ok	u128 | u16 | u32 | u64 | u8	(n12 [(n0 s"u128") (n0 s"u16") (n0 s"u32") (n0 s"u64") (n0 s"u8")])		--	32/16 32 16 u128 | u16 | u32 | u64 | u8 32/16	-
+UL	32/16	tagged	-	u8	16/16	u128	u16	u32	u64	u8
+L	T11	ok	(u8, u8) | [u8; LiteralExpr]	(n12 [(n1 n2 (n0 s"u8") (n0 s"u8")) (n2 (n0 s"u8") n3)])		--	4/1 4 1 (u8, u8) | [u8; 3] 4/1	-
+UL	4/1	tagged	-	u8	3/1	(u8, u8)	[u8; LiteralExpr]
+L	T12	ok	string | bytes	(n12 [(n7 n2) (n8 n2)])		--	40/8 40 8 string | bytes 40/8	-
+UL	40/8	tagged	-	u8	32/8	string	bytes
+L	T13	ok	App::Door | App::Point | App::Shape	(n12 [(n5 (s"app::door" s"App::Door")) (n5 (s"app::point" s"App::Point")) (n5 (s"app::shape" s"App::Shape"))])	App::Door App::Point App::Shape	--	12/4 12 4 App::Door | App::Point | App::Shape 12/4	-
+UL	12/4	tagged	-	u8	8/4	App::Door	App::Point	App::Shape
+P	App::Door	2	App::Door
+P	App::Point	0	App::Point
+P	App::Shape	1	App::Shape
+L	T14	ok	! | u8	(n12 [(n0 s"!") (n0 s"u8")])		--	2/1 2 1 ! | u8 2/1	-
+UL	2/1	tagged	-	u8	1/1	!	u8
+L	T15	ok	() | Ptr<i32>@Null	(n12 [(n0 s"()") (n10 n2 (n0 s"i32"))])		--	16/8 16 8 () | Ptr<i32>@Null 16/8	-
+UL	16/8	tagged	-	u8	8/8	()	Ptr<i32>@Null
+L	T16	ok	() | App::Wrapped	(n12 [(n0 s"()") (n5 (s"app::wrapped" s"App::Wrapped"))])	App::Wrapped	--	16/8 16 8 () | App::Wrapped 16/8	-
+UL	16/8	tagged	-	u8	8/8	()	App::Wrapped
+P	App::Wrapped	3	App::Wrapped
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111000000000000000000001
+Q	1	11111000000000000000000001
+Q	2	11111000000000000000000001
+Q	3	11111000000000000000000001
+Q	4	11111000000000000000000001
+Q	5	00000100000000000000000000
+Q	6	00000010000000000000000000
+Q	7	00000001000000000000000000
+Q	8	00000000100000000000000000
+Q	9	00000000010000000000000000
+Q	10	00000000001000000000000000
+Q	11	00000000000100000000000000
+Q	12	00000000000010000000000000
+Q	13	00000000000001000000000000
+Q	14	00000000000000100000000000
+Q	15	00000000000000010000000000
+Q	16	00000000000000001000000000
+Q	17	00000000000000000100000000
+Q	18	00000000000000000010000000
+Q	19	00000000000000000001000000
+Q	20	00000000000000000000100000
+Q	21	00000000000000000000010000
+Q	22	00000000000000000000001000
+Q	23	00000000000000000000000100
+Q	24	00000000000000000000000010
+Q	25	11111000000000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/lookup_nested_module/Ultraviolet.toml
+X	["App"]
+L	A	ok	App::Other::Deep::Far	(n5 (s"app::other::deep::far" s"App::Other::Deep::Far"))	App::Other::Deep::Far	--	4/4 4 4 App::Other::Deep::Far 4/4	-
+P	App::Other::Deep::Far	0	App::Other::Deep::Far
+L	B	ok	App::Other::Deep::Far	(n5 (s"app::other::deep::far" s"App::Other::Deep::Far"))	App::Other::Deep::Far	--	4/4 4 4 App::Other::Deep::Far 4/4	-
+P	App::Other::Deep::Far	0	App::Other::Deep::Far
+L	C	ok	App::Other::Deep::Far | App::Other::Remote	(n12 [(n5 (s"app::other::deep::far" s"App::Other::Deep::Far")) (n5 (s"app::other::remote" s"App::Other::Remote"))])	App::Other::Deep::Far App::Other::Remote	--	8/4 8 4 App::Other::Deep::Far | App::Other::Remote 8/4	-
+UL	8/4	tagged	-	u8	4/4	App::Other::Deep::Far	App::Other::Remote
+P	App::Other::Deep::Far	0	App::Other::Deep::Far
+P	App::Other::Remote	0	App::Other::Remote
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1100
+Q	1	1100
+Q	2	0010
+Q	3	0001
+DL	16/8	* imm ()	* imm VTable
+X	["App" "Other"]
+L	Remote.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Alias	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	Later	ok	Future<App::Other::Remote>	(n5 (s"future" s"Future") [(n5 (s"app::other::remote" s"App::Other::Remote"))])	App::Other::Remote Future	--	24/8 24 8 Future<App::Other::Remote> 24/8	async () / () / App::Other::Remote / !
+AL	Suspended	Completed	Async<(), (), App::Other::Remote, !>@Completed | Async<(), (), App::Other::Remote, !>@Suspended	32/8
+P	App::Other::Remote	0	App::Other::Remote
+P	Future	3	Future
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+RO	Remote	-	-
+RL	Remote	4/4	0
+EO	Kind	-	-
+ED	Kind	0	0
+EL	Kind	0	1/1	u8	0/1
+FT	Remote.value	i32	visible
+X	["App" "Other" "Deep"]
+L	Far.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+RO	Far	-	-
+RL	Far	4/4	0
+FT	Far.value	i32	visible
+F	/w/target/typecases/lookup_other_assembly/Ultraviolet.toml
+X	["App"]
+L	A	ok	Lib::Thing	(n5 (s"lib::thing" s"Lib::Thing"))	Lib::Thing	--	4/4 4 4 Lib::Thing 4/4	-
+P	Lib::Thing	0	Lib::Thing
+L	B	ok	[i32; PathExpr]	(n2 (n0 s"i32") n5)		--	20/4 20 4 [i32; 5] 20/4	-
+L	C	ok	i32 | Lib::Thing	(n12 [(n0 s"i32") (n5 (s"lib::thing" s"Lib::Thing"))])	Lib::Thing	--	8/4 8 4 i32 | Lib::Thing 8/4	-
+UL	8/4	tagged	-	u8	4/4	i32	Lib::Thing
+P	Lib::Thing	0	Lib::Thing
+L	Holder.thing	ok	Lib::Thing	(n5 (s"lib::thing" s"Lib::Thing"))	Lib::Thing	--	4/4 4 4 Lib::Thing 4/4	-
+P	Lib::Thing	0	Lib::Thing
+L	Holder.secret	ok	Lib::Thing	(n5 (s"lib::thing" s"Lib::Thing"))	Lib::Thing	--	4/4 4 4 Lib::Thing 4/4	-
+P	Lib::Thing	0	Lib::Thing
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	100110
+Q	1	010000
+Q	2	001000
+Q	3	100110
+Q	4	100110
+Q	5	000001
+DL	16/8	* imm ()	* imm VTable
+RO	Holder	-	-
+RL	Holder	8/4	0,4
+FT	Holder.thing	Lib::Thing	visible
+FT	Holder.secret	Lib::Thing	hidden
+X	["Lib"]
+L	Thing.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1
+DL	16/8	* imm ()	* imm VTable
+RO	Thing	-	-
+RL	Thing	4/4	0
+FT	Thing.value	i32	visible
+F	/w/target/typecases/lookup_other_module/Ultraviolet.toml
+X	["App"]
+L	A	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	B	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	C	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	D	ok	App::Other::Kind	(n5 (s"app::other::kind" s"App::Other::Kind"))	App::Other::Kind	--	1/1 1 1 App::Other::Kind 1/1	-
+P	App::Other::Kind	1	App::Other::Kind
+L	E	ok	App::Other::Alias	(n5 (s"app::other::alias" s"App::Other::Alias"))	App::Other::Alias	--	4/4 4 4 App::Other::Alias 4/4	-
+P	App::Other::Alias	3	App::Other::Alias
+L	F	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	G	ok	(App::Other::Remote, App::Other::Kind, App::Other::Kind)	(n1 n3 (n5 (s"app::other::remote" s"App::Other::Remote")) (n5 (s"app::other::kind" s"App::Other::Kind")) (n5 (s"app::other::kind" s"App::Other::Kind")))	App::Other::Kind App::Other::Remote	--	8/4 8 4 (App::Other::Remote, App::Other::Kind, App::Other::Kind) 8/4	-
+TL	8/4	0,4,5
+P	App::Other::Kind	1	App::Other::Kind
+P	App::Other::Remote	0	App::Other::Remote
+L	H	ok	App::Other::Later	(n5 (s"app::other::later" s"App::Other::Later"))	App::Other::Later	--	24/8 24 8 App::Other::Later 24/8	async () / () / App::Other::Remote / !
+P	App::Other::Later	3	App::Other::Later
+L	I	ok	App::Other::Later	(n5 (s"app::other::later" s"App::Other::Later"))	App::Other::Later	--	24/8 24 8 App::Other::Later 24/8	async () / () / App::Other::Remote / !
+P	App::Other::Later	3	App::Other::Later
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1110010000
+Q	1	1110010000
+Q	2	1110010000
+Q	3	0001000000
+Q	4	0000100000
+Q	5	1110010000
+Q	6	0000001000
+Q	7	0000000110
+Q	8	0000000110
+Q	9	0000000001
+DL	16/8	* imm ()	* imm VTable
+X	["App" "Other"]
+L	Remote.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Alias	ok	App::Other::Remote	(n5 (s"app::other::remote" s"App::Other::Remote"))	App::Other::Remote	--	4/4 4 4 App::Other::Remote 4/4	-
+P	App::Other::Remote	0	App::Other::Remote
+L	Later	ok	Future<App::Other::Remote>	(n5 (s"future" s"Future") [(n5 (s"app::other::remote" s"App::Other::Remote"))])	App::Other::Remote Future	--	24/8 24 8 Future<App::Other::Remote> 24/8	async () / () / App::Other::Remote / !
+AL	Suspended	Completed	Async<(), (), App::Other::Remote, !>@Completed | Async<(), (), App::Other::Remote, !>@Suspended	32/8
+P	App::Other::Remote	0	App::Other::Remote
+P	Future	3	Future
+Q	0	100
+Q	1	010
+Q	2	001
+DL	16/8	* imm ()	* imm VTable
+RO	Remote	-	-
+RL	Remote	4/4	0
+EO	Kind	-	-
+ED	Kind	0	0
+EL	Kind	0	1/1	u8	0/1
+FT	Remote.value	i32	visible
+F	/w/target/typecases/members/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	R.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	R::a(other)	ok	App::R	(n5 (s"app::r" s"App::R"))	App::R	--	4/4 4 4 App::R 4/4	-
+P	App::R	0	App::R
+L	R::a(more)	ok	App::R	(n5 (s"app::r" s"App::R"))	App::R	--	4/4 4 4 App::R 4/4	-
+P	App::R	0	App::R
+L	R::a->	ok	App::R	(n5 (s"app::r" s"App::R"))	App::R	--	4/4 4 4 App::R 4/4	-
+P	App::R	0	App::R
+L	R::b->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	R::b(self)	ok	unique App::R	(n13 n1 (n5 (s"app::r" s"App::R")))	App::R	--	4/4 4 4 unique App::R 4/4	-
+P	App::R	0	App::R
+L	C::Item	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	C.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	C::get(other)	ok	Self	(n5 (s"self" s"Self"))	Self	--	- - - Self -	-
+P	Self	-	-
+L	C::get->	ok	Self::Item	(n5 (s"self::item" s"Self::Item"))	Self::Item	--	- - - Self::Item -	-
+P	Self::Item	-	-
+L	M@S.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	M@S::get(other)	ok	App::M@S	(n6 (s"app::m" s"App::M") s"S")	App::M	--	4/4 4 4 App::M@S 4/4	-
+P	App::M	2	App::M
+L	M@S::get->	ok	App::M	(n5 (s"app::m" s"App::M"))	App::M	--	8/4 8 4 App::M 8/4	-
+P	App::M	2	App::M
+L	M@S::next(step)	ok	(i32, bool)	(n1 n2 (n0 s"i32") (n0 s"bool"))		--	8/4 8 4 (i32, bool) 8/4	-
+TL	8/4	0,4
+L	E::A	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	E::A	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	E::B.value	ok	[i32; LiteralExpr]	(n2 (n0 s"i32") n2)		--	8/4 8 4 [i32; 2] 8/4	-
+L	E::B.other	ok	App::E	(n5 (s"app::e" s"App::E"))	App::E	--	24/8 24 8 App::E 24/8	-
+P	App::E	1	App::E
+L	imported(value)	ok	* imm u8	(n11 n0 (n0 s"u8"))		--	8/8 8 8 * imm u8 8/8	-
+L	imported(count)	ok	usize	(n0 s"usize")		--	8/8 8 8 usize 8/8	-
+L	imported->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111111000101100100010000011
+Q	1	111111000101100100010000011
+Q	2	111111000101100100010000011
+Q	3	111111000101100100010000011
+Q	4	111111000101100100010000011
+Q	5	111111000101100100010000011
+Q	6	000000111000000000000000000
+Q	7	000000111000000000000000000
+Q	8	000000111000000000000000000
+Q	9	111111000101100100010000011
+Q	10	000000000010000000000000000
+Q	11	111111000101100100010000011
+Q	12	111111000101100100010000011
+Q	13	000000000000010000000000000
+Q	14	000000000000001000000000000
+Q	15	111111000101100100010000011
+Q	16	000000000000000010000000000
+Q	17	000000000000000001000000000
+Q	18	000000000000000000100000000
+Q	19	111111000101100100010000011
+Q	20	000000000000000000001000000
+Q	21	000000000000000000000100000
+Q	22	000000000000000000000010000
+Q	23	000000000000000000000001000
+Q	24	000000000000000000000000100
+Q	25	111111000101100100010000011
+Q	26	111111000101100100010000011
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	R	-	-
+RL	R	4/4	0
+ML	M	0	-	8/4	tagged	-	u8	4/4
+EO	E	-	-
+ED	E	1	0,1
+EL	E	0	40/8	u8	32/8
+EM	E::A.0	0	i32	0	32/8
+EM	E::A.1	0	bool	4	32/8
+EM	E::A.2	0	-	-	-
+EM	E::A.named	0	-	-	-
+EM	E::B.value	0	[i32; 2]	0	32/8
+EM	E::B.other	0	App::E	8	32/8
+EM	E::B.missing	0	-	-	-
+EM	E::B.0	0	-	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	R.value	i32	visible
+F	/w/target/typecases/modal_states/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Cell@Full.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	T0	ok	App::Door	(n5 (s"app::door" s"App::Door"))	App::Door	--	8/4 8 4 App::Door 8/4	-
+P	App::Door	2	App::Door
+L	T1	ok	App::Door@Open	(n6 (s"app::door" s"App::Door") s"Open")	App::Door	--	4/4 4 4 App::Door@Open 4/4	-
+P	App::Door	2	App::Door
+L	T2	ok	App::Door@Closed	(n6 (s"app::door" s"App::Door") s"Closed")	App::Door	--	0/1 0 1 App::Door@Closed 0/1	-
+P	App::Door	2	App::Door
+L	T3	ok	App::Door@Open	(n6 (s"app::door" s"App::Door") s"Open")	App::Door	--	4/4 4 4 App::Door@Open 4/4	-
+P	App::Door	2	App::Door
+L	T4	ok	App::Door@Missing	(n6 (s"app::door" s"App::Door") s"Missing")	App::Door	--	- - - App::Door@Missing -	-
+P	App::Door	2	App::Door
+L	T5	ok	App::Cell<i32>@Full	(n6 (s"app::cell" s"App::Cell") [(n0 s"i32")] s"Full")	App::Cell	--	4/4 4 4 App::Cell<i32>@Full 4/4	-
+P	App::Cell	2	App::Cell
+L	T6	ok	App::Cell<bool>@Full	(n6 (s"app::cell" s"App::Cell") [(n0 s"bool")] s"Full")	App::Cell	--	1/1 1 1 App::Cell<bool>@Full 1/1	-
+P	App::Cell	2	App::Cell
+L	T7	ok	App::Cell<i32>@Empty	(n6 (s"app::cell" s"App::Cell") [(n0 s"i32")] s"Empty")	App::Cell	--	0/1 0 1 App::Cell<i32>@Empty 0/1	-
+P	App::Cell	2	App::Cell
+L	T8	ok	App::Cell<i32>	(n5 (s"app::cell" s"App::Cell") [(n0 s"i32")])	App::Cell	--	8/4 8 4 App::Cell<i32> 8/4	-
+P	App::Cell	2	App::Cell
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000001
+Q	1	1111100000000001
+Q	2	1111100000000001
+Q	3	1111100000000001
+Q	4	1111100000000001
+Q	5	0000010000000000
+Q	6	0000001000000000
+Q	7	0000000101000000
+Q	8	0000000010000000
+Q	9	0000000101000000
+Q	10	0000000000100000
+Q	11	0000000000010000
+Q	12	0000000000001000
+Q	13	0000000000000100
+Q	14	0000000000000010
+Q	15	1111100000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+ML	Cell	0	-	-	-	-	-	-
+ML	Cell	1	-	8/4	tagged	-	u8	4/4
+ML	Cell	2	-	-	-	-	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/paths/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Count	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Wrapper.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Pair<TSecond=>	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	Pair.first	ok	TFirst	(n5 (s"tfirst" s"TFirst"))	TFirst	--	- - - TFirst -	-
+P	TFirst	-	-
+L	Pair.second	ok	TSecond	(n5 (s"tsecond" s"TSecond"))	TSecond	--	- - - TSecond -	-
+P	TSecond	-	-
+L	T0	ok	App::Point	(n5 (s"app::point" s"App::Point"))	App::Point	--	8/4 8 4 App::Point 8/4	-
+P	App::Point	0	App::Point
+L	T1	ok	App::Point	(n5 (s"app::point" s"App::Point"))	App::Point	--	8/4 8 4 App::Point 8/4	-
+P	App::Point	0	App::Point
+L	T2	ok	App::Shape	(n5 (s"app::shape" s"App::Shape"))	App::Shape	--	8/4 8 4 App::Shape 8/4	-
+P	App::Shape	1	App::Shape
+L	T3	ok	App::Count	(n5 (s"app::count" s"App::Count"))	App::Count	--	4/4 4 4 App::Count 4/4	-
+P	App::Count	3	App::Count
+L	T4	ok	App::Count	(n5 (s"app::count" s"App::Count"))	App::Count	--	4/4 4 4 App::Count 4/4	-
+P	App::Count	3	App::Count
+L	T5	ok	App::Wrapper<i32>	(n5 (s"app::wrapper" s"App::Wrapper") [(n0 s"i32")])	App::Wrapper	--	4/4 4 4 App::Wrapper<i32> 4/4	-
+P	App::Wrapper	0	App::Wrapper
+L	T6	ok	App::Wrapper<bool>	(n5 (s"app::wrapper" s"App::Wrapper") [(n0 s"bool")])	App::Wrapper	--	1/1 1 1 App::Wrapper<bool> 1/1	-
+P	App::Wrapper	0	App::Wrapper
+L	T7	ok	App::Wrapper<App::Wrapper<i32>>	(n5 (s"app::wrapper" s"App::Wrapper") [(n5 (s"app::wrapper" s"App::Wrapper") [(n0 s"i32")])])	App::Wrapper	--	4/4 4 4 App::Wrapper<App::Wrapper<i32>> 4/4	-
+P	App::Wrapper	0	App::Wrapper
+L	T8	ok	App::Wrapper<i32>	(n5 (s"app::wrapper" s"App::Wrapper") [(n0 s"i32")])	App::Wrapper	--	4/4 4 4 App::Wrapper<i32> 4/4	-
+P	App::Wrapper	0	App::Wrapper
+L	T9	ok	App::Pair<i32, bool>	(n5 (s"app::pair" s"App::Pair") [(n0 s"i32") (n0 s"bool")])	App::Pair	--	8/4 8 4 App::Pair<i32, bool> 8/4	-
+P	App::Pair	0	App::Pair
+L	T10	ok	App::Pair<i32>	(n5 (s"app::pair" s"App::Pair") [(n0 s"i32")])	App::Pair	--	8/4 8 4 App::Pair<i32> 8/4	-
+P	App::Pair	0	App::Pair
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111110000000000000001
+Q	1	1111110000000000000001
+Q	2	1111110000000000000001
+Q	3	1111110000000000000001
+Q	4	1111110000000000000001
+Q	5	1111110000000000000001
+Q	6	0000001000000000000000
+Q	7	0000000100000000000000
+Q	8	0000000010000000000000
+Q	9	0000000001000000000000
+Q	10	0000000000110000000000
+Q	11	0000000000110000000000
+Q	12	0000000000001000000000
+Q	13	0000000000000110000000
+Q	14	0000000000000110000000
+Q	15	0000000000000001001000
+Q	16	0000000000000000100000
+Q	17	0000000000000000010000
+Q	18	0000000000000001001000
+Q	19	0000000000000000000100
+Q	20	0000000000000000000010
+Q	21	1111110000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	Wrapper	-	-
+RL	Wrapper	-	-
+RO	Pair	-	-
+RL	Pair	-	-
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Wrapper.value	TValue	visible
+S	Wrapper	0
+I	Wrapper	0	TValue
+S	Wrapper	1	TValue=i32
+I	Wrapper	1	i32
+S	Wrapper	1	TValue=i32
+I	Wrapper	1	i32
+V	Wrapper	TValue+
+FT	Pair.first	TFirst	visible
+FT	Pair.second	bool	visible
+S	Pair	0	TSecond=bool
+I	Pair	0	TFirst
+I	Pair	0	bool
+S	Pair	1	TFirst=i32	TSecond=bool
+I	Pair	1	i32
+I	Pair	1	bool
+S	Pair	2	TFirst=i32	TSecond=bool
+I	Pair	2	i32
+I	Pair	2	bool
+V	Pair	TFirst+	TSecond+
+F	/w/target/typecases/perms/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	const i32	(n13 n0 (n0 s"i32"))		--	4/4 4 4 const i32 4/4	-
+L	T1	ok	unique i32	(n13 n1 (n0 s"i32"))		--	4/4 4 4 unique i32 4/4	-
+L	T2	ok	shared i32	(n13 n2 (n0 s"i32"))		--	4/4 4 4 shared i32 4/4	-
+L	T3	ok	unique App::Point	(n13 n1 (n5 (s"app::point" s"App::Point")))	App::Point	--	8/4 8 4 unique App::Point 8/4	-
+P	App::Point	0	App::Point
+L	T4	ok	shared App::Point	(n13 n2 (n5 (s"app::point" s"App::Point")))	App::Point	--	8/4 8 4 shared App::Point 8/4	-
+P	App::Point	0	App::Point
+L	T5	ok	unique [i32]	(n13 n1 (n3 (n0 s"i32")))		--	16/8 16 8 unique [i32] 16/8	-
+L	T6	ok	const string@View	(n13 n0 (n7 n0))		--	16/8 16 8 const string@View 16/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000001
+Q	1	1111100000001
+Q	2	1111100000001
+Q	3	1111100000001
+Q	4	1111100000001
+Q	5	0000010000000
+Q	6	0000001000000
+Q	7	0000000100000
+Q	8	0000000010000
+Q	9	0000000001000
+Q	10	0000000000100
+Q	11	0000000000010
+Q	12	1111100000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/pointers/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	Ptr<i32>	(n10 n0 (n0 s"i32"))		--	8/8 8 8 Ptr<i32> 8/8	-
+L	T1	ok	Ptr<i32>@Valid	(n10 n1 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Valid 8/8	-
+L	T2	ok	Ptr<i32>@Null	(n10 n2 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Null 8/8	-
+L	T3	ok	Ptr<i32>@Expired	(n10 n3 (n0 s"i32"))		--	8/8 8 8 Ptr<i32>@Expired 8/8	-
+L	T4	ok	* imm i32	(n11 n0 (n0 s"i32"))		--	8/8 8 8 * imm i32 8/8	-
+L	T5	ok	* mut i32	(n11 n1 (n0 s"i32"))		--	8/8 8 8 * mut i32 8/8	-
+L	T6	ok	* mut * imm u8	(n11 n1 (n11 n0 (n0 s"u8")))		--	8/8 8 8 * mut * imm u8 8/8	-
+L	T7	ok	Ptr<Ptr<i32>>	(n10 n0 (n10 n0 (n0 s"i32")))		--	8/8 8 8 Ptr<Ptr<i32>> 8/8	-
+L	T8	ok	Ptr<App::Point>	(n10 n0 (n5 (s"app::point" s"App::Point")))	App::Point	--	8/8 8 8 Ptr<App::Point> 8/8	-
+P	App::Point	0	App::Point
+L	T9	ok	Ptr<[i32; LiteralExpr]>	(n10 n0 (n2 (n0 s"i32") n2))		--	8/8 8 8 Ptr<[i32; 2]> 8/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000001
+Q	1	1111100000000001
+Q	2	1111100000000001
+Q	3	1111100000000001
+Q	4	1111100000000001
+Q	5	0000010000000000
+Q	6	0000001000000000
+Q	7	0000000100000000
+Q	8	0000000010000000
+Q	9	0000000001000000
+Q	10	0000000000100000
+Q	11	0000000000010000
+Q	12	0000000000001000
+Q	13	0000000000000100
+Q	14	0000000000000010
+Q	15	1111100000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/prims/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	i8	(n0 s"i8")		--	1/1 1 1 i8 1/1	-
+L	T1	ok	i16	(n0 s"i16")		--	2/2 2 2 i16 2/2	-
+L	T2	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T3	ok	i64	(n0 s"i64")		--	8/8 8 8 i64 8/8	-
+L	T4	ok	i128	(n0 s"i128")		--	16/16 16 16 i128 16/16	-
+L	T5	ok	u8	(n0 s"u8")		--	1/1 1 1 u8 1/1	-
+L	T6	ok	u16	(n0 s"u16")		--	2/2 2 2 u16 2/2	-
+L	T7	ok	u32	(n0 s"u32")		--	4/4 4 4 u32 4/4	-
+L	T8	ok	u64	(n0 s"u64")		--	8/8 8 8 u64 8/8	-
+L	T9	ok	u128	(n0 s"u128")		--	16/16 16 16 u128 16/16	-
+L	T10	ok	f16	(n0 s"f16")		--	2/2 2 2 f16 2/2	-
+L	T11	ok	f32	(n0 s"f32")		--	4/4 4 4 f32 4/4	-
+L	T12	ok	f64	(n0 s"f64")		--	8/8 8 8 f64 8/8	-
+L	T13	ok	bool	(n0 s"bool")		--	1/1 1 1 bool 1/1	-
+L	T14	ok	char	(n0 s"char")		--	4/4 4 4 char 4/4	-
+L	T15	ok	usize	(n0 s"usize")		--	8/8 8 8 usize 8/8	-
+L	T16	ok	isize	(n0 s"isize")		--	8/8 8 8 isize 8/8	-
+L	T17	ok	()	(n0 s"()")		--	0/1 0 1 () 0/1	-
+L	T18	ok	!	(n0 s"!")		--	0/1 0 1 ! 0/1	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100100000000000000001
+Q	1	1111100100000000000000001
+Q	2	1111100100000000000000001
+Q	3	1111100100000000000000001
+Q	4	1111100100000000000000001
+Q	5	0000010000000000000000000
+Q	6	0000001000000000000000000
+Q	7	1111100100000000000000001
+Q	8	0000000010000000000000000
+Q	9	0000000001000000000000000
+Q	10	0000000000100000000000000
+Q	11	0000000000010000000000000
+Q	12	0000000000001000000000000
+Q	13	0000000000000100000000000
+Q	14	0000000000000010000000000
+Q	15	0000000000000001000000000
+Q	16	0000000000000000100000000
+Q	17	0000000000000000010000000
+Q	18	0000000000000000001000000
+Q	19	0000000000000000000100000
+Q	20	0000000000000000000010000
+Q	21	0000000000000000000001000
+Q	22	0000000000000000000000100
+Q	23	0000000000000000000000010
+Q	24	1111100100000000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/ranges/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	Range<i32>	(n14 n0 (n0 s"i32"))		r-	8/4 8 4 Range<i32> 8/4	-
+GL	8/4	0,4
+L	T1	ok	RangeInclusive<i32>	(n14 n1 (n0 s"i32"))		r-	8/4 8 4 RangeInclusive<i32> 8/4	-
+GL	8/4	0,4
+L	T2	ok	RangeFrom<i32>	(n14 n2 (n0 s"i32"))		r-	4/4 4 4 RangeFrom<i32> 4/4	-
+GL	4/4	0
+L	T3	ok	RangeTo<i32>	(n14 n3 (n0 s"i32"))		r-	4/4 4 4 RangeTo<i32> 4/4	-
+GL	4/4	0
+L	T4	ok	RangeToInclusive<i32>	(n14 n4 (n0 s"i32"))		r-	4/4 4 4 RangeToInclusive<i32> 4/4	-
+GL	4/4	0
+L	T5	ok	RangeFull	(n14 n5)		ri	0/1 0 1 RangeFull 0/1	-
+GL	0/1	
+L	T6	ok	Range<usize>	(n14 n0 (n0 s"usize"))		ri	16/8 16 8 Range<usize> 16/8	-
+GL	16/8	0,8
+L	T7	ok	RangeFrom<usize>	(n14 n2 (n0 s"usize"))		ri	8/8 8 8 RangeFrom<usize> 8/8	-
+GL	8/8	0
+L	T8	ok	unique Range<usize>	(n13 n1 (n14 n0 (n0 s"usize")))		ri	16/8 16 8 unique Range<usize> 16/8	-
+GL	16/8	0,8
+L	T9	ok	Range<u8> | Range<usize>	(n12 [(n14 n0 (n0 s"u8")) (n14 n0 (n0 s"usize"))])		--	24/8 24 8 Range<u8> | Range<usize> 24/8	-
+UL	24/8	tagged	-	u8	16/8	Range<u8>	Range<usize>
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000001
+Q	1	1111100000000001
+Q	2	1111100000000001
+Q	3	1111100000000001
+Q	4	1111100000000001
+Q	5	0000010000000000
+Q	6	0000001000000000
+Q	7	0000000100000000
+Q	8	0000000010000000
+Q	9	0000000001000000
+Q	10	0000000000100000
+Q	11	0000000000010000
+Q	12	0000000000001000
+Q	13	0000000000000100
+Q	14	0000000000000010
+Q	15	1111100000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/refinements/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/refinements/Source/Main.uv" n309 n317)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	T1	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/refinements/Source/Main.uv" n348 n356)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	T2	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/refinements/Source/Main.uv" n387 n395)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	T3	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/refinements/Source/Main.uv" n426 n446)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	T4	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/refinements/Source/Main.uv" n477 n497)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	T5	ok	u8 where { ... }	(n16 (n0 s"u8") s"/w/target/typecases/refinements/Source/Main.uv" n527 n535)		--	1/1 1 1 u8 where { ... } 1/1	-
+L	T6	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/refinements/Source/Main.uv" n566 n570)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	T7	ok	Range<usize> where { ... }	(n16 (n14 n0 (n0 s"usize")) s"/w/target/typecases/refinements/Source/Main.uv" n610 n614)		ri	16/8 16 8 Range<usize> where { ... } 16/8	-
+GL	16/8	0,8
+L	T8	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/refinements/Source/Main.uv" n645 n657)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	T9	ok	i32 where { ... }	(n16 (n0 s"i32") s"/w/target/typecases/refinements/Source/Main.uv" n688 n705)		--	4/4 4 4 i32 where { ... } 4/4	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000000001
+Q	1	1111100000000001
+Q	2	1111100000000001
+Q	3	1111100000000001
+Q	4	1111100000000001
+Q	5	0000011000000000
+Q	6	0000011000000000
+Q	7	0000000100000000
+Q	8	0000000010000000
+Q	9	0000000001000000
+Q	10	0000000000100000
+Q	11	0000000000010000
+Q	12	0000000000001000
+Q	13	0000000000000100
+Q	14	0000000000000010
+Q	15	1111100000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/strings/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	string	(n7 n2)		--	32/8 32 8 string 32/8	-
+L	T1	ok	string@View	(n7 n0)		--	16/8 16 8 string@View 16/8	-
+L	T2	ok	string@Managed	(n7 n1)		--	24/8 24 8 string@Managed 24/8	-
+L	T3	ok	bytes	(n8 n2)		--	32/8 32 8 bytes 32/8	-
+L	T4	ok	bytes@View	(n8 n0)		--	16/8 16 8 bytes@View 16/8	-
+L	T5	ok	bytes@Managed	(n8 n1)		--	24/8 24 8 bytes@Managed 24/8	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000001
+Q	1	111110000001
+Q	2	111110000001
+Q	3	111110000001
+Q	4	111110000001
+Q	5	000001000000
+Q	6	000000100000
+Q	7	000000010000
+Q	8	000000001000
+Q	9	000000000100
+Q	10	000000000010
+Q	11	111110000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/tuples/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	()	(n0 s"()")		--	0/1 0 1 () 0/1	-
+L	T1	ok	(i32;)	(n1 n1 (n0 s"i32"))		--	4/4 4 4 (i32;) 4/4	-
+TL	4/4	0
+L	T2	ok	(i32, bool)	(n1 n2 (n0 s"i32") (n0 s"bool"))		--	8/4 8 4 (i32, bool) 8/4	-
+TL	8/4	0,4
+L	T3	ok	(i32, (bool, char))	(n1 n2 (n0 s"i32") (n1 n2 (n0 s"bool") (n0 s"char")))		--	12/4 12 4 (i32, (bool, char)) 12/4	-
+TL	12/4	0,4
+L	T4	ok	((i32;);)	(n1 n1 (n1 n1 (n0 s"i32")))		--	4/4 4 4 ((i32;);) 4/4	-
+TL	4/4	0
+L	T5	ok	(bool, i32)	(n1 n2 (n0 s"bool") (n0 s"i32"))		--	8/4 8 4 (bool, i32) 8/4	-
+TL	8/4	0,4
+L	T6	ok	(i32, bool)	(n1 n2 (n0 s"i32") (n0 s"bool"))		--	8/4 8 4 (i32, bool) 8/4	-
+TL	8/4	0,4
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	1111100000001
+Q	1	1111100000001
+Q	2	1111100000001
+Q	3	1111100000001
+Q	4	1111100000001
+Q	5	0000010000000
+Q	6	0000001000000
+Q	7	0000000100010
+Q	8	0000000010000
+Q	9	0000000001000
+Q	10	0000000000100
+Q	11	0000000100010
+Q	12	1111100000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/unions_nested_kinds/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	Ptr<i32> | * mut i32 | * imm i32 | (i32;) | [i32] | () -> i32 | App::Door | App::Door@Open | $App::Named	(n12 [(n10 n0 (n0 s"i32")) (n11 n1 (n12 [(n0 s"i32") (n11 n0 (n12 [(n0 s"i32") (n1 n1 (n0 s"i32")) (n3 (n0 s"i32")) (n4 n0 (n12 [(n0 s"i32") (n5 (s"app::door" s"App::Door")) (n6 (s"app::door" s"App::Door") s"Open") (n9 (s"app::named" s"App::Named"))]))]))]))])	App::Door App::Named	--	16/8 16 8 Ptr<i32> | * mut i32 | * imm i32 | (i32;) | [i32] | () -> i32 | App::Door | App::Door@Open | $App::Named 16/8	-
+UL	16/8	tagged	-	u8	8/8	Ptr<i32>	* mut i32 | * imm i32 | (i32;) | [i32] | () -> i32 | App::Door | App::Door@Open | $App::Named
+P	App::Door	2	App::Door
+P	App::Named	-	-
+L	T1	ok	() -> i32 | (i32;) | [i32] | * imm i32 | * mut i32 | Ptr<i32> | App::Door | App::Door@Open | $App::Named	(n12 [(n4 n0 (n12 [(n0 s"i32") (n1 n1 (n0 s"i32")) (n3 (n0 s"i32")) (n11 n0 (n12 [(n0 s"i32") (n11 n1 (n12 [(n0 s"i32") (n10 n0 (n0 s"i32"))]))]))])) (n5 (s"app::door" s"App::Door")) (n6 (s"app::door" s"App::Door") s"Open") (n9 (s"app::named" s"App::Named"))])	App::Door App::Named	--	24/8 24 8 () -> i32 | (i32;) | [i32] | * imm i32 | * mut i32 | Ptr<i32> | App::Door | App::Door@Open | $App::Named 24/8	-
+UL	24/8	tagged	-	u8	16/8	() -> i32 | (i32;) | [i32] | * imm i32 | * mut i32 | Ptr<i32>	App::Door	App::Door@Open	$App::Named
+P	App::Door	2	App::Door
+P	App::Named	-	-
+L	T2	ok	Ptr<i32> | Ptr<i32>@Valid | Ptr<i32>@Null | Ptr<i32>@Expired	(n12 [(n10 n0 (n0 s"i32")) (n10 n1 (n0 s"i32")) (n10 n2 (n0 s"i32")) (n10 n3 (n0 s"i32"))])		--	16/8 16 8 Ptr<i32> | Ptr<i32>@Valid | Ptr<i32>@Null | Ptr<i32>@Expired 16/8	-
+UL	16/8	tagged	-	u8	8/8	Ptr<i32>	Ptr<i32>@Valid	Ptr<i32>@Null	Ptr<i32>@Expired
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110001
+Q	1	111110001
+Q	2	111110001
+Q	3	111110001
+Q	4	111110001
+Q	5	000001000
+Q	6	000000100
+Q	7	000000010
+Q	8	111110001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/unions_order/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	bool | i32	(n12 [(n0 s"bool") (n0 s"i32")])		--	8/4 8 4 bool | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	bool	i32
+L	T1	ok	bool | i32	(n12 [(n0 s"bool") (n0 s"i32")])		--	8/4 8 4 bool | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	bool	i32
+L	T2	ok	bool | char | i32	(n12 [(n0 s"bool") (n0 s"char") (n0 s"i32")])		--	8/4 8 4 bool | char | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	bool	char	i32
+L	T3	ok	bool | char | i32	(n12 [(n0 s"bool") (n0 s"char") (n0 s"i32")])		--	8/4 8 4 bool | char | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	bool	char	i32
+L	T4	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T5	ok	bool | i32	(n12 [(n0 s"bool") (n0 s"i32")])		--	8/4 8 4 bool | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	bool	i32
+L	T6	ok	i32 | App::Point	(n12 [(n0 s"i32") (n5 (s"app::point" s"App::Point"))])	App::Point	--	12/4 12 4 i32 | App::Point 12/4	-
+UL	12/4	tagged	-	u8	8/4	i32	App::Point
+P	App::Point	0	App::Point
+L	T7	ok	i32 | App::Point	(n12 [(n0 s"i32") (n5 (s"app::point" s"App::Point"))])	App::Point	--	12/4 12 4 i32 | App::Point 12/4	-
+UL	12/4	tagged	-	u8	8/4	i32	App::Point
+P	App::Point	0	App::Point
+L	T8	ok	App::Point | App::Shape	(n12 [(n5 (s"app::point" s"App::Point")) (n5 (s"app::shape" s"App::Shape"))])	App::Point App::Shape	--	12/4 12 4 App::Point | App::Shape 12/4	-
+UL	12/4	tagged	-	u8	8/4	App::Point	App::Shape
+P	App::Point	0	App::Point
+P	App::Shape	1	App::Shape
+L	T9	ok	App::Point | App::Shape	(n12 [(n5 (s"app::point" s"App::Point")) (n5 (s"app::shape" s"App::Shape"))])	App::Point App::Shape	--	12/4 12 4 App::Point | App::Shape 12/4	-
+UL	12/4	tagged	-	u8	8/4	App::Point	App::Shape
+P	App::Point	0	App::Point
+P	App::Shape	1	App::Shape
+L	T10	ok	string | bytes	(n12 [(n7 n2) (n8 n2)])		--	40/8 40 8 string | bytes 40/8	-
+UL	40/8	tagged	-	u8	32/8	string	bytes
+L	T11	ok	string@View | string	(n12 [(n7 n0) (n7 n2)])		--	40/8 40 8 string@View | string 40/8	-
+UL	40/8	tagged	-	u8	32/8	string@View	string
+L	T12	ok	string@View | string@Managed | string	(n12 [(n7 n0) (n7 n1) (n7 n2)])		--	40/8 40 8 string@View | string@Managed | string 40/8	-
+UL	40/8	tagged	-	u8	32/8	string@View	string@Managed	string
+L	T13	ok	[i32; LiteralExpr] | [i32]	(n12 [(n2 (n0 s"i32") n2) (n3 (n0 s"i32"))])		--	24/8 24 8 [i32; 2] | [i32] 24/8	-
+UL	24/8	tagged	-	u8	16/8	[i32; LiteralExpr]	[i32]
+L	T14	ok	() | i32	(n12 [(n0 s"()") (n0 s"i32")])		--	8/4 8 4 () | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	()	i32
+L	T15	ok	() | i32	(n12 [(n0 s"()") (n0 s"i32")])		--	8/4 8 4 () | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	()	i32
+L	T16	ok	(bool, i32) | (i32, bool)	(n12 [(n1 n2 (n0 s"bool") (n0 s"i32")) (n1 n2 (n0 s"i32") (n0 s"bool"))])		--	12/4 12 4 (bool, i32) | (i32, bool) 12/4	-
+UL	12/4	tagged	-	u8	8/4	(bool, i32)	(i32, bool)
+L	T17	ok	! | i32	(n12 [(n0 s"!") (n0 s"i32")])		--	8/4 8 4 ! | i32 8/4	-
+UL	8/4	tagged	-	u8	4/4	!	i32
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000100000000000001
+Q	1	111110000100000000000001
+Q	2	111110000100000000000001
+Q	3	111110000100000000000001
+Q	4	111110000100000000000001
+Q	5	000001100010000000000000
+Q	6	000001100010000000000000
+Q	7	000000011000000000000000
+Q	8	000000011000000000000000
+Q	9	111110000100000000000001
+Q	10	000001100010000000000000
+Q	11	000000000001100000000000
+Q	12	000000000001100000000000
+Q	13	000000000000011000000000
+Q	14	000000000000011000000000
+Q	15	000000000000000100000000
+Q	16	000000000000000010000000
+Q	17	000000000000000001000000
+Q	18	000000000000000000100000
+Q	19	000000000000000000011000
+Q	20	000000000000000000011000
+Q	21	000000000000000000000100
+Q	22	000000000000000000000010
+Q	23	111110000100000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+F	/w/target/typecases/unions_paths_case/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	alpha.v	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	ALPHA.v	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Beta.v	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	beta.v	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Zed.v	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	T0	ok	App::ALPHA | App::alpha | App::Beta | App::beta	(n12 [(n5 (s"app::alpha" s"App::ALPHA")) (n5 (s"app::alpha" s"App::alpha")) (n5 (s"app::beta" s"App::Beta")) (n5 (s"app::beta" s"App::beta"))])	App::ALPHA App::alpha App::Beta App::beta	--	8/4 8 4 App::ALPHA | App::alpha | App::Beta | App::beta 8/4	-
+UL	8/4	tagged	-	u8	4/4	App::ALPHA	App::alpha	App::Beta	App::beta
+P	App::ALPHA	0	App::ALPHA
+P	App::alpha	0	App::alpha
+P	App::Beta	0	App::Beta
+P	App::beta	0	App::beta
+L	T1	ok	App::ALPHA | App::alpha | App::Beta | App::beta	(n12 [(n5 (s"app::alpha" s"App::ALPHA")) (n5 (s"app::alpha" s"App::alpha")) (n5 (s"app::beta" s"App::Beta")) (n5 (s"app::beta" s"App::beta"))])	App::ALPHA App::alpha App::Beta App::beta	--	8/4 8 4 App::ALPHA | App::alpha | App::Beta | App::beta 8/4	-
+UL	8/4	tagged	-	u8	4/4	App::ALPHA	App::alpha	App::Beta	App::beta
+P	App::ALPHA	0	App::ALPHA
+P	App::alpha	0	App::alpha
+P	App::Beta	0	App::Beta
+P	App::beta	0	App::beta
+L	T2	ok	App::alpha | App::Zed	(n12 [(n5 (s"app::alpha" s"App::alpha")) (n5 (s"app::zed" s"App::Zed"))])	App::alpha App::Zed	--	8/4 8 4 App::alpha | App::Zed 8/4	-
+UL	8/4	tagged	-	u8	4/4	App::alpha	App::Zed
+P	App::alpha	0	App::alpha
+P	App::Zed	0	App::Zed
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	11111111110001
+Q	1	11111111110001
+Q	2	11111111110001
+Q	3	11111111110001
+Q	4	11111111110001
+Q	5	11111111110001
+Q	6	11111111110001
+Q	7	11111111110001
+Q	8	11111111110001
+Q	9	11111111110001
+Q	10	00000000001100
+Q	11	00000000001100
+Q	12	00000000000010
+Q	13	11111111110001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	alpha	-	-
+RL	alpha	4/4	0
+RO	ALPHA	-	-
+RL	ALPHA	4/4	0
+RO	Beta	-	-
+RL	Beta	4/4	0
+RO	beta	-	-
+RL	beta	4/4	0
+RO	Zed	-	-
+RL	Zed	4/4	0
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	alpha.v	i32	visible
+FT	ALPHA.v	i32	visible
+FT	Beta.v	i32	visible
+FT	beta.v	i32	visible
+FT	Zed.v	i32	visible
+F	/w/target/typecases/variance/Ultraviolet.toml
+X	["App"]
+L	Point.x	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Point.y	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Shape::Circle	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Door@Open.width	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Named::name->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Out.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	In.take	ok	(TValue) -> i32	(n4 n1 n0 (n5 (s"tvalue" s"TValue")) (n0 s"i32"))	TValue	--	8/8 8 8 (TValue) -> i32 8/8	-
+P	TValue	-	-
+L	Both.value	ok	TValue	(n5 (s"tvalue" s"TValue"))	TValue	--	- - - TValue -	-
+P	TValue	-	-
+L	Both.take	ok	(TValue) -> i32	(n4 n1 n0 (n5 (s"tvalue" s"TValue")) (n0 s"i32"))	TValue	--	8/8 8 8 (TValue) -> i32 8/8	-
+P	TValue	-	-
+L	Unused.value	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+L	Mutable.value	ok	unique TValue	(n13 n1 (n5 (s"tvalue" s"TValue")))	TValue	--	- - - unique TValue -	-
+P	TValue	-	-
+L	Mutable.array	ok	[TValue; LiteralExpr]	(n2 (n5 (s"tvalue" s"TValue")) n2)	TValue	--	- - - [TValue; 2] -	-
+P	TValue	-	-
+L	ConstOnly.value	ok	const TValue	(n13 n0 (n5 (s"tvalue" s"TValue")))	TValue	--	- - - const TValue -	-
+P	TValue	-	-
+L	Sliced.value	ok	[TValue]	(n3 (n5 (s"tvalue" s"TValue")))	TValue	--	16/8 16 8 [TValue] 16/8	-
+P	TValue	-	-
+L	Pointed.value	ok	Ptr<TValue>@Valid	(n10 n1 (n5 (s"tvalue" s"TValue")))	TValue	--	8/8 8 8 Ptr<TValue>@Valid 8/8	-
+P	TValue	-	-
+L	Returned.make	ok	() -> TValue	(n4 n0 (n5 (s"tvalue" s"TValue")))	TValue	--	8/8 8 8 () -> TValue 8/8	-
+P	TValue	-	-
+L	Curried.make	ok	((TValue) -> i32) -> i32	(n4 n1 n0 (n4 n1 n0 (n5 (s"tvalue" s"TValue")) (n0 s"i32")) (n0 s"i32"))	TValue	--	8/8 8 8 ((TValue) -> i32) -> i32 8/8	-
+P	TValue	-	-
+L	InUnion.value	ok	i32 | TValue	(n12 [(n0 s"i32") (n5 (s"tvalue" s"TValue"))])	TValue	--	- - - i32 | TValue -	-
+UL	-
+P	TValue	-	-
+L	InTuple.value	ok	(TValue, (TOther) -> i32)	(n1 n2 (n5 (s"tvalue" s"TValue")) (n4 n1 n0 (n5 (s"tother" s"TOther")) (n0 s"i32")))	TOther TValue	--	- - - (TValue, (TOther) -> i32) -	-
+TL	-
+P	TOther	-	-
+P	TValue	-	-
+L	InNominal.value	ok	(App::Out<TValue>, i32)	(n1 n2 (n5 (s"app::out" s"App::Out") [(n5 (s"tvalue" s"TValue"))]) (n0 s"i32"))	App::Out TValue	--	- - - (App::Out<TValue>, i32) -	-
+TL	-
+P	App::Out	0	App::Out
+P	TValue	-	-
+L	InNominal.other	ok	[App::In<TValue>]	(n3 (n5 (s"app::in" s"App::In") [(n5 (s"tvalue" s"TValue"))]))	App::In TValue	--	16/8 16 8 [App::In<TValue>] 16/8	-
+P	App::In	0	App::In
+P	TValue	-	-
+L	InClosure.value	ok	|TValue| -> TValue	(n17 [(n0) (n5 (s"tvalue" s"TValue"))] (n5 (s"tvalue" s"TValue")) n0)	TValue	--	16/8 16 8 |TValue| -> TValue 16/8	-
+P	TValue	-	-
+L	InApply.value	ok	[App::Out<(TValue) -> TOther>]	(n3 (n5 (s"app::out" s"App::Out") [(n4 n1 n0 (n5 (s"tvalue" s"TValue")) (n5 (s"tother" s"TOther")))]))	App::Out TOther TValue	--	16/8 16 8 [App::Out<(TValue) -> TOther>] 16/8	-
+P	App::Out	0	App::Out
+P	TOther	-	-
+P	TValue	-	-
+L	main->	ok	i32	(n0 s"i32")		--	4/4 4 4 i32 4/4	-
+Q	0	111110000100000000000001
+Q	1	111110000100000000000001
+Q	2	111110000100000000000001
+Q	3	111110000100000000000001
+Q	4	111110000100000000000001
+Q	5	000001010000000000000000
+Q	6	000000101000000000000000
+Q	7	000001010000000000000000
+Q	8	000000101000000000000000
+Q	9	111110000100000000000001
+Q	10	000000000010000000000000
+Q	11	000000000001000000000000
+Q	12	000000000000100000000000
+Q	13	000000000000010000000000
+Q	14	000000000000001000000000
+Q	15	000000000000000100000000
+Q	16	000000000000000010000000
+Q	17	000000000000000001000000
+Q	18	000000000000000000100000
+Q	19	000000000000000000010000
+Q	20	000000000000000000001000
+Q	21	000000000000000000000100
+Q	22	000000000000000000000010
+Q	23	111110000100000000000001
+DL	16/8	* imm ()	* imm VTable
+RO	Point	-	-
+RL	Point	8/4	0,4
+EO	Shape	-	-
+ED	Shape	1	0,1
+EL	Shape	0	8/4	u8	4/4
+EM	Shape::Circle.0	0	i32	0	4/4
+EM	Shape::Circle.1	0	-	-	-
+EM	Shape::Circle.named	0	-	-	-
+ML	Door	0	-	8/4	tagged	-	u8	4/4
+RO	Out	-	-
+RL	Out	-	-
+RO	In	-	-
+RL	In	8/8	0
+RO	Both	-	-
+RL	Both	-	-
+RO	Unused	-	-
+RL	Unused	4/4	0
+RO	Mutable	-	-
+RL	Mutable	-	-
+RO	ConstOnly	-	-
+RL	ConstOnly	-	-
+RO	Sliced	-	-
+RL	Sliced	16/8	0
+RO	Pointed	-	-
+RL	Pointed	8/8	0
+RO	Returned	-	-
+RL	Returned	8/8	0
+RO	Curried	-	-
+RL	Curried	8/8	0
+RO	InUnion	-	-
+RL	InUnion	-	-
+RO	InTuple	-	-
+RL	InTuple	-	-
+RO	InNominal	-	-
+RL	InNominal	-	-
+RO	InClosure	-	-
+RL	InClosure	16/8	0
+RO	InApply	-	-
+RL	InApply	16/8	0
+FT	Point.x	i32	visible
+FT	Point.y	i32	visible
+FT	Out.value	TValue	visible
+S	Out	0
+I	Out	0	TValue
+S	Out	1	TValue=i32
+I	Out	1	i32
+S	Out	1	TValue=i32
+I	Out	1	i32
+V	Out	TValue+
+FT	In.take	(TValue) -> i32	visible
+S	In	0
+I	In	0	(TValue) -> i32
+S	In	1	TValue=i32
+I	In	1	(i32) -> i32
+S	In	1	TValue=i32
+I	In	1	(i32) -> i32
+V	In	TValue-
+FT	Both.value	TValue	visible
+FT	Both.take	(TValue) -> i32	visible
+S	Both	0
+I	Both	0	TValue
+I	Both	0	(TValue) -> i32
+S	Both	1	TValue=i32
+I	Both	1	i32
+I	Both	1	(i32) -> i32
+S	Both	1	TValue=i32
+I	Both	1	i32
+I	Both	1	(i32) -> i32
+V	Both	TValue=
+FT	Unused.value	i32	visible
+S	Unused	0
+I	Unused	0	i32
+S	Unused	1	TValue=i32
+I	Unused	1	i32
+S	Unused	1	TValue=i32
+I	Unused	1	i32
+V	Unused	TValue*
+FT	Mutable.value	unique TValue	visible
+FT	Mutable.array	[TValue; LiteralExpr]	visible
+S	Mutable	0
+I	Mutable	0	unique TValue
+I	Mutable	0	[TValue; LiteralExpr]
+S	Mutable	1	TValue=i32
+I	Mutable	1	unique i32
+I	Mutable	1	[i32; LiteralExpr]
+S	Mutable	1	TValue=i32
+I	Mutable	1	unique i32
+I	Mutable	1	[i32; LiteralExpr]
+V	Mutable	TValue=
+FT	ConstOnly.value	const TValue	visible
+S	ConstOnly	0
+I	ConstOnly	0	const TValue
+S	ConstOnly	1	TValue=i32
+I	ConstOnly	1	const i32
+S	ConstOnly	1	TValue=i32
+I	ConstOnly	1	const i32
+V	ConstOnly	TValue+
+FT	Sliced.value	[TValue]	visible
+S	Sliced	0
+I	Sliced	0	[TValue]
+S	Sliced	1	TValue=i32
+I	Sliced	1	[i32]
+S	Sliced	1	TValue=i32
+I	Sliced	1	[i32]
+V	Sliced	TValue=
+FT	Pointed.value	Ptr<TValue>@Valid	visible
+S	Pointed	0
+I	Pointed	0	Ptr<TValue>@Valid
+S	Pointed	1	TValue=i32
+I	Pointed	1	Ptr<i32>@Valid
+S	Pointed	1	TValue=i32
+I	Pointed	1	Ptr<i32>@Valid
+V	Pointed	TValue+
+FT	Returned.make	() -> TValue	visible
+S	Returned	0
+I	Returned	0	() -> TValue
+S	Returned	1	TValue=i32
+I	Returned	1	() -> i32
+S	Returned	1	TValue=i32
+I	Returned	1	() -> i32
+V	Returned	TValue+
+FT	Curried.make	((TValue) -> i32) -> i32	visible
+S	Curried	0
+I	Curried	0	((TValue) -> i32) -> i32
+S	Curried	1	TValue=i32
+I	Curried	1	((i32) -> i32) -> i32
+S	Curried	1	TValue=i32
+I	Curried	1	((i32) -> i32) -> i32
+V	Curried	TValue+
+FT	InUnion.value	i32 | TValue	visible
+S	InUnion	0
+I	InUnion	0	i32 | TValue
+S	InUnion	1	TValue=i32
+I	InUnion	1	i32
+S	InUnion	1	TValue=i32
+I	InUnion	1	i32
+V	InUnion	TValue+
+FT	InTuple.value	(TValue, (TOther) -> i32)	visible
+S	InTuple	0
+I	InTuple	0	(TValue, (TOther) -> i32)
+S	InTuple	1	TValue=i32
+I	InTuple	1	(i32, (TOther) -> i32)
+S	InTuple	2	TOther=bool	TValue=i32
+I	InTuple	2	(i32, (bool) -> i32)
+V	InTuple	TOther-	TValue+
+FT	InNominal.value	(App::Out<TValue>, i32)	visible
+FT	InNominal.other	[App::In<TValue>]	visible
+S	InNominal	0
+I	InNominal	0	(App::Out<TValue>, i32)
+I	InNominal	0	[App::In<TValue>]
+S	InNominal	1	TValue=i32
+I	InNominal	1	(App::Out<i32>, i32)
+I	InNominal	1	[App::In<i32>]
+S	InNominal	1	TValue=i32
+I	InNominal	1	(App::Out<i32>, i32)
+I	InNominal	1	[App::In<i32>]
+V	InNominal	TValue*
+FT	InClosure.value	|TValue| -> TValue	visible
+S	InClosure	0
+I	InClosure	0	|TValue| -> TValue
+S	InClosure	1	TValue=i32
+I	InClosure	1	|i32| -> i32
+S	InClosure	1	TValue=i32
+I	InClosure	1	|i32| -> i32
+V	InClosure	TValue=
+FT	InApply.value	[App::Out<(TValue) -> TOther>]	visible
+S	InApply	0
+I	InApply	0	[App::Out<(TValue) -> TOther>]
+S	InApply	1	TValue=i32
+I	InApply	1	[App::Out<(i32) -> TOther>]
+S	InApply	2	TOther=bool	TValue=i32
+I	InApply	2	[App::Out<(i32) -> bool>]
+V	InApply	TOther*	TValue*

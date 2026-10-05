@@ -15,6 +15,7 @@ fail=0
 [ -d target/p1cases ] || python3 tools/gen_phase1_cases.py > /dev/null
 [ -d target/ctcases ] || python3 tools/gen_comptime_cases.py > /dev/null
 [ -d target/rescases ] || python3 tools/gen_resolve_cases.py > /dev/null
+[ -d target/typecases ] || python3 tools/gen_type_cases.py > /dev/null
 
 echo "== unicode properties (all scalar values vs ICU 72)"
 ./target/release/uv-parity unicode > target/parity/unicode.tsv
@@ -79,6 +80,23 @@ echo "== name resolution: targeted cases"
 ./target/release/uv-parity comptime-list tests/golden/resolve_targeted.list > target/parity/resolve_targeted.list
 ./target/release/uv-parity resolve target/parity/resolve_targeted.list | sed "s|$ROOT/|/w/|g" > target/parity/resolve_targeted.tsv
 python3 tools/compare_dumps.py tests/golden/resolve_targeted.tsv target/parity/resolve_targeted.tsv --quiet || fail=1
+
+echo "== type core and layout (lowering, ordering, equivalence, lookup, substitution, variance; sizes, alignments, offsets, discriminants, niches): every project that resolves"
+./target/release/uv-parity types target/parity/comptime.list | sed "s|$ROOT/|/w/|g" > target/parity/types.tsv
+python3 tools/compare_dumps.py tests/golden/types.tsv target/parity/types.tsv --quiet || fail=1
+
+echo "== type core and layout: compile-time cases"
+./target/release/uv-parity types target/parity/comptime_cases.list | sed "s|$ROOT/|/w/|g" > target/parity/types_cases.tsv
+python3 tools/compare_dumps.py tests/golden/types_cases.tsv target/parity/types_cases.tsv --quiet || fail=1
+
+echo "== type core and layout: name-resolution cases"
+./target/release/uv-parity types target/parity/resolve_targeted.list | sed "s|$ROOT/|/w/|g" > target/parity/types_targeted.tsv
+python3 tools/compare_dumps.py tests/golden/types_targeted.tsv target/parity/types_targeted.tsv --quiet || fail=1
+
+echo "== type core and layout: targeted cases"
+./target/release/uv-parity comptime-list tests/golden/types_extra.list > target/parity/types_extra.list
+./target/release/uv-parity types target/parity/types_extra.list | sed "s|$ROOT/|/w/|g" > target/parity/types_extra.tsv
+python3 tools/compare_dumps.py tests/golden/types_extra.tsv target/parity/types_extra.tsv --quiet || fail=1
 
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1
