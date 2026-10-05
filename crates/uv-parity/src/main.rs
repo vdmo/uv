@@ -67,6 +67,11 @@ use uv_analysis::typing::type_predicates::{
 use uv_analysis::typing::type_wf::type_wf;
 use uv_analysis::typing::types::{make_type_modal_state, make_type_path, Permission};
 use uv_source::ast::ContractClause;
+use uv_analysis::layout::value_bits::{
+    decode_string_literal_bytes, encode_const, valid_value, value_bits, EnumPayloadVal, RawPtrVal, Value, ValueRangeKind,
+};
+use uv_analysis::typing::type_lookup::lookup_enum_decl;
+use uv_analysis::typing::types::{make_type_raw_ptr, PtrState, RawPtrQual};
 use uv_source::ast::{
     ASTItem, ClassItem, ExternItem, GenericParams, Param, Receiver, RecordMember, StateMember, TypeParam, TypePtr,
     VariantPayload,
@@ -332,7 +337,8 @@ fn dump_name_maps(out: &mut String, table: &NameMapTable) {
 
 /// Runs the front end through name resolution on one project block, in the order the
 /// driver does; see `DumpResolve` in the oracle.
-fn dump_resolve(out: &mut String, block: &[&str], types_mode: bool, relations_mode: bool) {
+fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
+    let types_mode = mode != "resolve";
     let input = match load_project_block(block) {
         Ok(project) => project,
         Err(failure) => {
@@ -413,7 +419,9 @@ fn dump_resolve(out: &mut String, block: &[&str], types_mode: bool, relations_mo
         }
         ctx.sigma.mods = resolved.modules;
         populate_sigma(&mut ctx);
-        if relations_mode {
+        if mode == "values" {
+            dump_values(out, &mut ctx, &name_maps.name_maps);
+        } else if mode == "relations" {
             dump_relations(out, &mut ctx, &name_maps.name_maps);
         } else {
             dump_types(out, &mut ctx, &name_maps.name_maps);
@@ -1555,6 +1563,181 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
     }
 }
 
+// ---- the bytes of values; see `DumpConsts` and `DumpValues` in the oracle ----
+
+fn hex(bits: &Option<Vec<u8>>) -> String {
+    match bits {
+        None => "-".to_string(),
+        Some(bits) => {
+            let mut out = String::with_capacity(1 + 2 * bits.len());
+            out.push('x');
+            for byte in bits {
+                let _ = write!(out, "{byte:02x}");
+            }
+            out
+        }
+    }
+}
+
+fn dump_consts(out: &mut String, label: &str, path: &str) -> Result<(), String> {
+    const PRIMS: [&str; 20] = [
+        "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64", "u128", "usize", "f16", "f32", "f64",
+        "bool", "char", "()", "!", "string",
+    ];
+    let bytes = std::fs::read(path).map_err(|err| format!("cannot read {path}: {err}"))?;
+    let _ = writeln!(out, "F\t{label}");
+    let loaded = load_source(label, &bytes);
+    let Some(source) = loaded.source else {
+        out.push_str("NOSOURCE\n");
+        return Ok(());
+    };
+    let result = tokenize_with_diagnostics(&source);
+    let Some(output) = result.output else {
+        out.push_str("NOTOKENS\n");
+        return Ok(());
+    };
+    let raw = make_type_raw_ptr(RawPtrQual::Imm, make_type_prim("u8"));
+    for token in &output.tokens {
+        use uv_source::lexer::token::TokenKind as K;
+        if !matches!(
+            token.kind,
+            K::IntLiteral | K::FloatLiteral | K::CharLiteral | K::BoolLiteral | K::NullLiteral | K::StringLiteral
+        ) {
+            continue;
+        }
+        let _ = write!(out, "C\t{}\t{}", token.kind.name(), escape(&token.lexeme));
+        for prim in PRIMS {
+            let bits = encode_const(&make_type_prim(prim), token);
+            if bits.is_some() {
+                let _ = write!(out, "\t{prim}={}", hex(&bits));
+            }
+        }
+        let bits = encode_const(&raw, token);
+        if bits.is_some() {
+            let _ = write!(out, "\traw={}", hex(&bits));
+        }
+        if token.kind == K::StringLiteral {
+            let _ = write!(out, "\tstr={}", hex(&decode_string_literal_bytes(&token.lexeme)));
+        }
+        out.push('\n');
+    }
+    Ok(())
+}
+
+/// A value of the type, chosen by the seed, as the oracle's `GenValue` chooses it.
+fn gen_value(ctx: &ScopeContext<'_>, type_ref: &TypeRef, seed: u64, depth: u32) -> Value {
+    let Some(ty) = type_ref.as_deref().filter(|_| depth <= 6) else {
+        return Value::Unit;
+    };
+    let mixed = seed.wrapping_mul(0x9E37_79B9_7F4A_7C15).wrapping_add(1);
+    let range = |kind| Value::Range { kind, lo: Some(seed % 100), hi: Some(seed % 100 + 5) };
+    match &ty.node {
+        TypeNode::Prim(name) => match name.as_str() {
+            "bool" => Value::Bool(seed & 1 != 0),
+            "char" => Value::Char((0x41 + seed % 26) as u32),
+            "f16" | "f32" | "f64" => Value::Float { r#type: name.clone(), bits: mixed },
+            "()" | "!" => Value::Unit,
+            _ => Value::Int { r#type: name.clone(), value: u128::from(mixed) },
+        },
+        TypeNode::Perm { base, .. } | TypeNode::Refine { base, .. } => gen_value(ctx, base, seed, depth + 1),
+        TypeNode::Ptr { state, .. } => {
+            let state = state.unwrap_or([PtrState::Valid, PtrState::Null, PtrState::Expired][(seed % 3) as usize]);
+            Value::Ptr { state, addr: if state == PtrState::Null { 0 } else { 0x1000 + seed } }
+        }
+        TypeNode::RawPtr { qual, .. } => Value::RawPtr(RawPtrVal { qual: *qual, addr: 0x2000 + seed }),
+        TypeNode::Tuple(elements) => Value::Tuple(
+            elements.iter().enumerate().map(|(i, ty)| gen_value(ctx, ty, seed + i as u64 + 1, depth + 1)).collect(),
+        ),
+        TypeNode::Array { element, length, .. } => {
+            if *length > 16 {
+                return Value::Unit;
+            }
+            Value::Array((0..*length).map(|i| gen_value(ctx, element, seed + i, depth + 1)).collect())
+        }
+        TypeNode::Slice(_) => Value::Slice { ptr: RawPtrVal { qual: RawPtrQual::Imm, addr: 0x3000 + seed }, length: seed },
+        TypeNode::Range(_) => range(ValueRangeKind::Exclusive),
+        TypeNode::RangeInclusive(_) => range(ValueRangeKind::Inclusive),
+        TypeNode::RangeFrom(_) => range(ValueRangeKind::From),
+        TypeNode::RangeTo(_) => range(ValueRangeKind::To),
+        TypeNode::RangeToInclusive(_) => range(ValueRangeKind::ToInclusive),
+        TypeNode::RangeFull => range(ValueRangeKind::Full),
+        TypeNode::Path { path, generic_args: args } | TypeNode::Apply { path, args } => {
+            let Some(decl) = lookup_enum_decl(ctx, path).filter(|decl| !decl.variants.is_empty()) else {
+                return Value::Unit;
+            };
+            let variant = &decl.variants[(seed % decl.variants.len() as u64) as usize];
+            let member_value = |member: Option<EnumPayloadMemberLayout>, seed| {
+                gen_value(ctx, &member.and_then(|member| member.r#type), seed, depth + 1)
+            };
+            let payload = match &variant.payload_opt {
+                None => None,
+                Some(VariantPayload::VariantPayloadTuple(tuple)) => Some(EnumPayloadVal::Tuple(
+                    (0..tuple.elements.len())
+                        .map(|i| {
+                            member_value(enum_tuple_payload_member_layout(ctx, decl, variant, args, i), seed + i as u64 + 1)
+                        })
+                        .collect(),
+                )),
+                Some(VariantPayload::VariantPayloadRecord(record)) => Some(EnumPayloadVal::Record(
+                    record
+                        .fields
+                        .iter()
+                        .enumerate()
+                        .map(|(i, field)| {
+                            let member = enum_record_payload_member_layout(ctx, decl, variant, args, &field.name);
+                            (field.name.clone(), member_value(member, seed + i as u64 + 1))
+                        })
+                        .collect(),
+                )),
+            };
+            Value::Enum { variant: variant.name.clone(), payload }
+        }
+        TypeNode::Dynamic(_) => Value::Dynamic { data: seed, vtable: seed + 1 },
+        TypeNode::String(_) => Value::String(Vec::new()),
+        TypeNode::Bytes(_) => Value::Bytes(Vec::new()),
+        _ => Value::Unit,
+    }
+}
+
+fn dump_values(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
+    for index in 0..ctx.sigma.mods.len() {
+        let module = ctx.sigma.mods[index].clone();
+        dump_line("X", &module.path, out);
+        ctx.current_module = module.path.clone();
+        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        ctx.scopes = vec![Scope::new(), names, universe_bindings()];
+        let ctx = &*ctx;
+        let types: Vec<TypeRef> =
+            collect_written_types(&module).iter().filter_map(|(_, written)| lower_type(ctx, written).ok()).collect();
+        for (i, ty) in types.iter().enumerate().take(80) {
+            let _ = write!(out, "V\t{i}\t{}", escape(&type_to_string(ty)));
+            for seed in [i as u64, i as u64 + 17] {
+                let bits = value_bits(ctx, ty, &gen_value(ctx, ty, seed, 0));
+                let _ = write!(out, "\t{}", hex(&bits));
+                if let Some(bits) = &bits {
+                    out.push_str(if valid_value(ctx, ty, bits) { " v" } else { " n" });
+                }
+            }
+            let next = &types[(i + 1) % types.len()];
+            let _ = write!(out, "\t{}\t", hex(&value_bits(ctx, ty, &gen_value(ctx, next, i as u64, 0))));
+            match size_of(ctx, ty).filter(|size| *size <= 4096) {
+                Some(size) => {
+                    let size = size as usize;
+                    let mixed: Vec<u8> = (0..size).map(|j| (j * 7 + 1) as u8).collect();
+                    let _ = write!(out, "{size}");
+                    flag(out, valid_value(ctx, ty, &vec![0; size]), 'z');
+                    flag(out, valid_value(ctx, ty, &vec![0xFF; size]), 'f');
+                    flag(out, valid_value(ctx, ty, &mixed), 'm');
+                    flag(out, valid_value(ctx, ty, &vec![1; size]), 'o');
+                    flag(out, valid_value(ctx, ty, &vec![0; size + 1]), 'l');
+                }
+                None => out.push('-'),
+            }
+            out.push('\n');
+        }
+    }
+}
+
 /// The built-in declarations; see `DumpSigma` in the oracle.
 fn dump_sigma(out: &mut String) {
     let mut ctx = ScopeContext::default();
@@ -1656,7 +1839,7 @@ fn run() -> Result<(), String> {
     let mut stdout = std::io::BufWriter::new(stdout.lock());
     match args.get(1).map(String::as_str) {
         Some("unicode") => dump_unicode(&mut stdout).map_err(|err| err.to_string()),
-        Some(mode @ ("tokens" | "ast")) if args.len() >= 3 => {
+        Some(mode @ ("tokens" | "ast" | "consts")) if args.len() >= 3 => {
             // The list file holds one "label<TAB>path" per line. `--root` rewrites the
             // container-side `/w/` prefix used when the list was written for the oracle.
             let root = args.iter().position(|a| a == "--root").and_then(|i| args.get(i + 1));
@@ -1672,6 +1855,8 @@ fn run() -> Result<(), String> {
                 let mut out = String::new();
                 if mode == "ast" {
                     dump_ast(&mut out, label, &path)?;
+                } else if mode == "consts" {
+                    dump_consts(&mut out, label, &path)?;
                 } else {
                     dump_tokens(&mut out, label, &path)?;
                 }
@@ -1687,7 +1872,7 @@ fn run() -> Result<(), String> {
             dump_sigma(&mut out);
             stdout.write_all(out.as_bytes()).map_err(|err| err.to_string())
         }
-        Some(mode @ ("comptime" | "resolve" | "types" | "relations")) if args.len() >= 3 => {
+        Some(mode @ ("comptime" | "resolve" | "types" | "relations" | "values")) if args.len() >= 3 => {
             let list = std::fs::read_to_string(&args[2]).map_err(|err| err.to_string())?;
             let mut block: Vec<&str> = Vec::new();
             for line in list.lines() {
@@ -1697,7 +1882,7 @@ fn run() -> Result<(), String> {
                 }
                 let mut out = String::new();
                 if mode != "comptime" {
-                    dump_resolve(&mut out, &block, mode != "resolve", mode == "relations");
+                    dump_resolve(&mut out, &block, mode);
                 } else {
                     dump_comptime(&mut out, &block);
                 }

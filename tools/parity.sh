@@ -17,6 +17,7 @@ fail=0
 [ -d target/rescases ] || python3 tools/gen_resolve_cases.py > /dev/null
 [ -d target/typecases ] || python3 tools/gen_type_cases.py > /dev/null
 [ -d target/relcases ] || python3 tools/gen_relation_cases.py > /dev/null
+[ -d target/constcases ] || python3 tools/gen_const_cases.py > /dev/null
 
 echo "== unicode properties (all scalar values vs ICU 72)"
 ./target/release/uv-parity unicode > target/parity/unicode.tsv
@@ -119,6 +120,24 @@ echo "== relations between types: targeted cases"
 ./target/release/uv-parity comptime-list tests/golden/relations_extra.list > target/parity/relations_extra.list
 ./target/release/uv-parity relations target/parity/relations_extra.list | sed "s|$ROOT/|/w/|g" > target/parity/relations_extra.tsv
 python3 tools/compare_dumps.py tests/golden/relations_extra.tsv target/parity/relations_extra.tsv --quiet || fail=1
+
+echo "== constant encoding (every literal as every primitive type, string literal bytes): corpus"
+./target/release/uv-parity consts tests/golden/uv_files.list --root "$ROOT" > target/parity/consts.tsv
+python3 tools/compare_dumps.py tests/golden/consts.tsv target/parity/consts.tsv --quiet || fail=1
+
+echo "== constant encoding: lexical stress cases"
+./target/release/uv-parity consts tests/golden/lex_cases.list --root "$ROOT" > target/parity/consts_lex_cases.tsv
+python3 tools/compare_dumps.py tests/golden/consts_lex_cases.tsv target/parity/consts_lex_cases.tsv --quiet || fail=1
+
+echo "== constant encoding: targeted literals"
+./target/release/uv-parity consts tests/golden/const_cases.list --root "$ROOT" > target/parity/const_cases.tsv
+python3 tools/compare_dumps.py tests/golden/const_cases.tsv target/parity/const_cases.tsv --quiet || fail=1
+
+for pair in "comptime:values" "comptime_cases:values_cases" "resolve_targeted:values_targeted" "types_extra:values_types" "relations_extra:values_relations"; do
+  echo "== value bytes and validity (values built from each module's types): ${pair##*:}"
+  ./target/release/uv-parity values "target/parity/${pair%%:*}.list" | sed "s|$ROOT/|/w/|g" > "target/parity/${pair##*:}.tsv"
+  python3 tools/compare_dumps.py "tests/golden/${pair##*:}.tsv" "target/parity/${pair##*:}.tsv" --quiet || fail=1
+done
 
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1

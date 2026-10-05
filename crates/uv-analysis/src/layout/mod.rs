@@ -6,6 +6,7 @@ mod dispatch;
 mod modal;
 mod records;
 mod unions;
+pub mod value_bits;
 
 use uv_project::target_profile::{ptr_size_bytes, TargetProfile};
 

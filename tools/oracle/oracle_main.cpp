@@ -499,6 +499,7 @@ bool HasErrorDiag(const core::DiagnosticStream& diags) {
 
 bool g_types_mode = false;
 bool g_rel_mode = false;
+bool g_val_mode = false;
 
 void PrintKey(const analysis::TypeKey& key);
 void PrintAtom(const analysis::KeyAtom& atom) {
@@ -1386,6 +1387,215 @@ void DumpRelations(analysis::ScopeContext& ctx, const analysis::NameMapTable& na
   }
 }
 
+// ---- the bytes of values; see `layout_value_bits.cpp` ----
+
+void PrintHex(const std::optional<std::vector<std::uint8_t>>& bits) {
+  if (!bits) {
+    std::cout << '-';
+    return;
+  }
+  static const char* const kDigits = "0123456789abcdef";
+  std::cout << 'x';
+  for (const auto byte : *bits) std::cout << kDigits[byte >> 4] << kDigits[byte & 15];
+}
+
+// Every literal token of a file, encoded as each primitive type and as a raw pointer.
+int DumpConsts(const std::string& label, const std::string& path) {
+  static const char* const kPrims[] = {"i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64",
+                                       "u128", "usize", "f16", "f32", "f64", "bool", "char", "()", "!", "string"};
+  std::ifstream in(path, std::ios::binary);
+  if (!in) {
+    std::cerr << "cannot read " << path << "\n";
+    return 2;
+  }
+  const std::vector<std::uint8_t> bytes((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+  std::cout << "F\t" << label << '\n';
+  const core::SourceLoadResult loaded = core::LoadSource(label, bytes);
+  if (!loaded.source.has_value()) {
+    std::cout << "NOSOURCE\n";
+    return 0;
+  }
+  const lexer::TokenizeDiagnosticResult result = lexer::TokenizeWithDiagnostics(*loaded.source);
+  if (!result.output.has_value()) {
+    std::cout << "NOTOKENS\n";
+    return 0;
+  }
+  const auto raw = analysis::MakeTypeRawPtr(analysis::RawPtrQual::Imm, analysis::MakeTypePrim("u8"));
+  for (const auto& token : result.output->tokens) {
+    switch (token.kind) {
+      case lexer::TokenKind::IntLiteral:
+      case lexer::TokenKind::FloatLiteral:
+      case lexer::TokenKind::CharLiteral:
+      case lexer::TokenKind::BoolLiteral:
+      case lexer::TokenKind::NullLiteral:
+      case lexer::TokenKind::StringLiteral:
+        break;
+      default:
+        continue;
+    }
+    std::cout << "C\t" << KindName(token.kind) << '\t' << Escape(token.lexeme);
+    for (const char* prim : kPrims) {
+      const auto bits = analysis::layout::EncodeConst(analysis::MakeTypePrim(prim), token);
+      if (bits) {
+        std::cout << '\t' << prim << '=';
+        PrintHex(bits);
+      }
+    }
+    if (const auto bits = analysis::layout::EncodeConst(raw, token)) {
+      std::cout << "\traw=";
+      PrintHex(bits);
+    }
+    if (token.kind == lexer::TokenKind::StringLiteral) {
+      std::cout << "\tstr=";
+      PrintHex(analysis::layout::DecodeStringLiteralBytes(token.lexeme));
+    }
+    std::cout << '\n';
+  }
+  return 0;
+}
+
+// A value of the type, chosen by the seed. The port's dump generates the same values.
+analysis::layout::Value GenValue(const analysis::ScopeContext& ctx, const analysis::TypeRef& type,
+                                 std::uint64_t seed, int depth) {
+  namespace L = analysis::layout;
+  using analysis::PtrState;
+  L::Value out;
+  out.node = L::UnitVal{};
+  if (!type || depth > 6) return out;
+  const std::uint64_t mixed = seed * 0x9E3779B97F4A7C15ull + 1;
+  if (const auto* prim = std::get_if<analysis::TypePrim>(&type->node)) {
+    const std::string& name = prim->name;
+    if (name == "bool") out.node = L::BoolVal{(seed & 1) != 0};
+    else if (name == "char") out.node = L::CharVal{static_cast<std::uint32_t>(0x41 + seed % 26)};
+    else if (name == "f16" || name == "f32" || name == "f64") out.node = L::FloatVal{name, mixed};
+    else if (name != "()" && name != "!") out.node = L::IntVal{name, core::UInt128FromU64(mixed)};
+    return out;
+  }
+  if (const auto* perm = std::get_if<analysis::TypePerm>(&type->node)) return GenValue(ctx, perm->base, seed, depth + 1);
+  if (const auto* refine = std::get_if<analysis::TypeRefine>(&type->node)) return GenValue(ctx, refine->base, seed, depth + 1);
+  if (const auto* ptr = std::get_if<analysis::TypePtr>(&type->node)) {
+    static const PtrState kStates[] = {PtrState::Valid, PtrState::Null, PtrState::Expired};
+    const PtrState state = ptr->state ? *ptr->state : kStates[seed % 3];
+    out.node = L::PtrVal{state, state == PtrState::Null ? 0 : 0x1000 + seed};
+    return out;
+  }
+  if (const auto* raw = std::get_if<analysis::TypeRawPtr>(&type->node)) {
+    out.node = L::RawPtrVal{raw->qual, 0x2000 + seed};
+    return out;
+  }
+  if (const auto* tuple = std::get_if<analysis::TypeTuple>(&type->node)) {
+    L::TupleVal value;
+    for (std::size_t i = 0; i < tuple->elements.size(); ++i) {
+      value.elements.push_back(GenValue(ctx, tuple->elements[i], seed + i + 1, depth + 1));
+    }
+    out.node = value;
+    return out;
+  }
+  if (const auto* array = std::get_if<analysis::TypeArray>(&type->node)) {
+    if (array->length > 16) return out;
+    L::ArrayVal value;
+    for (std::uint64_t i = 0; i < array->length; ++i) value.elements.push_back(GenValue(ctx, array->element, seed + i, depth + 1));
+    out.node = value;
+    return out;
+  }
+  if (std::holds_alternative<analysis::TypeSlice>(type->node)) {
+    out.node = L::SliceVal{L::RawPtrVal{analysis::RawPtrQual::Imm, 0x3000 + seed}, seed};
+    return out;
+  }
+  const auto range = [&](L::ValueRangeKind kind) {
+    L::ValueRangeVal value;
+    value.kind = kind;
+    value.lo = seed % 100;
+    value.hi = seed % 100 + 5;
+    out.node = value;
+    return out;
+  };
+  if (std::holds_alternative<analysis::TypeRange>(type->node)) return range(L::ValueRangeKind::Exclusive);
+  if (std::holds_alternative<analysis::TypeRangeInclusive>(type->node)) return range(L::ValueRangeKind::Inclusive);
+  if (std::holds_alternative<analysis::TypeRangeFrom>(type->node)) return range(L::ValueRangeKind::From);
+  if (std::holds_alternative<analysis::TypeRangeTo>(type->node)) return range(L::ValueRangeKind::To);
+  if (std::holds_alternative<analysis::TypeRangeToInclusive>(type->node)) return range(L::ValueRangeKind::ToInclusive);
+  if (std::holds_alternative<analysis::TypeRangeFull>(type->node)) return range(L::ValueRangeKind::Full);
+  if (const auto* path = analysis::AppliedTypePath(*type)) {
+    const auto* args = analysis::AppliedTypeArgs(*type);
+    const auto* decl = analysis::LookupEnumDecl(ctx, *path);
+    if (!decl || decl->variants.empty() || !args) return out;
+    const auto& variant = decl->variants[seed % decl->variants.size()];
+    L::EnumVal value;
+    value.variant = variant.name;
+    if (variant.payload_opt) {
+      if (const auto* tuple = std::get_if<ast::VariantPayloadTuple>(&*variant.payload_opt)) {
+        L::EnumPayloadTupleVal payload;
+        for (std::size_t i = 0; i < tuple->elements.size(); ++i) {
+          const auto member = L::EnumTuplePayloadMemberLayout(ctx, *decl, variant, *args, i);
+          payload.elements.push_back(GenValue(ctx, member ? member->type : nullptr, seed + i + 1, depth + 1));
+        }
+        value.payload = payload;
+      } else if (const auto* record = std::get_if<ast::VariantPayloadRecord>(&*variant.payload_opt)) {
+        L::EnumPayloadRecordVal payload;
+        std::uint64_t i = 0;
+        for (const auto& field : record->fields) {
+          const auto member = L::EnumRecordPayloadMemberLayout(ctx, *decl, variant, *args, field.name);
+          payload.fields.emplace_back(field.name, GenValue(ctx, member ? member->type : nullptr, seed + ++i, depth + 1));
+        }
+        value.payload = payload;
+      }
+    }
+    out.node = value;
+    return out;
+  }
+  if (std::holds_alternative<analysis::TypeDynamic>(type->node)) out.node = L::DynamicVal{seed, seed + 1};
+  else if (std::holds_alternative<analysis::TypeString>(type->node)) out.node = L::StringVal{};
+  else if (std::holds_alternative<analysis::TypeBytes>(type->node)) out.node = L::BytesVal{};
+  return out;
+}
+
+void DumpValues(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
+  namespace L = analysis::layout;
+  for (const auto& module : ctx.sigma.mods) {
+    std::cout << "X\t";
+    D(std::cout, module.path);
+    std::cout << '\n';
+    ctx.current_module = module.path;
+    const auto names = name_maps.find(analysis::PathKeyOf(module.path));
+    ctx.scopes = {analysis::Scope{},
+                  names == name_maps.end() ? analysis::Scope{} : names->second,
+                  analysis::UniverseBindings()};
+    std::vector<analysis::TypeRef> types;
+    for (const auto& written : CollectWrittenTypes(module)) {
+      const auto lowered = analysis::LowerType(ctx, written.type);
+      if (lowered.ok) types.push_back(lowered.type);
+    }
+    const std::size_t count = std::min<std::size_t>(types.size(), 80);
+    for (std::size_t i = 0; i < count; ++i) {
+      const auto& type = types[i];
+      std::cout << "V\t" << i << '\t' << Escape(analysis::TypeToString(type));
+      for (const std::uint64_t seed : {std::uint64_t{i}, std::uint64_t{i + 17}}) {
+        const auto bits = L::ValueBits(ctx, type, GenValue(ctx, type, seed, 0));
+        std::cout << '\t';
+        PrintHex(bits);
+        if (bits) std::cout << (L::ValidValue(ctx, type, *bits) ? " v" : " n");
+      }
+      // A value of the next type, which mostly is not a value of this one.
+      std::cout << '\t';
+      PrintHex(L::ValueBits(ctx, type, GenValue(ctx, types[(i + 1) % types.size()], i, 0)));
+      std::cout << '\t';
+      const auto size = L::SizeOf(ctx, type);
+      if (size && *size <= 4096) {
+        std::vector<std::uint8_t> zeros(*size, 0), ones(*size, 0xFF), mixed(*size), one(*size, 1);
+        for (std::size_t j = 0; j < mixed.size(); ++j) mixed[j] = static_cast<std::uint8_t>(j * 7 + 1);
+        std::vector<std::uint8_t> longer(*size + 1, 0);
+        std::cout << *size << (L::ValidValue(ctx, type, zeros) ? 'z' : '-') << (L::ValidValue(ctx, type, ones) ? 'f' : '-')
+                  << (L::ValidValue(ctx, type, mixed) ? 'm' : '-') << (L::ValidValue(ctx, type, one) ? 'o' : '-')
+                  << (L::ValidValue(ctx, type, longer) ? 'l' : '-');
+      } else {
+        std::cout << '-';
+      }
+      std::cout << '\n';
+    }
+  }
+}
+
 // Runs the reference front end on a project through name resolution, in the order the
 // driver does: compile-time pass, module visibility, name maps, module resolution. The
 // driver's check of compile-time procedure signatures (which needs the type checker) is
@@ -1471,7 +1681,9 @@ int DumpResolve(const std::vector<std::string>& block) {
     // As the driver does: the declaration tables are rebuilt from the resolved modules.
     ctx.sigma.mods = resolved.modules;
     analysis::PopulateSigma(ctx);
-    if (g_rel_mode) {
+    if (g_val_mode) {
+      DumpValues(ctx, name_maps.name_maps);
+    } else if (g_rel_mode) {
       DumpRelations(ctx, name_maps.name_maps);
     } else {
       DumpTypes(ctx, name_maps.name_maps);
@@ -1547,7 +1759,8 @@ int main(int argc, char** argv) {
     return DumpSigma();
   }
   g_rel_mode = argc >= 3 && std::string_view(argv[1]) == "relations";
-  g_types_mode = g_rel_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
+  g_val_mode = argc >= 3 && std::string_view(argv[1]) == "values";
+  g_types_mode = g_rel_mode || g_val_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
   const bool resolve_mode =
       g_types_mode || (argc >= 3 && std::string_view(argv[1]) == "resolve");
   if (resolve_mode || (argc >= 3 && std::string_view(argv[1]) == "comptime")) {
@@ -1585,7 +1798,8 @@ int main(int argc, char** argv) {
     return 0;
   }
   const bool ast_mode = argc >= 3 && std::string_view(argv[1]) == "ast";
-  if (ast_mode || (argc >= 3 && std::string_view(argv[1]) == "tokens")) {
+  const bool consts_mode = argc >= 3 && std::string_view(argv[1]) == "consts";
+  if (ast_mode || consts_mode || (argc >= 3 && std::string_view(argv[1]) == "tokens")) {
     // argv[2] is a list file: one "label<TAB>path" per line.
     std::ifstream list(argv[2]);
     std::string line;
@@ -1600,10 +1814,11 @@ int main(int argc, char** argv) {
       std::cout.flush();
       const pid_t child = fork();
       if (child == 0) {
-        alarm(3);
+        // Encoding every literal of a large file takes longer than lexing it.
+        alarm(consts_mode ? 300 : 3);
         int rc = 0;
         try {
-          rc = ast_mode ? DumpAst(label, path) : DumpTokens(label, path);
+          rc = ast_mode ? DumpAst(label, path) : consts_mode ? DumpConsts(label, path) : DumpTokens(label, path);
         } catch (const char* message) {
           std::cout << "\nCRASH\t" << message << '\n';
         }

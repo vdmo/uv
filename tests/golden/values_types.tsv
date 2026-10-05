@@ -1,0 +1,997 @@
+F	/w/target/typecases/array_len_bad/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	[i32; IdentifierExpr]	x6a6c747c7fe8befb9464097ba9e053fa v	xcfa966f0e425b16ff9a1fbee0e1e466e v	-	16zfmo-
+V	6	[i32; LiteralExpr]	-	-	-	-
+V	7	i32	x9464097b v	xf9a1fbee v	x9464097b	4zfmo-
+F	/w/target/typecases/array_len_expr/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	[i32; BinaryExpr]	x6a6c747c7fe8befb9464097ba9e053fa v	xcfa966f0e425b16ff9a1fbee0e1e466e v	x6a6c747c7fe8befb9464097ba9e053fa	16zfmo-
+V	6	[i32; LiteralExpr]	x7fe8befb9464097ba9e053fabe5c9e79 v	xe425b16ff9a1fbee0e1e466e239a90ed v	x7fe8befb9464097ba9e053fabe5c9e79	16zfmo-
+V	7	[i32; BinaryExpr]	x9464097ba9e053fabe5c9e79d3d8e8f8 v	xf9a1fbee0e1e466e239a90ed3816db6c v	x9464097ba9e053fabe5c9e79d3d8e8f8	16zfmo-
+V	8	[i32; CallExpr]	xa9e053fabe5c9e79d3d8e8f8e8543378 v	x0e1e466e239a90ed3816db6c4d9225ec v	-	16zfmo-
+V	9	i32	xbe5c9e79 v	x239a90ed v	xbe5c9e79	4zfmo-
+F	/w/target/typecases/array_len_qualified/Ultraviolet.toml
+X	["App"]
+V	0	[i32; PathExpr]	x01000000167c4a7f2bf894fe4074df7d55f029fd6a6c747c v	x663df2737bb93cf390358772a5b1d1f1ba2d1c71cfa966f0 v	x01000000167c4a7f2bf894fe4074df7d55f029fd6a6c747c	24zfmo-
+V	1	[i32; PathExpr]	x167c4a7f2bf894fe4074df7d55f029fd6a6c747c7fe8befb v	x7bb93cf390358772a5b1d1f1ba2d1c71cfa966f0e425b16f v	-	24zfmo-
+V	2	[i32; PathExpr]	x2bf894fe4074df7d55f029fd6a6c747c7fe8befb9464097ba9e053fa v	x90358772a5b1d1f1ba2d1c71cfa966f0e425b16ff9a1fbee0e1e466e v	-	28zfmo-
+V	3	[i32; LiteralExpr]	x4074df7d55f029fd6a6c747c7fe8befb9464097ba9e053fa v	xa5b1d1f1ba2d1c71cfa966f0e425b16ff9a1fbee0e1e466e v	-	24zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+X	["App" "Other"]
+V	0	i32	x01000000 v	x663df273 v	-	4zfmo-
+V	1	App::Other::Remote	-	-	-	4-----
+V	2	Future<App::Other::Remote>	-	-	-	24-----
+F	/w/target/typecases/array_len_self_ref/Ultraviolet.toml
+CRASH	signal
+F	/w/target/typecases/array_len_shadowed/Ultraviolet.toml
+X	["App"]
+V	0	[i32; IdentifierExpr]	x01000000167c4a7f v	x663df2737bb93cf3 v	-	8zfmo-
+V	1	[i32; PathExpr]	x167c4a7f2bf894fe4074df7d55f029fd6a6c747c7fe8befb v	x7bb93cf390358772a5b1d1f1ba2d1c71cfa966f0e425b16f v	-	24zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+X	["App" "Other"]
+V	0	i32	x01000000 v	x663df273 v	-	4zfmo-
+V	1	App::Other::Remote	-	-	-	4-----
+V	2	Future<App::Other::Remote>	-	-	-	24-----
+F	/w/target/typecases/array_len_static/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	[i32; IdentifierExpr]	x6a6c747c7fe8befb9464097ba9e053fabe5c9e79d3d8e8f8e8543378fdd07df7 v	xcfa966f0e425b16ff9a1fbee0e1e466e239a90ed3816db6c4d9225ec620e706b v	x6a6c747c7fe8befb9464097ba9e053fabe5c9e79d3d8e8f8e8543378fdd07df7	32zfmo-
+V	6	[i32; IdentifierExpr]	x7fe8befb9464097ba9e053fabe5c9e79d3d8e8f8e8543378fdd07df7124dc876 v	xe425b16ff9a1fbee0e1e466e239a90ed3816db6c4d9225ec620e706b778abaea v	x7fe8befb9464097ba9e053fabe5c9e79d3d8e8f8e8543378fdd07df7124dc876	32zfmo-
+V	7	[i32; LiteralExpr]	x9464097ba9e053fabe5c9e79d3d8e8f8e8543378fdd07df7124dc87627c912f6 v	xf9a1fbee0e1e466e239a90ed3816db6c4d9225ec620e706b778abaea8c06056a v	x9464097ba9e053fabe5c9e79d3d8e8f8e8543378fdd07df7124dc87627c912f6	32zfmo-
+V	8	[i32; IdentifierExpr]	xa9e053fabe5c9e79d3d8e8f8e8543378fdd07df7124dc87627c912f63c455d75 v	x0e1e466e239a90ed3816db6c4d9225ec620e706b778abaea8c06056aa1824fe9 v	-	32zfmo-
+V	9	[u8; IdentifierExpr]	xbed3e8fd12273c51 v	x23384d62778ca1b6 v	-	8zfmo-
+V	10	i32	xd3d8e8f8 v	x3816db6c v	xd3d8e8f8	4zfmo-
+F	/w/target/typecases/array_len_using/Ultraviolet.toml
+X	["App"]
+V	0	[i32; IdentifierExpr]	x01000000167c4a7f2bf894fe4074df7d55f029fd6a6c747c v	x663df2737bb93cf390358772a5b1d1f1ba2d1c71cfa966f0 v	-	24zfmo-
+V	1	[i32; IdentifierExpr]	x167c4a7f2bf894fe4074df7d55f029fd6a6c747c7fe8befb9464097b v	x7bb93cf390358772a5b1d1f1ba2d1c71cfa966f0e425b16ff9a1fbee v	-	28zfmo-
+V	2	[i32; LiteralExpr]	x2bf894fe4074df7d55f029fd6a6c747c7fe8befb9464097b v	x90358772a5b1d1f1ba2d1c71cfa966f0e425b16ff9a1fbee v	-	24zfmo-
+V	3	[i32; LiteralExpr]	x4074df7d55f029fd6a6c747c7fe8befb9464097ba9e053fabe5c9e79 v	xa5b1d1f1ba2d1c71cfa966f0e425b16ff9a1fbee0e1e466e239a90ed v	-	28zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+X	["App" "Other"]
+V	0	i32	x01000000 v	x663df273 v	-	4zfmo-
+V	1	App::Other::Remote	-	-	-	4-----
+V	2	Future<App::Other::Remote>	-	-	-	24-----
+F	/w/target/typecases/arrays_slices/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	[i32; LiteralExpr]	x6a6c747c7fe8befb9464097ba9e053fa v	xcfa966f0e425b16ff9a1fbee0e1e466e v	x6a6c747c7fe8befb9464097ba9e053fa	16zfmo-
+V	6	[i32; LiteralExpr]	x7fe8befb9464097ba9e053fabe5c9e79 v	xe425b16ff9a1fbee0e1e466e239a90ed v	x7fe8befb9464097ba9e053fabe5c9e79	16zfmo-
+V	7	[i32; LiteralExpr]	x9464097ba9e053fabe5c9e79d3d8e8f8 v	xf9a1fbee0e1e466e239a90ed3816db6c v	-	16zfmo-
+V	8	[i32; LiteralExpr]	xa9e053fabe5c9e79d3d8e8f8e8543378fdd07df7 v	x0e1e466e239a90ed3816db6c4d9225ec620e706b v	-	20zfmo-
+V	9	[bool; LiteralExpr]	x01000100 v	x00010001 v	-	4z--o-
+V	10	[[i32; LiteralExpr]; LiteralExpr]	xd3d8e8f8e8543378e8543378fdd07df7fdd07df7124dc876 v	x3816db6c4d9225ec4d9225ec620e706b620e706b778abaea v	-	24zfmo-
+V	11	[i32]	x0b300000000000000b00000000000000 v	x1c300000000000001c00000000000000 v	x0b300000000000000b00000000000000	16zfmo-
+V	12	[[i32]]	x0c300000000000000c00000000000000 v	x1d300000000000001d00000000000000 v	-	16zfmo-
+V	13	[(i32, bool); LiteralExpr]	x27c912f6010000003c455d7500000000 v	x8c06056a00000000a1824fe901000000 v	-	16z----
+V	14	[i32; LiteralExpr]	x v	x v	-	0zfmo-
+V	15	[i32; LiteralExpr]	-	-	-	4000zfmo-
+V	16	[i32; LiteralExpr]	x51c1a7f4663df2737bb93cf390358772 v	xb6fe9968cb7ae4e7e0f62e67f57279e6 v	x51c1a7f4663df2737bb93cf390358772	16zfmo-
+V	17	[i32; LiteralExpr]	x663df2737bb93cf390358772a5b1d1f1 v	xcb7ae4e7e0f62e67f57279e60aefc365 v	-	16zfmo-
+V	18	i32	x7bb93cf3 v	xe0f62e67 v	x7bb93cf3	4zfmo-
+F	/w/target/typecases/async_bad_arity/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Sequence<i32, bool>	-	-	-	-
+V	6	Stream<i32>	-	-	-	24-----
+V	7	Pipe<i32>	-	-	-	-
+V	8	Exchange<i32, bool>	-	-	-	-
+V	9	Future<i32, bool, char>	-	-	-	-
+V	10	Async<i32, bool, char, u8, u16>	-	-	-	24-----
+V	11	i32	xe8543378 v	x4d9225ec v	xe8543378	4zfmo-
+F	/w/target/typecases/async_builtin/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Async<i32>	-	-	-	24-----
+V	6	Async<i32, bool>	-	-	-	24-----
+V	7	Async<i32, bool, char>	-	-	-	24-----
+V	8	Async<i32, bool, char, u8>	-	-	-	24-----
+V	9	Future<i32>	-	-	-	24-----
+V	10	Future<i32, bool>	-	-	-	24-----
+V	11	Sequence<i32>	-	-	-	24-----
+V	12	Stream<i32, bool>	-	-	-	24-----
+V	13	Pipe<i32, bool>	-	-	-	24-----
+V	14	Exchange<i32>	-	-	-	24-----
+V	15	Async<i32>@Suspended	-	-	-	24-----
+V	16	Async<i32, bool, char, u8>@Completed	-	-	-	24-----
+V	17	Async<i32>@Failed	-	-	-	24-----
+V	18	unique Future<i32>	-	-	-	24-----
+V	19	Future<Future<i32>>	-	-	-	32-----
+V	20	Sequence<(i32, bool)>	-	-	-	24-----
+V	21	i32	xba2d1c71 v	x1f6b0ee5 v	xba2d1c71	4zfmo-
+F	/w/target/typecases/async_user_alias/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Future<i32>	-	-	-	24-----
+V	6	Future<TValue, bool>	-	-	-	24-----
+V	7	App::Task	-	-	-	24-----
+V	8	App::Job<TValue>	-	-	-	24-----
+V	9	(i32, bool)	xd3d8e8f801000000 v	x3816db6c00000000 v	-	8z----
+V	10	Stream<TSecond, TFirst>	-	-	-	-
+V	11	App::Job<u8>	-	-	-	24-----
+V	12	App::Task	-	-	-	24-----
+V	13	App::Job<i32>	-	-	-	24-----
+V	14	App::Job<bool>	-	-	-	24-----
+V	15	App::Indirect	-	-	-	24-----
+V	16	App::Twice<i32>	-	-	-	24-----
+V	17	App::NotAsync	-	-	-	8-----
+V	18	App::Mixed<i32, bool>	-	-	-	24-----
+V	19	App::Defaulted	-	-	-	24-----
+V	20	App::Job<i32, bool>	-	-	-	-
+V	21	i32	xba2d1c71 v	x1f6b0ee5 v	xba2d1c71	4zfmo-
+F	/w/target/typecases/builtin_paths/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Context	-	-	-	96-----
+V	6	File	-	-	-	16-----
+V	7	File@Read	-	-	-	8-----
+V	8	DirIter@Open	-	-	-	8-----
+V	9	IoError	x02 n	x05 n	-	1-----
+V	10	Outcome<i32, IoError>	x00000000e8543378 n	x0100000000000000 n	-	8-----
+V	11	Duration	-	-	-	16-----
+V	12	Region	-	-	-	16-----
+V	13	Region@Active	-	-	-	16-----
+V	14	RegionOptions	-	-	-	40-----
+V	15	CancelToken@Active	-	-	-	8-----
+V	16	Spawned<i32>@Ready	-	-	-	8-----
+V	17	Tracked<i32, bool>	-	-	-	8-----
+V	18	Priority	x00 n	x02 n	-	1-----
+V	19	CpuSet	-	-	-	8-----
+V	20	AllocationError	x0000000000000000ba2d1c7137fc8cfa n	x01000000000000001f6b0ee588113c7c n	-	16-----
+V	21	TimeError	x01 n	x03 n	-	1-----
+V	22	FileKind	x01 n	x00 n	-	1-----
+V	23	DirEntry	-	-	-	56-----
+V	24	i32	xf9a1fbee v	x5edfed62 v	xf9a1fbee	4zfmo-
+F	/w/target/typecases/closures/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	|| -> i32	-	-	-	16-----
+V	6	|i32| -> i32	-	-	-	16-----
+V	7	|i32, bool| -> ()	-	-	-	16-----
+V	8	|move i32| -> i32	-	-	-	16-----
+V	9	|| -> i32	-	-	-	16-----
+V	10	|| -> i32	-	-	-	16-----
+V	11	|| -> i32	-	-	-	16-----
+V	12	|| -> || -> i32	-	-	-	16-----
+V	13	i32	x124dc876 v	x778abaea v	x124dc876	4zfmo-
+F	/w/target/typecases/dynamic_opaque/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	$App::Named	x05000000000000000600000000000000 v	x16000000000000001700000000000000 v	x05000000000000000600000000000000	16zfmo-
+V	6	$App::Named	x06000000000000000700000000000000 v	x17000000000000001800000000000000 v	x06000000000000000700000000000000	16zfmo-
+V	7	$IO	x07000000000000000800000000000000 v	x18000000000000001900000000000000 v	x07000000000000000800000000000000	16zfmo-
+V	8	$Missing	x08000000000000000900000000000000 v	x19000000000000001a00000000000000 v	-	16zfmo-
+V	9	opaque App::Named	-	-	-	-
+V	10	opaque App::Named	-	-	-	-
+V	11	$Drop	x0b000000000000000c00000000000000 v	x1c000000000000001d00000000000000 v	-	16zfmo-
+V	12	i32	xfdd07df7 v	x620e706b v	xfdd07df7	4zfmo-
+F	/w/target/typecases/fields/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	i32	x6a6c747c v	xcfa966f0 v	-	4zfmo-
+V	6	bool	x00 v	x01 v	-	1z-mo-
+V	7	char	x48000000 v	x59000000 v	-	4z----
+V	8	[i32; LiteralExpr]	xa9e053fabe5c9e79 v	x0e1e466e239a90ed v	-	8zfmo-
+V	9	App::Point	-	-	-	8-----
+V	10	bool	x00 v	x01 v	-	1z-mo-
+V	11	TValue	-	-	-	-
+V	12	TOther	-	-	-	-
+V	13	(TValue, TOther)	-	-	-	-
+V	14	i32	x27c912f6 v	x8c06056a v	x27c912f6	4zfmo-
+F	/w/target/typecases/functions/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	() -> i32	-	-	-	8-----
+V	6	(i32) -> i32	-	-	-	8-----
+V	7	(i32, bool) -> ()	-	-	-	8-----
+V	8	(move i32) -> i32	-	-	-	8-----
+V	9	(i32) -> (bool) -> i32	-	-	-	8-----
+V	10	((i32) -> i32) -> i32	-	-	-	8-----
+V	11	() -> ()	-	-	-	8-----
+V	12	(App::Point) -> App::Shape	-	-	-	8-----
+V	13	() -> !	-	-	-	8-----
+V	14	i32	x27c912f6 v	x8c06056a v	x27c912f6	4zfmo-
+F	/w/target/typecases/generic_alias_instantiation/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	TValue	-	-	-	-
+V	6	(TSecond, TFirst)	-	-	-	-
+V	7	[App::Same<TValue>]	x07300000000000000700000000000000 v	x18300000000000001800000000000000 v	-	16zfmo-
+V	8	i32	xa9e053fa v	x0e1e466e v	-	4zfmo-
+V	9	bool | i32 | TValue	-	-	-	-
+V	10	App::Same<i32>	-	-	-	4-----
+V	11	App::Swap<i32, bool>	-	-	-	8-----
+V	12	App::Nest<i32>	-	-	-	16-----
+V	13	App::Fixed<i32>	-	-	-	4-----
+V	14	App::Collapse<i32>	-	-	-	8-----
+V	15	i32	x3c455d75 v	xa1824fe9 v	x3c455d75	4zfmo-
+F	/w/target/typecases/generic_defaults/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	i32	x6a6c747c v	xcfa966f0 v	-	4zfmo-
+V	6	TValue	-	-	-	-
+V	7	TFirst	-	-	-	-
+V	8	TFirst	-	-	-	-
+V	9	TSecond	-	-	-	-
+V	10	(TFirst, bool)	-	-	-	-
+V	11	[TSecond]	x0b300000000000000b00000000000000 v	x1c300000000000001c00000000000000 v	-	16zfmo-
+V	12	TFirst	-	-	-	-
+V	13	TSecond	-	-	-	-
+V	14	TThird	-	-	-	-
+V	15	Ptr<i32>@Valid	x0f10000000000000 v	x2010000000000000 v	-	8-fmo-
+V	16	* mut u8	x1020000000000000 v	x2120000000000000 v	-	8zfmo-
+V	17	string@View	x00000000000000000000000000000000 v	x00000000000000000000000000000000 v	-	16zfmo-
+V	18	TValue	-	-	-	-
+V	19	TOther	-	-	-	-
+V	20	TLast	-	-	-	-
+V	21	[i32; LiteralExpr]	xba2d1c71cfa966f0e425b16ff9a1fbee v	x1f6b0ee534e758644963a3e35edfed62 v	-	16zfmo-
+V	22	App::Wrapper<bool>	-	-	-	1-----
+V	23	(i32) -> bool	-	-	-	8-----
+V	24	$App::Named	x18000000000000001900000000000000 v	x29000000000000002a00000000000000 v	-	16zfmo-
+V	25	TValue	-	-	-	-
+V	26	TOther	-	-	-	-
+V	27	TFunc	-	-	-	-
+V	28	TDyn	-	-	-	-
+V	29	TValue	-	-	-	-
+V	30	Range<i32>	x1e00000023000000 v	x2f00000034000000 v	-	8zfmo-
+V	31	bool | i32	-	-	-	8-----
+V	32	App::Door@Open	-	-	-	4-----
+V	33	i32 where { ... }	-	-	-	4-----
+V	34	TValue	-	-	-	-
+V	35	TUnion	-	-	-	-
+V	36	TModal	-	-	-	-
+V	37	TRefined	-	-	-	-
+V	38	i32	x1f6b0ee5 v	x84a80059 v	x1f6b0ee5	4zfmo-
+F	/w/target/typecases/generic_instantiation/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	TFirst	-	-	-	-
+V	6	(TFirst, TSecond)	-	-	-	-
+V	7	[TFirst; LiteralExpr]	-	-	-	-
+V	8	[TSecond]	x08300000000000000800000000000000 v	x19300000000000001900000000000000 v	-	16zfmo-
+V	9	Ptr<TFirst>@Valid	x0910000000000000 v	x1a10000000000000 v	-	8-fmo-
+V	10	* mut TSecond	x0a20000000000000 v	x1b20000000000000 v	-	8zfmo-
+V	11	TFirst | TSecond	-	-	-	-
+V	12	i32 | TFirst	-	-	-	-
+V	13	(TFirst) -> TSecond	-	-	-	8-----
+V	14	|TFirst| -> TSecond	-	-	-	16-----
+V	15	(App::Holder<TSecond, TFirst>, i32)	-	-	-	-
+V	16	unique TFirst	-	-	-	-
+V	17	TFirst where { ... }	-	-	-	-
+V	18	(Range<TFirst>, i32)	-	-	-	-
+V	19	[App::Holder<TFirst, TFirst>]	x13300000000000001300000000000000 v	x24300000000000002400000000000000 v	-	16zfmo-
+V	20	App::Point	-	-	-	8-----
+V	21	i32	xba2d1c71 v	x1f6b0ee5 v	xba2d1c71	4zfmo-
+F	/w/target/typecases/layout_async/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Future<u128>	-	-	-	32-----
+V	6	Stream<TValue, u8>	-	-	-	-
+V	7	Async<u8>	-	-	-	24-----
+V	8	Async<u64>	-	-	-	24-----
+V	9	Async<u128>	-	-	-	48-----
+V	10	Async<(), (), u128>	-	-	-	32-----
+V	11	Async<(), (), (), u128>	-	-	-	32-----
+V	12	Async<u8, u8, [u8; LiteralExpr], [u8; LiteralExpr]>	-	-	-	64-----
+V	13	Future<u8>	-	-	-	24-----
+V	14	Future<[u64; LiteralExpr], u8>	-	-	-	40-----
+V	15	Sequence<u128>	-	-	-	48-----
+V	16	Stream<u8, [u8; LiteralExpr]>	-	-	-	40-----
+V	17	Pipe<u8, u128>	-	-	-	48-----
+V	18	Exchange<u128>	-	-	-	48-----
+V	19	Async<u8>@Suspended	-	-	-	24-----
+V	20	Async<u8, u8, u8, u8>@Failed	-	-	-	24-----
+V	21	App::Job	-	-	-	32-----
+V	22	App::Job2<u128>	-	-	-	48-----
+V	23	Spawned<u8>	-	-	-	8-----
+V	24	Spawned<u8>@Ready	-	-	-	8-----
+V	25	Tracked<u8, u8>	-	-	-	8-----
+V	26	CancelToken	-	-	-	16-----
+V	27	CancelToken@Active	-	-	-	8-----
+V	28	Region	-	-	-	16-----
+V	29	Region@Active	-	-	-	16-----
+V	30	File	-	-	-	16-----
+V	31	File@Read	-	-	-	8-----
+V	32	DirIter	-	-	-	16-----
+V	33	Context	-	-	-	96-----
+V	34	Outcome<u8, u64>	x0000000000000000e000000000000000 n	x0100000000000000453421dbadb94423 n	-	16-----
+V	35	Duration	-	-	-	16-----
+V	36	RegionOptions	-	-	-	40-----
+V	37	i32	x0aefc365 v	x6f2cb6d9 v	x0aefc365	4zfmo-
+F	/w/target/typecases/layout_enum_attrs/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	u8	x6a v	xcf v	x6a	1zfmo-
+V	6	u8	x7f v	xe4 v	-	1zfmo-
+V	7	u32	x9464097b v	xf9a1fbee v	-	4zfmo-
+V	8	i32	xa9e053fa v	x0e1e466e v	xa9e053fa	4zfmo-
+F	/w/target/typecases/layout_enum_bad_discs/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	App::Dup	-	-	-	-
+V	6	App::MaxThenMore	-	-	-	-
+V	7	App::Dup	-	-	-	-
+V	8	u8	xa9 v	x0e v	-	1zfmo-
+V	9	i32	xbe5c9e79 v	x239a90ed v	xbe5c9e79	4zfmo-
+F	/w/target/typecases/layout_enum_generic/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	TValue	-	-	-	-
+V	6	bool	x00 v	x01 v	-	1z-mo-
+V	7	TLeft	-	-	-	-
+V	8	TRight	-	-	-	-
+V	9	TLeft	-	-	-	-
+V	10	TRight	-	-	-	-
+V	11	(App::Maybe<u8>;)	x0000 n	x0177 n	x0000	2-----
+V	12	(App::Maybe<u64>;)	x010000000000000027c912f624a808a7 n	x00000000000000000000000000000000 n	-	16-----
+V	13	(App::Either<u8>;)	x023c00 n	x010000 n	-	3-----
+V	14	(App::Either<u64, u16>;)	x000000000000000051c1a7f4979b77e30000000000000000 n	x0200000000000000b6fe9968e9b02665cb7a000000000000 n	-	24-----
+V	15	[App::Maybe<App::Maybe<u8>>]	x0f300000000000000f00000000000000 v	x20300000000000002000000000000000 v	-	16zfmo-
+V	16	App::Maybe<u32>	x0000000000000000 n	x01000000cb7ae4e7 n	-	8-----
+V	17	App::Either<u8, u8>	x027b90 n	x01e000 n	-	3-----
+V	18	App::Maybe<i32, bool>	-	-	-	-
+V	19	i32	x90358772 v	xf57279e6 v	x90358772	4zfmo-
+F	/w/target/typecases/layout_enums/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	u8	x6a v	xcf v	x6a	1zfmo-
+V	6	u8	x7f v	xe4 v	-	1zfmo-
+V	7	u32	x9464097b v	xf9a1fbee v	-	4zfmo-
+V	8	u16	xa9e0 v	x0e1e v	-	2zfmo-
+V	9	u64	xbe5c9e798547f38f v	x239a90edd65ca211 v	-	8zfmo-
+V	10	string@View	x00000000000000000000000000000000 v	x00000000000000000000000000000000 v	-	16zfmo-
+V	11	u128	xe8543378f83a62cc0000000000000000 v	x4d9225ec4950114e0000000000000000 v	-	16zfmo-
+V	12	u8	xfd v	x62 v	-	1zfmo-
+V	13	i32	x124dc876 v	x778abaea v	-	4zfmo-
+V	14	Ptr<App::Recursive>@Valid	x0e10000000000000 v	x1f10000000000000 v	-	8-fmo-
+V	15	App::Direct	-	x000000000000000000000000000000000000000000000000 n	-	16-----
+V	16	i32	x51c1a7f4 v	xb6fe9968 v	x51c1a7f4	4zfmo-
+F	/w/target/typecases/layout_generic_records/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	TValue	-	-	-	-
+V	6	u8	x7f v	xe4 v	-	1zfmo-
+V	7	u64	x9464097b12548453 v	xf9a1fbee636933d5 v	-	8zfmo-
+V	8	TFirst	-	-	-	-
+V	9	TSecond	-	-	-	-
+V	10	(App::Box<u8>;)	-	-	-	2-----
+V	11	(App::Box<u64>;)	-	-	-	16-----
+V	12	(App::Pair<u8>;)	-	-	-	16-----
+V	13	(App::Pair<u8, u8>;)	-	-	-	2-----
+V	14	(App::Box<App::Box<u16>>;)	-	-	-	6-----
+V	15	(App::Box<App::Pair<u8, u16>>;)	-	-	-	6-----
+V	16	(App::Pair<u8, u8, u8>;)	-	-	-	-
+V	17	App::Box	-	-	-	-
+V	18	App::Box<[u32; LiteralExpr]>	-	-	-	16-----
+V	19	App::Pair<(), ()>	-	-	-	0-----
+V	20	App::Box<TValue>	-	-	-	-
+V	21	App::Alias<u64>	-	-	-	16-----
+V	22	App::Alias<u8, u8>	-	-	-	-
+V	23	i32	xe425b16f v	x4963a3e3 v	xe425b16f	4zfmo-
+F	/w/target/typecases/layout_misc/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	usize	x6a6c747c9f601517 v	xcfa966f0f075c498 v	-	8zfmo-
+V	6	App::Count	-	-	-	8-----
+V	7	GpuPtr<i32, Global>	-	-	-	8-----
+V	8	GpuPtr<i32, Shared>	-	-	-	8-----
+V	9	GpuPtr<i32, Private>	-	-	-	8-----
+V	10	Range<u8>	x0a0f v	x1b20 v	-	2zfmo-
+V	11	RangeInclusive<u64>	x0b000000000000001000000000000000 v	x1c000000000000002100000000000000 v	-	16zfmo-
+V	12	RangeFrom<u16>	x0c00 v	x1d00 v	-	2zfmo-
+V	13	RangeTo<u32>	x12000000 v	x23000000 v	-	4zfmo-
+V	14	RangeToInclusive<u128>	x13000000000000000000000000000000 v	x24000000000000000000000000000000 v	-	16zfmo-
+V	15	RangeFull	x v	x v	-	0zfmo-
+V	16	unique Range<u8>	x1015 v	x2126 v	-	2zfmo-
+V	17	i32 where { ... }	-	-	-	4-----
+V	18	opaque App::Named	-	-	-	-
+V	19	App::Count	-	-	-	8-----
+V	20	App::Deep	-	-	-	8-----
+V	21	!	-	-	-	0-----
+V	22	()	x v	x v	-	0zfmo-
+V	23	(!, u8)	-	-	-	1-----
+V	24	[!; LiteralExpr]	-	-	-	0-----
+V	25	[u8; LiteralExpr]	x v	x v	-	0zfmo-
+V	26	[u64; LiteralExpr]	-	-	-	-
+V	27	$App::Named	x1b000000000000001c00000000000000 v	x2c000000000000002d00000000000000 v	-	16zfmo-
+V	28	[$App::Named; LiteralExpr]	x1c000000000000001d000000000000001d000000000000001e00000000000000 v	x2d000000000000002e000000000000002e000000000000002f00000000000000 v	-	32zfmo-
+V	29	i32	x620e706b v	xc74b62df v	x620e706b	4zfmo-
+F	/w/target/typecases/layout_modals/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	u32	x6a6c747c v	xcfa966f0 v	-	4zfmo-
+V	6	u64	x7fe8befb58da4cb5 v	xe425b16faaeffb36 v	-	8zfmo-
+V	7	bool	x01 v	x00 v	-	1z-mo-
+V	8	Ptr<i32>@Valid	x0810000000000000 v	x1910000000000000 v	x0810000000000000	8-fmo-
+V	9	Ptr<i32>@Valid	x0910000000000000 v	x1a10000000000000 v	x0910000000000000	8-fmo-
+V	10	Ptr<i32>@Valid	x0a10000000000000 v	x1b10000000000000 v	x0a10000000000000	8-fmo-
+V	11	Ptr<u8>@Valid	x0b10000000000000 v	x1c10000000000000 v	x0b10000000000000	8-fmo-
+V	12	Ptr<i32>@Valid	x0c10000000000000 v	x1d10000000000000 v	-	8-fmo-
+V	13	u8	x12 v	x77 v	-	1zfmo-
+V	14	Ptr<i32>	x0e10000000000000 v	x0000000000000000 v	x0e10000000000000	8zfmo-
+V	15	Ptr<i32>@Valid	x0f10000000000000 v	x2010000000000000 v	-	8-fmo-
+V	16	i32	x51c1a7f4 v	xb6fe9968 v	-	4zfmo-
+V	17	u16	x663d v	xcb7a v	-	2zfmo-
+V	18	TValue	-	-	-	-
+V	19	App::Two	-	-	-	24-----
+V	20	App::Two@A	-	-	-	4-----
+V	21	App::Two@B	-	-	-	16-----
+V	22	App::Niche	-	-	-	8-----
+V	23	App::Niche@Some	-	-	-	8-----
+V	24	App::Niche@None	-	-	-	0-----
+V	25	(App::Generic<u64>;)	-	-	-	16-----
+V	26	(App::Generic<u8>@Full;)	-	-	-	1-----
+V	27	App::Two@Missing	-	-	-	-
+V	28	App::AllEmpty	-	-	-	1-----
+V	29	i32	x620e706b v	xc74b62df v	x620e706b	4zfmo-
+F	/w/target/typecases/layout_record_attrs/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	u8	x6a v	xcf v	-	1zfmo-
+V	6	u32	x7fe8befb v	xe425b16f v	-	4zfmo-
+V	7	u16	x9464 v	xf9a1 v	-	2zfmo-
+V	8	u8	xa9 v	x0e v	xa9	1zfmo-
+V	9	u8	xbe v	x23 v	-	1zfmo-
+V	10	u32	xd3d8e8f8 v	x3816db6c v	-	4zfmo-
+V	11	u8	xe8 v	x4d v	-	1zfmo-
+V	12	u32	xfdd07df7 v	x620e706b v	-	4zfmo-
+V	13	u8	x12 v	x77 v	-	1zfmo-
+V	14	u32	x27c912f6 v	x8c06056a v	-	4zfmo-
+V	15	u64	x3c455d75de214045 v	xa1824fe92f37efc6 v	-	8zfmo-
+V	16	u8	x51 v	xb6 v	x51	1zfmo-
+V	17	u8	x66 v	xcb v	x66	1zfmo-
+V	18	u8	x7b v	xe0 v	x7b	1zfmo-
+V	19	u8	x90 v	xf5 v	x90	1zfmo-
+V	20	u8	xa5 v	x0a v	-	1zfmo-
+V	21	App::Packed	-	-	-	7-----
+V	22	App::Aligned	-	-	-	16-----
+V	23	i32	xe425b16f v	x4963a3e3 v	xe425b16f	4zfmo-
+F	/w/target/typecases/layout_records/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	u8	x6a v	xcf v	x6a	1zfmo-
+V	6	u8	x7f v	xe4 v	x7f	1zfmo-
+V	7	u8	x94 v	xf9 v	x94	1zfmo-
+V	8	u8	xa9 v	x0e v	-	1zfmo-
+V	9	u32	xbe5c9e79 v	x239a90ed v	-	4zfmo-
+V	10	u8	xd3 v	x38 v	-	1zfmo-
+V	11	u64	xe8543378f83a62cc v	x4d9225ec4950114e v	-	8zfmo-
+V	12	u16	xfdd0 v	x620e v	-	2zfmo-
+V	13	u128	x124dc8766b2ed1080000000000000000 v	x778abaeabc43808a0000000000000000 v	-	16zfmo-
+V	14	bool	x00 v	x01 v	-	1z-mo-
+V	15	App::Padded	-	-	-	32-----
+V	16	u8	x51 v	xb6 v	-	1zfmo-
+V	17	App::Point	-	-	-	8-----
+V	18	string	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000	32zfmo-
+V	19	string@View	x00000000000000000000000000000000 v	x00000000000000000000000000000000 v	x00000000000000000000000000000000	16zfmo-
+V	20	string@Managed	x000000000000000000000000000000000000000000000000 v	x000000000000000000000000000000000000000000000000 v	-	24zfmo-
+V	21	bytes	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000	32zfmo-
+V	22	bytes@View	x00000000000000000000000000000000 v	x00000000000000000000000000000000 v	x00000000000000000000000000000000	16zfmo-
+V	23	bytes@Managed	x000000000000000000000000000000000000000000000000 v	x000000000000000000000000000000000000000000000000 v	-	24zfmo-
+V	24	(Ptr<i32>@Valid;)	x1910000000000000 v	x2a10000000000000 v	-	8-fmo-
+V	25	* mut u8	x1920000000000000 v	x2a20000000000000 v	-	8zfmo-
+V	26	(i32) -> i32	-	-	-	8-----
+V	27	|i32| -> i32	-	-	-	16-----
+V	28	[i32]	x1c300000000000001c00000000000000 v	x2d300000000000002d00000000000000 v	-	16zfmo-
+V	29	$App::Named	x1d000000000000001e00000000000000 v	x2e000000000000002f00000000000000 v	-	16zfmo-
+V	30	usize	x778abaeabc43808a v	xdcc7ac5e0e592f0c v	-	8zfmo-
+V	31	()	x v	x v	-	0zfmo-
+V	32	char	x47000000 v	x58000000 v	-	4z----
+V	33	f16	xb6fe v	x1b3c v	-	2zfmo-
+V	34	[u8; LiteralExpr]	xcbe0f5 v	x30455a v	-	3zfmo-
+V	35	[u32; LiteralExpr]	xe0f62e67f57279e6 v	x453421db5ab06b5a v	-	8zfmo-
+V	36	[App::Padded; LiteralExpr]	-	-	-	64-----
+V	37	[(); LiteralExpr]	x v	x v	-	0zfmo-
+V	38	[[u16; LiteralExpr]; LiteralExpr]	x1f6b34e7496334e749635edf v	x84a89924aea09924aea0c31c v	-	12zfmo-
+V	39	(u8, u32)	x490000005edfed62 v	xae000000c31ce0d6 v	-	8z----
+V	40	(u8;)	x5e v	xc3 v	-	1zfmo-
+V	41	((u8, u16), u8)	x88009d538800 v	xed000291ed00 v	-	6z----
+V	42	()	x v	x v	-	0zfmo-
+V	43	i32	x88d78261 v	xed1475d5 v	x88d78261	4zfmo-
+F	/w/target/typecases/layout_recursive/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	i32	x6a6c747c v	xcfa966f0 v	-	4zfmo-
+V	6	Ptr<App::ListNode>	x0610000000000000 v	x1710000000000000 v	-	8zfmo-
+V	7	i32	x9464097b v	xf9a1fbee v	-	4zfmo-
+V	8	App::Direct	-	-	-	16-----
+V	9	App::MutualB	-	-	-	24-----
+V	10	u8	xd3 v	x38 v	-	1zfmo-
+V	11	App::MutualA	-	-	-	24-----
+V	12	u64	xfdd07df7b1b4996a v	x620e706b03ca48ec v	-	8zfmo-
+V	13	[App::ViaArray; LiteralExpr]	-	-	-	32-----
+V	14	(App::ViaTuple, u8)	-	-	-	16-----
+V	15	u8 | App::ViaUnion	-	-	-	24-----
+V	16	[App::ViaSlice]	x10300000000000001000000000000000 v	x21300000000000002100000000000000 v	-	16zfmo-
+V	17	i32	x663df273 v	xcb7ae4e7 v	x663df273	4zfmo-
+F	/w/target/typecases/layout_recursive_alias_array/Ultraviolet.toml
+CRASH	signal
+F	/w/target/typecases/layout_recursive_alias_direct/Ultraviolet.toml
+CRASH	signal
+F	/w/target/typecases/layout_recursive_alias_tuple/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	(App::A1, u8)	-	-	-	16-----
+V	6	i32	x7fe8befb v	xe425b16f v	x7fe8befb	4zfmo-
+F	/w/target/typecases/layout_recursive_direct_record/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	i32	x6a6c747c v	xcfa966f0 v	-	4zfmo-
+V	6	App::Direct	-	-	-	16-----
+V	7	i32	x9464097b v	xf9a1fbee v	x9464097b	4zfmo-
+F	/w/target/typecases/layout_recursive_mutual_records/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	App::MutualB	-	-	-	24-----
+V	6	u8	x7f v	xe4 v	-	1zfmo-
+V	7	App::MutualA	-	-	-	24-----
+V	8	u64	xa9e053facbcdbbf1 v	x0e1e466e1de36a73 v	-	8zfmo-
+V	9	i32	xbe5c9e79 v	x239a90ed v	xbe5c9e79	4zfmo-
+F	/w/target/typecases/layout_recursive_via_union/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	u8 | App::ViaUnion	-	-	-	24-----
+V	6	i32	x7fe8befb v	xe425b16f v	x7fe8befb	4zfmo-
+F	/w/target/typecases/layout_unions/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Ptr<i32>@Valid	x0510000000000000 v	x1610000000000000 v	-	8-fmo-
+V	6	App::Handle	-	-	-	8-----
+V	7	(Ptr<i32>@Valid;)	x0810000000000000 v	x1910000000000000 v	-	8-fmo-
+V	8	u32 | u8	-	-	-	8-----
+V	9	() | u8	-	-	-	2-----
+V	10	() | bool	-	-	-	2-----
+V	11	() | Ptr<i32>@Valid	-	-	-	8-----
+V	12	() | Ptr<i32>	-	-	-	16-----
+V	13	() | bool | Ptr<i32>@Valid	-	-	-	16-----
+V	14	Ptr<i32>@Valid | Ptr<u8>@Valid	-	-	-	16-----
+V	15	unique () | Ptr<i32>@Valid	-	-	-	8-----
+V	16	() | App::Handle	-	-	-	8-----
+V	17	() | App::Chain	-	-	-	8-----
+V	18	u128 | u16 | u32 | u64 | u8	-	-	-	32-----
+V	19	(u8, u8) | [u8; LiteralExpr]	-	-	-	4-----
+V	20	string | bytes	-	-	-	40-----
+V	21	App::Door | App::Point | App::Shape	-	-	-	12-----
+V	22	! | u8	-	-	-	2-----
+V	23	() | Ptr<i32>@Null	-	-	-	16-----
+V	24	() | App::Wrapped	-	-	-	16-----
+V	25	i32	x0e1e466e v	x735b38e2 v	x0e1e466e	4zfmo-
+F	/w/target/typecases/lookup_nested_module/Ultraviolet.toml
+X	["App"]
+V	0	App::Other::Deep::Far	-	-	-	4-----
+V	1	App::Other::Deep::Far	-	-	-	4-----
+V	2	App::Other::Deep::Far | App::Other::Remote	-	-	-	8-----
+V	3	i32	x4074df7d v	xa5b1d1f1 v	-	4zfmo-
+X	["App" "Other"]
+V	0	i32	x01000000 v	x663df273 v	-	4zfmo-
+V	1	App::Other::Remote	-	-	-	4-----
+V	2	Future<App::Other::Remote>	-	-	-	24-----
+X	["App" "Other" "Deep"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/typecases/lookup_other_assembly/Ultraviolet.toml
+X	["App"]
+V	0	Lib::Thing	-	-	-	4-----
+V	1	[i32; PathExpr]	x167c4a7f2bf894fe4074df7d55f029fd6a6c747c v	x7bb93cf390358772a5b1d1f1ba2d1c71cfa966f0 v	-	20zfmo-
+V	2	i32 | Lib::Thing	-	-	-	8-----
+V	3	Lib::Thing	-	-	-	4-----
+V	4	Lib::Thing	-	-	-	4-----
+V	5	i32	x6a6c747c v	xcfa966f0 v	-	4zfmo-
+X	["Lib"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/typecases/lookup_other_module/Ultraviolet.toml
+X	["App"]
+V	0	App::Other::Remote	-	-	-	4-----
+V	1	App::Other::Remote	-	-	-	4-----
+V	2	App::Other::Remote	-	-	-	4-----
+V	3	App::Other::Kind	x00 n	x00 n	-	1-----
+V	4	App::Other::Alias	-	-	-	4-----
+V	5	App::Other::Remote	-	-	-	4-----
+V	6	(App::Other::Remote, App::Other::Kind, App::Other::Kind)	-	-	-	8-----
+V	7	App::Other::Later	-	-	-	24-----
+V	8	App::Other::Later	-	-	-	24-----
+V	9	i32	xbe5c9e79 v	x239a90ed v	-	4zfmo-
+X	["App" "Other"]
+V	0	i32	x01000000 v	x663df273 v	-	4zfmo-
+V	1	App::Other::Remote	-	-	-	4-----
+V	2	Future<App::Other::Remote>	-	-	-	24-----
+F	/w/target/typecases/members/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	i32	x6a6c747c v	xcfa966f0 v	-	4zfmo-
+V	6	App::R	-	-	-	4-----
+V	7	App::R	-	-	-	4-----
+V	8	App::R	-	-	-	4-----
+V	9	i32	xbe5c9e79 v	x239a90ed v	-	4zfmo-
+V	10	unique App::R	-	-	-	4-----
+V	11	i32	xe8543378 v	x4d9225ec v	xe8543378	4zfmo-
+V	12	i32	xfdd07df7 v	x620e706b v	-	4zfmo-
+V	13	Self	-	-	-	-
+V	14	Self::Item	-	-	-	-
+V	15	i32	x3c455d75 v	xa1824fe9 v	-	4zfmo-
+V	16	App::M@S	-	-	-	4-----
+V	17	App::M	-	-	-	8-----
+V	18	(i32, bool)	x9035877200000000 v	xf57279e601000000 v	-	8z----
+V	19	i32	x90358772 v	xf57279e6 v	-	4zfmo-
+V	20	bool	x00 v	x01 v	-	1z-mo-
+V	21	[i32; LiteralExpr]	xba2d1c71cfa966f0 v	x1f6b0ee534e75864 v	-	8zfmo-
+V	22	App::E	x0000000000000000e425b16f00000000000000000000000000000000000000000000000000000000 n	-	-	24-----
+V	23	* imm u8	x1720000000000000 v	x2820000000000000 v	-	8zfmo-
+V	24	usize	xf9a1fbee636933d5 v	x5edfed62b57ee256 v	-	8zfmo-
+V	25	i32	x0e1e466e v	x735b38e2 v	x0e1e466e	4zfmo-
+V	26	i32	x239a90ed v	x88d78261 v	x239a90ed	4zfmo-
+F	/w/target/typecases/modal_states/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	TValue	-	-	-	-
+V	6	App::Door	-	-	-	8-----
+V	7	App::Door@Open	-	-	-	4-----
+V	8	App::Door@Closed	-	-	-	0-----
+V	9	App::Door@Open	-	-	-	4-----
+V	10	App::Door@Missing	-	-	-	-
+V	11	App::Cell<i32>@Full	-	-	-	4-----
+V	12	App::Cell<bool>@Full	-	-	-	1-----
+V	13	App::Cell<i32>@Empty	-	-	-	0-----
+V	14	App::Cell<i32>	-	-	-	8-----
+V	15	i32	x3c455d75 v	xa1824fe9 v	x3c455d75	4zfmo-
+F	/w/target/typecases/paths/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	i32	x6a6c747c v	xcfa966f0 v	-	4zfmo-
+V	6	TValue	-	-	-	-
+V	7	bool	x01 v	x00 v	-	1z-mo-
+V	8	TFirst	-	-	-	-
+V	9	TSecond	-	-	-	-
+V	10	App::Point	-	-	-	8-----
+V	11	App::Point	-	-	-	8-----
+V	12	App::Shape	x0000000000000000 n	x01000000778abaea n	-	8-----
+V	13	App::Count	-	-	-	4-----
+V	14	App::Count	-	-	-	4-----
+V	15	App::Wrapper<i32>	-	-	-	4-----
+V	16	App::Wrapper<bool>	-	-	-	1-----
+V	17	App::Wrapper<App::Wrapper<i32>>	-	-	-	4-----
+V	18	App::Wrapper<i32>	-	-	-	4-----
+V	19	App::Pair<i32, bool>	-	-	-	8-----
+V	20	App::Pair<i32>	-	-	-	8-----
+V	21	i32	xba2d1c71 v	x1f6b0ee5 v	xba2d1c71	4zfmo-
+F	/w/target/typecases/perms/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	const i32	x6a6c747c v	xcfa966f0 v	x6a6c747c	4zfmo-
+V	6	unique i32	x7fe8befb v	xe425b16f v	x7fe8befb	4zfmo-
+V	7	shared i32	x9464097b v	xf9a1fbee v	-	4zfmo-
+V	8	unique App::Point	-	-	-	8-----
+V	9	shared App::Point	-	-	-	8-----
+V	10	unique [i32]	x0a300000000000000a00000000000000 v	x1b300000000000001b00000000000000 v	-	16zfmo-
+V	11	const string@View	x00000000000000000000000000000000 v	x00000000000000000000000000000000 v	-	16zfmo-
+V	12	i32	xfdd07df7 v	x620e706b v	xfdd07df7	4zfmo-
+F	/w/target/typecases/pointers/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Ptr<i32>	x0510000000000000 v	x0000000000000000 v	x0510000000000000	8zfmo-
+V	6	Ptr<i32>@Valid	x0610000000000000 v	x1710000000000000 v	-	8-fmo-
+V	7	Ptr<i32>@Null	x0000000000000000 v	x0000000000000000 v	-	8z----
+V	8	Ptr<i32>@Expired	x0810000000000000 v	x1910000000000000 v	-	8zfmo-
+V	9	* imm i32	x0920000000000000 v	x1a20000000000000 v	-	8zfmo-
+V	10	* mut i32	x0a20000000000000 v	x1b20000000000000 v	x0a20000000000000	8zfmo-
+V	11	* mut * imm u8	x0b20000000000000 v	x1c20000000000000 v	-	8zfmo-
+V	12	Ptr<Ptr<i32>>	x0c10000000000000 v	x1d10000000000000 v	x0c10000000000000	8zfmo-
+V	13	Ptr<App::Point>	x0000000000000000 v	x1e10000000000000 v	x0000000000000000	8zfmo-
+V	14	Ptr<[i32; LiteralExpr]>	x0e10000000000000 v	x0000000000000000 v	-	8zfmo-
+V	15	i32	x3c455d75 v	xa1824fe9 v	x3c455d75	4zfmo-
+F	/w/target/typecases/prims/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	i8	x6a v	xcf v	-	1zfmo-
+V	6	i16	x7fe8 v	xe425 v	-	2zfmo-
+V	7	i32	x9464097b v	xf9a1fbee v	-	4zfmo-
+V	8	i64	xa9e053facbcdbbf1 v	x0e1e466e1de36a73 v	-	8zfmo-
+V	9	i128	xbe5c9e798547f38f0000000000000000 v	x239a90edd65ca2110000000000000000 v	-	16zfmo-
+V	10	u8	xd3 v	x38 v	-	1zfmo-
+V	11	u16	xe854 v	x4d92 v	-	2zfmo-
+V	12	u32	xfdd07df7 v	x620e706b v	-	4zfmo-
+V	13	u64	x124dc8766b2ed108 v	x778abaeabc43808a v	-	8zfmo-
+V	14	u128	x27c912f624a808a70000000000000000 v	x8c06056a76bdb7280000000000000000 v	-	16zfmo-
+V	15	f16	x3c45 v	xa182 v	-	2zfmo-
+V	16	f32	x51c1a7f4 v	xb6fe9968 v	-	4zfmo-
+V	17	f64	x663df2735115af81 v	xcb7ae4e7a22a5e03 v	-	8zfmo-
+V	18	bool	x00 v	x01 v	-	1z-mo-
+V	19	char	x54000000 v	x4b000000 v	-	4z----
+V	20	usize	xa5b1d1f17d82555c v	x0aefc365cf9704de v	-	8zfmo-
+V	21	isize	xba2d1c7137fc8cfa v	x1f6b0ee588113c7c v	-	8zfmo-
+V	22	()	x v	x v	x	0zfmo-
+V	23	!	-	-	-	0-----
+V	24	i32	xf9a1fbee v	x5edfed62 v	xf9a1fbee	4zfmo-
+F	/w/target/typecases/ranges/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Range<i32>	x050000000a000000 v	x160000001b000000 v	-	8zfmo-
+V	6	RangeInclusive<i32>	x060000000b000000 v	x170000001c000000 v	-	8zfmo-
+V	7	RangeFrom<i32>	x07000000 v	x18000000 v	-	4zfmo-
+V	8	RangeTo<i32>	x0d000000 v	x1e000000 v	-	4zfmo-
+V	9	RangeToInclusive<i32>	x0e000000 v	x1f000000 v	-	4zfmo-
+V	10	RangeFull	x v	x v	-	0zfmo-
+V	11	Range<usize>	x0b000000000000001000000000000000 v	x1c000000000000002100000000000000 v	-	16zfmo-
+V	12	RangeFrom<usize>	x0c00000000000000 v	x1d00000000000000 v	-	8zfmo-
+V	13	unique Range<usize>	x0d000000000000001200000000000000 v	x1e000000000000002300000000000000 v	-	16zfmo-
+V	14	Range<u8> | Range<usize>	-	-	-	24-----
+V	15	i32	x3c455d75 v	xa1824fe9 v	x3c455d75	4zfmo-
+F	/w/target/typecases/refinements/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	i32 where { ... }	-	-	-	4-----
+V	6	i32 where { ... }	-	-	-	4-----
+V	7	i32 where { ... }	-	-	-	4-----
+V	8	i32 where { ... }	-	-	-	4-----
+V	9	i32 where { ... }	-	-	-	4-----
+V	10	u8 where { ... }	-	-	-	1-----
+V	11	i32 where { ... }	-	-	-	4-----
+V	12	Range<usize> where { ... }	x0c000000000000001100000000000000 v	x1d000000000000002200000000000000 v	-	16zfmo-
+V	13	i32 where { ... }	-	-	-	4-----
+V	14	i32 where { ... }	-	-	-	4-----
+V	15	i32	x3c455d75 v	xa1824fe9 v	x3c455d75	4zfmo-
+F	/w/target/typecases/strings/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	string	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000	32zfmo-
+V	6	string@View	x00000000000000000000000000000000 v	x00000000000000000000000000000000 v	x00000000000000000000000000000000	16zfmo-
+V	7	string@Managed	x000000000000000000000000000000000000000000000000 v	x000000000000000000000000000000000000000000000000 v	-	24zfmo-
+V	8	bytes	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000	32zfmo-
+V	9	bytes@View	x00000000000000000000000000000000 v	x00000000000000000000000000000000 v	x00000000000000000000000000000000	16zfmo-
+V	10	bytes@Managed	x000000000000000000000000000000000000000000000000 v	x000000000000000000000000000000000000000000000000 v	-	24zfmo-
+V	11	i32	xe8543378 v	x4d9225ec v	xe8543378	4zfmo-
+F	/w/target/typecases/tuples/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	()	x v	x v	-	0zfmo-
+V	6	(i32;)	x9464097b v	xf9a1fbee v	-	4zfmo-
+V	7	(i32, bool)	xa9e053fa01000000 v	x0e1e466e00000000 v	-	8z----
+V	8	(i32, (bool, char))	xbe5c9e79010000004d000000 v	x239a90ed0000000044000000 v	-	12z----
+V	9	((i32;);)	xe8543378 v	x4d9225ec v	-	4zfmo-
+V	10	(bool, i32)	x01000000fdd07df7 v	x00000000620e706b v	-	8z----
+V	11	(i32, bool)	xfdd07df701000000 v	x620e706b00000000 v	-	8z----
+V	12	i32	xfdd07df7 v	x620e706b v	xfdd07df7	4zfmo-
+F	/w/target/typecases/unions_nested_kinds/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	Ptr<i32> | * mut i32 | * imm i32 | (i32;) | [i32] | () -> i32 | App::Door | App::Door@Open | $App::Named	-	-	-	16-----
+V	6	() -> i32 | (i32;) | [i32] | * imm i32 | * mut i32 | Ptr<i32> | App::Door | App::Door@Open | $App::Named	-	-	-	24-----
+V	7	Ptr<i32> | Ptr<i32>@Valid | Ptr<i32>@Null | Ptr<i32>@Expired	-	-	-	16-----
+V	8	i32	xa9e053fa v	x0e1e466e v	xa9e053fa	4zfmo-
+F	/w/target/typecases/unions_order/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	bool | i32	-	-	-	8-----
+V	6	bool | i32	-	-	-	8-----
+V	7	bool | char | i32	-	-	-	8-----
+V	8	bool | char | i32	-	-	-	8-----
+V	9	i32	xbe5c9e79 v	x239a90ed v	-	4zfmo-
+V	10	bool | i32	-	-	-	8-----
+V	11	i32 | App::Point	-	-	-	12-----
+V	12	i32 | App::Point	-	-	-	12-----
+V	13	App::Point | App::Shape	-	-	-	12-----
+V	14	App::Point | App::Shape	-	-	-	12-----
+V	15	string | bytes	-	-	-	40-----
+V	16	string@View | string	-	-	-	40-----
+V	17	string@View | string@Managed | string	-	-	-	40-----
+V	18	[i32; LiteralExpr] | [i32]	-	-	-	24-----
+V	19	() | i32	-	-	-	8-----
+V	20	() | i32	-	-	-	8-----
+V	21	(bool, i32) | (i32, bool)	-	-	-	12-----
+V	22	! | i32	-	-	-	8-----
+V	23	i32	xe425b16f v	x4963a3e3 v	xe425b16f	4zfmo-
+F	/w/target/typecases/unions_paths_case/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+V	5	i32	x6a6c747c v	xcfa966f0 v	x6a6c747c	4zfmo-
+V	6	i32	x7fe8befb v	xe425b16f v	x7fe8befb	4zfmo-
+V	7	i32	x9464097b v	xf9a1fbee v	x9464097b	4zfmo-
+V	8	i32	xa9e053fa v	x0e1e466e v	xa9e053fa	4zfmo-
+V	9	i32	xbe5c9e79 v	x239a90ed v	-	4zfmo-
+V	10	App::ALPHA | App::alpha | App::Beta | App::beta	-	-	-	8-----
+V	11	App::ALPHA | App::alpha | App::Beta | App::beta	-	-	-	8-----
+V	12	App::alpha | App::Zed	-	-	-	8-----
+V	13	i32	x124dc876 v	x778abaea v	x124dc876	4zfmo-
+F	/w/target/typecases/variance/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+V	5	TValue	-	-	-	-
+V	6	(TValue) -> i32	-	-	-	8-----
+V	7	TValue	-	-	-	-
+V	8	(TValue) -> i32	-	-	-	8-----
+V	9	i32	xbe5c9e79 v	x239a90ed v	-	4zfmo-
+V	10	unique TValue	-	-	-	-
+V	11	[TValue; LiteralExpr]	-	-	-	-
+V	12	const TValue	-	-	-	-
+V	13	[TValue]	x0d300000000000000d00000000000000 v	x1e300000000000001e00000000000000 v	-	16zfmo-
+V	14	Ptr<TValue>@Valid	x0e10000000000000 v	x1f10000000000000 v	-	8-fmo-
+V	15	() -> TValue	-	-	-	8-----
+V	16	((TValue) -> i32) -> i32	-	-	-	8-----
+V	17	i32 | TValue	-	-	-	-
+V	18	(TValue, (TOther) -> i32)	-	-	-	-
+V	19	(App::Out<TValue>, i32)	-	-	-	-
+V	20	[App::In<TValue>]	x14300000000000001400000000000000 v	x25300000000000002500000000000000 v	-	16zfmo-
+V	21	|TValue| -> TValue	-	-	-	16-----
+V	22	[App::Out<(TValue) -> TOther>]	x16300000000000001600000000000000 v	x27300000000000002700000000000000 v	-	16zfmo-
+V	23	i32	xe425b16f v	x4963a3e3 v	xe425b16f	4zfmo-

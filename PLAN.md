@@ -209,6 +209,8 @@ Gates, all passing:
 | Relations between types: for every type written in a declaration its well-formedness, intrinsic classes (`Bitcopy`, `Clone`, `Drop`, `FfiSafe`, `GpuSafe`, zeroable, `Eq`, discrete, ordered) and intrinsic method signatures; subtyping, argument compatibility and cast validity between the module's types; class linearisation, method and field tables, dispatchability, class subtyping and implementation; method and transition signatures; generic parameter validation, bounds and inference; static proofs of contracts and refinements; every project that resolves | identical on 545 of 546; the reference crashes on the other 1 |
 | Same, the compile-time, name-resolution and type-core cases | identical on 121 of 144 (the reference crashes on 23), 410 of 410, and 52 of 54 (the reference crashes on 2) |
 | Same, 35 targeted cases (each structural subtyping rule, variance, aliases, refinements, class hierarchies and their failures, the predicates, generic parameter lists and inference, 78 contracts for the prover) | identical, 35 |
+| Constant encoding: every literal token encoded as each primitive type and as a raw pointer, and the bytes of every string literal; the corpus, the lexical stress cases and 235 targeted files | identical on 1585 of 1585, 4906 of 4908 (the reference crashes on 2), and 235 of 235 |
+| Value bytes and validity: for the types of every module, values built from the type are encoded and the result judged, with a value of a neighbouring type and five byte patterns; every project that resolves and the four case sets | identical on 545 of 546, 121 of 144, 410 of 410, 51 of 54 and 35 of 35; the reference crashes on the rest |
 | `--phase1-only`: JSON diagnostics, exit status and `--dump-ast` listing | identical, 549 fixtures, 58 manifest cases, 78 module-level cases |
 | `--check`: JSON diagnostics and exit status for projects rejected in phase 1 | identical, 32 fixtures and 41 manifest cases |
 | `--check`: phase-1 diagnostics for every other project | identical, 534 |
@@ -275,7 +277,7 @@ M3.3 is itself in parts:
 | a. Type core: semantic types, lowering, array lengths, equivalence, ordering, lookup, substitution, variance | `typing/type_refs`, `type_lower`, `const_len`, `type_equiv`, `type_lookup`, `variance`; `generics/monomorphize` (substitution); `contracts/verification` (structural equality) | done |
 | b. Layout: sizes, alignments, field offsets, discriminants, niches | `layout` (all but constant encoding), `composite/enums`, `modal/modal_widen` (payload state) | done |
 | c. Relations between types: subtyping, well-formedness, intrinsic classes, class tables, method signatures, generic parameters and arguments, static proofs | `typing/subtyping`, `type_wf`, `type_predicates`, `signature`, `item_generic_params`; `composite/classes`, `class_linearization`, `record_methods` (receivers); `modal` (lookups, widening checks); `generics` (all of it); `contracts/verification` | done, with the two gaps below |
-| d. Constant encoding (the bytes of a value of each type) | `layout/layout_value_bits` | next |
+| d. Constant encoding (the bytes of a value of each type) | `layout/layout_value_bits` | done |
 
 What M3.3a added:
 
@@ -348,6 +350,32 @@ printer then cannot print; the Rust port builds the same type and prints the hol
 One numeric difference: the prover's simplex uses `long double` in the reference (80-bit on
 x86-64) and `f64` here, with the same tolerance. No input in the gates tells them apart;
 a system whose pivots differ only beyond 53 bits of mantissa could.
+
+What M3.3d added:
+
+- `uv-analysis::layout::value_bits`: `encode_const` (a literal as a primitive type, `null`
+  as a raw pointer), `decode_string_literal_bytes`, `value_bits` (a structured value in
+  the layout of its type) and `valid_value` (whether bytes are a value of a type), with
+  the value representation they share.
+- The oracle gained `consts` and `values` modes; `tools/gen_const_cases.py` writes 235
+  files of literals (integers at the edges of each width and base, floats at the
+  rounding and range edges of each precision, every character and string escape and
+  malformed forms of each).
+
+Things about the reference's constant encoding that M3.4 and code generation inherit:
+
+- Half precision is converted by the reference's own routine, not IEEE rounding: a
+  single-precision subnormal becomes zero, and every NaN gets its lowest payload bit set.
+  A literal is read as a double first and narrowed from there, so `f32` and `f16`
+  literals are rounded twice. Reproduced.
+- `value_bits` has no encoding for records, modals or unions, and `valid_value` accepts
+  no nominal type, union, function or refinement. The reference file holds helpers for
+  them (`ValueBitsForRecord`, state and niche helpers) that nothing calls; they are not
+  ported.
+- Text values encode as zeroes of the right size.
+- Float digits go through `strtod` in the reference and Rust's parser here. Both round
+  decimal forms correctly (2,724 literals in the gate agree); `strtod` would also take
+  hexadecimal floats, which the lexer never produces.
 
 Two pieces of reference behaviour are reproduced on purpose.
 

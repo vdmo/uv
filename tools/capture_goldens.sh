@@ -96,6 +96,18 @@ for name in comptime_projects comptime_cases resolve_targeted types_extra relati
     /w/reference/oracle/uv-oracle relations "$ROOT/target/parity/$name.oracle.list" \
     | sed "s|$ROOT/|/w/|g" > "tests/golden/$out.tsv"
 done
+# Constant encoding: literals of the corpus, the lexical cases and cases of their own;
+# then values built from the types of the same project lists.
+python3 tools/gen_const_cases.py
+for pair in uv_files:consts lex_cases:consts_lex_cases const_cases:const_cases; do
+  docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -e LD_LIBRARY_PATH="$ICU" uv-oracle \
+    /w/reference/oracle/uv-oracle consts "/w/tests/golden/${pair%%:*}.list" > "tests/golden/${pair##*:}.tsv"
+done
+for pair in comptime_projects:values comptime_cases:values_cases resolve_targeted:values_targeted types_extra:values_types relations_extra:values_relations; do
+  docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -v "$ROOT":"$ROOT" -e LD_LIBRARY_PATH="$ICU" uv-oracle \
+    /w/reference/oracle/uv-oracle values "$ROOT/target/parity/${pair%%:*}.oracle.list" \
+    | sed "s|$ROOT/|/w/|g" > "tests/golden/${pair##*:}.tsv"
+done
 run uv-oracle /w/reference/oracle/uv-oracle sigma > tests/golden/sigma.tsv
 run uv-oracle sh -c 'g++ -std=c++20 -O1 -o /tmp/probe /w/tools/oracle/unordered_probe.cpp && /tmp/probe' \
   > tests/golden/unordered_order.txt

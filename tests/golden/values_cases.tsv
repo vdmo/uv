@@ -1,0 +1,414 @@
+F	/w/target/ctcases/attr_args_on_emit/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_bad_target_on_comptime_stmt/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_on_ct_procedure/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_unknown_on_comptime_expr/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_unknown_on_comptime_stmt/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/comptime_expr_non_expr_ast/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/comptime_proc_returns_item/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	-	4zfmo-
+F	/w/target/ctcases/comptime_proc_returns_quote/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/cross_assembly_import_required/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_assembly_with_import/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_emitted_decl/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_private/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_reflect/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_chain/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/ct_if_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_false_no_else/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/ct_if_not_bool/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_true/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/ct_literalize_values/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/ct_loop/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/ct_loop_empty/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/ct_loop_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_not_iterable/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_pattern_mismatch/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_tuple/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/ct_nested_static/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/ct_proc_not_shared_across_modules/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/derive_body_fails/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_reports_error/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_restricted/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_warns/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+F	/w/target/ctcases/derive_cycle/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_emitted_item_derives/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+V	2	string	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	-	32zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+F	/w/target/ctcases/derive_enum_modal/Ultraviolet.toml
+X	["App"]
+V	0	string	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	-	32zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/derive_missing_emits_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_missing_requires_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_alias/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_procedure/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_order/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+V	2	string	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	-	32zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+F	/w/target/ctcases/derive_reflects_target/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	-	4zfmo-
+V	1	bool	x01 v	x00 v	x01	1z-mo-
+V	2	bool	x00 v	x01 v	-	1z-mo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+F	/w/target/ctcases/derive_target_ambiguous/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_target_declared_later/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_target_via_using/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_twice_same_target/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	-	4zfmo-
+V	1	string	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	-	32zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+V	3	string	x0000000000000000000000000000000000000000000000000000000000000000 v	x0000000000000000000000000000000000000000000000000000000000000000 v	-	32zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	x55f029fd	4zfmo-
+F	/w/target/ctcases/derive_unknown_target/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/diag_bad_arg/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/diag_error/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/diag_module_and_span/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/diag_note/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/diag_warning/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/emit_emits_emitter/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	x00	1z-mo-
+V	1	bool	x01 v	x00 v	-	1z-mo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	-	4zfmo-
+F	/w/target/ctcases/emit_many_forms/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/emit_nested_comptime/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	usize	x167c4a7fb979379e v	x7bb93cf30a8fe61f v	-	8zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/emit_non_ast/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/emit_non_item/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/emit_shared_splice/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	x4074df7d	4zfmo-
+V	4	i32	x55f029fd v	xba2d1c71 v	-	4zfmo-
+F	/w/target/ctcases/emit_twice_same_value/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	-	4zfmo-
+F	/w/target/ctcases/emit_type_items/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/emit_without_capability/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/eval_arith/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_arity/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_array/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_array_repeat/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_array_repeat_bad/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_block_let/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_bool/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_char_float/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_compare/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_contract_ok/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_contract_post_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_contract_pre_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_enum/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_enum_eq/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_field/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_field_missing/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_if_case/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_if_case_literal/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_if_is/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_if_is_enum/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_is_modal/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_is_record/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_no_else/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_modal/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_prohibited_deref/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_region/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_spawn/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_unsafe/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_record/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_return/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_runtime_call_of_ct_proc/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_string/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_string_value/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_suffix/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_unit/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/eval_unknown_call/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/eval_unknown_name/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/eval_wrap/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/files_all/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/files_bad_arg/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/files_unknown_method/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/files_values/Ultraviolet.toml
+X	["App"]
+V	0	i32	x01000000 v	x663df273 v	x01000000	4zfmo-
+F	/w/target/ctcases/files_without_attribute/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/hygiene_seed_across_modules/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+X	["App" "Other"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/quote_ambiguous/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_expr_hygiene/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_expr_value/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_invalid/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	-	4zfmo-
+F	/w/target/ctcases/quote_not_matching_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_pattern_kind/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/quote_stmt_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_type_kind/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	(i32, bool)	x2bf894fe01000000 v	x9035877200000000 v	-	8z----
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/reflect_bad_args/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category_alias_cycle/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category_unknown_path/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/reflect_field_loop/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/reflect_fields/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_alias/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_generic_default/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_not_reflect/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_structural/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_too_many_args/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_implements/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_module_path/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_sees_emitted_type/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/reflect_states/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_states_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_type_name/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_unknown_method/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_variants/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_variants_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_context_mismatch/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_eval_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_func_type/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	(i32, i32) -> i32	-	-	-	8-----
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/splice_ident/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	x2bf894fe	4zfmo-
+V	3	i32	x4074df7d v	xa5b1d1f1 v	-	4zfmo-
+F	/w/target/ctcases/splice_ident_invalid/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_ident_not_string/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_literal_values/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	usize	x167c4a7fb979379e v	x7bb93cf30a8fe61f v	-	8zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/splice_stmt_tail/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/splice_type_from_type_literal/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	(i32, bool)	x2bf894fe01000000 v	x9035877200000000 v	-	8z----
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
+F	/w/target/ctcases/splice_whole_body/Ultraviolet.toml
+X	["App"]
+V	0	bool	x00 v	x01 v	-	1z-mo-
+V	1	i32	x167c4a7f v	x7bb93cf3 v	x167c4a7f	4zfmo-
+V	2	i32	x2bf894fe v	x90358772 v	-	4zfmo-
