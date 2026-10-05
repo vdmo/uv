@@ -1,0 +1,1164 @@
+F	/w/target/ctcases/attr_args_on_emit/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_bad_target_on_comptime_stmt/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_on_ct_procedure/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_unknown_on_comptime_expr/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/attr_unknown_on_comptime_stmt/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/comptime_expr_non_expr_ast/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/comptime_proc_returns_item/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	from_proc->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	from_proc->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1000	1000	0111	
+SB	1	0111	0111	1111	
+SB	2	0111	0111	1111	
+SB	3	0111	0111	1111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	1111
+FI	Clone	1111
+FI	Drop	0000
+FI	FfiSafe	0111
+FI	GpuSafe	1111
+FI	Eq	1111
+FI	Discrete	0111
+FI	Hash	0000
+FI	Iterator	0000
+F	/w/target/ctcases/comptime_proc_returns_quote/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/cross_assembly_import_required/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_assembly_with_import/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_emitted_decl/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_private/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/cross_module_reflect/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_chain/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/ct_if_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_false_no_else/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/ct_if_not_bool/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_if_true/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/ct_literalize_values/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/ct_loop/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/ct_loop_empty/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/ct_loop_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_not_iterable/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_pattern_mismatch/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/ct_loop_tuple/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/ct_nested_static/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/ct_proc_not_shared_across_modules/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/derive_body_fails/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_reports_error/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_restricted/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_body_warns/Ultraviolet.toml
+X	["App"]
+W	R.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	11	11	11	
+SB	1	11	11	11	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	11
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	11
+FI	Hash	00
+FI	Iterator	00
+CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	00	
+CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	00	
+F	/w/target/ctcases/derive_cycle/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_emitted_item_derives/Ultraviolet.toml
+X	["App"]
+W	R.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	Made.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	plain_made->	string	ok	----eE-----0	E-TYP-2623	E-TYP-2640	string	string(const string)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1101	1101	1101	
+SB	1	1101	1101	1101	
+SB	2	0010	0010	0000	
+SB	3	1101	1101	1101	
+MI	8	M::A<>-	M::F<i32;>-	M::F<string;>-	M::G<i32;>-	M::G<string;>-	M::G<i32;i32;>-	M::G<i32;string;>-	M::G<string;i32;>-	10T8
+FI	Bitcopy	1101
+FI	Clone	1101
+FI	Drop	0000
+FI	FfiSafe	1101
+FI	GpuSafe	1101
+FI	Eq	1111
+FI	Discrete	1101
+FI	Hash	0000
+FI	Iterator	0000
+CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	0000	
+CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	0000	
+F	/w/target/ctcases/derive_enum_modal/Ultraviolet.toml
+X	["App"]
+W	plain_made->	string	ok	----eE-----0	E-TYP-2623	E-TYP-2640	string	string(const string)->bool+	--	--
+W	first_made->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	000	
+SB	1	011	011	011	
+SB	2	011	011	011	
+MI	8	M::A<>-	M::F<i32;>-	M::F<string;>-	M::G<i32;>-	M::G<string;>-	M::G<i32;i32;>-	M::G<i32;string;>-	M::G<string;i32;>-	10T8
+FI	Bitcopy	011
+FI	Clone	011
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	011
+FI	Eq	111
+FI	Discrete	011
+FI	Hash	000
+FI	Iterator	000
+CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	000	
+CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	000	
+MW	M@S	--s
+F	/w/target/ctcases/derive_missing_emits_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_missing_requires_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_alias/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_class/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_on_procedure/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_order/Ultraviolet.toml
+X	["App"]
+W	R.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	second_made->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	plain_made->	string	ok	----eE-----0	E-TYP-2623	E-TYP-2640	string	string(const string)->bool+	--	--
+W	first_made->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	11011	11011	11011	
+SB	1	11011	11011	11011	
+SB	2	00100	00100	00000	
+SB	3	11011	11011	11011	
+SB	4	11011	11011	11011	
+MI	7	M::A<>-	M::F<i32;>-	M::F<string;>-	M::G<i32;>-	M::G<string;>-	M::G<i32;i32;>-	M::G<string;string;>-	10T7
+FI	Bitcopy	11011
+FI	Clone	11011
+FI	Drop	00000
+FI	FfiSafe	11011
+FI	GpuSafe	11011
+FI	Eq	11111
+FI	Discrete	11011
+FI	Hash	00000
+FI	Iterator	00000
+CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	00000	
+CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	00000	
+IM	R	App::Emitted	ok -	101
+IM	R	App::Required	ok -	101
+F	/w/target/ctcases/derive_reflects_target/Ultraviolet.toml
+X	["App"]
+W	R.a	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	R.b	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	counted->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1001	1001	1111	
+SB	1	0110	0110	1001	
+SB	2	0110	0110	1001	
+SB	3	1001	1001	1111	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;bool;>-	M::G<i32;i32;>-	10T7
+FI	Bitcopy	1111
+FI	Clone	1111
+FI	Drop	0000
+FI	FfiSafe	1001
+FI	GpuSafe	1111
+FI	Eq	1111
+FI	Discrete	1001
+FI	Hash	0000
+FI	Iterator	0000
+CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	0000	
+CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	0000	
+F	/w/target/ctcases/derive_target_ambiguous/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_target_declared_later/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_target_via_using/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/derive_twice_same_target/Ultraviolet.toml
+X	["App"]
+W	R1.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	plain_made->	string	ok	----eE-----0	E-TYP-2623	E-TYP-2640	string	string(const string)->bool+	--	--
+W	R2.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	plain_made->	string	ok	----eE-----0	E-TYP-2623	E-TYP-2640	string	string(const string)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10101	10101	10101	
+SB	1	01010	01010	00000	
+SB	2	10101	10101	10101	
+SB	3	01010	01010	00000	
+SB	4	10101	10101	10101	
+MI	7	M::A<>-	M::F<i32;>-	M::F<string;>-	M::G<i32;>-	M::G<string;>-	M::G<i32;i32;>-	M::G<string;string;>-	10T7
+FI	Bitcopy	10101
+FI	Clone	10101
+FI	Drop	00000
+FI	FfiSafe	10101
+FI	GpuSafe	10101
+FI	Eq	11111
+FI	Discrete	10101
+FI	Hash	00000
+FI	Iterator	00000
+CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	00000	
+CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	00000	
+F	/w/target/ctcases/derive_unknown_target/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/diag_bad_arg/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/diag_error/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/diag_module_and_span/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/diag_note/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/diag_warning/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/emit_emits_emitter/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	outer->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	innermost->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1100	1100	0011	
+SB	1	1100	1100	0011	
+SB	2	0011	0011	1111	
+SB	3	0011	0011	1111	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	1111
+FI	Clone	1111
+FI	Drop	0000
+FI	FfiSafe	0011
+FI	GpuSafe	1111
+FI	Eq	1111
+FI	Discrete	0011
+FI	Hash	0000
+FI	Iterator	0000
+F	/w/target/ctcases/emit_many_forms/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/emit_nested_comptime/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	nested->	usize	ok	bc-zeEio-fk0	-	-	usize	usize(const usize)->bool+	usize()->() | usize+	usize()->() | usize+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	011	
+SB	1	010	010	111	
+SB	2	001	001	111	
+MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<usize;>-	M::G<bool;>-	M::G<i32;>-	M::G<usize;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<usize;usize;>-	10T10
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	111
+FI	Eq	111
+FI	Discrete	011
+FI	Hash	000
+FI	Iterator	000
+F	/w/target/ctcases/emit_non_ast/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/emit_non_item/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/emit_shared_splice/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	first->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	second->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	first->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10000	10000	01111	
+SB	1	01111	01111	11111	
+SB	2	01111	01111	11111	
+SB	3	01111	01111	11111	
+SB	4	01111	01111	11111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	11111
+FI	Clone	11111
+FI	Drop	00000
+FI	FfiSafe	01111
+FI	GpuSafe	11111
+FI	Eq	11111
+FI	Discrete	01111
+FI	Hash	00000
+FI	Iterator	00000
+F	/w/target/ctcases/emit_twice_same_value/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	twice->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	twice->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1000	1000	0111	
+SB	1	0111	0111	1111	
+SB	2	0111	0111	1111	
+SB	3	0111	0111	1111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	1111
+FI	Clone	1111
+FI	Drop	0000
+FI	FfiSafe	0111
+FI	GpuSafe	1111
+FI	Eq	1111
+FI	Discrete	0111
+FI	Hash	0000
+FI	Iterator	0000
+F	/w/target/ctcases/emit_type_items/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/emit_without_capability/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/eval_arith/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_arity/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_array/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_array_repeat/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_array_repeat_bad/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_block_let/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_bool/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_char_float/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_compare/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_contract_ok/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_contract_post_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_contract_pre_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_enum/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_enum_eq/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_field/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_field_missing/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_if_case/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_if_case_literal/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_if_is/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_if_is_enum/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_is_modal/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_is_record/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_if_no_else/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_modal/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_prohibited_deref/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_region/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_spawn/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_prohibited_unsafe/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_record/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/eval_return/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_runtime_call_of_ct_proc/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/eval_string/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_string_value/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_suffix/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_unit/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/eval_unknown_call/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/eval_unknown_name/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/eval_wrap/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/files_all/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/files_bad_arg/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/files_unknown_method/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/files_values/Ultraviolet.toml
+X	["App"]
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1	1	1	
+MI	4	M::A<>-	M::F<i32;>-	M::G<i32;>-	M::G<i32;i32;>-	10T4
+FI	Bitcopy	1
+FI	Clone	1
+FI	Drop	0
+FI	FfiSafe	1
+FI	GpuSafe	1
+FI	Eq	1
+FI	Discrete	1
+FI	Hash	0
+FI	Iterator	0
+F	/w/target/ctcases/files_without_attribute/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/hygiene_seed_across_modules/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main_made->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	011	
+SB	1	011	011	111	
+SB	2	011	011	111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	111
+FI	Eq	111
+FI	Discrete	011
+FI	Hash	000
+FI	Iterator	000
+X	["App" "Other"]
+W	run2->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	other_made->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/quote_ambiguous/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_expr_hygiene/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_expr_value/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_invalid/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	10	10	01	
+SB	1	01	01	11	
+MI	7	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	10T7
+FI	Bitcopy	11
+FI	Clone	11
+FI	Drop	00
+FI	FfiSafe	01
+FI	GpuSafe	11
+FI	Eq	11
+FI	Discrete	01
+FI	Hash	00
+FI	Iterator	00
+F	/w/target/ctcases/quote_not_matching_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_pattern_kind/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	made->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	011	
+SB	1	011	011	111	
+SB	2	011	011	111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	111
+FI	Eq	111
+FI	Discrete	011
+FI	Hash	000
+FI	Iterator	000
+F	/w/target/ctcases/quote_stmt_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/quote_type_kind/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	Made	(i32, bool)	ok	bc-z-------0	E-TYP-2623	-	(i32, bool)	--	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	001	
+SB	1	010	010	000	
+SB	2	001	001	101	
+MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<(i32, bool);>-	M::G<bool;>-	M::G<i32;>-	M::G<(i32, bool);>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<(i32, bool);(i32, bool);>-	10T10
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	001
+FI	GpuSafe	111
+FI	Eq	101
+FI	Discrete	001
+FI	Hash	000
+FI	Iterator	000
+F	/w/target/ctcases/reflect_bad_args/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category_alias_cycle/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_category_unknown_path/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/reflect_field_loop/Ultraviolet.toml
+STOP	resolve
+F	/w/target/ctcases/reflect_fields/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_alias/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_generic_default/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_fields_not_reflect/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_structural/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_too_many_args/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_fields_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_implements/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_module_path/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_sees_emitted_type/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	Late.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	011	
+SB	1	011	011	111	
+SB	2	011	011	111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	111
+FI	Eq	111
+FI	Discrete	011
+FI	Hash	000
+FI	Iterator	000
+F	/w/target/ctcases/reflect_states/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_states_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/reflect_type_name/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_unknown_method/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_variants/Ultraviolet.toml
+CRASH	signal
+F	/w/target/ctcases/reflect_variants_wrong_kind/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_context_mismatch/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_eval_fail/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_func_type/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	Fn2	(i32, i32) -> i32	ok	bc-------f-0	-	-	(i32, i32) -> i32	--	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	001	
+SB	1	010	010	000	
+SB	2	001	001	101	
+MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<(i32, i32) -> i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<(i32, i32) -> i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<(i32, i32) -> i32;(i32, i32) -> i32;>-	10T10
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	111
+FI	Eq	101
+FI	Discrete	001
+FI	Hash	000
+FI	Iterator	000
+F	/w/target/ctcases/splice_ident/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	ident_proc(chosen)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	ident_proc->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	1000	1000	0111	
+SB	1	0111	0111	1111	
+SB	2	0111	0111	1111	
+SB	3	0111	0111	1111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	1111
+FI	Clone	1111
+FI	Drop	0000
+FI	FfiSafe	0111
+FI	GpuSafe	1111
+FI	Eq	1111
+FI	Discrete	0111
+FI	Hash	0000
+FI	Iterator	0000
+F	/w/target/ctcases/splice_ident_invalid/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_ident_not_string/Ultraviolet.toml
+STOP	comptime
+F	/w/target/ctcases/splice_literal_values/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	lit->	usize	ok	bc-zeEio-fk0	-	-	usize	usize(const usize)->bool+	usize()->() | usize+	usize()->() | usize+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	011	
+SB	1	010	010	111	
+SB	2	001	001	111	
+MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<usize;>-	M::G<bool;>-	M::G<i32;>-	M::G<usize;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<usize;usize;>-	10T10
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	111
+FI	Eq	111
+FI	Discrete	011
+FI	Hash	000
+FI	Iterator	000
+F	/w/target/ctcases/splice_stmt_tail/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	tail->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	011	
+SB	1	011	011	111	
+SB	2	011	011	111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	111
+FI	Eq	111
+FI	Discrete	011
+FI	Hash	000
+FI	Iterator	000
+F	/w/target/ctcases/splice_type_from_type_literal/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	FromLiteral	(i32, bool)	ok	bc-z-------0	E-TYP-2623	-	(i32, bool)	--	--	--
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	001	
+SB	1	010	010	000	
+SB	2	001	001	101	
+MI	10	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::F<(i32, bool);>-	M::G<bool;>-	M::G<i32;>-	M::G<(i32, bool);>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<(i32, bool);(i32, bool);>-	10T10
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	001
+FI	GpuSafe	111
+FI	Eq	101
+FI	Discrete	001
+FI	Hash	000
+FI	Iterator	000
+F	/w/target/ctcases/splice_whole_body/Ultraviolet.toml
+X	["App"]
+W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
+W	whole->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
+SB	0	100	100	011	
+SB	1	011	011	111	
+SB	2	011	011	111	
+MI	8	M::A<>-	M::F<bool;>-	M::F<i32;>-	M::G<bool;>-	M::G<i32;>-	M::G<bool;i32;>-	M::G<i32;bool;>-	M::G<i32;i32;>-	10T8
+FI	Bitcopy	111
+FI	Clone	111
+FI	Drop	000
+FI	FfiSafe	011
+FI	GpuSafe	111
+FI	Eq	111
+FI	Discrete	011
+FI	Hash	000
+FI	Iterator	000

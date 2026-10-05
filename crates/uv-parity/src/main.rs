@@ -35,6 +35,38 @@ use uv_analysis::typing::types::{
     type_to_string, KeyAtom, StringState, TypeKey, TypeNode, TypeRef,
 };
 use uv_analysis::typing::variance::{compute_variance_context, Variance};
+use uv_analysis::caps::context_caps::is_capability_class;
+use uv_analysis::composite::class_linearization::linearize_class;
+use uv_analysis::composite::classes::{
+    check_orphan_rule, class_abstract_states, class_associated_types, class_dispatchability_diagnostic,
+    class_dispatchable, class_field_table, class_method_table, class_subtypes, dispatchable, is_modal_class,
+    lookup_class_method, missing_impl_methods, type_implements_class, vtable_eligible,
+};
+use uv_analysis::composite::record_methods::recv_mode_of;
+use uv_analysis::contracts::verification::{
+    add_predicate_facts, ent_fact, ent_linear, ent_true, evaluate_constant, get_type_bounds, negated_predicate,
+    static_proof, ConstValue, StaticProofContext, StaticProofResult,
+};
+use uv_analysis::generics::generic_params::{
+    bind_type_params, build_param_scope, has_default_params, is_valid_const_param_type, parse_const_param,
+    required_param_count, total_param_count, validate_generic_params,
+};
+use uv_analysis::generics::monomorphize::{
+    check_bounds_satisfied, infer_type_arguments, InstantiationKey, MonomorphizeContext,
+};
+use uv_analysis::typing::item_generic_params::{check_generic_args, process_generic_params};
+use uv_analysis::modal::lookup::{has_state, lookup_modal_field_decl, lookup_state_method_decl, lookup_transition_decl};
+use uv_analysis::modal::modal_widen::{niche_compatible, widen_warn_cond};
+use uv_analysis::typing::signature::{build_method_signature, build_transition_signature, Signature};
+use uv_analysis::typing::subtyping::{argument_type_compatible, subtyping, SubtypingResult};
+use uv_analysis::typing::type_predicates::{
+    bitcopy_type, builtin_discrete_type, cast_valid, clone_type, drop_type, eq_type, eq_type_in, ffi_safe_diag_for_type,
+    ffi_safe_type, gpu_safe_diag_for_type, is_capability_type, lookup_foundational_builtin_method_sig, ord_type,
+    perm_of_type, strip_perm, zeroable_type,
+};
+use uv_analysis::typing::type_wf::type_wf;
+use uv_analysis::typing::types::{make_type_modal_state, make_type_path, Permission};
+use uv_source::ast::ContractClause;
 use uv_source::ast::{
     ASTItem, ClassItem, ExternItem, GenericParams, Param, Receiver, RecordMember, StateMember, TypeParam, TypePtr,
     VariantPayload,
@@ -300,7 +332,7 @@ fn dump_name_maps(out: &mut String, table: &NameMapTable) {
 
 /// Runs the front end through name resolution on one project block, in the order the
 /// driver does; see `DumpResolve` in the oracle.
-fn dump_resolve(out: &mut String, block: &[&str], types_mode: bool) {
+fn dump_resolve(out: &mut String, block: &[&str], types_mode: bool, relations_mode: bool) {
     let input = match load_project_block(block) {
         Ok(project) => project,
         Err(failure) => {
@@ -381,7 +413,11 @@ fn dump_resolve(out: &mut String, block: &[&str], types_mode: bool) {
         }
         ctx.sigma.mods = resolved.modules;
         populate_sigma(&mut ctx);
-        dump_types(out, &mut ctx, &name_maps.name_maps);
+        if relations_mode {
+            dump_relations(out, &mut ctx, &name_maps.name_maps);
+        } else {
+            dump_types(out, &mut ctx, &name_maps.name_maps);
+        }
         return;
     }
     let _ = writeln!(out, "RESOLVE\t{}", if resolved.ok { "ok" } else { "failed" });
@@ -923,6 +959,602 @@ fn dump_types(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapT
     }
 }
 
+// ---- relations between types; see `DumpRelations` in the oracle ----
+
+fn diag_or(diag_id: Option<&str>) -> &str {
+    diag_id.unwrap_or("-")
+}
+
+fn print_signature(out: &mut String, sig: &Result<Signature, Option<&'static str>>) {
+    match sig {
+        Err(diag_id) => {
+            let _ = write!(out, "fail\t{}", diag_or(*diag_id));
+        }
+        Ok(sig) => {
+            let _ = write!(
+                out,
+                "ok\t{}\t{}\t",
+                escape(&type_to_string(&sig.func_type)),
+                escape(&type_to_string(&sig.return_type))
+            );
+            for (name, ty) in &sig.bindings {
+                let _ = write!(out, "{name}:{};", escape(&type_to_string(ty)));
+            }
+        }
+    }
+}
+
+fn print_proof(out: &mut String, proof: &StaticProofResult) {
+    let _ = write!(
+        out,
+        "{}/{}/{}",
+        if proof.provable { '1' } else { '0' },
+        diag_or(proof.diag_id),
+        escape(proof.explanation)
+    );
+}
+
+fn print_const(out: &mut String, value: ConstValue) {
+    match value {
+        ConstValue::Unknown => out.push('?'),
+        ConstValue::Bool(value) => out.push_str(if value { "true" } else { "false" }),
+        ConstValue::Int(value) => {
+            let _ = write!(out, "{value}");
+        }
+    }
+}
+
+fn dump_contract(out: &mut String, owner: &str, contract: &Option<ContractClause>) {
+    let Some(contract) = contract else {
+        return;
+    };
+    let _ = write!(out, "PC\t{owner}");
+    for clause in [&contract.precondition, &contract.postcondition] {
+        out.push('\t');
+        if clause.is_none() {
+            out.push('-');
+            continue;
+        }
+        print_proof(out, &static_proof(&StaticProofContext::default(), clause));
+        out.push(' ');
+        print_const(out, evaluate_constant(clause));
+        out.push(' ');
+        out.push(if ent_true(clause) { 't' } else { '-' });
+        out.push(if negated_predicate(clause).is_some_and(|negated| negated.is_some()) { 'n' } else { '-' });
+    }
+    out.push('\t');
+    if contract.precondition.is_some() && contract.postcondition.is_some() {
+        let mut proof_ctx = StaticProofContext::default();
+        add_predicate_facts(&mut proof_ctx, &contract.precondition);
+        let _ = write!(out, "{} ", proof_ctx.facts.len());
+        print_proof(out, &static_proof(&proof_ctx, &contract.postcondition));
+        out.push(' ');
+        out.push(if ent_fact(&proof_ctx, &contract.postcondition) { 'f' } else { '-' });
+        out.push(if ent_linear(&proof_ctx, &contract.postcondition) { 'l' } else { '-' });
+        if let Some(negated) = negated_predicate(&contract.precondition).filter(|negated| negated.is_some()) {
+            let mut neg_ctx = StaticProofContext::default();
+            add_predicate_facts(&mut neg_ctx, &negated);
+            out.push(' ');
+            print_proof(out, &static_proof(&neg_ctx, &contract.postcondition));
+        }
+    } else {
+        out.push('-');
+    }
+    out.push('\n');
+}
+
+fn flag(out: &mut String, set: bool, mark: char) {
+    out.push(if set { mark } else { '-' });
+}
+
+fn print_diag_list(out: &mut String, diags: &[Diagnostic]) {
+    for diag in diags {
+        let _ = write!(out, " [{}|{}|", diag.code, escape(&diag.message));
+        match &diag.span {
+            Some(span) => {
+                let _ = write!(out, "{}", span.start_offset);
+            }
+            None => out.push('-'),
+        }
+        out.push(']');
+    }
+}
+
+fn type_text(ty: &TypeRef) -> String {
+    if ty.is_some() {
+        escape(&type_to_string(ty))
+    } else {
+        "-".to_string()
+    }
+}
+
+fn dump_generic_params(
+    out: &mut String,
+    ctx: &ScopeContext<'_>,
+    name: &str,
+    generic_params: &Option<GenericParams>,
+    types: &[TypeRef],
+) {
+    let params: &[TypeParam] = generic_params.as_ref().map_or(&[], |params| &params.params);
+    let _ = write!(
+        out,
+        "GP\t{name}\t{}/{}{}\t",
+        required_param_count(generic_params),
+        total_param_count(generic_params),
+        if has_default_params(generic_params) { 'd' } else { '-' }
+    );
+    match validate_generic_params(generic_params) {
+        Ok(infos) => {
+            out.push_str("ok -");
+            for info in &infos {
+                let default = info.default_type.as_ref().map_or_else(|| "none".to_string(), type_text);
+                let _ = write!(out, " {}/{}/{default}", info.name, info.class_bounds.len());
+            }
+        }
+        Err(error) => {
+            let _ = write!(out, "fail {}", diag_or(error.diag_id));
+            print_diag_list(out, &error.diagnostics);
+        }
+    }
+    out.push('\t');
+    let processed = process_generic_params(ctx, params);
+    match &processed {
+        Ok(infos) => {
+            out.push_str("ok -");
+            for info in infos {
+                let _ = write!(out, " {}/{}/{}", info.name, info.class_bounds.len(), type_text(&info.default_type));
+            }
+        }
+        Err(diag_id) => {
+            let _ = write!(out, "fail {}", diag_or(*diag_id));
+        }
+    }
+    let _ = write!(out, "\t{}", bind_type_params(ctx, generic_params).len());
+    let scope = build_param_scope(generic_params);
+    let mut keys: Vec<&String> = scope.keys().collect();
+    keys.sort();
+    for key in keys {
+        let entity = &scope.get(key).expect("key of the scope");
+        let _ = write!(
+            out,
+            " {key}={}/{}",
+            entity.target_opt.as_deref().unwrap_or("-"),
+            entity.type_param_class_bounds.len()
+        );
+    }
+    out.push('\t');
+    for param in params {
+        let info = parse_const_param(param, &make_type_prim("u8"));
+        let _ = write!(out, "{}=", info.name);
+        match info.default_value {
+            Some(value) => {
+                let _ = write!(out, "{value}");
+            }
+            None => out.push('-'),
+        }
+        out.push(if parse_const_param(param, &make_type_prim("bool")).r#type.is_some() { '!' } else { ' ' });
+    }
+    out.push('\n');
+    for n in 0..=params.len() + 1 {
+        for shift in [0usize, 7] {
+            if types.is_empty() && (n != 0 || shift != 0) {
+                continue;
+            }
+            let args: Vec<TypeRef> = (0..n).map(|i| types[(shift + i * 3) % types.len()].clone()).collect();
+            let _ = write!(out, "GB\t{name}\t{n}.{shift}\t");
+            match check_bounds_satisfied(params, &args) {
+                Ok(()) => out.push_str("ok"),
+                Err(error) => {
+                    let _ = write!(
+                        out,
+                        "fail {}|{}|{}|{}",
+                        diag_or(error.diag_id),
+                        error.param_name,
+                        escape(&error.type_name),
+                        error.bound_name
+                    );
+                    print_diag_list(out, &error.diagnostics);
+                }
+            }
+            out.push('\t');
+            match &processed {
+                Ok(infos) => match check_generic_args(ctx, infos, &args) {
+                    Ok(()) => out.push_str("ok -"),
+                    Err(diag_id) => {
+                        let _ = write!(out, "fail {diag_id}");
+                    }
+                },
+                Err(_) => out.push('-'),
+            }
+            out.push('\n');
+        }
+    }
+}
+
+fn dump_inference(
+    out: &mut String,
+    ctx: &ScopeContext<'_>,
+    name: &str,
+    generic_params: &Option<GenericParams>,
+    proc_params: &[Param],
+    types: &[TypeRef],
+) {
+    let params: &[TypeParam] = generic_params.as_ref().map_or(&[], |params| &params.params);
+    let mut bound_ctx = ctx.clone();
+    bound_ctx.scopes = bind_type_params(ctx, generic_params);
+    let expected: Vec<TypeRef> =
+        proc_params.iter().map(|param| lower_type(&bound_ctx, &param.r#type).unwrap_or(None)).collect();
+    for variant in 0..3 {
+        if variant != 0 && types.is_empty() {
+            continue;
+        }
+        let actual: Vec<TypeRef> = match variant {
+            0 => expected.clone(),
+            1 => {
+                let args: Vec<TypeRef> = (0..params.len()).map(|j| types[(j * 5 + 1) % types.len()].clone()).collect();
+                let subst = build_substitution(params, &args);
+                expected.iter().map(|ty| if ty.is_some() { instantiate_type(ty, &subst) } else { None }).collect()
+            }
+            _ => (0..expected.len()).map(|i| types[i % types.len()].clone()).collect(),
+        };
+        let inferred = infer_type_arguments(params, &expected, &actual);
+        let _ = write!(
+            out,
+            "IN\t{name}\t{variant}\t{} {}",
+            if inferred.ok { "ok" } else { "fail" },
+            diag_or(inferred.diag_id)
+        );
+        for arg in &inferred.inferred_args {
+            let _ = write!(out, "\t{}", type_text(arg));
+        }
+        out.push('\n');
+    }
+}
+
+fn dump_instantiation_set(out: &mut String, types: &[TypeRef]) {
+    let mut mono = MonomorphizeContext::default();
+    let count = types.len().min(12);
+    let key = |name: &str, args: Vec<TypeRef>| InstantiationKey { decl_path: vec!["M".to_string(), name.to_string()], args };
+    for ty in &types[..count] {
+        mono.demand(&key("G", vec![ty.clone()]));
+    }
+    for i in 0..count {
+        mono.demand(&key("G", vec![types[i].clone(), types[count - 1 - i].clone()]));
+    }
+    for i in 0..count {
+        mono.demand(&key("F", vec![types[count - 1 - i].clone()]));
+    }
+    mono.demand(&key("A", Vec::new()));
+    mono.demand(&key("A", Vec::new()));
+    let _ = write!(out, "MI\t{}", mono.instantiations().len());
+    for (inst, entry) in mono.instantiations() {
+        let _ = write!(out, "\t{}<", string_of_path(&inst.decl_path));
+        for arg in &inst.args {
+            let _ = write!(out, "{};", type_text(arg));
+        }
+        let _ = write!(out, ">{}", if entry.processed { 'p' } else { '-' });
+    }
+    out.push('\t');
+    out.push(if mono.has_instantiation(&key("A", Vec::new())) { '1' } else { '0' });
+    out.push(if mono.has_instantiation(&key("B", Vec::new())) { '1' } else { '0' });
+    out.push(if mono.process_to_fixed_point() { 'T' } else { 'F' });
+    let _ = writeln!(out, "{}", mono.instantiations().values().filter(|entry| entry.processed).count());
+}
+
+fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
+    const FOUNDATIONAL: [&str; 9] =
+        ["Bitcopy", "Clone", "Drop", "FfiSafe", "GpuSafe", "Eq", "Discrete", "Hash", "Iterator"];
+    for index in 0..ctx.sigma.mods.len() {
+        let module = ctx.sigma.mods[index].clone();
+        dump_line("X", &module.path, out);
+        ctx.current_module = module.path.clone();
+        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        ctx.scopes = vec![Scope::new(), names, universe_bindings()];
+        let ctx = &*ctx;
+        let mut types: Vec<TypeRef> = Vec::new();
+        for (label, written) in collect_written_types(&module) {
+            let Ok(ty) = lower_type(ctx, &written) else {
+                continue;
+            };
+            types.push(ty.clone());
+            let text = type_to_string(&ty);
+            let _ = write!(out, "W\t{}\t{}\t", escape(&label), escape(&text));
+            if text.contains(" where { ... }") {
+                out.push_str("pending");
+            } else {
+                match type_wf(ctx, &ty) {
+                    Ok(()) => out.push_str("ok"),
+                    Err(diag_id) => {
+                        let _ = write!(out, "fail:{}", diag_or(diag_id));
+                    }
+                }
+            }
+            out.push('\t');
+            flag(out, bitcopy_type(ctx, &ty), 'b');
+            flag(out, clone_type(ctx, &ty), 'c');
+            flag(out, drop_type(ctx, &ty), 'd');
+            flag(out, zeroable_type(ctx, &ty), 'z');
+            flag(out, eq_type(&ty), 'e');
+            flag(out, eq_type_in(ctx, &ty), 'E');
+            flag(out, builtin_discrete_type(&ty), 'i');
+            flag(out, ord_type(&ty), 'o');
+            flag(out, is_capability_type(&ty), 'C');
+            flag(out, ffi_safe_type(ctx, &ty), 'f');
+            flag(out, is_valid_const_param_type(&ty), 'k');
+            let _ = write!(
+                out,
+                "{}\t{}\t{}\t{}",
+                match perm_of_type(&ty) {
+                    Permission::Const => 0,
+                    Permission::Unique => 1,
+                    Permission::Shared => 2,
+                },
+                diag_or(ffi_safe_diag_for_type(ctx, &ty)),
+                diag_or(gpu_safe_diag_for_type(ctx, &ty)),
+                escape(&type_to_string(&strip_perm(&ty)))
+            );
+            for method in ["eq", "successor", "predecessor"] {
+                out.push('\t');
+                match lookup_foundational_builtin_method_sig(Some(ctx), &ty, method) {
+                    Some(sig) => {
+                        let _ = write!(out, "{}(", escape(&type_to_string(&sig.recv_type)));
+                        for param in &sig.params {
+                            out.push_str(&escape(&type_to_string(&param.r#type)));
+                        }
+                        let _ = write!(out, ")->{}", escape(&type_to_string(&sig.ret)));
+                    }
+                    None => out.push('-'),
+                }
+                out.push(if lookup_foundational_builtin_method_sig(None, &ty, method).is_some() { '+' } else { '-' });
+            }
+            out.push('\n');
+            if let Some(TypeNode::Refine { base, predicate }) = ty.as_deref().map(|ty| &ty.node) {
+                if predicate.is_some() {
+                    out.push_str("PR\t");
+                    print_proof(out, &static_proof(&StaticProofContext::default(), predicate));
+                    out.push('\t');
+                    print_const(out, evaluate_constant(predicate));
+                    let mut self_ctx = StaticProofContext::default();
+                    add_predicate_facts(&mut self_ctx, predicate);
+                    let _ = write!(out, "\t{} ", self_ctx.facts.len());
+                    print_proof(out, &static_proof(&self_ctx, predicate));
+                    match get_type_bounds(base) {
+                        Some((min, max)) => {
+                            let _ = writeln!(out, "\t11 {min} {max}");
+                        }
+                        None => out.push_str("\t00 0 0\n"),
+                    }
+                }
+            }
+        }
+        let count = types.len().min(40);
+        for i in 0..count {
+            let (mut sub, mut arg, mut cast, mut diags) = (String::new(), String::new(), String::new(), String::new());
+            let mark = |res: SubtypingResult| match (res.ok, res.subtype) {
+                (false, _) => 'e',
+                (true, true) => '1',
+                (true, false) => '0',
+            };
+            for j in 0..count {
+                let res = subtyping(ctx, &types[i], &types[j]);
+                sub.push(mark(res));
+                if let Some(diag_id) = res.diag_id {
+                    let _ = write!(diags, " {j}={diag_id}");
+                }
+                arg.push(mark(argument_type_compatible(ctx, &types[i], &types[j], None)));
+                cast.push(if cast_valid(&types[i], &types[j]) { '1' } else { '0' });
+            }
+            let _ = writeln!(out, "SB\t{i}\t{sub}\t{arg}\t{cast}\t{diags}");
+        }
+        let implements = |out: &mut String, class: &[String]| {
+            for ty in &types[..count] {
+                out.push(if type_implements_class(ctx, ty, class) { '1' } else { '0' });
+            }
+        };
+        dump_instantiation_set(out, &types);
+        for name in FOUNDATIONAL {
+            let _ = write!(out, "FI\t{name}\t");
+            implements(out, &[name.to_string()]);
+            out.push('\n');
+        }
+        let child = |name: &str| [&module.path[..], &[name.to_string()]].concat();
+        let classes: Vec<Vec<String>> = module
+            .items
+            .iter()
+            .filter_map(|item| match item {
+                ASTItem::ClassDecl(decl) => Some(child(&decl.name)),
+                _ => None,
+            })
+            .collect();
+        for item in &module.items {
+            let named: Option<(&str, &Option<GenericParams>)> = match item {
+                ASTItem::ProcedureDecl(node) => Some((&node.name, &node.generic_params)),
+                ASTItem::ComptimeProcedureDecl(node) => Some((&node.name, &node.generic_params)),
+                ASTItem::RecordDecl(node) => Some((&node.name, &node.generic_params)),
+                ASTItem::EnumDecl(node) => Some((&node.name, &node.generic_params)),
+                ASTItem::ModalDecl(node) => Some((&node.name, &node.generic_params)),
+                ASTItem::ClassDecl(node) => Some((&node.name, &node.generic_params)),
+                ASTItem::TypeAliasDecl(node) => Some((&node.name, &node.generic_params)),
+                _ => None,
+            };
+            if let Some((name, generic_params @ Some(_))) = named {
+                dump_generic_params(out, ctx, name, generic_params, &types);
+            }
+            match item {
+                ASTItem::ProcedureDecl(node) if node.generic_params.is_some() => {
+                    dump_inference(out, ctx, &node.name, &node.generic_params, &node.params, &types);
+                }
+                ASTItem::ComptimeProcedureDecl(node) if node.generic_params.is_some() => {
+                    dump_inference(out, ctx, &node.name, &node.generic_params, &node.params, &types);
+                }
+                _ => {}
+            }
+            match item {
+                ASTItem::ProcedureDecl(node) => dump_contract(out, &node.name, &node.contract),
+                ASTItem::ClassDecl(node) => {
+                    let path = child(&node.name);
+                    let _ = write!(out, "CL\t{}\t", node.name);
+                    match linearize_class(ctx, &path) {
+                        Ok(order) => {
+                            out.push_str("ok");
+                            for entry in &order {
+                                let _ = write!(out, " {}", string_of_path(entry));
+                            }
+                        }
+                        Err(diag_id) => {
+                            let _ = write!(out, "fail {diag_id}");
+                        }
+                    }
+                    out.push('\t');
+                    match class_method_table(ctx, &path) {
+                        Ok(methods) => {
+                            out.push_str("ok");
+                            for entry in &methods {
+                                let _ = write!(
+                                    out,
+                                    " {}::{}{}",
+                                    string_of_path(&entry.owner),
+                                    entry.method.name,
+                                    if vtable_eligible(entry.method) { '+' } else { '-' }
+                                );
+                            }
+                        }
+                        Err(diag_id) => {
+                            let _ = write!(out, "fail {diag_id}");
+                        }
+                    }
+                    out.push('\t');
+                    match class_field_table(ctx, &path) {
+                        Ok(fields) => {
+                            out.push_str("ok");
+                            for field in &fields {
+                                let _ = write!(out, " {}", field.name);
+                            }
+                        }
+                        Err(diag_id) => {
+                            let _ = write!(out, "fail {diag_id}");
+                        }
+                    }
+                    let _ = write!(out, "\t{}\t", diag_or(class_dispatchability_diagnostic(ctx, &path)));
+                    flag(out, class_dispatchable(ctx, &path), 'd');
+                    flag(out, dispatchable(node), 'D');
+                    flag(out, is_modal_class(node), 'm');
+                    flag(out, is_capability_class(ctx, &path), 'c');
+                    let _ = write!(out, "\t{}/{}\t", class_associated_types(node).len(), class_abstract_states(node).len());
+                    for other in &classes {
+                        out.push(if class_subtypes(ctx, &path, other) { '1' } else { '0' });
+                    }
+                    out.push('\t');
+                    implements(out, &path);
+                    out.push('\t');
+                    for class_item in &node.items {
+                        if let ClassItem::ClassMethodDecl(method) = class_item {
+                            out.push(match lookup_class_method(ctx, &path, &method.name) {
+                                Some(found) if std::ptr::eq(found, method) => '=',
+                                Some(_) => '^',
+                                None => '!',
+                            });
+                        }
+                    }
+                    out.push('\n');
+                }
+                ASTItem::RecordDecl(node) => {
+                    let path = child(&node.name);
+                    let self_type = make_type_path(path.clone());
+                    for class_path in &node.implements {
+                        let _ = write!(out, "IM\t{}\t{}\t", node.name, string_of_path(class_path));
+                        match missing_impl_methods(ctx, class_path, node) {
+                            None => out.push_str("fail -"),
+                            Some(missing) if missing.is_empty() => out.push_str("ok -"),
+                            Some(missing) => {
+                                out.push_str("fail E-TYP-IMPL-INCOMPLETE");
+                                for name in &missing {
+                                    let _ = write!(out, " {name}");
+                                }
+                            }
+                        }
+                        out.push('\t');
+                        out.push(if check_orphan_rule(ctx, &path, class_path, &module.path) { '1' } else { '0' });
+                        out.push(if check_orphan_rule(ctx, &path, class_path, &["Elsewhere".to_string()]) { '1' } else { '0' });
+                        out.push(if type_implements_class(ctx, &self_type, class_path) { '1' } else { '0' });
+                        out.push('\n');
+                    }
+                    for member in &node.members {
+                        let RecordMember::MethodDecl(method) = member else {
+                            continue;
+                        };
+                        let _ = write!(out, "MS\t{}::{}\t", node.name, method.name);
+                        let sig = build_method_signature(
+                            ctx,
+                            &self_type,
+                            &method.receiver,
+                            &method.params,
+                            &method.return_type_opt,
+                            None,
+                        );
+                        print_signature(out, &sig);
+                        let _ = writeln!(out, "\t{}", if recv_mode_of(&method.receiver).is_some() { "move" } else { "-" });
+                        dump_contract(out, &format!("{}::{}", node.name, method.name), &method.contract);
+                    }
+                }
+                ASTItem::ModalDecl(node) => {
+                    let path = child(&node.name);
+                    for state in &node.states {
+                        let state_type = make_type_modal_state(path.clone(), &state.name, Vec::new());
+                        let _ = write!(out, "MW\t{}@{}\t", node.name, state.name);
+                        flag(out, niche_compatible(ctx, &path, &state.name), 'n');
+                        flag(out, widen_warn_cond(ctx, &path, &state.name), 'w');
+                        flag(out, has_state(node, &state.name), 's');
+                        out.push('\n');
+                        let same = |found: bool| if found { '=' } else { '!' };
+                        for member in &state.members {
+                            match member {
+                                StateMember::StateMethodDecl(method) => {
+                                    let _ = write!(out, "MS\t{}@{}::{}\t", node.name, state.name, method.name);
+                                    let sig = build_method_signature(
+                                        ctx,
+                                        &state_type,
+                                        &method.receiver,
+                                        &method.params,
+                                        &method.return_type_opt,
+                                        None,
+                                    );
+                                    print_signature(out, &sig);
+                                    let found = lookup_state_method_decl(node, &state.name, &method.name);
+                                    let _ = writeln!(out, "\t{}", same(found.is_some_and(|found| std::ptr::eq(found, method))));
+                                }
+                                StateMember::TransitionDecl(transition) => {
+                                    let _ = write!(out, "TS\t{}@{}::{}\t", node.name, state.name, transition.name);
+                                    let target = make_type_modal_state(path.clone(), &transition.target_state, Vec::new());
+                                    print_signature(
+                                        out,
+                                        &build_transition_signature(ctx, &state_type, &target, &transition.params, None),
+                                    );
+                                    let found = lookup_transition_decl(node, &state.name, &transition.name);
+                                    let _ =
+                                        writeln!(out, "\t{}", same(found.is_some_and(|found| std::ptr::eq(found, transition))));
+                                }
+                                StateMember::StateFieldDecl(field) => {
+                                    let found = lookup_modal_field_decl(node, &state.name, &field.name);
+                                    let _ = writeln!(
+                                        out,
+                                        "MF\t{}@{}.{}\t{}",
+                                        node.name,
+                                        state.name,
+                                        field.name,
+                                        same(found.is_some_and(|found| std::ptr::eq(found, field)))
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+}
+
 /// The built-in declarations; see `DumpSigma` in the oracle.
 fn dump_sigma(out: &mut String) {
     let mut ctx = ScopeContext::default();
@@ -1055,7 +1687,7 @@ fn run() -> Result<(), String> {
             dump_sigma(&mut out);
             stdout.write_all(out.as_bytes()).map_err(|err| err.to_string())
         }
-        Some(mode @ ("comptime" | "resolve" | "types")) if args.len() >= 3 => {
+        Some(mode @ ("comptime" | "resolve" | "types" | "relations")) if args.len() >= 3 => {
             let list = std::fs::read_to_string(&args[2]).map_err(|err| err.to_string())?;
             let mut block: Vec<&str> = Vec::new();
             for line in list.lines() {
@@ -1065,11 +1697,12 @@ fn run() -> Result<(), String> {
                 }
                 let mut out = String::new();
                 if mode != "comptime" {
-                    dump_resolve(&mut out, &block, mode == "types");
+                    dump_resolve(&mut out, &block, mode != "resolve", mode == "relations");
                 } else {
                     dump_comptime(&mut out, &block);
                 }
                 stdout.write_all(out.as_bytes()).map_err(|err| err.to_string())?;
+                stdout.flush().map_err(|err| err.to_string())?;
                 block.clear();
             }
             Ok(())

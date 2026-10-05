@@ -81,6 +81,21 @@ for name in comptime_projects comptime_cases resolve_targeted types_extra; do
     /w/reference/oracle/uv-oracle types "$ROOT/target/parity/$name.oracle.list" \
     | sed "s|$ROOT/|/w/|g" > "tests/golden/$out.tsv"
 done
+# The relations between types, on the same lists and on cases of their own.
+python3 tools/gen_relation_cases.py
+for name in comptime_projects comptime_cases resolve_targeted types_extra relations_extra; do
+  ./target/release/uv-parity comptime-list "tests/golden/$name.list" > "target/parity/$name.oracle.list"
+  case "$name" in
+    comptime_projects) out=relations ;;
+    comptime_cases) out=relations_cases ;;
+    resolve_targeted) out=relations_targeted ;;
+    types_extra) out=relations_types ;;
+    *) out=$name ;;
+  esac
+  docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -v "$ROOT":"$ROOT" -e LD_LIBRARY_PATH="$ICU" uv-oracle \
+    /w/reference/oracle/uv-oracle relations "$ROOT/target/parity/$name.oracle.list" \
+    | sed "s|$ROOT/|/w/|g" > "tests/golden/$out.tsv"
+done
 run uv-oracle /w/reference/oracle/uv-oracle sigma > tests/golden/sigma.tsv
 run uv-oracle sh -c 'g++ -std=c++20 -O1 -o /tmp/probe /w/tools/oracle/unordered_probe.cpp && /tmp/probe' \
   > tests/golden/unordered_order.txt

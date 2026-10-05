@@ -27,12 +27,28 @@ pub fn is_outcome_type_path<S: AsRef<str>>(path: &[S]) -> bool {
     any_builtin(path, &["Outcome"])
 }
 
-/// The capability classes a class path may name without a declaration.
-pub fn is_capability_class_path<S: AsRef<str>>(path: &[S]) -> bool {
+/// The built-in classes name resolution leaves as written. `System` is not among them.
+pub fn is_class_path_resolved_without_declaration<S: AsRef<str>>(path: &[S]) -> bool {
     any_builtin(
         path,
         &["IO", "Network", "HeapAllocator", "Time", "MonotonicTime", "WallTime", "ExecutionDomain", "Reactor"],
     )
+}
+
+/// The built-in capability classes.
+pub fn is_capability_class_path<S: AsRef<str>>(path: &[S]) -> bool {
+    any_builtin(
+        path,
+        &["IO", "Network", "HeapAllocator", "ExecutionDomain", "System", "Reactor", "Time", "MonotonicTime", "WallTime"],
+    )
+}
+
+pub fn is_execution_domain_class_path<S: AsRef<str>>(path: &[S]) -> bool {
+    any_builtin(path, &["ExecutionDomain"])
+}
+
+pub fn is_context_type_path<S: AsRef<str>>(path: &[S]) -> bool {
+    any_builtin(path, &["Context"])
 }
 
 /// Records that can be constructed by bare name. The reference table has a spare empty

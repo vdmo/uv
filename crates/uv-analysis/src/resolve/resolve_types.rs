@@ -84,7 +84,7 @@ pub fn resolve_class_path(ctx: &mut ResolveContext<'_, '_>, path: &[String]) -> 
         return Err(ResError::default());
     };
     if prefix.is_empty() {
-        if is_capability_class_path(path) || is_foundational_class_path(path) {
+        if is_class_path_resolved_without_declaration(path) || is_foundational_class_path(path) {
             return Ok(vec![name.clone()]);
         }
         return Ok(match resolve_class_name(ctx.ctx, name) {

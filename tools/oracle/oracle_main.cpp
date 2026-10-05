@@ -41,6 +41,20 @@
 #include "04_analysis/typing/type_stmt.h"
 #include "04_analysis/typing/types.h"
 #include "04_analysis/typing/variance.h"
+#include "04_analysis/composite/classes.h"
+#include "04_analysis/caps/cap_system.h"
+#include "04_analysis/modal/modal_fields.h"
+#include "04_analysis/modal/modal_transitions.h"
+#include "04_analysis/composite/record_methods.h"
+#include "04_analysis/typing/type_expr.h"
+#include "04_analysis/contracts/verification.h"
+#include "04_analysis/generics/generic_params.h"
+#include "04_analysis/generics/where_bounds.h"
+#include "04_analysis/modal/modal.h"
+#include "04_analysis/typing/subtyping.h"
+#include "04_analysis/typing/type_decls.h"
+#include "04_analysis/typing/type_predicates.h"
+#include "04_analysis/typing/type_wf.h"
 #include <algorithm>
 #include <unordered_map>
 
@@ -484,6 +498,7 @@ bool HasErrorDiag(const core::DiagnosticStream& diags) {
 // module-level bindings) is lowered and printed with what the type core derives from it.
 
 bool g_types_mode = false;
+bool g_rel_mode = false;
 
 void PrintKey(const analysis::TypeKey& key);
 void PrintAtom(const analysis::KeyAtom& atom) {
@@ -950,6 +965,427 @@ void DumpTypes(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_m
   }
 }
 
+// ---- relations between types: well-formedness, predicates, subtyping, classes ----
+
+std::string DiagOr(const std::optional<std::string_view>& diag_id) {
+  return diag_id ? std::string(*diag_id) : "-";
+}
+
+void PrintSignature(const analysis::SignatureResult& sig) {
+  if (!sig.ok) {
+    std::cout << "fail\t" << DiagOr(sig.diag_id);
+    return;
+  }
+  std::cout << "ok\t" << Escape(analysis::TypeToString(sig.func_type)) << '\t'
+            << Escape(analysis::TypeToString(sig.return_type)) << '\t';
+  for (const auto& [name, type] : sig.bindings) {
+    std::cout << name << ':' << Escape(analysis::TypeToString(type)) << ';';
+  }
+}
+
+void PrintProof(const analysis::StaticProofResult& proof) {
+  std::cout << (proof.provable ? '1' : '0') << '/' << DiagOr(proof.diag_id) << '/' << Escape(proof.explanation);
+}
+
+void PrintConst(const analysis::ConstValue& value) {
+  if (!value.known) std::cout << '?';
+  else if (value.is_bool) std::cout << (value.bool_value ? "true" : "false");
+  else std::cout << value.value;
+}
+
+// A contract's clauses: what each proves alone, and the postcondition given the
+// precondition.
+void DumpContract(const std::string& owner, const std::optional<ast::ContractClause>& contract) {
+  if (!contract) return;
+  std::cout << "PC\t" << owner;
+  for (const auto& clause : {contract->precondition, contract->postcondition}) {
+    std::cout << '\t';
+    if (!clause) {
+      std::cout << '-';
+      continue;
+    }
+    PrintProof(analysis::StaticProof(analysis::StaticProofContext{}, clause));
+    std::cout << ' ';
+    PrintConst(analysis::EvaluateConstant(clause));
+    std::cout << ' ' << (analysis::EntTrue(clause) ? 't' : '-');
+    const auto negated = analysis::NegatedPredicate(clause);
+    std::cout << (negated && *negated ? 'n' : '-');
+  }
+  std::cout << '\t';
+  if (contract->precondition && contract->postcondition) {
+    analysis::StaticProofContext proof_ctx;
+    analysis::AddPredicateFacts(proof_ctx, contract->precondition);
+    std::cout << proof_ctx.facts.size() << ' ';
+    PrintProof(analysis::StaticProof(proof_ctx, contract->postcondition));
+    std::cout << ' ' << (analysis::EntFact(proof_ctx, contract->postcondition) ? 'f' : '-')
+              << (analysis::EntLinear(proof_ctx, contract->postcondition) ? 'l' : '-');
+    // And the precondition refuted: its negation as the only fact.
+    if (const auto negated = analysis::NegatedPredicate(contract->precondition); negated && *negated) {
+      analysis::StaticProofContext neg_ctx;
+      analysis::AddPredicateFacts(neg_ctx, *negated);
+      std::cout << ' ';
+      PrintProof(analysis::StaticProof(neg_ctx, contract->postcondition));
+    }
+  } else {
+    std::cout << '-';
+  }
+  std::cout << '\n';
+}
+
+void PrintDiagList(const core::DiagnosticStream& diags) {
+  for (const auto& diag : diags) {
+    std::cout << " [" << diag.code << '|' << Escape(diag.message) << '|';
+    if (diag.span) std::cout << diag.span->start_offset; else std::cout << '-';
+    std::cout << ']';
+  }
+}
+
+std::string TypeText(const analysis::TypeRef& type) {
+  return type ? Escape(analysis::TypeToString(type)) : "-";
+}
+
+// A generic parameter list: how it validates, the scope it binds, and how argument
+// lists drawn from the module's types fit it.
+void DumpGenericParams(analysis::ScopeContext& ctx, const std::string& name,
+                       const std::optional<ast::GenericParams>& generic_params,
+                       const std::vector<analysis::TypeRef>& types) {
+  const auto& params = generic_params->params;
+  std::cout << "GP\t" << name << '\t' << analysis::RequiredParamCount(generic_params) << '/'
+            << analysis::TotalParamCount(generic_params)
+            << (analysis::HasDefaultParams(generic_params) ? 'd' : '-') << '\t';
+  const auto valid = analysis::ValidateGenericParams(ctx, generic_params);
+  std::cout << (valid.ok ? "ok" : "fail") << ' ' << DiagOr(valid.diag_id);
+  for (const auto& info : valid.type_params) {
+    std::cout << ' ' << info.name << '/' << info.class_bounds.size() << '/'
+              << (info.default_type ? TypeText(*info.default_type) : "none");
+  }
+  PrintDiagList(valid.diagnostics);
+  std::cout << '\t';
+  const auto processed = analysis::ProcessGenericParams(ctx, generic_params);
+  std::cout << (processed.ok ? "ok" : "fail") << ' ' << DiagOr(processed.diag_id);
+  if (processed.ok) {
+    for (const auto& info : processed.params) {
+      std::cout << ' ' << info.name << '/' << info.class_bounds.size() << '/' << TypeText(info.default_type);
+    }
+  }
+  std::cout << '\t' << analysis::BindTypeParams(ctx, generic_params).size();
+  const auto scope = analysis::BuildParamScope(ctx, generic_params);
+  std::vector<std::string> keys;
+  for (const auto& [key, entity] : scope) keys.push_back(key);
+  std::sort(keys.begin(), keys.end());
+  for (const auto& key : keys) {
+    const auto& entity = scope.at(key);
+    std::cout << ' ' << key << '=' << entity.target_opt.value_or("-") << '/' << entity.type_param_class_bounds.size();
+  }
+  std::cout << '\t';
+  for (const auto& param : params) {
+    const auto info = analysis::ParseConstParam(ctx, param, analysis::MakeTypePrim("u8"));
+    std::cout << info.name << '=';
+    if (info.default_value) std::cout << *info.default_value; else std::cout << '-';
+    std::cout << (analysis::ParseConstParam(ctx, param, analysis::MakeTypePrim("bool")).type ? '!' : ' ');
+  }
+  std::cout << '\n';
+  for (std::size_t n = 0; n <= params.size() + 1; ++n) {
+    for (const std::size_t shift : {std::size_t{0}, std::size_t{7}}) {
+      if (types.empty() && (n != 0 || shift != 0)) continue;
+      std::vector<analysis::TypeRef> args;
+      for (std::size_t i = 0; i < n; ++i) args.push_back(types[(shift + i * 3) % types.size()]);
+      std::cout << "GB\t" << name << '\t' << n << '.' << shift << '\t';
+      const auto bounds = analysis::CheckBoundsSatisfied(params, args);
+      if (bounds.ok) {
+        std::cout << "ok";
+      } else {
+        std::cout << "fail " << DiagOr(bounds.diag_id) << '|' << bounds.param_name << '|' << Escape(bounds.type_name)
+                  << '|' << bounds.bound_name;
+      }
+      PrintDiagList(bounds.diagnostics);
+      std::cout << '\t';
+      if (processed.ok) {
+        const auto checked = analysis::CheckGenericArgs(ctx, processed.params, args);
+        std::cout << (checked.ok ? "ok" : "fail") << ' ' << DiagOr(checked.diag_id);
+      } else {
+        std::cout << '-';
+      }
+      std::cout << '\n';
+    }
+  }
+}
+
+// Type arguments inferred for a generic procedure: from its own parameter types, from
+// those types instantiated with the module's types, and from the module's types as they
+// come.
+void DumpInference(analysis::ScopeContext& ctx, const std::string& name,
+                   const std::optional<ast::GenericParams>& generic_params,
+                   const std::vector<ast::Param>& proc_params,
+                   const std::vector<analysis::TypeRef>& types) {
+  const auto& params = generic_params->params;
+  const auto saved = ctx.scopes;
+  ctx.scopes = analysis::BindTypeParams(ctx, generic_params);
+  std::vector<analysis::TypeRef> expected;
+  for (const auto& param : proc_params) {
+    const auto lowered = analysis::LowerType(ctx, param.type);
+    expected.push_back(lowered.ok ? lowered.type : nullptr);
+  }
+  ctx.scopes = saved;
+  for (int variant = 0; variant < 3; ++variant) {
+    if (variant != 0 && types.empty()) continue;
+    std::vector<analysis::TypeRef> actual;
+    if (variant == 0) {
+      actual = expected;
+    } else if (variant == 1) {
+      std::vector<analysis::TypeRef> args;
+      for (std::size_t j = 0; j < params.size(); ++j) args.push_back(types[(j * 5 + 1) % types.size()]);
+      const auto subst = analysis::BuildSubstitution(params, args);
+      for (const auto& type : expected) actual.push_back(type ? analysis::InstantiateType(type, subst) : nullptr);
+    } else {
+      for (std::size_t i = 0; i < expected.size(); ++i) actual.push_back(types[i % types.size()]);
+    }
+    const auto inferred = analysis::InferTypeArguments(params, expected, actual, std::nullopt);
+    std::cout << "IN\t" << name << '\t' << variant << '\t' << (inferred.ok ? "ok" : "fail") << ' '
+              << DiagOr(inferred.diag_id);
+    for (const auto& arg : inferred.inferred_args) std::cout << '\t' << TypeText(arg);
+    std::cout << '\n';
+  }
+}
+
+void DumpInstantiationSet(const std::vector<analysis::TypeRef>& types) {
+  analysis::MonomorphizeContext mono;
+  const std::size_t count = std::min<std::size_t>(types.size(), 12);
+  const auto key = [&](const char* name, std::vector<analysis::TypeRef> args) {
+    return analysis::InstantiationKey{analysis::TypePath{"M", name}, std::move(args)};
+  };
+  for (std::size_t i = 0; i < count; ++i) mono.Demand(key("G", {types[i]}));
+  for (std::size_t i = 0; i < count; ++i) mono.Demand(key("G", {types[i], types[count - 1 - i]}));
+  for (std::size_t i = 0; i < count; ++i) mono.Demand(key("F", {types[count - 1 - i]}));
+  mono.Demand(key("A", {}));
+  mono.Demand(key("A", {}));
+  std::cout << "MI\t" << mono.Instantiations().size();
+  for (const auto& [inst, entry] : mono.Instantiations()) {
+    std::cout << '\t' << core::StringOfPath(inst.decl_path) << '<';
+    for (const auto& arg : inst.args) std::cout << TypeText(arg) << ';';
+    std::cout << '>' << (entry.processed ? 'p' : '-');
+  }
+  std::cout << '\t' << (mono.HasInstantiation(key("A", {})) ? '1' : '0')
+            << (mono.HasInstantiation(key("B", {})) ? '1' : '0') << (mono.ProcessToFixedPoint() ? 'T' : 'F');
+  std::size_t processed = 0;
+  for (const auto& [inst, entry] : mono.Instantiations()) processed += entry.processed ? 1 : 0;
+  std::cout << processed << '\n';
+}
+
+void DumpRelations(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
+  static const char* const kFoundational[] = {"Bitcopy", "Clone", "Drop", "FfiSafe", "GpuSafe", "Eq",
+                                               "Discrete", "Hash", "Iterator"};
+  for (const auto& module : ctx.sigma.mods) {
+    std::cout << "X\t";
+    D(std::cout, module.path);
+    std::cout << '\n';
+    ctx.current_module = module.path;
+    const auto names = name_maps.find(analysis::PathKeyOf(module.path));
+    ctx.scopes = {analysis::Scope{},
+                  names == name_maps.end() ? analysis::Scope{} : names->second,
+                  analysis::UniverseBindings()};
+    std::vector<analysis::TypeRef> types;
+    for (const auto& written : CollectWrittenTypes(module)) {
+      const auto lowered = analysis::LowerType(ctx, written.type);
+      if (!lowered.ok) continue;
+      const auto& type = lowered.type;
+      types.push_back(type);
+      const std::string text = analysis::TypeToString(type);
+      std::cout << "W\t" << Escape(written.label) << '\t' << Escape(text) << '\t';
+      // A refinement's predicate is typed as an expression, which the port cannot do yet.
+      if (text.find(" where { ... }") != std::string::npos) {
+        std::cout << "pending";
+      } else {
+        const auto wf = analysis::TypeWF(ctx, type);
+        std::cout << (wf.ok ? "ok" : "fail:" + DiagOr(wf.diag_id));
+      }
+      std::cout << '\t' << (analysis::BitcopyType(ctx, type) ? 'b' : '-')
+                << (analysis::CloneType(ctx, type) ? 'c' : '-')
+                << (analysis::DropType(ctx, type) ? 'd' : '-')
+                << (analysis::ZeroableType(ctx, type) ? 'z' : '-')
+                << (analysis::EqType(type) ? 'e' : '-')
+                << (analysis::EqType(ctx, type) ? 'E' : '-')
+                << (analysis::BuiltinDiscreteType(type) ? 'i' : '-')
+                << (analysis::OrdType(type) ? 'o' : '-')
+                << (analysis::IsCapabilityType(type) ? 'C' : '-')
+                << (analysis::FfiSafeType(ctx, type) ? 'f' : '-')
+                << (analysis::IsValidConstParamType(type) ? 'k' : '-')
+                << static_cast<int>(analysis::PermOfType(type));
+      std::cout << '\t' << DiagOr(analysis::FfiSafeDiagForType(ctx, type)) << '\t'
+                << DiagOr(analysis::GpuSafeDiagForType(ctx, type)) << '\t'
+                << Escape(analysis::TypeToString(analysis::StripPerm(type)));
+      for (const char* method : {"eq", "successor", "predecessor"}) {
+        std::cout << '\t';
+        if (const auto sig = analysis::LookupFoundationalBuiltinMethodSig(ctx, type, method)) {
+          std::cout << Escape(analysis::TypeToString(sig->recv_type)) << '(';
+          for (const auto& param : sig->params) std::cout << Escape(analysis::TypeToString(param.type));
+          std::cout << ")->" << Escape(analysis::TypeToString(sig->ret));
+        } else {
+          std::cout << '-';
+        }
+        std::cout << (analysis::LookupFoundationalBuiltinMethodSig(type, method) ? '+' : '-');
+      }
+      std::cout << '\n';
+      if (const auto* refine = std::get_if<analysis::TypeRefine>(&type->node); refine && refine->predicate) {
+        std::cout << "PR\t";
+        PrintProof(analysis::StaticProof(analysis::StaticProofContext{}, refine->predicate));
+        std::cout << '\t';
+        PrintConst(analysis::EvaluateConstant(refine->predicate));
+        analysis::StaticProofContext self_ctx;
+        analysis::AddPredicateFacts(self_ctx, refine->predicate);
+        std::cout << '\t' << self_ctx.facts.size() << ' ';
+        PrintProof(analysis::StaticProof(self_ctx, refine->predicate));
+        const auto bounds = analysis::GetTypeBounds(refine->base);
+        std::cout << '\t' << bounds.has_min << bounds.has_max << ' ' << bounds.min << ' ' << bounds.max << '\n';
+      }
+    }
+    const std::size_t count = std::min<std::size_t>(types.size(), 40);
+    for (std::size_t i = 0; i < count; ++i) {
+      std::string sub, arg, cast, diags;
+      for (std::size_t j = 0; j < count; ++j) {
+        const auto res = analysis::Subtyping(ctx, types[i], types[j]);
+        sub.push_back(res.ok ? (res.subtype ? '1' : '0') : 'e');
+        if (res.diag_id) diags += " " + std::to_string(j) + "=" + std::string(*res.diag_id);
+        const auto compatible = analysis::ArgumentTypeCompatible(ctx, types[i], types[j], std::nullopt);
+        arg.push_back(compatible.ok ? (compatible.subtype ? '1' : '0') : 'e');
+        cast.push_back(analysis::CastValid(types[i], types[j]) ? '1' : '0');
+      }
+      std::cout << "SB\t" << i << '\t' << sub << '\t' << arg << '\t' << cast << '\t' << diags << '\n';
+    }
+    DumpInstantiationSet(types);
+    for (const char* name : kFoundational) {
+      std::cout << "FI\t" << name << '\t';
+      for (std::size_t i = 0; i < count; ++i) {
+        std::cout << (analysis::TypeImplementsClass(ctx, types[i], ast::ClassPath{name}) ? '1' : '0');
+      }
+      std::cout << '\n';
+    }
+    std::vector<ast::ClassPath> classes;
+    for (const auto& item : module.items) {
+      if (const auto* decl = std::get_if<ast::ClassDecl>(&item)) {
+        ast::ClassPath path = module.path;
+        path.push_back(decl->name);
+        classes.push_back(path);
+      }
+    }
+    for (const auto& item : module.items) {
+      std::visit(
+          [&](const auto& node) {
+            using T = std::decay_t<decltype(node)>;
+            ast::Path path = module.path;
+            if constexpr (requires { node.name; }) path.push_back(node.name);
+            if constexpr (requires { node.generic_params; node.name; }) {
+              if (node.generic_params) DumpGenericParams(ctx, node.name, node.generic_params, types);
+            }
+            if constexpr (requires { node.generic_params; node.params; node.name; }) {
+              if (node.generic_params) DumpInference(ctx, node.name, node.generic_params, node.params, types);
+            }
+            if constexpr (std::is_same_v<T, ast::ProcedureDecl>) {
+              DumpContract(node.name, node.contract);
+            } else if constexpr (std::is_same_v<T, ast::ClassDecl>) {
+              std::cout << "CL\t" << node.name << '\t';
+              const auto order = analysis::LinearizeClass(ctx, path);
+              if (order.ok) {
+                std::cout << "ok";
+                for (const auto& entry : order.order) std::cout << ' ' << core::StringOfPath(entry);
+              } else {
+                std::cout << "fail " << DiagOr(order.diag_id);
+              }
+              std::cout << '\t';
+              const auto methods = analysis::ClassMethodTable(ctx, path);
+              if (methods.ok) {
+                std::cout << "ok";
+                for (const auto& entry : methods.methods) {
+                  std::cout << ' ' << core::StringOfPath(entry.owner) << "::" << entry.method->name
+                            << (analysis::VTableEligible(*entry.method) ? "+" : "-");
+                }
+              } else {
+                std::cout << "fail " << DiagOr(methods.diag_id);
+              }
+              std::cout << '\t';
+              const auto fields = analysis::ClassFieldTable(ctx, path);
+              if (fields.ok) {
+                std::cout << "ok";
+                for (const auto* field : fields.fields) std::cout << ' ' << field->name;
+              } else {
+                std::cout << "fail " << DiagOr(fields.diag_id);
+              }
+              std::cout << '\t' << DiagOr(analysis::ClassDispatchabilityDiagnostic(ctx, path)) << '\t'
+                        << (analysis::ClassDispatchable(ctx, path) ? 'd' : '-')
+                        << (analysis::Dispatchable(ctx, node) ? 'D' : '-')
+                        << (analysis::IsModalClass(node) ? 'm' : '-')
+                        << (analysis::IsCapabilityClass(ctx, path) ? 'c' : '-') << '\t'
+                        << analysis::ClassAssociatedTypes(node).size() << '/'
+                        << analysis::ClassAbstractStates(node).size() << '\t';
+              for (const auto& other : classes) std::cout << (analysis::ClassSubtypes(ctx, path, other) ? '1' : '0');
+              std::cout << '\t';
+              for (std::size_t i = 0; i < count; ++i) {
+                std::cout << (analysis::TypeImplementsClass(ctx, types[i], path) ? '1' : '0');
+              }
+              std::cout << '\t';
+              for (const auto& item : node.items) {
+                if (const auto* method = std::get_if<ast::ClassMethodDecl>(&item)) {
+                  const auto* found = analysis::LookupClassMethod(ctx, path, method->name);
+                  std::cout << (found ? (found == method ? '=' : '^') : '!');
+                }
+              }
+              std::cout << '\n';
+            } else if constexpr (std::is_same_v<T, ast::RecordDecl>) {
+              const auto self_type = analysis::MakeTypePath(path);
+              for (const auto& class_path : node.implements) {
+                const auto complete = analysis::CheckImplCompleteness(ctx, class_path, node);
+                std::cout << "IM\t" << node.name << '\t' << core::StringOfPath(class_path) << '\t'
+                          << (complete.ok ? "ok" : "fail") << ' ' << DiagOr(complete.diag_id);
+                for (const auto& missing : complete.missing_methods) std::cout << ' ' << missing;
+                std::cout << '\t' << (analysis::CheckOrphanRule(ctx, path, class_path, module.path) ? '1' : '0')
+                          << (analysis::CheckOrphanRule(ctx, path, class_path, ast::ModulePath{"Elsewhere"}) ? '1' : '0')
+                          << (analysis::TypeImplementsClass(ctx, self_type, class_path) ? '1' : '0') << '\n';
+              }
+              for (const auto& member : node.members) {
+                if (const auto* method = std::get_if<ast::MethodDecl>(&member)) {
+                  std::cout << "MS\t" << node.name << "::" << method->name << '\t';
+                  PrintSignature(analysis::BuildMethodSignature(ctx, self_type, method->receiver, method->params,
+                                                                method->return_type_opt));
+                  const auto mode = analysis::RecvModeOf(method->receiver);
+                  std::cout << '\t' << (mode ? "move" : "-") << '\n';
+                  DumpContract(node.name + "::" + method->name, method->contract);
+                }
+              }
+            } else if constexpr (std::is_same_v<T, ast::ModalDecl>) {
+              for (const auto& state : node.states) {
+                const auto state_type = analysis::MakeTypeModalState(path, state.name);
+                std::cout << "MW\t" << node.name << '@' << state.name << '\t'
+                          << (analysis::NicheCompatible(ctx, path, state.name) ? 'n' : '-')
+                          << (analysis::WidenWarnCond(ctx, path, state.name) ? 'w' : '-')
+                          << (analysis::HasState(node, state.name) ? 's' : '-') << '\n';
+                for (const auto& member : state.members) {
+                  if (const auto* method = std::get_if<ast::StateMethodDecl>(&member)) {
+                    std::cout << "MS\t" << node.name << '@' << state.name << "::" << method->name << '\t';
+                    PrintSignature(analysis::BuildMethodSignature(ctx, state_type, method->receiver, method->params,
+                                                                  method->return_type_opt));
+                    std::cout << '\t' << (analysis::LookupStateMethodDecl(node, state.name, method->name) == method ? '=' : '!')
+                              << '\n';
+                  } else if (const auto* transition = std::get_if<ast::TransitionDecl>(&member)) {
+                    std::cout << "TS\t" << node.name << '@' << state.name << "::" << transition->name << '\t';
+                    PrintSignature(analysis::BuildTransitionSignature(
+                        ctx, state_type, analysis::MakeTypeModalState(path, transition->target_state),
+                        transition->params));
+                    std::cout << '\t' << (analysis::LookupTransitionDecl(node, state.name, transition->name) == transition ? '=' : '!')
+                              << '\n';
+                  } else if (const auto* field = std::get_if<ast::StateFieldDecl>(&member)) {
+                    std::cout << "MF\t" << node.name << '@' << state.name << '.' << field->name << '\t'
+                              << (analysis::LookupModalFieldDecl(node, state.name, field->name) == field ? '=' : '!')
+                              << '\n';
+                  }
+                }
+              }
+            }
+          },
+          item);
+    }
+  }
+}
+
 // Runs the reference front end on a project through name resolution, in the order the
 // driver does: compile-time pass, module visibility, name maps, module resolution. The
 // driver's check of compile-time procedure signatures (which needs the type checker) is
@@ -1035,7 +1471,11 @@ int DumpResolve(const std::vector<std::string>& block) {
     // As the driver does: the declaration tables are rebuilt from the resolved modules.
     ctx.sigma.mods = resolved.modules;
     analysis::PopulateSigma(ctx);
-    DumpTypes(ctx, name_maps.name_maps);
+    if (g_rel_mode) {
+      DumpRelations(ctx, name_maps.name_maps);
+    } else {
+      DumpTypes(ctx, name_maps.name_maps);
+    }
     return 0;
   }
   std::cout << "RESOLVE\t" << (resolved.ok ? "ok" : "failed") << '\n';
@@ -1106,7 +1546,8 @@ int main(int argc, char** argv) {
   if (argc >= 2 && std::string_view(argv[1]) == "sigma") {
     return DumpSigma();
   }
-  g_types_mode = argc >= 3 && std::string_view(argv[1]) == "types";
+  g_rel_mode = argc >= 3 && std::string_view(argv[1]) == "relations";
+  g_types_mode = g_rel_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
   const bool resolve_mode =
       g_types_mode || (argc >= 3 && std::string_view(argv[1]) == "resolve");
   if (resolve_mode || (argc >= 3 && std::string_view(argv[1]) == "comptime")) {

@@ -16,6 +16,7 @@ fail=0
 [ -d target/ctcases ] || python3 tools/gen_comptime_cases.py > /dev/null
 [ -d target/rescases ] || python3 tools/gen_resolve_cases.py > /dev/null
 [ -d target/typecases ] || python3 tools/gen_type_cases.py > /dev/null
+[ -d target/relcases ] || python3 tools/gen_relation_cases.py > /dev/null
 
 echo "== unicode properties (all scalar values vs ICU 72)"
 ./target/release/uv-parity unicode > target/parity/unicode.tsv
@@ -97,6 +98,27 @@ echo "== type core and layout: targeted cases"
 ./target/release/uv-parity comptime-list tests/golden/types_extra.list > target/parity/types_extra.list
 ./target/release/uv-parity types target/parity/types_extra.list | sed "s|$ROOT/|/w/|g" > target/parity/types_extra.tsv
 python3 tools/compare_dumps.py tests/golden/types_extra.tsv target/parity/types_extra.tsv --quiet || fail=1
+
+echo "== relations between types (well-formedness, intrinsic classes, subtyping, class tables, signatures, static proofs): every project that resolves"
+./target/release/uv-parity relations target/parity/comptime.list | sed "s|$ROOT/|/w/|g" > target/parity/relations.tsv
+python3 tools/compare_dumps.py tests/golden/relations.tsv target/parity/relations.tsv --quiet || fail=1
+
+echo "== relations between types: compile-time cases"
+./target/release/uv-parity relations target/parity/comptime_cases.list | sed "s|$ROOT/|/w/|g" > target/parity/relations_cases.tsv
+python3 tools/compare_dumps.py tests/golden/relations_cases.tsv target/parity/relations_cases.tsv --quiet || fail=1
+
+echo "== relations between types: name-resolution cases"
+./target/release/uv-parity relations target/parity/resolve_targeted.list | sed "s|$ROOT/|/w/|g" > target/parity/relations_targeted.tsv
+python3 tools/compare_dumps.py tests/golden/relations_targeted.tsv target/parity/relations_targeted.tsv --quiet || fail=1
+
+echo "== relations between types: type-core cases"
+./target/release/uv-parity relations target/parity/types_extra.list | sed "s|$ROOT/|/w/|g" > target/parity/relations_types.tsv
+python3 tools/compare_dumps.py tests/golden/relations_types.tsv target/parity/relations_types.tsv --quiet || fail=1
+
+echo "== relations between types: targeted cases"
+./target/release/uv-parity comptime-list tests/golden/relations_extra.list > target/parity/relations_extra.list
+./target/release/uv-parity relations target/parity/relations_extra.list | sed "s|$ROOT/|/w/|g" > target/parity/relations_extra.tsv
+python3 tools/compare_dumps.py tests/golden/relations_extra.tsv target/parity/relations_extra.tsv --quiet || fail=1
 
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1

@@ -206,6 +206,9 @@ Gates, all passing:
 | Type core and layout: every type written in a declaration, lowered and printed, with its ordering key, the paths it names and what they resolve to, equivalence against the module's other types, field types, instantiations and variance, and its layout, size and alignment; every record, enum and modal declaration's layout (offsets, discriminants, payloads, niches); every project that resolves | identical on 545 of 546; the reference crashes on the other 1 |
 | Same, the compile-time and name-resolution cases | identical on 121 of 144 (the reference crashes on 23) and 410 of 410 |
 | Same, 54 targeted cases (union order, array lengths that need evaluation, refinements, generic defaults, asynchronous aliases, lookup across modules and assemblies; packing and alignment attributes, explicit and invalid discriminants, niches, recursive and generic types) | identical on 51; the reference crashes on the other 3 |
+| Relations between types: for every type written in a declaration its well-formedness, intrinsic classes (`Bitcopy`, `Clone`, `Drop`, `FfiSafe`, `GpuSafe`, zeroable, `Eq`, discrete, ordered) and intrinsic method signatures; subtyping, argument compatibility and cast validity between the module's types; class linearisation, method and field tables, dispatchability, class subtyping and implementation; method and transition signatures; generic parameter validation, bounds and inference; static proofs of contracts and refinements; every project that resolves | identical on 545 of 546; the reference crashes on the other 1 |
+| Same, the compile-time, name-resolution and type-core cases | identical on 121 of 144 (the reference crashes on 23), 410 of 410, and 52 of 54 (the reference crashes on 2) |
+| Same, 35 targeted cases (each structural subtyping rule, variance, aliases, refinements, class hierarchies and their failures, the predicates, generic parameter lists and inference, 78 contracts for the prover) | identical, 35 |
 | `--phase1-only`: JSON diagnostics, exit status and `--dump-ast` listing | identical, 549 fixtures, 58 manifest cases, 78 module-level cases |
 | `--check`: JSON diagnostics and exit status for projects rejected in phase 1 | identical, 32 fixtures and 41 manifest cases |
 | `--check`: phase-1 diagnostics for every other project | identical, 534 |
@@ -271,8 +274,8 @@ M3.3 is itself in parts:
 | --- | --- | --- |
 | a. Type core: semantic types, lowering, array lengths, equivalence, ordering, lookup, substitution, variance | `typing/type_refs`, `type_lower`, `const_len`, `type_equiv`, `type_lookup`, `variance`; `generics/monomorphize` (substitution); `contracts/verification` (structural equality) | done |
 | b. Layout: sizes, alignments, field offsets, discriminants, niches | `layout` (all but constant encoding), `composite/enums`, `modal/modal_widen` (payload state) | done |
-| c. Subtyping, well-formedness, predicates, modal, composite types, the rest of generics | `typing/subtyping`, `type_wf`, `type_predicates`, `modal`, `composite`, `generics` | next |
-| d. Constant encoding (the bytes of a value of each type) | `layout/layout_value_bits` | |
+| c. Relations between types: subtyping, well-formedness, intrinsic classes, class tables, method signatures, generic parameters and arguments, static proofs | `typing/subtyping`, `type_wf`, `type_predicates`, `signature`, `item_generic_params`; `composite/classes`, `class_linearization`, `record_methods` (receivers); `modal` (lookups, widening checks); `generics` (all of it); `contracts/verification` | done, with the two gaps below |
+| d. Constant encoding (the bytes of a value of each type) | `layout/layout_value_bits` | next |
 
 What M3.3a added:
 
@@ -296,6 +299,55 @@ What M3.3b added:
 - Type lowering now has the three flavours the reference has (ordinary, for layout, for
   modal representation), as one function with a flavour argument.
 - The oracle's `types` mode prints layouts too.
+
+What M3.3c added:
+
+- `uv-analysis::typing`: `subtyping` (with alias normalisation, variance of nominal
+  arguments, refinement entailment, and `argument_type_compatible`), `type_wf`,
+  `type_predicates` (`Bitcopy`, `Clone`, `Drop`, `FfiSafe`, `GpuSafe`, zeroable, `Eq`,
+  discrete, ordered, casts, the intrinsic `eq`/`successor`/`predecessor` signatures),
+  `signature` (method and transition signatures, `Self` substitution).
+- `uv-analysis::composite`: `class_linearization` (C3), `classes` (method and field
+  tables, dispatchability, class subtyping, whether a type implements a class,
+  completeness of an implementation, the orphan rule), `record_methods` (receiver types
+  and modes).
+- `uv-analysis::contracts::verification`: the static prover (constant folding, known
+  facts, conjunction and disjunction, linear integer entailment by simplex with branch
+  and bound).
+- `uv-analysis::modal`: `lookup` (states, fields, methods, transitions) and the widening
+  checks; `caps::context_caps::is_capability_class`.
+- `uv-analysis::generics`: `generic_params` (validation of a parameter list, its scope,
+  counts, constant parameters), `monomorphize` (bounds on arguments, inference of type
+  arguments by matching, the set of demanded instantiations), `where_bounds`; and
+  `typing::item_generic_params` (parameters as declaration typing sees them, the check of
+  arguments against them).
+- The oracle gained a `relations` mode; `tools/gen_relation_cases.py` writes the targeted
+  cases (35 projects: each structural subtyping rule, variance, aliases, refinements,
+  class hierarchies with every linearisation and table failure, the predicates, generic
+  parameter lists and inference, and 78 contracts for the prover).
+
+Two gaps in M3.3c, both waiting for expression typing (M3.4):
+
+- Well-formedness of a refinement type types its predicate as an expression and checks
+  that it is pure. `type_wf` returns a marker for such a type (`REFINEMENT_WF_PENDING`)
+  instead of an answer, and the parity gate does not compare the well-formedness of types
+  that contain a refinement. Everything else about refinements (subtyping by proof,
+  predicates, layout) is compared.
+- The functions of these files that type expressions or take the expression typer as an
+  argument are left for M3.4, where their callers are: `BuildProcedureSignature`
+  (`signature`), receiver and argument checks and `LookupMethodStatic`
+  (`record_methods`), and all of `composite/records`, `tuples`, `unions`, `arrays_slices`
+  and `function_types`.
+
+Two things about the reference worth knowing before M3.4 builds on this part. Its
+instantiation worklist (`ProcessToFixedPoint`) only marks entries processed; nothing is
+instantiated there. And it validates a default type argument with an unsupported form
+nested inside it (`<A = (Range<i32>, i32)>`) into a type with a hole, which its own
+printer then cannot print; the Rust port builds the same type and prints the hole.
+
+One numeric difference: the prover's simplex uses `long double` in the reference (80-bit on
+x86-64) and `f64` here, with the same tolerance. No input in the gates tells them apart;
+a system whose pivots differ only beyond 53 bits of mantissa could.
 
 Two pieces of reference behaviour are reproduced on purpose.
 
@@ -340,6 +392,9 @@ Upstream bugs found (the Rust port deliberately differs on these inputs):
   defined through itself (`let N: usize = N`), all recurse until the reference crashes.
   The Rust port stops: such an alias has no signature and no size, and the length is not
   a constant.
+- Relations between types: subtyping and the `GpuSafe` check also follow a type alias
+  that is defined through itself until the reference crashes. The Rust port stops: such a
+  type is a subtype of nothing and is not GPU-safe.
 - Compile-time pass: `introspect~>category` on a cyclic type alias (`type A = B`, `type B = A`)
   recurses until the reference crashes. The Rust port stops and the evaluation fails.
 

@@ -1,4 +1,5 @@
-//! Contracts and verification. Only structural equality of syntax is here so far; the
-//! type core needs it to compare refinement predicates.
+//! Contracts and verification: structural equality of syntax, and the static prover for
+//! predicates.
 
 pub mod struct_equal;
+pub mod verification;
