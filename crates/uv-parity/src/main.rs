@@ -82,6 +82,13 @@ use uv_analysis::typing::type_env::{
     ParallelContextKind, TypeBinding, TypeEnv,
 };
 use uv_source::ast::Mutability;
+use std::cell::RefCell;
+use std::rc::Rc;
+use uv_analysis::resolve::scopes::id_key_of;
+use uv_analysis::typing::pending::{reset_scaffolding, take_pending};
+use uv_analysis::typing::stmt::block::type_block;
+use uv_analysis::typing::stmt_context::StmtTypeContext;
+use uv_analysis::typing::type_expr::{type_expr, type_identifier_expr, type_place};
 use uv_analysis::typing::solve::{apply_substitution, solve, Constraint};
 use uv_analysis::typing::types::{
     make_type, make_type_array, make_type_closure, make_type_func, make_type_slice, make_type_union, TypeFuncParam,
@@ -438,7 +445,9 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
         }
         ctx.sigma.mods = resolved.modules;
         populate_sigma(&mut ctx);
-        if mode == "patterns" {
+        if mode == "bodies" {
+            dump_bodies(out, &mut ctx, &name_maps.name_maps);
+        } else if mode == "patterns" {
             dump_patterns(out, &mut ctx, &name_maps.name_maps);
         } else if mode == "values" {
             dump_values(out, &mut ctx, &name_maps.name_maps);
@@ -2131,6 +2140,123 @@ fn dump_patterns(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameM
     }
 }
 
+// ---- body typing; see `DumpBody` in the oracle ----
+
+#[allow(clippy::too_many_arguments)]
+fn dump_body(
+    out: &mut String,
+    ctx: &ScopeContext<'_>,
+    name: &str,
+    generic_params: &Option<GenericParams>,
+    params: &[Param],
+    return_type_opt: &TypePtr,
+    contract: &Option<ContractClause>,
+    body: &BlockPtr,
+) {
+    let Some(body) = body.as_deref() else {
+        return;
+    };
+    let _ = write!(out, "B\t{name}\t");
+    let mut proc_ctx = ctx.clone();
+    proc_ctx.scopes = bind_type_params(ctx, generic_params);
+    let mut env = TypeEnv::default();
+    env.scopes.push(Default::default());
+    for param in params {
+        let lowered = match lower_type(&proc_ctx, &param.r#type) {
+            Ok(lowered) => lowered,
+            Err(diag_id) => {
+                let _ = writeln!(out, "param-fail\t{}", diag_or(diag_id));
+                return;
+            }
+        };
+        let binding = TypeBinding {
+            r#type: lowered.clone(),
+            storage_type: lowered,
+            provenance_kind: BindingProvenanceSeedKind::Param,
+            ..Default::default()
+        };
+        env.scopes[0].insert(id_key_of(&param.name), binding);
+    }
+    let return_type = if return_type_opt.is_some() {
+        match lower_type(&proc_ctx, return_type_opt) {
+            Ok(lowered) => lowered,
+            Err(diag_id) => {
+                let _ = writeln!(out, "return-fail\t{}", diag_or(diag_id));
+                return;
+            }
+        }
+    } else {
+        make_type_prim("()")
+    };
+    let diags = Rc::new(RefCell::new(Vec::new()));
+    let env = Rc::new(RefCell::new(env));
+    proc_ctx.diagnostics = Some(diags.clone());
+    let type_ctx = StmtTypeContext {
+        return_type,
+        diags: Some(diags.clone()),
+        env_ref: Some(env.clone()),
+        contract: contract.as_ref(),
+        ..Default::default()
+    };
+    // The callbacks read the environment as it stands when they are called.
+    let type_expr_fn = |inner: &ExprPtr| type_expr(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
+    let type_ident_fn = |ident: &str| type_identifier_expr(&env.borrow(), ident);
+    let type_place_fn = |inner: &ExprPtr| type_place(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
+    let start_env = env.borrow().clone();
+    reset_scaffolding();
+    let result =
+        type_block(&proc_ctx, &type_ctx, body, &start_env, &type_expr_fn, &type_ident_fn, &type_place_fn, Some(&env));
+    if let Some(what) = take_pending() {
+        let _ = writeln!(out, "PENDING\t{what}");
+        return;
+    }
+    let _ = write!(
+        out,
+        "{}\t{}\t{}\t{}\t",
+        if result.ok { "ok" } else { "fail" },
+        diag_or(result.diag_id),
+        escape(&result.diag_detail),
+        type_text(&result.r#type)
+    );
+    match &result.diag_span {
+        Some(span) => {
+            let _ = write!(out, "{}-{}", span.start_offset, span.end_offset);
+        }
+        None => out.push('-'),
+    }
+    let _ = write!(out, "\t{}\t", env.borrow().scopes.len());
+    for id in &result.diagnostic_obligation_ids {
+        let _ = write!(out, "{id},");
+    }
+    out.push('\t');
+    print_diag_list(out, &diags.borrow());
+    out.push('\n');
+}
+
+fn dump_bodies(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
+    for index in 0..ctx.sigma.mods.len() {
+        let module = ctx.sigma.mods[index].clone();
+        dump_line("X", &module.path, out);
+        ctx.current_module = module.path.clone();
+        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        ctx.scopes = vec![Scope::new(), names, universe_bindings()];
+        for item in &module.items {
+            if let ASTItem::ProcedureDecl(node) = item {
+                dump_body(
+                    out,
+                    ctx,
+                    &node.name,
+                    &node.generic_params,
+                    &node.params,
+                    &node.return_type_opt,
+                    &node.contract,
+                    &node.body,
+                );
+            }
+        }
+    }
+}
+
 /// The built-in declarations; see `DumpSigma` in the oracle.
 fn dump_sigma(out: &mut String) {
     let mut ctx = ScopeContext::default();
@@ -2265,7 +2391,7 @@ fn run() -> Result<(), String> {
             dump_sigma(&mut out);
             stdout.write_all(out.as_bytes()).map_err(|err| err.to_string())
         }
-        Some(mode @ ("comptime" | "resolve" | "types" | "relations" | "values" | "patterns")) if args.len() >= 3 => {
+        Some(mode @ ("comptime" | "resolve" | "types" | "relations" | "values" | "patterns" | "bodies")) if args.len() >= 3 => {
             let list = std::fs::read_to_string(&args[2]).map_err(|err| err.to_string())?;
             let mut block: Vec<&str> = Vec::new();
             for line in list.lines() {

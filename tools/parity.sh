@@ -147,6 +147,10 @@ for pair in "comptime:patterns" "comptime_cases:patterns_cases" "resolve_targete
   python3 tools/compare_dumps.py "tests/golden/${pair##*:}.tsv" "target/parity/${pair##*:}.tsv" --quiet || fail=1
 done
 
+echo "== body typing (every procedure body; bodies that reach an unported construct are pending, not compared)"
+./target/release/uv-parity bodies target/parity/comptime.list | sed "s|$ROOT/|/w/|g" > target/parity/bodies.tsv
+python3 tools/compare_typing.py tests/golden/bodies.tsv target/parity/bodies.tsv || fail=1
+
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1
 

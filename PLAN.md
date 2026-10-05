@@ -387,8 +387,26 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: gate and block core in place, 1 of 4,569 bodies compared |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
+
+Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
+procedure body as declaration typing does (type parameters and parameters in scope, the
+declared return type expected) and prints one line per body: the outcome, rule, detail,
+type, span and the diagnostics emitted. The port prints the same line, or `PENDING` with
+the first construct it reached that is not ported (`typing::pending`, scaffolding that
+goes away with the last such construct). `tools/compare_typing.py` compares the bodies
+that are not pending, fails on any mismatch, and reports how many bodies are compared and
+what the rest wait for. The reference types 4,569 bodies on the corpus, 4,203 of them
+successfully and the rest with 120 different rules.
+
+Proof facts that statements leave for later ones (`FallthroughProofContextForStmt`) are
+not tracked yet. Until they are, a statement that would change them marks the proof
+context incomplete and any later proof that consults it makes the body pending.
+
+So far part b has the dispatch skeletons (`type_expr`, `type_stmt`), the statement
+context, and the block core: statement sequences, block typing with its result and
+break flow, and the loop result types.
 
 Part b calls into code that belongs to M3.5 (`memory/regions`, `memory/calls`,
 `memory/borrow_bind`, `contracts/contract_check`, `keys/key_paths`, `caps`); what it needs

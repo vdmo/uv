@@ -58,6 +58,7 @@
 #include "04_analysis/typing/literals.h"
 #include "04_analysis/typing/type_infer.h"
 #include "04_analysis/memory/regions.h"
+#include "04_analysis/typing/expr/path.h"
 #include "04_analysis/typing/type_pattern.h"
 #include <algorithm>
 #include <unordered_map>
@@ -505,6 +506,7 @@ bool g_types_mode = false;
 bool g_rel_mode = false;
 bool g_val_mode = false;
 bool g_pat_mode = false;
+bool g_body_mode = false;
 
 void PrintKey(const analysis::TypeKey& key);
 void PrintAtom(const analysis::KeyAtom& atom) {
@@ -1869,6 +1871,87 @@ void DumpPatterns(analysis::ScopeContext& ctx, const analysis::NameMapTable& nam
   }
 }
 
+// ---- body typing; see `TypeProcedureDeclBody` ----
+
+// Types the body of a procedure as declaration typing does, up to and including the
+// block: type parameters and parameters in scope, the declared return type expected.
+// One line per body, so that a port that cannot type a body yet can say so in its place.
+void DumpBody(const analysis::ScopeContext& ctx, const std::string& name,
+              const std::optional<ast::GenericParams>& generic_params, const std::vector<ast::Param>& params,
+              const std::shared_ptr<ast::Type>& return_type_opt, const std::optional<ast::ContractClause>& contract,
+              const std::shared_ptr<ast::Block>& body) {
+  using namespace analysis;
+  if (!body) return;
+  std::cout << "B\t" << name << '\t';
+  ScopeContext proc_ctx = ctx;
+  proc_ctx.sigma_source = ctx.sigma_source ? ctx.sigma_source : &ctx.sigma;
+  proc_ctx.scopes = BindTypeParams(ctx, generic_params);
+  TypeEnv env;
+  env.scopes.emplace_back();
+  for (const auto& param : params) {
+    const auto lowered = LowerType(proc_ctx, param.type);
+    if (!lowered.ok) {
+      std::cout << "param-fail\t" << DiagOr(lowered.diag_id) << '\n';
+      return;
+    }
+    TypeBinding binding;
+    binding.mut = ast::Mutability::Let;
+    binding.type = lowered.type;
+    binding.storage_type = lowered.type;
+    binding.provenance_kind = BindingProvenanceSeedKind::Param;
+    env.scopes.back()[IdKeyOf(param.name)] = std::move(binding);
+  }
+  TypeRef return_type = MakeTypePrim("()");
+  if (return_type_opt) {
+    const auto lowered = LowerType(proc_ctx, return_type_opt);
+    if (!lowered.ok) {
+      std::cout << "return-fail\t" << DiagOr(lowered.diag_id) << '\n';
+      return;
+    }
+    return_type = lowered.type;
+  }
+  core::DiagnosticStream diags;
+  StmtTypeContext type_ctx;
+  type_ctx.return_type = return_type;
+  proc_ctx.diagnostics = &diags;
+  type_ctx.diags = &diags;
+  type_ctx.env_ref = &env;
+  if (contract.has_value()) type_ctx.contract = &*contract;
+  ExprTypeFn type_expr = [&](const ast::ExprPtr& inner) { return TypeExpr(proc_ctx, type_ctx, inner, env); };
+  IdentTypeFn type_ident = [&](std::string_view ident) -> ExprTypeResult {
+    return expr::TypeIdentifierExprImpl(proc_ctx, ast::IdentifierExpr{std::string(ident)}, env);
+  };
+  PlaceTypeFn type_place = [&](const ast::ExprPtr& inner) { return TypePlace(proc_ctx, type_ctx, inner, env); };
+  const auto result = TypeBlock(proc_ctx, type_ctx, *body, env, type_expr, type_ident, type_place, &env);
+  std::cout << (result.ok ? "ok" : "fail") << '\t' << DiagOr(result.diag_id) << '\t' << Escape(result.diag_detail) << '\t'
+            << TypeText(result.type) << '\t';
+  if (result.diag_span) std::cout << result.diag_span->start_offset << '-' << result.diag_span->end_offset;
+  else std::cout << '-';
+  std::cout << '\t' << env.scopes.size() << '\t';
+  for (const auto& id : result.diagnostic_obligation_ids) std::cout << id << ',';
+  std::cout << '\t';
+  PrintDiagList(diags);
+  std::cout << '\n';
+}
+
+void DumpBodies(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
+  for (const auto& module : ctx.sigma.mods) {
+    std::cout << "X\t";
+    D(std::cout, module.path);
+    std::cout << '\n';
+    ctx.current_module = module.path;
+    const auto names = name_maps.find(analysis::PathKeyOf(module.path));
+    ctx.scopes = {analysis::Scope{},
+                  names == name_maps.end() ? analysis::Scope{} : names->second,
+                  analysis::UniverseBindings()};
+    for (const auto& item : module.items) {
+      if (const auto* node = std::get_if<ast::ProcedureDecl>(&item)) {
+        DumpBody(ctx, node->name, node->generic_params, node->params, node->return_type_opt, node->contract, node->body);
+      }
+    }
+  }
+}
+
 // Runs the reference front end on a project through name resolution, in the order the
 // driver does: compile-time pass, module visibility, name maps, module resolution. The
 // driver's check of compile-time procedure signatures (which needs the type checker) is
@@ -1954,7 +2037,9 @@ int DumpResolve(const std::vector<std::string>& block) {
     // As the driver does: the declaration tables are rebuilt from the resolved modules.
     ctx.sigma.mods = resolved.modules;
     analysis::PopulateSigma(ctx);
-    if (g_pat_mode) {
+    if (g_body_mode) {
+      DumpBodies(ctx, name_maps.name_maps);
+    } else if (g_pat_mode) {
       DumpPatterns(ctx, name_maps.name_maps);
     } else if (g_val_mode) {
       DumpValues(ctx, name_maps.name_maps);
@@ -2036,7 +2121,8 @@ int main(int argc, char** argv) {
   g_rel_mode = argc >= 3 && std::string_view(argv[1]) == "relations";
   g_val_mode = argc >= 3 && std::string_view(argv[1]) == "values";
   g_pat_mode = argc >= 3 && std::string_view(argv[1]) == "patterns";
-  g_types_mode = g_rel_mode || g_val_mode || g_pat_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
+  g_body_mode = argc >= 3 && std::string_view(argv[1]) == "bodies";
+  g_types_mode = g_rel_mode || g_val_mode || g_pat_mode || g_body_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
   const bool resolve_mode =
       g_types_mode || (argc >= 3 && std::string_view(argv[1]) == "resolve");
   if (resolve_mode || (argc >= 3 && std::string_view(argv[1]) == "comptime")) {
