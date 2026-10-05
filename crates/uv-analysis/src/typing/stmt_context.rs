@@ -11,6 +11,7 @@ use uv_source::ast;
 
 use super::type_env::TypeEnv;
 use super::types::{TypePath, TypeRef};
+use crate::keys::key_paths::KeyPath;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum LoopFlag {
@@ -25,6 +26,13 @@ pub enum ContractPhase {
     None,
     Precondition,
     Postcondition,
+}
+
+/// A key held by an enclosing key block, as nested accesses are checked against it.
+#[derive(Debug, Clone)]
+pub struct HeldKeyTypingInfo {
+    pub path: KeyPath,
+    pub mode: ast::KeyMode,
 }
 
 #[derive(Clone, Default)]
@@ -44,6 +52,7 @@ pub struct StmtTypeContext<'t> {
     pub parallel_domain: TypeRef,
     pub keys_held: bool,
     pub key_mode: Option<ast::KeyMode>,
+    pub held_key_paths: Vec<HeldKeyTypingInfo>,
     pub shared_access_mode: Option<ast::KeyMode>,
     pub suppress_shared_access_check: bool,
     pub in_shared_capturing_closure: bool,
@@ -54,4 +63,25 @@ pub struct StmtTypeContext<'t> {
     pub contract_dynamic: bool,
     pub test_postcondition_runtime: bool,
     pub current_class_path: Option<TypePath>,
+}
+
+/// The context for an access that needs the given mode of key, unless an enclosing
+/// access already needs a stronger one.
+pub fn with_shared_access_mode<'t>(
+    ctx: &StmtTypeContext<'t>,
+    mode: ast::KeyMode,
+) -> StmtTypeContext<'t> {
+    let mut out = ctx.clone();
+    if out.shared_access_mode.is_none()
+        || (mode == ast::KeyMode::Write && out.shared_access_mode != Some(ast::KeyMode::Write))
+    {
+        out.shared_access_mode = Some(mode);
+    }
+    out
+}
+
+pub fn suppress_shared_access_check<'t>(ctx: &StmtTypeContext<'t>) -> StmtTypeContext<'t> {
+    let mut out = ctx.clone();
+    out.suppress_shared_access_check = true;
+    out
 }

@@ -17,12 +17,21 @@ pub type AttrOpt = Option<AttributeList>;
 pub type DocList = Vec<crate::lexer::DocComment>;
 
 /// Attaches attributes to an expression, merging with attributes it already carries.
-pub fn attach_expr_attrs(expr: &ExprPtr, attrs: AttributeList, span: &uv_core::span::Span) -> ExprPtr {
+pub fn attach_expr_attrs(
+    expr: &ExprPtr,
+    attrs: AttributeList,
+    span: &uv_core::span::Span,
+) -> ExprPtr {
     let node = match expr {
         Some(node) if !attrs.is_empty() => node,
         _ => return expr.clone(),
     };
-    let make = |node: ExprNode| Some(std::sync::Arc::new(Expr { span: span.clone(), node }));
+    let make = |node: ExprNode| {
+        Some(std::sync::Arc::new(Expr {
+            span: span.clone(),
+            node,
+        }))
+    };
     match &node.node {
         ExprNode::ComptimeExpr(comptime) => {
             let mut merged = comptime.clone();
@@ -36,7 +45,10 @@ pub fn attach_expr_attrs(expr: &ExprPtr, attrs: AttributeList, span: &uv_core::s
             combined.extend(attributed.attrs.iter().cloned());
             let inner_is_comptime = matches!(
                 attributed.expr.as_deref(),
-                Some(Expr { node: ExprNode::ComptimeExpr(_), .. })
+                Some(Expr {
+                    node: ExprNode::ComptimeExpr(_),
+                    ..
+                })
             );
             if inner_is_comptime {
                 return attach_expr_attrs(&attributed.expr, combined, span);
@@ -46,7 +58,10 @@ pub fn attach_expr_attrs(expr: &ExprPtr, attrs: AttributeList, span: &uv_core::s
                 expr: attributed.expr.clone(),
             }))
         }
-        _ => make(ExprNode::AttributedExpr(AttributedExpr { attrs, expr: expr.clone() })),
+        _ => make(ExprNode::AttributedExpr(AttributedExpr {
+            attrs,
+            expr: expr.clone(),
+        })),
     }
 }
 
@@ -181,9 +196,11 @@ pub fn item_summary(item: &ASTItem, include_spans: bool) -> String {
         ASTItem::RecordDecl(d) => named(d.vis, "record", &d.name),
         ASTItem::EnumDecl(d) => named(d.vis, "enum", &d.name),
         ASTItem::ModalDecl(d) => named(d.vis, "modal", &d.name),
-        ASTItem::ClassDecl(d) => {
-            named(d.vis, if d.modal { "modal class" } else { "class" }, &d.name)
-        }
+        ASTItem::ClassDecl(d) => named(
+            d.vis,
+            if d.modal { "modal class" } else { "class" },
+            &d.name,
+        ),
         ASTItem::TypeAliasDecl(d) => named(d.vis, "type", &d.name),
         ASTItem::DeriveTargetDecl(d) => format!(" derive target {}", d.name),
         ASTItem::StaticDecl(d) => format!(
@@ -215,6 +232,44 @@ pub fn attr_list_of(item: &ASTItem) -> &[AttributeItem] {
         ASTItem::ClassDecl(d) => &d.attrs,
         ASTItem::TypeAliasDecl(d) => &d.attrs,
         ASTItem::DeriveTargetDecl(_) | ASTItem::ErrorItem(_) => &[],
+    }
+}
+
+/// The subexpressions of an array literal in order: elements, and each repeat's value
+/// then count. Absent ones are skipped.
+pub fn array_expr_subexprs(expr: &ArrayExpr) -> Vec<&ExprPtr> {
+    let mut out = Vec::new();
+    for segment in &expr.elements {
+        match segment {
+            ArraySegment::ArrayElemSegment(node) => {
+                if node.value.is_some() {
+                    out.push(&node.value);
+                }
+            }
+            ArraySegment::ArrayRepeatSegment(node) => {
+                if node.value.is_some() {
+                    out.push(&node.value);
+                }
+                if node.count.is_some() {
+                    out.push(&node.count);
+                }
+            }
+        }
+    }
+    out
+}
+
+/// The type written for a binding: after the pattern, or on a typed pattern.
+pub fn binding_annotation_type_opt(binding: &Binding) -> TypePtr {
+    if binding.type_opt.is_some() {
+        return binding.type_opt.clone();
+    }
+    match binding.pat.as_deref() {
+        Some(Pattern {
+            node: PatternNode::TypedPattern(typed),
+            ..
+        }) => typed.r#type.clone(),
+        _ => None,
     }
 }
 

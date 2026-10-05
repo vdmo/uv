@@ -5,115 +5,129 @@ use std::collections::HashMap;
 use std::fmt::Write as _;
 use std::io::Write as _;
 
-use uv_core::diagnostics::Diagnostic;
-use uv_core::source_load::load_source;
-use uv_core::span::Span;
-use uv_core::unicode::{analyze_identifier_security, case_fold, is_xid_continue, is_xid_start, nfc};
-use uv_comptime::{execute_comptime, ComptimePassOptions};
+use std::cell::RefCell;
+use std::rc::Rc;
+use uv_analysis::caps::context_caps::is_capability_class;
+use uv_analysis::composite::class_linearization::linearize_class;
+use uv_analysis::composite::classes::{
+    check_orphan_rule, class_abstract_states, class_associated_types,
+    class_dispatchability_diagnostic, class_dispatchable, class_field_table, class_method_table,
+    class_subtypes, dispatchable, is_modal_class, lookup_class_method, missing_impl_methods,
+    type_implements_class, vtable_eligible,
+};
+use uv_analysis::composite::enums::enum_discriminants;
+use uv_analysis::composite::record_methods::recv_mode_of;
 use uv_analysis::context::{Entity, NameMapTable, Scope, ScopeContext, TypeDecl};
+use uv_analysis::contracts::verification::{
+    add_predicate_facts, ent_fact, ent_linear, ent_true, evaluate_constant, get_type_bounds,
+    negated_predicate, static_proof, ConstValue, StaticProofContext, StaticProofResult,
+};
+use uv_analysis::generics::generic_params::{
+    bind_type_params, build_param_scope, has_default_params, is_valid_const_param_type,
+    parse_const_param, required_param_count, total_param_count, validate_generic_params,
+};
+use uv_analysis::generics::monomorphize::{build_substitution, instantiate_type};
+use uv_analysis::generics::monomorphize::{
+    check_bounds_satisfied, infer_type_arguments, InstantiationKey, MonomorphizeContext,
+};
+use uv_analysis::layout::value_bits::{
+    decode_string_literal_bytes, encode_const, valid_value, value_bits, EnumPayloadVal, RawPtrVal,
+    Value, ValueRangeKind,
+};
+use uv_analysis::layout::{
+    align_of, dyn_layout_of, enum_layout_of, enum_record_payload_member_layout,
+    enum_tuple_payload_member_layout, layout_of, lower_async_type_of, lower_type_for_layout,
+    modal_layout_of, range_layout_of, record_layout_of, resolve_enum_layout_options,
+    resolve_record_layout_options, size_of, tuple_layout_of, union_layout_of,
+    EnumPayloadMemberLayout, Layout, RecordLayout,
+};
+use uv_analysis::memory::regions::ProvenanceKind;
+use uv_analysis::modal::lookup::{
+    has_state, lookup_modal_field_decl, lookup_state_method_decl, lookup_transition_decl,
+};
+use uv_analysis::modal::modal_widen::payload_state;
+use uv_analysis::modal::modal_widen::{niche_compatible, widen_warn_cond};
 use uv_analysis::resolve::collect_toplevel::collect_name_maps;
 use uv_analysis::resolve::populate_sigma::populate_sigma;
 use uv_analysis::resolve::resolve_module::resolve_modules;
 use uv_analysis::resolve::resolver::ResolveContext;
-use uv_analysis::resolve::scopes_lookup::module_names_of;
-use uv_analysis::generics::monomorphize::{build_substitution, instantiate_type};
-use uv_analysis::composite::enums::enum_discriminants;
-use uv_analysis::layout::{
-    align_of, dyn_layout_of, enum_layout_of, enum_record_payload_member_layout, enum_tuple_payload_member_layout,
-    layout_of, lower_async_type_of, lower_type_for_layout, modal_layout_of, range_layout_of, record_layout_of,
-    resolve_enum_layout_options, resolve_record_layout_options, size_of, tuple_layout_of, union_layout_of,
-    EnumPayloadMemberLayout, Layout, RecordLayout,
-};
-use uv_analysis::modal::modal_widen::payload_state;
-use uv_analysis::resolve::scopes::{path_key_of, universe_bindings};
-use uv_analysis::resolve::visibility::{can_access, check_module_visibility};
-use uv_analysis::typing::type_equiv::type_equiv;
-use uv_analysis::typing::type_lookup::{async_sig_of, field_type, field_visible, lookup_type_decl_resolved, record_fields};
-use uv_analysis::typing::type_lower::lower_type;
-use uv_analysis::typing::types::{
-    is_range_index_type, is_range_type, make_type_prim, make_type_string, make_type_tuple, type_key_of, type_paths,
-    type_to_string, KeyAtom, StringState, TypeKey, TypeNode, TypeRef,
-};
-use uv_analysis::typing::variance::{compute_variance_context, Variance};
-use uv_analysis::caps::context_caps::is_capability_class;
-use uv_analysis::composite::class_linearization::linearize_class;
-use uv_analysis::composite::classes::{
-    check_orphan_rule, class_abstract_states, class_associated_types, class_dispatchability_diagnostic,
-    class_dispatchable, class_field_table, class_method_table, class_subtypes, dispatchable, is_modal_class,
-    lookup_class_method, missing_impl_methods, type_implements_class, vtable_eligible,
-};
-use uv_analysis::composite::record_methods::recv_mode_of;
-use uv_analysis::contracts::verification::{
-    add_predicate_facts, ent_fact, ent_linear, ent_true, evaluate_constant, get_type_bounds, negated_predicate,
-    static_proof, ConstValue, StaticProofContext, StaticProofResult,
-};
-use uv_analysis::generics::generic_params::{
-    bind_type_params, build_param_scope, has_default_params, is_valid_const_param_type, parse_const_param,
-    required_param_count, total_param_count, validate_generic_params,
-};
-use uv_analysis::generics::monomorphize::{
-    check_bounds_satisfied, infer_type_arguments, InstantiationKey, MonomorphizeContext,
-};
-use uv_analysis::typing::item_generic_params::{check_generic_args, process_generic_params};
-use uv_analysis::modal::lookup::{has_state, lookup_modal_field_decl, lookup_state_method_decl, lookup_transition_decl};
-use uv_analysis::modal::modal_widen::{niche_compatible, widen_warn_cond};
-use uv_analysis::typing::signature::{build_method_signature, build_transition_signature, Signature};
-use uv_analysis::typing::subtyping::{argument_type_compatible, subtyping, SubtypingResult};
-use uv_analysis::typing::type_predicates::{
-    bitcopy_type, builtin_discrete_type, cast_valid, clone_type, drop_type, eq_type, eq_type_in, ffi_safe_diag_for_type,
-    ffi_safe_type, gpu_safe_diag_for_type, is_capability_type, lookup_foundational_builtin_method_sig, ord_type,
-    perm_of_type, strip_perm, zeroable_type,
-};
-use uv_analysis::typing::type_wf::type_wf;
-use uv_analysis::typing::types::{make_type_modal_state, make_type_path, Permission};
-use uv_source::ast::ContractClause;
-use uv_analysis::layout::value_bits::{
-    decode_string_literal_bytes, encode_const, valid_value, value_bits, EnumPayloadVal, RawPtrVal, Value, ValueRangeKind,
-};
-use uv_analysis::typing::type_lookup::lookup_enum_decl;
-use uv_analysis::typing::literals::{check_literal_expr, null_literal_expected, type_literal_expr};
-use uv_analysis::typing::types::{make_type_perm, make_type_ptr};
-use uv_source::ast::LiteralExpr;
-use uv_analysis::memory::regions::ProvenanceKind;
-use uv_analysis::typing::type_env::{
-    apply_binding_provenance_seed, bind_of, collect_pat_names, distinct_names, gpu_context, has_heap_provenance,
-    intro_all, mark_shared_derived_bindings_stale, mut_of, normalize_binding_provenance_seed, pop_scope,
-    project_type_env_to_depth, push_scope, stable_binding_type, type_pattern, BindingProvenanceSeedKind,
-    ParallelContextKind, TypeBinding, TypeEnv,
-};
-use uv_source::ast::Mutability;
-use std::cell::RefCell;
-use std::rc::Rc;
 use uv_analysis::resolve::scopes::id_key_of;
+use uv_analysis::resolve::scopes::{path_key_of, universe_bindings};
+use uv_analysis::resolve::scopes_lookup::module_names_of;
+use uv_analysis::resolve::visibility::{can_access, check_module_visibility};
+use uv_analysis::typing::item_generic_params::{check_generic_args, process_generic_params};
+use uv_analysis::typing::literals::{check_literal_expr, null_literal_expected, type_literal_expr};
+use uv_analysis::typing::pattern::{
+    enum_pattern_covers_variant, irrefutable_pattern, modal_pattern_covers_state,
+    type_pattern_against_type,
+};
 use uv_analysis::typing::pending::{reset_scaffolding, take_pending};
+use uv_analysis::typing::signature::{
+    build_method_signature, build_transition_signature, Signature,
+};
+use uv_analysis::typing::solve::{apply_substitution, solve, Constraint};
 use uv_analysis::typing::stmt::block::type_block;
 use uv_analysis::typing::stmt_context::StmtTypeContext;
+use uv_analysis::typing::subtyping::{argument_type_compatible, subtyping, SubtypingResult};
+use uv_analysis::typing::type_env::{
+    apply_binding_provenance_seed, bind_of, collect_pat_names, distinct_names, gpu_context,
+    has_heap_provenance, intro_all, mark_shared_derived_bindings_stale, mut_of,
+    normalize_binding_provenance_seed, pop_scope, project_type_env_to_depth, push_scope,
+    stable_binding_type, type_pattern, BindingProvenanceSeedKind, ParallelContextKind, TypeBinding,
+    TypeEnv,
+};
+use uv_analysis::typing::type_equiv::type_equiv;
 use uv_analysis::typing::type_expr::{type_expr, type_identifier_expr, type_place};
-use uv_analysis::typing::solve::{apply_substitution, solve, Constraint};
+use uv_analysis::typing::type_lookup::lookup_enum_decl;
+use uv_analysis::typing::type_lookup::{
+    async_sig_of, field_type, field_visible, lookup_type_decl_resolved, record_fields,
+};
+use uv_analysis::typing::type_lower::lower_type;
+use uv_analysis::typing::type_predicates::{
+    bitcopy_type, builtin_discrete_type, cast_valid, clone_type, drop_type, eq_type, eq_type_in,
+    ffi_safe_diag_for_type, ffi_safe_type, gpu_safe_diag_for_type, is_capability_type,
+    lookup_foundational_builtin_method_sig, ord_type, perm_of_type, strip_perm, zeroable_type,
+};
+use uv_analysis::typing::type_wf::type_wf;
 use uv_analysis::typing::types::{
-    make_type, make_type_array, make_type_closure, make_type_func, make_type_slice, make_type_union, TypeFuncParam,
+    is_range_index_type, is_range_type, make_type_prim, make_type_string, make_type_tuple,
+    type_key_of, type_paths, type_to_string, KeyAtom, StringState, TypeKey, TypeNode, TypeRef,
 };
-use uv_analysis::typing::pattern::{
-    enum_pattern_covers_variant, irrefutable_pattern, modal_pattern_covers_state, type_pattern_against_type,
+use uv_analysis::typing::types::{
+    make_type, make_type_array, make_type_closure, make_type_func, make_type_slice,
+    make_type_union, TypeFuncParam,
 };
-use uv_source::ast::{BlockPtr, ExprNode, ExprPtr, PatternNode, PatternPtr, Stmt};
+use uv_analysis::typing::types::{make_type_modal_state, make_type_path, Permission};
+use uv_analysis::typing::types::{make_type_perm, make_type_ptr};
 use uv_analysis::typing::types::{make_type_raw_ptr, PtrState, RawPtrQual};
-use uv_source::ast::{
-    ASTItem, ClassItem, ExternItem, GenericParams, Param, Receiver, RecordMember, StateMember, TypeParam, TypePtr,
-    VariantPayload,
-};
+use uv_analysis::typing::variance::{compute_variance_context, Variance};
+use uv_comptime::{execute_comptime, ComptimePassOptions};
+use uv_core::diagnostics::Diagnostic;
 use uv_core::diagnostics::{emit, has_error};
+use uv_core::source_load::load_source;
+use uv_core::span::Span;
 use uv_core::symbols::string_of_path;
-use uv_project::target_profile::TargetProfile;
-use uv_source::ast::ASTModule;
+use uv_core::unicode::{
+    analyze_identifier_security, case_fold, is_xid_continue, is_xid_start, nfc,
+};
 use uv_project::load_project::load_project;
 use uv_project::manifest::find_project_root;
 use uv_project::module_discovery::compilation_unit;
 use uv_project::project::{Assembly, AssemblyTarget};
+use uv_project::target_profile::TargetProfile;
 use uv_source::ast::dump::AstDump;
-use uv_source::phase1::{run_phase1, AssemblyOutcome, Phase1Observer};
+use uv_source::ast::ASTModule;
+use uv_source::ast::ContractClause;
+use uv_source::ast::LiteralExpr;
+use uv_source::ast::Mutability;
+use uv_source::ast::{
+    ASTItem, ClassItem, ExternItem, GenericParams, Param, Receiver, RecordMember, StateMember,
+    TypeParam, TypePtr, VariantPayload,
+};
+use uv_source::ast::{BlockPtr, ExprNode, ExprPtr, PatternNode, PatternPtr, Stmt};
 use uv_source::lexer::tokenize_with_diagnostics;
 use uv_source::parser::parse_file;
+use uv_source::phase1::{run_phase1, AssemblyOutcome, Phase1Observer};
 
 fn escape(text: &str) -> String {
     let mut out = String::with_capacity(text.len());
@@ -132,13 +146,21 @@ fn escape(text: &str) -> String {
 fn span_text(span: &Span) -> String {
     format!(
         "{}\t{}\t{}\t{}\t{}\t{}",
-        span.start_offset, span.end_offset, span.start_line, span.start_col, span.end_line, span.end_col
+        span.start_offset,
+        span.end_offset,
+        span.start_line,
+        span.start_col,
+        span.end_line,
+        span.end_col
     )
 }
 
 fn print_diags(out: &mut String, diags: &[Diagnostic]) {
     for diag in diags {
-        let span = diag.span.as_ref().map_or_else(|| "-".to_string(), span_text);
+        let span = diag
+            .span
+            .as_ref()
+            .map_or_else(|| "-".to_string(), span_text);
         let _ = writeln!(
             out,
             "G\t{}\t{}\t{}\t{}\t{}",
@@ -176,7 +198,13 @@ fn dump_tokens(out: &mut String, label: &str, path: &str) -> Result<(), String> 
         );
     }
     for doc in &output.docs {
-        let _ = writeln!(out, "D\t{}\t{}\t{}", doc.kind.name(), escape(&doc.text), span_text(&doc.span));
+        let _ = writeln!(
+            out,
+            "D\t{}\t{}\t{}",
+            doc.kind.name(),
+            escape(&doc.text),
+            span_text(&doc.span)
+        );
     }
     Ok(())
 }
@@ -217,7 +245,10 @@ fn opt_text(text: &Option<String>) -> String {
 }
 
 fn file_span_text(span: &Option<Span>) -> String {
-    span.as_ref().map_or_else(|| "-".to_string(), |span| format!("{}\t{}", span.file, span_text(span)))
+    span.as_ref().map_or_else(
+        || "-".to_string(),
+        |span| format!("{}\t{}", span.file, span_text(span)),
+    )
 }
 
 /// Diagnostics with the span's file and the attached notes; see `PrintDiagsFull` in the oracle.
@@ -269,11 +300,16 @@ fn load_project_block(block: &[&str]) -> Result<ProjectBlock, String> {
                 out.options.fallback_source_root = Some(fallback.to_string());
             }
             ["A", name, source_root, ..] => {
-                out.options.source_roots_by_assembly.insert(name.to_string(), source_root.to_string());
+                out.options
+                    .source_roots_by_assembly
+                    .insert(name.to_string(), source_root.to_string());
             }
             ["R", count, ..] => out.reachable = count.parse().unwrap_or(0),
             ["M", path, files @ ..] => {
-                let mut module = ASTModule { path: path.split("::").map(str::to_string).collect(), ..ASTModule::default() };
+                let mut module = ASTModule {
+                    path: path.split("::").map(str::to_string).collect(),
+                    ..ASTModule::default()
+                };
                 for file in files {
                     let bytes = std::fs::read(file).unwrap_or_default();
                     let Some(source) = load_source(file, &bytes).source else {
@@ -285,7 +321,8 @@ fn load_project_block(block: &[&str]) -> Result<ProjectBlock, String> {
                     };
                     module.items.extend(parsed_file.items);
                     module.module_doc.extend(parsed_file.module_doc);
-                    out.unsafe_spans_by_file.insert(source.path.to_string(), parsed.unsafe_spans);
+                    out.unsafe_spans_by_file
+                        .insert(source.path.to_string(), parsed.unsafe_spans);
                 }
                 out.modules.push(module);
             }
@@ -319,7 +356,12 @@ fn dump_modules(out: &mut String, modules: &[ASTModule]) {
 
 /// Runs the compile-time pass on one project block of a comptime list.
 fn dump_comptime(out: &mut String, block: &[&str]) {
-    let ProjectBlock { label, options, modules, .. } = match load_project_block(block) {
+    let ProjectBlock {
+        label,
+        options,
+        modules,
+        ..
+    } = match load_project_block(block) {
         Ok(project) => project,
         Err(failure) => {
             out.push_str(&failure);
@@ -373,7 +415,9 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
         }
     };
     let _ = writeln!(out, "F\t{}", input.label);
-    let Some(project) = load_project(&input.options.project_root, &AssemblyTarget::default()).project else {
+    let Some(project) =
+        load_project(&input.options.project_root, &AssemblyTarget::default()).project
+    else {
         out.push_str("NOPROJECT\n");
         return;
     };
@@ -395,7 +439,11 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
             let path = string_of_path(&module.path);
             project.assemblies.iter().flat_map(move |assembly| {
                 let path = path.clone();
-                assembly.modules.iter().filter(move |info| info.path == path).cloned()
+                assembly
+                    .modules
+                    .iter()
+                    .filter(move |info| info.path == path)
+                    .cloned()
             })
         })
         .collect();
@@ -458,7 +506,11 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
         }
         return;
     }
-    let _ = writeln!(out, "RESOLVE\t{}", if resolved.ok { "ok" } else { "failed" });
+    let _ = writeln!(
+        out,
+        "RESOLVE\t{}",
+        if resolved.ok { "ok" } else { "failed" }
+    );
     print_diags_full(out, &resolved.diags);
     dump_modules(out, &resolved.modules);
 }
@@ -508,7 +560,10 @@ fn collect_params(owner: &str, params: &[Param], ret: &TypePtr, out: &mut Writte
 fn collect_generics(owner: &str, params: &Option<GenericParams>, out: &mut Written) {
     for param in params.iter().flat_map(|params| &params.params) {
         if param.default_type.is_some() {
-            out.push((format!("{owner}<{}=>", param.name), param.default_type.clone()));
+            out.push((
+                format!("{owner}<{}=>", param.name),
+                param.default_type.clone(),
+            ));
         }
     }
 }
@@ -541,18 +596,29 @@ fn collect_written_types(module: &ASTModule) -> Written {
                 for member in &node.members {
                     match member {
                         RecordMember::FieldDecl(field) => {
-                            out.push((format!("{}.{}", node.name, field.name), field.r#type.clone()));
+                            out.push((
+                                format!("{}.{}", node.name, field.name),
+                                field.r#type.clone(),
+                            ));
                         }
                         RecordMember::MethodDecl(method) => {
                             let owner = format!("{}::{}", node.name, method.name);
-                            collect_params(&owner, &method.params, &method.return_type_opt, &mut out);
+                            collect_params(
+                                &owner,
+                                &method.params,
+                                &method.return_type_opt,
+                                &mut out,
+                            );
                             if let Receiver::ReceiverExplicit(recv) = &method.receiver {
                                 out.push((format!("{owner}(self)"), recv.r#type.clone()));
                             }
                         }
                         RecordMember::AssociatedTypeDecl(assoc) => {
                             if assoc.default_type.is_some() {
-                                out.push((format!("{}::{}", node.name, assoc.name), assoc.default_type.clone()));
+                                out.push((
+                                    format!("{}::{}", node.name, assoc.name),
+                                    assoc.default_type.clone(),
+                                ));
                             }
                         }
                     }
@@ -565,12 +631,16 @@ fn collect_written_types(module: &ASTModule) -> Written {
                         None => {}
                         Some(VariantPayload::VariantPayloadTuple(tuple)) => {
                             for element in &tuple.elements {
-                                out.push((format!("{}::{}", node.name, variant.name), element.clone()));
+                                out.push((
+                                    format!("{}::{}", node.name, variant.name),
+                                    element.clone(),
+                                ));
                             }
                         }
                         Some(VariantPayload::VariantPayloadRecord(record)) => {
                             for field in &record.fields {
-                                let label = format!("{}::{}.{}", node.name, variant.name, field.name);
+                                let label =
+                                    format!("{}::{}.{}", node.name, variant.name, field.name);
                                 out.push((label, field.r#type.clone()));
                             }
                         }
@@ -588,10 +658,20 @@ fn collect_written_types(module: &ASTModule) -> Written {
                             }
                             StateMember::StateMethodDecl(method) => {
                                 let owner = format!("{owner}::{}", method.name);
-                                collect_params(&owner, &method.params, &method.return_type_opt, &mut out);
+                                collect_params(
+                                    &owner,
+                                    &method.params,
+                                    &method.return_type_opt,
+                                    &mut out,
+                                );
                             }
                             StateMember::TransitionDecl(trans) => {
-                                collect_params(&format!("{owner}::{}", trans.name), &trans.params, &None, &mut out);
+                                collect_params(
+                                    &format!("{owner}::{}", trans.name),
+                                    &trans.params,
+                                    &None,
+                                    &mut out,
+                                );
                             }
                         }
                     }
@@ -602,19 +682,33 @@ fn collect_written_types(module: &ASTModule) -> Written {
                 for class_item in &node.items {
                     match class_item {
                         ClassItem::ClassFieldDecl(field) => {
-                            out.push((format!("{}.{}", node.name, field.name), field.r#type.clone()));
+                            out.push((
+                                format!("{}.{}", node.name, field.name),
+                                field.r#type.clone(),
+                            ));
                         }
                         ClassItem::ClassMethodDecl(method) => {
                             let owner = format!("{}::{}", node.name, method.name);
-                            collect_params(&owner, &method.params, &method.return_type_opt, &mut out);
+                            collect_params(
+                                &owner,
+                                &method.params,
+                                &method.return_type_opt,
+                                &mut out,
+                            );
                         }
                         ClassItem::AssociatedTypeDecl(assoc) => {
                             if assoc.default_type.is_some() {
-                                out.push((format!("{}::{}", node.name, assoc.name), assoc.default_type.clone()));
+                                out.push((
+                                    format!("{}::{}", node.name, assoc.name),
+                                    assoc.default_type.clone(),
+                                ));
                             }
                         }
                         ClassItem::AbstractFieldDecl(field) => {
-                            out.push((format!("{}.{}", node.name, field.name), field.r#type.clone()));
+                            out.push((
+                                format!("{}.{}", node.name, field.name),
+                                field.r#type.clone(),
+                            ));
                         }
                         ClassItem::AbstractStateDecl(state) => {
                             for field in &state.fields {
@@ -629,7 +723,10 @@ fn collect_written_types(module: &ASTModule) -> Written {
                 collect_generics(&node.name, &node.generic_params, &mut out);
                 out.push((node.name.clone(), node.r#type.clone()));
             }
-            ASTItem::UsingDecl(_) | ASTItem::ImportDecl(_) | ASTItem::DeriveTargetDecl(_) | ASTItem::ErrorItem(_) => {}
+            ASTItem::UsingDecl(_)
+            | ASTItem::ImportDecl(_)
+            | ASTItem::DeriveTargetDecl(_)
+            | ASTItem::ErrorItem(_) => {}
         }
     }
     out
@@ -640,11 +737,18 @@ fn opt_u64(value: Option<u64>) -> String {
 }
 
 fn layout_text(layout: Option<Layout>) -> String {
-    layout.map_or_else(|| "-".to_string(), |layout| format!("{}/{}", layout.size, layout.align))
+    layout.map_or_else(
+        || "-".to_string(),
+        |layout| format!("{}/{}", layout.size, layout.align),
+    )
 }
 
 fn offsets_text(offsets: &[u64]) -> String {
-    offsets.iter().map(u64::to_string).collect::<Vec<_>>().join(",")
+    offsets
+        .iter()
+        .map(u64::to_string)
+        .collect::<Vec<_>>()
+        .join(",")
 }
 
 /// Layout details of a lowered type that is a union, a range, a tuple or asynchronous.
@@ -676,7 +780,12 @@ fn dump_shape_layouts(out: &mut String, ctx: &ScopeContext<'_>, lowered: &TypeRe
     }
     let record_line = |out: &mut String, tag: &str, layout: Option<RecordLayout>| match layout {
         Some(layout) => {
-            let _ = writeln!(out, "{tag}\t{}\t{}", layout_text(Some(layout.layout)), offsets_text(&layout.offsets));
+            let _ = writeln!(
+                out,
+                "{tag}\t{}\t{}",
+                layout_text(Some(layout.layout)),
+                offsets_text(&layout.offsets)
+            );
         }
         None => {
             let _ = writeln!(out, "{tag}\t-");
@@ -713,7 +822,9 @@ fn dump_decl_layouts(out: &mut String, ctx: &ScopeContext<'_>, item: &ASTItem) {
     let arg_lists = |params: &Option<GenericParams>| {
         let mut lists: Vec<Vec<TypeRef>> = vec![Vec::new()];
         if let Some(params) = params.as_ref().filter(|params| !params.params.is_empty()) {
-            let mut all: Vec<TypeRef> = (0..params.params.len()).map(|index| pool[index % pool.len()].clone()).collect();
+            let mut all: Vec<TypeRef> = (0..params.params.len())
+                .map(|index| pool[index % pool.len()].clone())
+                .collect();
             lists.push(all.clone());
             all.push(pool[0].clone());
             lists.push(all);
@@ -730,12 +841,19 @@ fn dump_decl_layouts(out: &mut String, ctx: &ScopeContext<'_>, item: &ASTItem) {
                 if options.packed { "packed" } else { "-" },
                 opt_u64(options.min_align)
             );
-            let fields: Option<Vec<TypeRef>> =
-                record_fields(node).iter().map(|field| lower_type_for_layout(ctx, &field.r#type)).collect();
+            let fields: Option<Vec<TypeRef>> = record_fields(node)
+                .iter()
+                .map(|field| lower_type_for_layout(ctx, &field.r#type))
+                .collect();
             match fields.and_then(|fields| record_layout_of(ctx, &fields, &options)) {
                 Some(layout) => {
                     let offsets = offsets_text(&layout.offsets);
-                    let _ = writeln!(out, "RL\t{}\t{}\t{offsets}", node.name, layout_text(Some(layout.layout)));
+                    let _ = writeln!(
+                        out,
+                        "RL\t{}\t{}\t{offsets}",
+                        node.name,
+                        layout_text(Some(layout.layout))
+                    );
                 }
                 None => {
                     let _ = writeln!(out, "RL\t{}\t-\t-", node.name);
@@ -753,10 +871,22 @@ fn dump_decl_layouts(out: &mut String, ctx: &ScopeContext<'_>, item: &ASTItem) {
             );
             match enum_discriminants(node) {
                 Ok(discs) => {
-                    let _ = writeln!(out, "ED\t{}\t{}\t{}", node.name, discs.max_disc, offsets_text(&discs.discs));
+                    let _ = writeln!(
+                        out,
+                        "ED\t{}\t{}\t{}",
+                        node.name,
+                        discs.max_disc,
+                        offsets_text(&discs.discs)
+                    );
                 }
                 Err(err) => {
-                    let _ = writeln!(out, "ED\t{}\tfail\t{}\t{}", node.name, err.diag_id, span_text(&err.span));
+                    let _ = writeln!(
+                        out,
+                        "ED\t{}\tfail\t{}\t{}",
+                        node.name,
+                        err.diag_id,
+                        span_text(&err.span)
+                    );
                 }
             }
             for args in arg_lists(&node.generic_params) {
@@ -781,38 +911,65 @@ fn dump_decl_layouts(out: &mut String, ctx: &ScopeContext<'_>, item: &ASTItem) {
                     let Some(payload) = &variant.payload_opt else {
                         continue;
                     };
-                    let mut member_line = |label: String, member: Option<EnumPayloadMemberLayout>| {
-                        let _ = write!(out, "EM\t{}::{}{label}\t{}\t", node.name, variant.name, args.len());
-                        match member {
-                            Some(member) => {
-                                let _ = writeln!(
-                                    out,
-                                    "{}\t{}\t{}/{}",
-                                    escape(&type_to_string(&member.r#type)),
-                                    member.offset,
-                                    member.payload_size,
-                                    member.payload_align
-                                );
+                    let mut member_line =
+                        |label: String, member: Option<EnumPayloadMemberLayout>| {
+                            let _ = write!(
+                                out,
+                                "EM\t{}::{}{label}\t{}\t",
+                                node.name,
+                                variant.name,
+                                args.len()
+                            );
+                            match member {
+                                Some(member) => {
+                                    let _ = writeln!(
+                                        out,
+                                        "{}\t{}\t{}/{}",
+                                        escape(&type_to_string(&member.r#type)),
+                                        member.offset,
+                                        member.payload_size,
+                                        member.payload_align
+                                    );
+                                }
+                                None => out.push_str("-\t-\t-\n"),
                             }
-                            None => out.push_str("-\t-\t-\n"),
-                        }
-                    };
+                        };
                     match payload {
                         VariantPayload::VariantPayloadTuple(tuple) => {
                             for index in 0..=tuple.elements.len() {
-                                let member = enum_tuple_payload_member_layout(ctx, node, variant, &args, index);
+                                let member = enum_tuple_payload_member_layout(
+                                    ctx, node, variant, &args, index,
+                                );
                                 member_line(format!(".{index}"), member);
                             }
-                            member_line(".named".to_string(), enum_record_payload_member_layout(ctx, node, variant, &args, "x"));
+                            member_line(
+                                ".named".to_string(),
+                                enum_record_payload_member_layout(ctx, node, variant, &args, "x"),
+                            );
                         }
                         VariantPayload::VariantPayloadRecord(record) => {
                             for field in &record.fields {
-                                let member = enum_record_payload_member_layout(ctx, node, variant, &args, &field.name);
+                                let member = enum_record_payload_member_layout(
+                                    ctx,
+                                    node,
+                                    variant,
+                                    &args,
+                                    &field.name,
+                                );
                                 member_line(format!(".{}", field.name), member);
                             }
-                            let missing = enum_record_payload_member_layout(ctx, node, variant, &args, "no_such_field");
+                            let missing = enum_record_payload_member_layout(
+                                ctx,
+                                node,
+                                variant,
+                                &args,
+                                "no_such_field",
+                            );
                             member_line(".missing".to_string(), missing);
-                            member_line(".0".to_string(), enum_tuple_payload_member_layout(ctx, node, variant, &args, 0));
+                            member_line(
+                                ".0".to_string(),
+                                enum_tuple_payload_member_layout(ctx, node, variant, &args, 0),
+                            );
                         }
                     }
                 }
@@ -851,7 +1008,9 @@ fn dump_instantiations(out: &mut String, name: &str, params: &[TypeParam], membe
         make_type_tuple(vec![make_type_prim("u8"), make_type_prim("u8")]),
     ];
     for count in [0, 1, params.len()] {
-        let args: Vec<TypeRef> = (0..count).map(|index| pool[index % pool.len()].clone()).collect();
+        let args: Vec<TypeRef> = (0..count)
+            .map(|index| pool[index % pool.len()].clone())
+            .collect();
         let subst = build_substitution(params, &args);
         let _ = write!(out, "S\t{name}\t{count}");
         for (param, ty) in &subst {
@@ -859,7 +1018,11 @@ fn dump_instantiations(out: &mut String, name: &str, params: &[TypeParam], membe
         }
         out.push('\n');
         for member in members {
-            let _ = writeln!(out, "I\t{name}\t{count}\t{}", escape(&type_to_string(&instantiate_type(member, &subst))));
+            let _ = writeln!(
+                out,
+                "I\t{name}\t{count}\t{}",
+                escape(&type_to_string(&instantiate_type(member, &subst)))
+            );
         }
     }
     let _ = write!(out, "V\t{name}");
@@ -880,7 +1043,10 @@ fn dump_types(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapT
         let module = ctx.sigma.mods[index].clone();
         dump_line("X", &module.path, out);
         ctx.current_module = module.path.clone();
-        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        let names = name_maps
+            .get(&path_key_of(&module.path))
+            .cloned()
+            .unwrap_or_default();
         ctx.scopes = vec![Scope::new(), names, universe_bindings()];
         let mut lowered_types = Vec::new();
         for (label, written) in collect_written_types(&module) {
@@ -897,16 +1063,31 @@ fn dump_types(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapT
             print_key(out, &type_key_of(&lowered));
             out.push('\t');
             let paths = type_paths(&lowered);
-            out.push_str(&paths.iter().map(|path| string_of_path(path)).collect::<Vec<_>>().join(" "));
+            out.push_str(
+                &paths
+                    .iter()
+                    .map(|path| string_of_path(path))
+                    .collect::<Vec<_>>()
+                    .join(" "),
+            );
             let _ = write!(
                 out,
                 "\t{}{}",
                 if is_range_type(&lowered) { 'r' } else { '-' },
-                if is_range_index_type(&lowered) { 'i' } else { '-' }
+                if is_range_index_type(&lowered) {
+                    'i'
+                } else {
+                    '-'
+                }
             );
             out.push('\t');
             out.push_str(&layout_text(layout_of(ctx, &lowered)));
-            let _ = write!(out, " {} {}", opt_u64(size_of(ctx, &lowered)), opt_u64(align_of(ctx, &lowered)));
+            let _ = write!(
+                out,
+                " {} {}",
+                opt_u64(size_of(ctx, &lowered)),
+                opt_u64(align_of(ctx, &lowered))
+            );
             match lower_type_for_layout(ctx, &written) {
                 Some(for_layout) => {
                     let layout = layout_text(layout_of(ctx, &for_layout));
@@ -950,7 +1131,11 @@ fn dump_types(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapT
         for i in 0..count {
             let _ = write!(out, "Q\t{i}\t");
             for j in 0..count {
-                out.push(if type_equiv(&lowered_types[i], &lowered_types[j]) { '1' } else { '0' });
+                out.push(if type_equiv(&lowered_types[i], &lowered_types[j]) {
+                    '1'
+                } else {
+                    '0'
+                });
             }
             out.push('\n');
         }
@@ -976,7 +1161,11 @@ fn dump_types(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapT
                             node.name,
                             field.name,
                             ty.map_or_else(|| "-".to_string(), |ty| escape(&type_to_string(&ty))),
-                            if field_visible(ctx, node, &field.name, &elsewhere) { "visible" } else { "hidden" }
+                            if field_visible(ctx, node, &field.name, &elsewhere) {
+                                "visible"
+                            } else {
+                                "hidden"
+                            }
                         );
                         if let Ok(lowered) = lower_type(ctx, &field.r#type) {
                             members.push(lowered);
@@ -987,7 +1176,9 @@ fn dump_types(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapT
                     }
                 }
                 ASTItem::TypeAliasDecl(node) => {
-                    if let (Some(params), Ok(lowered)) = (&node.generic_params, lower_type(ctx, &node.r#type)) {
+                    if let (Some(params), Ok(lowered)) =
+                        (&node.generic_params, lower_type(ctx, &node.r#type))
+                    {
                         dump_instantiations(out, &node.name, &params.params, &[lowered]);
                     }
                 }
@@ -1058,7 +1249,13 @@ fn dump_contract(out: &mut String, owner: &str, contract: &Option<ContractClause
         print_const(out, evaluate_constant(clause));
         out.push(' ');
         out.push(if ent_true(clause) { 't' } else { '-' });
-        out.push(if negated_predicate(clause).is_some_and(|negated| negated.is_some()) { 'n' } else { '-' });
+        out.push(
+            if negated_predicate(clause).is_some_and(|negated| negated.is_some()) {
+                'n'
+            } else {
+                '-'
+            },
+        );
     }
     out.push('\t');
     if contract.precondition.is_some() && contract.postcondition.is_some() {
@@ -1067,9 +1264,19 @@ fn dump_contract(out: &mut String, owner: &str, contract: &Option<ContractClause
         let _ = write!(out, "{} ", proof_ctx.facts.len());
         print_proof(out, &static_proof(&proof_ctx, &contract.postcondition));
         out.push(' ');
-        out.push(if ent_fact(&proof_ctx, &contract.postcondition) { 'f' } else { '-' });
-        out.push(if ent_linear(&proof_ctx, &contract.postcondition) { 'l' } else { '-' });
-        if let Some(negated) = negated_predicate(&contract.precondition).filter(|negated| negated.is_some()) {
+        out.push(if ent_fact(&proof_ctx, &contract.postcondition) {
+            'f'
+        } else {
+            '-'
+        });
+        out.push(if ent_linear(&proof_ctx, &contract.postcondition) {
+            'l'
+        } else {
+            '-'
+        });
+        if let Some(negated) =
+            negated_predicate(&contract.precondition).filter(|negated| negated.is_some())
+        {
             let mut neg_ctx = StaticProofContext::default();
             add_predicate_facts(&mut neg_ctx, &negated);
             out.push(' ');
@@ -1123,13 +1330,20 @@ fn dump_generic_params(
         "GP\t{name}\t{}/{}{}\t",
         required_param_count(generic_params),
         total_param_count(generic_params),
-        if has_default_params(generic_params) { 'd' } else { '-' }
+        if has_default_params(generic_params) {
+            'd'
+        } else {
+            '-'
+        }
     );
     match validate_generic_params(generic_params) {
         Ok(infos) => {
             out.push_str("ok -");
             for info in &infos {
-                let default = info.default_type.as_ref().map_or_else(|| "none".to_string(), type_text);
+                let default = info
+                    .default_type
+                    .as_ref()
+                    .map_or_else(|| "none".to_string(), type_text);
                 let _ = write!(out, " {}/{}/{default}", info.name, info.class_bounds.len());
             }
         }
@@ -1144,7 +1358,13 @@ fn dump_generic_params(
         Ok(infos) => {
             out.push_str("ok -");
             for info in infos {
-                let _ = write!(out, " {}/{}/{}", info.name, info.class_bounds.len(), type_text(&info.default_type));
+                let _ = write!(
+                    out,
+                    " {}/{}/{}",
+                    info.name,
+                    info.class_bounds.len(),
+                    type_text(&info.default_type)
+                );
             }
         }
         Err(diag_id) => {
@@ -1174,7 +1394,16 @@ fn dump_generic_params(
             }
             None => out.push('-'),
         }
-        out.push(if parse_const_param(param, &make_type_prim("bool")).r#type.is_some() { '!' } else { ' ' });
+        out.push(
+            if parse_const_param(param, &make_type_prim("bool"))
+                .r#type
+                .is_some()
+            {
+                '!'
+            } else {
+                ' '
+            },
+        );
     }
     out.push('\n');
     for n in 0..=params.len() + 1 {
@@ -1182,7 +1411,9 @@ fn dump_generic_params(
             if types.is_empty() && (n != 0 || shift != 0) {
                 continue;
             }
-            let args: Vec<TypeRef> = (0..n).map(|i| types[(shift + i * 3) % types.len()].clone()).collect();
+            let args: Vec<TypeRef> = (0..n)
+                .map(|i| types[(shift + i * 3) % types.len()].clone())
+                .collect();
             let _ = write!(out, "GB\t{name}\t{n}.{shift}\t");
             match check_bounds_satisfied(params, &args) {
                 Ok(()) => out.push_str("ok"),
@@ -1224,8 +1455,10 @@ fn dump_inference(
     let params: &[TypeParam] = generic_params.as_ref().map_or(&[], |params| &params.params);
     let mut bound_ctx = ctx.clone();
     bound_ctx.scopes = bind_type_params(ctx, generic_params);
-    let expected: Vec<TypeRef> =
-        proc_params.iter().map(|param| lower_type(&bound_ctx, &param.r#type).unwrap_or(None)).collect();
+    let expected: Vec<TypeRef> = proc_params
+        .iter()
+        .map(|param| lower_type(&bound_ctx, &param.r#type).unwrap_or(None))
+        .collect();
     for variant in 0..3 {
         if variant != 0 && types.is_empty() {
             continue;
@@ -1233,11 +1466,24 @@ fn dump_inference(
         let actual: Vec<TypeRef> = match variant {
             0 => expected.clone(),
             1 => {
-                let args: Vec<TypeRef> = (0..params.len()).map(|j| types[(j * 5 + 1) % types.len()].clone()).collect();
+                let args: Vec<TypeRef> = (0..params.len())
+                    .map(|j| types[(j * 5 + 1) % types.len()].clone())
+                    .collect();
                 let subst = build_substitution(params, &args);
-                expected.iter().map(|ty| if ty.is_some() { instantiate_type(ty, &subst) } else { None }).collect()
+                expected
+                    .iter()
+                    .map(|ty| {
+                        if ty.is_some() {
+                            instantiate_type(ty, &subst)
+                        } else {
+                            None
+                        }
+                    })
+                    .collect()
             }
-            _ => (0..expected.len()).map(|i| types[i % types.len()].clone()).collect(),
+            _ => (0..expected.len())
+                .map(|i| types[i % types.len()].clone())
+                .collect(),
         };
         let inferred = infer_type_arguments(params, &expected, &actual);
         let _ = write!(
@@ -1256,12 +1502,18 @@ fn dump_inference(
 fn dump_instantiation_set(out: &mut String, types: &[TypeRef]) {
     let mut mono = MonomorphizeContext::default();
     let count = types.len().min(12);
-    let key = |name: &str, args: Vec<TypeRef>| InstantiationKey { decl_path: vec!["M".to_string(), name.to_string()], args };
+    let key = |name: &str, args: Vec<TypeRef>| InstantiationKey {
+        decl_path: vec!["M".to_string(), name.to_string()],
+        args,
+    };
     for ty in &types[..count] {
         mono.demand(&key("G", vec![ty.clone()]));
     }
     for i in 0..count {
-        mono.demand(&key("G", vec![types[i].clone(), types[count - 1 - i].clone()]));
+        mono.demand(&key(
+            "G",
+            vec![types[i].clone(), types[count - 1 - i].clone()],
+        ));
     }
     for i in 0..count {
         mono.demand(&key("F", vec![types[count - 1 - i].clone()]));
@@ -1277,19 +1529,54 @@ fn dump_instantiation_set(out: &mut String, types: &[TypeRef]) {
         let _ = write!(out, ">{}", if entry.processed { 'p' } else { '-' });
     }
     out.push('\t');
-    out.push(if mono.has_instantiation(&key("A", Vec::new())) { '1' } else { '0' });
-    out.push(if mono.has_instantiation(&key("B", Vec::new())) { '1' } else { '0' });
-    out.push(if mono.process_to_fixed_point() { 'T' } else { 'F' });
-    let _ = writeln!(out, "{}", mono.instantiations().values().filter(|entry| entry.processed).count());
+    out.push(if mono.has_instantiation(&key("A", Vec::new())) {
+        '1'
+    } else {
+        '0'
+    });
+    out.push(if mono.has_instantiation(&key("B", Vec::new())) {
+        '1'
+    } else {
+        '0'
+    });
+    out.push(if mono.process_to_fixed_point() {
+        'T'
+    } else {
+        'F'
+    });
+    let _ = writeln!(
+        out,
+        "{}",
+        mono.instantiations()
+            .values()
+            .filter(|entry| entry.processed)
+            .count()
+    );
 }
 
 fn dump_solving(out: &mut String, ctx: &ScopeContext<'_>, types: &[TypeRef]) {
     let count = types.len().min(24);
     let var = |id: u32| make_type(TypeNode::Var(id));
-    let eq = |lhs: TypeRef, rhs: TypeRef| Constraint { lhs, rhs, requires_subtyping: false };
-    let sub = |lhs: TypeRef, rhs: TypeRef| Constraint { lhs, rhs, requires_subtyping: true };
+    let eq = |lhs: TypeRef, rhs: TypeRef| Constraint {
+        lhs,
+        rhs,
+        requires_subtyping: false,
+    };
+    let sub = |lhs: TypeRef, rhs: TypeRef| Constraint {
+        lhs,
+        rhs,
+        requires_subtyping: true,
+    };
     let range = |base: TypeRef| make_type(TypeNode::Range(base));
-    let func = |param: TypeRef, ret: TypeRef| make_type_func(vec![TypeFuncParam { mode: None, r#type: param }], ret);
+    let func = |param: TypeRef, ret: TypeRef| {
+        make_type_func(
+            vec![TypeFuncParam {
+                mode: None,
+                r#type: param,
+            }],
+            ret,
+        )
+    };
     let closure = |param: TypeRef, ret: TypeRef| make_type_closure(vec![(false, param)], ret, None);
     let unique = |base: TypeRef| make_type_perm(Permission::Unique, base);
     for i in 0..count {
@@ -1299,23 +1586,40 @@ fn dump_solving(out: &mut String, ctx: &ScopeContext<'_>, types: &[TypeRef]) {
         let valid = Some(PtrState::Valid);
         let sets: Vec<Vec<Constraint>> = vec![
             vec![eq(var(0), a())],
-            vec![eq(make_type_tuple(vec![var(0), var(1)]), make_type_tuple(vec![a(), b()]))],
+            vec![eq(
+                make_type_tuple(vec![var(0), var(1)]),
+                make_type_tuple(vec![a(), b()]),
+            )],
             vec![eq(var(0), a()), eq(var(0), b())],
             vec![sub(var(0), a()), sub(b(), var(1)), eq(var(1), var(0))],
             vec![eq(var(0), make_type_tuple(vec![var(0), a()]))],
             vec![sub(a(), b())],
             vec![
                 eq(make_type_slice(var(0)), make_type_slice(a())),
-                eq(make_type_raw_ptr(RawPtrQual::Imm, var(1)), make_type_raw_ptr(RawPtrQual::Imm, b())),
+                eq(
+                    make_type_raw_ptr(RawPtrQual::Imm, var(1)),
+                    make_type_raw_ptr(RawPtrQual::Imm, b()),
+                ),
                 eq(make_type_ptr(var(2), valid), make_type_ptr(a(), valid)),
             ],
             vec![eq(func(var(0), var(1)), func(a(), b())), eq(var(0), var(1))],
-            vec![eq(var(0), var(1)), eq(var(1), var(2)), eq(var(2), a()), eq(unique(var(3)), unique(var(0)))],
-            vec![eq(make_type_union(vec![var(0), a()]), make_type_union(vec![b(), a()]))],
+            vec![
+                eq(var(0), var(1)),
+                eq(var(1), var(2)),
+                eq(var(2), a()),
+                eq(unique(var(3)), unique(var(0))),
+            ],
+            vec![eq(
+                make_type_union(vec![var(0), a()]),
+                make_type_union(vec![b(), a()]),
+            )],
             vec![
                 eq(range(var(0)), range(a())),
                 eq(a(), var(1)),
-                eq(make_type_array(var(0), 3, None), make_type_array(b(), 3, None)),
+                eq(
+                    make_type_array(var(0), 3, None),
+                    make_type_array(b(), 3, None),
+                ),
             ],
             vec![eq(closure(var(0), var(1)), closure(a(), b()))],
             vec![eq(var(1), var(0)), eq(var(0), var(1)), eq(var(0), a())],
@@ -1357,13 +1661,17 @@ fn dump_solving(out: &mut String, ctx: &ScopeContext<'_>, types: &[TypeRef]) {
 }
 
 fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
-    const FOUNDATIONAL: [&str; 9] =
-        ["Bitcopy", "Clone", "Drop", "FfiSafe", "GpuSafe", "Eq", "Discrete", "Hash", "Iterator"];
+    const FOUNDATIONAL: [&str; 9] = [
+        "Bitcopy", "Clone", "Drop", "FfiSafe", "GpuSafe", "Eq", "Discrete", "Hash", "Iterator",
+    ];
     for index in 0..ctx.sigma.mods.len() {
         let module = ctx.sigma.mods[index].clone();
         dump_line("X", &module.path, out);
         ctx.current_module = module.path.clone();
-        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        let names = name_maps
+            .get(&path_key_of(&module.path))
+            .cloned()
+            .unwrap_or_default();
         ctx.scopes = vec![Scope::new(), names, universe_bindings()];
         let ctx = &*ctx;
         let mut types: Vec<TypeRef> = Vec::new();
@@ -1420,13 +1728,22 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                     }
                     None => out.push('-'),
                 }
-                out.push(if lookup_foundational_builtin_method_sig(None, &ty, method).is_some() { '+' } else { '-' });
+                out.push(
+                    if lookup_foundational_builtin_method_sig(None, &ty, method).is_some() {
+                        '+'
+                    } else {
+                        '-'
+                    },
+                );
             }
             out.push('\n');
             if let Some(TypeNode::Refine { base, predicate }) = ty.as_deref().map(|ty| &ty.node) {
                 if predicate.is_some() {
                     out.push_str("PR\t");
-                    print_proof(out, &static_proof(&StaticProofContext::default(), predicate));
+                    print_proof(
+                        out,
+                        &static_proof(&StaticProofContext::default(), predicate),
+                    );
                     out.push('\t');
                     print_const(out, evaluate_constant(predicate));
                     let mut self_ctx = StaticProofContext::default();
@@ -1444,7 +1761,8 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
         }
         let count = types.len().min(40);
         for i in 0..count {
-            let (mut sub, mut arg, mut cast, mut diags) = (String::new(), String::new(), String::new(), String::new());
+            let (mut sub, mut arg, mut cast, mut diags) =
+                (String::new(), String::new(), String::new(), String::new());
             let mark = |res: SubtypingResult| match (res.ok, res.subtype) {
                 (false, _) => 'e',
                 (true, true) => '1',
@@ -1456,14 +1774,24 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                 if let Some(diag_id) = res.diag_id {
                     let _ = write!(diags, " {j}={diag_id}");
                 }
-                arg.push(mark(argument_type_compatible(ctx, &types[i], &types[j], None)));
-                cast.push(if cast_valid(&types[i], &types[j]) { '1' } else { '0' });
+                arg.push(mark(argument_type_compatible(
+                    ctx, &types[i], &types[j], None,
+                )));
+                cast.push(if cast_valid(&types[i], &types[j]) {
+                    '1'
+                } else {
+                    '0'
+                });
             }
             let _ = writeln!(out, "SB\t{i}\t{sub}\t{arg}\t{cast}\t{diags}");
         }
         let implements = |out: &mut String, class: &[String]| {
             for ty in &types[..count] {
-                out.push(if type_implements_class(ctx, ty, class) { '1' } else { '0' });
+                out.push(if type_implements_class(ctx, ty, class) {
+                    '1'
+                } else {
+                    '0'
+                });
             }
         };
         dump_instantiation_set(out, &types);
@@ -1498,10 +1826,24 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
             }
             match item {
                 ASTItem::ProcedureDecl(node) if node.generic_params.is_some() => {
-                    dump_inference(out, ctx, &node.name, &node.generic_params, &node.params, &types);
+                    dump_inference(
+                        out,
+                        ctx,
+                        &node.name,
+                        &node.generic_params,
+                        &node.params,
+                        &types,
+                    );
                 }
                 ASTItem::ComptimeProcedureDecl(node) if node.generic_params.is_some() => {
-                    dump_inference(out, ctx, &node.name, &node.generic_params, &node.params, &types);
+                    dump_inference(
+                        out,
+                        ctx,
+                        &node.name,
+                        &node.generic_params,
+                        &node.params,
+                        &types,
+                    );
                 }
                 _ => {}
             }
@@ -1531,7 +1873,11 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                                     " {}::{}{}",
                                     string_of_path(&entry.owner),
                                     entry.method.name,
-                                    if vtable_eligible(entry.method) { '+' } else { '-' }
+                                    if vtable_eligible(entry.method) {
+                                        '+'
+                                    } else {
+                                        '-'
+                                    }
                                 );
                             }
                         }
@@ -1551,14 +1897,27 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                             let _ = write!(out, "fail {diag_id}");
                         }
                     }
-                    let _ = write!(out, "\t{}\t", diag_or(class_dispatchability_diagnostic(ctx, &path)));
+                    let _ = write!(
+                        out,
+                        "\t{}\t",
+                        diag_or(class_dispatchability_diagnostic(ctx, &path))
+                    );
                     flag(out, class_dispatchable(ctx, &path), 'd');
                     flag(out, dispatchable(node), 'D');
                     flag(out, is_modal_class(node), 'm');
                     flag(out, is_capability_class(ctx, &path), 'c');
-                    let _ = write!(out, "\t{}/{}\t", class_associated_types(node).len(), class_abstract_states(node).len());
+                    let _ = write!(
+                        out,
+                        "\t{}/{}\t",
+                        class_associated_types(node).len(),
+                        class_abstract_states(node).len()
+                    );
                     for other in &classes {
-                        out.push(if class_subtypes(ctx, &path, other) { '1' } else { '0' });
+                        out.push(if class_subtypes(ctx, &path, other) {
+                            '1'
+                        } else {
+                            '0'
+                        });
                     }
                     out.push('\t');
                     implements(out, &path);
@@ -1590,9 +1949,24 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                             }
                         }
                         out.push('\t');
-                        out.push(if check_orphan_rule(ctx, &path, class_path, &module.path) { '1' } else { '0' });
-                        out.push(if check_orphan_rule(ctx, &path, class_path, &["Elsewhere".to_string()]) { '1' } else { '0' });
-                        out.push(if type_implements_class(ctx, &self_type, class_path) { '1' } else { '0' });
+                        out.push(if check_orphan_rule(ctx, &path, class_path, &module.path) {
+                            '1'
+                        } else {
+                            '0'
+                        });
+                        out.push(
+                            if check_orphan_rule(ctx, &path, class_path, &["Elsewhere".to_string()])
+                            {
+                                '1'
+                            } else {
+                                '0'
+                            },
+                        );
+                        out.push(if type_implements_class(ctx, &self_type, class_path) {
+                            '1'
+                        } else {
+                            '0'
+                        });
                         out.push('\n');
                     }
                     for member in &node.members {
@@ -1609,14 +1983,27 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                             None,
                         );
                         print_signature(out, &sig);
-                        let _ = writeln!(out, "\t{}", if recv_mode_of(&method.receiver).is_some() { "move" } else { "-" });
-                        dump_contract(out, &format!("{}::{}", node.name, method.name), &method.contract);
+                        let _ = writeln!(
+                            out,
+                            "\t{}",
+                            if recv_mode_of(&method.receiver).is_some() {
+                                "move"
+                            } else {
+                                "-"
+                            }
+                        );
+                        dump_contract(
+                            out,
+                            &format!("{}::{}", node.name, method.name),
+                            &method.contract,
+                        );
                     }
                 }
                 ASTItem::ModalDecl(node) => {
                     let path = child(&node.name);
                     for state in &node.states {
-                        let state_type = make_type_modal_state(path.clone(), &state.name, Vec::new());
+                        let state_type =
+                            make_type_modal_state(path.clone(), &state.name, Vec::new());
                         let _ = write!(out, "MW\t{}@{}\t", node.name, state.name);
                         flag(out, niche_compatible(ctx, &path, &state.name), 'n');
                         flag(out, widen_warn_cond(ctx, &path, &state.name), 'w');
@@ -1626,7 +2013,11 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                         for member in &state.members {
                             match member {
                                 StateMember::StateMethodDecl(method) => {
-                                    let _ = write!(out, "MS\t{}@{}::{}\t", node.name, state.name, method.name);
+                                    let _ = write!(
+                                        out,
+                                        "MS\t{}@{}::{}\t",
+                                        node.name, state.name, method.name
+                                    );
                                     let sig = build_method_signature(
                                         ctx,
                                         &state_type,
@@ -1636,22 +2027,51 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                                         None,
                                     );
                                     print_signature(out, &sig);
-                                    let found = lookup_state_method_decl(node, &state.name, &method.name);
-                                    let _ = writeln!(out, "\t{}", same(found.is_some_and(|found| std::ptr::eq(found, method))));
+                                    let found =
+                                        lookup_state_method_decl(node, &state.name, &method.name);
+                                    let _ = writeln!(
+                                        out,
+                                        "\t{}",
+                                        same(
+                                            found.is_some_and(|found| std::ptr::eq(found, method))
+                                        )
+                                    );
                                 }
                                 StateMember::TransitionDecl(transition) => {
-                                    let _ = write!(out, "TS\t{}@{}::{}\t", node.name, state.name, transition.name);
-                                    let target = make_type_modal_state(path.clone(), &transition.target_state, Vec::new());
+                                    let _ = write!(
+                                        out,
+                                        "TS\t{}@{}::{}\t",
+                                        node.name, state.name, transition.name
+                                    );
+                                    let target = make_type_modal_state(
+                                        path.clone(),
+                                        &transition.target_state,
+                                        Vec::new(),
+                                    );
                                     print_signature(
                                         out,
-                                        &build_transition_signature(ctx, &state_type, &target, &transition.params, None),
+                                        &build_transition_signature(
+                                            ctx,
+                                            &state_type,
+                                            &target,
+                                            &transition.params,
+                                            None,
+                                        ),
                                     );
-                                    let found = lookup_transition_decl(node, &state.name, &transition.name);
+                                    let found =
+                                        lookup_transition_decl(node, &state.name, &transition.name);
                                     let _ =
-                                        writeln!(out, "\t{}", same(found.is_some_and(|found| std::ptr::eq(found, transition))));
+                                        writeln!(
+                                            out,
+                                            "\t{}",
+                                            same(found.is_some_and(|found| std::ptr::eq(
+                                                found, transition
+                                            )))
+                                        );
                                 }
                                 StateMember::StateFieldDecl(field) => {
-                                    let found = lookup_modal_field_decl(node, &state.name, &field.name);
+                                    let found =
+                                        lookup_modal_field_decl(node, &state.name, &field.name);
                                     let _ = writeln!(
                                         out,
                                         "MF\t{}@{}.{}\t{}",
@@ -1689,8 +2109,8 @@ fn hex(bits: &Option<Vec<u8>>) -> String {
 
 fn dump_consts(out: &mut String, label: &str, path: &str) -> Result<(), String> {
     const PRIMS: [&str; 20] = [
-        "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64", "u128", "usize", "f16", "f32", "f64",
-        "bool", "char", "()", "!", "string",
+        "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64", "u128", "usize",
+        "f16", "f32", "f64", "bool", "char", "()", "!", "string",
     ];
     let bytes = std::fs::read(path).map_err(|err| format!("cannot read {path}: {err}"))?;
     let _ = writeln!(out, "F\t{label}");
@@ -1709,7 +2129,12 @@ fn dump_consts(out: &mut String, label: &str, path: &str) -> Result<(), String> 
         use uv_source::lexer::token::TokenKind as K;
         if !matches!(
             token.kind,
-            K::IntLiteral | K::FloatLiteral | K::CharLiteral | K::BoolLiteral | K::NullLiteral | K::StringLiteral
+            K::IntLiteral
+                | K::FloatLiteral
+                | K::CharLiteral
+                | K::BoolLiteral
+                | K::NullLiteral
+                | K::StringLiteral
         ) {
             continue;
         }
@@ -1724,14 +2149,19 @@ fn dump_consts(out: &mut String, label: &str, path: &str) -> Result<(), String> 
         if bits.is_some() {
             let _ = write!(out, "\traw={}", hex(&bits));
         }
-        let literal = LiteralExpr { literal: token.clone() };
+        let literal = LiteralExpr {
+            literal: token.clone(),
+        };
         let typed = type_literal_expr(&literal);
         if typed.ok {
             let _ = write!(out, "\ttype={}", escape(&type_to_string(&typed.r#type)));
         } else {
             let _ = write!(out, "\ttype=fail:{}", diag_or(typed.diag_id));
         }
-        let mut expected: Vec<(&str, TypeRef)> = PRIMS.iter().map(|prim| (*prim, make_type_prim(prim))).collect();
+        let mut expected: Vec<(&str, TypeRef)> = PRIMS
+            .iter()
+            .map(|prim| (*prim, make_type_prim(prim)))
+            .collect();
         let view = make_type_string(Some(StringState::View));
         expected.extend([
             ("view", view.clone()),
@@ -1740,8 +2170,14 @@ fn dump_consts(out: &mut String, label: &str, path: &str) -> Result<(), String> 
             ("raw", raw.clone()),
             ("uniq-raw", make_type_perm(Permission::Unique, raw.clone())),
             ("ptr", make_type_ptr(make_type_prim("u8"), None)),
-            ("uniq-i64", make_type_perm(Permission::Unique, make_type_prim("i64"))),
-            ("const-f64", make_type_perm(Permission::Const, make_type_prim("f64"))),
+            (
+                "uniq-i64",
+                make_type_perm(Permission::Unique, make_type_prim("i64")),
+            ),
+            (
+                "const-f64",
+                make_type_perm(Permission::Const, make_type_prim("f64")),
+            ),
             ("const-view", make_type_perm(Permission::Const, view)),
             ("none", None),
         ]);
@@ -1761,7 +2197,11 @@ fn dump_consts(out: &mut String, label: &str, path: &str) -> Result<(), String> 
         flag_bit(out, null_literal_expected(&raw));
         flag_bit(out, null_literal_expected(&expected[0].1));
         if token.kind == K::StringLiteral {
-            let _ = write!(out, "\tstr={}", hex(&decode_string_literal_bytes(&token.lexeme)));
+            let _ = write!(
+                out,
+                "\tstr={}",
+                hex(&decode_string_literal_bytes(&token.lexeme))
+            );
         }
         out.push('\n');
     }
@@ -1774,51 +2214,104 @@ fn gen_value(ctx: &ScopeContext<'_>, type_ref: &TypeRef, seed: u64, depth: u32) 
         return Value::Unit;
     };
     let mixed = seed.wrapping_mul(0x9E37_79B9_7F4A_7C15).wrapping_add(1);
-    let range = |kind| Value::Range { kind, lo: Some(seed % 100), hi: Some(seed % 100 + 5) };
+    let range = |kind| Value::Range {
+        kind,
+        lo: Some(seed % 100),
+        hi: Some(seed % 100 + 5),
+    };
     match &ty.node {
         TypeNode::Prim(name) => match name.as_str() {
             "bool" => Value::Bool(seed & 1 != 0),
             "char" => Value::Char((0x41 + seed % 26) as u32),
-            "f16" | "f32" | "f64" => Value::Float { r#type: name.clone(), bits: mixed },
+            "f16" | "f32" | "f64" => Value::Float {
+                r#type: name.clone(),
+                bits: mixed,
+            },
             "()" | "!" => Value::Unit,
-            _ => Value::Int { r#type: name.clone(), value: u128::from(mixed) },
+            _ => Value::Int {
+                r#type: name.clone(),
+                value: u128::from(mixed),
+            },
         },
-        TypeNode::Perm { base, .. } | TypeNode::Refine { base, .. } => gen_value(ctx, base, seed, depth + 1),
-        TypeNode::Ptr { state, .. } => {
-            let state = state.unwrap_or([PtrState::Valid, PtrState::Null, PtrState::Expired][(seed % 3) as usize]);
-            Value::Ptr { state, addr: if state == PtrState::Null { 0 } else { 0x1000 + seed } }
+        TypeNode::Perm { base, .. } | TypeNode::Refine { base, .. } => {
+            gen_value(ctx, base, seed, depth + 1)
         }
-        TypeNode::RawPtr { qual, .. } => Value::RawPtr(RawPtrVal { qual: *qual, addr: 0x2000 + seed }),
+        TypeNode::Ptr { state, .. } => {
+            let state = state.unwrap_or(
+                [PtrState::Valid, PtrState::Null, PtrState::Expired][(seed % 3) as usize],
+            );
+            Value::Ptr {
+                state,
+                addr: if state == PtrState::Null {
+                    0
+                } else {
+                    0x1000 + seed
+                },
+            }
+        }
+        TypeNode::RawPtr { qual, .. } => Value::RawPtr(RawPtrVal {
+            qual: *qual,
+            addr: 0x2000 + seed,
+        }),
         TypeNode::Tuple(elements) => Value::Tuple(
-            elements.iter().enumerate().map(|(i, ty)| gen_value(ctx, ty, seed + i as u64 + 1, depth + 1)).collect(),
+            elements
+                .iter()
+                .enumerate()
+                .map(|(i, ty)| gen_value(ctx, ty, seed + i as u64 + 1, depth + 1))
+                .collect(),
         ),
-        TypeNode::Array { element, length, .. } => {
+        TypeNode::Array {
+            element, length, ..
+        } => {
             if *length > 16 {
                 return Value::Unit;
             }
-            Value::Array((0..*length).map(|i| gen_value(ctx, element, seed + i, depth + 1)).collect())
+            Value::Array(
+                (0..*length)
+                    .map(|i| gen_value(ctx, element, seed + i, depth + 1))
+                    .collect(),
+            )
         }
-        TypeNode::Slice(_) => Value::Slice { ptr: RawPtrVal { qual: RawPtrQual::Imm, addr: 0x3000 + seed }, length: seed },
+        TypeNode::Slice(_) => Value::Slice {
+            ptr: RawPtrVal {
+                qual: RawPtrQual::Imm,
+                addr: 0x3000 + seed,
+            },
+            length: seed,
+        },
         TypeNode::Range(_) => range(ValueRangeKind::Exclusive),
         TypeNode::RangeInclusive(_) => range(ValueRangeKind::Inclusive),
         TypeNode::RangeFrom(_) => range(ValueRangeKind::From),
         TypeNode::RangeTo(_) => range(ValueRangeKind::To),
         TypeNode::RangeToInclusive(_) => range(ValueRangeKind::ToInclusive),
         TypeNode::RangeFull => range(ValueRangeKind::Full),
-        TypeNode::Path { path, generic_args: args } | TypeNode::Apply { path, args } => {
-            let Some(decl) = lookup_enum_decl(ctx, path).filter(|decl| !decl.variants.is_empty()) else {
+        TypeNode::Path {
+            path,
+            generic_args: args,
+        }
+        | TypeNode::Apply { path, args } => {
+            let Some(decl) = lookup_enum_decl(ctx, path).filter(|decl| !decl.variants.is_empty())
+            else {
                 return Value::Unit;
             };
             let variant = &decl.variants[(seed % decl.variants.len() as u64) as usize];
             let member_value = |member: Option<EnumPayloadMemberLayout>, seed| {
-                gen_value(ctx, &member.and_then(|member| member.r#type), seed, depth + 1)
+                gen_value(
+                    ctx,
+                    &member.and_then(|member| member.r#type),
+                    seed,
+                    depth + 1,
+                )
             };
             let payload = match &variant.payload_opt {
                 None => None,
                 Some(VariantPayload::VariantPayloadTuple(tuple)) => Some(EnumPayloadVal::Tuple(
                     (0..tuple.elements.len())
                         .map(|i| {
-                            member_value(enum_tuple_payload_member_layout(ctx, decl, variant, args, i), seed + i as u64 + 1)
+                            member_value(
+                                enum_tuple_payload_member_layout(ctx, decl, variant, args, i),
+                                seed + i as u64 + 1,
+                            )
                         })
                         .collect(),
                 )),
@@ -1828,15 +2321,30 @@ fn gen_value(ctx: &ScopeContext<'_>, type_ref: &TypeRef, seed: u64, depth: u32) 
                         .iter()
                         .enumerate()
                         .map(|(i, field)| {
-                            let member = enum_record_payload_member_layout(ctx, decl, variant, args, &field.name);
-                            (field.name.clone(), member_value(member, seed + i as u64 + 1))
+                            let member = enum_record_payload_member_layout(
+                                ctx,
+                                decl,
+                                variant,
+                                args,
+                                &field.name,
+                            );
+                            (
+                                field.name.clone(),
+                                member_value(member, seed + i as u64 + 1),
+                            )
                         })
                         .collect(),
                 )),
             };
-            Value::Enum { variant: variant.name.clone(), payload }
+            Value::Enum {
+                variant: variant.name.clone(),
+                payload,
+            }
         }
-        TypeNode::Dynamic(_) => Value::Dynamic { data: seed, vtable: seed + 1 },
+        TypeNode::Dynamic(_) => Value::Dynamic {
+            data: seed,
+            vtable: seed + 1,
+        },
         TypeNode::String(_) => Value::String(Vec::new()),
         TypeNode::Bytes(_) => Value::Bytes(Vec::new()),
         _ => Value::Unit,
@@ -1848,22 +2356,35 @@ fn dump_values(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMap
         let module = ctx.sigma.mods[index].clone();
         dump_line("X", &module.path, out);
         ctx.current_module = module.path.clone();
-        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        let names = name_maps
+            .get(&path_key_of(&module.path))
+            .cloned()
+            .unwrap_or_default();
         ctx.scopes = vec![Scope::new(), names, universe_bindings()];
         let ctx = &*ctx;
-        let types: Vec<TypeRef> =
-            collect_written_types(&module).iter().filter_map(|(_, written)| lower_type(ctx, written).ok()).collect();
+        let types: Vec<TypeRef> = collect_written_types(&module)
+            .iter()
+            .filter_map(|(_, written)| lower_type(ctx, written).ok())
+            .collect();
         for (i, ty) in types.iter().enumerate().take(80) {
             let _ = write!(out, "V\t{i}\t{}", escape(&type_to_string(ty)));
             for seed in [i as u64, i as u64 + 17] {
                 let bits = value_bits(ctx, ty, &gen_value(ctx, ty, seed, 0));
                 let _ = write!(out, "\t{}", hex(&bits));
                 if let Some(bits) = &bits {
-                    out.push_str(if valid_value(ctx, ty, bits) { " v" } else { " n" });
+                    out.push_str(if valid_value(ctx, ty, bits) {
+                        " v"
+                    } else {
+                        " n"
+                    });
                 }
             }
             let next = &types[(i + 1) % types.len()];
-            let _ = write!(out, "\t{}\t", hex(&value_bits(ctx, ty, &gen_value(ctx, next, i as u64, 0))));
+            let _ = write!(
+                out,
+                "\t{}\t",
+                hex(&value_bits(ctx, ty, &gen_value(ctx, next, i as u64, 0)))
+            );
             match size_of(ctx, ty).filter(|size| *size <= 4096) {
                 Some(size) => {
                     let size = size as usize;
@@ -1886,7 +2407,9 @@ fn dump_values(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMap
 
 fn collect_expr_patterns(expr: &ExprPtr, out: &mut Vec<PatternPtr>) {
     match expr.as_deref().map(|expr| &expr.node) {
-        Some(ExprNode::IfCaseExpr(node)) => out.extend(node.cases.iter().map(|clause| clause.pattern.clone())),
+        Some(ExprNode::IfCaseExpr(node)) => {
+            out.extend(node.cases.iter().map(|clause| clause.pattern.clone()))
+        }
         Some(ExprNode::IfIsExpr(node)) => out.push(node.pattern.clone()),
         Some(ExprNode::LoopIterExpr(node)) => out.push(node.pattern.clone()),
         _ => {}
@@ -2024,15 +2547,26 @@ fn dump_env_fixed(out: &mut String) {
         );
     }
     let mut env = push_scope(&e0);
-    let mut derived = TypeBinding { derived_from_shared: true, ..Default::default() };
+    let mut derived = TypeBinding {
+        derived_from_shared: true,
+        ..Default::default()
+    };
     apply_binding_provenance_seed(&mut derived, ProvenanceKind::Heap, None);
     env.scopes[0].emplace("outer".to_string(), derived);
     env.scopes[1].emplace("inner".to_string(), TypeBinding::default());
     env.parallel_context = Some(ParallelContextKind::Gpu);
     mark_shared_derived_bindings_stale(&mut env);
     out.push('\t');
-    flag(out, bind_of(&env, "outer").is_some_and(|bound| bound.stale_after_release), 's');
-    flag(out, bind_of(&env, "inner").is_some_and(|bound| bound.stale_after_release), 's');
+    flag(
+        out,
+        bind_of(&env, "outer").is_some_and(|bound| bound.stale_after_release),
+        's',
+    );
+    flag(
+        out,
+        bind_of(&env, "inner").is_some_and(|bound| bound.stale_after_release),
+        's',
+    );
     flag(out, has_heap_provenance(&env, "outer"), 'h');
     flag(out, has_heap_provenance(&env, "inner"), 'h');
     flag(out, has_heap_provenance(&env, "none"), 'h');
@@ -2047,11 +2581,16 @@ fn dump_patterns(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameM
         let module = ctx.sigma.mods[index].clone();
         dump_line("X", &module.path, out);
         ctx.current_module = module.path.clone();
-        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        let names = name_maps
+            .get(&path_key_of(&module.path))
+            .cloned()
+            .unwrap_or_default();
         ctx.scopes = vec![Scope::new(), names, universe_bindings()];
         let ctx = &*ctx;
-        let types: Vec<TypeRef> =
-            collect_written_types(&module).iter().filter_map(|(_, written)| lower_type(ctx, written).ok()).collect();
+        let types: Vec<TypeRef> = collect_written_types(&module)
+            .iter()
+            .filter_map(|(_, written)| lower_type(ctx, written).ok())
+            .collect();
         let mut patterns: Vec<PatternPtr> = Vec::new();
         for item in &module.items {
             match item {
@@ -2113,7 +2652,9 @@ fn dump_patterns(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameM
             let mut first_ok: Option<(usize, Vec<(String, TypeRef)>)> = None;
             for (j, ty) in types.iter().enumerate() {
                 let typed = type_pattern(ctx, pattern, ty);
-                if matches!(typed, Err(None)) || (matches!(typed, Err(Some("Let-Refutable-Pattern-Err"))) && j != 0) {
+                if matches!(typed, Err(None))
+                    || (matches!(typed, Err(Some("Let-Refutable-Pattern-Err"))) && j != 0)
+                {
                     continue;
                 }
                 let _ = write!(out, "\t{j}:");
@@ -2199,13 +2740,23 @@ fn dump_body(
         ..Default::default()
     };
     // The callbacks read the environment as it stands when they are called.
-    let type_expr_fn = |inner: &ExprPtr| type_expr(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
-    let type_ident_fn = |ident: &str| type_identifier_expr(&env.borrow(), ident);
-    let type_place_fn = |inner: &ExprPtr| type_place(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
+    let type_expr_fn =
+        |inner: &ExprPtr| type_expr(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
+    let type_ident_fn = |ident: &str| type_identifier_expr(&proc_ctx, &env.borrow(), ident);
+    let type_place_fn =
+        |inner: &ExprPtr| type_place(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
     let start_env = env.borrow().clone();
     reset_scaffolding();
-    let result =
-        type_block(&proc_ctx, &type_ctx, body, &start_env, &type_expr_fn, &type_ident_fn, &type_place_fn, Some(&env));
+    let result = type_block(
+        &proc_ctx,
+        &type_ctx,
+        body,
+        &start_env,
+        &type_expr_fn,
+        &type_ident_fn,
+        &type_place_fn,
+        Some(&env),
+    );
     if let Some(what) = take_pending() {
         let _ = writeln!(out, "PENDING\t{what}");
         return;
@@ -2238,7 +2789,10 @@ fn dump_bodies(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMap
         let module = ctx.sigma.mods[index].clone();
         dump_line("X", &module.path, out);
         ctx.current_module = module.path.clone();
-        let names = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
+        let names = name_maps
+            .get(&path_key_of(&module.path))
+            .cloned()
+            .unwrap_or_default();
         ctx.scopes = vec![Scope::new(), names, universe_bindings()];
         for item in &module.items {
             if let ASTItem::ProcedureDecl(node) = item {
@@ -2301,7 +2855,11 @@ fn comptime_list_block(out: &mut String, manifest: &str) {
     if !phase1.ok || has_error(&phase1.diags) {
         return;
     }
-    let _ = writeln!(out, "P\t{manifest}\t{}\t{}", project.root, project.source_root);
+    let _ = writeln!(
+        out,
+        "P\t{manifest}\t{}\t{}",
+        project.root, project.source_root
+    );
     for assembly in &project.assemblies {
         let _ = writeln!(out, "A\t{}\t{}", assembly.name, assembly.source_root);
     }
@@ -2429,7 +2987,10 @@ fn run() -> Result<(), String> {
 fn main() {
     // Deeply nested inputs recurse far in the parser; the reference runs with an 8 MiB
     // main-thread stack and larger frames, so give the port generous room.
-    let worker = std::thread::Builder::new().stack_size(1 << 30).spawn(run).expect("spawn worker");
+    let worker = std::thread::Builder::new()
+        .stack_size(1 << 30)
+        .spawn(run)
+        .expect("spawn worker");
     match worker.join() {
         Ok(Ok(())) => {}
         Ok(Err(message)) => {

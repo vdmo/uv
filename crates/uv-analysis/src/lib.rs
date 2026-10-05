@@ -3,13 +3,15 @@
 //! variance, substitution). Expression typing and the remaining analyses follow.
 
 pub mod caps;
-pub mod context;
 pub mod composite;
+pub mod context;
 pub mod contracts;
 pub mod ffi;
 pub mod generics;
+pub mod keys;
 pub mod layout;
 pub mod memory;
 pub mod modal;
+pub mod provenance;
 pub mod resolve;
 pub mod typing;

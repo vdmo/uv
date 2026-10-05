@@ -14,11 +14,14 @@ use crate::context::ScopeContext;
 use crate::typing::callbacks::{ExprTypeFn, IdentTypeFn, PlaceTypeFn, PlaceTypeResult};
 use crate::typing::expr_result::ExprTypeResult;
 use crate::typing::pending::{mark_proof_context_incomplete, pending};
+use crate::typing::stmt::binding_stmt::type_binding_stmt;
 use crate::typing::stmt::return_stmt::type_return_stmt;
 use crate::typing::stmt_context::StmtTypeContext;
 use crate::typing::type_env::{bind_of, push_scope, TypeEnv};
 use crate::typing::type_equiv::type_equiv;
-use crate::typing::type_expr::{type_expr, type_identifier_expr, type_place};
+use crate::typing::type_expr::{
+    emit_stale_binding_reference_warning, type_expr, type_identifier_expr, type_place,
+};
 use crate::typing::type_predicates::bitcopy_type;
 use crate::typing::types::{make_type_prim, TypeRef};
 
@@ -44,11 +47,19 @@ pub struct StmtTypeResult {
 
 impl StmtTypeResult {
     pub fn typed(env: TypeEnv) -> Self {
-        StmtTypeResult { ok: true, env, ..Default::default() }
+        StmtTypeResult {
+            ok: true,
+            env,
+            ..Default::default()
+        }
     }
 
     pub fn failed(diag_id: Option<&'static str>, env: &TypeEnv) -> Self {
-        StmtTypeResult { diag_id, env: env.clone(), ..Default::default() }
+        StmtTypeResult {
+            diag_id,
+            env: env.clone(),
+            ..Default::default()
+        }
     }
 }
 
@@ -132,7 +143,9 @@ pub fn span_of_stmt(stmt: &Stmt) -> &Span {
 /// The one type all the given types are equivalent to: the first of them.
 pub fn res_type(types: &[TypeRef]) -> Option<TypeRef> {
     let (base, rest) = types.split_first()?;
-    rest.iter().all(|ty| type_equiv(base, ty)).then(|| base.clone())
+    rest.iter()
+        .all(|ty| type_equiv(base, ty))
+        .then(|| base.clone())
 }
 
 /// The type of a loop that only ends by `break`: `!` when nothing breaks.
@@ -158,7 +171,9 @@ pub fn loop_type_fin(breaks: &[TypeRef], break_void: bool) -> Option<TypeRef> {
 fn type_ident_expr(ctx: &ScopeContext<'_>, env: &TypeEnv, name: &str) -> ExprTypeResult {
     match bind_of(env, name) {
         None => ExprTypeResult::failed(Some("ResolveExpr-Ident-Err")),
-        Some(binding) if !bitcopy_type(ctx, &binding.r#type) => ExprTypeResult::failed(Some("ValueUse-NonBitcopyPlace")),
+        Some(binding) if !bitcopy_type(ctx, &binding.r#type) => {
+            ExprTypeResult::failed(Some("ValueUse-NonBitcopyPlace"))
+        }
         Some(binding) => ExprTypeResult::typed(binding.r#type.clone()),
     }
 }
@@ -188,13 +203,21 @@ pub fn type_expr_with_env(
 }
 
 /// A bound name is a place of its type; anything else is asked of the callback.
-pub fn type_place_with_env(env: &TypeEnv, type_place_fn: PlaceTypeFn<'_>, expr: &ExprPtr) -> PlaceTypeResult {
+pub fn type_place_with_env(
+    env: &TypeEnv,
+    type_place_fn: PlaceTypeFn<'_>,
+    expr: &ExprPtr,
+) -> PlaceTypeResult {
     let Some(e) = expr.as_deref() else {
         return PlaceTypeResult::default();
     };
     if let ExprNode::IdentifierExpr(ident) = &e.node {
         if let Some(binding) = bind_of(env, &ident.name) {
-            return PlaceTypeResult { ok: true, r#type: binding.r#type.clone(), ..Default::default() };
+            return PlaceTypeResult {
+                ok: true,
+                r#type: binding.r#type.clone(),
+                ..Default::default()
+            };
         }
     }
     type_place_fn(expr)
@@ -225,7 +248,10 @@ impl BreakCollector<'_, '_, '_, '_> {
     }
 
     fn block_ptr(&self, block: &ast::BlockPtr) -> FlowInfo {
-        block.as_deref().map(|block| self.block(block)).unwrap_or_default()
+        block
+            .as_deref()
+            .map(|block| self.block(block))
+            .unwrap_or_default()
     }
 
     fn stmt(&self, stmt: &Stmt) -> FlowInfo {
@@ -235,7 +261,13 @@ impl BreakCollector<'_, '_, '_, '_> {
                 if node.value_opt.is_none() {
                     flow.break_void = true;
                 } else {
-                    let typed = type_expr_with_env(self.ctx, self.type_ctx, self.env, self.type_expr_fn, &node.value_opt);
+                    let typed = type_expr_with_env(
+                        self.ctx,
+                        self.type_ctx,
+                        self.env,
+                        self.type_expr_fn,
+                        &node.value_opt,
+                    );
                     if typed.ok {
                         flow.breaks.push(typed.r#type);
                     }
@@ -289,8 +321,26 @@ pub fn type_stmt(
     type_place_fn: PlaceTypeFn<'_>,
     env_ref: EnvRef<'_>,
 ) -> StmtTypeResult {
-    let _ = (type_ident_fn, type_place_fn, env_ref);
+    let _ = env_ref;
     match stmt {
+        Stmt::LetStmt(node) => type_binding_stmt(
+            ctx,
+            type_ctx,
+            &node.binding,
+            ast::Mutability::Let,
+            env,
+            type_ident_fn,
+            type_place_fn,
+        ),
+        Stmt::VarStmt(node) => type_binding_stmt(
+            ctx,
+            type_ctx,
+            &node.binding,
+            ast::Mutability::Var,
+            env,
+            type_ident_fn,
+            type_place_fn,
+        ),
         Stmt::ReturnStmt(node) => type_return_stmt(ctx, type_ctx, node, env, type_expr_fn),
         _ => {
             pending(stmt_kind(stmt));
@@ -334,9 +384,19 @@ pub fn type_stmt_seq(
         // Each statement is typed by functions bound to the environment before it.
         let typed = {
             let expr_fn = |inner: &ExprPtr| type_expr(ctx, type_ctx, inner, &current);
-            let ident_fn = |name: &str| type_identifier_expr(&current, name);
+            let ident_fn = |name: &str| {
+                let typed = type_identifier_expr(ctx, &current, name);
+                if typed.ok {
+                    if let Some(binding) = bind_of(&current, name) {
+                        emit_stale_binding_reference_warning(binding, type_ctx, None);
+                    }
+                }
+                typed
+            };
             let place_fn = |inner: &ExprPtr| type_place(ctx, type_ctx, inner, &current);
-            type_stmt(ctx, type_ctx, stmt, &current, &expr_fn, &ident_fn, &place_fn, env_ref)
+            type_stmt(
+                ctx, type_ctx, stmt, &current, &expr_fn, &ident_fn, &place_fn, env_ref,
+            )
         };
         if !typed.ok {
             let diag_detail = if typed.diag_detail.is_empty() {
@@ -361,10 +421,21 @@ pub fn type_stmt_seq(
         note_proof_context_effects(stmt);
         publish_env(type_ctx, env_ref, &current);
         flow.results.extend(typed.flow.results);
-        merge_break_flow(&mut flow, FlowInfo { results: Vec::new(), ..typed.flow });
+        merge_break_flow(
+            &mut flow,
+            FlowInfo {
+                results: Vec::new(),
+                ..typed.flow
+            },
+        );
     }
     publish_env(type_ctx, env_ref, &current);
-    StmtSeqResult { ok: true, env: current, flow, ..Default::default() }
+    StmtSeqResult {
+        ok: true,
+        env: current,
+        flow,
+        ..Default::default()
+    }
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -379,8 +450,16 @@ pub fn type_block_info(
     env_ref: EnvRef<'_>,
 ) -> BlockInfoResult {
     let pushed = push_scope(env);
-    let stmts_typed =
-        type_stmt_seq(ctx, type_ctx, &block.stmts, &pushed, type_expr_fn, type_ident_fn, type_place_fn, env_ref);
+    let stmts_typed = type_stmt_seq(
+        ctx,
+        type_ctx,
+        &block.stmts,
+        &pushed,
+        type_expr_fn,
+        type_ident_fn,
+        type_place_fn,
+        env_ref,
+    );
     if !stmts_typed.ok {
         return BlockInfoResult {
             diag_id: stmts_typed.diag_id,
@@ -390,9 +469,17 @@ pub fn type_block_info(
             ..Default::default()
         };
     }
-    let mut break_flow =
-        FlowInfo { results: Vec::new(), breaks: stmts_typed.flow.breaks.clone(), break_void: stmts_typed.flow.break_void };
-    let collector = BreakCollector { ctx, type_ctx, env: &stmts_typed.env, type_expr_fn };
+    let mut break_flow = FlowInfo {
+        results: Vec::new(),
+        breaks: stmts_typed.flow.breaks.clone(),
+        break_void: stmts_typed.flow.break_void,
+    };
+    let collector = BreakCollector {
+        ctx,
+        type_ctx,
+        env: &stmts_typed.env,
+        type_expr_fn,
+    };
     merge_break_flow(&mut break_flow, collector.block(block));
     let done = |ty: TypeRef| BlockInfoResult {
         ok: true,
@@ -421,7 +508,10 @@ pub fn type_block_info(
         return done(ty);
     }
     if !stmts_typed.flow.results.is_empty() {
-        return BlockInfoResult { diag_id: Some("BlockInfo-Res-Err"), ..Default::default() };
+        return BlockInfoResult {
+            diag_id: Some("BlockInfo-Res-Err"),
+            ..Default::default()
+        };
     }
     if let Some(ty) = tail_type {
         return done(ty);
@@ -444,7 +534,16 @@ pub fn type_block(
     type_place_fn: PlaceTypeFn<'_>,
     env_ref: EnvRef<'_>,
 ) -> ExprTypeResult {
-    let info = type_block_info(ctx, type_ctx, block, env, type_expr_fn, type_ident_fn, type_place_fn, env_ref);
+    let info = type_block_info(
+        ctx,
+        type_ctx,
+        block,
+        env,
+        type_expr_fn,
+        type_ident_fn,
+        type_place_fn,
+        env_ref,
+    );
     ExprTypeResult {
         ok: info.ok,
         diag_id: info.diag_id,

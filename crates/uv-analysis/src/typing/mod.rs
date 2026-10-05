@@ -4,6 +4,7 @@ pub mod alias_normalize;
 pub mod callbacks;
 pub mod check_expr;
 pub mod const_len;
+pub mod expr;
 pub mod expr_result;
 pub mod item_generic_params;
 pub mod literals;
