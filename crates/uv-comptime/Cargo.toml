@@ -1,0 +1,10 @@
+[package]
+name = "uv-comptime"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+uv-core = { path = "../uv-core" }
+uv-project = { path = "../uv-project" }
+uv-source = { path = "../uv-source" }

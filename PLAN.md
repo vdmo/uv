@@ -170,7 +170,8 @@ meaningless.
 
 ## Status
 
-M0, M1 and M2 are done. Run `tools/parity.sh` to re-check every gate (about a minute);
+M0, M1 and M2 are done, and M3 has started (its first slice, the compile-time pass, is
+done). Run `tools/parity.sh` to re-check every gate (about a minute);
 `tools/capture_goldens.sh` regenerates the goldens (needs Docker, and takes a while because
 of the inputs the reference does not terminate on).
 
@@ -194,6 +195,8 @@ Gates, all passing:
 | Complete syntax tree (every node, field and span), doc attachment, `unsafe` spans and parse diagnostics, corpus | identical, 1,585 files (42 MB of dump, byte for byte) |
 | Same, the 4,908 lexical stress cases | identical on 4,446; the reference crashes or hangs on the other 462 |
 | Same, 6,000 corpus files with token-level edits (parser error recovery) | identical on 5,977; the reference hangs on the other 23 |
+| Compile-time pass: expanded modules (full syntax trees) and diagnostics, every project that passes phase 1, including the 62-module HelloUltraviolet project | identical, 546 projects (42 MB of dump, byte for byte) |
+| Same, 144 targeted cases (evaluator, quote and splice, hygiene, emission, reflection, project files, derive) | identical on 143; the reference crashes on the other 1 |
 | `--phase1-only`: JSON diagnostics, exit status and `--dump-ast` listing | identical, 549 fixtures, 58 manifest cases, 78 module-level cases |
 | `--check`: JSON diagnostics and exit status for projects rejected in phase 1 | identical, 32 fixtures and 41 manifest cases |
 | `--check`: phase-1 diagnostics for every other project | identical, 534 |
@@ -216,6 +219,35 @@ What M2 added:
   validation, the error cap, `--phase1-only` and `--dump-ast`. Any other run that passes
   phase 1 prints its diagnostics, says later phases are not implemented and exits with 3.
 
+M3 is split into slices, each gated on its own against the oracle before the next starts:
+
+| Slice | Reference source | Lines | State |
+| --- | --- | --- | --- |
+| M3.1 compile-time pass (`uv-comptime`) | `03_comptime` | 10.6k | done |
+| M3.2 name resolution | `04_analysis/resolve`, `language_service` facts | 14k | next |
+| M3.3 typing context, generics, modal, composite, layout | `typing` (core), `generics`, `modal`, `composite`, `layout` | about 45k | |
+| M3.4 expression, statement and declaration typing | `typing` (rest) | about 40k | |
+| M3.5 memory, provenance, capabilities, keys, contracts | `memory`, `provenance`, `caps`, `keys`, `contracts` | 36k | |
+| M3.6 driver phases 2 and 3 end to end | `06_driver` (sema section), `conformance` | | gate: `--check --diag-json` identical on every fixture |
+
+What M3.1 added:
+
+- `uv-comptime`: the evaluator, quote parsing and splice substitution, hygiene, emission,
+  reflection (`introspect`), the project-files snapshot (`files`), derive targets and
+  their ordering, and the per-module expansion driver.
+- The oracle gained a `comptime` mode that runs the reference pass on a project and dumps
+  the expanded modules; `uv-parity comptime-list` produces the project descriptions from
+  the Rust phase 1.
+- Phase-1 orchestration moved from the driver into `uv-source::phase1` so tools can run it.
+- `uvc` does not run phase 2 yet: the reference validates compile-time procedure
+  signatures with the type checker first, which arrives in M3.3.
+
+One piece of reference behaviour is reproduced on purpose: hygiene renames quoted syntax in
+place through shared nodes, so a quoted value that is emitted twice or spliced into two
+quotes is renamed again on each insertion and earlier insertions change with it. Matching
+that needs one documented `unsafe` function (`shared_node_mut` in `hygiene.rs`); every
+other crate is free of `unsafe`.
+
 Upstream bugs found (the Rust port deliberately differs on these inputs):
 
 - Lexer: malformed UTF-8 that encodes a surrogate (`ED A0 80`) or a value above U+10FFFF
@@ -226,6 +258,8 @@ Upstream bugs found (the Rust port deliberately differs on these inputs):
   of file and reports the missing brace with `E-SRC-0520`.
 - Parser: `ForeignContractClause.kind` is read uninitialised when a foreign contract clause
   is malformed. The Rust port uses `Assumes`; the comparison ignores that one field.
+- Compile-time pass: `introspect~>category` on a cyclic type alias (`type A = B`, `type B = A`)
+  recurses until the reference crashes. The Rust port stops and the evaluation fails.
 
 Known differences that remain until later milestones:
 

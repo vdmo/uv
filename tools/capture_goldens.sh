@@ -36,5 +36,20 @@ python3 tools/gen_phase1_cases.py
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_phase1.sh projects fixture_projects.list
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_phase1.sh project_cases project_cases.list
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_phase1.sh phase1_cases phase1_cases.list
+
+# Compile-time pass. The project lists are produced by the Rust phase 1 (which is gated
+# above); the oracle runs with the workspace mounted at its host path so that the project
+# files capability sees the same paths on both sides, and the paths are normalised after.
+python3 tools/gen_comptime_cases.py
+cargo build --release --quiet -p uv-parity
+(cat tests/golden/fixture_projects.list tests/golden/project_cases.list tests/golden/phase1_cases.list
+ echo ultraviolet/HelloUltraviolet/Ultraviolet.toml) > tests/golden/comptime_projects.list
+for name in comptime_projects comptime_cases; do
+  ./target/release/uv-parity comptime-list "tests/golden/$name.list" > "target/parity/$name.oracle.list"
+  docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -v "$ROOT":"$ROOT" -e LD_LIBRARY_PATH="$ICU" uv-oracle \
+    /w/reference/oracle/uv-oracle comptime "$ROOT/target/parity/$name.oracle.list" \
+    | sed "s|$ROOT/|/w/|g" > "tests/golden/$(echo "$name" | sed 's/_projects//').tsv"
+done
+
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_cli.sh > tests/golden/cli_cases.out
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_text.sh > tests/golden/text_render.out

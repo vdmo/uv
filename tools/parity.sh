@@ -13,6 +13,7 @@ fail=0
 [ -d target/parsecases ] || python3 tools/gen_parse_cases.py > /dev/null
 [ -d target/prjcases ] || python3 tools/gen_project_cases.py > /dev/null
 [ -d target/p1cases ] || python3 tools/gen_phase1_cases.py > /dev/null
+[ -d target/ctcases ] || python3 tools/gen_comptime_cases.py > /dev/null
 
 echo "== unicode properties (all scalar values vs ICU 72)"
 ./target/release/uv-parity unicode > target/parity/unicode.tsv
@@ -46,6 +47,16 @@ python3 tools/parity_phase1.py project_cases || fail=1
 
 echo "== phase 1: module-level cases"
 python3 tools/parity_phase1.py phase1_cases || fail=1
+
+echo "== compile-time pass (expanded modules and diagnostics): every project that passes phase 1"
+./target/release/uv-parity comptime-list tests/golden/comptime_projects.list > target/parity/comptime.list
+./target/release/uv-parity comptime target/parity/comptime.list | sed "s|$ROOT/|/w/|g" > target/parity/comptime.tsv
+python3 tools/compare_dumps.py tests/golden/comptime.tsv target/parity/comptime.tsv --quiet || fail=1
+
+echo "== compile-time pass: targeted cases"
+./target/release/uv-parity comptime-list tests/golden/comptime_cases.list > target/parity/comptime_cases.list
+./target/release/uv-parity comptime target/parity/comptime_cases.list | sed "s|$ROOT/|/w/|g" > target/parity/comptime_cases.tsv
+python3 tools/compare_dumps.py tests/golden/comptime_cases.tsv target/parity/comptime_cases.tsv --quiet || fail=1
 
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1

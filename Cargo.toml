@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/uv-core", "crates/uv-project", "crates/uv-source", "crates/uv-analysis", "crates/uv-parity", "crates/uvc"]
+members = ["crates/uv-core", "crates/uv-project", "crates/uv-source", "crates/uv-comptime", "crates/uv-analysis", "crates/uv-parity", "crates/uvc"]
 
 [workspace.package]
 version = "0.4.0-alpha"

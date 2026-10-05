@@ -7,4 +7,6 @@ publish = false
 
 [dependencies]
 uv-core = { path = "../uv-core" }
+uv-project = { path = "../uv-project" }
 uv-source = { path = "../uv-source" }
+uv-comptime = { path = "../uv-comptime" }

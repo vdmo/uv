@@ -327,7 +327,7 @@ pub(crate) fn parse_generic_args_opt(parser: Parser) -> Parsed<Option<Vec<TypePt
     (parsed, Some(args))
 }
 
-pub(crate) fn make_type_modal_ref(path: Path, generic_args: Vec<TypePtr>) -> TypeModalRef {
+pub fn make_type_modal_ref(path: Path, generic_args: Vec<TypePtr>) -> TypeModalRef {
     if generic_args.is_empty() {
         TypeModalRef::TypePathType(TypePathType { path, generic_args: Vec::new() })
     } else {

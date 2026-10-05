@@ -131,3 +131,30 @@ pub fn item_summary(item: &ASTItem, include_spans: bool) -> String {
     });
     out
 }
+
+/// The attributes written on an item; items that carry none yield an empty list.
+pub fn attr_list_of(item: &ASTItem) -> &[AttributeItem] {
+    match item {
+        ASTItem::UsingDecl(d) => d.attrs_opt.as_deref().unwrap_or(&[]),
+        ASTItem::ImportDecl(d) => d.attrs_opt.as_deref().unwrap_or(&[]),
+        ASTItem::ExternBlock(d) => d.attrs_opt.as_deref().unwrap_or(&[]),
+        ASTItem::StaticDecl(d) => d.attrs_opt.as_deref().unwrap_or(&[]),
+        ASTItem::ProcedureDecl(d) => &d.attrs,
+        ASTItem::ComptimeProcedureDecl(d) => &d.attrs,
+        ASTItem::RecordDecl(d) => &d.attrs,
+        ASTItem::EnumDecl(d) => &d.attrs,
+        ASTItem::ModalDecl(d) => &d.attrs,
+        ASTItem::ClassDecl(d) => &d.attrs,
+        ASTItem::TypeAliasDecl(d) => &d.attrs,
+        ASTItem::DeriveTargetDecl(_) | ASTItem::ErrorItem(_) => &[],
+    }
+}
+
+/// The attributes attached directly to an expression (`comptime` or attributed forms).
+pub fn expr_attr_list(expr: &Expr) -> &[AttributeItem] {
+    match &expr.node {
+        ExprNode::ComptimeExpr(comptime) => comptime.attrs_opt.as_deref().unwrap_or(&[]),
+        ExprNode::AttributedExpr(attributed) => &attributed.attrs,
+        _ => &[],
+    }
+}

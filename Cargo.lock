@@ -190,6 +190,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "uv-comptime"
+version = "0.4.0-alpha"
+dependencies = [
+ "uv-core",
+ "uv-project",
+ "uv-source",
+]
+
+[[package]]
 name = "uv-core"
 version = "0.4.0-alpha"
 dependencies = [
@@ -204,7 +213,9 @@ dependencies = [
 name = "uv-parity"
 version = "0.4.0-alpha"
 dependencies = [
+ "uv-comptime",
  "uv-core",
+ "uv-project",
  "uv-source",
 ]
 

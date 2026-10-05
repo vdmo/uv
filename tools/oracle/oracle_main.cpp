@@ -23,6 +23,7 @@
 #include "02_source/ast/ast.h"
 #include "02_source/lexer/lexer.h"
 #include "02_source/parser/parser.h"
+#include "03_comptime/comptime.h"
 
 using namespace ultraviolet;
 
@@ -237,6 +238,139 @@ int DumpTokens(const std::string& label, const std::string& path) {
   return 0;
 }
 
+// ---- compile-time pass ------------------------------------------------------
+
+std::vector<std::string> SplitTabs(const std::string& line) {
+  std::vector<std::string> out;
+  std::size_t start = 0;
+  while (true) {
+    const auto tab = line.find('\t', start);
+    if (tab == std::string::npos) {
+      out.push_back(line.substr(start));
+      return out;
+    }
+    out.push_back(line.substr(start, tab - start));
+    start = tab + 1;
+  }
+}
+
+std::vector<std::string> SplitModulePath(const std::string& path) {
+  std::vector<std::string> out;
+  std::size_t start = 0;
+  while (true) {
+    const auto sep = path.find("::", start);
+    if (sep == std::string::npos) {
+      out.push_back(path.substr(start));
+      return out;
+    }
+    out.push_back(path.substr(start, sep - start));
+    start = sep + 2;
+  }
+}
+
+// Diagnostics with the span's file and the attached notes, which the compile-time pass
+// uses and the token and syntax-tree dumps do not need.
+void PrintDiagsFull(const core::DiagnosticStream& diags) {
+  for (const auto& diag : diags) {
+    std::cout << "G\t" << diag.code << '\t' << SeverityName(diag.severity)
+              << '\t' << Escape(diag.message) << '\t';
+    if (diag.span.has_value()) {
+      std::cout << diag.span->file << '\t';
+      PrintSpan(*diag.span);
+    } else {
+      std::cout << "-";
+    }
+    std::cout << '\t';
+    for (std::size_t i = 0; i < diag.obligation_ids.size(); ++i) {
+      if (i != 0) std::cout << ',';
+      std::cout << diag.obligation_ids[i];
+    }
+    std::cout << '\t' << (diag.label.has_value() ? Escape(*diag.label) : "-") << '\n';
+    for (const auto& child : diag.children) {
+      std::cout << "N\t" << static_cast<int>(child.kind) << '\t' << Escape(child.message)
+                << '\t';
+      if (child.span.has_value()) {
+        std::cout << child.span->file << '\t';
+        PrintSpan(*child.span);
+      } else {
+        std::cout << "-";
+      }
+      std::cout << '\t' << (child.fix_text.has_value() ? Escape(*child.fix_text) : "-")
+                << '\t' << (child.label.has_value() ? Escape(*child.label) : "-") << '\n';
+    }
+  }
+}
+
+// One project block of a comptime list:
+//   P <label> <project root> <fallback source root>
+//   A <assembly name> <source root>        (repeated)
+//   M <module path> <file> <file> ...      (repeated, in phase-1 order)
+//   E
+int DumpComptime(const std::vector<std::string>& block) {
+  frontend::ComptimePassOptions options;
+  std::vector<ast::ASTModule> modules;
+  std::string label;
+  for (const auto& line : block) {
+    const auto fields = SplitTabs(line);
+    if (fields[0] == "P" && fields.size() >= 4) {
+      label = fields[1];
+      options.project_root = fields[2];
+      options.fallback_source_root = std::filesystem::path(fields[3]);
+    } else if (fields[0] == "A" && fields.size() >= 3) {
+      options.source_roots_by_assembly[fields[1]] = fields[2];
+    } else if (fields[0] == "M" && fields.size() >= 2) {
+      ast::ASTModule module;
+      module.path = SplitModulePath(fields[1]);
+      for (std::size_t i = 2; i < fields.size(); ++i) {
+        std::ifstream in(fields[i], std::ios::binary);
+        const std::vector<std::uint8_t> bytes((std::istreambuf_iterator<char>(in)),
+                                              std::istreambuf_iterator<char>());
+        const core::SourceLoadResult loaded = core::LoadSource(fields[i], bytes);
+        if (!loaded.source.has_value()) {
+          std::cout << "F\t" << label << "\nNOSOURCE\t" << fields[i] << '\n';
+          return 0;
+        }
+        ast::ParseFileResult parsed = ast::ParseFile(*loaded.source);
+        if (!parsed.file.has_value()) {
+          std::cout << "F\t" << label << "\nNOFILE\t" << fields[i] << '\n';
+          return 0;
+        }
+        for (auto& item : parsed.file->items) module.items.push_back(std::move(item));
+        for (auto& doc : parsed.file->module_doc) module.module_doc.push_back(std::move(doc));
+      }
+      modules.push_back(std::move(module));
+    }
+  }
+  std::cout << "F\t" << label << '\n';
+  const frontend::ComptimeResult result = frontend::ExecuteComptime(modules, options);
+  PrintDiagsFull(result.diags);
+  if (!result.modules.has_value()) {
+    std::cout << "NOMODULES\n";
+    return 0;
+  }
+  for (const auto& module : *result.modules) {
+    std::cout << "X\t";
+    D(std::cout, module.path);
+    std::cout << '\n';
+    for (const auto& doc : module.module_doc) {
+      std::cout << "M\t";
+      D(std::cout, doc);
+      std::cout << '\n';
+    }
+    for (const auto& item : module.items) {
+      std::cout << "I\t";
+      D(std::cout, item);
+      std::cout << '\n';
+    }
+    for (const auto& proc : module.comptime_procedures) {
+      std::cout << "C\t";
+      D(std::cout, proc);
+      std::cout << '\n';
+    }
+  }
+  return 0;
+}
+
 std::string Utf8(std::uint32_t scalar) {
   std::string out;
   core::AppendUtf8(out, core::UnicodeScalar(scalar));
@@ -275,6 +409,40 @@ int main(int argc, char** argv) {
   if (argc >= 2 && std::string_view(argv[1]) == "unicode") {
     return DumpUnicode();
   }
+  if (argc >= 3 && std::string_view(argv[1]) == "comptime") {
+    // argv[2] is a list of project blocks; each runs in a child process.
+    std::ifstream list(argv[2]);
+    std::string line;
+    std::vector<std::string> block;
+    while (std::getline(list, line)) {
+      if (line != "E") {
+        block.push_back(line);
+        continue;
+      }
+      const std::string label = block.empty() ? "" : SplitTabs(block[0])[1];
+      std::cout.flush();
+      const pid_t child = fork();
+      if (child == 0) {
+        alarm(1800);
+        int rc = 0;
+        try {
+          rc = DumpComptime(block);
+        } catch (const char* message) {
+          std::cout << "\nCRASH\t" << message << '\n';
+        }
+        std::cout.flush();
+        _exit(rc);
+      }
+      int status = 0;
+      waitpid(child, &status, 0);
+      if (WIFSIGNALED(status)) {
+        std::cout << "F\t" << label << '\n'
+                  << (WTERMSIG(status) == SIGALRM ? "HANG" : "CRASH\tsignal") << '\n';
+      }
+      block.clear();
+    }
+    return 0;
+  }
   const bool ast_mode = argc >= 3 && std::string_view(argv[1]) == "ast";
   if (ast_mode || (argc >= 3 && std::string_view(argv[1]) == "tokens")) {
     // argv[2] is a list file: one "label<TAB>path" per line.
@@ -312,6 +480,6 @@ int main(int argc, char** argv) {
     }
     return 0;
   }
-  std::cerr << "usage: uv-oracle unicode | tokens <list-file> | ast <list-file>\n";
+  std::cerr << "usage: uv-oracle unicode | tokens <list-file> | ast <list-file> | comptime <list-file>\n";
   return 2;
 }
