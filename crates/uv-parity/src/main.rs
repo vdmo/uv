@@ -1,6 +1,7 @@
 //! Emits the same dumps as the reference oracle (`tools/oracle/oracle_main.cpp`) so the
 //! two implementations can be compared byte for byte.
 
+use std::collections::HashMap;
 use std::fmt::Write as _;
 use std::io::Write as _;
 
@@ -9,7 +10,16 @@ use uv_core::source_load::load_source;
 use uv_core::span::Span;
 use uv_core::unicode::{analyze_identifier_security, case_fold, is_xid_continue, is_xid_start, nfc};
 use uv_comptime::{execute_comptime, ComptimePassOptions};
-use uv_core::diagnostics::has_error;
+use uv_analysis::context::{Entity, NameMapTable, Scope, ScopeContext, TypeDecl};
+use uv_analysis::resolve::collect_toplevel::collect_name_maps;
+use uv_analysis::resolve::populate_sigma::populate_sigma;
+use uv_analysis::resolve::resolve_module::resolve_modules;
+use uv_analysis::resolve::resolver::ResolveContext;
+use uv_analysis::resolve::scopes_lookup::module_names_of;
+use uv_analysis::resolve::visibility::{can_access, check_module_visibility};
+use uv_core::diagnostics::{emit, has_error};
+use uv_core::symbols::string_of_path;
+use uv_project::target_profile::TargetProfile;
 use uv_source::ast::ASTModule;
 use uv_project::load_project::load_project;
 use uv_project::manifest::find_project_root;
@@ -152,42 +162,85 @@ fn print_diags_full(out: &mut String, diags: &[Diagnostic]) {
     }
 }
 
-/// Runs the compile-time pass on one project block of a comptime list.
-fn dump_comptime(out: &mut String, block: &[&str]) {
-    let mut options = ComptimePassOptions::default();
-    let mut modules = Vec::new();
-    let mut label = "";
+/// One project block of a project list; see `LoadProjectBlock` in the oracle.
+#[derive(Default)]
+struct ProjectBlock {
+    label: String,
+    options: ComptimePassOptions,
+    modules: Vec<ASTModule>,
+    reachable: usize,
+    unsafe_spans_by_file: HashMap<String, Vec<Span>>,
+}
+
+/// Loads a block, or returns the lines to print when one of its files cannot be used.
+fn load_project_block(block: &[&str]) -> Result<ProjectBlock, String> {
+    let mut out = ProjectBlock::default();
     for line in block {
         let fields: Vec<&str> = line.split('\t').collect();
         match fields.as_slice() {
             ["P", name, root, fallback, ..] => {
-                label = name;
-                options.project_root = root.to_string();
-                options.fallback_source_root = Some(fallback.to_string());
+                out.label = name.to_string();
+                out.options.project_root = root.to_string();
+                out.options.fallback_source_root = Some(fallback.to_string());
             }
             ["A", name, source_root, ..] => {
-                options.source_roots_by_assembly.insert(name.to_string(), source_root.to_string());
+                out.options.source_roots_by_assembly.insert(name.to_string(), source_root.to_string());
             }
+            ["R", count, ..] => out.reachable = count.parse().unwrap_or(0),
             ["M", path, files @ ..] => {
                 let mut module = ASTModule { path: path.split("::").map(str::to_string).collect(), ..ASTModule::default() };
                 for file in files {
                     let bytes = std::fs::read(file).unwrap_or_default();
                     let Some(source) = load_source(file, &bytes).source else {
-                        let _ = writeln!(out, "F\t{label}\nNOSOURCE\t{file}");
-                        return;
+                        return Err(format!("F\t{}\nNOSOURCE\t{file}\n", out.label));
                     };
-                    let Some(parsed) = parse_file(&source).file else {
-                        let _ = writeln!(out, "F\t{label}\nNOFILE\t{file}");
-                        return;
+                    let parsed = parse_file(&source);
+                    let Some(parsed_file) = parsed.file else {
+                        return Err(format!("F\t{}\nNOFILE\t{file}\n", out.label));
                     };
-                    module.items.extend(parsed.items);
-                    module.module_doc.extend(parsed.module_doc);
+                    module.items.extend(parsed_file.items);
+                    module.module_doc.extend(parsed_file.module_doc);
+                    out.unsafe_spans_by_file.insert(source.path.to_string(), parsed.unsafe_spans);
                 }
-                modules.push(module);
+                out.modules.push(module);
             }
             _ => {}
         }
     }
+    Ok(out)
+}
+
+fn dump_line(tag: &str, value: &dyn AstDump, out: &mut String) {
+    out.push_str(tag);
+    out.push('\t');
+    value.dump(out);
+    out.push('\n');
+}
+
+fn dump_modules(out: &mut String, modules: &[ASTModule]) {
+    for module in modules {
+        dump_line("X", &module.path, out);
+        for doc in &module.module_doc {
+            dump_line("M", doc, out);
+        }
+        for item in &module.items {
+            dump_line("I", item, out);
+        }
+        for proc in &module.comptime_procedures {
+            dump_line("C", proc, out);
+        }
+    }
+}
+
+/// Runs the compile-time pass on one project block of a comptime list.
+fn dump_comptime(out: &mut String, block: &[&str]) {
+    let ProjectBlock { label, options, modules, .. } = match load_project_block(block) {
+        Ok(project) => project,
+        Err(failure) => {
+            out.push_str(&failure);
+            return;
+        }
+    };
     let _ = writeln!(out, "F\t{label}");
     let result = execute_comptime(&modules, &options);
     print_diags_full(out, &result.diags);
@@ -195,23 +248,135 @@ fn dump_comptime(out: &mut String, block: &[&str]) {
         out.push_str("NOMODULES\n");
         return;
     };
-    let line = |tag: &str, value: &dyn AstDump, out: &mut String| {
-        out.push_str(tag);
-        out.push('\t');
-        value.dump(out);
-        out.push('\n');
+    dump_modules(out, &expanded);
+}
+
+fn dump_name_maps(out: &mut String, table: &NameMapTable) {
+    for (module_key, name_map) in table {
+        dump_line("NM", module_key, out);
+        let mut entries: Vec<(&String, &Entity)> = name_map.iter().collect();
+        entries.sort_by(|a, b| a.0.cmp(b.0));
+        for (name, ent) in entries {
+            out.push_str("NE\t");
+            name.dump(out);
+            let _ = write!(out, "\t{:?}\t{:?}\t", ent.kind, ent.source);
+            ent.origin_opt.dump(out);
+            out.push('\t');
+            ent.target_opt.dump(out);
+            out.push('\t');
+            ent.declaration_span.dump(out);
+            out.push('\t');
+            ent.language_symbol_id.dump(out);
+            out.push('\t');
+            ent.type_param_class_bounds.dump(out);
+            out.push('\t');
+            ent.visibility.dump(out);
+            out.push('\n');
+        }
+    }
+}
+
+/// Runs the front end through name resolution on one project block, in the order the
+/// driver does; see `DumpResolve` in the oracle.
+fn dump_resolve(out: &mut String, block: &[&str]) {
+    let input = match load_project_block(block) {
+        Ok(project) => project,
+        Err(failure) => {
+            out.push_str(&failure);
+            return;
+        }
     };
-    for module in &expanded {
-        line("X", &module.path, out);
-        for doc in &module.module_doc {
-            line("M", doc, out);
+    let _ = writeln!(out, "F\t{}", input.label);
+    let Some(project) = load_project(&input.options.project_root, &AssemblyTarget::default()).project else {
+        out.push_str("NOPROJECT\n");
+        return;
+    };
+    let comptime = execute_comptime(&input.modules, &input.options);
+    let Some(mut parsed_modules) = comptime.modules.filter(|_| !has_error(&comptime.diags)) else {
+        out.push_str("STOP\tcomptime\n");
+        return;
+    };
+    let mut diags = Vec::new();
+    for diag in comptime.diags {
+        emit(&mut diags, diag);
+    }
+    parsed_modules.truncate(input.reachable);
+
+    let mut sema_project = project.clone();
+    sema_project.modules = parsed_modules
+        .iter()
+        .flat_map(|module| {
+            let path = string_of_path(&module.path);
+            project.assemblies.iter().flat_map(move |assembly| {
+                let path = path.clone();
+                assembly.modules.iter().filter(move |info| info.path == path).cloned()
+            })
+        })
+        .collect();
+
+    let mut ctx = ScopeContext {
+        project: Some(&sema_project),
+        target_profile: Some(TargetProfile::X86_64SysV),
+        scopes: vec![Scope::new(), Scope::new(), Scope::new()],
+        ..Default::default()
+    };
+    ctx.sigma.mods = parsed_modules;
+    ctx.sigma.unsafe_spans_by_file = input.unsafe_spans_by_file;
+    for index in 0..ctx.sigma.mods.len() {
+        ctx.current_module = ctx.sigma.mods[index].path.clone();
+        for diag in check_module_visibility(&ctx, &ctx.sigma.mods[index]) {
+            emit(&mut diags, diag);
         }
-        for item in &module.items {
-            line("I", item, out);
+    }
+    let name_maps = collect_name_maps(&mut ctx);
+    for diag in name_maps.diags {
+        emit(&mut diags, diag);
+    }
+    print_diags_full(out, &diags);
+    dump_name_maps(out, &name_maps.name_maps);
+    if has_error(&diags) {
+        out.push_str("STOP\tnames\n");
+        return;
+    }
+    populate_sigma(&mut ctx);
+    let module_names = module_names_of(&sema_project);
+    let no_parse_diags = Vec::new();
+    let mut res_ctx = ResolveContext {
+        ctx: &mut ctx,
+        name_maps: &name_maps.name_maps,
+        module_names: &module_names,
+        can_access: Some(can_access),
+        parse_ok: true,
+        parse_diags: Some(&no_parse_diags),
+    };
+    let resolved = resolve_modules(&mut res_ctx);
+    let _ = writeln!(out, "RESOLVE\t{}", if resolved.ok { "ok" } else { "failed" });
+    print_diags_full(out, &resolved.diags);
+    dump_modules(out, &resolved.modules);
+}
+
+/// The built-in declarations; see `DumpSigma` in the oracle.
+fn dump_sigma(out: &mut String) {
+    let mut ctx = ScopeContext::default();
+    populate_sigma(&mut ctx);
+    for (key, decl) in &ctx.sigma.types {
+        out.push_str("T\t");
+        key.dump(out);
+        out.push('\t');
+        match decl {
+            TypeDecl::Record(node) => node.dump(out),
+            TypeDecl::Enum(node) => node.dump(out),
+            TypeDecl::Modal(node) => node.dump(out),
+            TypeDecl::TypeAlias(node) => node.dump(out),
         }
-        for proc in &module.comptime_procedures {
-            line("C", proc, out);
-        }
+        out.push('\n');
+    }
+    for (key, decl) in &ctx.sigma.classes {
+        out.push_str("K\t");
+        key.dump(out);
+        out.push('\t');
+        decl.dump(out);
+        out.push('\n');
     }
 }
 
@@ -238,6 +403,7 @@ fn comptime_list_block(out: &mut String, manifest: &str) {
     for assembly in &project.assemblies {
         let _ = writeln!(out, "A\t{}\t{}", assembly.name, assembly.source_root);
     }
+    let _ = writeln!(out, "R\t{}", phase1.reachable_count);
     for info in &phase1.project_module_infos {
         let _ = write!(out, "M\t{}", info.path);
         for file in compilation_unit(&info.dir).files {
@@ -316,7 +482,12 @@ fn run() -> Result<(), String> {
             }
             Ok(())
         }
-        Some("comptime") if args.len() >= 3 => {
+        Some("sigma") => {
+            let mut out = String::new();
+            dump_sigma(&mut out);
+            stdout.write_all(out.as_bytes()).map_err(|err| err.to_string())
+        }
+        Some(mode @ ("comptime" | "resolve")) if args.len() >= 3 => {
             let list = std::fs::read_to_string(&args[2]).map_err(|err| err.to_string())?;
             let mut block: Vec<&str> = Vec::new();
             for line in list.lines() {
@@ -325,7 +496,11 @@ fn run() -> Result<(), String> {
                     continue;
                 }
                 let mut out = String::new();
-                dump_comptime(&mut out, &block);
+                if mode == "resolve" {
+                    dump_resolve(&mut out, &block);
+                } else {
+                    dump_comptime(&mut out, &block);
+                }
                 stdout.write_all(out.as_bytes()).map_err(|err| err.to_string())?;
                 block.clear();
             }

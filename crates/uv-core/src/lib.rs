@@ -16,6 +16,7 @@ pub mod process_config;
 pub mod source_load;
 pub mod source_text;
 pub mod span;
+pub mod std_unordered;
 pub mod spec_trace;
 pub mod symbols;
 pub mod terminal;

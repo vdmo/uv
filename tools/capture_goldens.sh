@@ -51,5 +51,25 @@ for name in comptime_projects comptime_cases; do
     | sed "s|$ROOT/|/w/|g" > "tests/golden/$(echo "$name" | sed 's/_projects//').tsv"
 done
 
+# Name resolution: the same project lists, plus cases aimed at the resolver, run through
+# the reference's name collection and module resolution. Then the built-in declaration
+# table, and the iteration order of the standard library's hash table, which decides the
+# reference's spelling suggestions.
+python3 tools/gen_resolve_cases.py
+for name in comptime_projects comptime_cases resolve_targeted; do
+  ./target/release/uv-parity comptime-list "tests/golden/$name.list" > "target/parity/$name.oracle.list"
+  case "$name" in
+    comptime_projects) out=resolve ;;
+    comptime_cases) out=resolve_cases ;;
+    *) out=$name ;;
+  esac
+  docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -v "$ROOT":"$ROOT" -e LD_LIBRARY_PATH="$ICU" uv-oracle \
+    /w/reference/oracle/uv-oracle resolve "$ROOT/target/parity/$name.oracle.list" \
+    | sed "s|$ROOT/|/w/|g" > "tests/golden/$out.tsv"
+done
+run uv-oracle /w/reference/oracle/uv-oracle sigma > tests/golden/sigma.tsv
+run uv-oracle sh -c 'g++ -std=c++20 -O1 -o /tmp/probe /w/tools/oracle/unordered_probe.cpp && /tmp/probe' \
+  > tests/golden/unordered_order.txt
+
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_cli.sh > tests/golden/cli_cases.out
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_text.sh > tests/golden/text_render.out

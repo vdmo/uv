@@ -14,6 +14,7 @@ fail=0
 [ -d target/prjcases ] || python3 tools/gen_project_cases.py > /dev/null
 [ -d target/p1cases ] || python3 tools/gen_phase1_cases.py > /dev/null
 [ -d target/ctcases ] || python3 tools/gen_comptime_cases.py > /dev/null
+[ -d target/rescases ] || python3 tools/gen_resolve_cases.py > /dev/null
 
 echo "== unicode properties (all scalar values vs ICU 72)"
 ./target/release/uv-parity unicode > target/parity/unicode.tsv
@@ -57,6 +58,27 @@ echo "== compile-time pass: targeted cases"
 ./target/release/uv-parity comptime-list tests/golden/comptime_cases.list > target/parity/comptime_cases.list
 ./target/release/uv-parity comptime target/parity/comptime_cases.list | sed "s|$ROOT/|/w/|g" > target/parity/comptime_cases.tsv
 python3 tools/compare_dumps.py tests/golden/comptime_cases.tsv target/parity/comptime_cases.tsv --quiet || fail=1
+
+echo "== hash-table ordering the reference's output depends on"
+cargo test --release --quiet -p uv-core std_unordered > target/parity/unordered.log 2>&1 \
+  && echo "identical (probe of the reference's standard library)" || { cat target/parity/unordered.log; fail=1; }
+
+echo "== built-in declaration table"
+./target/release/uv-parity sigma > target/parity/sigma.tsv
+cmp tests/golden/sigma.tsv target/parity/sigma.tsv && echo "identical ($(grep -c . tests/golden/sigma.tsv) declarations)" || fail=1
+
+echo "== name resolution (name maps, resolved modules, diagnostics): every project that passes phase 1"
+./target/release/uv-parity resolve target/parity/comptime.list | sed "s|$ROOT/|/w/|g" > target/parity/resolve.tsv
+python3 tools/compare_dumps.py tests/golden/resolve.tsv target/parity/resolve.tsv --quiet || fail=1
+
+echo "== name resolution: compile-time cases"
+./target/release/uv-parity resolve target/parity/comptime_cases.list | sed "s|$ROOT/|/w/|g" > target/parity/resolve_cases.tsv
+python3 tools/compare_dumps.py tests/golden/resolve_cases.tsv target/parity/resolve_cases.tsv --quiet || fail=1
+
+echo "== name resolution: targeted cases"
+./target/release/uv-parity comptime-list tests/golden/resolve_targeted.list > target/parity/resolve_targeted.list
+./target/release/uv-parity resolve target/parity/resolve_targeted.list | sed "s|$ROOT/|/w/|g" > target/parity/resolve_targeted.tsv
+python3 tools/compare_dumps.py tests/golden/resolve_targeted.tsv target/parity/resolve_targeted.tsv --quiet || fail=1
 
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1

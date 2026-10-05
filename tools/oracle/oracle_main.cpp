@@ -24,6 +24,14 @@
 #include "02_source/lexer/lexer.h"
 #include "02_source/parser/parser.h"
 #include "03_comptime/comptime.h"
+#include "00_core/symbols.h"
+#include "01_project/project.h"
+#include "04_analysis/resolve/resolve_items.h"
+#include "04_analysis/resolve/resolver.h"
+#include "04_analysis/resolve/scopes_lookup.h"
+#include "04_analysis/resolve/visibility.h"
+#include <algorithm>
+#include <unordered_map>
 
 using namespace ultraviolet;
 
@@ -306,18 +314,33 @@ void PrintDiagsFull(const core::DiagnosticStream& diags) {
 //   A <assembly name> <source root>        (repeated)
 //   M <module path> <file> <file> ...      (repeated, in phase-1 order)
 //   E
-int DumpComptime(const std::vector<std::string>& block) {
+struct ProjectBlock {
+  std::string label;
   frontend::ComptimePassOptions options;
   std::vector<ast::ASTModule> modules;
-  std::string label;
+  std::size_t reachable = 0;
+  std::unordered_map<std::string, std::vector<core::Span>> unsafe_spans_by_file;
+  std::string failure;
+};
+
+// One project block of a project list:
+//   P <label> <project root> <fallback source root>
+//   A <assembly name> <source root>        (repeated)
+//   R <number of leading modules reachable from the selected assembly>
+//   M <module path> <file> <file> ...      (repeated, in phase-1 order)
+//   E
+ProjectBlock LoadProjectBlock(const std::vector<std::string>& block) {
+  ProjectBlock out;
   for (const auto& line : block) {
     const auto fields = SplitTabs(line);
     if (fields[0] == "P" && fields.size() >= 4) {
-      label = fields[1];
-      options.project_root = fields[2];
-      options.fallback_source_root = std::filesystem::path(fields[3]);
+      out.label = fields[1];
+      out.options.project_root = fields[2];
+      out.options.fallback_source_root = std::filesystem::path(fields[3]);
     } else if (fields[0] == "A" && fields.size() >= 3) {
-      options.source_roots_by_assembly[fields[1]] = fields[2];
+      out.options.source_roots_by_assembly[fields[1]] = fields[2];
+    } else if (fields[0] == "R" && fields.size() >= 2) {
+      out.reachable = static_cast<std::size_t>(std::stoull(fields[1]));
     } else if (fields[0] == "M" && fields.size() >= 2) {
       ast::ASTModule module;
       module.path = SplitModulePath(fields[1]);
@@ -327,28 +350,26 @@ int DumpComptime(const std::vector<std::string>& block) {
                                               std::istreambuf_iterator<char>());
         const core::SourceLoadResult loaded = core::LoadSource(fields[i], bytes);
         if (!loaded.source.has_value()) {
-          std::cout << "F\t" << label << "\nNOSOURCE\t" << fields[i] << '\n';
-          return 0;
+          out.failure = "NOSOURCE\t" + fields[i];
+          return out;
         }
         ast::ParseFileResult parsed = ast::ParseFile(*loaded.source);
         if (!parsed.file.has_value()) {
-          std::cout << "F\t" << label << "\nNOFILE\t" << fields[i] << '\n';
-          return 0;
+          out.failure = "NOFILE\t" + fields[i];
+          return out;
         }
         for (auto& item : parsed.file->items) module.items.push_back(std::move(item));
         for (auto& doc : parsed.file->module_doc) module.module_doc.push_back(std::move(doc));
+        out.unsafe_spans_by_file[loaded.source->path] = std::move(parsed.unsafe_spans);
       }
-      modules.push_back(std::move(module));
+      out.modules.push_back(std::move(module));
     }
   }
-  std::cout << "F\t" << label << '\n';
-  const frontend::ComptimeResult result = frontend::ExecuteComptime(modules, options);
-  PrintDiagsFull(result.diags);
-  if (!result.modules.has_value()) {
-    std::cout << "NOMODULES\n";
-    return 0;
-  }
-  for (const auto& module : *result.modules) {
+  return out;
+}
+
+void DumpModules(const std::vector<ast::ASTModule>& modules) {
+  for (const auto& module : modules) {
     std::cout << "X\t";
     D(std::cout, module.path);
     std::cout << '\n';
@@ -367,6 +388,184 @@ int DumpComptime(const std::vector<std::string>& block) {
       D(std::cout, proc);
       std::cout << '\n';
     }
+  }
+}
+
+int DumpComptime(const std::vector<std::string>& block) {
+  const ProjectBlock project = LoadProjectBlock(block);
+  std::cout << "F\t" << project.label << '\n';
+  if (!project.failure.empty()) {
+    std::cout << project.failure << '\n';
+    return 0;
+  }
+  const frontend::ComptimeResult result =
+      frontend::ExecuteComptime(project.modules, project.options);
+  PrintDiagsFull(result.diags);
+  if (!result.modules.has_value()) {
+    std::cout << "NOMODULES\n";
+    return 0;
+  }
+  DumpModules(*result.modules);
+  return 0;
+}
+
+const char* EntityKindName(analysis::EntityKind kind) {
+  switch (kind) {
+    case analysis::EntityKind::Value: return "Value";
+    case analysis::EntityKind::Type: return "Type";
+    case analysis::EntityKind::Class: return "Class";
+    case analysis::EntityKind::ModuleAlias: return "ModuleAlias";
+  }
+  return "?";
+}
+
+const char* EntitySourceName(analysis::EntitySource source) {
+  switch (source) {
+    case analysis::EntitySource::Decl: return "Decl";
+    case analysis::EntitySource::Using: return "Using";
+    case analysis::EntitySource::RegionAlias: return "RegionAlias";
+    case analysis::EntitySource::Import: return "Import";
+  }
+  return "?";
+}
+
+void DumpNameMaps(const analysis::NameMapTable& table) {
+  for (const auto& [module_key, name_map] : table) {
+    std::cout << "NM\t";
+    D(std::cout, module_key);
+    std::cout << '\n';
+    std::vector<const analysis::NameMap::value_type*> entries;
+    entries.reserve(name_map.size());
+    for (const auto& entry : name_map) entries.push_back(&entry);
+    std::sort(entries.begin(), entries.end(),
+              [](const auto* a, const auto* b) { return a->first < b->first; });
+    for (const auto* entry : entries) {
+      const analysis::Entity& ent = entry->second;
+      std::cout << "NE\t";
+      D(std::cout, entry->first);
+      std::cout << '\t' << EntityKindName(ent.kind) << '\t' << EntitySourceName(ent.source)
+                << '\t';
+      D(std::cout, ent.origin_opt);
+      std::cout << '\t';
+      D(std::cout, ent.target_opt);
+      std::cout << '\t';
+      D(std::cout, ent.declaration_span);
+      std::cout << '\t';
+      D(std::cout, ent.language_symbol_id);
+      std::cout << '\t';
+      D(std::cout, ent.type_param_class_bounds);
+      std::cout << '\t';
+      D(std::cout, ent.visibility);
+      std::cout << '\n';
+    }
+  }
+}
+
+bool HasErrorDiag(const core::DiagnosticStream& diags) {
+  for (const auto& diag : diags) {
+    if (diag.severity == core::Severity::Error) return true;
+  }
+  return false;
+}
+
+// Runs the reference front end on a project through name resolution, in the order the
+// driver does: compile-time pass, module visibility, name maps, module resolution. The
+// driver's check of compile-time procedure signatures (which needs the type checker) is
+// not part of this mode.
+int DumpResolve(const std::vector<std::string>& block) {
+  ProjectBlock input = LoadProjectBlock(block);
+  std::cout << "F\t" << input.label << '\n';
+  if (!input.failure.empty()) {
+    std::cout << input.failure << '\n';
+    return 0;
+  }
+  const project::LoadProjectResult loaded =
+      project::LoadProject(input.options.project_root, project::AssemblyTarget{});
+  if (!loaded.project.has_value()) {
+    std::cout << "NOPROJECT\n";
+    return 0;
+  }
+  frontend::ComptimeResult comptime =
+      frontend::ExecuteComptime(input.modules, input.options);
+  if (!comptime.modules.has_value() || HasErrorDiag(comptime.diags)) {
+    std::cout << "STOP\tcomptime\n";
+    return 0;
+  }
+  core::DiagnosticStream diags;
+  for (const auto& diag : comptime.diags) core::Emit(diags, diag);
+  std::vector<ast::ASTModule> parsed_modules(
+      comptime.modules->begin(),
+      comptime.modules->begin() +
+          static_cast<std::ptrdiff_t>(std::min(input.reachable, comptime.modules->size())));
+
+  project::Project sema_project = *loaded.project;
+  std::vector<project::ModuleInfo> reachable_infos;
+  for (const auto& module : parsed_modules) {
+    const std::string path = core::StringOfPath(module.path);
+    for (const auto& assembly : sema_project.assemblies) {
+      for (const auto& info : assembly.modules) {
+        if (info.path == path) reachable_infos.push_back(info);
+      }
+    }
+  }
+  sema_project.modules = std::move(reachable_infos);
+
+  analysis::ScopeContext ctx;
+  ctx.project = &sema_project;
+  ctx.target_profile = project::TargetProfile::X86_64SysV;
+  ctx.sigma.mods = parsed_modules;
+  ctx.sigma.unsafe_spans_by_file = input.unsafe_spans_by_file;
+  ctx.scopes = {analysis::Scope{}, analysis::Scope{}, analysis::Scope{}};
+  for (const auto& module : parsed_modules) {
+    ctx.current_module = module.path;
+    for (const auto& diag : analysis::CheckModuleVisibility(ctx, module)) {
+      core::Emit(diags, diag);
+    }
+  }
+  const auto name_maps = analysis::CollectNameMaps(ctx);
+  for (const auto& diag : name_maps.diags) core::Emit(diags, diag);
+  const std::size_t before_resolve = diags.size();
+  PrintDiagsFull(diags);
+  DumpNameMaps(name_maps.name_maps);
+  if (HasErrorDiag(diags)) {
+    std::cout << "STOP\tnames\n";
+    return 0;
+  }
+  analysis::PopulateSigma(ctx);
+  const auto module_names = analysis::ModuleNamesOf(sema_project);
+  core::DiagnosticStream no_parse_diags;
+  analysis::ResolveContext res_ctx;
+  res_ctx.ctx = &ctx;
+  res_ctx.name_maps = &name_maps.name_maps;
+  res_ctx.module_names = &module_names;
+  res_ctx.can_access = analysis::CanAccess;
+  res_ctx.parse_ok = true;
+  res_ctx.parse_diags = &no_parse_diags;
+  const auto resolved = analysis::ResolveModules(res_ctx);
+  (void)before_resolve;
+  std::cout << "RESOLVE\t" << (resolved.ok ? "ok" : "failed") << '\n';
+  PrintDiagsFull(resolved.diags);
+  DumpModules(resolved.modules);
+  return 0;
+}
+
+// The declarations analysis registers for built-in types and classes, by path.
+int DumpSigma() {
+  analysis::ScopeContext ctx;
+  analysis::PopulateSigma(ctx);
+  for (const auto& [key, decl] : ctx.sigma.types) {
+    std::cout << "T\t";
+    D(std::cout, key);
+    std::cout << '\t';
+    std::visit([](const auto& node) { D(std::cout, node); }, decl);
+    std::cout << '\n';
+  }
+  for (const auto& [key, decl] : ctx.sigma.classes) {
+    std::cout << "K\t";
+    D(std::cout, key);
+    std::cout << '\t';
+    D(std::cout, decl);
+    std::cout << '\n';
   }
   return 0;
 }
@@ -409,7 +608,11 @@ int main(int argc, char** argv) {
   if (argc >= 2 && std::string_view(argv[1]) == "unicode") {
     return DumpUnicode();
   }
-  if (argc >= 3 && std::string_view(argv[1]) == "comptime") {
+  if (argc >= 2 && std::string_view(argv[1]) == "sigma") {
+    return DumpSigma();
+  }
+  const bool resolve_mode = argc >= 3 && std::string_view(argv[1]) == "resolve";
+  if (resolve_mode || (argc >= 3 && std::string_view(argv[1]) == "comptime")) {
     // argv[2] is a list of project blocks; each runs in a child process.
     std::ifstream list(argv[2]);
     std::string line;
@@ -426,7 +629,7 @@ int main(int argc, char** argv) {
         alarm(1800);
         int rc = 0;
         try {
-          rc = DumpComptime(block);
+          rc = resolve_mode ? DumpResolve(block) : DumpComptime(block);
         } catch (const char* message) {
           std::cout << "\nCRASH\t" << message << '\n';
         }
@@ -480,6 +683,6 @@ int main(int argc, char** argv) {
     }
     return 0;
   }
-  std::cerr << "usage: uv-oracle unicode | tokens <list-file> | ast <list-file> | comptime <list-file>\n";
+  std::cerr << "usage: uv-oracle unicode | tokens <list-file> | ast <list-file> | comptime <list-file> | resolve <list-file>\n";
   return 2;
 }

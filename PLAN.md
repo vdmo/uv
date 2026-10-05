@@ -170,8 +170,9 @@ meaningless.
 
 ## Status
 
-M0, M1 and M2 are done, and M3 has started (its first slice, the compile-time pass, is
-done). Run `tools/parity.sh` to re-check every gate (about a minute);
+M0, M1 and M2 are done, and M3 has started (its first two slices, the compile-time pass
+and name resolution, are done). Run `tools/parity.sh` to re-check every gate (about a
+minute);
 `tools/capture_goldens.sh` regenerates the goldens (needs Docker, and takes a while because
 of the inputs the reference does not terminate on).
 
@@ -197,6 +198,11 @@ Gates, all passing:
 | Same, 6,000 corpus files with token-level edits (parser error recovery) | identical on 5,977; the reference hangs on the other 23 |
 | Compile-time pass: expanded modules (full syntax trees) and diagnostics, every project that passes phase 1, including the 62-module HelloUltraviolet project | identical, 546 projects (42 MB of dump, byte for byte) |
 | Same, 144 targeted cases (evaluator, quote and splice, hygiene, emission, reflection, project files, derive) | identical on 143; the reference crashes on the other 1 |
+| Name resolution: per-module name maps, resolved modules (full syntax trees) and diagnostics with notes and suggestions, every project that passes phase 1 | identical, 546 projects (43 MB of dump, byte for byte) |
+| Same, the 144 compile-time cases | identical on 143; the reference crashes on the other 1 |
+| Same, 410 targeted cases (unresolved names and suggestions, scopes, qualified forms, patterns, `using`, `import`, other assemblies, reserved names) | identical, 410 |
+| Built-in declaration table (the records, enums, modals, aliases and classes analysis registers) | identical, 52 declarations |
+| Iteration order of the reference's hash table (hash values, growth, element order after inserts, copies and assignments) | identical to a probe of its standard library |
 | `--phase1-only`: JSON diagnostics, exit status and `--dump-ast` listing | identical, 549 fixtures, 58 manifest cases, 78 module-level cases |
 | `--check`: JSON diagnostics and exit status for projects rejected in phase 1 | identical, 32 fixtures and 41 manifest cases |
 | `--check`: phase-1 diagnostics for every other project | identical, 534 |
@@ -224,8 +230,8 @@ M3 is split into slices, each gated on its own against the oracle before the nex
 | Slice | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | M3.1 compile-time pass (`uv-comptime`) | `03_comptime` | 10.6k | done |
-| M3.2 name resolution | `04_analysis/resolve`, `language_service` facts | 14k | next |
-| M3.3 typing context, generics, modal, composite, layout | `typing` (core), `generics`, `modal`, `composite`, `layout` | about 45k | |
+| M3.2 name resolution (`uv-analysis::resolve`) | `04_analysis/resolve`, built-in declarations from `caps`, `memory`, `typing` | 13k | done |
+| M3.3 typing context, generics, modal, composite, layout | `typing` (core), `generics`, `modal`, `composite`, `layout` | about 45k | next |
 | M3.4 expression, statement and declaration typing | `typing` (rest) | about 40k | |
 | M3.5 memory, provenance, capabilities, keys, contracts | `memory`, `provenance`, `caps`, `keys`, `contracts` | 36k | |
 | M3.6 driver phases 2 and 3 end to end | `06_driver` (sema section), `conformance` | | gate: `--check --diag-json` identical on every fixture |
@@ -242,7 +248,31 @@ What M3.1 added:
 - `uvc` does not run phase 2 yet: the reference validates compile-time procedure
   signatures with the type checker first, which arrives in M3.3.
 
-One piece of reference behaviour is reproduced on purpose: hygiene renames quoted syntax in
+What M3.2 added:
+
+- `uv-analysis::resolve`: scopes and lookup, visibility checks, top-level name collection
+  to a fixed point across modules, `using` and `import`, and the resolver proper for
+  types, patterns, expressions, statements, items and modules, with the reference's
+  diagnostics (including which parts of a failure each call site keeps).
+- `uv-analysis::caps::builtin_decls` and `resolve::populate_sigma`: the declarations of
+  the built-in types and classes.
+- `uv-core::std_unordered`: a map that iterates in the order of the reference's
+  `std::unordered_map` (see below).
+- The oracle gained `resolve` and `sigma` modes, and `tools/oracle/unordered_probe.cpp`;
+  `tools/gen_resolve_cases.py` writes the targeted cases.
+- `uvc` still stops after phase 1, for the reason given under M3.1.
+
+Two pieces of reference behaviour are reproduced on purpose.
+
+The first is hash-table order. The reference iterates `std::unordered_map` where the order
+shows: a spelling suggestion takes the first of several equally close names, and a
+wildcard `using` binds names in the order of the map it reads. That order comes from the
+standard library the reference is built with (libstdc++ here), so scopes use a map that
+reproduces its hash function, bucket growth and element linking, tested against a probe of
+the real library. A reference built with another standard library would order ties
+differently; the port matches the Linux build.
+
+The second: hygiene renames quoted syntax in
 place through shared nodes, so a quoted value that is emitted twice or spliced into two
 quotes is renamed again on each insertion and earlier insertions change with it. Matching
 that needs one documented `unsafe` function (`shared_node_mut` in `hygiene.rs`); every
@@ -258,6 +288,17 @@ Upstream bugs found (the Rust port deliberately differs on these inputs):
   of file and reports the missing brace with `E-SRC-0520`.
 - Parser: `ForeignContractClause.kind` is read uninitialised when a foreign contract clause
   is malformed. The Rust port uses `Assumes`; the comparison ignores that one field.
+- Name resolution: the rules `E-MOD-1307` (a pattern `E::V { .. }` where `V` is both a
+  record variant of enum `E` and a record of module `E`) and `E-TYP-1501` (the same shape
+  where neither reading is a record) are missing from the reference's table of resolver
+  rules, so it reports "Internal error: resolver failed with unmapped diagnostic id". A
+  qualified class path whose last segment does not exist (`record R <: App::Missing`)
+  fails without any rule and is reported as "Internal error: module resolution failed
+  without diagnostic". The Rust port reproduces both for now; they are flagged here to be
+  fixed once the type checker's own diagnostics for these inputs are ported.
+- Name resolution: the type parameters of a record's method are not in scope while the
+  method is resolved (`procedure map<TOther>(~, other: TOther)` in a record fails with
+  `E-MOD-1301`), although those of class methods and free procedures are. Reproduced.
 - Compile-time pass: `introspect~>category` on a cyclic type alias (`type A = B`, `type B = A`)
   recurses until the reference crashes. The Rust port stops and the evaluation fails.
 
@@ -270,6 +311,11 @@ Known differences that remain until later milestones:
 - `#test(covers(...))` looks for the obligation ledger under the working directory and its
   ancestors only (the reference also checks its support bundle and a build-time path).
 - `--profile-compiler` events for parsing are not emitted.
+- The resolver does not record language-service facts (declarations of locals and
+  references to symbols); the reference records them only when the LSP drives it, so
+  they are part of M4. Entities carry the declaration span but no symbol id yet.
+- Conformance-trace records written by name collection and module resolution are not
+  emitted (the trace itself is part of M3.6).
 
 Not ported yet, although it lives in the source directories of finished milestones:
 
@@ -278,4 +324,10 @@ Not ported yet, although it lives in the source directories of finished mileston
 - `01_project`: linking, tool resolution, target platform and IR assembly (needed in M6).
 - `02_source`: AST utilities that only later phases call (visitors, cloning helpers,
   `ast_dump` beyond the item summary) are ported when their first caller is.
+- `04_analysis/resolve`: the assembly import graph (`assembly_import_graph.cpp`), which
+  only the driver calls, comes with M3.6. Five files there have no caller in the
+  reference build and are not ported: `resolve_callee.cpp`, `resolve_enum_payload.cpp`,
+  `resolve_expr_list.cpp`, `resolve_extern.cpp`, `resolve_attributes.cpp` (the resolver
+  uses its own copies of what they define), as are the step-wise name collection
+  (`NamesStep`) and `DeclNames`.
 - Driver: `test`, `init`, `clean`, `--conformance`, `--profile-compiler`.

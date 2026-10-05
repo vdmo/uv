@@ -9,7 +9,7 @@ mkdir -p "$OUT/obj"
 # holds files that are not part of it.
 ANALYSIS=$(grep -o '04_analysis/[A-Za-z0-9_/]*\.cpp' "$S/CMakeLists.txt" | sort -u | sed "s|^|$S/|")
 PROJECT=$(grep -o '01_project/[A-Za-z0-9_/]*\.cpp' "$S/CMakeLists.txt" | sort -u | sed "s|^|$S/|")
-SRCS="$(ls $S/00_core/*.cpp) $S/00_core/host/services.cpp $S/00_core/host/linux_host.cpp $S/00_core/host/crash_debug.cpp $S/00_core/host/crash_debug_linux.cpp $(find $S/02_source -name '*.cpp' ! -name parse_modules.cpp | sort) $(ls $S/03_comptime/*.cpp) $ANALYSIS $PROJECT /w/tools/oracle/oracle_main.cpp"
+SRCS="$(ls $S/00_core/*.cpp) $S/00_core/host/services.cpp $S/00_core/host/linux_host.cpp $S/00_core/host/crash_debug.cpp $S/00_core/host/crash_debug_linux.cpp $(find $S/02_source -name '*.cpp' | sort) $(ls $S/03_comptime/*.cpp) $ANALYSIS $PROJECT /w/tools/oracle/oracle_main.cpp"
 OBJS=""
 for src in $SRCS; do
   obj="$OUT/obj/$(echo "$src" | sed 's|/|_|g').o"

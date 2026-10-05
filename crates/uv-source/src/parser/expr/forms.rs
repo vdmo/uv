@@ -682,7 +682,7 @@ pub(crate) fn parse_field_init_list(mut parser: Parser) -> Parsed<Vec<FieldInit>
     }
 }
 
-pub(crate) fn make_modal_ref(path: Path, generic_args: Vec<TypePtr>) -> ModalRef {
+pub fn make_modal_ref(path: Path, generic_args: Vec<TypePtr>) -> ModalRef {
     if generic_args.is_empty() {
         ModalRef::Path(path)
     } else {

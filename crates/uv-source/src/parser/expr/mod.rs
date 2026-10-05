@@ -7,6 +7,7 @@ use uv_core::span::Span;
 use uv_core::spec_rule;
 
 pub(crate) use self::forms::*;
+pub use self::forms::make_modal_ref;
 use super::angle::{skip_angles, split_shift_r};
 use super::consume::{emit_trailing_comma_err, match_operator, match_punct, trailing_comma_allowed, TokenMatch};
 use super::item::attributes::parse_attribute_list_opt;

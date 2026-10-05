@@ -1,0 +1,20 @@
+//! Name resolution.
+
+pub mod collect_toplevel;
+pub mod module_relations;
+pub mod populate_sigma;
+pub mod resolve_contracts;
+pub mod resolve_expr;
+pub mod resolve_generics;
+pub mod resolve_imports;
+pub mod resolve_items;
+pub mod resolve_module;
+pub mod resolve_pattern;
+pub mod resolve_qual;
+pub mod resolve_types;
+pub mod resolve_using;
+pub mod resolver;
+pub mod scopes;
+pub mod scopes_intro;
+pub mod scopes_lookup;
+pub mod visibility;

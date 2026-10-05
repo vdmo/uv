@@ -12,7 +12,7 @@ mod state;
 mod stmt;
 mod types;
 
-pub use expr::{parse_expr, parse_expr_opt, parse_predicate_expr};
+pub use expr::{make_modal_ref, parse_expr, parse_expr_opt, parse_predicate_expr};
 pub use file::{parse_file, parse_file_ok, parse_items, ParseFileResult};
 pub use item::parse_item;
 pub use pattern::parse_pattern;
