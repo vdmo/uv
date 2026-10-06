@@ -3,3 +3,4 @@
 
 pub mod struct_equal;
 pub mod verification;
+pub mod purity;

@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 573 of 4,569 bodies compared (12.5%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 892 of 4,569 bodies compared (19.5%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -417,6 +417,19 @@ So far part b has:
 - `return`, with outcome introduction (`outcome`) and array coercion
   (`composite::arrays_slices`);
 - `move`, `copy`, and names bound in the environment as values and places.
+
+Added since: `let`/`var`, module-level names (statics and procedures), binary and
+unary operators, casts, `sizeof`/`alignof`, tuple and array literals, expression
+statements, `if` with the narrowing of bindings by a pure condition, block expressions and
+checking a block against an expected type, and the purity
+analysis the typer asks for (`contracts::purity`, from the reference's
+`contract_check`: it follows calls into procedure and method bodies). Purity is gated on
+its own in the `relations` dumps: every contract clause and every expression written
+directly in a body, 22,940 expressions on the corpus.
+
+The declaration tables are now shared between contexts instead of copied, as typing a
+body under another module's name needs a context of its own; the body dump went from
+37 to 5 seconds.
 
 Known gaps inside what is ported, each of which makes a body pending when reached
 rather than answering: names of module-level declarations (`ValuePathType`), the proof

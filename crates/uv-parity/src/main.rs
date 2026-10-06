@@ -120,6 +120,7 @@ use uv_source::ast::ASTModule;
 use uv_source::ast::ContractClause;
 use uv_source::ast::LiteralExpr;
 use uv_source::ast::Mutability;
+use uv_analysis::contracts::purity::is_pure_in_scope;
 use uv_source::ast::{
     ASTItem, ClassItem, ExternItem, GenericParams, Param, Receiver, RecordMember, StateMember,
     TypeParam, TypePtr, VariantPayload,
@@ -454,8 +455,8 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
         scopes: vec![Scope::new(), Scope::new(), Scope::new()],
         ..Default::default()
     };
-    ctx.sigma.mods = parsed_modules;
-    ctx.sigma.unsafe_spans_by_file = input.unsafe_spans_by_file;
+    std::sync::Arc::make_mut(&mut ctx.sigma).mods = parsed_modules;
+    std::sync::Arc::make_mut(&mut ctx.sigma).unsafe_spans_by_file = input.unsafe_spans_by_file;
     for index in 0..ctx.sigma.mods.len() {
         ctx.current_module = ctx.sigma.mods[index].path.clone();
         for diag in check_module_visibility(&ctx, &ctx.sigma.mods[index]) {
@@ -491,7 +492,7 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
             out.push_str("STOP\tresolve\n");
             return;
         }
-        ctx.sigma.mods = resolved.modules;
+        std::sync::Arc::make_mut(&mut ctx.sigma).mods = resolved.modules;
         populate_sigma(&mut ctx);
         if mode == "bodies" {
             dump_bodies(out, &mut ctx, &name_maps.name_maps);
@@ -1660,6 +1661,34 @@ fn dump_solving(out: &mut String, ctx: &ScopeContext<'_>, types: &[TypeRef]) {
     }
 }
 
+fn dump_purity(out: &mut String, ctx: &ScopeContext<'_>, name: &str, contract: &Option<ContractClause>, body: &BlockPtr) {
+    let mark = |expr: &ExprPtr| match expr {
+        None => '-',
+        Some(_) if is_pure_in_scope(ctx, expr) => '1',
+        Some(_) => '0',
+    };
+    let mut marks = String::new();
+    if let Some(contract) = contract {
+        marks.push(mark(&contract.precondition));
+        marks.push(mark(&contract.postcondition));
+    }
+    marks.push('|');
+    if let Some(body) = body.as_deref() {
+        for stmt in &body.stmts {
+            marks.push(match stmt {
+                Stmt::LetStmt(node) => mark(&node.binding.init),
+                Stmt::VarStmt(node) => mark(&node.binding.init),
+                Stmt::ExprStmt(node) => mark(&node.value),
+                Stmt::ReturnStmt(node) => mark(&node.value_opt),
+                Stmt::AssignStmt(node) => mark(&node.value),
+                _ => '.',
+            });
+        }
+        marks.push(mark(&body.tail_opt));
+    }
+    let _ = writeln!(out, "PU\t{name}\t{marks}");
+}
+
 fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
     const FOUNDATIONAL: [&str; 9] = [
         "Bitcopy", "Clone", "Drop", "FfiSafe", "GpuSafe", "Eq", "Discrete", "Hash", "Iterator",
@@ -1848,7 +1877,10 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                 _ => {}
             }
             match item {
-                ASTItem::ProcedureDecl(node) => dump_contract(out, &node.name, &node.contract),
+                ASTItem::ProcedureDecl(node) => {
+                    dump_contract(out, &node.name, &node.contract);
+                    dump_purity(out, ctx, &node.name, &node.contract, &node.body);
+                }
                 ASTItem::ClassDecl(node) => {
                     let path = child(&node.name);
                     let _ = write!(out, "CL\t{}\t", node.name);
@@ -1997,6 +2029,8 @@ fn dump_relations(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &Name
                             &format!("{}::{}", node.name, method.name),
                             &method.contract,
                         );
+                        let owner = format!("{}::{}", node.name, method.name);
+                        dump_purity(out, ctx, &owner, &method.contract, &method.body);
                     }
                 }
                 ASTItem::ModalDecl(node) => {

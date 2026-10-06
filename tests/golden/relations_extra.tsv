@@ -123,6 +123,7 @@ GB	a	2.7	ok	fail E-TYP-2303
 IN	a	0	ok -	T
 IN	a	1	ok -	i32
 IN	a	2	ok -	i32
+PU	a	|1-
 GP	b	1/1-	ok - T/1/none	ok - T/1/-	4 T=T/1	T=- 
 GB	b	0.0	fail E-TYP-2303|T|| [E-TYP-2303|Missing type argument for bounded generic parameter 'T'|449]	fail E-TYP-2303
 GB	b	0.7	fail E-TYP-2303|T|| [E-TYP-2303|Missing type argument for bounded generic parameter 'T'|449]	fail E-TYP-2303
@@ -133,6 +134,7 @@ GB	b	2.7	ok	fail E-TYP-2303
 IN	b	0	ok -	T
 IN	b	1	ok -	i32
 IN	b	2	ok -	i32
+PU	b	|1-
 GP	c	2/2-	ok - T/1/none U/1/none	ok - T/1/- U/1/-	4 T=T/1 U=U/1	T=- U=- 
 GB	c	0.0	fail E-TYP-2303|T|| [E-TYP-2303|Missing type argument for bounded generic parameter 'T'|529]	fail E-TYP-2303
 GB	c	0.7	fail E-TYP-2303|T|| [E-TYP-2303|Missing type argument for bounded generic parameter 'T'|529]	fail E-TYP-2303
@@ -145,6 +147,7 @@ GB	c	3.7	ok	fail E-TYP-2303
 IN	c	0	ok -	T	U
 IN	c	1	ok -	i32	T
 IN	c	2	ok -	i32	i32
+PU	c	|1-
 GP	Holder	1/1-	ok - T/1/none	ok - T/1/-	4 T=T/1	T=- 
 GB	Holder	0.0	fail E-TYP-2303|T|| [E-TYP-2303|Missing type argument for bounded generic parameter 'T'|621]	fail E-TYP-2303
 GB	Holder	0.7	fail E-TYP-2303|T|| [E-TYP-2303|Missing type argument for bounded generic parameter 'T'|621]	fail E-TYP-2303
@@ -154,9 +157,12 @@ GB	Holder	2.0	fail E-TYP-2302|T|i32|App::Named [E-TYP-2302|Type 'i32' cannot sat
 GB	Holder	2.7	ok	fail E-TYP-2303
 IM	Speaker	App::Loud	ok -	101
 MS	Speaker::name	ok	(const App::Speaker) -> i32	i32	self:const App::Speaker;	-
+PU	Speaker::name	|1-
 MS	Speaker::shout	ok	(const App::Speaker) -> i32	i32	self:const App::Speaker;	-
+PU	Speaker::shout	|1-
 MW	Gate@Up	--s
 MW	Gate@Down	--s
+PU	main	|1-
 F	/w/target/relcases/class_caps/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -266,6 +272,7 @@ CL	Deep	ok App::Deep App::FileIo IO	ok App::Deep::deeper+ App::FileIo::extra+	ok
 CL	Plain	ok App::Plain	ok App::Plain::plain+	ok	-	dD--	0/0	000100	0000000000000000000000	^
 CL	Net	ok App::Net Network App::Plain	ok App::Net::both+ App::Plain::plain+	ok	-	dD-c	0/0	000110	0000000000000100000000	^
 CL	Domain	ok App::Domain ExecutionDomain	ok App::Domain::run+ ExecutionDomain::name+ ExecutionDomain::max_concurrency+	ok	-	dD-c	0/0	000001	0000000000000000100000	^
+PU	main	|1-
 F	/w/target/relcases/class_linear/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -395,9 +402,12 @@ CL	J	fail E-TYP-2508	fail E-TYP-2508	fail E-TYP-2508	E-TYP-2508	-D--	0/0	0000000
 CL	K	fail E-TYP-2508	fail E-TYP-2508	fail E-TYP-2508	E-TYP-2508	-D--	0/0	000000000001	00000000000000000000000000	!
 IM	R	App::D	ok -	101
 MS	R::a	ok	(const App::R) -> i32	i32	self:const App::R;	-
+PU	R::a	|1-
 MS	R::d	ok	(const App::R) -> i32	i32	self:const App::R;	-
+PU	R::d	|1-
 IM	S	App::B	fail E-TYP-IMPL-INCOMPLETE b	101
 IM	S	App::Named	fail E-TYP-IMPL-INCOMPLETE name	101
+PU	main	|1-
 F	/w/target/relcases/class_methods/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -553,9 +563,13 @@ CL	Shared	ok App::Shared	ok App::Shared::touch+	ok	-	dD--	0/0	000000000010	00000
 CL	Explicit	ok App::Explicit	ok App::Explicit::touch+ App::Explicit::take+	ok	-	dD--	0/0	000000000001	000000000000000000000000000000000000000	^^
 IM	Impl	App::Base	fail E-TYP-IMPL-INCOMPLETE differ	101
 MS	Impl::same	ok	(const App::Impl) -> i32	i32	self:const App::Impl;	-
+PU	Impl::same	|1-
 IM	Full	App::Base	ok -	101
 MS	Full::same	ok	(const App::Full) -> i32	i32	self:const App::Full;	-
+PU	Full::same	|1-
 MS	Full::differ	ok	(const App::Full) -> i32	i32	self:const App::Full;	-
+PU	Full::differ	|1-
+PU	main	|1-
 F	/w/target/relcases/generic_infer/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -754,6 +768,7 @@ GB	id	2.7	ok	fail E-TYP-2303
 IN	id	0	ok -	T
 IN	id	1	ok -	i32
 IN	id	2	ok -	i32
+PU	id	|1-
 GP	both	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	both	0.0	ok	fail E-TYP-2303
 GB	both	0.7	ok	fail E-TYP-2303
@@ -764,6 +779,7 @@ GB	both	2.7	ok	fail E-TYP-2303
 IN	both	0	ok -	T
 IN	both	1	ok -	i32
 IN	both	2	ok -	i32
+PU	both	|1-
 GP	pair	2/2-	ok - T/0/none U/0/none	ok - T/0/- U/0/-	4 T=T/0 U=U/0	T=- U=- 
 GB	pair	0.0	ok	fail E-TYP-2303
 GB	pair	0.7	ok	fail E-TYP-2303
@@ -776,6 +792,7 @@ GB	pair	3.7	ok	fail E-TYP-2303
 IN	pair	0	ok -	T	U
 IN	pair	1	ok -	i32	T
 IN	pair	2	ok -	i32	i32
+PU	pair	|1-
 GP	tuple	2/2-	ok - T/0/none U/0/none	ok - T/0/- U/0/-	4 T=T/0 U=U/0	T=- U=- 
 GB	tuple	0.0	ok	fail E-TYP-2303
 GB	tuple	0.7	ok	fail E-TYP-2303
@@ -788,6 +805,7 @@ GB	tuple	3.7	ok	fail E-TYP-2303
 IN	tuple	0	ok -	T	U
 IN	tuple	1	ok -	i32	T
 IN	tuple	2	fail E-TYP-2301	-	-
+PU	tuple	|1-
 GP	slice	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	slice	0.0	ok	fail E-TYP-2303
 GB	slice	0.7	ok	fail E-TYP-2303
@@ -798,6 +816,7 @@ GB	slice	2.7	ok	fail E-TYP-2303
 IN	slice	0	ok -	T
 IN	slice	1	ok -	i32
 IN	slice	2	fail E-TYP-2301	-
+PU	slice	|1-
 GP	array	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	array	0.0	ok	fail E-TYP-2303
 GB	array	0.7	ok	fail E-TYP-2303
@@ -808,6 +827,7 @@ GB	array	2.7	ok	fail E-TYP-2303
 IN	array	0	ok -	T
 IN	array	1	ok -	i32
 IN	array	2	fail E-TYP-2301	-
+PU	array	|1-
 GP	ptr	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	ptr	0.0	ok	fail E-TYP-2303
 GB	ptr	0.7	ok	fail E-TYP-2303
@@ -818,6 +838,7 @@ GB	ptr	2.7	ok	fail E-TYP-2303
 IN	ptr	0	ok -	T
 IN	ptr	1	ok -	i32
 IN	ptr	2	fail E-TYP-2301	-
+PU	ptr	|1-
 GP	func	2/2-	ok - T/0/none U/0/none	ok - T/0/- U/0/-	4 T=T/0 U=U/0	T=- U=- 
 GB	func	0.0	ok	fail E-TYP-2303
 GB	func	0.7	ok	fail E-TYP-2303
@@ -830,6 +851,7 @@ GB	func	3.7	ok	fail E-TYP-2303
 IN	func	0	ok -	T	U
 IN	func	1	ok -	i32	T
 IN	func	2	fail E-TYP-2301	-	-
+PU	func	|1-
 GP	closure	2/2-	ok - T/0/none U/0/none	ok - T/0/- U/0/-	4 T=T/0 U=U/0	T=- U=- 
 GB	closure	0.0	ok	fail E-TYP-2303
 GB	closure	0.7	ok	fail E-TYP-2303
@@ -842,6 +864,7 @@ GB	closure	3.7	ok	fail E-TYP-2303
 IN	closure	0	ok -	T	U
 IN	closure	1	ok -	i32	T
 IN	closure	2	fail E-TYP-2301	-	-
+PU	closure	|1-
 GP	nominal	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	nominal	0.0	ok	fail E-TYP-2303
 GB	nominal	0.7	ok	fail E-TYP-2303
@@ -852,6 +875,7 @@ GB	nominal	2.7	ok	fail E-TYP-2303
 IN	nominal	0	fail E-TYP-2301	-
 IN	nominal	1	fail E-TYP-2301	-
 IN	nominal	2	fail E-TYP-2301	-
+PU	nominal	|1-
 GP	perm	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	perm	0.0	ok	fail E-TYP-2303
 GB	perm	0.7	ok	fail E-TYP-2303
@@ -862,6 +886,7 @@ GB	perm	2.7	ok	fail E-TYP-2303
 IN	perm	0	ok -	T
 IN	perm	1	ok -	i32
 IN	perm	2	fail E-TYP-2301	-
+PU	perm	|1-
 GP	union	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	union	0.0	ok	fail E-TYP-2303
 GB	union	0.7	ok	fail E-TYP-2303
@@ -872,6 +897,7 @@ GB	union	2.7	ok	fail E-TYP-2303
 IN	union	0	ok -	T
 IN	union	1	fail E-TYP-2301	-
 IN	union	2	fail E-TYP-2301	-
+PU	union	|1-
 GP	fixed	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	fixed	0.0	ok	fail E-TYP-2303
 GB	fixed	0.7	ok	fail E-TYP-2303
@@ -882,6 +908,7 @@ GB	fixed	2.7	ok	fail E-TYP-2303
 IN	fixed	0	ok -	T
 IN	fixed	1	ok -	i32
 IN	fixed	2	ok -	i32
+PU	fixed	|1-
 GP	unused	2/2-	ok - T/0/none U/0/none	ok - T/0/- U/0/-	4 T=T/0 U=U/0	T=- U=- 
 GB	unused	0.0	ok	fail E-TYP-2303
 GB	unused	0.7	ok	fail E-TYP-2303
@@ -894,6 +921,7 @@ GB	unused	3.7	ok	fail E-TYP-2303
 IN	unused	0	fail E-TYP-2301	T	-
 IN	unused	1	fail E-TYP-2301	i32	-
 IN	unused	2	fail E-TYP-2301	i32	-
+PU	unused	|1-
 GP	defaulted	1/2d	ok - T/0/none U/0/bool	ok - T/0/- U/0/bool	4 T=T/0 U=U/0	T=- U=- 
 GB	defaulted	0.0	ok	fail E-TYP-2303
 GB	defaulted	0.7	ok	fail E-TYP-2303
@@ -906,6 +934,7 @@ GB	defaulted	3.7	ok	fail E-TYP-2303
 IN	defaulted	0	ok -	T	bool
 IN	defaulted	1	ok -	i32	bool
 IN	defaulted	2	ok -	i32	bool
+PU	defaulted	|1-
 GP	baddefault	1/2d	fail - [|Internal error: unable to lower default type for generic parameter 'U'|1537]	ok - T/0/- U/0/Range<i32>	4 T=T/0 U=U/0	T=- U=- 
 GB	baddefault	0.0	ok	fail E-TYP-2303
 GB	baddefault	0.7	ok	fail E-TYP-2303
@@ -918,6 +947,7 @@ GB	baddefault	3.7	ok	fail E-TYP-2303
 IN	baddefault	0	fail -	T	-
 IN	baddefault	1	fail -	i32	-
 IN	baddefault	2	fail -	i32	-
+PU	baddefault	|1-
 GP	modalp	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	modalp	0.0	ok	fail E-TYP-2303
 GB	modalp	0.7	ok	fail E-TYP-2303
@@ -928,6 +958,7 @@ GB	modalp	2.7	ok	fail E-TYP-2303
 IN	modalp	0	ok -	T
 IN	modalp	1	ok -	i32
 IN	modalp	2	ok -	i32
+PU	modalp	|1-
 GP	refine	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	refine	0.0	ok	fail E-TYP-2303
 GB	refine	0.7	ok	fail E-TYP-2303
@@ -938,6 +969,7 @@ GB	refine	2.7	ok	fail E-TYP-2303
 IN	refine	0	ok -	T
 IN	refine	1	ok -	i32
 IN	refine	2	fail E-TYP-2301	-
+PU	refine	|1-
 GP	bounded	2/2-	ok - T/1/none U/1/none	ok - T/1/- U/1/-	4 T=T/1 U=U/1	T=- U=- 
 GB	bounded	0.0	fail E-TYP-2303|T|| [E-TYP-2303|Missing type argument for bounded generic parameter 'T'|1786]	fail E-TYP-2303
 GB	bounded	0.7	fail E-TYP-2303|T|| [E-TYP-2303|Missing type argument for bounded generic parameter 'T'|1786]	fail E-TYP-2303
@@ -950,6 +982,8 @@ GB	bounded	3.7	ok	fail E-TYP-2303
 IN	bounded	0	ok -	T	U
 IN	bounded	1	ok -	i32	T
 IN	bounded	2	ok -	i32	i32
+PU	bounded	|1-
+PU	main	|1-
 F	/w/target/relcases/generic_params/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1258,6 +1292,7 @@ GB	BoundRange	2.0	fail E-TYP-2302|T|i32|App::Named [E-TYP-2302|Type 'i32' cannot
 GB	BoundRange	2.7	ok	fail E-TYP-2303
 IM	Speaker	App::Named	ok -	101
 MS	Speaker::name	ok	(const App::Speaker) -> i32	i32	self:const App::Speaker;	-
+PU	Speaker::name	|1-
 GP	Opt	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	Opt	0.0	ok	fail E-TYP-2303
 GB	Opt	0.7	ok	fail E-TYP-2303
@@ -1292,6 +1327,7 @@ GB	Pair	1.0	ok	ok -
 GB	Pair	1.7	ok	ok -
 GB	Pair	2.0	ok	fail E-TYP-2303
 GB	Pair	2.7	ok	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/relcases/pred_bitcopy/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1463,6 +1499,7 @@ GB	Bound	1.0	fail E-TYP-2302|T|i32|Bitcopy [E-TYP-2302|Type 'i32' cannot satisfy
 GB	Bound	1.7	fail E-TYP-2302|T|string@View|Bitcopy [E-TYP-2302|Type 'string@View' cannot satisfy class bound 'Bitcopy' for parameter 'T'|928]	ok -
 GB	Bound	2.0	fail E-TYP-2302|T|i32|Bitcopy [E-TYP-2302|Type 'i32' cannot satisfy class bound 'Bitcopy' for parameter 'T'|928]	fail E-TYP-2303
 GB	Bound	2.7	fail E-TYP-2302|T|string@View|Bitcopy [E-TYP-2302|Type 'string@View' cannot satisfy class bound 'Bitcopy' for parameter 'T'|928]	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/relcases/pred_clone_drop/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1602,14 +1639,24 @@ MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000000000000000000000	^
 MS	Cloner::clone	ok	(const App::Cloner) -> App::Cloner	App::Cloner	self:const App::Cloner;	-
+PU	Cloner::clone	|1-
 MS	BadClone::clone	ok	(unique App::BadClone) -> App::BadClone	App::BadClone	self:unique App::BadClone;	-
+PU	BadClone::clone	|1-
 MS	ArgClone::clone	ok	(const App::ArgClone, i32) -> App::ArgClone	App::ArgClone	self:const App::ArgClone;other:i32;	-
+PU	ArgClone::clone	|1-
 MS	MoveClone::clone	ok	(const App::MoveClone) -> i32	i32	self:const App::MoveClone;	-
+PU	MoveClone::clone	|1-
 MS	Dropper::drop	ok	(unique App::Dropper) -> ()	()	self:unique App::Dropper;	-
+PU	Dropper::drop	|--
 MS	BadDrop::drop	ok	(const App::BadDrop) -> ()	()	self:const App::BadDrop;	-
+PU	BadDrop::drop	|--
 MS	RetDrop::drop	ok	(unique App::RetDrop) -> i32	i32	self:unique App::RetDrop;	-
+PU	RetDrop::drop	|1-
 MS	Both::clone	ok	(const App::Both) -> App::Both	App::Both	self:const App::Both;	-
+PU	Both::clone	|1-
 MS	Both::drop	ok	(unique App::Both) -> ()	()	self:unique App::Both;	-
+PU	Both::drop	|--
+PU	main	|1-
 F	/w/target/relcases/pred_eq/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1727,6 +1774,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	00000000000000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/pred_ffi/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1893,6 +1941,7 @@ GB	CBound	1.0	fail E-TYP-2302|T|i32|FfiSafe [E-TYP-2302|Type 'i32' cannot satisf
 GB	CBound	1.7	ok	ok -
 GB	CBound	2.0	fail E-TYP-2302|T|i32|FfiSafe [E-TYP-2302|Type 'i32' cannot satisfy class bound 'FfiSafe' for parameter 'T'|670]	fail E-TYP-2303
 GB	CBound	2.7	ok	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/relcases/pred_gpu_zero/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2058,6 +2107,7 @@ GB	GBound	1.0	fail E-TYP-2302|T|i32|GpuSafe [E-TYP-2302|Type 'i32' cannot satisf
 GB	GBound	1.7	fail E-TYP-2302|T|Ptr<i32>@Valid|GpuSafe [E-TYP-2302|Type 'Ptr<i32>@Valid' cannot satisfy class bound 'GpuSafe' for parameter 'T'|367]	fail E-TYP-2302
 GB	GBound	2.0	fail E-TYP-2302|T|i32|GpuSafe [E-TYP-2302|Type 'i32' cannot satisfy class bound 'GpuSafe' for parameter 'T'|367]	fail E-TYP-2303
 GB	GBound	2.7	fail E-TYP-2302|T|Ptr<i32>@Valid|GpuSafe [E-TYP-2302|Type 'Ptr<i32>@Valid' cannot satisfy class bound 'GpuSafe' for parameter 'T'|367]	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/relcases/proof_const/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2249,25 +2299,46 @@ MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000000000000000000000000	^
 PC	p0	1/-/Constant evaluation true -n	-	-
+PU	p0	1-|1-
 PC	p1	1/-/Constant evaluation true -n	1/-/Constant evaluation true -n	1 1/-/Constant evaluation -- 1/-/Constant evaluation
+PU	p1	11|1-
 PC	p2	1/-/Constant evaluation true -n	-	-
+PU	p2	1-|1-
 PC	p3	1/-/Constant evaluation true -n	-	-
+PU	p3	1-|1-
 PC	p4	0/-/ false -n	-	-
+PU	p4	1-|1-
 PC	p5	1/-/Constant evaluation true -n	-	-
+PU	p5	1-|1-
 PC	p6	0/E-SEM-2850/ ? -n	-	-
+PU	p6	1-|1-
 PC	p7	1/-/Constant evaluation true -n	-	-
+PU	p7	1-|1-
 PC	p8	1/-/Constant evaluation true -n	-	-
+PU	p8	1-|1-
 PC	p9	1/-/Constant evaluation true -n	-	-
+PU	p9	1-|1-
 PC	p10	1/-/Constant evaluation true -n	0/-/ false -n	2 0/-/ -- 0/-/
+PU	p10	11|1-
 PC	p11	1/-/Constant evaluation true -n	-	-
+PU	p11	1-|1-
 PC	p12	1/-/Constant evaluation true -n	-	-
+PU	p12	1-|1-
 PC	p13	1/-/Constant evaluation true -n	-	-
+PU	p13	1-|1-
 PC	p14	1/-/Constant evaluation true -n	-	-
+PU	p14	1-|1-
 PC	p15	0/E-SEM-2850/ ? -n	1/-/Constant evaluation true -n	1 1/-/Constant evaluation -l 1/-/Constant evaluation
+PU	p15	11|1-
 PC	p16	1/-/Constant evaluation true -n	-	-
+PU	p16	1-|1-
 PC	p17	1/-/Constant evaluation true -n	-	-
+PU	p17	1-|1-
 PC	p18	1/-/Constant evaluation true -n	-	-
+PU	p18	1-|1-
 PC	p19	0/E-SEM-2850/ ? -n	-	-
+PU	p19	1-|1-
+PU	main	|1-
 F	/w/target/relcases/proof_forms/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2435,19 +2506,34 @@ MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000000000000000000000000	^
 PC	p0	0/E-SEM-2850/ ? -n	-	-
+PU	p0	1-|1-
 PC	p1	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p1	11|1-
 PC	p2	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p2	11|1-
 PC	p3	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p3	11|1-
 PC	p4	0/E-SEM-2850/ ? -n	-	-
+PU	p4	1-|1-
 PC	p5	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	3 1/-/Matches known fact fl 0/E-SEM-2850/
+PU	p5	11|1-
 PC	p6	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Matches known fact fl 0/E-SEM-2850/
+PU	p6	11|1-
 PC	p7	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Matches known fact fl 0/E-SEM-2850/
+PU	p7	11|1-
 PC	p8	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p8	11|1-
 PC	p9	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p9	11|1-
 PC	p10	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p10	11|1-
 PC	p11	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	3 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p11	11|1-
 PC	p12	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p12	11|1-
 PC	p13	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p13	11|1-
+PU	main	|1-
 F	/w/target/relcases/proof_linear/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2695,39 +2781,74 @@ MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000000000000000000000000	^
 PC	p0	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p0	11|1-
 PC	p1	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p1	11|1-
 PC	p2	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p2	11|1-
 PC	p3	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p3	11|1-
 PC	p4	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p4	11|1-
 PC	p5	1/-/Trivially true true tn	1/-/Constant evaluation true -n	1 1/-/Constant evaluation -l 1/-/Constant evaluation
+PU	p5	11|1-
 PC	p6	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p6	11|1-
 PC	p7	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p7	11|1-
 PC	p8	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p8	11|1-
 PC	p9	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p9	11|1-
 PC	p10	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p10	11|1-
 PC	p11	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p11	11|1-
 PC	p12	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Matches known fact fl 0/E-SEM-2850/
+PU	p12	11|1-
 PC	p13	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p13	11|1-
 PC	p14	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Both conjuncts provable -- 0/E-SEM-2850/
+PU	p14	11|1-
 PC	p15	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/At least one disjunct provable -- 0/E-SEM-2850/
+PU	p15	11|1-
 PC	p16	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/At least one disjunct provable -- 0/E-SEM-2850/
+PU	p16	11|1-
 PC	p17	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p17	11|1-
 PC	p18	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p18	11|1-
 PC	p19	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p19	11|1-
 PC	p20	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p20	11|1-
 PC	p21	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p21	11|1-
 PC	p22	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p22	11|1-
 PC	p23	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p23	11|1-
 PC	p24	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p24	11|1-
 PC	p25	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p25	11|1-
 PC	p26	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p26	11|1-
 PC	p27	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p27	11|1-
 PC	p28	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p28	11|1-
 PC	p29	0/E-SEM-2850/ ? -n	0/-/ false -n	1 0/-/ -- 0/-/
+PU	p29	11|1-
 PC	p30	0/E-SEM-2850/ ? -n	0/-/ false -n	2 0/-/ -- 0/-/
+PU	p30	11|1-
 PC	p31	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p31	11|1-
 PC	p32	0/-/ false -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p32	11|1-
 PC	p33	0/E-SEM-2850/ ? -n	1/-/Trivially true true tn	1 1/-/Trivially true -- 1/-/Trivially true
+PU	p33	11|1-
+PU	main	|1-
 F	/w/target/relcases/proof_wide/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2899,15 +3020,26 @@ MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000000000000000000000000	^
 PC	p0	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p0	11|1-
 PC	p1	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p1	11|1-
 PC	p2	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p2	11|1-
 PC	p3	0/E-SEM-2850/ ? -n	-	-
+PU	p3	1-|1-
 PC	p4	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p4	11|1-
 PC	p5	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Linear integer reasoning -l 0/E-SEM-2850/
+PU	p5	11|1-
 PC	p6	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	p6	11|1-
 PC	p7	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 1/-/Matches known fact f- 0/E-SEM-2850/
+PU	p7	11|1-
 PC	p8	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 1/-/Matches known fact
+PU	p8	11|1-
 PC	p9	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	2 1/-/Matches known fact fl 0/E-SEM-2850/
+PU	p9	11|1-
+PU	main	|1-
 F	/w/target/relcases/refine_basic/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3049,6 +3181,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/refine_nested/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3138,6 +3271,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	00000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sig_methods/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3257,12 +3391,19 @@ MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	000000000000000000000000000	^
 MS	Counter::get	ok	(const App::Counter) -> i32	i32	self:const App::Counter;	-
+PU	Counter::get	|1-
 MS	Counter::set	ok	(unique App::Counter, i32) -> ()	()	self:unique App::Counter;value:i32;	-
+PU	Counter::set	|--
 MS	Counter::share	ok	(shared App::Counter, const App::Counter) -> App::Counter	App::Counter	self:shared App::Counter;other:const App::Counter;	-
+PU	Counter::share	|1-
 MS	Counter::take	ok	(move const App::Counter, move App::Point) -> (App::Counter, App::Point)	(App::Counter, App::Point)	self:const App::Counter;extra:App::Point;	move
+PU	Counter::take	|1-
 MS	Counter::explicit	fail	Record-Method-RecvSelf-Err	-
+PU	Counter::explicit	|1-
 MS	Counter::generic	fail	E-TYP-2303	-
+PU	Counter::generic	|1-
 MS	Counter::nested	ok	(const App::Counter, [App::Counter; LiteralExpr]) -> i32 | App::Counter	i32 | App::Counter	self:const App::Counter;value:[App::Counter; LiteralExpr];	-
+PU	Counter::nested	|1-
 GP	Box	1/1-	ok - T/0/none	ok - T/0/-	4 T=T/0	T=- 
 GB	Box	0.0	ok	fail E-TYP-2303
 GB	Box	0.7	ok	fail E-TYP-2303
@@ -3278,6 +3419,7 @@ MW	Conn@Live	--s
 MF	Conn@Live.port	=
 MS	Conn@Live::send	ok	(unique App::Conn@Live, [u8]) -> App::Conn@Live	App::Conn@Live	self:unique App::Conn@Live;data:[u8];	=
 TS	Conn@Live::close	ok	(move unique App::Conn@Live) -> App::Conn@Idle	App::Conn@Idle	self:unique App::Conn@Live;	=
+PU	main	|1-
 F	/w/target/relcases/sub_alias/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3419,6 +3561,7 @@ GB	Wrap	1.0	ok	ok -
 GB	Wrap	1.7	ok	ok -
 GB	Wrap	2.0	ok	fail E-TYP-2303
 GB	Wrap	2.7	ok	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/relcases/sub_arrays/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3503,6 +3646,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	00000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_async/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3595,6 +3739,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_closures/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3675,6 +3820,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_dynamic/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3809,9 +3955,13 @@ CL	FileIo	ok App::FileIo IO	ok App::FileIo::extra+	ok	-	dD-c	0/0	00010	000000000
 CL	Mutating	ok App::Mutating	ok App::Mutating::change+ App::Mutating::read+	ok	-	dD--	0/0	00001	00000000000000000000000000000000	^^
 IM	Speaker	App::Named	ok -	101
 MS	Speaker::name	ok	(const App::Speaker) -> i32	i32	self:const App::Speaker;	-
+PU	Speaker::name	|1-
 IM	Shouter	App::Loud	ok -	101
 MS	Shouter::name	ok	(const App::Shouter) -> i32	i32	self:const App::Shouter;	-
+PU	Shouter::name	|1-
 MS	Shouter::shout	ok	(const App::Shouter) -> i32	i32	self:const App::Shouter;	-
+PU	Shouter::shout	|1-
+PU	main	|1-
 F	/w/target/relcases/sub_funcs/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3892,6 +4042,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_modal/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4016,6 +4167,7 @@ GB	Gen	2.7	ok	fail E-TYP-2303
 MW	Gen@Some	--s
 MF	Gen@Some.value	=
 MW	Gen@None	--s
+PU	main	|1-
 F	/w/target/relcases/sub_perms/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4100,6 +4252,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	00000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_prims/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4192,6 +4345,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_ptrs/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4276,6 +4430,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	00000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_ranges/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4352,6 +4507,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_text/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4436,6 +4592,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	00000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_tuples/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4512,6 +4669,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_unions/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4604,6 +4762,7 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000000000	^
+PU	main	|1-
 F	/w/target/relcases/sub_variance/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4800,6 +4959,7 @@ GB	Two	2.0	ok	ok -
 GB	Two	2.7	ok	ok -
 GB	Two	3.0	ok	fail E-TYP-2303
 GB	Two	3.7	ok	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/relcases/wf_generic/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4943,6 +5103,7 @@ GB	Def	2.0	ok	ok -
 GB	Def	2.7	ok	ok -
 GB	Def	3.0	ok	fail E-TYP-2303
 GB	Def	3.7	ok	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/relcases/wf_misc/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -5057,3 +5218,4 @@ GB	Gen	2.7	ok	fail E-TYP-2303
 MW	Gen@Some	--s
 MF	Gen@Some.value	=
 MW	Gen@None	--s
+PU	main	|1-

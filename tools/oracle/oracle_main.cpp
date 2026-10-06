@@ -58,6 +58,7 @@
 #include "04_analysis/typing/literals.h"
 #include "04_analysis/typing/type_infer.h"
 #include "04_analysis/memory/regions.h"
+#include "04_analysis/contracts/contract_check.h"
 #include "04_analysis/typing/expr/path.h"
 #include "04_analysis/typing/type_pattern.h"
 #include <algorithm>
@@ -1237,6 +1238,40 @@ void DumpSolving(const analysis::ScopeContext& ctx, const std::vector<analysis::
   }
 }
 
+// Purity of the clauses of a contract and of the expressions written directly in a
+// body: one mark each, in source order.
+void DumpPurity(const analysis::ScopeContext& ctx, const std::string& name,
+                const std::optional<ast::ContractClause>& contract, const std::shared_ptr<ast::Block>& body) {
+  analysis::ContractContext contract_ctx;
+  contract_ctx.scope_ctx = &ctx;
+  std::string marks;
+  const auto mark = [&](const ast::ExprPtr& expr) {
+    if (!expr) {
+      marks.push_back('-');
+      return;
+    }
+    const auto purity = analysis::CheckPurity(contract_ctx, expr);
+    marks.push_back(purity.ok ? '1' : '0');
+  };
+  if (contract) {
+    mark(contract->precondition);
+    mark(contract->postcondition);
+  }
+  marks.push_back('|');
+  if (body) {
+    for (const auto& stmt : body->stmts) {
+      if (const auto* node = std::get_if<ast::LetStmt>(&stmt)) mark(node->binding.init);
+      else if (const auto* node = std::get_if<ast::VarStmt>(&stmt)) mark(node->binding.init);
+      else if (const auto* node = std::get_if<ast::ExprStmt>(&stmt)) mark(node->value);
+      else if (const auto* node = std::get_if<ast::ReturnStmt>(&stmt)) mark(node->value_opt);
+      else if (const auto* node = std::get_if<ast::AssignStmt>(&stmt)) mark(node->value);
+      else marks.push_back('.');
+    }
+    mark(body->tail_opt);
+  }
+  std::cout << "PU\t" << name << '\t' << marks << '\n';
+}
+
 void DumpRelations(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
   static const char* const kFoundational[] = {"Bitcopy", "Clone", "Drop", "FfiSafe", "GpuSafe", "Eq",
                                                "Discrete", "Hash", "Iterator"};
@@ -1348,6 +1383,7 @@ void DumpRelations(analysis::ScopeContext& ctx, const analysis::NameMapTable& na
             }
             if constexpr (std::is_same_v<T, ast::ProcedureDecl>) {
               DumpContract(node.name, node.contract);
+              DumpPurity(ctx, node.name, node.contract, node.body);
             } else if constexpr (std::is_same_v<T, ast::ClassDecl>) {
               std::cout << "CL\t" << node.name << '\t';
               const auto order = analysis::LinearizeClass(ctx, path);
@@ -1415,6 +1451,7 @@ void DumpRelations(analysis::ScopeContext& ctx, const analysis::NameMapTable& na
                   const auto mode = analysis::RecvModeOf(method->receiver);
                   std::cout << '\t' << (mode ? "move" : "-") << '\n';
                   DumpContract(node.name + "::" + method->name, method->contract);
+                  DumpPurity(ctx, node.name + "::" + method->name, method->contract, method->body);
                 }
               }
             } else if constexpr (std::is_same_v<T, ast::ModalDecl>) {

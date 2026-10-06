@@ -11,7 +11,8 @@ use uv_core::span::Span;
 use uv_source::ast::{self, ExprNode, ExprPtr, Stmt};
 
 use crate::context::ScopeContext;
-use crate::typing::callbacks::{ExprTypeFn, IdentTypeFn, PlaceTypeFn, PlaceTypeResult};
+use crate::typing::callbacks::{CheckResult, ExprTypeFn, IdentTypeFn, PlaceTypeFn, PlaceTypeResult};
+use crate::typing::subtyping::subtyping;
 use crate::typing::expr_result::ExprTypeResult;
 use crate::typing::pending::{mark_proof_context_incomplete, pending};
 use crate::typing::stmt::binding_stmt::type_binding_stmt;
@@ -19,11 +20,9 @@ use crate::typing::stmt::return_stmt::type_return_stmt;
 use crate::typing::stmt_context::StmtTypeContext;
 use crate::typing::type_env::{bind_of, push_scope, TypeEnv};
 use crate::typing::type_equiv::type_equiv;
-use crate::typing::type_expr::{
-    emit_stale_binding_reference_warning, type_expr, type_identifier_expr, type_place,
-};
+use crate::typing::type_expr::{check_expr_against, emit_stale_binding_reference_warning, type_expr, type_identifier_expr, type_place};
 use crate::typing::type_predicates::bitcopy_type;
-use crate::typing::types::{make_type_prim, TypeRef};
+use crate::typing::types::{make_type_prim, type_to_string, TypeRef};
 
 /// What leaves a statement other than by falling through: the types that reach the
 /// block's result, and the values of `break`s.
@@ -235,6 +234,21 @@ struct BreakCollector<'c, 'a, 't, 'f> {
     type_ctx: &'c StmtTypeContext<'t>,
     env: &'c TypeEnv,
     type_expr_fn: ExprTypeFn<'f>,
+    /// Whether a bound name broken with is typed as a value use, which requires a type
+    /// that is copied. Blocks do; expression statements do not.
+    ident_as_value: bool,
+}
+
+/// The `break`s reachable from an expression without entering a loop.
+pub fn collect_break_flow(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    env: &TypeEnv,
+    type_expr_fn: ExprTypeFn<'_>,
+    expr: &ExprPtr,
+    ident_as_value: bool,
+) -> FlowInfo {
+    BreakCollector { ctx, type_ctx, env, type_expr_fn, ident_as_value }.expr(expr)
 }
 
 impl BreakCollector<'_, '_, '_, '_> {
@@ -261,13 +275,16 @@ impl BreakCollector<'_, '_, '_, '_> {
                 if node.value_opt.is_none() {
                     flow.break_void = true;
                 } else {
-                    let typed = type_expr_with_env(
-                        self.ctx,
-                        self.type_ctx,
-                        self.env,
-                        self.type_expr_fn,
-                        &node.value_opt,
-                    );
+                    let typed = if self.ident_as_value {
+                        type_expr_with_env(self.ctx, self.type_ctx, self.env, self.type_expr_fn, &node.value_opt)
+                    } else {
+                        let via_env = type_expr(self.ctx, self.type_ctx, &node.value_opt, self.env);
+                        if via_env.ok || via_env.diag_id.is_some() {
+                            via_env
+                        } else {
+                            (self.type_expr_fn)(&node.value_opt)
+                        }
+                    };
                     if typed.ok {
                         flow.breaks.push(typed.r#type);
                     }
@@ -342,6 +359,7 @@ pub fn type_stmt(
             type_place_fn,
         ),
         Stmt::ReturnStmt(node) => type_return_stmt(ctx, type_ctx, node, env, type_expr_fn),
+        Stmt::ExprStmt(node) => super::expr_stmt::type_expr_stmt(ctx, type_ctx, node, env, type_expr_fn),
         _ => {
             pending(stmt_kind(stmt));
             StmtTypeResult::failed(None, env)
@@ -478,8 +496,7 @@ pub fn type_block_info(
         ctx,
         type_ctx,
         env: &stmts_typed.env,
-        type_expr_fn,
-    };
+        type_expr_fn, ident_as_value: true };
     merge_break_flow(&mut break_flow, collector.block(block));
     let done = |ty: TypeRef| BlockInfoResult {
         ok: true,
@@ -552,4 +569,107 @@ pub fn type_block(
         diag_span: info.diag_span,
         diagnostic_obligation_ids: info.diagnostic_obligation_ids,
     }
+}
+
+/// Whether a block has the expected type: its result paths, else its tail, else a
+/// final `return`, else nothing where `()` is expected.
+#[allow(clippy::too_many_arguments)]
+pub fn check_block(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    block: &ast::Block,
+    env: &TypeEnv,
+    expected: &TypeRef,
+    type_expr_fn: ExprTypeFn<'_>,
+    type_ident_fn: IdentTypeFn<'_>,
+    type_place_fn: PlaceTypeFn<'_>,
+    env_ref: EnvRef<'_>,
+) -> CheckResult {
+    if expected.is_none() {
+        return CheckResult::default();
+    }
+    let fail = |diag_id: Option<&'static str>, diag_detail: String| CheckResult { diag_id, diag_detail, ..Default::default() };
+    let pushed = push_scope(env);
+    let stmts_typed =
+        type_stmt_seq(ctx, type_ctx, &block.stmts, &pushed, type_expr_fn, type_ident_fn, type_place_fn, env_ref);
+    if !stmts_typed.ok {
+        return CheckResult {
+            diag_id: stmts_typed.diag_id,
+            diag_detail: stmts_typed.diag_detail,
+            diag_span: stmts_typed.diag_span,
+            ..Default::default()
+        };
+    }
+    if let Some(result_type) = res_type(&stmts_typed.flow.results) {
+        let sub = subtyping(ctx, &result_type, expected);
+        if !sub.ok {
+            return fail(sub.diag_id, String::new());
+        }
+        if !sub.subtype {
+            let detail = format!(
+                "block result type {} is not compatible with expected {}",
+                type_to_string(&result_type),
+                type_to_string(expected)
+            );
+            return fail(sub.diag_id, detail);
+        }
+        return CheckResult { ok: true, ..Default::default() };
+    }
+    if !stmts_typed.flow.results.is_empty() {
+        return fail(Some("BlockInfo-Res-Err"), "block result paths do not have one equivalent type".to_string());
+    }
+    if let Some(tail) = block.tail_opt.as_deref() {
+        publish_env(type_ctx, env_ref, &stmts_typed.env);
+        let check = check_expr_against(ctx, type_ctx, &block.tail_opt, expected, &stmts_typed.env);
+        if check.ok {
+            return CheckResult { ok: true, ..Default::default() };
+        }
+        let diag_detail = if check.diag_detail.is_empty() {
+            format!("block tail expression failed checking against expected {}", type_to_string(expected))
+        } else {
+            check.diag_detail
+        };
+        return CheckResult {
+            diag_id: check.diag_id,
+            diag_detail,
+            diag_span: check.diag_span.or_else(|| Some(tail.span.clone())),
+            ..Default::default()
+        };
+    }
+    let unit = matches!(expected.as_deref().map(|ty| &ty.node), Some(crate::typing::types::TypeNode::Prim(name)) if name == "()");
+    if matches!(block.stmts.last(), Some(Stmt::ReturnStmt(_))) || unit {
+        return CheckResult { ok: true, ..Default::default() };
+    }
+    fail(None, format!("block has no tail expression or explicit return for expected {}", type_to_string(expected)))
+}
+
+/// A block as an expression: typed without publishing its environment.
+pub fn type_block_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, expr: &ast::BlockExpr, env: &TypeEnv) -> ExprTypeResult {
+    let Some(block) = expr.block.as_deref() else {
+        return ExprTypeResult::default();
+    };
+    let mut body_ctx = type_ctx.clone();
+    body_ctx.env_ref = None;
+    let expr_fn = |inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env);
+    let ident_fn = |name: &str| type_identifier_expr(ctx, env, name);
+    let place_fn = |inner: &ExprPtr| type_place(ctx, type_ctx, inner, env);
+    type_block(ctx, &body_ctx, block, env, &expr_fn, &ident_fn, &place_fn, None)
+}
+
+pub fn check_block_expr(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    expr: &ast::BlockExpr,
+    env: &TypeEnv,
+    expected: &TypeRef,
+) -> CheckResult {
+    let Some(block) = expr.block.as_deref() else {
+        return CheckResult::default();
+    };
+    let mut body_ctx = type_ctx.clone();
+    body_ctx.env_ref = None;
+    let expr_fn = |inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env);
+    let ident_fn = |name: &str| type_identifier_expr(ctx, env, name);
+    let place_fn = |inner: &ExprPtr| type_place(ctx, type_ctx, inner, env);
+    check_block(ctx, &body_ctx, block, env, expected, &expr_fn, &ident_fn, &place_fn, None)
 }

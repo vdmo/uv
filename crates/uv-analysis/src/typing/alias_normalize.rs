@@ -29,7 +29,7 @@ fn lookup_type_alias_decl<'c>(ctx: &'c ScopeContext<'_>, path: &[String]) -> Opt
 
 /// The alias's definition for the arguments; nothing when the path is no alias or does
 /// not take them.
-fn expand_type_alias_apply(ctx: &ScopeContext<'_>, path: &[String], args: &[TypeRef]) -> Result<TypeRef, Option<&'static str>> {
+pub(crate) fn expand_type_alias_apply(ctx: &ScopeContext<'_>, path: &[String], args: &[TypeRef]) -> Result<TypeRef, Option<&'static str>> {
     let Some(alias) = lookup_type_alias_decl(ctx, path) else {
         return Ok(None);
     };

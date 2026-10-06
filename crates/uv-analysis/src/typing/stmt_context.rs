@@ -61,6 +61,8 @@ pub struct StmtTypeContext<'t> {
     pub require_pure: bool,
     pub contract: Option<&'t ast::ContractClause>,
     pub contract_dynamic: bool,
+    /// The facts known at this point, which static proofs may use.
+    pub proof_ctx: Option<Rc<crate::contracts::verification::StaticProofContext>>,
     pub test_postcondition_runtime: bool,
     pub current_class_path: Option<TypePath>,
 }

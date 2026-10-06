@@ -126,7 +126,7 @@ fn type_decl_name(decl: &TypeDecl) -> &str {
 /// Rebuilds the declaration tables. Built-ins are keyed by bare name, module
 /// declarations by module path and name.
 pub fn populate_sigma(ctx: &mut ScopeContext<'_>) {
-    let sigma = &mut ctx.sigma;
+    let sigma = std::sync::Arc::make_mut(&mut ctx.sigma);
     sigma.types.clear();
     sigma.classes.clear();
     for decl in foundational_classes().into_iter().chain(capability_classes()) {

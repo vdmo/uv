@@ -177,6 +177,7 @@ pub fn type_wf(ctx: &ScopeContext<'_>, type_ref: &TypeRef) -> Result<(), WfError
             if predicate.is_none() {
                 return Err(None);
             }
+            super::pending::pending("RefinementWF");
             Err(Some(REFINEMENT_WF_PENDING))
         }
         TypeNode::String(_) | TypeNode::Bytes(_) | TypeNode::RangeFull => Ok(()),

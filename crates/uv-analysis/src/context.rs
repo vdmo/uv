@@ -96,7 +96,7 @@ pub struct NameResolutionTables<'a> {
 pub struct ScopeContext<'a> {
     pub project: Option<&'a Project>,
     pub target_profile: Option<TargetProfile>,
-    pub sigma: Sigma,
+    pub sigma: std::sync::Arc<Sigma>,
     pub diagnostics: Option<std::rc::Rc<std::cell::RefCell<DiagnosticStream>>>,
     pub name_resolution_tables: Option<NameResolutionTables<'a>>,
     pub current_module: Vec<String>,

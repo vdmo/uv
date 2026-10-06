@@ -38,6 +38,10 @@ FI	Eq	1111
 FI	Discrete	0111
 FI	Hash	0000
 FI	Iterator	0000
+PU	run	|1-
+PU	from_proc	|11-
+PU	from_proc	|11-
+PU	main	|1-
 F	/w/target/ctcases/comptime_proc_returns_quote/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -54,6 +58,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/cross_assembly_import_required/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/cross_assembly_with_import/Ultraviolet.toml
@@ -80,6 +86,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/ct_if_fail/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/ct_if_false_no_else/Ultraviolet.toml
@@ -98,6 +106,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|11
+PU	main	|1-
 F	/w/target/ctcases/ct_if_not_bool/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/ct_if_true/Ultraviolet.toml
@@ -116,6 +126,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/ct_literalize_values/Ultraviolet.toml
 CRASH	signal
 F	/w/target/ctcases/ct_loop/Ultraviolet.toml
@@ -134,6 +146,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|10
+PU	main	|1-
 F	/w/target/ctcases/ct_loop_empty/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -150,6 +164,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|11
+PU	main	|1-
 F	/w/target/ctcases/ct_loop_fail/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/ct_loop_not_iterable/Ultraviolet.toml
@@ -172,6 +188,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|10
+PU	main	|1-
 F	/w/target/ctcases/ct_nested_static/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -188,6 +206,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 F	/w/target/ctcases/ct_proc_not_shared_across_modules/Ultraviolet.toml
 STOP	resolve
 F	/w/target/ctcases/derive_body_fails/Ultraviolet.toml
@@ -218,6 +237,7 @@ FI	Hash	00
 FI	Iterator	00
 CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	00	
 CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	00	
+PU	main	|1-
 F	/w/target/ctcases/derive_cycle/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/derive_emitted_item_derives/Ultraviolet.toml
@@ -250,6 +270,8 @@ FI	Hash	0000
 FI	Iterator	0000
 CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	0000	
 CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	0000	
+PU	plain_made	|1-
+PU	main	|1-
 F	/w/target/ctcases/derive_enum_modal/Ultraviolet.toml
 X	["App"]
 W	plain_made->	string	ok	----eE-----0	E-TYP-2623	E-TYP-2640	string	string(const string)->bool+	--	--
@@ -276,7 +298,10 @@ FI	Hash	000
 FI	Iterator	000
 CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	000	
 CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	000	
+PU	plain_made	|1-
 MW	M@S	--s
+PU	first_made	|11-
+PU	main	|1-
 F	/w/target/ctcases/derive_missing_emits_class/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/derive_missing_requires_class/Ultraviolet.toml
@@ -323,6 +348,10 @@ CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	00000
 CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	00000	
 IM	R	App::Emitted	ok -	101
 IM	R	App::Required	ok -	101
+PU	second_made	|1-
+PU	plain_made	|1-
+PU	first_made	|11-
+PU	main	|1-
 F	/w/target/ctcases/derive_reflects_target/Ultraviolet.toml
 X	["App"]
 W	R.a	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -353,6 +382,8 @@ FI	Hash	0000
 FI	Iterator	0000
 CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	0000	
 CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	0000	
+PU	counted	|1-
+PU	main	|1-
 F	/w/target/ctcases/derive_target_ambiguous/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/derive_target_declared_later/Ultraviolet.toml
@@ -393,6 +424,9 @@ FI	Hash	00000
 FI	Iterator	00000
 CL	Emitted	ok App::Emitted	ok	ok	-	dD--	0/0	10	00000	
 CL	Required	ok App::Required	ok	ok	-	dD--	0/0	01	00000	
+PU	plain_made	|1-
+PU	plain_made	|1-
+PU	main	|1-
 F	/w/target/ctcases/derive_unknown_target/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/diag_bad_arg/Ultraviolet.toml
@@ -415,6 +449,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/diag_error/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/diag_module_and_span/Ultraviolet.toml
@@ -439,6 +475,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/diag_warning/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -459,6 +497,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/emit_emits_emitter/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -487,6 +527,10 @@ FI	Eq	1111
 FI	Discrete	0011
 FI	Hash	0000
 FI	Iterator	0000
+PU	run	|1-
+PU	outer	|1-
+PU	innermost	|1-
+PU	main	|1-
 F	/w/target/ctcases/emit_many_forms/Ultraviolet.toml
 STOP	resolve
 F	/w/target/ctcases/emit_nested_comptime/Ultraviolet.toml
@@ -513,6 +557,9 @@ FI	Eq	111
 FI	Discrete	011
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	nested	|1-
+PU	main	|1-
 F	/w/target/ctcases/emit_non_ast/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -533,6 +580,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/emit_non_item/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/emit_shared_splice/Ultraviolet.toml
@@ -567,6 +616,11 @@ FI	Eq	11111
 FI	Discrete	01111
 FI	Hash	00000
 FI	Iterator	00000
+PU	run	|1-
+PU	first	|1-
+PU	second	|1-
+PU	first	|1-
+PU	main	|1-
 F	/w/target/ctcases/emit_twice_same_value/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -595,6 +649,10 @@ FI	Eq	1111
 FI	Discrete	0111
 FI	Hash	0000
 FI	Iterator	0000
+PU	run	|1-
+PU	twice	|11-
+PU	twice	|11-
+PU	main	|1-
 F	/w/target/ctcases/emit_type_items/Ultraviolet.toml
 CRASH	signal
 F	/w/target/ctcases/emit_without_capability/Ultraviolet.toml
@@ -617,6 +675,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_arith/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -633,6 +693,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_arity/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/eval_array/Ultraviolet.toml
@@ -651,6 +713,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_array_repeat/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -667,6 +731,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_array_repeat_bad/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -683,6 +749,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_block_let/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -699,6 +767,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_bool/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -715,6 +785,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_char_float/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -731,6 +803,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_compare/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -747,6 +821,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_contract_ok/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -763,6 +839,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_contract_post_fail/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/eval_contract_pre_fail/Ultraviolet.toml
@@ -791,6 +869,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_if_case/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -807,6 +887,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_if_case_literal/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -823,6 +905,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_if_is/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -839,6 +923,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_if_is_enum/Ultraviolet.toml
 CRASH	signal
 F	/w/target/ctcases/eval_if_is_modal/Ultraviolet.toml
@@ -861,6 +947,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_modal/Ultraviolet.toml
 CRASH	signal
 F	/w/target/ctcases/eval_prohibited_deref/Ultraviolet.toml
@@ -889,6 +977,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_runtime_call_of_ct_proc/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/eval_string/Ultraviolet.toml
@@ -907,6 +997,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_string_value/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -923,6 +1015,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_suffix/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -939,6 +1033,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_unit/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -955,6 +1051,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/eval_unknown_call/Ultraviolet.toml
 STOP	resolve
 F	/w/target/ctcases/eval_unknown_name/Ultraviolet.toml
@@ -975,6 +1073,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/files_all/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -995,6 +1095,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/files_bad_arg/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -1015,6 +1117,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/files_unknown_method/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -1035,6 +1139,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/files_values/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1051,6 +1157,8 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/files_without_attribute/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -1071,6 +1179,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/hygiene_seed_across_modules/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -1095,6 +1205,9 @@ FI	Eq	111
 FI	Discrete	011
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	main_made	|11-
+PU	main	|1-
 X	["App" "Other"]
 W	run2->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
 W	other_made->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1114,6 +1227,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run2	|1-
+PU	other_made	|111-
 F	/w/target/ctcases/quote_ambiguous/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/quote_expr_hygiene/Ultraviolet.toml
@@ -1140,6 +1255,8 @@ FI	Eq	11
 FI	Discrete	01
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/quote_not_matching_kind/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/quote_pattern_kind/Ultraviolet.toml
@@ -1166,6 +1283,9 @@ FI	Eq	111
 FI	Discrete	011
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	made	|11-
+PU	main	|1-
 F	/w/target/ctcases/quote_stmt_kind/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/quote_type_kind/Ultraviolet.toml
@@ -1192,6 +1312,8 @@ FI	Eq	101
 FI	Discrete	001
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/reflect_bad_args/Ultraviolet.toml
 CRASH	signal
 F	/w/target/ctcases/reflect_category/Ultraviolet.toml
@@ -1244,6 +1366,9 @@ FI	Eq	111
 FI	Discrete	011
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	later	|1-
+PU	main	|1-
 F	/w/target/ctcases/reflect_states/Ultraviolet.toml
 CRASH	signal
 F	/w/target/ctcases/reflect_states_wrong_kind/Ultraviolet.toml
@@ -1284,6 +1409,8 @@ FI	Eq	101
 FI	Discrete	001
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/splice_ident/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -1312,6 +1439,9 @@ FI	Eq	1111
 FI	Discrete	0111
 FI	Hash	0000
 FI	Iterator	0000
+PU	run	|1-
+PU	ident_proc	|11-
+PU	main	|1-
 F	/w/target/ctcases/splice_ident_invalid/Ultraviolet.toml
 STOP	comptime
 F	/w/target/ctcases/splice_ident_not_string/Ultraviolet.toml
@@ -1340,6 +1470,9 @@ FI	Eq	111
 FI	Discrete	011
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	lit	|111-
+PU	main	|1-
 F	/w/target/ctcases/splice_stmt_tail/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -1364,6 +1497,9 @@ FI	Eq	111
 FI	Discrete	011
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	tail	|1-
+PU	main	|1-
 F	/w/target/ctcases/splice_type_from_type_literal/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -1388,6 +1524,8 @@ FI	Eq	101
 FI	Discrete	001
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	main	|1-
 F	/w/target/ctcases/splice_whole_body/Ultraviolet.toml
 X	["App"]
 W	run->	bool	ok	bc-zeE-----0	E-TYP-2623	-	bool	bool(const bool)->bool+	--	--
@@ -1412,3 +1550,6 @@ FI	Eq	111
 FI	Discrete	011
 FI	Hash	000
 FI	Iterator	000
+PU	run	|1-
+PU	whole	|1-
+PU	main	|1-

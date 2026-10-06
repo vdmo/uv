@@ -8,6 +8,7 @@ use uv_core::span::Span;
 
 use super::callbacks::{CheckResult, PlaceTypeResult};
 use super::check_expr::check_expr;
+use super::expr::small;
 use super::expr::path::{type_identifier_place, type_path_expr};
 use super::expr_result::ExprTypeResult;
 use super::literals::type_literal_expr;
@@ -154,6 +155,20 @@ fn type_expr_form(
             typed
         }
         ExprNode::PathExpr(node) => type_path_expr(ctx, node, env),
+        ExprNode::BinaryExpr(node) => super::expr::binary::type_binary_expr(ctx, type_ctx, node, env),
+        ExprNode::IfExpr(node) => super::expr::if_expr::type_if_expr(ctx, type_ctx, node, env),
+        ExprNode::BlockExpr(node) => super::stmt::block::type_block_expr(ctx, type_ctx, node, env),
+        ExprNode::UnaryExpr(node) => small::type_unary_expr(ctx, type_ctx, node, env, &e.span),
+        ExprNode::CastExpr(node) => small::type_cast_expr(ctx, type_ctx, node, env),
+        ExprNode::TupleExpr(node) => small::type_tuple_expr(ctx, type_ctx, node, env),
+        ExprNode::ArrayExpr(node) => {
+            small::type_array_expr(ctx, node, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::ArrayRepeatExpr(node) => {
+            small::type_array_repeat_expr(ctx, node, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::SizeofExpr(node) => small::type_layout_query_expr(ctx, &node.r#type),
+        ExprNode::AlignofExpr(node) => small::type_layout_query_expr(ctx, &node.r#type),
         ExprNode::MoveExpr(node) => {
             // Moving is an effect, which a contract predicate may not have.
             if type_ctx.require_pure {
@@ -292,11 +307,27 @@ pub fn check_expr_against(
         return CheckResult::default();
     }
     match &e.node {
+        ExprNode::IfExpr(node) => {
+            let result = super::expr::if_expr::check_if_expr(ctx, type_ctx, node, expected, env);
+            // In a dynamic context a refinement that cannot be proved is checked at run time.
+            if !result.ok && type_ctx.contract_dynamic {
+                pending("DynamicRefinement");
+            }
+            return result;
+        }
+        ExprNode::BlockExpr(node) => {
+            let checked = super::stmt::block::check_block_expr(ctx, type_ctx, node, env, expected);
+            return CheckResult {
+                ok: checked.ok,
+                diag_id: checked.diag_id,
+                diag_detail: checked.diag_detail,
+                diag_span: checked.diag_span,
+                ..Default::default()
+            };
+        }
         ExprNode::AttributedExpr(_)
         | ExprNode::ComptimeExpr(_)
-        | ExprNode::IfExpr(_)
         | ExprNode::IfIsExpr(_)
-        | ExprNode::BlockExpr(_)
         | ExprNode::RecordExpr(_)
         | ExprNode::QuoteExpr(_)
         | ExprNode::EnumLiteralExpr(_)

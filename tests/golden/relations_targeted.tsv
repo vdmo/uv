@@ -74,6 +74,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/block_name_out_of_scope/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/bytes_builtin_ok/Ultraviolet.toml
@@ -144,6 +147,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|011-
+PU	main	|1-
 F	/w/target/rescases/bytes_builtin_wrong_namespace/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/class_assoc_default_missing/Ultraviolet.toml
@@ -177,6 +183,7 @@ FI	Discrete	001
 FI	Hash	000
 FI	Iterator	000
 CL	C	ok App::C	ok App::C::get-	ok	E-TYP-2541	----	0/0	1	000	^
+PU	main	|1-
 F	/w/target/rescases/class_super_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/comptime_capabilities/Ultraviolet.toml
@@ -247,6 +254,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/comptime_proc_body_missing/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -263,6 +273,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 F	/w/target/rescases/comptime_proc_dup/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/comptime_proc_missing_type/Ultraviolet.toml
@@ -281,6 +292,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 F	/w/target/rescases/comptime_proc_ok/Ultraviolet.toml
 X	["App"]
 W	run->	usize	ok	bc-zeEio-fk0	-	-	usize	usize(const usize)->bool+	usize()->() | usize+	usize()->() | usize+
@@ -301,6 +313,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 F	/w/target/rescases/comptime_proc_vs_record/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/contract_entry/Ultraviolet.toml
@@ -330,6 +344,8 @@ FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
 PC	f	0/E-SEM-2850/ ? -n	0/E-SEM-2850/ ? -n	1 0/E-SEM-2850/ -- 0/E-SEM-2850/
+PU	f	11|1-
+PU	main	|1-
 F	/w/target/rescases/contract_post_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/contract_pre_missing/Ultraviolet.toml
@@ -359,6 +375,8 @@ FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
 PC	f	0/E-SEM-2850/ ? -n	-	-
+PU	f	1-|1-
+PU	main	|1-
 F	/w/target/rescases/derive_target_dup/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -375,6 +393,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 F	/w/target/rescases/derive_target_missing/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -391,6 +410,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 F	/w/target/rescases/derive_target_ok/Ultraviolet.toml
 X	["App"]
 W	main->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -407,6 +427,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 F	/w/target/rescases/dup_alias_record/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/dup_class_record/Ultraviolet.toml
@@ -437,6 +458,8 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	imported	|1-
+PU	main	|1-
 F	/w/target/rescases/dup_let_same_scope/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/dup_main/Ultraviolet.toml
@@ -475,6 +498,8 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	R	|1-
+PU	main	|1-
 F	/w/target/rescases/dup_static/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/dup_static_proc/Ultraviolet.toml
@@ -497,6 +522,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	value	|1-
+PU	main	|1-
 F	/w/target/rescases/dup_static_tuple/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/dup_var_same_scope/Ultraviolet.toml
@@ -517,6 +544,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -572,6 +600,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/emit_in_comptime_procedure/Ultraviolet.toml
 X	["App"]
@@ -589,6 +620,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -644,6 +676,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/emit_in_ct_statement/Ultraviolet.toml
 X	["App"]
@@ -661,6 +696,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -716,6 +752,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/emit_in_nested_comptime/Ultraviolet.toml
 X	["App"]
@@ -733,6 +772,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -788,6 +828,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/emit_other_method/Ultraviolet.toml
 X	["App"]
@@ -805,6 +848,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -860,6 +904,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/emit_with_files_only/Ultraviolet.toml
 X	["App"]
@@ -877,6 +924,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -932,6 +980,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/enum_arg_missing/Ultraviolet.toml
 STOP	resolve
@@ -1003,6 +1054,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/enum_builtin_io_error/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1071,6 +1125,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/enum_builtin_outcome/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_builtin_priority/Ultraviolet.toml
@@ -1159,6 +1216,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|1111-
+PU	main	|1-
 F	/w/target/rescases/enum_record/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1227,6 +1287,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/enum_record_as_tuple/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_tuple/Ultraviolet.toml
@@ -1297,6 +1360,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/enum_tuple_as_record/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/enum_tuple_as_unit/Ultraviolet.toml
@@ -1369,6 +1435,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/enum_unit_as_tuple/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/error_in_record_then_proc/Ultraviolet.toml
@@ -1413,6 +1482,8 @@ FI	Eq	1111
 FI	Discrete	1111
 FI	Hash	0000
 FI	Iterator	0000
+PU	run	|11111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1468,6 +1539,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/extern_foreign_contract_missing/Ultraviolet.toml
 STOP	resolve
@@ -1495,6 +1569,7 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	main	|1-
 F	/w/target/rescases/extern_foreign_ensures_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/extern_missing_return/Ultraviolet.toml
@@ -1525,6 +1600,7 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	main	|1-
 F	/w/target/rescases/extern_unknown_abi/Ultraviolet.toml
 X	["App"]
 W	imported(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1549,6 +1625,7 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	main	|1-
 F	/w/target/rescases/field_init_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/field_init_ok/Ultraviolet.toml
@@ -1571,6 +1648,7 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	main	|1-
 F	/w/target/rescases/forward_reference_ok/Ultraviolet.toml
 X	["App"]
 W	first->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -1599,6 +1677,9 @@ FI	Eq	1111
 FI	Discrete	1111
 FI	Hash	0000
 FI	Iterator	0000
+PU	first	|1-
+PU	second	|11-
+PU	main	|1-
 F	/w/target/rescases/frame_plain/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_alias_ok/Ultraviolet.toml
@@ -1628,6 +1709,7 @@ GB	Pair	1.0	ok	ok -
 GB	Pair	1.7	ok	ok -
 GB	Pair	2.0	ok	fail E-TYP-2303
 GB	Pair	2.7	ok	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/rescases/generic_call/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_call_missing_callee/Ultraviolet.toml
@@ -1664,6 +1746,7 @@ GB	Maker	1.7	ok	ok -
 GB	Maker	2.0	ok	fail E-TYP-2303
 GB	Maker	2.7	ok	fail E-TYP-2303
 CL	Maker	ok App::Maker	ok App::Maker::make-	ok	E-TYP-2542	----	0/0	1	000	^
+PU	main	|1-
 F	/w/target/rescases/generic_dup_param/Ultraviolet.toml
 X	["App"]
 W	pick(value)	TValue	fail:-	-----------0	E-TYP-2628	E-TYP-2640	TValue	--	--	--
@@ -1700,6 +1783,8 @@ GB	pick	3.7	ok	-
 IN	pick	0	ok -	TValue	TValue
 IN	pick	1	ok -	TValue	TValue
 IN	pick	2	ok -	TValue	TValue
+PU	pick	|1-
+PU	main	|1-
 F	/w/target/rescases/generic_enum_ok/Ultraviolet.toml
 X	["App"]
 W	Maybe::Just	TValue	fail:-	-----------0	E-TYP-2628	E-TYP-2640	TValue	--	--	--
@@ -1727,6 +1812,7 @@ GB	Maybe	1.0	ok	ok -
 GB	Maybe	1.7	ok	ok -
 GB	Maybe	2.0	ok	fail E-TYP-2303
 GB	Maybe	2.7	ok	fail E-TYP-2303
+PU	main	|1-
 F	/w/target/rescases/generic_modal_ok/Ultraviolet.toml
 X	["App"]
 W	Cell@Full.value	TValue	fail:-	-----------0	E-TYP-2628	E-TYP-2640	TValue	--	--	--
@@ -1757,6 +1843,7 @@ GB	Cell	2.7	ok	fail E-TYP-2303
 MW	Cell@Full	--s
 MF	Cell@Full.value	=
 MW	Cell@Empty	--s
+PU	main	|1-
 F	/w/target/rescases/generic_param_not_in_sibling/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_proc_bound_missing/Ultraviolet.toml
@@ -1793,6 +1880,8 @@ GB	pick	2.7	ok	-
 IN	pick	0	ok -	TValue
 IN	pick	1	ok -	TValue
 IN	pick	2	ok -	TValue
+PU	pick	|1-
+PU	main	|1-
 F	/w/target/rescases/generic_proc_bound_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_proc_default_missing/Ultraviolet.toml
@@ -1831,6 +1920,8 @@ GB	pick	2.7	ok	fail E-TYP-2303
 IN	pick	0	ok -	TValue
 IN	pick	1	ok -	TValue
 IN	pick	2	ok -	TValue
+PU	pick	|11-
+PU	main	|1-
 F	/w/target/rescases/generic_proc_param_shadows_param/Ultraviolet.toml
 X	["App"]
 W	pick(value)	value	fail:-	-----------0	E-TYP-2628	E-TYP-2640	value	--	--	--
@@ -1865,6 +1956,8 @@ GB	pick	2.7	ok	fail E-TYP-2303
 IN	pick	0	ok -	value
 IN	pick	1	ok -	i32
 IN	pick	2	ok -	value
+PU	pick	|1-
+PU	main	|1-
 F	/w/target/rescases/generic_record_method_own_param/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/generic_record_ok/Ultraviolet.toml
@@ -1899,6 +1992,8 @@ GB	Wrapper	1.7	ok	ok -
 GB	Wrapper	2.0	ok	fail E-TYP-2303
 GB	Wrapper	2.7	ok	fail E-TYP-2303
 MS	Wrapper::get	fail	-	-
+PU	Wrapper::get	|1-
+PU	main	|1-
 F	/w/target/rescases/hint_arc/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/hint_box/Ultraviolet.toml
@@ -2001,6 +2096,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/if_case_bare_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/if_case_dup/Ultraviolet.toml
@@ -2075,6 +2173,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/if_case_typed_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/if_is_bare_alias/Ultraviolet.toml
@@ -2155,6 +2256,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/if_is_typed_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/import_alias/Ultraviolet.toml
@@ -2177,6 +2281,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2232,6 +2338,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/import_alias_as_type/Ultraviolet.toml
 STOP	resolve
@@ -2257,6 +2366,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	tools	|1-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2312,6 +2423,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/import_alias_reserved/Ultraviolet.toml
 STOP	resolve
@@ -2341,6 +2455,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2396,6 +2512,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/import_relative/Ultraviolet.toml
 X	["App"]
@@ -2417,6 +2536,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2472,6 +2593,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/import_self/Ultraviolet.toml
 X	["App"]
@@ -2489,6 +2613,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2544,6 +2669,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/import_twice/Ultraviolet.toml
 STOP	names
@@ -2567,6 +2695,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2622,6 +2752,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/invariant_missing/Ultraviolet.toml
 STOP	resolve
@@ -2645,6 +2778,7 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	main	|1-
 F	/w/target/rescases/let_uses_itself/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/lib_import_alias/Ultraviolet.toml
@@ -2667,6 +2801,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2722,6 +2858,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 X	["Lib"]
 W	exported(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2754,6 +2893,8 @@ FI	Eq	11111
 FI	Discrete	11111
 FI	Hash	00000
 FI	Iterator	00000
+PU	exported	|1-
+PU	internal_only	|1-
 F	/w/target/rescases/lib_internal_item/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/lib_pattern_without_import/Ultraviolet.toml
@@ -2774,6 +2915,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2829,6 +2971,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 X	["Lib"]
 W	exported(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2861,6 +3006,8 @@ FI	Eq	11111
 FI	Discrete	11111
 FI	Hash	00000
 FI	Iterator	00000
+PU	exported	|1-
+PU	internal_only	|1-
 F	/w/target/rescases/lib_type_without_import/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/lib_using_import_after/Ultraviolet.toml
@@ -2883,6 +3030,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2938,6 +3087,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 X	["Lib"]
 W	exported(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -2970,6 +3122,8 @@ FI	Eq	11111
 FI	Discrete	11111
 FI	Hash	00000
 FI	Iterator	00000
+PU	exported	|1-
+PU	internal_only	|1-
 F	/w/target/rescases/lib_using_internal/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/lib_using_list_without_import/Ultraviolet.toml
@@ -2998,6 +3152,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3053,6 +3209,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 X	["Lib"]
 W	exported(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3085,6 +3244,8 @@ FI	Eq	11111
 FI	Discrete	11111
 FI	Hash	00000
 FI	Iterator	00000
+PU	exported	|1-
+PU	internal_only	|1-
 F	/w/target/rescases/lib_using_without_import/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/lib_with_import/Ultraviolet.toml
@@ -3107,6 +3268,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3162,6 +3325,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 X	["Lib"]
 W	exported(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3194,6 +3360,8 @@ FI	Eq	11111
 FI	Discrete	11111
 FI	Hash	00000
 FI	Iterator	00000
+PU	exported	|1-
+PU	internal_only	|1-
 F	/w/target/rescases/lib_without_import/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/loop_binding_dup/Ultraviolet.toml
@@ -3266,6 +3434,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/loop_binding_out_of_scope/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/loop_binding_shadow/Ultraviolet.toml
@@ -3340,6 +3511,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|101-
+PU	main	|1-
 F	/w/target/rescases/loop_iter_invariant_sees_binding/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3408,6 +3582,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/loop_typed_binding_missing_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/method_body_missing/Ultraviolet.toml
@@ -3445,6 +3622,8 @@ FI	Discrete	1111
 FI	Hash	0000
 FI	Iterator	0000
 MS	R::get	ok	(const App::R, i32) -> i32	i32	self:const App::R;self:i32;	-
+PU	R::get	|1-
+PU	main	|1-
 F	/w/target/rescases/method_self_ok/Ultraviolet.toml
 X	["App"]
 W	R.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3474,7 +3653,10 @@ FI	Discrete	1101
 FI	Hash	0000
 FI	Iterator	0000
 MS	R::get	ok	(const App::R) -> i32	i32	self:const App::R;	-
+PU	R::get	|1-
 MS	R::make	ok	(const App::R) -> App::R	App::R	self:const App::R;	-
+PU	R::make	|1-
+PU	main	|1-
 F	/w/target/rescases/method_tilde_value/Ultraviolet.toml
 X	["App"]
 W	R.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3500,6 +3682,8 @@ FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
 MS	R::get	ok	(const App::R) -> i32	i32	self:const App::R;	-
+PU	R::get	|1-
+PU	main	|1-
 F	/w/target/rescases/modal_state_literal/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3568,6 +3752,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/modal_state_literal_field_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/modal_state_literal_missing/Ultraviolet.toml
@@ -3596,6 +3783,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3651,6 +3840,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/module_item_internal/Ultraviolet.toml
 X	["App"]
@@ -3672,6 +3864,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3727,6 +3921,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/module_item_private/Ultraviolet.toml
 STOP	names
@@ -3752,6 +3949,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3807,6 +4006,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/module_pattern_enum_not_variant/Ultraviolet.toml
 X	["App"]
@@ -3828,6 +4030,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3883,6 +4087,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/module_pattern_not_record/Ultraviolet.toml
 STOP	resolve
@@ -3906,6 +4113,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -3961,6 +4170,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/module_shadowed_by_local/Ultraviolet.toml
 STOP	resolve
@@ -4042,6 +4254,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4097,6 +4311,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 X	["App" "Util" "Deep"]
 W	deepest(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4117,6 +4334,7 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	deepest	|1-
 F	/w/target/rescases/pat_enum_dup/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pat_enum_missing_type/Ultraviolet.toml
@@ -4191,6 +4409,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/pat_enum_ok/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4259,6 +4480,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/pat_enum_qualified/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4327,6 +4551,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/pat_enum_record_named_like_variant/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4399,6 +4626,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	00000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/pat_modal_ok/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4467,6 +4697,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|1111-
+PU	main	|1-
 F	/w/target/rescases/pat_range/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4535,6 +4768,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/pat_record_missing_type/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pat_record_ok/Ultraviolet.toml
@@ -4605,6 +4841,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/pat_record_qualified/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4673,6 +4912,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/pat_record_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pat_record_qualified_not_record/Ultraviolet.toml
@@ -4745,6 +4987,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/pattern_dup_nested/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/pattern_dup_tuple/Ultraviolet.toml
@@ -4817,6 +5062,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/pattern_tuple_variant_vs_module_record/Ultraviolet.toml
 X	["App"]
 W	Util::Remote	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4841,6 +5089,8 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4896,6 +5146,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/pattern_type_vs_module_enum/Ultraviolet.toml
 STOP	resolve
@@ -4925,6 +5178,8 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -4980,6 +5235,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/pattern_typed/Ultraviolet.toml
 STOP	resolve
@@ -5007,6 +5265,8 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -5062,6 +5322,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/pattern_variant_vs_module_record/Ultraviolet.toml
 STOP	resolve
@@ -5133,6 +5396,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/proc_overload_then_record/Ultraviolet.toml
 STOP	names
 F	/w/target/rescases/proc_overloads/Ultraviolet.toml
@@ -5171,6 +5437,10 @@ FI	Eq	111111
 FI	Discrete	110111
 FI	Hash	000000
 FI	Iterator	000000
+PU	f	|1-
+PU	f	|1-
+PU	f	|1-
+PU	main	|1-
 F	/w/target/rescases/qualified_deep_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/qualified_module_missing/Ultraviolet.toml
@@ -5245,6 +5515,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/qualified_proc_arg_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/qualified_proc_missing/Ultraviolet.toml
@@ -5317,6 +5590,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/qualified_static_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/qualified_type_as_value/Ultraviolet.toml
@@ -5389,6 +5665,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/record_call_form/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -5457,6 +5736,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|01-
+PU	main	|1-
 F	/w/target/rescases/record_call_form_builtin/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -5525,6 +5807,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|001-
+PU	main	|1-
 F	/w/target/rescases/record_call_form_qualified/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -5593,6 +5878,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|01-
+PU	main	|1-
 F	/w/target/rescases/record_implements_missing/Ultraviolet.toml
 X	["App"]
 W	R.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -5614,6 +5902,7 @@ FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
 IM	R	Missing	fail -	101
+PU	main	|1-
 F	/w/target/rescases/record_implements_ok/Ultraviolet.toml
 X	["App"]
 W	R.value	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -5646,6 +5935,7 @@ CL	C	ok App::C	ok	ok	-	dD--	0/0	1	0000
 IM	R	App::C	ok -	101
 IM	S	App::C	ok -	101
 IM	T	Bitcopy	ok -	101
+PU	main	|1-
 F	/w/target/rescases/record_implements_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/record_literal/Ultraviolet.toml
@@ -5716,6 +6006,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/record_literal_builtin/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -5784,6 +6077,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/record_literal_field_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/record_literal_missing/Ultraviolet.toml
@@ -5856,6 +6152,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/record_literal_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/region_alias_dup/Ultraviolet.toml
@@ -5928,6 +6227,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|.1-
+PU	main	|1-
 F	/w/target/rescases/region_alias_out_of_scope/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/region_alias_reused/Ultraviolet.toml
@@ -5998,6 +6300,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|..1-
+PU	main	|1-
 F	/w/target/rescases/region_body_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/region_frame_missing/Ultraviolet.toml
@@ -6070,6 +6375,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|.1-
+PU	main	|1-
 F	/w/target/rescases/reserved_local_gen/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/reserved_local_root/Ultraviolet.toml
@@ -6170,6 +6478,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111-
+PU	main	|1-
 F	/w/target/rescases/sibling_module_names/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/state_method_missing/Ultraviolet.toml
@@ -6207,6 +6518,7 @@ MF	M@S.value	=
 MS	M@S::get	ok	(const App::M@S) -> i32	i32	self:const App::M@S;	=
 TS	M@S::next	ok	(move unique App::M@S, i32) -> App::M@T	App::M@T	self:unique App::M@S;step:i32;	=
 MW	M@T	--s
+PU	main	|1-
 F	/w/target/rescases/state_method_self_type/Ultraviolet.toml
 X	["App"]
 W	M@S::get->	Self	ok	-----------0	E-TYP-2628	E-TYP-2640	Self	--	--	--
@@ -6229,6 +6541,7 @@ FI	Hash	00
 FI	Iterator	00
 MW	M@S	--s
 MS	M@S::get	ok	(const App::M@S) -> App::M@S	App::M@S	self:const App::M@S;	=
+PU	main	|1-
 F	/w/target/rescases/string_builtin_arg_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/string_builtin_missing/Ultraviolet.toml
@@ -6303,6 +6616,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|011-
+PU	main	|1-
 F	/w/target/rescases/string_builtin_wrong_namespace/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/suggest_far_none/Ultraviolet.toml
@@ -6411,6 +6727,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|111111-
+PU	main	|1-
 F	/w/target/rescases/type_cast_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_class_as_type/Ultraviolet.toml
@@ -6483,6 +6802,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/type_dynamic_ok/Ultraviolet.toml
 X	["App"]
 W	Point.x	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -6551,6 +6873,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|1111-
+PU	main	|1-
 F	/w/target/rescases/type_dynamic_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_missing_alias/Ultraviolet.toml
@@ -6659,6 +6984,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/type_qualified_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_qualified_module_missing/Ultraviolet.toml
@@ -6731,6 +7059,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/type_refine_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_refine_self/Ultraviolet.toml
@@ -6801,6 +7132,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/type_refine_shadow_self/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_self_outside/Ultraviolet.toml
@@ -6871,6 +7205,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|11-
+PU	main	|1-
 F	/w/target/rescases/type_sizeof_missing/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/type_transmute_missing/Ultraviolet.toml
@@ -6897,6 +7234,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	helper	|1-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -6952,6 +7291,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_alias_universe/Ultraviolet.toml
 STOP	resolve
@@ -6979,6 +7321,8 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	offered	|1-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7034,6 +7378,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_conflict_decl_before/Ultraviolet.toml
 STOP	names
@@ -7057,6 +7404,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|01-
+PU	main	|1-
 X	["App" "A"]
 W	from_a(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	from_a->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7076,6 +7425,7 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	from_a	|1-
 X	["App" "B"]
 W	from_b(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	from_b->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7095,6 +7445,7 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	from_b	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7150,6 +7501,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_decl_then_wildcard/Ultraviolet.toml
 STOP	names
@@ -7175,6 +7529,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7230,6 +7586,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_item_alias/Ultraviolet.toml
 STOP	resolve
@@ -7254,6 +7613,7 @@ FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
 IM	R	App::Util::Trait	ok -	101
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7309,6 +7669,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_item_enum/Ultraviolet.toml
 STOP	resolve
@@ -7332,6 +7695,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7387,6 +7752,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_item_missing/Ultraviolet.toml
 STOP	names
@@ -7418,6 +7786,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7473,6 +7843,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_item_static/Ultraviolet.toml
 X	["App"]
@@ -7494,6 +7867,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7549,6 +7924,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_item_type/Ultraviolet.toml
 X	["App"]
@@ -7570,6 +7948,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7625,6 +8005,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_list/Ultraviolet.toml
 X	["App"]
@@ -7646,6 +8029,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7701,6 +8086,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_list_alias/Ultraviolet.toml
 X	["App"]
@@ -7722,6 +8110,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|111-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7777,6 +8167,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_list_dup/Ultraviolet.toml
 STOP	names
@@ -7808,6 +8201,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|11-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -7863,6 +8258,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_local_dup_alias/Ultraviolet.toml
 STOP	resolve
@@ -7936,6 +8334,9 @@ MW	Door@Open	--s
 MF	Door@Open.width	=
 MW	Door@Closed	--s
 CL	Named	ok App::Named	ok App::Named::name+	ok	-	dD--	0/0	1	0000000000000	^
+PU	helper	|1-
+PU	run	|1.11-
+PU	main	|1-
 F	/w/target/rescases/using_local_shadow_outer/Ultraviolet.toml
 STOP	resolve
 F	/w/target/rescases/using_public_list_of_internal/Ultraviolet.toml
@@ -7958,6 +8359,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -8013,6 +8415,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_public_wildcard/Ultraviolet.toml
 STOP	names
@@ -8032,6 +8437,7 @@ FI	Eq	1
 FI	Discrete	1
 FI	Hash	0
 FI	Iterator	0
+PU	main	|1-
 X	["App" "Open"]
 W	opened(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	opened->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -8055,6 +8461,7 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	opened	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -8110,6 +8517,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_reexport_chain/Ultraviolet.toml
 X	["App"]
@@ -8131,6 +8541,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|01-
+PU	main	|1-
 X	["App" "Mid"]
 MI	1	M::A<>-	10T1
 FI	Bitcopy	
@@ -8197,6 +8609,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_reexport_internal_chain/Ultraviolet.toml
 X	["App"]
@@ -8218,6 +8633,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|01-
+PU	main	|1-
 X	["App" "Mid"]
 MI	1	M::A<>-	10T1
 FI	Bitcopy	
@@ -8284,6 +8701,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_reexport_private_chain/Ultraviolet.toml
 STOP	names
@@ -8307,6 +8727,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|011-
+PU	main	|1-
 X	["App" "Mid"]
 MI	1	M::A<>-	10T1
 FI	Bitcopy	
@@ -8373,6 +8795,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_reserved_alias/Ultraviolet.toml
 STOP	resolve
@@ -8406,6 +8831,8 @@ FI	Eq	111
 FI	Discrete	111
 FI	Hash	000
 FI	Iterator	000
+PU	offered	|1-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -8461,6 +8888,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_wildcard_module_missing/Ultraviolet.toml
 STOP	names
@@ -8484,6 +8914,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -8539,6 +8971,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_wildcard_public_api/Ultraviolet.toml
 X	["App"]
@@ -8560,6 +8995,8 @@ FI	Eq	11
 FI	Discrete	11
 FI	Hash	00
 FI	Iterator	00
+PU	run	|1-
+PU	main	|1-
 X	["App" "Util"]
 W	offered(value)	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
 W	offered->	i32	ok	bc-zeEio-fk0	-	-	i32	i32(const i32)->bool+	i32()->() | i32+	i32()->() | i32+
@@ -8615,6 +9052,9 @@ FI	Eq	11111111111
 FI	Discrete	11111111111
 FI	Hash	00000000000
 FI	Iterator	00000000000
+PU	offered	|1-
+PU	inner	|1-
+PU	hidden	|1-
 CL	Trait	ok App::Util::Trait	ok	ok	-	dD--	0/0	1	00000000000	
 F	/w/target/rescases/using_wildcards_same_name/Ultraviolet.toml
 STOP	names
