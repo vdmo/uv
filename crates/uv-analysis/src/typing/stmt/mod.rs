@@ -2,6 +2,7 @@
 
 pub mod assign_stmt;
 pub mod key_block;
+pub mod key_block_checks;
 pub mod postcondition;
 pub mod proof_facts;
 pub mod scoped;

@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,503 of 4,569 bodies compared (98.6%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,540 of 4,569 bodies compared (99.4%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -523,11 +523,13 @@ shared data and so may need keys inferred (`DispatchKeyInference`), is left pend
 Key blocks are in for the ordinary forms (`typing::stmt::key_block`): the paths must be
 rooted in shared data and marked at most once at a record field, a key already held may
 not be taken again in another mode except to release it, a block that writes under its
-own key needs write mode, and the body is typed with the keys held. Three variants are
-not ported and make the body pending: speculative blocks (`SpeculativeKeyBlock`), the
-`ordered` option (`OrderedKeyBlock`), and paths indexed by a value that is not a
-constant (`DynamicKeyPath`), which need the proof that the body's indices do not
-conflict.
+own key needs write mode, and the body is typed with the keys held. The variants are in
+`typing::stmt::key_block_checks`: `ordered` paths must differ only in their indices; a
+path indexed by a value known only at run time is accepted when the body's own indices
+cannot conflict (equal or provably different by constants, a proved inequality, offsets
+from one name, an index particular to each parallel task, or loop ranges that do not
+meet) and the block cannot race with another task; a speculative block must be a write
+block that writes only what its keys cover and makes no impure call.
 
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from

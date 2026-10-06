@@ -1,8 +1,7 @@
 //! Key blocks: `#path [, path…] [mode] { … }` holds keys on shared data for the body.
 //!
-//! The ordinary forms are ported. Three variants are not, and leave the body pending:
-//! speculative blocks, the `ordered` option, and paths indexed by a value that is not
-//! a constant (which need the proof that the body's indices do not conflict).
+//! The checks of the `ordered`, dynamically indexed and speculative variants are in
+//! `key_block_checks`.
 
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -14,13 +13,17 @@ use uv_source::ast::{self, ExprNode, ExprPtr, Stmt};
 use uv_source::attributes::{attrs, validate_attributes, AttributeTarget};
 
 use super::block::{type_block_info, FlowInfo, StmtTypeResult};
+use super::key_block_checks::{
+    block_may_be_expensive_to_reexecute, body_has_dynamic_index_conflict, find_impure_speculative_call_block, ordered_comparable_paths,
+    paths_indexed_by_parallel_binding, statically_comparable_ordered_paths,
+};
+use crate::layout::size_of;
 use crate::composite::function_types::lookup_module_static;
 use crate::context::ScopeContext;
 use crate::keys::key_paths::{build_key_path, is_prefix, key_path_less, parse_key_path_spec, KeyPath};
 use crate::resolve::scopes::id_eq;
 use crate::resolve::scopes_lookup::resolve_value_name;
 use crate::typing::const_len::const_len;
-use crate::typing::pending::pending;
 use crate::typing::stmt_context::{HeldKeyTypingInfo, LoopFlag, StmtTypeContext};
 use crate::typing::type_env::{bind_of, gpu_context, mark_shared_derived_bindings_stale, TypeEnv};
 use crate::typing::type_expr::{type_expr, type_identifier_expr, type_place};
@@ -271,18 +274,37 @@ pub fn type_key_block_stmt(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_
     if memory_order_attr_count > 0 && has_speculative_mod {
         return failed("E-CON-0096");
     }
-    if has_speculative_mod {
-        pending("SpeculativeKeyBlock");
-        return StmtTypeResult::default();
+    // A speculative block runs without the keys and retries on conflict, so it must
+    // be a write block.
+    if has_speculative_mod && node.mode != ast::KeyMode::Write {
+        return failed("E-CON-0095");
     }
-    if node.options.ordered {
-        pending("OrderedKeyBlock");
-        return StmtTypeResult::default();
+    let has_ordered_mod = node.options.ordered;
+    if has_ordered_mod {
+        if !ordered_comparable_paths(&node.paths) {
+            return failed("E-CON-0014");
+        }
+        if type_ctx.diags.is_some() && statically_comparable_ordered_paths(ctx, &node.paths) {
+            warn("W-CON-0013", &node.span);
+        }
     }
     // In a loop, a path of several segments could take a finer key.
-    if type_ctx.loop_flag == LoopFlag::Loop && type_ctx.diags.is_some() && !has_release_mod {
+    if type_ctx.loop_flag == LoopFlag::Loop && type_ctx.diags.is_some() && !has_release_mod && !has_speculative_mod && !has_ordered_mod {
         if let Some(path) = node.paths.iter().find(|path| path.segs.len() >= 2 && !path.segs.iter().any(seg_marked)) {
             warn("W-CON-0001", &path.span);
+        }
+    }
+
+    // Retrying a speculative block is costly when it copies much or does much.
+    if has_speculative_mod && type_ctx.diags.is_some() {
+        let large_path = node
+            .paths
+            .iter()
+            .find(|path| key_root_type(ctx, env, &path.root).and_then(|root_type| size_of(ctx, &root_type)).is_some_and(|size| size > 128));
+        match large_path {
+            Some(path) => warn("W-CON-0020", &path.span),
+            None if block_may_be_expensive_to_reexecute(&node.body) => warn("W-CON-0021", &node.span),
+            None => {}
         }
     }
 
@@ -318,9 +340,27 @@ pub fn type_key_block_stmt(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_
         }
     }
 
+    // A path indexed by a value known only at run time is accepted when the body's
+    // own indices cannot conflict and the block cannot race with another task.
     if node.paths.iter().any(|path| key_path_has_dynamic_index(ctx, path)) {
-        pending("DynamicKeyPath");
-        return StmtTypeResult::default();
+        let mut keyed_roots: Vec<&str> = node.paths.iter().map(|path| path.root.as_str()).collect();
+        keyed_roots.sort_unstable();
+        keyed_roots.dedup();
+        if keyed_roots.iter().any(|root| body_has_dynamic_index_conflict(ctx, type_ctx, env, body, root)) {
+            return failed("E-CON-0010");
+        }
+        let dispatch_indexed = type_ctx
+            .parallel_capture_scopes
+            .as_ref()
+            .and_then(|scopes| scopes.last())
+            .is_some_and(|scope| paths_indexed_by_parallel_binding(&node.paths, &scope.bindings.borrow()));
+        let statically_safe = !type_ctx.in_parallel || dispatch_indexed || has_speculative_mod;
+        if !statically_safe && !dynamic_key_context {
+            return failed("E-CON-0020");
+        }
+        if dynamic_key_context {
+            warn(if statically_safe { "I-CON-0013" } else { "I-CON-0011" }, &node.span);
+        }
     }
     let explicit_key_paths: Vec<KeyPath> = node.paths.iter().map(parse_key_path_spec).collect();
     let mut written_paths = Vec::new();
@@ -328,6 +368,10 @@ pub fn type_key_block_stmt(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_
     let writes_explicit_key_path = written_paths.iter().any(|path| explicit_key_paths.iter().any(|key| is_prefix(key, path)));
     if writes_explicit_key_path && node.mode != ast::KeyMode::Write {
         return failed("E-CON-0070");
+    }
+    // A speculative block may only write what its keys cover.
+    if has_speculative_mod && written_paths.iter().any(|path| !explicit_key_paths.iter().any(|key| is_prefix(key, path))) {
+        return failed("E-CON-0091");
     }
 
     let key_env = Rc::new(RefCell::new(env.clone()));
@@ -338,7 +382,7 @@ pub fn type_key_block_stmt(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_
         contract_dynamic: dynamic_key_context,
         key_mode: Some(node.mode),
         held_key_paths,
-        in_speculative: false,
+        in_speculative: has_speculative_mod,
         env_ref: Some(key_env.clone()),
         ..type_ctx.clone()
     };
@@ -348,6 +392,11 @@ pub fn type_key_block_stmt(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_
     let info = type_block_info(ctx, &key_ctx, body, env, &key_type_expr, &key_type_ident, &key_type_place, Some(&key_env));
     if !info.ok {
         return StmtTypeResult { diag_id: info.diag_id, diag_detail: info.diag_detail, diag_span: info.diag_span, ..Default::default() };
+    }
+    if has_speculative_mod {
+        if let Some(impure_span) = find_impure_speculative_call_block(ctx, &node.body) {
+            return StmtTypeResult { diag_id: Some("E-CON-0097"), diag_span: Some(impure_span), ..Default::default() };
+        }
     }
     // Releasing keys makes what was read under them stale.
     let mut out_env = env.clone();
