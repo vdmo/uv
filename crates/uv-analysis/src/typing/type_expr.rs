@@ -229,6 +229,7 @@ fn type_expr_form(
         ExprNode::IfCaseExpr(node) => super::expr::if_case::type_if_case_expr(ctx, type_ctx, node, env),
         ExprNode::RecordExpr(node) => super::expr::record_literal::type_record_expr(ctx, type_ctx, node, env, None),
         ExprNode::EnumLiteralExpr(node) => super::expr::enum_literal::type_enum_literal_expr(ctx, type_ctx, node, env),
+        ExprNode::MethodCallExpr(node) => super::expr::method_call::type_method_call_expr(ctx, type_ctx, node, env, &e.span),
         ExprNode::CallExpr(node) => super::expr::call::type_call_expr(ctx, type_ctx, node, env),
         ExprNode::CallTypeArgsExpr(node) => super::expr::call::type_call_type_args_expr(ctx, type_ctx, node, env),
         // Splices are gone before typing; the reference types them as nothing.
