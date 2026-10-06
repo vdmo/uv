@@ -10,7 +10,8 @@ use std::collections::HashSet;
 use std::rc::Rc;
 
 use uv_core::behavior_model::{abort_on_error_count, default_error_recovery_policy};
-use uv_core::diagnostics::{DiagnosticStream, Severity};
+use uv_core::diagnostic_messages::make_diagnostic_by_id;
+use uv_core::diagnostics::{emit, DiagnosticStream, Severity};
 use uv_core::process_config::max_errors_override;
 use uv_core::span::Span;
 use uv_source::ast::{self, ASTItem};
@@ -18,7 +19,13 @@ use uv_source::attributes::{attrs, get_attribute_value, has_attribute};
 
 use super::item_procedure::{type_procedure_decl, DeclOutcome};
 use super::expr_store::TypeStores;
-use super::item_simple::{type_static_decl, type_type_alias_decl};
+use super::item_class::type_class_decl;
+use super::item_procedure::build_procedure_signature;
+use super::types::{make_type, type_key_of, ParamMode, TypeKey, TypeNode};
+use crate::generics::generic_params::bind_type_params;
+use crate::generics::monomorphize::{instantiate_type, TypeSubst};
+use super::item_record::type_record_decl;
+use super::item_simple::{type_enum_decl, type_static_decl, type_type_alias_decl};
 use super::item_using::{type_import_decl, type_using_decl};
 use super::typecheck_diag::{emit_decl_diag, emit_resolved_typecheck_diagnostic};
 use crate::resolve::scopes::id_eq;
@@ -73,13 +80,29 @@ fn type_item(ctx: &ScopeContext<'_>, item: &ASTItem, module_path: &[String], sha
             DeclOutcome::Pending(what) => Err(what),
             DeclOutcome::Failed(failure) => {
                 let span = failure.diag_span.or_else(|| Some(node.span.clone()));
-                emit_decl_diag(&mut shared.borrow_mut(), failure.diag_id, span, &failure.diag_detail, Vec::new(), &failure.diagnostic_obligation_ids);
+                emit_decl_diag(&mut shared.borrow_mut(), failure.diag_id, span, &failure.diag_detail, failure.children, &failure.diagnostic_obligation_ids);
+                Ok(())
+            }
+        };
+    }
+    let with_diags = match item {
+        ASTItem::RecordDecl(node) => Some((type_record_decl(ctx, node, module_path, shared), &node.span)),
+        ASTItem::ClassDecl(node) => Some((type_class_decl(ctx, node, module_path, shared), &node.span)),
+        _ => None,
+    };
+    if let Some((outcome, span)) = with_diags {
+        return match outcome {
+            DeclOutcome::Ok => Ok(()),
+            DeclOutcome::Pending(what) => Err(what),
+            DeclOutcome::Failed(failure) => {
+                emit_decl_diag(&mut shared.borrow_mut(), failure.diag_id, Some(span.clone()), &failure.diag_detail, Vec::new(), &failure.diagnostic_obligation_ids);
                 Ok(())
             }
         };
     }
     let outcome = match item {
         ASTItem::TypeAliasDecl(node) => Some((type_type_alias_decl(ctx, node, module_path), &node.span)),
+        ASTItem::EnumDecl(node) => Some((type_enum_decl(ctx, node, module_path), &node.span)),
         ASTItem::StaticDecl(node) => Some((type_static_decl(ctx, node, module_path, &mut shared.borrow_mut()), &node.span)),
         _ => None,
     };
@@ -163,6 +186,53 @@ fn emit_duplicate_symbol_diags(modules: &[ast::ASTModule], diags: &mut Diagnosti
     }
 }
 
+/// A procedure's signature with its generic parameters erased: the name, and for each
+/// parameter its mode and type key.
+struct ErasedOverloadSignature {
+    name: String,
+    params: Vec<(Option<ParamMode>, TypeKey)>,
+}
+
+fn build_erased_overload_signature(ctx: &ScopeContext<'_>, proc: &ast::ProcedureDecl) -> Option<ErasedOverloadSignature> {
+    let mut proc_ctx = ctx.clone();
+    proc_ctx.scopes = bind_type_params(ctx, &proc.generic_params);
+    let sig = build_procedure_signature(&proc_ctx, &proc.params, &proc.return_type_opt).ok()?;
+    let TypeNode::Func { params, .. } = &sig.func_type.as_deref()?.node else {
+        return None;
+    };
+    let erased_param = make_type(TypeNode::Var(0));
+    let erasure: TypeSubst = proc.generic_params.iter().flat_map(|params| &params.params).map(|param| (param.name.clone(), erased_param.clone())).collect();
+    Some(ErasedOverloadSignature {
+        name: proc.name.clone(),
+        params: params.iter().map(|param| (param.mode, type_key_of(&instantiate_type(&param.r#type, &erasure)))).collect(),
+    })
+}
+
+/// Two procedures of a module that differ only in their generic parameters are one
+/// declaration twice.
+fn emit_duplicate_erased_overload_signature_diags(ctx: &ScopeContext<'_>, module: &ast::ASTModule, diags: &mut DiagnosticStream) {
+    let mut seen: Vec<ErasedOverloadSignature> = Vec::new();
+    for item in &module.items {
+        let ASTItem::ProcedureDecl(proc) = item else {
+            continue;
+        };
+        if id_eq(&proc.name, "main") {
+            continue;
+        }
+        let Some(signature) = build_erased_overload_signature(ctx, proc) else {
+            continue;
+        };
+        if seen.iter().any(|other| id_eq(&other.name, &signature.name) && other.params == signature.params) {
+            if let Some(mut diag) = make_diagnostic_by_id("E-MOD-1302", Some(proc.span.clone())) {
+                diag.obligation_ids.push("Collect-Dup".to_string());
+                emit(diags, diag);
+            }
+            emit_resolved_typecheck_diagnostic(diags, "E-SEM-3032", Some(proc.span.clone()), "");
+        }
+        seen.push(signature);
+    }
+}
+
 fn count_error_diagnostics(diags: &DiagnosticStream) -> usize {
     diags.iter().filter(|diag| diag.severity == Severity::Error).count()
 }
@@ -182,25 +252,14 @@ fn decl_typing_modules(ctx: &mut ScopeContext<'_>, modules: &[ast::ASTModule], n
         ctx.current_module = module.path.clone();
         let module_scope = name_maps.get(&path_key_of(&module.path)).cloned().unwrap_or_default();
         ctx.scopes = vec![Scope::new(), module_scope, universe_scope.clone()];
-        // Procedures of one name whose signatures erase to the same one are reported
-        // before the module's declarations. That pass is not ported; it can only
-        // concern procedures that share a name.
-        let mut names_seen: Vec<&str> = Vec::new();
-        let mut shared_names: Vec<&str> = Vec::new();
-        for item in &module.items {
-            if let ASTItem::ProcedureDecl(proc) = item {
-                if id_eq(&proc.name, "main") {
-                    continue;
-                }
-                if names_seen.iter().any(|seen| id_eq(seen, &proc.name)) {
-                    shared_names.push(&proc.name);
-                }
-                names_seen.push(&proc.name);
-            }
+        emit_duplicate_erased_overload_signature_diags(ctx, module, &mut shared.borrow_mut());
+        if abort_on_error_count(&error_policy, count_error_diagnostics(&shared.borrow())) {
+            result.aborted = true;
+            result.diags = shared.take();
+            return;
         }
         for (item_index, item) in module.items.iter().enumerate() {
-            let overloaded = matches!(item, ASTItem::ProcedureDecl(proc) if shared_names.iter().any(|name| id_eq(name, &proc.name)));
-            let typed = if overloaded { Err("ErasedOverloads".to_string()) } else { type_item(ctx, item, &module.path, &shared) };
+            let typed = type_item(ctx, item, &module.path, &shared);
             if let Err(what) = typed {
                 result.pending_items.push(PendingItem { module: module_index, item: item_index, what });
             }

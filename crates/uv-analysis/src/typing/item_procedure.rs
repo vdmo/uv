@@ -8,7 +8,7 @@ use std::cell::RefCell;
 use std::collections::HashSet;
 use std::rc::Rc;
 
-use uv_core::diagnostics::DiagnosticStream;
+use uv_core::diagnostics::{DiagnosticStream, SubDiagnostic, SubDiagnosticKind};
 use uv_core::span::Span;
 use uv_source::ast::{self, ExprNode, ExprPtr, Stmt, TypePtr};
 use uv_source::attributes::{attrs, has_attribute, validate_attributes, AttributeTarget};
@@ -27,6 +27,8 @@ use super::type_wf::{type_wf, REFINEMENT_WF_PENDING};
 use super::typecheck_diag::emit_resolved_typecheck_diagnostic;
 use super::types::{make_type_func, make_type_prim, TypeFuncParam, TypeNode, TypeRef};
 use crate::context::ScopeContext;
+use crate::caps::builtin_paths::is_context_type_path;
+use crate::caps::context_caps::is_context_bundle_type;
 use crate::generics::generic_params::bind_type_params;
 use crate::memory::borrow_bind::bind_check_body;
 use crate::memory::region_prov::prov_bind_check;
@@ -39,10 +41,12 @@ pub struct DeclFailure {
     pub diag_detail: String,
     pub diag_span: Option<Span>,
     pub diagnostic_obligation_ids: Vec<String>,
+    /// Notes and fix-its that go with the diagnostic.
+    pub children: Vec<SubDiagnostic>,
 }
 
 impl DeclFailure {
-    fn rule(diag_id: &'static str) -> Self {
+    pub(crate) fn rule(diag_id: &'static str) -> Self {
         DeclFailure { diag_id: Some(diag_id), ..Default::default() }
     }
 
@@ -231,6 +235,60 @@ fn emit_supplemental_borrow_diag(
     }
 }
 
+fn type_params_of(decl: &ast::ProcedureDecl) -> &[ast::TypeParam] {
+    decl.generic_params.as_ref().map_or(&[][..], |params| &params.params[..])
+}
+
+/// `public procedure main(move ctx: Context) -> i32`, or a record of capabilities.
+fn main_sig_ok(ctx: &ScopeContext<'_>, decl: &ast::ProcedureDecl) -> bool {
+    if decl.vis != ast::Visibility::Public {
+        return false;
+    }
+    let [param] = decl.params.as_slice() else {
+        return false;
+    };
+    if param.mode.is_some_and(|mode| mode != ast::ParamMode::Move) {
+        return false;
+    }
+    if param.r#type.is_none() || !is_context_bundle_type(ctx, &param.r#type) {
+        return false;
+    }
+    matches!(decl.return_type_opt.as_deref().map(|ty| &ty.node), Some(ast::TypeNode::TypePrim(prim)) if prim.name == "i32")
+}
+
+/// The one-line fix for a `main` that only misspells its signature.
+fn main_signature_fix_its(decl: &ast::ProcedureDecl) -> Vec<SubDiagnostic> {
+    let is_context_syntax = |ty: &ast::Type| match &ty.node {
+        ast::TypeNode::TypePathType(path) => path.generic_args.is_empty() && is_context_type_path(&path.path),
+        ast::TypeNode::TypePrim(prim) => id_eq(&prim.name, "Context"),
+        _ => false,
+    };
+    let [param] = decl.params.as_slice() else {
+        return Vec::new();
+    };
+    let (Some(param_type), Some(ret)) = (param.r#type.as_deref(), decl.return_type_opt.as_deref()) else {
+        return Vec::new();
+    };
+    let ret_is_i32 = matches!(&ret.node, ast::TypeNode::TypePrim(prim) if id_eq(&prim.name, "i32"));
+    if decl.name != "main" || !decl.attrs.is_empty() || !type_params_of(decl).is_empty() || !is_context_syntax(param_type) || !ret_is_i32 {
+        return Vec::new();
+    }
+    let mut span = decl.span.clone();
+    span.end_offset = param_type.span.end_offset;
+    span.end_line = param_type.span.end_line;
+    span.end_col = param_type.span.end_col;
+    if span.end_offset <= span.start_offset {
+        return Vec::new();
+    }
+    vec![SubDiagnostic {
+        kind: SubDiagnosticKind::FixIt,
+        message: "Fix main signature".to_string(),
+        span: Some(span),
+        fix_text: Some(format!("public procedure main(move {}: Context)", param.name)),
+        ..Default::default()
+    }]
+}
+
 /// See `TypeProcedureDecl`.
 pub fn type_procedure_decl(
     ctx: &ScopeContext<'_>,
@@ -270,7 +328,12 @@ pub fn type_procedure_decl(
         return pending("InlineAlways");
     }
     if decl.name == "main" {
-        return pending("MainSignature");
+        if !type_params_of(decl).is_empty() {
+            return failed("E-MOD-2432");
+        }
+        if !main_sig_ok(ctx, decl) {
+            return DeclOutcome::Failed(DeclFailure { diag_id: Some("E-MOD-2431"), children: main_signature_fix_its(decl), ..Default::default() });
+        }
     }
     let type_params = decl.generic_params.as_ref().map_or(&[][..], |params| &params.params[..]);
     if let Err(diag_id) = process_generic_params(ctx, type_params) {
@@ -346,6 +409,7 @@ pub fn type_procedure_decl(
                 diag_detail,
                 diag_span: body_result.diag_span.or_else(|| Some(procedure_body_failure_span(body))),
                 diagnostic_obligation_ids: body_result.diagnostic_obligation_ids.iter().map(|id| id.to_string()).collect(),
+                children: Vec::new(),
             });
         }
         if body_result.r#type.is_some() {

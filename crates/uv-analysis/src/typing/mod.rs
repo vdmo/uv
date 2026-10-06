@@ -2,7 +2,9 @@
 
 pub mod alias_normalize;
 pub mod attributed;
+pub mod item_class;
 pub mod item_procedure;
+pub mod item_record;
 pub mod item_simple;
 pub mod item_using;
 pub mod typecheck;
