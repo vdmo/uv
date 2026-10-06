@@ -13,7 +13,7 @@ use super::callbacks::{CheckResult, ExprTypeFn, IdentTypeFn, PlaceTypeFn};
 use super::const_len::const_len;
 use super::expr_result::ExprTypeResult;
 use super::literals::{check_literal_expr, type_literal_expr};
-use super::pending::{consult_proof_context, pending};
+use super::pending::pending;
 use super::subtyping::subtyping;
 use super::type_equiv::type_equiv;
 use super::type_lookup::async_sig_of;
@@ -469,7 +469,6 @@ impl Checker<'_, '_, '_> {
                 return no(base_check.diag_id);
             }
             // The predicate, with the value for `self`, is proved from the facts in scope.
-            consult_proof_context();
             pending("RefinePredicate");
             return CheckResult::default();
         }

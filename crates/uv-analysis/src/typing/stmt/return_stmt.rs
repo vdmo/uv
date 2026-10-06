@@ -10,6 +10,7 @@ use std::sync::Arc;
 use uv_source::ast::{self, ExprNode, ExprPtr};
 
 use super::block::StmtTypeResult;
+use super::postcondition::verify_postcondition_at_return;
 use crate::context::ScopeContext;
 use crate::typing::closure_capture::{analyze_closure_capture_info, closure_type_has_shared_deps};
 use crate::typing::callbacks::ExprTypeFn;
@@ -160,16 +161,6 @@ fn check_returned_safe_pointer_provenance(
     None
 }
 
-/// The postcondition, with the returned value for `@result`, must be provable here.
-fn verify_postcondition_at_return(type_ctx: &StmtTypeContext<'_>) -> Option<&'static str> {
-    let contract = type_ctx.contract?;
-    if contract.postcondition.is_none() || type_ctx.test_postcondition_runtime {
-        return None;
-    }
-    pending("ReturnPostcondition");
-    None
-}
-
 fn failed(diag_id: Option<&'static str>) -> StmtTypeResult {
     StmtTypeResult { diag_id, ..Default::default() }
 }
@@ -187,7 +178,7 @@ pub fn type_return_stmt(
         let diag = check_escaping_closure_return(&node.value_opt, env, expected)
             .or_else(|| check_ffi_boundary_region_local_raw_pointer_return(type_ctx, &node.value_opt, expected))
             .or_else(|| check_returned_safe_pointer_provenance(ctx, type_ctx, env, type_expr_fn, &node.value_opt, expected))
-            .or_else(|| verify_postcondition_at_return(type_ctx));
+            .or_else(|| verify_postcondition_at_return(ctx, type_ctx, env, type_expr_fn, &node.value_opt));
         match diag {
             Some(diag_id) => failed(Some(diag_id)),
             None => StmtTypeResult::typed(env.clone()),
@@ -197,7 +188,7 @@ pub fn type_return_stmt(
         if !unit(expected) {
             return failed(Some(mismatch));
         }
-        match verify_postcondition_at_return(type_ctx) {
+        match verify_postcondition_at_return(ctx, type_ctx, env, type_expr_fn, &node.value_opt) {
             Some(diag_id) => failed(Some(diag_id)),
             None => StmtTypeResult::typed(env.clone()),
         }

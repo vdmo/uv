@@ -12,6 +12,7 @@ use uv_core::span::Span;
 use uv_source::ast::{self, Arg, ArgPassKind, ExprNode, ExprPtr};
 use uv_source::attributes::{attrs, has_attribute};
 
+use super::call_contracts::{check_call_site_precondition, check_foreign_static_assumes};
 use crate::caps::builtin_paths::{is_capability_class_path, lookup_builtin_record_ctor_path, path_matches_builtin_name};
 use crate::caps::cap_concurrency::is_gpu_intrinsic_name;
 use crate::composite::classes::type_implements_class;
@@ -786,6 +787,7 @@ fn generic_arg_count_mismatch(lookup: Option<&CalleeProcedureLookupResult<'_>>, 
 }
 
 struct ExternProcLookupResult<'m> {
+    module: &'m ast::ASTModule,
     proc: &'m ast::ExternProcDecl,
 }
 
@@ -831,7 +833,7 @@ fn build_extern_callee_query(
 /// procedure there has the name, and failing both the first in any module.
 fn lookup_extern_procedure_for_query<'c>(ctx: &'c ScopeContext<'_>, query: &ExternCalleeQuery) -> Option<ExternProcLookupResult<'c>> {
     let find_in_module = |module: &'c ast::ASTModule| {
-        query.candidate_names.iter().find_map(|name| find_extern_in_module(module, name)).map(|proc| ExternProcLookupResult { proc })
+        query.candidate_names.iter().find_map(|name| find_extern_in_module(module, name)).map(|proc| ExternProcLookupResult { module, proc })
     };
     let find_anywhere = || ctx.sigma.mods.iter().find_map(find_in_module);
     let Some(module) = find_module(ctx, &query.module_path) else {
@@ -906,36 +908,6 @@ fn extract_direct_callee_name(callee: &ExprPtr) -> Option<&str> {
 
 fn is_gpu_barrier_name(name: &str) -> bool {
     matches!(name, "gpu_barrier" | "gpu_memory_barrier" | "gpu_workgroup_barrier")
-}
-
-/// The `assumes` clauses of a foreign procedure must be proved at the call. The proof
-/// of a predicate with the arguments substituted is not ported, so such a call is left
-/// pending.
-fn check_foreign_static_assumes(call: &ast::CallExpr, lookup: Option<&ExternProcLookupResult<'_>>) {
-    let Some(lookup) = lookup else {
-        return;
-    };
-    let Some(clauses) = &lookup.proc.foreign_contracts_opt else {
-        return;
-    };
-    if lookup.proc.params.len() != call.args.len() {
-        return;
-    }
-    if clauses.iter().any(|clause| clause.kind == ast::ForeignContractKind::Assumes && clause.predicates.iter().any(Option::is_some)) {
-        pending("ForeignAssumes");
-    }
-}
-
-/// The callee's precondition must hold at the call. As for foreign assumptions, the
-/// proof is not ported.
-fn check_call_site_precondition(call: &ast::CallExpr, lookup: Option<&CalleeProcedureLookupResult<'_>>) {
-    let Some(lookup) = lookup else {
-        return;
-    };
-    let has_precondition = lookup.proc.contract().as_ref().is_some_and(|contract| contract.precondition.is_some());
-    if has_precondition && lookup.proc.params().len() == call.args.len() {
-        pending("CallPrecondition");
-    }
 }
 
 fn params_pure(params: &[TypeFuncParam]) -> bool {
@@ -1143,14 +1115,20 @@ pub fn type_call_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, no
             || !matches!(strip_perm(&callee.r#type).as_deref().map(|ty| &ty.node), Some(TypeNode::Func { params, .. }) if !params_pure(params))
     };
     let foreign_checks = || -> Option<&'static str> {
-        check_foreign_static_assumes(node, extern_lookup.as_ref());
+        if let Some(found) = &extern_lookup {
+            if let Some(diag_id) = check_foreign_static_assumes(ctx, type_ctx, node, found.module, found.proc) {
+                return Some(diag_id);
+            }
+        }
         check_ffi_boundary_region_local_raw_pointer_args(ctx, type_ctx, node, env, callee_is_extern)
     };
     let finish = |call_type: TypeRef| -> ExprTypeResult {
         if type_ctx.require_pure && !callee_params_pure() {
             return failed("E-SEM-2802");
         }
-        check_call_site_precondition(node, callee_proc.as_ref());
+        if let Some(diag_id) = check_call_site_precondition(ctx, type_ctx, node, callee_proc.as_ref().map(|lookup| lookup.proc)) {
+            return failed(diag_id);
+        }
         if let Some(lookup) = &callee_proc {
             if let Some(diag_id) = check_shared_arg_write_requirement(type_ctx, lookup.proc.params(), &node.args, &type_expr_fn) {
                 return failed(diag_id);

@@ -23,25 +23,7 @@ pub fn take_pending() -> Option<&'static str> {
     PENDING.with(Cell::take)
 }
 
-thread_local! {
-    static PROOF_CONTEXT_INCOMPLETE: Cell<bool> = const { Cell::new(false) };
-}
-
-/// Starts a body: nothing pending, the proof context complete.
+/// Starts a body: nothing pending.
 pub fn reset_scaffolding() {
     PENDING.with(|cell| cell.set(None));
-    PROOF_CONTEXT_INCOMPLETE.with(|cell| cell.set(false));
-}
-
-/// A statement whose proof facts are not tracked yet has been typed.
-pub fn mark_proof_context_incomplete() {
-    PROOF_CONTEXT_INCOMPLETE.with(|cell| cell.set(true));
-}
-
-/// To be called wherever typing consults the proof context: if facts may be missing
-/// from it, the answer would not be the reference's, and the body becomes pending.
-pub fn consult_proof_context() {
-    if PROOF_CONTEXT_INCOMPLETE.with(Cell::get) {
-        pending("ProofContext");
-    }
 }

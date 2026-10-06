@@ -14,7 +14,7 @@ use crate::context::ScopeContext;
 use crate::typing::callbacks::{CheckResult, ExprTypeFn, IdentTypeFn, PlaceTypeFn, PlaceTypeResult};
 use crate::typing::subtyping::subtyping;
 use crate::typing::expr_result::ExprTypeResult;
-use crate::typing::pending::{mark_proof_context_incomplete, pending};
+use crate::typing::pending::pending;
 use crate::typing::stmt::binding_stmt::type_binding_stmt;
 use crate::typing::stmt::return_stmt::type_return_stmt;
 use crate::typing::stmt_context::StmtTypeContext;
@@ -71,6 +71,8 @@ pub struct StmtSeqResult {
     pub diag_detail: String,
     pub diag_span: Option<Span>,
     pub diagnostic_obligation_ids: Vec<&'static str>,
+    /// The facts known after the last statement.
+    pub proof_ctx: super::proof_facts::ProofCtx,
 }
 
 #[derive(Debug, Clone, Default)]
@@ -381,22 +383,6 @@ pub fn type_stmt(
     }
 }
 
-/// The proof facts a statement leaves for those after it are not tracked yet. A
-/// statement that would add or drop facts marks the proof context incomplete, and a
-/// later proof that consults it makes the body pending instead of deciding wrongly.
-fn note_proof_context_effects(stmt: &Stmt) {
-    let changes_facts = match stmt {
-        Stmt::LetStmt(node) => node.binding.init.is_some(),
-        Stmt::VarStmt(node) => node.binding.init.is_some(),
-        Stmt::AssignStmt(_) | Stmt::CompoundAssignStmt(_) => true,
-        Stmt::ExprStmt(node) => node.value.is_some(),
-        _ => false,
-    };
-    if changes_facts {
-        mark_proof_context_incomplete();
-    }
-}
-
 #[allow(clippy::too_many_arguments)]
 pub fn type_stmt_seq(
     ctx: &ScopeContext<'_>,
@@ -409,11 +395,15 @@ pub fn type_stmt_seq(
     env_ref: EnvRef<'_>,
 ) -> StmtSeqResult {
     let mut current = env.clone();
+    let mut current_proof_ctx = type_ctx.proof_ctx.clone();
     publish_env(type_ctx, env_ref, &current);
     let mut flow = FlowInfo::default();
     for stmt in stmts {
         publish_env(type_ctx, env_ref, &current);
-        // Each statement is typed by functions bound to the environment before it.
+        // Each statement is typed by functions bound to the environment before it,
+        // with the facts the statements before it left.
+        let stmt_ctx = StmtTypeContext { proof_ctx: current_proof_ctx.clone(), ..type_ctx.clone() };
+        let type_ctx = &stmt_ctx;
         let typed = {
             let expr_fn = |inner: &ExprPtr| type_expr(ctx, type_ctx, inner, &current);
             let ident_fn = |name: &str| {
@@ -447,10 +437,11 @@ pub fn type_stmt_seq(
                 diag_detail,
                 diag_span: typed.diag_span.or_else(|| Some(span_of_stmt(stmt).clone())),
                 diagnostic_obligation_ids: typed.diagnostic_obligation_ids,
+                proof_ctx: None,
             };
         }
         current = typed.env;
-        note_proof_context_effects(stmt);
+        current_proof_ctx = super::proof_facts::fallthrough_proof_context_for_stmt(ctx, &current, &current_proof_ctx, stmt);
         publish_env(type_ctx, env_ref, &current);
         flow.results.extend(typed.flow.results);
         merge_break_flow(
@@ -462,12 +453,7 @@ pub fn type_stmt_seq(
         );
     }
     publish_env(type_ctx, env_ref, &current);
-    StmtSeqResult {
-        ok: true,
-        env: current,
-        flow,
-        ..Default::default()
-    }
+    StmtSeqResult { ok: true, env: current, flow, proof_ctx: current_proof_ctx, ..Default::default() }
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -523,8 +509,9 @@ pub fn type_block_info(
     let mut tail_type = None;
     if let Some(tail) = block.tail_opt.as_deref() {
         publish_env(type_ctx, env_ref, &stmts_typed.env);
-        let tail_fn = |inner: &ExprPtr| type_expr(ctx, type_ctx, inner, &stmts_typed.env);
-        let typed = type_expr_with_env(ctx, type_ctx, &stmts_typed.env, &tail_fn, &block.tail_opt);
+        let tail_ctx = StmtTypeContext { proof_ctx: stmts_typed.proof_ctx.clone(), ..type_ctx.clone() };
+        let tail_fn = |inner: &ExprPtr| type_expr(ctx, &tail_ctx, inner, &stmts_typed.env);
+        let typed = type_expr_with_env(ctx, &tail_ctx, &stmts_typed.env, &tail_fn, &block.tail_opt);
         if !typed.ok {
             return BlockInfoResult {
                 diag_id: typed.diag_id,
@@ -634,7 +621,8 @@ pub fn check_block(
     }
     if let Some(tail) = block.tail_opt.as_deref() {
         publish_env(type_ctx, env_ref, &stmts_typed.env);
-        let check = check_expr_against(ctx, type_ctx, &block.tail_opt, expected, &stmts_typed.env);
+        let tail_ctx = StmtTypeContext { proof_ctx: stmts_typed.proof_ctx.clone(), ..type_ctx.clone() };
+        let check = check_expr_against(ctx, &tail_ctx, &block.tail_opt, expected, &stmts_typed.env);
         if check.ok {
             return CheckResult { ok: true, ..Default::default() };
         }

@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 3,950 of 4,569 bodies compared (86.5%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,129 of 4,569 bodies compared (90.4%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -400,9 +400,12 @@ that are not pending, fails on any mismatch, and reports how many bodies are com
 what the rest wait for. The reference types 4,569 bodies on the corpus, 4,203 of them
 successfully and the rest with 120 different rules.
 
-Proof facts that statements leave for later ones (`FallthroughProofContextForStmt`) are
-not tracked yet. Until they are, a statement that would change them marks the proof
-context incomplete and any later proof that consults it makes the body pending.
+The proof facts statements leave for later ones are tracked
+(`typing::stmt::proof_facts`, the reference's `FallthroughProofContextForStmt`): an
+assignment forgets the facts about the name it writes, a binding to a pure expression
+is known to equal it, a binding to a call learns the callee's postcondition and a
+foreign procedure's `ensures` clauses, and an `if` that leaves when its condition holds
+leaves the condition false behind it.
 
 So far part b has:
 
@@ -433,10 +436,10 @@ without arguments, overload resolution among procedures of one name, explicit ty
 arguments with defaults and bounds, inference of type arguments from the arguments and
 from the expected type, argument passing (`move`, `copy`, places passed by reference),
 the write-key requirement for shared arguments to `unique` parameters, and the raw
-pointer check at the foreign boundary. Three checks at a call are not ported and make
-the body pending when they would apply: the proof of the callee's precondition
-(`CallPrecondition`), the proof of a foreign procedure's `assumes` clauses
-(`ForeignAssumes`), and the warning for a callee whose key accesses are unknown
+pointer check at the foreign boundary. The callee's precondition and a foreign
+procedure's `assumes` clauses are proved at the call with the arguments substituted
+(`typing::expr::call_contracts`). One check at a call is not ported and makes the body
+pending when it would apply: the warning for a callee whose key accesses are unknown
 (`CalleeKeyAccessSummary`). The selected overload and the inferred substitution are
 not recorded for later passes yet; that comes with the expression-type store below.
 
@@ -487,13 +490,17 @@ type; an expected closure type supplies what the closure leaves out. The checks 
 use the capture facts are in with it: a closure expected to declare shared dependencies
 must not spawn, and a returned closure must declare the shared data it captures.
 
+The postcondition is proved at `return` (`typing::stmt::postcondition`): the returned
+value takes the place of `@result`, `@entry(e)` becomes `e` where it cannot have
+changed, and the predicate is simplified where the value decides a branch.
+
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from
 37 to 5 seconds.
 
 Known gaps inside what is ported, each of which makes a body pending when reached
 rather than answering: names of module-level declarations (`ValuePathType`), the proof
-of a refinement predicate, postconditions at `return`,
+of a refinement predicate,
 provenance of returned pointers, opaque return types, attributed expressions, and the
 shared-access check under held keys.
 
