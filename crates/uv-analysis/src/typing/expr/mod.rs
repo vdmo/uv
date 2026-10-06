@@ -6,6 +6,7 @@ pub mod binary;
 pub mod call;
 pub mod call_contracts;
 pub mod closure_expr;
+pub mod dispatch_keys;
 pub mod enum_literal;
 pub mod field_access;
 pub mod parallel;

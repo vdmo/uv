@@ -12,6 +12,7 @@ use crate::caps::cap_methods::lookup_context_method_sig;
 use crate::context::{IdKey, ScopeContext};
 use crate::resolve::scopes::{id_eq, id_key_of};
 use crate::typing::callbacks::ExprTypeFn;
+use super::dispatch_keys::{access_of_key_clause, dispatch_pattern_name_set, dynamic_key_pattern, infer_dispatch_accesses};
 use crate::typing::closure_capture::block_captures;
 use crate::typing::const_len::const_len;
 use crate::typing::expr_result::ExprTypeResult;
@@ -411,9 +412,6 @@ pub fn type_spawn_expr(
 /// `dispatch pattern in range [key path mode] [opts] { … }`: the body runs once per
 /// index, in parallel. Without a key clause the keys each iteration needs are inferred
 /// from the shared data the body uses.
-///
-/// That inference, and the check of a written key clause, are not ported: a dispatch
-/// with a key clause, or whose body can see shared data, is left pending.
 pub fn type_dispatch_expr(
     ctx: &ScopeContext<'_>,
     type_ctx: &StmtTypeContext<'_>,
@@ -522,15 +520,20 @@ pub fn type_dispatch_expr(
     if non_associative_reduce && !has_ordered {
         return failed("E-CON-0143");
     }
-    if expr.key_clause.is_some() {
-        crate::typing::pending::pending("DispatchKeyClause");
-        return ExprTypeResult::default();
-    }
-    // Only shared data needs keys; a body that can see none has nothing to infer.
-    let sees_shared = body_env.scopes.iter().flat_map(|scope| scope.iter()).any(|(_, binding)| perm_of_type(&binding.r#type) == Permission::Shared);
-    if sees_shared {
-        crate::typing::pending::pending("DispatchKeyInference");
-        return ExprTypeResult::default();
+    // The keys each iteration needs: the written clause, or what the body uses.
+    let pattern_names = dispatch_pattern_name_set(&expr.pattern);
+    let partition_spec = match &expr.key_clause {
+        Some(key_clause) => vec![access_of_key_clause(key_clause, &pattern_names)],
+        None => match infer_dispatch_accesses(&expr.pattern, body, &body_env) {
+            Ok(spec) => spec,
+            Err(diag_id) => return failed(diag_id),
+        },
+    };
+    if let (false, Some(diags), true) = (partition_spec.is_empty(), &type_ctx.diags, dynamic_key_pattern(&partition_spec, &pattern_names)) {
+        let warn_span = expr.key_clause.as_ref().map_or(&body.span, |key_clause| &key_clause.span);
+        if let Some(diag) = make_diagnostic_by_id("W-CON-0140", Some(warn_span.clone())) {
+            emit(&mut diags.borrow_mut(), diag);
+        }
     }
     if !has_reduce {
         return ExprTypeResult::typed(make_type_prim("()"));
