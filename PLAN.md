@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,547 of 4,569 bodies compared (99.5%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: all 4,569 bodies compared, none mismatched or pending; method bodies and the expression-type store remain |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -438,9 +438,10 @@ from the expected type, argument passing (`move`, `copy`, places passed by refer
 the write-key requirement for shared arguments to `unique` parameters, and the raw
 pointer check at the foreign boundary. The callee's precondition and a foreign
 procedure's `assumes` clauses are proved at the call with the arguments substituted
-(`typing::expr::call_contracts`). One check at a call is not ported and makes the body
-pending when it would apply: the warning for a callee whose key accesses are unknown
-(`CalleeKeyAccessSummary`). The selected overload and the inferred substitution are
+(`typing::expr::call_contracts`). A call under held keys of a procedure whose key
+accesses are unknown warns (`typing::expr::callee_key_access`); the reference also
+collects the accesses themselves, which nothing reads during typing, so only whether
+they are unknown is computed. The selected overload and the inferred substitution are
 not recorded for later passes yet; that comes with the expression-type store below.
 
 Field access (records, modal states, `Self` in a class) and tuple element access are in
@@ -539,9 +540,17 @@ The declaration tables are now shared between contexts instead of copied, as typ
 body under another module's name needs a context of its own; the body dump went from
 37 to 5 seconds.
 
+The last small forms: attributed expressions as values, places and against an expected
+type (`typing::attributed`: attribute validation, a memory ordering only on an access
+to shared data, `[[dynamic]]` as a dynamic context), `alloc_raw` on a heap allocator
+where a raw pointer is expected, the GPU barrier divergence check of `if`, and the
+provenance of a returned safe pointer or, at an exported boundary, raw pointer.
+
 Known gaps inside what is ported, each of which makes a body pending when reached
-rather than answering: provenance of returned pointers, opaque return types,
-attributed expressions, and the shared-access check under held keys.
+rather than answering; no body of the gate reaches one: opaque return types, the
+well-formedness of a refinement predicate, `comptime` expressions (also under
+attributes), a quote inside compile-time code and `@entry` inside a postcondition
+(outside those contexts both are rejected as in the reference).
 
 Two things the gate does not exercise yet, because the oracle's harness leaves them
 unset as well: the store of expression types (`ctx.expr_types`), which the reference

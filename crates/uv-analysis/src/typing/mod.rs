@@ -1,6 +1,7 @@
 //! Types and typing.
 
 pub mod alias_normalize;
+pub mod attributed;
 pub mod callbacks;
 pub mod check_expr;
 pub mod closure_capture;

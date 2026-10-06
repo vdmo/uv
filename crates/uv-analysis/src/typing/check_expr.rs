@@ -9,11 +9,12 @@ use uv_source::ast::{self, ArraySegment, ExprNode, ExprPtr};
 use uv_source::lexer::token::TokenKind;
 
 use super::alias_normalize::normalize_alias_type;
+use super::attributed::has_memory_order_attribute;
+use uv_source::attributes::{validate_attributes, AttributeTarget};
 use super::callbacks::{CheckResult, ExprTypeFn, IdentTypeFn, PlaceTypeFn};
 use super::const_len::const_len;
 use super::expr_result::ExprTypeResult;
 use super::literals::{check_literal_expr, type_literal_expr};
-use super::pending::pending;
 use super::subtyping::subtyping;
 use super::type_equiv::type_equiv;
 use super::type_lookup::async_sig_of;
@@ -23,7 +24,9 @@ use crate::composite::arrays_slices::coerce_array_to_slice;
 use crate::context::ScopeContext;
 use crate::contracts::verification::{static_proof_at, StaticProofContext};
 use crate::typing::stmt::postcondition::substitute_refinement_self;
-use crate::memory::calls::type_call_with_subst;
+use crate::caps::builtin_paths::path_matches_builtin_name;
+use crate::memory::calls::{has_source_provenance, is_in_unsafe_span, is_place_expr_for_call, type_call_with_subst};
+use crate::typing::expr::method_call::addr_of_ok;
 use crate::typing::expr::call::infer_generic_call_subst;
 use crate::modal::lookup::{has_state, lookup_modal_decl};
 use crate::modal::modal_widen::niche_compatible;
@@ -214,6 +217,69 @@ impl Checker<'_, '_, '_> {
         Ok(total_length)
     }
 
+    /// `heap~>alloc_raw(count)` where a mutable raw pointer is expected: the element type
+    /// comes from the expectation, so only the receiver and the count are checked.
+    /// Nothing when the receiver is not a heap allocator.
+    fn check_heap_alloc_raw(&self, e: &ast::Expr, method: &ast::MethodCallExpr) -> Option<CheckResult> {
+        let ctx = self.ctx;
+        let mut recv_type = (self.type_expr)(&method.receiver);
+        if !recv_type.ok && recv_type.diag_id == Some("ValueUse-NonBitcopyPlace") {
+            let span = method.receiver.as_deref().map(|receiver| receiver.span.clone()).unwrap_or_default();
+            let move_expr = ast::Expr { span, node: ExprNode::MoveExpr(ast::MoveExpr { place: method.receiver.clone() }) };
+            recv_type = (self.type_expr)(&Some(std::sync::Arc::new(move_expr)));
+        }
+        if !recv_type.ok {
+            return Some(no(recv_type.diag_id));
+        }
+        let recv_strip = strip_perm(&recv_type.r#type);
+        let Some(TypeNode::Dynamic(path)) = recv_strip.as_deref().map(|ty| &ty.node) else {
+            return None;
+        };
+        if !path_matches_builtin_name(path, "HeapAllocator") {
+            return None;
+        }
+        if !is_in_unsafe_span(ctx, &e.span) {
+            return Some(no(Some("E-MEM-3030")));
+        }
+        let required = make_type_perm(Permission::Const, make_type_dynamic(vec!["HeapAllocator".to_string()]));
+        let recv_sub = subtyping(ctx, &recv_type.r#type, &required);
+        if !recv_sub.ok {
+            return Some(no(recv_sub.diag_id));
+        }
+        if !recv_sub.subtype {
+            return Some(no(Some("E-TYP-1605")));
+        }
+        if has_source_provenance(&method.receiver) {
+            if !is_place_expr_for_call(&method.receiver) {
+                return Some(no(Some("E-TYP-1603")));
+            }
+            if let Err(diag_id) = addr_of_ok(&method.receiver, self.type_expr, None) {
+                return Some(no(diag_id));
+            }
+        }
+        let [arg] = method.args.as_slice() else {
+            return Some(no(Some("E-SEM-2532")));
+        };
+        if arg.pass == ast::ArgPassKind::Move {
+            return Some(no(Some("E-SEM-2535")));
+        }
+        if has_source_provenance(&arg.value) && !is_place_expr_for_call(&arg.value) {
+            return Some(no(Some("E-TYP-1603")));
+        }
+        let arg_type = (self.type_expr)(&arg.value);
+        if !arg_type.ok {
+            return Some(no(arg_type.diag_id));
+        }
+        let count_sub = subtyping(ctx, &arg_type.r#type, &make_type_prim("usize"));
+        if !count_sub.ok {
+            return Some(no(count_sub.diag_id));
+        }
+        if !count_sub.subtype {
+            return Some(no(Some("E-SEM-2533")));
+        }
+        Some(ok())
+    }
+
     fn check(&self, expr: &ExprPtr, expected: &TypeRef) -> CheckResult {
         let ctx = self.ctx;
         let (Some(e), Some(expected_ty)) = (expr.as_deref(), expected.as_deref()) else {
@@ -225,9 +291,33 @@ impl Checker<'_, '_, '_> {
         let expected_strip = strip_perm(expected);
         let expected_strip_node = expected_strip.as_deref().map(|ty| &ty.node);
         match &e.node {
-            ExprNode::AttributedExpr(_) => {
-                pending("AttributedExpr");
-                return CheckResult::default();
+            ExprNode::AttributedExpr(attributed) => {
+                let no = |diag_id| CheckResult { diag_id, ..Default::default() };
+                let validation = validate_attributes(&attributed.attrs, AttributeTarget::Expression);
+                if !validation.ok {
+                    return no(validation.diag_id);
+                }
+                if has_memory_order_attribute(&attributed.attrs) {
+                    let observed_attr = (self.type_expr)(expr);
+                    if !observed_attr.ok {
+                        return no(observed_attr.diag_id);
+                    }
+                }
+                let observed = (self.type_expr)(expr);
+                if observed.ok {
+                    let sub = subtyping(ctx, &observed.r#type, expected);
+                    if !sub.ok {
+                        return no(sub.diag_id);
+                    }
+                    if sub.subtype {
+                        return CheckResult { ok: true, ..Default::default() };
+                    }
+                }
+                let checked_inner = self.check(&attributed.expr, expected);
+                if !checked_inner.ok {
+                    return no(checked_inner.diag_id);
+                }
+                return CheckResult { ok: true, ..Default::default() };
             }
             ExprNode::ClosureExpr(closure) => {
                 let normalized = match normalize_alias_type(ctx, expected) {
@@ -307,8 +397,9 @@ impl Checker<'_, '_, '_> {
             }
             ExprNode::MethodCallExpr(method) if id_eq(&method.name, "alloc_raw") => {
                 if matches!(expected_strip_node, Some(TypeNode::RawPtr { qual: RawPtrQual::Mut, .. })) {
-                    pending("alloc_raw");
-                    return CheckResult::default();
+                    if let Some(result) = self.check_heap_alloc_raw(e, method) {
+                        return result;
+                    }
                 }
             }
             // A call whose type arguments may follow from the expected type.

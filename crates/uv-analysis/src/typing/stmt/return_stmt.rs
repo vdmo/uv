@@ -18,7 +18,9 @@ use crate::typing::expr_result::ExprTypeResult;
 use crate::typing::outcome::{classify_outcome_intro, OutcomeIntro};
 use crate::typing::pending::pending;
 use crate::typing::stmt_context::StmtTypeContext;
-use crate::typing::type_env::{bind_of, TypeEnv};
+use crate::memory::regions::ProvenanceKind;
+use crate::provenance::prov_expr::track_expr_provenance;
+use crate::typing::type_env::{bind_of, BindingProvenanceSeedKind, TypeBinding, TypeEnv};
 use crate::typing::type_expr::{check_expr_against, type_expr};
 use crate::typing::type_lookup::async_sig_of;
 use crate::typing::type_predicates::strip_perm_and_refine;
@@ -129,13 +131,47 @@ fn check_escaping_closure_return(ret_expr: &ExprPtr, env: &TypeEnv, expected: &T
     None
 }
 
+/// The binding an expression is a part of, for the provenance it was declared with.
+fn binding_for_ffi_boundary_expr<'e>(env: &'e TypeEnv, expr: &ExprPtr) -> Option<&'e TypeBinding> {
+    match &expr.as_deref()?.node {
+        ExprNode::IdentifierExpr(node) => bind_of(env, &node.name),
+        ExprNode::FieldAccessExpr(node) => binding_for_ffi_boundary_expr(env, &node.base),
+        ExprNode::TupleAccessExpr(node) => binding_for_ffi_boundary_expr(env, &node.base),
+        ExprNode::IndexAccessExpr(node) => binding_for_ffi_boundary_expr(env, &node.base),
+        ExprNode::DerefExpr(node) => binding_for_ffi_boundary_expr(env, &node.value),
+        ExprNode::MoveExpr(node) => binding_for_ffi_boundary_expr(env, &node.place),
+        ExprNode::AttributedExpr(node) => binding_for_ffi_boundary_expr(env, &node.expr),
+        _ => None,
+    }
+}
+
 /// A raw pointer into a region must not leave through an exported procedure.
-fn check_ffi_boundary_region_local_raw_pointer_return(type_ctx: &StmtTypeContext<'_>, ret_expr: &ExprPtr, expected: &TypeRef) -> Option<&'static str> {
+fn check_ffi_boundary_region_local_raw_pointer_return(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    env: &TypeEnv,
+    type_expr_fn: ExprTypeFn<'_>,
+    ret_expr: &ExprPtr,
+    expected: &TypeRef,
+) -> Option<&'static str> {
     if !type_ctx.ffi_export_boundary || ret_expr.is_none() || !type_may_be(expected, |node| matches!(node, TypeNode::RawPtr { .. })) {
         return None;
     }
-    pending("FfiBoundaryReturn");
-    None
+    let typed = type_expr_with_current_env(ctx, type_ctx, env, type_expr_fn, ret_expr);
+    if !typed.ok {
+        return typed.diag_id;
+    }
+    if !matches!(strip_perm_and_refine(&typed.r#type).as_deref().map(|ty| &ty.node), Some(TypeNode::RawPtr { .. })) {
+        return None;
+    }
+    if binding_for_ffi_boundary_expr(env, ret_expr).is_some_and(|binding| binding.provenance_kind == BindingProvenanceSeedKind::Region) {
+        return Some("E-SYS-3360");
+    }
+    let prov = track_expr_provenance(ctx, ret_expr, env);
+    if !prov.ok {
+        return prov.diag_id;
+    }
+    (prov.kind == ProvenanceKind::Region).then_some("E-SYS-3360")
 }
 
 /// A safe pointer to a local must not be returned.
@@ -155,10 +191,14 @@ fn check_returned_safe_pointer_provenance(
     if !typed.ok {
         return typed.diag_id;
     }
-    if is_safe_ptr_type(&typed.r#type) {
-        pending("ReturnProvenance");
+    if !is_safe_ptr_type(&typed.r#type) {
+        return None;
     }
-    None
+    let prov = track_expr_provenance(ctx, ret_expr, env);
+    if !prov.ok {
+        return prov.diag_id;
+    }
+    matches!(prov.kind, ProvenanceKind::Stack | ProvenanceKind::Region).then_some("E-MEM-3020")
 }
 
 fn failed(diag_id: Option<&'static str>) -> StmtTypeResult {
@@ -176,7 +216,7 @@ pub fn type_return_stmt(
     // The checks every accepted value goes through, in the reference's order.
     let after_checks = |expected: &TypeRef| -> StmtTypeResult {
         let diag = check_escaping_closure_return(&node.value_opt, env, expected)
-            .or_else(|| check_ffi_boundary_region_local_raw_pointer_return(type_ctx, &node.value_opt, expected))
+            .or_else(|| check_ffi_boundary_region_local_raw_pointer_return(ctx, type_ctx, env, type_expr_fn, &node.value_opt, expected))
             .or_else(|| check_returned_safe_pointer_provenance(ctx, type_ctx, env, type_expr_fn, &node.value_opt, expected))
             .or_else(|| verify_postcondition_at_return(ctx, type_ctx, env, type_expr_fn, &node.value_opt));
         match diag {

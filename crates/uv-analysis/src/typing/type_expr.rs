@@ -6,9 +6,11 @@ use uv_core::diagnostic_messages::make_diagnostic_by_id;
 use uv_core::diagnostics::{emit, SubDiagnostic, SubDiagnosticKind};
 use uv_core::span::Span;
 
+use super::attributed::{attribute_list_diag, compute_expr_dynamic_context, memory_order_placement_diag};
 use super::callbacks::{CheckResult, PlaceTypeResult};
 use super::check_expr::check_expr;
 use super::closure_capture::check_escaping_closure_spawn;
+use super::expr::call::is_comptime_typing_env;
 use super::expr::small;
 use super::expr::path::{type_identifier_place, type_path_expr};
 use super::expr_result::ExprTypeResult;
@@ -284,6 +286,27 @@ fn type_expr_form(
         ExprNode::CallTypeArgsExpr(node) => super::expr::call::type_call_type_args_expr(ctx, type_ctx, node, env),
         // Splices are gone before typing; the reference types them as nothing.
         ExprNode::SpliceExprNode(_) | ExprNode::SpliceIdentNode(_) => ExprTypeResult::default(),
+        // `@entry` belongs to postconditions; typing it there is not ported.
+        ExprNode::EntryExpr(_) if type_ctx.contract_phase != ContractPhase::Postcondition => {
+            ExprTypeResult { diag_id: Some("E-SEM-2852"), ..Default::default() }
+        }
+        // A quote belongs to compile-time code; typing it there is not ported.
+        ExprNode::QuoteExpr(_) if !is_comptime_typing_env(env) => ExprTypeResult { diag_id: Some("E-CTE-0221"), ..Default::default() },
+        // The environment of an attributed `comptime` is not ported.
+        ExprNode::AttributedExpr(node) if !matches!(node.expr.as_deref().map(|inner| &inner.node), Some(ExprNode::ComptimeExpr(_))) => {
+            if let Some(diag_id) = attribute_list_diag(type_ctx, &node.attrs) {
+                return ExprTypeResult { diag_id: Some(diag_id), ..Default::default() };
+            }
+            let inner_ctx = StmtTypeContext { contract_dynamic: compute_expr_dynamic_context(e, type_ctx.contract_dynamic), ..type_ctx.clone() };
+            let inner = type_expr(ctx, &inner_ctx, &node.expr, env);
+            if !inner.ok {
+                return inner;
+            }
+            if let Some(diag_id) = memory_order_placement_diag(ctx, &inner_ctx, &node.attrs, &node.expr, env) {
+                return ExprTypeResult { diag_id: Some(diag_id), ..Default::default() };
+            }
+            inner
+        }
         _ => {
             pending(ast::expr_kind(e));
             ExprTypeResult::default()
@@ -318,9 +341,20 @@ pub fn type_place(
         ExprNode::IndexAccessExpr(node) => {
             super::expr::access::type_index_access_place(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
         }
-        ExprNode::AttributedExpr(_) => {
-            pending("AttributedExpr place");
-            PlaceTypeResult::default()
+        ExprNode::AttributedExpr(node) => {
+            let failed = |diag_id| PlaceTypeResult { diag_id: Some(diag_id), diag_span: Some(e.span.clone()), ..Default::default() };
+            if let Some(diag_id) = attribute_list_diag(type_ctx, &node.attrs) {
+                return failed(diag_id);
+            }
+            let inner_ctx = StmtTypeContext { contract_dynamic: compute_expr_dynamic_context(e, type_ctx.contract_dynamic), ..type_ctx.clone() };
+            let inner = type_place(ctx, &inner_ctx, &node.expr, env);
+            if !inner.ok {
+                return inner;
+            }
+            if let Some(diag_id) = memory_order_placement_diag(ctx, &inner_ctx, &node.attrs, &node.expr, env) {
+                return failed(diag_id);
+            }
+            inner
         }
         _ => PlaceTypeResult::default(),
     };
@@ -347,12 +381,7 @@ fn try_dynamic_refinement_fallback(
     let Some(e) = expr.as_deref() else {
         return CheckResult::default();
     };
-    // An attribute on the expression may itself make the context dynamic.
-    if matches!(e.node, ExprNode::AttributedExpr(_)) {
-        pending("AttributedExpr");
-        return CheckResult::default();
-    }
-    if !type_ctx.contract_dynamic || expected.is_none() {
+    if !compute_expr_dynamic_context(e, type_ctx.contract_dynamic) || expected.is_none() {
         return CheckResult::default();
     }
     let norm = match super::alias_normalize::normalize_alias_type(ctx, expected) {
@@ -388,6 +417,22 @@ pub fn check_expr_against(
     // A record or enum literal takes its type arguments from the expected type; when it
     // neither fits nor names a rule, the general check below decides.
     match &e.node {
+        // The environment of an attributed `comptime` is not ported.
+        ExprNode::AttributedExpr(node) if !matches!(node.expr.as_deref().map(|inner| &inner.node), Some(ExprNode::ComptimeExpr(_))) => {
+            let failed = |diag_id| CheckResult { diag_id: Some(diag_id), diag_span: Some(e.span.clone()), ..Default::default() };
+            if let Some(diag_id) = attribute_list_diag(type_ctx, &node.attrs) {
+                return failed(diag_id);
+            }
+            let inner_ctx = StmtTypeContext { contract_dynamic: compute_expr_dynamic_context(e, type_ctx.contract_dynamic), ..type_ctx.clone() };
+            let checked_inner = check_expr_against(ctx, &inner_ctx, &node.expr, expected, env);
+            if !checked_inner.ok {
+                return checked_inner;
+            }
+            if let Some(diag_id) = memory_order_placement_diag(ctx, &inner_ctx, &node.attrs, &node.expr, env) {
+                return failed(diag_id);
+            }
+            return CheckResult { ok: true, ..Default::default() };
+        }
         ExprNode::RecordExpr(node) => {
             let typed_record = super::expr::record_literal::type_record_expr(ctx, type_ctx, node, env, Some(expected));
             if typed_record.ok {
@@ -462,6 +507,9 @@ pub fn check_expr_against(
                 diag_span: checked.diag_span,
                 ..Default::default()
             };
+        }
+        ExprNode::QuoteExpr(_) if !is_comptime_typing_env(env) => {
+            return CheckResult { diag_id: Some("E-CTE-0221"), diag_span: Some(e.span.clone()), ..Default::default() };
         }
         ExprNode::AttributedExpr(_)
         | ExprNode::ComptimeExpr(_)

@@ -552,7 +552,7 @@ fn check_builtin_modal_member_args(
 
 /// Whether a reference may be taken to an argument: an indexed place must be indexed by
 /// `usize`.
-fn addr_of_ok(expr: &ExprPtr, type_expr: ExprTypeFn<'_>, check_expr: Option<ArgCheckFn<'_>>) -> Result<(), Diag> {
+pub(crate) fn addr_of_ok(expr: &ExprPtr, type_expr: ExprTypeFn<'_>, check_expr: Option<ArgCheckFn<'_>>) -> Result<(), Diag> {
     let Some(e) = expr.as_deref().filter(|_| is_place_expr(expr)) else {
         return Err(None);
     };

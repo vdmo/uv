@@ -13,6 +13,7 @@ use uv_source::ast::{self, Arg, ArgPassKind, ExprNode, ExprPtr};
 use uv_source::attributes::{attrs, has_attribute};
 
 use super::call_contracts::{check_call_site_precondition, check_foreign_static_assumes};
+use super::callee_key_access::KeyAccessSummaryBuilder;
 use crate::caps::builtin_paths::{is_capability_class_path, lookup_builtin_record_ctor_path, path_matches_builtin_name};
 use crate::caps::cap_concurrency::is_gpu_intrinsic_name;
 use crate::composite::classes::type_implements_class;
@@ -32,7 +33,6 @@ use crate::resolve::scopes_lookup::{resolve_type_name, resolve_value_name};
 use crate::typing::callbacks::{CheckResult, ExprTypeFn, PlaceTypeFn};
 use crate::typing::expr_result::ExprTypeResult;
 use crate::typing::outcome::{classify_outcome_intro, OutcomeIntro};
-use crate::typing::pending::pending;
 use crate::typing::stmt::binding_stmt::normalize_deprecated_message;
 use crate::typing::stmt_context::{with_shared_access_mode, ContractPhase, StmtTypeContext};
 use crate::typing::subtyping::subtyping;
@@ -136,7 +136,7 @@ pub struct CalleeProcedureLookupResult<'m> {
     pub name: String,
 }
 
-fn is_comptime_typing_env(env: &TypeEnv) -> bool {
+pub(crate) fn is_comptime_typing_env(env: &TypeEnv) -> bool {
     ["diagnostics", "introspect", "emitter", "files", "target"].iter().any(|name| bind_of(env, name).is_some())
 }
 
@@ -319,7 +319,7 @@ fn resolve_free_procedure_overload<'c>(
     out
 }
 
-fn type_is_shared_param_surface(ty: &ast::TypePtr) -> bool {
+pub(crate) fn type_is_shared_param_surface(ty: &ast::TypePtr) -> bool {
     match ty.as_deref().map(|ty| &ty.node) {
         Some(ast::TypeNode::TypePermType(node)) => node.perm == ast::TypePerm::Shared,
         Some(ast::TypeNode::TypeRefine(node)) => type_is_shared_param_surface(&node.base),
@@ -373,28 +373,34 @@ fn check_shared_arg_write_requirement(
 }
 
 /// A call under held keys of a procedure whose key accesses are unknown warns when it
-/// is handed shared data the keys cover. The summary of a procedure's accesses is not
-/// ported, so a call that could warn is left pending.
+/// is handed shared data the keys cover.
 fn emit_unknown_callee_access_warning_if_needed(
+    ctx: &ScopeContext<'_>,
     type_ctx: &StmtTypeContext<'_>,
     node: &ast::CallExpr,
     lookup: Option<&CalleeProcedureLookupResult<'_>>,
 ) {
-    if !type_ctx.keys_held || type_ctx.diags.is_none() || type_ctx.held_key_paths.is_empty() {
+    let Some(diags) = type_ctx.diags.as_ref().filter(|_| type_ctx.keys_held && !type_ctx.held_key_paths.is_empty()) else {
         return;
-    }
+    };
     let Some(proc) = lookup.and_then(|lookup| lookup.proc.proc) else {
         return;
     };
-    let could_warn = node.args.iter().zip(&proc.params).any(|(arg, param)| {
+    if !KeyAccessSummaryBuilder::new(ctx).accesses_unknown(proc) {
+        return;
+    }
+    let covered = node.args.iter().zip(&proc.params).any(|(arg, param)| {
         if !type_is_shared_param_surface(&param.r#type) {
             return false;
         }
         let built = build_key_path(&arg.value);
         built.success && type_ctx.held_key_paths.iter().any(|held| is_prefix(&held.path, &built.path))
     });
-    if could_warn {
-        pending("CalleeKeyAccessSummary");
+    if covered {
+        let span = node.callee.as_deref().map(|callee| callee.span.clone()).unwrap_or_default();
+        if let Some(diag) = make_diagnostic_by_id("W-CON-0005", Some(span)) {
+            emit(&mut diags.borrow_mut(), diag);
+        }
     }
 }
 
@@ -1137,7 +1143,7 @@ pub fn type_call_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, no
         if let Some(diag_id) = foreign_checks() {
             return failed(diag_id);
         }
-        emit_unknown_callee_access_warning_if_needed(type_ctx, node, callee_proc.as_ref());
+        emit_unknown_callee_access_warning_if_needed(ctx, type_ctx, node, callee_proc.as_ref());
         if let Some(lookup) = &callee_proc {
             emit_deprecated_reference_warning_from_attrs(lookup.proc.attrs(), type_ctx, node.callee.as_deref().map(|callee| callee.span.clone()));
         }

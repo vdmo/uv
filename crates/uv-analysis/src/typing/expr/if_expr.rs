@@ -11,13 +11,13 @@ use std::sync::Arc;
 use uv_core::span::Span;
 use uv_source::ast::{self, ExprNode, ExprPtr};
 
+use crate::caps::cap_concurrency::is_gpu_execution_barrier_name;
 use crate::context::{IdKey, ScopeContext};
 use crate::contracts::purity::is_pure_in_scope;
 use crate::contracts::verification::{extend_proof_context_with_predicate_at, negated_predicate};
 use crate::resolve::scopes::{id_eq, id_key_of};
 use crate::typing::callbacks::CheckResult;
 use crate::typing::expr_result::ExprTypeResult;
-use crate::typing::pending::pending;
 use crate::typing::stmt_context::{with_shared_access_mode, StmtTypeContext};
 use crate::typing::subtyping::subtyping;
 use crate::typing::type_env::{gpu_context, TypeEnv};
@@ -172,8 +172,8 @@ fn prepare_branches<'t>(
         return Err((Some("If-Cond-NotBool"), String::new()));
     }
     // On a GPU both branches must reach the same barriers.
-    if gpu_context(env) {
-        pending("GpuBarrier");
+    if gpu_context(env) && contains_gpu_barrier_call(&expr.then_expr) != contains_gpu_barrier_call(&expr.else_expr) {
+        return Err((Some("E-CON-0158"), String::new()));
     }
     let mut branches =
         Branches { then_ctx: type_ctx.clone(), else_ctx: type_ctx.clone(), then_env: env.clone(), else_env: env.clone() };
@@ -280,4 +280,77 @@ pub fn check_if_expr(
         return branch_failure("else", expected, else_check);
     }
     CheckResult { ok: true, ..Default::default() }
+}
+
+fn block_contains_gpu_barrier_call(block: &ast::BlockPtr) -> bool {
+    block.as_deref().is_some_and(|block| block.stmts.iter().any(stmt_contains_gpu_barrier_call) || contains_gpu_barrier_call(&block.tail_opt))
+}
+
+fn stmt_contains_gpu_barrier_call(stmt: &ast::Stmt) -> bool {
+    use ast::Stmt;
+    match stmt {
+        Stmt::LetStmt(node) => contains_gpu_barrier_call(&node.binding.init),
+        Stmt::VarStmt(node) => contains_gpu_barrier_call(&node.binding.init),
+        Stmt::AssignStmt(node) => contains_gpu_barrier_call(&node.place) || contains_gpu_barrier_call(&node.value),
+        Stmt::CompoundAssignStmt(node) => contains_gpu_barrier_call(&node.place) || contains_gpu_barrier_call(&node.value),
+        Stmt::ExprStmt(node) => contains_gpu_barrier_call(&node.value),
+        Stmt::DeferStmt(node) => block_contains_gpu_barrier_call(&node.body),
+        Stmt::RegionStmt(node) => block_contains_gpu_barrier_call(&node.body),
+        Stmt::FrameStmt(node) => block_contains_gpu_barrier_call(&node.body),
+        Stmt::UnsafeBlockStmt(node) => block_contains_gpu_barrier_call(&node.body),
+        Stmt::KeyBlockStmt(node) => block_contains_gpu_barrier_call(&node.body),
+        Stmt::ReturnStmt(node) => contains_gpu_barrier_call(&node.value_opt),
+        Stmt::BreakStmt(node) => contains_gpu_barrier_call(&node.value_opt),
+        _ => false,
+    }
+}
+
+/// Whether a branch calls a GPU execution barrier. Loops, closures and nested tasks
+/// are not looked into, as in the reference.
+fn contains_gpu_barrier_call(expr: &ExprPtr) -> bool {
+    let Some(e) = expr.as_deref() else {
+        return false;
+    };
+    let any = |exprs: &[&ExprPtr]| exprs.iter().any(|inner| contains_gpu_barrier_call(inner));
+    match &e.node {
+        ExprNode::CallExpr(node) => {
+            let barrier = match node.callee.as_deref().map(|callee| &callee.node) {
+                Some(ExprNode::IdentifierExpr(ident)) => is_gpu_execution_barrier_name(&ident.name),
+                Some(ExprNode::PathExpr(path)) => is_gpu_execution_barrier_name(&path.name),
+                _ => false,
+            };
+            barrier || contains_gpu_barrier_call(&node.callee) || node.args.iter().any(|arg| contains_gpu_barrier_call(&arg.value))
+        }
+        ExprNode::MethodCallExpr(node) => {
+            contains_gpu_barrier_call(&node.receiver) || node.args.iter().any(|arg| contains_gpu_barrier_call(&arg.value))
+        }
+        ExprNode::IfExpr(node) => any(&[&node.cond, &node.then_expr, &node.else_expr]),
+        ExprNode::IfIsExpr(node) => any(&[&node.scrutinee, &node.then_expr, &node.else_expr]),
+        ExprNode::IfCaseExpr(node) => {
+            contains_gpu_barrier_call(&node.scrutinee)
+                || node.cases.iter().any(|clause| contains_gpu_barrier_call(&clause.body))
+                || contains_gpu_barrier_call(&node.else_expr)
+        }
+        ExprNode::BlockExpr(node) => block_contains_gpu_barrier_call(&node.block),
+        ExprNode::UnsafeBlockExpr(node) => block_contains_gpu_barrier_call(&node.block),
+        ExprNode::AttributedExpr(node) => contains_gpu_barrier_call(&node.expr),
+        ExprNode::UnaryExpr(node) => contains_gpu_barrier_call(&node.value),
+        ExprNode::CastExpr(node) => contains_gpu_barrier_call(&node.value),
+        ExprNode::DerefExpr(node) => contains_gpu_barrier_call(&node.value),
+        ExprNode::AllocExpr(node) => contains_gpu_barrier_call(&node.value),
+        ExprNode::PropagateExpr(node) => contains_gpu_barrier_call(&node.value),
+        ExprNode::AddressOfExpr(node) => contains_gpu_barrier_call(&node.place),
+        ExprNode::MoveExpr(node) => contains_gpu_barrier_call(&node.place),
+        ExprNode::BinaryExpr(node) => any(&[&node.lhs, &node.rhs]),
+        ExprNode::RangeExpr(node) => any(&[&node.lhs, &node.rhs]),
+        ExprNode::PipelineExpr(node) => any(&[&node.lhs, &node.rhs]),
+        ExprNode::ArrayRepeatExpr(node) => any(&[&node.value, &node.count]),
+        ExprNode::IndexAccessExpr(node) => any(&[&node.base, &node.index]),
+        ExprNode::FieldAccessExpr(node) => contains_gpu_barrier_call(&node.base),
+        ExprNode::TupleAccessExpr(node) => contains_gpu_barrier_call(&node.base),
+        ExprNode::TupleExpr(node) => node.elements.iter().any(contains_gpu_barrier_call),
+        ExprNode::ArrayExpr(node) => ast::array_expr_subexprs(node).into_iter().any(contains_gpu_barrier_call),
+        ExprNode::RecordExpr(node) => node.fields.iter().any(|field| contains_gpu_barrier_call(&field.value)),
+        _ => false,
+    }
 }
