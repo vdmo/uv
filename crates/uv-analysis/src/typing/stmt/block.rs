@@ -359,6 +359,9 @@ pub fn type_stmt(
             type_place_fn,
         ),
         Stmt::ReturnStmt(node) => type_return_stmt(ctx, type_ctx, node, env, type_expr_fn),
+        Stmt::AssignStmt(node) => {
+            super::assign_stmt::type_assign_stmt(ctx, type_ctx, node, env, type_expr_fn, type_ident_fn, type_place_fn)
+        }
         Stmt::ExprStmt(node) => super::expr_stmt::type_expr_stmt(ctx, type_ctx, node, env, type_expr_fn),
         _ => {
             pending(stmt_kind(stmt));
