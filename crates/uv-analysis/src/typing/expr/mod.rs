@@ -1,6 +1,7 @@
 //! Typing the expression forms, one file per form as in the reference.
 
 pub mod access;
+pub mod contract_entry;
 pub mod async_forms;
 pub mod binary;
 pub mod call;

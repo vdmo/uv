@@ -291,10 +291,7 @@ fn type_expr_form(
         ExprNode::CallTypeArgsExpr(node) => super::expr::call::type_call_type_args_expr(ctx, type_ctx, node, env),
         // Splices are gone before typing; the reference types them as nothing.
         ExprNode::SpliceExprNode(_) | ExprNode::SpliceIdentNode(_) => ExprTypeResult::default(),
-        // `@entry` belongs to postconditions; typing it there is not ported.
-        ExprNode::EntryExpr(_) if type_ctx.contract_phase != ContractPhase::Postcondition => {
-            ExprTypeResult { diag_id: Some("E-SEM-2852"), ..Default::default() }
-        }
+        ExprNode::EntryExpr(node) => super::expr::contract_entry::type_entry_expr(ctx, type_ctx, node, env),
         // A quote belongs to compile-time code; typing it there is not ported.
         ExprNode::QuoteExpr(_) if !is_comptime_typing_env(env) => ExprTypeResult { diag_id: Some("E-CTE-0221"), ..Default::default() },
         // The environment of an attributed `comptime` is not ported.

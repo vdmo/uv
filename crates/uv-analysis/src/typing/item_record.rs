@@ -14,6 +14,9 @@ use uv_source::ast::{self, AttributeArgValue};
 use uv_source::attributes::{attrs, has_attribute, resolve_verification_mode_attribute, validate_attributes, AttributeTarget, VerificationModeAttribute};
 use uv_source::lexer::token::TokenKind;
 
+use crate::contracts::contract_check::{check_behavioral_subtyping, check_contract_well_formed, check_type_invariant};
+use crate::contracts::purity::ContractContext;
+use crate::contracts::verification::extend_proof_context_with_predicate_at;
 use super::dynamic_context::{compute_dynamic_context, DynamicScopeAncestor};
 use super::item_generic_params::process_generic_params;
 use super::item_procedure::{has_explicit_return, DeclFailure, DeclOutcome};
@@ -261,8 +264,15 @@ pub fn type_record_decl(ctx: &ScopeContext<'_>, decl: &ast::RecordDecl, module_p
     if methods.iter().any(|method| method.name == "drop") && field_types.iter().all(|(_, ty)| bitcopy_type(ctx, ty)) {
         return failed("E-TYP-2621");
     }
-    if decl.invariant_opt.is_some() {
-        return DeclOutcome::Pending("TypeInvariant".to_string());
+    if let Some(invariant) = &decl.invariant_opt {
+        if fields.iter().any(|field| field.vis == ast::Visibility::Public) {
+            return failed("E-SEM-2824");
+        }
+        let contract_ctx = ContractContext { scope_ctx: Some(ctx), receiver_type: self_type.clone(), ..Default::default() };
+        let inv_result = check_type_invariant(&contract_ctx, invariant);
+        if !inv_result.ok {
+            return failed_with(inv_result.diag_id);
+        }
     }
 
     let mut concrete_class_methods: HashSet<String> = HashSet::new();
@@ -337,9 +347,11 @@ pub fn type_record_decl(ctx: &ScopeContext<'_>, decl: &ast::RecordDecl, module_p
             if !type_equiv(&class_sig.func_type, &impl_sig.func_type) {
                 return failed("E-TYP-2503");
             }
-            // A contract on either side is judged by behavioural subtyping.
-            if class_method.contract.is_some() || impl_method.contract.is_some() {
-                return DeclOutcome::Pending("BehavioralSubtyping".to_string());
+            let class_contract = class_method.contract.clone().unwrap_or_default();
+            let impl_contract = impl_method.contract.clone().unwrap_or_default();
+            let behavioral = check_behavioral_subtyping(&class_contract, &impl_contract);
+            if !behavioral.ok {
+                return failed_with(behavioral.diag_id);
             }
         }
     }
@@ -361,7 +373,7 @@ pub fn type_record_decl(ctx: &ScopeContext<'_>, decl: &ast::RecordDecl, module_p
         if has_attribute(&method.attrs, attrs::STATIC) {
             return failed("E-MOD-2452");
         }
-        let (recv_perm, _const_receiver) = match &method.receiver {
+        let (recv_perm, const_receiver) = match &method.receiver {
             ast::Receiver::ReceiverShorthand(shorthand) => match shorthand.perm {
                 ast::ReceiverPerm::Unique => (Some(Permission::Unique), false),
                 ast::ReceiverPerm::Shared => (Some(Permission::Shared), false),
@@ -374,8 +386,18 @@ pub fn type_record_decl(ctx: &ScopeContext<'_>, decl: &ast::RecordDecl, module_p
             Ok(sig) => sig,
             Err(diag_id) => return failed_with(diag_id),
         };
-        if method.contract.is_some() {
-            return DeclOutcome::Pending("ContractWF".to_string());
+        if let Some(contract) = &method.contract {
+            let contract_ctx = ContractContext {
+                scope_ctx: Some(ctx),
+                receiver_type: self_type.clone(),
+                return_type: sig.return_type.clone(),
+                params: sig.bindings.iter().filter(|(name, _)| name != "self").cloned().collect(),
+                ..Default::default()
+            };
+            let contract_check = check_contract_well_formed(&contract_ctx, contract);
+            if !contract_check.ok {
+                return failed_with(contract_check.diag_id);
+            }
         }
         let Some(body) = method.body.as_deref() else {
             continue;
@@ -401,6 +423,11 @@ pub fn type_record_decl(ctx: &ScopeContext<'_>, decl: &ast::RecordDecl, module_p
             diags: Some(diags.clone()),
             env_ref: Some(env.clone()),
             contract_dynamic: inherited_dynamic_methods.contains(&id_key_of(&method.name)) || compute_dynamic_context(&body.span, &ancestors),
+            contract: method.contract.as_ref(),
+            proof_ctx: match &decl.invariant_opt {
+                Some(invariant) if const_receiver => extend_proof_context_with_predicate_at(None, &invariant.predicate, &body.span).map(Rc::new),
+                _ => None,
+            },
             ..Default::default()
         };
         let type_expr_fn = |inner: &ast::ExprPtr| type_expr(ctx, &type_ctx, inner, &env.borrow().clone());

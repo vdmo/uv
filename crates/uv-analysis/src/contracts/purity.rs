@@ -35,6 +35,8 @@ pub struct ContractContext<'c, 'a> {
     pub is_postcondition: bool,
     /// `move` is allowed in a body that is analysed, never in a predicate itself.
     pub allow_responsibility_moves: bool,
+    /// The parameters taken by `move`, which `@entry` may not mention.
+    pub moved_params: HashSet<String>,
 }
 
 #[derive(Debug, Clone, Default)]

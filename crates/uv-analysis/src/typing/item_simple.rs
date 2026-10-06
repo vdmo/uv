@@ -21,6 +21,8 @@ use super::types::{make_type_path, make_type_prim, TypeRef};
 use crate::composite::classes::{check_orphan_rule, class_field_table, class_method_table, is_modal_class};
 use crate::composite::enums::enum_discriminants;
 use crate::caps::cap_requirements::type_has_capabilities;
+use crate::contracts::contract_check::check_type_invariant;
+use crate::contracts::purity::ContractContext;
 use crate::context::{PathKey, ScopeContext, TypeDecl};
 use crate::resolve::scopes::path_key_of;
 
@@ -251,8 +253,12 @@ pub fn type_enum_decl(ctx: &ScopeContext<'_>, decl: &ast::EnumDecl, module_path:
     if has_impl(&decl.implements, "Bitcopy") && payloads.iter().any(|payload| !bitcopy_type(ctx, payload)) {
         return failed(Some("E-TYP-2622"));
     }
-    if decl.invariant_opt.is_some() {
-        return DeclOutcome::Pending("TypeInvariant".to_string());
+    if let Some(invariant) = &decl.invariant_opt {
+        let contract_ctx = ContractContext { scope_ctx: Some(ctx), receiver_type: self_type.clone(), ..Default::default() };
+        let inv_result = check_type_invariant(&contract_ctx, invariant);
+        if !inv_result.ok {
+            return failed(inv_result.diag_id);
+        }
     }
     for impl_path in &decl.implements {
         let Some(class_decl) = ctx.sigma.classes.get(&path_key_of(impl_path)) else {

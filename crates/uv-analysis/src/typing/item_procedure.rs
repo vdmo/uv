@@ -28,6 +28,9 @@ use super::typecheck_diag::emit_resolved_typecheck_diagnostic;
 use super::types::{make_type_func, make_type_prim, TypeFuncParam, TypeNode, TypeRef};
 use crate::context::ScopeContext;
 use crate::caps::builtin_paths::is_context_type_path;
+use crate::contracts::contract_check::check_contract_well_formed;
+use crate::contracts::intrinsics::validate_contract_intrinsics;
+use crate::contracts::purity::ContractContext;
 use crate::caps::context_caps::is_context_bundle_type;
 use crate::generics::generic_params::bind_type_params;
 use crate::memory::borrow_bind::bind_check_body;
@@ -289,6 +292,14 @@ pub(crate) fn main_signature_fix_its(decl: &ast::ProcedureDecl) -> Vec<SubDiagno
     }]
 }
 
+/// A `#dynamic` written on a predicate itself, not on the declaration.
+pub(crate) fn contract_clause_has_direct_dynamic_attr(contract: &ast::ContractClause) -> bool {
+    let has_dynamic = |expr: &ExprPtr| {
+        matches!(expr.as_deref().map(|expr| &expr.node), Some(ExprNode::AttributedExpr(attributed)) if has_attribute(&attributed.attrs, attrs::DYNAMIC))
+    };
+    has_dynamic(&contract.precondition) || has_dynamic(&contract.postcondition)
+}
+
 /// See `TypeProcedureDecl`.
 pub fn type_procedure_decl(
     ctx: &ScopeContext<'_>,
@@ -355,9 +366,25 @@ pub fn type_procedure_decl(
         env.scopes[0].insert(id_key_of(name), binding);
     }
 
-    if decl.contract.is_some() {
-        // Contract intrinsics and well-formedness.
-        return pending("ContractWF");
+    if let Some(contract) = &decl.contract {
+        if contract_clause_has_direct_dynamic_attr(contract) {
+            return failed("E-CON-0410");
+        }
+        let contract_ctx = ContractContext {
+            scope_ctx: Some(&proc_ctx),
+            params: sig.bindings.iter().cloned().collect(),
+            moved_params: decl.params.iter().filter(|param| param.mode == Some(ast::ParamMode::Move)).map(|param| param.name.clone()).collect(),
+            return_type: sig.return_type.clone(),
+            ..Default::default()
+        };
+        let intrinsics_check = validate_contract_intrinsics(contract, &contract_ctx);
+        if !intrinsics_check.ok {
+            return DeclOutcome::Failed(DeclFailure::of(intrinsics_check.diag_id));
+        }
+        let contract_check = check_contract_well_formed(&contract_ctx, contract);
+        if !contract_check.ok {
+            return DeclOutcome::Failed(DeclFailure::of(contract_check.diag_id));
+        }
     }
 
     if let Some(body) = decl.body.as_deref() {
@@ -381,7 +408,28 @@ pub fn type_procedure_decl(
             contract: decl.contract.as_ref(),
             ..Default::default()
         };
-        let _ = ContractPhase::None;
+        // The predicates are typed as expressions: pure, and `bool`.
+        if let Some(contract) = &decl.contract {
+            let check_predicate = |predicate: &ExprPtr, phase: ContractPhase| -> Option<&'static str> {
+                predicate.as_ref()?;
+                let contract_type_ctx = StmtTypeContext { contract_phase: phase, require_pure: true, ..type_ctx.clone() };
+                reset_scaffolding();
+                let typed = type_expr(&proc_ctx, &contract_type_ctx, predicate, &env.borrow());
+                if !typed.ok {
+                    return Some(typed.diag_id.unwrap_or("WF-Contract"));
+                }
+                (!type_equiv(&typed.r#type, &make_type_prim("bool"))).then_some("WF-Contract")
+            };
+            for (predicate, phase) in [(&contract.precondition, ContractPhase::Precondition), (&contract.postcondition, ContractPhase::Postcondition)] {
+                let diag = check_predicate(predicate, phase);
+                if let Some(what) = take_pending() {
+                    return DeclOutcome::Pending(what.to_string());
+                }
+                if let Some(diag_id) = diag {
+                    return failed(diag_id);
+                }
+            }
+        }
         let type_expr_fn = |inner: &ExprPtr| type_expr(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
         let type_ident_fn = |ident: &str| type_identifier_expr(&proc_ctx, &env.borrow(), ident);
         let type_place_fn = |inner: &ExprPtr| type_place(&proc_ctx, &type_ctx, inner, &env.borrow().clone());

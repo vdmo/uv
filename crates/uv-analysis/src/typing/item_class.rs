@@ -93,9 +93,6 @@ pub fn type_class_decl(ctx: &ScopeContext<'_>, decl: &ast::ClassDecl, module_pat
         let Some(body) = method.body_opt.as_deref() else {
             continue;
         };
-        if method.contract.is_some() {
-            return DeclOutcome::Pending("ContractWF".to_string());
-        }
         let recv_perm = match &method.receiver {
             ast::Receiver::ReceiverShorthand(shorthand) => Some(match shorthand.perm {
                 ast::ReceiverPerm::Unique => Permission::Unique,
@@ -122,6 +119,7 @@ pub fn type_class_decl(ctx: &ScopeContext<'_>, decl: &ast::ClassDecl, module_pat
             diags: Some(diags.clone()),
             env_ref: Some(env.clone()),
             current_class_path: Some(class_path.clone()),
+            contract: method.contract.as_ref(),
             contract_dynamic: compute_dynamic_context(&body.span, &ancestors),
             ..Default::default()
         };

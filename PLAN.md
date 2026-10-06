@@ -388,7 +388,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
 | b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | done against the body gate: all 4,704 bodies compared (procedures, methods, transitions) with the stores typing fills and the context declaration typing sets, none mismatched or pending |
-| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | in progress: 6,478 of 6,822 declarations compared (95.0%), none mismatched |
+| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | in progress: 6,635 of 6,822 declarations compared (97.3%), none mismatched |
 
 Part c and M3.5 are ported together against one gate, because declaration typing calls
 straight into the code of M3.5 (the borrow check of each body, contract checks, the
@@ -419,9 +419,8 @@ not ported makes the declaration pending when it would apply:
 
 | Waiting for | Procedures |
 | --- | --- |
-| contract intrinsics and well-formedness (`ContractWF`) | 154 |
 | foreign-interface attributes and export signatures (`ProcFfiAttrs`) | 66 |
-| the warning for `#dynamic` where nothing needs a run-time check | 18 |
+| the warning for `#dynamic` where nothing needs a run-time check | 23 |
 | the `inline(always)` warning | 10 |
 | opaque return types | 6 |
 
@@ -468,9 +467,17 @@ initialisers and its bodies depend on, a cycle among the eager ones reported as
 of the 546 projects compare identically from start to finish, up from 43; the other 97
 hold a declaration that is still pending.
 
-Left: modals (26) and extern blocks (44), the foreign-interface attributes of
-procedures (66), contracts (154), the `#dynamic` no-effect warning (18), refinement
-well-formedness (12), the `inline(always)` warning (10) and opaque return types (6).
+Contracts are in (`contracts::intrinsics`, `contracts::contract_check`, and
+`typing::expr::contract_entry` for `@entry`): `@result` only in a postcondition, an
+`@entry` expression over bindings that exist at entry, without capabilities, side effects
+or moved parameters; purity of predicates; the predicates typed as `bool` under the
+contract phases; type invariants; and behavioural subtyping of an implementation's
+contract against its class's. With them 471 of the 546 projects compare identically end
+to end.
+
+Left: modals (26) and extern blocks (44), the foreign-interface attributes of procedures
+(66), the `#dynamic` no-effect warning (23), refinement well-formedness (12), the
+`inline(always)` warning (10) and opaque return types (6).
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
 procedure body as declaration typing does (type parameters and parameters in scope, the
