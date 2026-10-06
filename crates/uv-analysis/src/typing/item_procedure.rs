@@ -29,6 +29,7 @@ use super::types::{make_type_func, make_type_prim, TypeFuncParam, TypeNode, Type
 use crate::context::ScopeContext;
 use crate::generics::generic_params::bind_type_params;
 use crate::memory::borrow_bind::bind_check_body;
+use crate::memory::region_prov::prov_bind_check;
 use crate::resolve::scopes::{id_eq, id_key_of};
 
 /// How a declaration failed: the rule, a detail, where, and the obligations.
@@ -363,8 +364,13 @@ pub fn type_procedure_decl(
         if !bind.ok {
             return DeclOutcome::Failed(DeclFailure::of(bind.diag_id));
         }
-        // The provenance check of the body.
-        return pending("BodyProvenance");
+        let prov = prov_bind_check(&proc_ctx, module_path, &decl.params, &decl.body, None, Some(diags));
+        if let Some(what) = take_pending() {
+            return DeclOutcome::Pending(what.to_string());
+        }
+        if !prov.ok {
+            return DeclOutcome::Failed(DeclFailure::of(prov.diag_id));
+        }
     }
     if has_attribute(&decl.attrs, attrs::DYNAMIC) {
         return pending("DynamicNoRuntime");

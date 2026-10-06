@@ -18,6 +18,7 @@ use uv_source::attributes::{attrs, get_attribute_value, has_attribute};
 
 use super::item_procedure::{type_procedure_decl, DeclOutcome};
 use super::expr_store::TypeStores;
+use super::item_simple::{type_static_decl, type_type_alias_decl};
 use super::item_using::{type_import_decl, type_using_decl};
 use super::typecheck_diag::{emit_decl_diag, emit_resolved_typecheck_diagnostic};
 use crate::resolve::scopes::id_eq;
@@ -73,6 +74,23 @@ fn type_item(ctx: &ScopeContext<'_>, item: &ASTItem, module_path: &[String], sha
             DeclOutcome::Failed(failure) => {
                 let span = failure.diag_span.or_else(|| Some(node.span.clone()));
                 emit_decl_diag(&mut shared.borrow_mut(), failure.diag_id, span, &failure.diag_detail, Vec::new(), &failure.diagnostic_obligation_ids);
+                Ok(())
+            }
+        };
+    }
+    let outcome = match item {
+        ASTItem::TypeAliasDecl(node) => Some((type_type_alias_decl(ctx, node, module_path), &node.span)),
+        ASTItem::StaticDecl(node) => Some((type_static_decl(ctx, node, module_path, &mut shared.borrow_mut()), &node.span)),
+        _ => None,
+    };
+    if let Some((outcome, span)) = outcome {
+        return match outcome {
+            DeclOutcome::Ok => Ok(()),
+            DeclOutcome::Pending(what) => Err(what),
+            DeclOutcome::Failed(failure) => {
+                // A static's failure carries neither detail nor obligations.
+                let obligations = if matches!(item, ASTItem::StaticDecl(_)) { Vec::new() } else { failure.diagnostic_obligation_ids };
+                emit_decl_diag(&mut shared.borrow_mut(), failure.diag_id, Some(span.clone()), "", Vec::new(), &obligations);
                 Ok(())
             }
         };

@@ -3,6 +3,7 @@
 pub mod alias_normalize;
 pub mod attributed;
 pub mod item_procedure;
+pub mod item_simple;
 pub mod item_using;
 pub mod typecheck;
 pub mod typecheck_diag;

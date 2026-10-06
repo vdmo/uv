@@ -388,7 +388,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
 | b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | done against the body gate: all 4,704 bodies compared (procedures, methods, transitions) with the stores typing fills and the context declaration typing sets, none mismatched or pending |
-| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | in progress: 1,896 of 6,822 declarations compared (27.8%), none mismatched |
+| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | in progress: 5,923 of 6,822 declarations compared (86.8%), none mismatched |
 
 Part c and M3.5 are ported together against one gate, because declaration typing calls
 straight into the code of M3.5 (the borrow check of each body, contract checks, the
@@ -419,10 +419,10 @@ not ported makes the declaration pending when it would apply:
 
 | Waiting for | Procedures |
 | --- | --- |
-| the provenance check of the body (`BodyProvenance`: `ProvBindCheck` in `memory/regions`) | 3,870 |
 | contract intrinsics and well-formedness (`ContractWF`) | 154 |
 | foreign-interface attributes and export signatures (`ProcFfiAttrs`) | 66 |
 | the signature of `main` (`MainSignature`, needs the context bundle types of `caps`) | 56 |
+| the warning for `#dynamic` where nothing needs a run-time check | 18 |
 | overloads that erase to one signature | 17 |
 | the `inline(always)` warning | 10 |
 | opaque return types | 6 |
@@ -445,9 +445,16 @@ reference does; the borrow check reads expression types back from them.
 Not as in the reference: the statics of a module are bound again for each body rather
 than cached, and the per-body timing is not kept.
 
-The provenance check is next: `ProvBindCheck` and the engine under it in
-`memory/regions` (about 3,600 lines of the reference), of which the port has only the
-expression-level tracking that typing needed.
+The provenance check is in too (`memory::region_prov`, the reference's `ProvBindCheck`):
+where each value's storage comes from (a region, the stack, the heap, a global, a
+parameter), that nothing is stored in or captured by something that outlives it, and
+the provenance of a call followed through the body of the overload typing selected. It
+matched the reference on all of the corpus on its first run. The maps of expression
+provenance the reference also fills for later phases are not kept yet.
+
+Type alias and static declarations are in (`typing::item_simple`), with the capability
+check that statics need (`caps::cap_requirements`, only whether a type carries any
+capability, which is all that has been asked so far).
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
 procedure body as declaration typing does (type parameters and parameters in scope, the
