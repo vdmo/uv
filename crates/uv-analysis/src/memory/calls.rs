@@ -232,7 +232,7 @@ fn strip_perm_once(ty: &TypeRef) -> &TypeRef {
 }
 
 /// `#layout(packed)` on the record.
-fn is_packed_record(ctx: &ScopeContext<'_>, path: &[String]) -> bool {
+pub(crate) fn is_packed_record(ctx: &ScopeContext<'_>, path: &[String]) -> bool {
     let Some(TypeDecl::Record(record)) = ctx.sigma.types.get(&path_key_of(path)) else {
         return false;
     };

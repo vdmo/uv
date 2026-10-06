@@ -225,6 +225,22 @@ fn type_expr_form(
         }
         ExprNode::FieldAccessExpr(node) => super::expr::field_access::type_field_access_expr(ctx, type_ctx, node, env),
         ExprNode::TupleAccessExpr(node) => super::expr::tuple_access::type_tuple_access_expr(ctx, type_ctx, node, env),
+        ExprNode::DerefExpr(node) => super::expr::access::type_deref_expr(ctx, type_ctx, node, env, &e.span),
+        ExprNode::IndexAccessExpr(node) => {
+            super::expr::access::type_index_access_expr(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::AddressOfExpr(node) => super::expr::access::type_address_of_expr(ctx, type_ctx, node, env),
+        ExprNode::RangeExpr(node) => super::expr::access::type_range_expr(ctx, type_ctx, node, env),
+        ExprNode::UnsafeBlockExpr(node) => super::expr::access::type_unsafe_block_expr(ctx, type_ctx, node, env),
+        ExprNode::LoopInfiniteExpr(node) => {
+            super::expr::loops::type_loop_infinite_expr(ctx, type_ctx, node, env, &|name: &str| type_identifier_expr(ctx, env, name))
+        }
+        ExprNode::LoopConditionalExpr(node) => {
+            super::expr::loops::type_loop_conditional_expr(ctx, type_ctx, node, env, &|name: &str| type_identifier_expr(ctx, env, name))
+        }
+        ExprNode::LoopIterExpr(node) => {
+            super::expr::loops::type_loop_iter_expr(ctx, type_ctx, node, env, &|name: &str| type_identifier_expr(ctx, env, name))
+        }
         ExprNode::IfIsExpr(node) => super::expr::if_case::type_if_is_expr(ctx, type_ctx, node, env),
         ExprNode::IfCaseExpr(node) => super::expr::if_case::type_if_case_expr(ctx, type_ctx, node, env),
         ExprNode::RecordExpr(node) => super::expr::record_literal::type_record_expr(ctx, type_ctx, node, env, None),
@@ -264,14 +280,12 @@ pub fn type_place(
         }
         ExprNode::FieldAccessExpr(node) => super::expr::field_access::type_field_access_place(ctx, type_ctx, node, env),
         ExprNode::TupleAccessExpr(node) => super::expr::tuple_access::type_tuple_access_place(ctx, type_ctx, node, env),
-        ExprNode::AttributedExpr(_)
-        | ExprNode::DerefExpr(_)
-        | ExprNode::IndexAccessExpr(_) => {
-            pending(match &e.node {
-                ExprNode::AttributedExpr(_) => "AttributedExpr place",
-                ExprNode::DerefExpr(_) => "DerefExpr place",
-                _ => "IndexAccessExpr place",
-            });
+        ExprNode::DerefExpr(node) => super::expr::access::type_deref_place(ctx, type_ctx, node, env, &e.span),
+        ExprNode::IndexAccessExpr(node) => {
+            super::expr::access::type_index_access_place(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::AttributedExpr(_) => {
+            pending("AttributedExpr place");
             PlaceTypeResult::default()
         }
         _ => PlaceTypeResult::default(),
@@ -366,6 +380,16 @@ pub fn check_expr_against(
             }
             return result;
         }
+        ExprNode::UnsafeBlockExpr(node) => {
+            let checked = super::expr::access::check_unsafe_block_expr(ctx, type_ctx, node, env, expected);
+            return CheckResult {
+                ok: checked.ok,
+                diag_id: checked.diag_id,
+                diag_detail: checked.diag_detail,
+                diag_span: checked.diag_span,
+                ..Default::default()
+            };
+        }
         ExprNode::BlockExpr(node) => {
             let checked = super::stmt::block::check_block_expr(ctx, type_ctx, node, env, expected);
             return CheckResult {
@@ -378,8 +402,7 @@ pub fn check_expr_against(
         }
         ExprNode::AttributedExpr(_)
         | ExprNode::ComptimeExpr(_)
-        | ExprNode::QuoteExpr(_)
-        | ExprNode::UnsafeBlockExpr(_) => {
+        | ExprNode::QuoteExpr(_) => {
             pending(ast::expr_kind(e));
             return CheckResult::default();
         }

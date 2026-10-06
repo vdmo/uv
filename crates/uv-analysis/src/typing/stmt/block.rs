@@ -362,6 +362,17 @@ pub fn type_stmt(
         Stmt::AssignStmt(node) => {
             super::assign_stmt::type_assign_stmt(ctx, type_ctx, node, env, type_expr_fn, type_ident_fn, type_place_fn)
         }
+        Stmt::UnsafeBlockStmt(node) => crate::typing::expr::access::type_unsafe_block_stmt(
+            ctx,
+            type_ctx,
+            node,
+            env,
+            type_expr_fn,
+            type_ident_fn,
+            type_place_fn,
+        ),
+        Stmt::BreakStmt(node) => crate::typing::expr::loops::type_break_stmt(ctx, type_ctx, node, env, type_expr_fn),
+        Stmt::ContinueStmt(_) => crate::typing::expr::loops::type_continue_stmt(type_ctx, env),
         Stmt::ExprStmt(node) => super::expr_stmt::type_expr_stmt(ctx, type_ctx, node, env, type_expr_fn),
         _ => {
             pending(stmt_kind(stmt));

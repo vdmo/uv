@@ -65,6 +65,8 @@ pub struct StmtTypeContext<'t> {
     pub proof_ctx: Option<Rc<crate::contracts::verification::StaticProofContext>>,
     pub test_postcondition_runtime: bool,
     pub current_class_path: Option<TypePath>,
+    /// The range each loop variable in scope runs over, by name.
+    pub loop_iteration_ranges: Option<Rc<std::collections::HashMap<crate::context::IdKey, ast::ExprPtr>>>,
 }
 
 /// The context for an access that needs the given mode of key, unless an enclosing
