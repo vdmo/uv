@@ -2,6 +2,11 @@
 
 pub mod alias_normalize;
 pub mod attributed;
+pub mod item_procedure;
+pub mod item_using;
+pub mod typecheck;
+pub mod typecheck_diag;
+pub mod dynamic_context;
 pub mod expr_store;
 pub mod callbacks;
 pub mod check_expr;

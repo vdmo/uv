@@ -116,6 +116,11 @@ use uv_project::module_discovery::compilation_unit;
 use uv_project::project::{Assembly, AssemblyTarget};
 use uv_project::target_profile::TargetProfile;
 use uv_source::ast::dump::AstDump;
+use uv_analysis::typing::typecheck::typecheck_modules;
+use uv_source::ast::item_span;
+use uv_analysis::typing::dynamic_context::{compute_dynamic_context, DynamicScopeAncestor};
+use uv_source::attributes::{attrs, has_attribute, resolve_verification_mode_attribute, VerificationModeAttribute};
+use uv_source::ast::AttributeItem;
 use uv_source::ast::walk::ExprWalk;
 use uv_analysis::typing::expr_store::TypeStores;
 use uv_analysis::contracts::verification::extend_proof_context_with_predicate_at;
@@ -502,7 +507,9 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
         }
         std::sync::Arc::make_mut(&mut ctx.sigma).mods = resolved.modules;
         populate_sigma(&mut ctx);
-        if mode == "bodies" {
+        if mode == "typecheck" {
+            dump_typecheck(out, &mut ctx, &name_maps.name_maps);
+        } else if mode == "bodies" {
             dump_bodies(out, &mut ctx, &name_maps.name_maps);
         } else if mode == "patterns" {
             dump_patterns(out, &mut ctx, &name_maps.name_maps);
@@ -2791,6 +2798,7 @@ fn dump_typed_body(
     let diags = Rc::new(RefCell::new(Vec::new()));
     let env = Rc::new(RefCell::new(env));
     proc_ctx.diagnostics = Some(diags.clone());
+    let flags = BODY_FLAGS.take();
     // The stores the type checker's entry point sets up; they are also read back.
     let stores = Rc::new(TypeStores::default());
     proc_ctx.stores = Some(stores.clone());
@@ -2801,6 +2809,9 @@ fn dump_typed_body(
         contract,
         current_class_path: class_path,
         proof_ctx: proof_ctx.map(Rc::new),
+        contract_dynamic: flags.dynamic,
+        ffi_export_boundary: flags.ffi_export_boundary,
+        test_postcondition_runtime: flags.test_postcondition_runtime,
         ..Default::default()
     };
     // The callbacks read the environment as it stands when they are called.
@@ -2925,6 +2936,7 @@ fn dump_signature_body(
     let sig = match sig {
         Ok(sig) => sig,
         Err(diag_id) => {
+            BODY_FLAGS.take();
             let _ = writeln!(out, "sig-fail\t{}", diag_or(diag_id));
             return;
         }
@@ -2978,6 +2990,23 @@ fn dump_record_method_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &Re
             Err(diag_id) => assoc_fail = Some(diag_id),
         }
     }
+    // A method that implements a class method marked dynamic is dynamic too.
+    let mut inherited_dynamic = std::collections::HashSet::new();
+    for impl_path in &decl.implements {
+        let Ok(method_table) = class_method_table(ctx, impl_path) else {
+            continue;
+        };
+        for entry in method_table {
+            if resolve_verification_mode_attribute(&entry.method.attrs) != Some(VerificationModeAttribute::Dynamic) {
+                continue;
+            }
+            let implemented = decl.members.iter().find_map(|member| match member {
+                RecordMember::MethodDecl(method) if id_eq(&method.name, &entry.method.name) => Some(id_key_of(&method.name)),
+                _ => None,
+            });
+            inherited_dynamic.extend(implemented);
+        }
+    }
     for member in &decl.members {
         let RecordMember::MethodDecl(method) = member else {
             continue;
@@ -2997,6 +3026,11 @@ fn dump_record_method_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &Re
             }
             _ => None,
         };
+        BODY_FLAGS.set(BodyFlags {
+            dynamic: inherited_dynamic.contains(&id_key_of(&method.name))
+                || dynamic_body(&method.body, (&decl.attrs, &decl.span), Some((&method.attrs, &method.span))),
+            ..Default::default()
+        });
         dump_signature_body(
             out,
             ctx,
@@ -3023,6 +3057,10 @@ fn dump_class_method_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &Cla
             continue;
         }
         let sig = build_method_signature(ctx, &self_var_type(), &method.receiver, &method.params, &method.return_type_opt, None);
+        BODY_FLAGS.set(BodyFlags {
+            dynamic: dynamic_body(&method.body_opt, (&decl.attrs, &decl.span), Some((&method.attrs, &method.span))),
+            ..Default::default()
+        });
         dump_signature_body(
             out,
             ctx,
@@ -3082,6 +3120,10 @@ fn dump_modal_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &ModalDecl,
                 }
                 _ => None,
             };
+            BODY_FLAGS.set(BodyFlags {
+                dynamic: dynamic_body(&method.body, (&decl.attrs, &decl.span), Some((&method.attrs, &method.span))),
+                ..Default::default()
+            });
             dump_signature_body(
                 out,
                 ctx,
@@ -3105,6 +3147,10 @@ fn dump_modal_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &ModalDecl,
             }
             let target_type = make_type_modal_state(type_path.clone(), &transition.target_state, self_args.clone());
             let sig = build_transition_signature(ctx, &state_type, &target_type, &transition.params, None);
+            BODY_FLAGS.set(BodyFlags {
+                dynamic: dynamic_body(&transition.body, (&decl.attrs, &decl.span), Some((&transition.attrs, &transition.span))),
+                ..Default::default()
+            });
             dump_signature_body(
                 out,
                 ctx,
@@ -3122,7 +3168,109 @@ fn dump_modal_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &ModalDecl,
     }
 }
 
+// ---- the type checker's entry point; see `DumpTypecheck` in the oracle ----
+
+fn print_typecheck_diag(out: &mut String, diag: &Diagnostic) {
+    let span_text = |span: &Option<Span>| match span {
+        Some(span) => format!("{}-{}", span.start_offset, span.end_offset),
+        None => "-".to_string(),
+    };
+    let _ = write!(
+        out,
+        " [{}|{}|{}|{}|{}|",
+        diag.code,
+        diag.severity as u8,
+        escape(&diag.message),
+        span_text(&diag.span),
+        diag.label.as_deref().map_or("-".to_string(), escape)
+    );
+    for id in &diag.obligation_ids {
+        let _ = write!(out, "{id},");
+    }
+    out.push('|');
+    for child in &diag.children {
+        let _ = write!(out, "{{{}:{}:{}}}", child.kind as u8, escape(&child.message), span_text(&child.span));
+    }
+    out.push(']');
+}
+
+/// Each diagnostic is listed under the declaration whose extent holds its position;
+/// the rest follow on the `Z` line. A declaration the port cannot type yet says so.
+fn dump_typecheck(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
+    let checked = typecheck_modules(ctx, name_maps);
+    let mut used = vec![false; checked.diags.len()];
+    for (module_index, module) in ctx.sigma.mods.iter().enumerate() {
+        dump_line("X", &module.path, out);
+        for (item_index, item) in module.items.iter().enumerate() {
+            let span = item_span(item);
+            let variant = match item {
+                ASTItem::UsingDecl(_) => 0,
+                ASTItem::ImportDecl(_) => 1,
+                ASTItem::ExternBlock(_) => 2,
+                ASTItem::StaticDecl(_) => 3,
+                ASTItem::ProcedureDecl(_) => 4,
+                ASTItem::ComptimeProcedureDecl(_) => 5,
+                ASTItem::RecordDecl(_) => 6,
+                ASTItem::EnumDecl(_) => 7,
+                ASTItem::ModalDecl(_) => 8,
+                ASTItem::ClassDecl(_) => 9,
+                ASTItem::TypeAliasDecl(_) => 10,
+                ASTItem::DeriveTargetDecl(_) => 11,
+                ASTItem::ErrorItem(_) => 12,
+            };
+            let _ = write!(out, "I\t{variant}\t{}-{}\t", span.start_offset, span.end_offset);
+            let pending = checked.pending_items.iter().find(|pending| pending.module == module_index && pending.item == item_index);
+            for (index, diag) in checked.diags.iter().enumerate() {
+                let inside = diag.span.as_ref().is_some_and(|at| {
+                    at.file == span.file && at.start_offset >= span.start_offset && at.start_offset < span.end_offset
+                });
+                if used[index] || !inside {
+                    continue;
+                }
+                used[index] = true;
+                if pending.is_none() {
+                    print_typecheck_diag(out, diag);
+                }
+            }
+            if let Some(pending) = pending {
+                let _ = write!(out, "PENDING\t{}", pending.what);
+            }
+            out.push('\n');
+        }
+    }
+    if let Some(what) = &checked.pending_tail {
+        let _ = writeln!(out, "Z\tPENDING\t{what}");
+        return;
+    }
+    let _ = write!(out, "Z\t{}\t{}\t", if checked.ok { "ok" } else { "fail" }, if checked.has_init_plan { "plan" } else { "-" });
+    for (index, diag) in checked.diags.iter().enumerate() {
+        if !used[index] {
+            print_typecheck_diag(out, diag);
+        }
+    }
+    out.push('\n');
+}
+
+/// What the declaration around a body contributes to its typing context, as the typing
+/// of declarations sets it; taken by the next body dumped.
+#[derive(Clone, Copy, Default)]
+struct BodyFlags {
+    dynamic: bool,
+    ffi_export_boundary: bool,
+    test_postcondition_runtime: bool,
+}
+
+fn dynamic_body(body: &BlockPtr, outer: (&[AttributeItem], &Span), inner: Option<(&[AttributeItem], &Span)>) -> bool {
+    let Some(body) = body.as_deref() else {
+        return false;
+    };
+    let ancestors: Vec<DynamicScopeAncestor<'_>> =
+        [Some(outer), inner].into_iter().flatten().map(|(attrs, span)| DynamicScopeAncestor { attrs, span }).collect();
+    compute_dynamic_context(&body.span, &ancestors)
+}
+
 thread_local! {
+    static BODY_FLAGS: std::cell::Cell<BodyFlags> = const { std::cell::Cell::new(BodyFlags { dynamic: false, ffi_export_boundary: false, test_postcondition_runtime: false }) };
     /// The addresses of the expressions of the project's modules.
     static SYNTAX_EXPRS: RefCell<std::collections::HashSet<usize>> = RefCell::default();
 }
@@ -3144,6 +3292,11 @@ fn dump_bodies(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMap
         ctx.scopes = vec![Scope::new(), names, universe_bindings()];
         for item in &module.items {
             if let ASTItem::ProcedureDecl(node) = item {
+                BODY_FLAGS.set(BodyFlags {
+                    dynamic: dynamic_body(&node.body, (&node.attrs, &node.span), None),
+                    ffi_export_boundary: has_attribute(&node.attrs, attrs::EXPORT) || has_attribute(&node.attrs, attrs::HOST_EXPORT),
+                    test_postcondition_runtime: has_attribute(&node.attrs, attrs::TEST),
+                });
                 dump_body(
                     out,
                     ctx,
@@ -3154,6 +3307,7 @@ fn dump_bodies(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMap
                     &node.contract,
                     &node.body,
                 );
+                BODY_FLAGS.take();
             }
             match item {
                 ASTItem::RecordDecl(node) => dump_record_method_bodies(out, ctx, node, &module.path),
@@ -3303,7 +3457,7 @@ fn run() -> Result<(), String> {
             dump_sigma(&mut out);
             stdout.write_all(out.as_bytes()).map_err(|err| err.to_string())
         }
-        Some(mode @ ("comptime" | "resolve" | "types" | "relations" | "values" | "patterns" | "bodies")) if args.len() >= 3 => {
+        Some(mode @ ("comptime" | "resolve" | "types" | "relations" | "values" | "patterns" | "bodies" | "typecheck")) if args.len() >= 3 => {
             let list = std::fs::read_to_string(&args[2]).map_err(|err| err.to_string())?;
             let mut block: Vec<&str> = Vec::new();
             for line in list.lines() {

@@ -41,6 +41,10 @@
 #include "04_analysis/typing/type_lookup.h"
 #include "04_analysis/typing/type_lower.h"
 #include "04_analysis/typing/type_stmt.h"
+#include "04_analysis/typing/dynamic_context.h"
+#include "04_analysis/typing/typecheck.h"
+#include "04_analysis/composite/classes.h"
+#include "02_source/attributes/attribute_registry.h"
 #include "04_analysis/typing/types.h"
 #include "04_analysis/typing/variance.h"
 #include "04_analysis/composite/classes.h"
@@ -541,6 +545,7 @@ bool g_rel_mode = false;
 bool g_val_mode = false;
 bool g_pat_mode = false;
 bool g_body_mode = false;
+bool g_check_mode = false;
 
 void PrintKey(const analysis::TypeKey& key);
 void PrintAtom(const analysis::KeyAtom& atom) {
@@ -1999,6 +2004,23 @@ const std::size_t kSharedExprSize =
     sizeof(std::_Sp_counted_ptr_inplace<ast::Expr, std::allocator<void>, __gnu_cxx::__default_lock_policy>);
 
 std::vector<std::string>* g_store_lines = nullptr;
+
+// What the declaration around a body contributes to its typing context, as the typing
+// of declarations sets it; taken by the next body dumped.
+struct BodyFlags {
+  bool dynamic = false;
+  bool ffi_export_boundary = false;
+  bool test_postcondition_runtime = false;
+};
+BodyFlags g_body_flags;
+
+bool DynamicBody(const std::shared_ptr<ast::Block>& body, const ast::AttributeList& outer, const core::Span& outer_span,
+                 const ast::AttributeList* inner = nullptr, const core::Span* inner_span = nullptr) {
+  if (!body) return false;
+  std::vector<analysis::DynamicScopeAncestor> ancestors{analysis::MakeDynamicScopeAncestor(outer, outer_span)};
+  if (inner && inner_span) ancestors.push_back(analysis::MakeDynamicScopeAncestor(*inner, *inner_span));
+  return analysis::ComputeDynamicContext(body->span, ancestors);
+}
 // The expressions of the project's modules. An entry for any other expression is one
 // the checker synthesized and has freed since; its address says nothing.
 ExprSet g_syntax_exprs;
@@ -2039,6 +2061,10 @@ void DumpTypedBody(analysis::ScopeContext& proc_ctx, analysis::TypeEnv& env, con
   proc_ctx.dynamic_refine_checks = &dynamic_refine_checks;
   proc_ctx.generic_call_substs = &generic_call_substs;
   proc_ctx.selected_call_targets = &selected_call_targets;
+  type_ctx.contract_dynamic = g_body_flags.dynamic;
+  type_ctx.ffi_export_boundary = g_body_flags.ffi_export_boundary;
+  type_ctx.test_postcondition_runtime = g_body_flags.test_postcondition_runtime;
+  g_body_flags = {};
   if (with_env) {
     type_ctx.diags = &diags;
     type_ctx.env_ref = &env;
@@ -2112,6 +2138,7 @@ void DumpSignatureBody(const analysis::ScopeContext& ctx, const std::string& nam
   if (!body) return;
   std::cout << "B\t" << name << '\t';
   if (!sig.ok) {
+    g_body_flags = {};
     std::cout << "sig-fail\t" << DiagOr(sig.diag_id) << '\n';
     return;
   }
@@ -2172,6 +2199,26 @@ void DumpRecordMethodBodies(const analysis::ScopeContext& ctx, const ast::Record
     }
     assoc_subst[assoc->name] = SubstSelfType(self_type, lowered.type, &assoc_subst);
   }
+  // A method that implements a class method marked dynamic is dynamic too.
+  std::unordered_set<IdKey> inherited_dynamic;
+  for (const auto& impl_path : decl.implements) {
+    if (ctx.sigma.classes.find(PathKeyOf(impl_path)) == ctx.sigma.classes.end()) continue;
+    const auto method_table = ClassMethodTable(ctx, impl_path);
+    if (!method_table.ok) continue;
+    for (const auto& entry : method_table.methods) {
+      if (!entry.method ||
+          ResolveVerificationModeAttribute(entry.method->attrs) != VerificationModeAttribute::Dynamic) {
+        continue;
+      }
+      for (const auto& member : decl.members) {
+        const auto* method = std::get_if<ast::MethodDecl>(&member);
+        if (method && IdEq(method->name, entry.method->name)) {
+          inherited_dynamic.insert(IdKeyOf(method->name));
+          break;
+        }
+      }
+    }
+  }
   for (const auto& member : decl.members) {
     const auto* method = std::get_if<ast::MethodDecl>(&member);
     if (!method || !method->body) continue;
@@ -2185,6 +2232,8 @@ void DumpRecordMethodBodies(const analysis::ScopeContext& ctx, const ast::Record
     if (decl.invariant_opt.has_value() && ConstShorthand(method->receiver)) {
       proof_ctx = ExtendProofContextWithPredicateAt(proof_ctx, decl.invariant_opt->predicate, method->body->span);
     }
+    g_body_flags.dynamic = inherited_dynamic.contains(IdKeyOf(method->name)) ||
+                           DynamicBody(method->body, decl.attrs, decl.span, &method->attrs, &method->span);
     DumpSignatureBody(ctx, name, sig, UniqueShorthand(method->receiver), sig.return_type, &method->contract, std::nullopt,
                       proof_ctx, method->body, true);
   }
@@ -2198,6 +2247,7 @@ void DumpClassMethodBodies(const analysis::ScopeContext& ctx, const ast::ClassDe
     const auto* method = std::get_if<ast::ClassMethodDecl>(&item);
     if (!method || !method->body_opt) continue;
     const auto sig = BuildMethodSignature(ctx, SelfVarType(), method->receiver, method->params, method->return_type_opt);
+    g_body_flags.dynamic = DynamicBody(method->body_opt, decl.attrs, decl.span, &method->attrs, &method->span);
     DumpSignatureBody(ctx, decl.name + "::" + method->name, sig, UniqueShorthand(method->receiver), sig.return_type,
                       &method->contract, class_path, nullptr, method->body_opt, true);
   }
@@ -2238,6 +2288,7 @@ void DumpModalBodies(const analysis::ScopeContext& ctx, const ast::ModalDecl& de
         proof_ctx = ExtendProofContextWithPredicateAt(proof_ctx, StateInvariantOf(*decl.invariant_opt, state.name),
                                                       method->body->span);
       }
+      g_body_flags.dynamic = DynamicBody(method->body, decl.attrs, decl.span, &method->attrs, &method->span);
       DumpSignatureBody(ctx, decl.name + "@" + state.name + "::" + method->name, sig, UniqueShorthand(method->receiver),
                         sig.return_type, &method->contract, std::nullopt, proof_ctx, method->body, true);
     }
@@ -2246,10 +2297,61 @@ void DumpModalBodies(const analysis::ScopeContext& ctx, const ast::ModalDecl& de
       if (!transition || !transition->body) continue;
       const TypeRef target_type = MakeTypeModalState(type_path, transition->target_state, self_args);
       const auto sig = BuildTransitionSignature(ctx, state_type, target_type, transition->params);
+      g_body_flags.dynamic = DynamicBody(transition->body, decl.attrs, decl.span, &transition->attrs, &transition->span);
       DumpSignatureBody(ctx, decl.name + "@" + state.name + "->" + transition->target_state + "::" + transition->name, sig,
                         false, target_type, nullptr, std::nullopt, nullptr, transition->body, false);
     }
   }
+}
+
+// ---- the type checker's entry point; see `TypecheckModules` ----
+
+void PrintTypecheckDiag(const core::Diagnostic& diag) {
+  std::cout << " [" << diag.code << '|' << static_cast<int>(diag.severity) << '|' << Escape(diag.message) << '|';
+  if (diag.span) std::cout << diag.span->start_offset << '-' << diag.span->end_offset; else std::cout << '-';
+  std::cout << '|' << (diag.label ? Escape(*diag.label) : std::string("-")) << '|';
+  for (const auto& id : diag.obligation_ids) std::cout << id << ',';
+  std::cout << '|';
+  for (const auto& child : diag.children) {
+    std::cout << '{' << static_cast<int>(child.kind) << ':' << Escape(child.message) << ':';
+    if (child.span) std::cout << child.span->start_offset << '-' << child.span->end_offset; else std::cout << '-';
+    std::cout << '}';
+  }
+  std::cout << ']';
+}
+
+// Runs the type checker over the project as the driver does, and prints what it
+// reports. Each diagnostic is listed under the declaration whose extent holds its
+// position, so that a port can be compared one declaration at a time; the rest (from
+// the passes over the whole project, or without a position) follow on the `Z` line.
+void DumpTypecheck(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
+  g_keep_expr_memory = true;
+  const auto checked = analysis::TypecheckModules(ctx, ctx.sigma.mods, &name_maps);
+  std::vector<bool> used(checked.diags.size(), false);
+  for (const auto& module : ctx.sigma.mods) {
+    std::cout << "X\t";
+    D(std::cout, module.path);
+    std::cout << '\n';
+    for (const auto& item : module.items) {
+      const core::Span span = std::visit([](const auto& node) { return node.span; }, item);
+      std::cout << "I\t" << item.index() << '\t' << span.start_offset << '-' << span.end_offset << '\t';
+      for (std::size_t i = 0; i < checked.diags.size(); ++i) {
+        const auto& diag = checked.diags[i];
+        if (used[i] || !diag.span || diag.span->file != span.file || diag.span->start_offset < span.start_offset ||
+            diag.span->start_offset >= span.end_offset) {
+          continue;
+        }
+        used[i] = true;
+        PrintTypecheckDiag(diag);
+      }
+      std::cout << '\n';
+    }
+  }
+  std::cout << "Z\t" << (checked.ok ? "ok" : "fail") << '\t' << (checked.init_plan ? "plan" : "-") << '\t';
+  for (std::size_t i = 0; i < checked.diags.size(); ++i) {
+    if (!used[i]) PrintTypecheckDiag(checked.diags[i]);
+  }
+  std::cout << '\n';
 }
 
 void DumpBodies(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
@@ -2267,7 +2369,12 @@ void DumpBodies(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_
                   analysis::UniverseBindings()};
     for (const auto& item : module.items) {
       if (const auto* node = std::get_if<ast::ProcedureDecl>(&item)) {
+        g_body_flags = {DynamicBody(node->body, node->attrs, node->span),
+                        analysis::HasAttribute(node->attrs, analysis::attrs::kExport) ||
+                            analysis::HasAttribute(node->attrs, analysis::attrs::kHostExport),
+                        analysis::HasAttribute(node->attrs, analysis::attrs::kTest)};
         DumpBody(ctx, node->name, node->generic_params, node->params, node->return_type_opt, node->contract, node->body);
+        g_body_flags = {};
       } else if (const auto* record = std::get_if<ast::RecordDecl>(&item)) {
         DumpRecordMethodBodies(ctx, *record, module.path);
       } else if (const auto* class_decl = std::get_if<ast::ClassDecl>(&item)) {
@@ -2364,7 +2471,9 @@ int DumpResolve(const std::vector<std::string>& block) {
     // As the driver does: the declaration tables are rebuilt from the resolved modules.
     ctx.sigma.mods = resolved.modules;
     analysis::PopulateSigma(ctx);
-    if (g_body_mode) {
+    if (g_check_mode) {
+      DumpTypecheck(ctx, name_maps.name_maps);
+    } else if (g_body_mode) {
       DumpBodies(ctx, name_maps.name_maps);
     } else if (g_pat_mode) {
       DumpPatterns(ctx, name_maps.name_maps);
@@ -2449,7 +2558,8 @@ int main(int argc, char** argv) {
   g_val_mode = argc >= 3 && std::string_view(argv[1]) == "values";
   g_pat_mode = argc >= 3 && std::string_view(argv[1]) == "patterns";
   g_body_mode = argc >= 3 && std::string_view(argv[1]) == "bodies";
-  g_types_mode = g_rel_mode || g_val_mode || g_pat_mode || g_body_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
+  g_check_mode = argc >= 3 && std::string_view(argv[1]) == "typecheck";
+  g_types_mode = g_rel_mode || g_val_mode || g_pat_mode || g_body_mode || g_check_mode || (argc >= 3 && std::string_view(argv[1]) == "types");
   const bool resolve_mode =
       g_types_mode || (argc >= 3 && std::string_view(argv[1]) == "resolve");
   if (resolve_mode || (argc >= 3 && std::string_view(argv[1]) == "comptime")) {

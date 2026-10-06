@@ -23,7 +23,7 @@ fn failed(diag_id: Option<&'static str>) -> StmtTypeResult {
 }
 
 /// `region$0`, `region$1`, …: the first not bound in any scope.
-fn fresh_region_name(env: &TypeEnv) -> String {
+pub(crate) fn fresh_region_name(env: &TypeEnv) -> String {
     (0usize..)
         .map(|index| format!("region${index}"))
         .find(|name| {

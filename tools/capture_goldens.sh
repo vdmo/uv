@@ -120,6 +120,10 @@ done
 docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -v "$ROOT":"$ROOT" -e LD_LIBRARY_PATH="$ICU" uv-oracle \
   /w/reference/oracle/uv-oracle bodies "$ROOT/target/parity/comptime_projects.oracle.list" \
   | sed "s|$ROOT/|/w/|g" > tests/golden/bodies.tsv
+# The type checker's entry point on the same projects: the diagnostics of each declaration.
+docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -v "$ROOT":"$ROOT" -e LD_LIBRARY_PATH="$ICU" uv-oracle \
+  /w/reference/oracle/uv-oracle typecheck "$ROOT/target/parity/comptime_projects.oracle.list" \
+  | sed "s|$ROOT/|/w/|g" > tests/golden/typecheck.tsv
 run uv-oracle /w/reference/oracle/uv-oracle sigma > tests/golden/sigma.tsv
 run uv-oracle sh -c 'g++ -std=c++20 -O1 -o /tmp/probe /w/tools/oracle/unordered_probe.cpp && /tmp/probe' \
   > tests/golden/unordered_order.txt

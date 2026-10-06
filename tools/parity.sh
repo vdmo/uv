@@ -151,6 +151,10 @@ echo "== body typing (every procedure, method and transition body; bodies that r
 ./target/release/uv-parity bodies target/parity/comptime.list | sed "s|$ROOT/|/w/|g" > target/parity/bodies.tsv
 python3 tools/compare_typing.py tests/golden/bodies.tsv target/parity/bodies.tsv || fail=1
 
+echo "== type check (every declaration of every project; declarations of a kind that is not ported are pending, not compared)"
+./target/release/uv-parity typecheck target/parity/comptime.list | sed "s|$ROOT/|/w/|g" > target/parity/typecheck.tsv
+python3 tools/compare_check.py tests/golden/typecheck.tsv target/parity/typecheck.tsv || fail=1
+
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1
 

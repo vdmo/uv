@@ -2,8 +2,9 @@
 //! an access to shared data, and `[[dynamic]]` makes the expression a dynamic context.
 
 use uv_source::ast::{self, AttributeItem, ExprNode, ExprPtr, Stmt};
-use uv_source::attributes::{attrs, has_attribute, validate_attributes, AttributeTarget};
+use uv_source::attributes::{attrs, validate_attributes, AttributeTarget};
 
+use super::dynamic_context::{compute_dynamic_context, DynamicScopeAncestor};
 use super::stmt_context::StmtTypeContext;
 use super::type_env::TypeEnv;
 use super::type_expr::{type_expr, type_place};
@@ -21,7 +22,8 @@ pub fn has_memory_order_attribute(attr_list: &[AttributeItem]) -> bool {
 
 /// Whether the expression is in a dynamic context: inherited, or marked on itself.
 pub fn compute_expr_dynamic_context(expr: &ast::Expr, inherited: bool) -> bool {
-    inherited || has_attribute(ast::expr_attr_list(expr), attrs::DYNAMIC)
+    let ancestors = [DynamicScopeAncestor { attrs: ast::expr_attr_list(expr), span: &expr.span }];
+    inherited || compute_dynamic_context(&expr.span, &ancestors)
 }
 
 /// The checks on the attributes alone, before the inner expression is typed.

@@ -134,7 +134,7 @@ X	["AArch64DependencyObject"]
 B	aarch64DependencyObjectValue	ok	-		!	-	2			1:bdd060b5d43b540c 1:bdd060b5d43b540c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/ArtifactProjects/ArrayIndexOOBPanic/Ultraviolet.toml
 X	["ArrayIndexOOBPanic"]
-B	arrayIndexOOBPanicValue	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	308-313	2			6:4ec12164a1277140 5:8222a851a33e1d69 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	arrayIndexOOBPanicValue	ok	-		!	-	2			7:df3532eea6830a1a 5:8222a851a33e1d69 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	main	ok	-		!	-	2			4:64979cfbdbdf3a5b 3:fd816175819a68c9 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/ArtifactProjects/AsyncFailedSpawnedWaitPanic/Ultraviolet.toml
 X	["AsyncFailedSpawnedWaitPanic"]
@@ -257,15 +257,15 @@ B	attributeDiscoveryOrderTextByte	ok	-		!	-	2			17:be9983d12e5a25e6 13:a9f171505
 B	attributeDiscoveryOrderTextEquals	ok	-		!	-	3			33:ec42b4b7925ea117 27:4ae3f448d9d49961 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributeDiscoveryOrderReadTextEquals	ok	-		!	-	2			11:cb2400eeb9004a0c 7:36cc51e6dc236a58 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributeDiscoveryOrderWrite	ok	-		!	-	2			14:84af9e2ede045431 11:95517c3f93bf1189 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributeDiscoveryOrderFirst	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2219-2332	2			13:4fe40fc2e3cde991 9:735c3c780d5a10fc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributeDiscoveryOrderSecond	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2719-2840	2			17:392bfcd8839587a0 13:d18233d57aadf879 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributeDiscoveryOrderThird	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3226-3349	2			17:b57444ccbcc14825 13:374dc8609e2f2997 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributeDiscoveryOrderFirst	ok	-		!	-	2			13:4fe40fc2e3cde991 9:735c3c780d5a10fc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributeDiscoveryOrderSecond	ok	-		!	-	2			17:392bfcd8839587a0 13:d18233d57aadf879 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributeDiscoveryOrderThird	ok	-		!	-	2			17:b57444ccbcc14825 13:374dc8609e2f2997 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/ArtifactProjects/AttributeDynamicSemantics/Ultraviolet.toml
 X	["AttributeDynamicSemantics" "Tests"]
-B	attributeDynamicSemanticsRuntimeValue	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	211-216	2			6:a120d1c1681fa048 5:f02c49f9a432125e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributeDynamicSemanticsRuntimeValue	ok	-		!	-	2			7:ea4c0a3eac399f10 5:f02c49f9a432125e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributeDynamicSemanticsPasses	ok	-		!	-	2			1:87e8f82c315bde66 1:87e8f82c315bde66 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributeDynamicSemanticsFails	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	613-625	2			1:a918e491cc173428 1:a918e491cc173428 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributeDynamicSemanticsErrors	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	889-909	2			6:4904d6696c026287 6:4904d6696c026287 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributeDynamicSemanticsFails	ok	-		!	-	2			1:a918e491cc173428 1:a918e491cc173428 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributeDynamicSemanticsErrors	ok	-		!	-	2			6:4904d6696c026287 6:4904d6696c026287 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/ArtifactProjects/AttributeMetadataDiscovery/Ultraviolet.toml
 X	["AttributeMetadataDiscovery" "Tests"]
 B	attributeMetadataBareFallback	ok	-		!	-	2			1:292548c6f1a089de 1:292548c6f1a089de 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -292,10 +292,10 @@ B	attributeAuthorityTextEquals	ok	-		!	-	3			33:766d016f2a2387c7 27:5b12fedb42df
 B	attributeAuthorityReadTextEquals	ok	-		!	-	2			10:6392aa7960efc883 5:74afd2117b39a358 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributeAuthorityTargetProfileKnown	ok	-		!	-	2			17:91b3c58e35c76b1d 9:60beb4ccdd5e8ec2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributeShapeNoParameter	ok	-		!	-	2			1:aac4dd651454b00a 1:aac4dd651454b00a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributeAuthorityParameter	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3254-3804	2			71:a8b4da3bc15d05d7 55:58a06c243a737e42 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributeAuthorityParameter	ok	-		!	-	2			71:a8b4da3bc15d05d7 55:58a06c243a737e42 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness/Ultraviolet.toml
 X	["AttributeTestHarness" "Tests"]
-B	attributeHarnessRecordsAuthority	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	342-571	2			25:246ac3ad9ab99bb4 19:da26a08f624304c0 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributeHarnessRecordsAuthority	ok	-		!	-	2			25:246ac3ad9ab99bb4 19:da26a08f624304c0 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/ArtifactProjects/CastPanic/Ultraviolet.toml
 X	["CastPanic"]
 B	castPanicValue	ok	-		!	-	2			2:2ab626bd7997924c 2:2ab626bd7997924c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -426,8 +426,8 @@ B	emitLlNullableForeignContractProbe	ok	-		!	-	2			4:4bb6a6a65824b458 2:70305ccc
 B	emitLlStaticForeignContractProbe	ok	-		!	-	2			6:f21313b2aa7fec56 5:526add1918fd7597 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	emitLlUnwindAbortImportProbe	ok	-		!	-	2			4:1f15ae8615badee2 2:24546f507b4fa4b2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	emitLlUnwindCatchImportProbe	ok	-		!	-	2			4:dcd888f439dc3878 2:fa5fae9b7163d5c7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	emitLlUnwindAbortExportProbe	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	21872-21877	2			4:f5539dfddc21e7fb 3:7b8748653e645d5f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	emitLlUnwindCatchExportProbe	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	22095-22100	2			4:e034ad770e417dcc 3:66fb26454116ec56 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	emitLlUnwindAbortExportProbe	ok	-		!	-	2			5:7bf332ebb0e5fa45 3:7b8748653e645d5f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	emitLlUnwindCatchExportProbe	ok	-		!	-	2			5:74996b418ad5fa64 3:66fb26454116ec56 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	emitLlForeignByRefRecordProbe	ok	-		!	-	2			2:4afbbe1f5311c90b 1:442938377c6154a3 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	emitLlDroppingByValueProbe	ok	-		!	-	2			1:762020115e157929 1:762020115e157929 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	emitLlGenericFfiBoxProbe	ok	-		!	-	2			2:75578a667386feed 1:885f38d62d66c89b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -554,7 +554,7 @@ X	["ReducedEmptyDispatchPanic"]
 B	main	ok	-		!	-	2			10:f141c0ac96d32bdf 8:82250656a3c04012 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Ultraviolet.toml
 X	["RefinementRuntimePanic"]
-B	refinementRuntimePanicValue	fail	E-TYP-1953	statement failed typing: LetStmt	-	200-245	2			1:9d202abdb520ce4e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	refinementRuntimePanicValue	ok	-		!	-	2			2:56b5291b0c93a514 1:9d202abdb520ce4e 1:523b56ec085ef52 0:14650fb0739d0383 0:14650fb0739d0383
 B	main	ok	-		!	-	2			4:e0e5dcf8f2fa1b26 3:dd1ff65f9870ec84 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols/Ultraviolet.toml
 X	["RuntimeInterfaceSymbols"]
@@ -686,7 +686,7 @@ X	["DynamicKeyRuntimeInfo"]
 B	dynamicKeyRuntimeInfoReference	ok	-		!	-	2		 [I-CON-0013|Static key safety proven under `#dynamic`|267]	12:66afc494b5205180 11:21c6d66573bd5e65 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeSyncInfo/Ultraviolet.toml
 X	["DynamicKeyRuntimeSyncInfo"]
-B	dynamicKeyRuntimeSyncInfoReference	fail	E-CON-0020	statement failed typing: LetStmt	-	314-526	2			10:61cb4894908e640 9:341ab33b8f59523 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	dynamicKeyRuntimeSyncInfoReference	ok	-		!	-	2		 [I-CON-0011|Runtime synchronization emitted under `#dynamic`|394] [I-CON-0011|Runtime synchronization emitted under `#dynamic`|616]	29:ce651df473d0798f 22:6f40122b0e57dccf 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/DiagnosticSource/Keys/FineGrainedLoopKeyWarning/Ultraviolet.toml
 X	["FineGrainedLoopKeyWarning"]
 B	fineGrainedLoopKeyWarningReference	ok	-		!	-	3		 [W-CON-0001|Fine-grained keys in tight loop (performance hint)|463]	18:49a1178782fb607c 17:c646ea3d3b88abfb 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -1268,7 +1268,7 @@ X	["CapabilityIsolationDiagnosticOwnership"]
 B	hostedCapability	ok	-		!	-	2			1:f863e3e8418e3f24 1:f863e3e8418e3f24 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/RejectedSource/FFI/CapabilityIsolationDiagnostics/Ultraviolet.toml
 X	["CapabilityIsolationDiagnostics"]
-B	capabilityIsolationDiagnosticsReference	ok	-		!	-	2			6:4dce912b864bd6e0 5:e0ea09287dc0a652 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	capabilityIsolationDiagnosticsReference	fail	E-SYS-3360	statement failed typing: ReturnStmt	-	268-282	2			5:84a42dc409f738b4 5:84a42dc409f738b4 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/RejectedSource/FFI/ErrorPredicateWellFormedness/Ultraviolet.toml
 X	["ErrorPredicateWellFormedness"]
 F	/w/target/fixtures/Fixtures/RejectedSource/FFI/ExternCallSafety/Ultraviolet.toml
@@ -1287,7 +1287,7 @@ X	["FfiPassByValueRequired"]
 B	DroppingFfiRecord::drop	ok	-		()	-	2			0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiReturnRegionLocalRawPtr/Ultraviolet.toml
 X	["FfiReturnRegionLocalRawPtr"]
-B	ffiReturnRegionLocalRawPtrReference	ok	-		!	-	2			6:33efce485554c170 5:16d7a2e9cb49503c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	ffiReturnRegionLocalRawPtrReference	fail	E-SYS-3360	statement failed typing: ReturnStmt	-	280-294	2			5:5b868364f862b214 5:5b868364f862b214 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 F	/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeBoolParameter/Ultraviolet.toml
 X	["FfiSafeBoolParameter"]
 F	/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiSafeDiagnostics/Ultraviolet.toml
@@ -2311,9 +2311,9 @@ B	acceptedProjectHostedImportLibraryMatches	ok	-		!	-	2			20:453235a6f7a027b9 12
 B	acceptedProjectHostedExercise	ok	-		!	-	2			82:c584380d307ae787 77:107b26bca7a16c57 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	acceptedProjectReportNamedResult	ok	-		!	-	2			11:41d43c97112c5032 10:d88769787e90b22c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	acceptedProjectMergeNamedResult	ok	-		!	-	2			8:f42e2085c0aba2f3 2:d745ad57656fc08 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	acceptedProjectLoweringChecksJudgementSetObligation	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	113370-113436	2			10:fda78461253c8194 8:b7ee1823d86a2e4d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	acceptedProjectFixturesBuildAndExerciseArtifactObligations	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	113938-114004	2			10:558df5d9857d067e 8:bd1c89716368afd6 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	appendixDCommandLineDiagnosticsExercise	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	351-417	2			10:f97d7d5b24216987 8:f9ddab315c247ca7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	acceptedProjectLoweringChecksJudgementSetObligation	ok	-		!	-	2			22:57f43549412c567d 20:93753073e5ce272a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	acceptedProjectFixturesBuildAndExerciseArtifactObligations	ok	-		!	-	2			66:d267523c5717c0fb 64:d389291f73e66903 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	appendixDCommandLineDiagnosticsExercise	ok	-		!	-	2			22:defafaef8fcf38e 20:2afa51c81f94593e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	artifactProjectTargetText	ok	-		!	-	2			6:558798f97f9642eb 1:f9b11ad4e6a71a6 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	artifactProjectTargetProfileText	ok	-		!	-	2			6:4d1a5a3322bc541 1:cd6074335faa78c7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	artifactProjectTargetStatus	ok	-		!	-	2			7:78ee6f15c4b4092f 3:34c9a1c952637c36 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2447,7 +2447,7 @@ B	artifactProjectAArch64DependencyExercise	ok	-		!	-	2			112:9d39db545cfc450c 10
 B	artifactProjectModuleDiscoveryOrderingExercise	ok	-		!	-	2			90:e86a29f693a5468f 84:d04872f6e789cec8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	artifactProjectReportNamedResult	ok	-		!	-	2			11:fab68658ebe6ab4f 10:3b2f0c811be57f09 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	artifactProjectMergeNamedResult	ok	-		!	-	2			8:26a66a85c6cc2daa 2:ce41e25d77360f74 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	artifactProjectFixturesBuildAndExerciseOutputObligations	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	359440-359506	2			10:afb3711a214a77d 8:f47b696505f4745d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	artifactProjectFixturesBuildAndExerciseOutputObligations	ok	-		!	-	2			239:67b19f0289d08a0 233:f103ef0bf94542d6 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	asyncArtifactMapContains	ok	-		!	-	2			15:e5f559d83580e42a 10:9a454b780ec3a9f6 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	asyncArtifactCompositionObligationIdsMatch	ok	-		!	-	2			229:af4af196b4983097 115:60ad543e5c6f53f8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	asyncArtifactCompositionIrEvidenceMatches	ok	-		!	-	2			81:ed93337518e7e710 41:1945cdaa1035274 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2470,7 +2470,7 @@ B	attributesMetadataArtifactConformanceLineContains	ok	-		!	-	2			7:d10134e481b9
 B	attributesMetadataArtifactIrContains	ok	-		!	-	2			6:713ea24e3e5078d 3:73bc9faedd7b8e77 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributesMetadataLayoutEvidenceMatches	ok	-		!	-	2			51:d79ab9b0f772fdd4 31:b9f1c73b01dc10e3 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributesMetadataOptimizationEvidenceMatches	ok	-		!	-	2			39:de50ccfd7e0f44d4 23:c2ed8aafa71fa318 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributesMetadataArtifactObligationsExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	4974-5040	2			10:c6e4750692e22464 8:ef00d4b58814e858 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributesMetadataArtifactObligationsExecute	ok	-		!	-	2			59:1b51976ddfdd34d3 40:59640434c4868967 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributesMetadataRunTestCommand	ok	-		!	-	2			105:68042f3005492292 98:a789f694fd4cf3a4 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributesMetadataRunCoverageCommand	ok	-		!	-	2			105:996f3d64ede882b1 98:51f58e78572b198a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributesMetadataRunAllTestsCommand	ok	-		!	-	2			89:5fdfef5368b6524e 82:7a28f8c3da183658 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2497,12 +2497,12 @@ B	attributesSourceNativeDynamicSemanticsConformanceLineContains	ok	-		!	-	2			7:
 B	attributesSourceNativeDiscoveryOrderConformanceLineContains	ok	-		!	-	2			7:7e944fd0eb544cd3 4:ecca5d4648e5a697 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributesSourceNativeMetadataConformanceLineContains	ok	-		!	-	2			7:2cd34d3a72af846b 2:b0177e6adf9d3374 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	attributesSourceNativeAuthorityShapeConformanceLineContains	ok	-		!	-	2			7:1d520c6410d40a16 3:c3fd1673754ce47 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributesSourceNativeHarnessGenerationExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	44223-44289	2			10:9a57e2c2ac7639a0 8:9922e7049453a1c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributesSourceNativeDynamicSemanticsExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	46333-46399	2			10:1cb18d861faf63eb 8:400da119c4029965 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributesSourceNativeDiscoveryOrderExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	47526-47592	2			10:876e88c9799e9348 8:c35368a0333ecb66 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributesSourceNativeMetadataDiscoveryExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	49324-49390	2			10:8d100131f198d028 8:aaba321b0614c04 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributesSourceNativeAuthorityAndShapeExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	55202-55268	2			10:2405e7c85d40e0ac 8:52b268bfeea346c4 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	attributesSourceNativeDiagnosticsCompositeExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	58900-58966	2			10:790381d58d168ac9 8:43b4d19c429c0cb5 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributesSourceNativeHarnessGenerationExecute	ok	-		!	-	2			61:7666afbb39361506 41:6c4ec46f2eff35a6 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributesSourceNativeDynamicSemanticsExecute	ok	-		!	-	2			36:58116e07cf2f0df3 24:693f25a9e4df54d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributesSourceNativeDiscoveryOrderExecute	ok	-		!	-	2			48:8db9014b4359ce3d 30:5225913b6e61453d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributesSourceNativeMetadataDiscoveryExecute	ok	-		!	-	2			135:dc9025f24196f973 93:a6c7d776a3977e99 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributesSourceNativeAuthorityAndShapeExecute	ok	-		!	-	2			91:7bbc967aaa52e5e5 61:cf23e766dcbe7508 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	attributesSourceNativeDiagnosticsCompositeExecute	ok	-		!	-	2			19:62e0708e91e23c80 13:6eea35f3b1de5591 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	catalogObligationCount	ok	-		!	-	2			1:7687a9517a47cad8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	catalogBlockedObligationCount	ok	-		!	-	2			1:96feb50008963419 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	catalogAccountedObligationCount	ok	-		!	-	2			3:1d77375730bd35ac 3:1d77375730bd35ac 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2626,8 +2626,8 @@ B	diagnosticExerciseDirectoryStep	ok	-		!	-	2			24:e0fd38e6afdd3032 18:d1b1fe2a9
 B	diagnosticExerciseOpenFixtureDirectory	ok	-		!	-	2			44:92902a4a306f54b5 39:4d1343bec0c3f5c8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	diagnosticExerciseFixtureDirectory	ok	-		!	-	2			53:bab69919bc131742 41:4b13c026b6dd8dad 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	diagnosticExerciseProjectFixtureDirectory	ok	-		!	-	2			32:63c32dcc1ccd09e1 21:450dbd6df6394b36 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	rejectedSourceFixturesCompileAndEmitExpectedDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	34590-34656	2			10:1ac4e57455586280 8:f1561f181337075 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	diagnosticSourceFixturesEmitExpectedDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	35734-35800	2			10:e3b068a5848dd77 8:707f2018a85eb521 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	rejectedSourceFixturesCompileAndEmitExpectedDiagnostics	ok	-		!	-	2			49:6f1c977d752bb428 45:1388e8c2dbc5dfc6 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	diagnosticSourceFixturesEmitExpectedDiagnostics	ok	-		!	-	2			49:161d35e009a7247c 45:9885723149016b27 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	acceptedSourceExerciseKind	ok	-		!	-	2			1:816f5315ada8589e 1:816f5315ada8589e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	acceptedProjectExerciseKind	ok	-		!	-	2			1:9777d61c12b99e86 1:9777d61c12b99e86 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	rejectedSourceExerciseKind	ok	-		!	-	2			1:a9c2f80311157883 1:a9c2f80311157883 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2639,11 +2639,11 @@ B	expressionsWorkstreamExpressionSemanticsBuild	ok	-		!	-	2			9:460a8f1f0aa254fb
 B	expressionsWorkstreamPtrNullBuild	ok	-		!	-	2			9:b721db2db4670a74 5:dc767b00efeb04ef 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	expressionsWorkstreamSemanticsConformanceContains	ok	-		!	-	2			6:ea84c552bda13be 1:9645f35ec93253e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	expressionsWorkstreamPtrNullConformanceContains	ok	-		!	-	2			6:e8a37a86b862d121 1:6945a1fc81fbcd6b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	expressionsWorkstreamLoweringConformanceExercise	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	2354-2420	2			10:723196b2fd01f80b 8:731d87797a91fc5b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	expressionsWorkstreamIndexDiagnosticsAndRuntimePanicExercise	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	5430-5496	2			10:abf4d179d8720e54 8:82ac5143d4eb36ae 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	expressionsWorkstreamCastPanicExercise	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	6822-6888	2			10:55f857a9abc33ab2 8:42b7346ea4ad9c8e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	expressionsWorkstreamLoweringConformanceExercise	ok	-		!	-	2			91:f9f63ca6edddaad1 49:5123c60146c25d80 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	expressionsWorkstreamIndexDiagnosticsAndRuntimePanicExercise	ok	-		!	-	2			48:1a098f10be4e4031 42:2711a307c998ce59 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	expressionsWorkstreamCastPanicExercise	ok	-		!	-	2			31:95aec652bc45b6b5 29:897f3dbd6781dd79 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	expressionsWorkstreamRejectedFixture	ok	-		!	-	2			5:6cf7bf99fd5ce7d2 2:79efaa888c58572f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	expressionsWorkstreamRejectedDiagnosticsExercise	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	617-683	2			10:6580fabb0f5d6356 8:b97d8c397e5906cc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	expressionsWorkstreamRejectedDiagnosticsExercise	ok	-		!	-	2			156:7377e5b71a8e4551 154:5993b4020306f013 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	referenceLocation	ok	-		!	-	2			4:f9c47480f5a01a77 4:f9c47480f5a01a77 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	exerciseReference	ok	-		!	-	2			3:318b46bd14d17a 3:318b46bd14d17a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	auditTextByte	ok	-		!	-	2			17:89fda0b2dfbc5f9e 13:694e3d2bb02a67fd 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2659,8 +2659,8 @@ B	moduleSourceProjectModuleAggregationLineContains	ok	-		!	-	2			5:3874fca732bba
 B	moduleSourceProjectSharedResolutionLineContains	ok	-		!	-	2			5:b572e3f2123c69bd 2:de442be5a3e68af3 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	moduleSourceProjectModuleAggregationPayloadMatches	ok	-		!	-	2			73:e0c6e65a9591ab03 37:14661eef0dbb474a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	moduleSourceProjectSharedResolutionPayloadMatches	ok	-		!	-	2			29:4c807c66bb98c9a5 15:aba771470129ed59 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	moduleSourceProjectExternAbiFormsExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	5529-5595	2			10:aa3a44b865cac458 8:60f0c182f2086738 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	moduleSourceProjectStaticLoweringItemsExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	11326-11392	2			10:c552fee495dea2c 8:780caeb5e61627de 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	moduleSourceProjectExternAbiFormsExecute	ok	-		!	-	2			172:106769e3e94c30 117:38338c8fb5fc8562 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	moduleSourceProjectStaticLoweringItemsExecute	ok	-		!	-	2			100:b7bc0c2d5bcedfc0 71:b2321be0528dc85f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	obligationReference	ok	-		!	-	2			3:c803d05364134ec7 3:c803d05364134ec7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	obligationEntry	ok	-		!	-	2			3:33cde0c36276aff1 3:33cde0c36276aff1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	obligationEntryMatchesPrimary	ok	-		!	-	2			26:b4105565ccec014e 15:1079ac0bfe346fdc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2799,7 +2799,7 @@ B	outputDiagnosticIRWriteFailureExercise	ok	-		!	-	2			11:ffc504e46e977455 9:a68
 B	outputDiagnosticMergeResult	ok	-		!	-	2			12:f89cb54f412c7933 11:ce96757ed381d98f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	outputDiagnosticReportNamedResult	ok	-		!	-	2			11:de618d26e933cbd2 10:b2234b38611e3e81 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	outputDiagnosticMergeNamedResult	ok	-		!	-	2			8:4ec7167e5bfcbb83 2:17d92e16a0c2cfbb 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	outputDiagnosticFixturesExecuteAndEmitExpectedDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt; expr-kind=IfExpr	-	122849-122915	2			10:be6751d7e5071ed9 8:8cdb5111ad06e3e9 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	outputDiagnosticFixturesExecuteAndEmitExpectedDiagnostics	ok	-		!	-	2			227:3b8e8a2fa5f18dcf 224:b8ba1de9c6c22120 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	parserStateIndexIsValid	ok	-		!	-	2			5:8b04e45edb62f0fe 5:8b04e45edb62f0fe 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	parserAdvanceSaturates	ok	-		!	-	2			18:3d06493f8a453fd0 18:3d06493f8a453fd0 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	parserSpanIsOrdered	ok	-		!	-	2			5:9b2a4a5e4d538b12 5:9b2a4a5e4d538b12 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2816,23 +2816,23 @@ B	runParsingReferenceModels	ok	-		!	-	2			9:914885bd3f37a5ec 5:de72b3a53fc7d623 
 B	patternRejectedFixtureMatchesExpectedDiagnostics	ok	-		!	-	2			24:8dc4a429c5167255 22:87e2a113120b6465 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	patternConformancePathContains	ok	-		!	-	2			5:22cdb0da2585a7e3 1:fc5a7689821246c9 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	patternRejectedFixtureMatchesExpectedAndRecordsObligation	ok	-		!	-	2			144:fdb3e8ee769ad114 117:d25d7f78641466ab 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternDuplicatePatternBindingRejectsWithPatDupDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	6998-7162	2			5:f93f0637fb62934b 3:290decc52df767ec 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternBasicPatternsDiagnosticRejectsWithBasicPatternsDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	7384-7548	2			5:93513ee2a71aac48 3:b14318444440af 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternCaseClausesDiagnosticRejectsWithCaseClausesDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	7773-7935	2			5:86499c5808c86abb 3:62688182d1027f50 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternEnumModalDiagnosticRejectsWithEnumModalDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	8154-8322	2			5:42738eb2b49ea68f 3:5ccb93276c6cb52 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternIfCaseModalNonExhaustiveRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	8538-8703	2			5:32983c80ca77441f 3:e7b80c56a49f94ae 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternIfCaseUnionNonExhaustiveRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	8919-9084	2			5:fd21d3adfe6c4b19 3:3a302f06c1ef3fbc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternIfCaseEnumNonExhaustiveRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	9298-9462	2			5:8d087c146d7b1775 3:72475f0fc376831e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternIfCaseUnreachableRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	9662-9820	2			5:cb8718451eff0434 3:3f7bb898399bab54 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternExhaustivenessDiagnosticRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	10044-11687	2			36:d5184062c457cc9b 28:579d3ed542f80d6c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternDiagnosticsSupplementRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	11905-15514	2			81:19157bc2e6545a9 61:468c957098e15b13 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternParsePatternErrorRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	15706-15864	2			5:4be5ff4afda94363 3:90f6166f34a90d60 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternRangePatternNonConstRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	16063-16224	2			5:78f9d170cf236fd7 3:29536d0bc2734e9c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternRangePatternEmptyRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	16416-16574	2			5:cac4f13f53792914 3:8133919734ec507b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternRangePatternsDiagnosticRejectsWithRangePatternsDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	16796-16960	2			5:f7f4a315a87f6f4b 3:3214f90e03b37fa8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternTuplePatternArityRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	17152-17310	2			5:19fc4b3862dda193 3:3836b0f7579f1207 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternRecordPatternUnknownFieldRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	17519-17685	2			5:c231debdbda2fa90 3:1825674a2a7cb8b1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternTupleRecordDiagnosticRejectsWithTupleRecordDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	17910-18080	2			5:86f59d86db3e6a73 3:f3ee1c1c2005b1d0 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternDuplicatePatternBindingRejectsWithPatDupDiagnostic	ok	-		!	-	2			5:f93f0637fb62934b 3:290decc52df767ec 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternBasicPatternsDiagnosticRejectsWithBasicPatternsDiagnostic	ok	-		!	-	2			5:93513ee2a71aac48 3:b14318444440af 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternCaseClausesDiagnosticRejectsWithCaseClausesDiagnostic	ok	-		!	-	2			5:86499c5808c86abb 3:62688182d1027f50 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternEnumModalDiagnosticRejectsWithEnumModalDiagnostic	ok	-		!	-	2			5:42738eb2b49ea68f 3:5ccb93276c6cb52 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternIfCaseModalNonExhaustiveRejectsWithExactDiagnostic	ok	-		!	-	2			5:32983c80ca77441f 3:e7b80c56a49f94ae 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternIfCaseUnionNonExhaustiveRejectsWithExactDiagnostic	ok	-		!	-	2			5:fd21d3adfe6c4b19 3:3a302f06c1ef3fbc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternIfCaseEnumNonExhaustiveRejectsWithExactDiagnostic	ok	-		!	-	2			5:8d087c146d7b1775 3:72475f0fc376831e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternIfCaseUnreachableRejectsWithExactDiagnostic	ok	-		!	-	2			5:cb8718451eff0434 3:3f7bb898399bab54 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternExhaustivenessDiagnosticRejectsWithExactDiagnostic	ok	-		!	-	2			36:d5184062c457cc9b 28:579d3ed542f80d6c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternDiagnosticsSupplementRejectsWithExactDiagnostic	ok	-		!	-	2			81:19157bc2e6545a9 61:468c957098e15b13 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternParsePatternErrorRejectsWithExactDiagnostic	ok	-		!	-	2			5:4be5ff4afda94363 3:90f6166f34a90d60 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternRangePatternNonConstRejectsWithExactDiagnostic	ok	-		!	-	2			5:78f9d170cf236fd7 3:29536d0bc2734e9c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternRangePatternEmptyRejectsWithExactDiagnostic	ok	-		!	-	2			5:cac4f13f53792914 3:8133919734ec507b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternRangePatternsDiagnosticRejectsWithRangePatternsDiagnostic	ok	-		!	-	2			5:f7f4a315a87f6f4b 3:3214f90e03b37fa8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternTuplePatternArityRejectsWithExactDiagnostic	ok	-		!	-	2			5:19fc4b3862dda193 3:3836b0f7579f1207 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternRecordPatternUnknownFieldRejectsWithExactDiagnostic	ok	-		!	-	2			5:c231debdbda2fa90 3:1825674a2a7cb8b1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternTupleRecordDiagnosticRejectsWithTupleRecordDiagnostic	ok	-		!	-	2			5:86f59d86db3e6a73 3:f3ee1c1c2005b1d0 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	patternLoweringProjectRuns	ok	-		!	-	2			21:b0cbe73cfb9f0181 12:9e97076d252dae62 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	patternLoweringConformanceContains	ok	-		!	-	2			6:30c08ddf2598332 1:747f12a1b8067a71 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	patternConformanceLineContainsRequiredPayload	ok	-		!	-	2			8:a7589b547f8b0414 3:46f0ddefb567a544 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -2841,20 +2841,20 @@ B	patternConformanceTextContainsEntry	ok	-		!	-	3			43:851407a44bcd9f69 34:a90d3
 B	patternLoweringConformanceContainsEntry	ok	-		!	-	2			63:7b2feb6353f2c5a1 44:22c2b91abfbaa26c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	patternLoweringProjectContainsEntry	ok	-		!	-	2			15:175bea5105edc82e 3:9a4f88027a8ea320 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	patternLoweringProjectContainsMarker	ok	-		!	-	2			12:bbad3e821c13ecde 3:c5043134050ded84 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternBindingEnvironmentConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	6084-6324	2			7:189aff39697f2e77 5:2c4826864f860431 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternBasicPatternLoweringSharedConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	6525-6769	2			7:2feaa057fa42fa62 5:21bf4b5de2e67d3d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternPatternLoweringJudgementsConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	6976-7216	2			7:7364865686e5e990 5:7e0746afca633921 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternLowerPatCorrectnessConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	7485-7849	2			11:b12607731c89312f 8:b63af227778a0b27 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternLowerIfCasesCorrectnessConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	8130-8491	2			11:b5ab4eac58b1f2d9 8:63b38ca01b2e2d4f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternLowerBindListEmptyConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	8757-9059	2			11:74635c938cf4ae31 8:31d50dc2d412871c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternLowerBindListConsConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	9322-9694	2			11:f4cef06fe904f46 8:e6132d31b2b73f85 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternLowerPatGeneralConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	9890-10114	2			7:c21dcebaea3c6558 5:dddedf4d0bfd6fd1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternLowerIfCasesConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	10303-10514	2			7:9ba4d4cada585aef 5:7c1f7f4fce2016d8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternEnumModalPatternLoweringSharedConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	10724-10984	2			7:1236c483f1ef0a49 5:7f5d35af834be3a4 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternExhaustivenessIrrefutabilityHelpersConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	11204-11463	2			7:12c62f94fd11929c 5:66cf2963dd4bde89 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternExhaustivenessNoAdditionalLoweringConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	11689-11986	2			7:a0562893c0c822c2 5:e349b7573d25d489 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternRangePatternLoweringSharedConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	12187-12431	2			7:d33cb040d0a0ade0 5:28c1454eda475930 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	patternTupleRecordPatternLoweringSharedConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	12645-12913	2			7:d706a3e8b55d3f23 5:441d66a68fc69afb 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternBindingEnvironmentConformanceMatches	ok	-		!	-	2			7:189aff39697f2e77 5:2c4826864f860431 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternBasicPatternLoweringSharedConformanceMatches	ok	-		!	-	2			7:2feaa057fa42fa62 5:21bf4b5de2e67d3d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternPatternLoweringJudgementsConformanceMatches	ok	-		!	-	2			7:7364865686e5e990 5:7e0746afca633921 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternLowerPatCorrectnessConformanceMatches	ok	-		!	-	2			11:b12607731c89312f 8:b63af227778a0b27 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternLowerIfCasesCorrectnessConformanceMatches	ok	-		!	-	2			11:b5ab4eac58b1f2d9 8:63b38ca01b2e2d4f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternLowerBindListEmptyConformanceMatches	ok	-		!	-	2			11:74635c938cf4ae31 8:31d50dc2d412871c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternLowerBindListConsConformanceMatches	ok	-		!	-	2			11:f4cef06fe904f46 8:e6132d31b2b73f85 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternLowerPatGeneralConformanceMatches	ok	-		!	-	2			7:c21dcebaea3c6558 5:dddedf4d0bfd6fd1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternLowerIfCasesConformanceMatches	ok	-		!	-	2			7:9ba4d4cada585aef 5:7c1f7f4fce2016d8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternEnumModalPatternLoweringSharedConformanceMatches	ok	-		!	-	2			7:1236c483f1ef0a49 5:7f5d35af834be3a4 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternExhaustivenessIrrefutabilityHelpersConformanceMatches	ok	-		!	-	2			7:12c62f94fd11929c 5:66cf2963dd4bde89 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternExhaustivenessNoAdditionalLoweringConformanceMatches	ok	-		!	-	2			7:a0562893c0c822c2 5:e349b7573d25d489 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternRangePatternLoweringSharedConformanceMatches	ok	-		!	-	2			7:d33cb040d0a0ade0 5:28c1454eda475930 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	patternTupleRecordPatternLoweringSharedConformanceMatches	ok	-		!	-	2			7:d706a3e8b55d3f23 5:441d66a68fc69afb 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	artifactProjectRuntimeInterfaceIrContains	ok	-		!	-	2			6:2f71916049aa0ee8 3:2c807b73893d1ec8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	artifactProjectRuntimeInterfaceSymbolsMatch	ok	-		!	-	4			76:27babf670879f17 73:a1af07584b12699d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	artifactProjectRuntimeInterfaceSignaturesMatch	ok	-		!	-	4			171:27b8cdfb352d5098 168:bfc07f4d2b6e5fa2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -3006,13 +3006,13 @@ B	validatedCompileTimeExecutionAndMetaprogrammingAsyncDiagnosticsSupplementOblig
 B	comptimeConformanceProjectRuns	ok	-		!	-	2			21:dbc651d6e2182372 12:903e1e5cde574c51 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	comptimeConformanceContains	ok	-		!	-	2			6:688c5c3781dbdc51 1:4d59624985d76f0b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	comptimeConformanceArtifactsExist	ok	-		!	-	2			11:495716e0ddbaef4 5:d012a5d2e8d6aff 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeAcceptedProjectPhaseExecutionConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1889-2898	2			47:8d8cf07244826031 20:c315145303983a03 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeAcceptedProjectCapabilitiesConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3164-6112	2			117:a5594064047fb680 48:555f5efd8e0d43d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeAcceptedProjectFormsConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	6359-8832	2			112:6adedb295a479fc4 46:7665c8bdcad09878 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeTypeAvailabilityConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	9083-10592	2			51:a8a491bb951fa733 23:71ed7a4ebe8cf73d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeAcceptedProjectDeriveConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	10842-13909	2			112:4c48c06655984715 46:628b2124d5df9994 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeAcceptedProjectQuoteSpliceConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	14175-16556	2			92:cb1e3e56ef0c17f4 38:d10116f0891ec895 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeAcceptedProjectReflectionConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	16818-18597	2			67:982b073d6252e2b1 28:1087b03b728f29c5 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeAcceptedProjectPhaseExecutionConformanceMatches	ok	-		!	-	2			47:8d8cf07244826031 20:c315145303983a03 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeAcceptedProjectCapabilitiesConformanceMatches	ok	-		!	-	2			117:a5594064047fb680 48:555f5efd8e0d43d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeAcceptedProjectFormsConformanceMatches	ok	-		!	-	2			112:6adedb295a479fc4 46:7665c8bdcad09878 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeTypeAvailabilityConformanceMatches	ok	-		!	-	2			51:a8a491bb951fa733 23:71ed7a4ebe8cf73d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeAcceptedProjectDeriveConformanceMatches	ok	-		!	-	2			112:4c48c06655984715 46:628b2124d5df9994 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeAcceptedProjectQuoteSpliceConformanceMatches	ok	-		!	-	2			92:cb1e3e56ef0c17f4 38:d10116f0891ec895 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeAcceptedProjectReflectionConformanceMatches	ok	-		!	-	2			67:982b073d6252e2b1 28:1087b03b728f29c5 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countCompileTimeExecutionAndMetaprogrammingCompileTimeCapabilitiesObligations	ok	-		!	-	2			1:b33f87e3e147134f 1:b33f87e3e147134f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	validatedCompileTimeExecutionAndMetaprogrammingCompileTimeCapabilitiesObligations	ok	-		!	-	2			326:b4a6efca68944da0 298:721ce6315ba149d9 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countCompileTimeExecutionAndMetaprogrammingCompileTimeDiagnosticsSupplementObligations	ok	-		!	-	2			1:5eed2f8f1ff8df82 1:5eed2f8f1ff8df82 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -3022,33 +3022,33 @@ B	validatedCompileTimeExecutionAndMetaprogrammingCompileTimeFormsObligations	ok	
 B	countCompileTimeExecutionAndMetaprogrammingDeriveTargetsAndContractsObligations	ok	-		!	-	2			1:a3826c453e640ce 1:a3826c453e640ce 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	validatedCompileTimeExecutionAndMetaprogrammingDeriveTargetsAndContractsObligations	ok	-		!	-	2			314:6b83566ac75ca700 287:3acf4b333c3cb9 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	comptimeDiagnosticFixtureMatchesExpectedDiagnostics	ok	-		!	-	2			24:c3e9dedb58630c4b 22:ace0b08a57b8e717 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeProjectFilesInvalidPathEmitsExpectedDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	820-1253	2			13:512fa143bad6fa95 9:a148bbc78adf5d6c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeEmitterEmitNonItemRejectsWithExactDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1467-1643	2			6:cfaf0c0acd130fa2 4:3fc7730cffdfbb0b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeUserDiagnosticErrorRejectsWithExactDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1858-2035	2			6:8e35d524d92e16ee 4:53e4da91e384eca7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeUserDiagnosticWarningEmitsExpectedDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2244-2426	2			6:bc15af8473473865 4:85ab5c07244d31a8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeUserDiagnosticNoteEmitsExpectedDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2629-2808	2			6:7f515283138f363b 4:49d80fe3416e814a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimePointerParameterRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3014-3196	2			6:d4f495b076c24d12 4:17ee50cfc4098a66 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeProhibitedWaitRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3398-3578	2			6:ccccce65c8a9ee31 4:1f705b75058b6a61 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeRuntimeCallsComptimeProcedureRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3792-3979	2			6:e3feeb130e090f9f 4:a5024a24ad295eb2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeProcedureContractFailureRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	4202-4392	2			6:3b74fd2a924f494e 4:46bac5911e1dc130 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeIfConditionTypeRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	4597-4778	2			6:1fed741ec07689fb 4:7c0edc92cf0f2827 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeDeriveOnProcedureRejectsWithExactDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	4989-5164	2			6:c485bc2cdea240e0 4:f9dbb0380b331118 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeUnknownDeriveTargetRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	5377-5554	2			6:4f16463af9987e92 4:e77567fa0a20af21 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeDeriveTargetProhibitedWaitRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	5771-5955	2			6:5b5731447d0f22be 4:b313fe9868b2c961 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeDeriveMissingRequiredClassRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	6183-6367	2			6:d824f4fe715b2ce5 4:ecdd0dab24585dea 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeDeriveMissingEmittedClassRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	6593-6776	2			6:7e014d61225e10bf 4:be53e522cc6aee83 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeDeriveTargetUserErrorRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	6994-7173	2			6:912bf77e858a9d6a 4:a39998058017cc6a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeQuoteOutsideComptimeRejectsWithExactDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	7390-7568	2			6:547176706a408525 4:7ce8cbce2f001ad2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeInvalidQuotedContentRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	7783-7961	2			6:428567a6e7fdf19c 4:30f2f4d5ec03bff 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeSpliceTypeMismatchRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	8172-8348	2			6:2043f50e3bdd3e07 4:73ea17dc3c5e6ab2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeSpliceIdentifierStructuralNameRejectsWithExactDiagnostic	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	8579-8767	2			6:7e14aa1e633c755b 4:3453fc1d2149fddc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeIntrospectFieldsNonRecordRejectsWithExactDiagnostics	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	8995-9178	2			6:8fecca9bb70d67d7 4:15e2081210750733 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeProjectFilesInvalidPathEmitsExpectedDiagnostics	ok	-		!	-	2			13:512fa143bad6fa95 9:a148bbc78adf5d6c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeEmitterEmitNonItemRejectsWithExactDiagnostics	ok	-		!	-	2			6:cfaf0c0acd130fa2 4:3fc7730cffdfbb0b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeUserDiagnosticErrorRejectsWithExactDiagnostics	ok	-		!	-	2			6:8e35d524d92e16ee 4:53e4da91e384eca7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeUserDiagnosticWarningEmitsExpectedDiagnostics	ok	-		!	-	2			6:bc15af8473473865 4:85ab5c07244d31a8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeUserDiagnosticNoteEmitsExpectedDiagnostics	ok	-		!	-	2			6:7f515283138f363b 4:49d80fe3416e814a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimePointerParameterRejectsWithExactDiagnostic	ok	-		!	-	2			6:d4f495b076c24d12 4:17ee50cfc4098a66 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeProhibitedWaitRejectsWithExactDiagnostic	ok	-		!	-	2			6:ccccce65c8a9ee31 4:1f705b75058b6a61 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeRuntimeCallsComptimeProcedureRejectsWithExactDiagnostic	ok	-		!	-	2			6:e3feeb130e090f9f 4:a5024a24ad295eb2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeProcedureContractFailureRejectsWithExactDiagnostic	ok	-		!	-	2			6:3b74fd2a924f494e 4:46bac5911e1dc130 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeIfConditionTypeRejectsWithExactDiagnostic	ok	-		!	-	2			6:1fed741ec07689fb 4:7c0edc92cf0f2827 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeDeriveOnProcedureRejectsWithExactDiagnostics	ok	-		!	-	2			6:c485bc2cdea240e0 4:f9dbb0380b331118 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeUnknownDeriveTargetRejectsWithExactDiagnostic	ok	-		!	-	2			6:4f16463af9987e92 4:e77567fa0a20af21 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeDeriveTargetProhibitedWaitRejectsWithExactDiagnostic	ok	-		!	-	2			6:5b5731447d0f22be 4:b313fe9868b2c961 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeDeriveMissingRequiredClassRejectsWithExactDiagnostic	ok	-		!	-	2			6:d824f4fe715b2ce5 4:ecdd0dab24585dea 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeDeriveMissingEmittedClassRejectsWithExactDiagnostic	ok	-		!	-	2			6:7e014d61225e10bf 4:be53e522cc6aee83 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeDeriveTargetUserErrorRejectsWithExactDiagnostic	ok	-		!	-	2			6:912bf77e858a9d6a 4:a39998058017cc6a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeQuoteOutsideComptimeRejectsWithExactDiagnostics	ok	-		!	-	2			6:547176706a408525 4:7ce8cbce2f001ad2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeInvalidQuotedContentRejectsWithExactDiagnostic	ok	-		!	-	2			6:428567a6e7fdf19c 4:30f2f4d5ec03bff 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeSpliceTypeMismatchRejectsWithExactDiagnostic	ok	-		!	-	2			6:2043f50e3bdd3e07 4:73ea17dc3c5e6ab2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeSpliceIdentifierStructuralNameRejectsWithExactDiagnostic	ok	-		!	-	2			6:7e14aa1e633c755b 4:3453fc1d2149fddc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeIntrospectFieldsNonRecordRejectsWithExactDiagnostics	ok	-		!	-	2			6:8fecca9bb70d67d7 4:15e2081210750733 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	comptimeRuntimeErasureArtifactRuns	ok	-		!	-	2			23:82305c131822ea3b 15:cb2affb7235084aa 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	comptimeRuntimeErasureArtifactExists	ok	-		!	-	2			16:44ce5b5181002a5 6:a281d517c408180f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	comptimeRuntimeErasureIrContains	ok	-		!	-	2			6:6d6994c653573c5f 1:38f685ad751efccd 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	comptimeRuntimeErasureIrExcludes	ok	-		!	-	2			6:d3f6be952795db62 1:bd3f15ae9ca2414a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	comptimeRuntimeErasureConformanceContains	ok	-		!	-	2			6:d1c61fc667b1d028 1:180f753655d095e1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	comptimeRuntimeErasureArtifactEvidenceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2864-5412	2			95:67bd2420a099495b 47:376e4f51b2f667ad 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	comptimeRuntimeErasureArtifactEvidenceMatches	ok	-		!	-	2			95:67bd2420a099495b 47:376e4f51b2f667ad 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countCompileTimeExecutionAndMetaprogrammingQuoteSpliceAndEmissionObligations	ok	-		!	-	2			1:df70facd72eb1f75 1:df70facd72eb1f75 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	validatedCompileTimeExecutionAndMetaprogrammingQuoteSpliceAndEmissionObligations	ok	-		!	-	2			278:74ad60b9150e5f60 254:199486795b0c5ab5 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countCompileTimeExecutionAndMetaprogrammingReflectionObligations	ok	-		!	-	2			1:bfeb82a8476abca1 1:bfeb82a8476abca1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -3151,7 +3151,7 @@ X	["HelloUltraviolet" "Audit" "Catalog" "KeySystem"]
 B	keySystemConformanceProjectRuns	ok	-		!	-	2			21:59db46e3a9b077b8 12:f482c971e0b158f6 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	keySystemConformanceLineContains	ok	-		!	-	2			7:7388bc72695c2c9e 1:f5bd1d85e9f22dfc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	keySystemConformanceArtifactsExist	ok	-		!	-	2			11:2a4be85988545197 5:34357f7f349bf334 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	keySystemCompilerConformanceArtifactMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1953-17933	2			348:18ee69fe0a71089f 174:c9f106f47617ea9 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	keySystemCompilerConformanceArtifactMatches	ok	-		!	-	2			348:18ee69fe0a71089f 174:c9f106f47617ea9 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countKeySystemConflictDetectionObligations	ok	-		!	-	2			1:914bad3fee4827f8 1:914bad3fee4827f8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	validatedKeySystemConflictDetectionObligations	ok	-		!	-	2			242:d331527bfe9c64fd 221:2a1453ee6072118 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countKeySystemDynamicKeyVerificationObligations	ok	-		!	-	2			1:232abd599b1f4d61 1:232abd599b1f4d61 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -3268,7 +3268,7 @@ B	validatedProceduresAndContractsBehavioralSubtypingObligations	ok	-		!	-	2			86
 B	proceduresContractClauseFlowProofRuns	ok	-		!	-	2			11:e72829f6197d051c 5:6851d1f48db2749f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	proceduresContractClauseConformanceLineMatches	ok	-		!	-	2			7:d74705be26ffc55 1:66063132334ef35 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	proceduresContractClauseFlowProofArtifactsMatch	ok	-		!	-	2			34:ee4a41512ebc8ca0 12:412150f23219a41c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	proceduresContractClauseRuntimeConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2821-3672	2			17:d904a8b8328f80d9 9:658789c06efc8305 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	proceduresContractClauseRuntimeConformanceMatches	ok	-		!	-	2			17:d904a8b8328f80d9 9:658789c06efc8305 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countProceduresAndContractsContractClausesObligations	ok	-		!	-	2			1:d11ed78d6a3efab 1:d11ed78d6a3efab 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	validatedProceduresAndContractsContractClausesObligations	ok	-		!	-	2			446:b70f5d471ff11467 408:86a9dcb62149dcdf 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countProceduresAndContractsInvariantsObligations	ok	-		!	-	2			1:82b48d60b0365d1f 1:82b48d60b0365d1f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -3342,7 +3342,7 @@ B	validatedStructuredParallelismCaptureSemanticsObligations	ok	-		!	-	2			182:28
 B	structuredParallelismConformanceProjectRuns	ok	-		!	-	2			21:9cc4c02f6f943f36 12:8554001592f6f5ab 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	structuredParallelismConformanceLineContains	ok	-		!	-	2			7:e56945de3c965999 1:92a61cc74934f3bf 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	structuredParallelismConformanceArtifactsExist	ok	-		!	-	2			11:bfb10a207b27d52c 5:6304c8013932e74a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	structuredParallelismCompilerConformanceArtifactMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2159-6629	2			90:39e4c3048354ec1e 45:706971da922ab124 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	structuredParallelismCompilerConformanceArtifactMatches	ok	-		!	-	2			90:39e4c3048354ec1e 45:706971da922ab124 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countStructuredParallelismDeterminismAndNestingObligations	ok	-		!	-	2			1:a3bf329b4a798a93 1:a3bf329b4a798a93 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	validatedStructuredParallelismDeterminismAndNestingObligations	ok	-		!	-	2			110:f3fee183b5b269db 100:275114cdec854d2b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countStructuredParallelismDispatchObligations	ok	-		!	-	2			1:a517e78043132cf7 1:a517e78043132cf7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -3358,7 +3358,7 @@ B	validatedStructuredParallelismSpawnObligations	ok	-		!	-	2			122:6f1d54e913deb
 B	countStructuredParallelismStructuredParallelismDiagnosticsSupplementObligations	ok	-		!	-	2			1:b61c5cea2ea8b6e 1:b61c5cea2ea8b6e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	validatedStructuredParallelismStructuredParallelismDiagnosticsSupplementObligations	ok	-		!	-	2			2:b5bbbc3c6981efdb 1:fd3504db21ff0838 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 X	["HelloUltraviolet" "Audit" "Catalog" "TypeSystemCore"]
-B	typeInferencePrimitiveUnificationConformanceMatches	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1096-1402	2			16:eaf8eec1c1281de3 11:969314911a91e170 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	typeInferencePrimitiveUnificationConformanceMatches	ok	-		!	-	2			16:eaf8eec1c1281de3 11:969314911a91e170 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countTypeSystemCoreCoreTypeDiagnosticsObligations	ok	-		!	-	2			1:df216701b6f09186 1:df216701b6f09186 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	validatedTypeSystemCoreCoreTypeDiagnosticsObligations	ok	-		!	-	2			2:417e85f8b41fb006 1:36090f310821f111 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	countTypeSystemCoreMetatheoreticPropertiesObligations	ok	-		!	-	2			1:97068ca87858d007 1:97068ca87858d007 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -4471,8 +4471,8 @@ X	["HelloUltraviolet" "Reference" "DataTypes"]
 B	arrayElementSegmentReference	ok	-		!	-	2			24:7e7e9bb92d17e8f1 24:7e7e9bb92d17e8f1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	evalSigmaArrayReference	ok	-		!	-	2			28:6558b1f053062035 28:6558b1f053062035 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	arrayPlaceIndexReference	ok	-		!	-	2			15:6d73519cc7db637c 13:88e6c3f26adff42d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	dynamicArrayIndexReference	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	950-955	2			6:4f0de11df54e6cb5 5:a004daf55387f2e4 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	dynamicArrayPlaceReference	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	1087-1092	2			6:12ff60845ed08f9a 5:80b087bc8b31b78b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	dynamicArrayIndexReference	ok	-		!	-	2			7:63faf3c610dcb527 5:a004daf55387f2e4 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	dynamicArrayPlaceReference	ok	-		!	-	2			11:da429ae98f12f1cd 7:5204082bae47248d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	arrayConstructionControlReference	ok	-		!	-	2			10:57aeecfe105bae00 8:1da3c65084cddd74 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	evalSigmaArrayCtrlReference	ok	-		!	-	2			5:fb980522d11bfa99 4:e57a167c90faca56 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	evalSigmaIndexReference	ok	-		!	-	2			8:70788e49092f7989 6:76aa6cbc1582fecc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -4845,7 +4845,7 @@ B	ffiExportedCatchBoundary	ok	-		!	-	2			1:7c9a0ea9fa3eef12 0:14650fb0739d0383 0
 B	runFFIBoundaryUnwindingReference	ok	-		!	-	2			11:ba30e36bb451f8b4 9:3f0f86300237aadd 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	ffiImportedReferenceBorrowedRawPointerProvider	ok	-		!	-	2			6:cf641047dce3a47d 6:cf641047dce3a47d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	callBorrowedRawPointer	ok	-		!	-	2			4:5deee5a17990363b 2:f819e96dcd80788d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	ffiPointerIdentity	ok	-		!	-	2			1:40fab1617ba6005c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	ffiPointerIdentity	ok	-		!	-	2			1:40fab1617ba6005c 1:40fab1617ba6005c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	runFFICapabilityIsolationReference	ok	-		!	-	2			19:46ebde4177ea16a6 17:a276aa4556c3d972 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	ffiExportedIncrement	ok	-		!	-	2			3:4094ec0921d5bb0 3:4094ec0921d5bb0 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	ffiExportedRecordValue	ok	-		!	-	2			2:181e35e44e125223 1:eb8eea7a430676ab 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -4940,10 +4940,10 @@ B	orderedComparablePathsReference	ok	-		!	-	2			11:284e21a58cc1d73e 9:4933ba6d8f
 B	keyConflictRuntimeCompatibilityReference	ok	-		!	-	2			7:94783450b517a4dc 4:df98570f30979343 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	runKeysConflictDetectionReference	ok	-		!	-	2			17:d24fb76b3433c7ce 9:d24e9f6236b40041 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	dynamicKeyBlockValue	ok	-		!	-	2		 [I-CON-0013|Static key safety proven under `#dynamic`|219]	12:e170c91433931d88 11:6a8c0e69dacca364 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	dynamicRuntimeSynchronizedWriteValue	fail	E-UNS-0102	statement failed typing: ReturnStmt	-	578-615	2		 [I-CON-0013|Static key safety proven under `#dynamic`|474]	15:b560f598b9846303 11:be1e891f3e5d217c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	dynamicParallelRuntimeSynchronizedWriteValue	fail	E-CON-0020	statement failed typing: LetStmt	-	839-1053	2			8:4f4b14e98311acce 7:ff6b5dbc49bd7400 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	dynamicRuntimeSynchronizedWriteValue	ok	-		!	-	2		 [I-CON-0013|Static key safety proven under `#dynamic`|474]	20:d6841c42a0623749 16:a5bf271d0118bf26 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	dynamicParallelRuntimeSynchronizedWriteValue	ok	-		!	-	2		 [I-CON-0011|Runtime synchronization emitted under `#dynamic`|919] [I-CON-0011|Runtime synchronization emitted under `#dynamic`|1143]	27:5f09fd66fb45b10a 20:dddaf0507653e6bb 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	dynamicPrefixCoarsenedReadValue	ok	-		!	-	2			15:e31111d2fc2b4e1d 14:ed86de1a3895cc9a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	dynamicSpeculativeOnlyWriteValue	ok	-		!	-	2		 [W-CON-0006|Explicit read-then-write form used; compound assignment available (`K-RMW-Explicit-Warn`)|1857]	22:80e7890155e74c47 19:eb402d19efb39722 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	dynamicSpeculativeOnlyWriteValue	ok	-		!	-	2		 [I-CON-0013|Static key safety proven under `#dynamic`|1814] [W-CON-0006|Explicit read-then-write form used; compound assignment available (`K-RMW-Explicit-Warn`)|1857] [I-CON-0013|Static key safety proven under `#dynamic`|1928]	22:80e7890155e74c47 19:eb402d19efb39722 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	readSharedLeafForDynamic	ok	-		!	-	2			5:2fc5194fb31622 5:2fc5194fb31622 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	dynamicUniqueOriginSharedViewValue	ok	-		!	-	2			5:42de5af29d49e8e3 3:3303bcd8b039defa 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	dynamicKeyVerificationNoAdditionalSyntaxReference	ok	-		!	-	2			5:19b5b9894dd9ef44 4:2eb6ac6fc256998c 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -4999,7 +4999,7 @@ B	speculativeConstReceiverCallValue	ok	-		!	-	2		 [W-CON-0021|Speculative block 
 B	speculativeMultiPathWriteValue	ok	-		!	-	2			26:97e01645ade35bf4 22:e64ead4279df492e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	speculativeRecordFieldWriteValue	ok	-		!	-	2			13:6b38dc1bfc538cbb 12:b832fb25dbb6af22 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	speculativeIndexedFieldWriteValue	ok	-		!	-	2			34:a9814719bd378b08 32:4c19e94d00fc5ed4 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	ffiImportedSpeculativePanicBoundaryProvider	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	2627-2638	2			9:866fa22f15cba0a1 7:8546651ce886e4b7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	ffiImportedSpeculativePanicBoundaryProvider	ok	-		!	-	2			15:7ef6556d67fdf857 12:53c3b9cfb744781b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	callSpeculativePanicBoundary	ok	-		!	-	2			3:612f525bbf7adb5c 2:c11239925f8d5823 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	speculativePanicTraceValue	ok	-		!	-	2			5:903e899d516017 4:d1e96a064220ae84 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	speculativePermittedOperationsReference	ok	-		!	-	2			13:3db770087b9e88c7 10:3f85ed857126f8a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -5022,9 +5022,9 @@ B	runLoweringBackendRequirementsReference	ok	-		!	-	2			39:bd89877b372b6ef7 31:8
 B	cleanupDeferValue	ok	-		!	-	2			10:75de40bd3bd6b51c 9:e0689fdf4e383a56 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	LoweringDropRecord::drop	ok	-		()	-	2			0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	CleanupTraceDropRecord::drop	ok	-		()	-	2			5:d60fb9a0c7107d78 4:26f0653550d838ba 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	CleanupPanickingDropRecord::drop	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	1689-1694	2			10:4b44404a711c6ea9 9:c4a1ef7445fe921a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	CleanupPanickingDropRecord::drop	ok	-		()	-	2			11:dd9dc74246370c35 10:80b36d966dc772fe 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	cleanupDropValue	ok	-		!	-	2			3:42456c51267395e2 2:8687fb843577d2dc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	cleanupDeferPanicBoundaryProvider	fail	E-UNS-0102	statement failed typing: DeferStmt	-	2256-2379	2			11:c8878ae88e79b5fb 10:6057bedee08806c1 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	cleanupDeferPanicBoundaryProvider	ok	-		!	-	2			17:4cce20cbb8283bdb 16:70dafbcafd62c63d 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	cleanupDropPanicBoundaryProvider	ok	-		!	-	2			15:71c67cc35c1aa8e5 14:e67e27d1829418dd 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	cleanupChildDropPanicBoundaryProvider	ok	-		!	-	2			16:d6ac1836eeb5622 15:cc31e7f794314f18 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	cleanupDeferPanicValue	ok	-		!	-	2			6:2d03fc24c6aa35ca 6:2d03fc24c6aa35ca 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -5526,7 +5526,7 @@ B	postconditionEntryCaptureReference	ok	-		!	-	2			3:863c9ad35e96b0d6 3:863c9ad3
 B	postconditionUnionNumericReference	ok	-		!	-	2			1:45af43900ca202e6 1:45af43900ca202e6 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	postconditionUnionBooleanReference	ok	-		!	-	2			1:f7fbdf367d545c8b 1:f7fbdf367d545c8b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	postconditionPropagationSource	ok	-		!	-	2			5:be2a265f1e2f4814 5:be2a265f1e2f4814 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	postconditionPropagationReference	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1544-1561	2			7:b6832d8bb338ed39 7:b6832d8bb338ed39 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	postconditionPropagationReference	ok	-		!	-	2			7:b6832d8bb338ed39 7:b6832d8bb338ed39 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	postconditionModalReference	ok	-		!	-	2			2:fcdcb42c55a5cb9 2:fcdcb42c55a5cb9 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	postconditionGenericReference	ok	-		!	-	2			2:5148bc1193f9a756 1:ccb9a6b853314225 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	postconditionUnionIsNumeric	ok	-		!	-	2			7:5946a0326db8f49f 7:5946a0326db8f49f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
@@ -5835,34 +5835,34 @@ B	recordSubtypingReturn	ok	-		!	-	2			29:c8ba865d7dbaeb81 22:fcce393bd078ab1f 0:
 B	runTypesSubtypingReference	ok	-		!	-	2			26:caf5695741c1b8e1 15:fd3edc0cf1159011 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	runTypesSubtypingReferenceWithReport	ok	-		!	-	2			93:95151a3d42a6fd28 92:94f423b0e3bb1904 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 X	["HelloUltraviolet" "Tests"]
-B	auditAsyncArtifactObligationsExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	297-346	2			3:68cbb36e005c205 1:90900c65e550189 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditRejectedSourceFixturesExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1323-1396	2			3:887c6d08541d2e77 1:4280b9555d102067 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditDiagnosticSourceFixturesExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1566-1631	2			3:195e5e56696a00b7 1:55fc38c816a058a2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditOutputDiagnosticFixturesExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1801-1876	2			3:3e7dc36102b236c9 1:dda7789b8e140dfe 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditAcceptedProjectFixturesExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2044-2120	2			3:de44220e725a314b 1:394db3c8250ce0ae 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditArtifactProjectFixturesExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2288-2362	2			3:4be2c131f3e428a3 1:ecee44b79d0b47b8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditStructuredParallelLoweringEvidenceExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2660-2707	2			10:a584d612fcbc8215 10:a584d612fcbc8215 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditGpuRuntimeEvidenceExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2950-2997	2			10:cebace65a5e1d17f 10:cebace65a5e1d17f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditEmitLlBackendEvidenceExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3235-3283	2			10:932e3a4360986129 10:932e3a4360986129 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditSourceNativeDynamicSemanticsExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3528-3591	2			3:aac3b9c218e3fa89 1:64398240129fcad3 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditSourceNativeDiscoveryOrderExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3813-3874	2			3:78de0d6fcd2ce7f1 1:9e3b9350bc91ba7e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditSourceNativeMetadataDiscoveryExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	4282-4346	2			3:180c9299f3eb8133 1:5f95a1b07dc1f639 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditSourceNativeAuthorityAndShapeExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	4611-4675	2			3:1d79932f846e6749 1:71a1b5057e95e622 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	auditSourceNativeDiagnosticsCompositeExecute	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	4913-4980	2			3:541f64dbc51d6c13 1:2d9cb29da9dd0c55 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditAsyncArtifactObligationsExecute	ok	-		!	-	2			3:68cbb36e005c205 1:90900c65e550189 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditRejectedSourceFixturesExecute	ok	-		!	-	2			3:887c6d08541d2e77 1:4280b9555d102067 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditDiagnosticSourceFixturesExecute	ok	-		!	-	2			3:195e5e56696a00b7 1:55fc38c816a058a2 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditOutputDiagnosticFixturesExecute	ok	-		!	-	2			3:3e7dc36102b236c9 1:dda7789b8e140dfe 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditAcceptedProjectFixturesExecute	ok	-		!	-	2			3:de44220e725a314b 1:394db3c8250ce0ae 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditArtifactProjectFixturesExecute	ok	-		!	-	2			3:4be2c131f3e428a3 1:ecee44b79d0b47b8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditStructuredParallelLoweringEvidenceExecute	ok	-		!	-	2			10:a584d612fcbc8215 10:a584d612fcbc8215 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditGpuRuntimeEvidenceExecute	ok	-		!	-	2			10:cebace65a5e1d17f 10:cebace65a5e1d17f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditEmitLlBackendEvidenceExecute	ok	-		!	-	2			10:932e3a4360986129 10:932e3a4360986129 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditSourceNativeDynamicSemanticsExecute	ok	-		!	-	2			3:aac3b9c218e3fa89 1:64398240129fcad3 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditSourceNativeDiscoveryOrderExecute	ok	-		!	-	2			3:78de0d6fcd2ce7f1 1:9e3b9350bc91ba7e 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditSourceNativeMetadataDiscoveryExecute	ok	-		!	-	2			3:180c9299f3eb8133 1:5f95a1b07dc1f639 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditSourceNativeAuthorityAndShapeExecute	ok	-		!	-	2			3:1d79932f846e6749 1:71a1b5057e95e622 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	auditSourceNativeDiagnosticsCompositeExecute	ok	-		!	-	2			3:541f64dbc51d6c13 1:2d9cb29da9dd0c55 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeOrdinaryProcedure	ok	-		!	-	2			1:56ce63b0bae82ed7 1:56ce63b0bae82ed7 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeIoUnitSucceeded	ok	-		!	-	2			4:7bc61216d2699e06 4:7bc61216d2699e06 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeReadTextEquals	ok	-		!	-	2			11:6b0d2e985c48690a 7:c973968ecc1b8c8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeDurationOutcomeSucceeded	ok	-		!	-	2			7:890561002ca6649f 7:890561002ca6649f 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeUtcInstantOutcomeSucceeded	ok	-		!	-	2			4:4087576a27531e25 4:4087576a27531e25 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeWriteOrderFile	ok	-		!	-	2			14:da3dba8d85c0a059 11:45529136664d1aa3 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	sourceNativeOrderFirst	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	1972-2072	2			13:debda638644c7f1a 9:627a7d2d4f0cf 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	sourceNativeOrderSecond	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	2447-2555	2			17:ed3e6df4cb755b95 13:e92701e6524a21f8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	sourceNativeOrderThird	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3019-3127	2			19:4777bc069132f40d 15:dc0883700c46d305 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	sourceNativeBareTest	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	3207-3245	2			2:baa32ac58cb9bcb3 1:cbfea6cacee9c423 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	sourceNativeOrderFirst	ok	-		!	-	2			13:debda638644c7f1a 9:627a7d2d4f0cf 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	sourceNativeOrderSecond	ok	-		!	-	2			17:ed3e6df4cb755b95 13:e92701e6524a21f8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	sourceNativeOrderThird	ok	-		!	-	2			19:4777bc069132f40d 15:dc0883700c46d305 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	sourceNativeBareTest	ok	-		!	-	2			2:baa32ac58cb9bcb3 1:cbfea6cacee9c423 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeNamedTest	ok	-		!	-	2			1:d784ea86536fc1cb 1:d784ea86536fc1cb 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeCoveredTest	ok	-		!	-	2			1:748f9bf6292a691a 1:748f9bf6292a691a 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeNamedCoveredTest	ok	-		!	-	2			1:8db3afe64482a4b3 1:8db3afe64482a4b3 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
-B	sourceNativeAuthorityTest	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	4360-4589	2			34:dc7f3a1d9362d6c9 28:81a9d8bb82e0ec13 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
+B	sourceNativeAuthorityTest	ok	-		!	-	2			34:dc7f3a1d9362d6c9 28:81a9d8bb82e0ec13 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeShapeTest	ok	-		!	-	2			1:8b212de05039bafc 1:8b212de05039bafc 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	sourceNativeDynamicSemanticsTest	ok	-		!	-	2			1:678f70c9a149f17b 1:678f70c9a149f17b 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383
 B	runAttributesSourceNativeTestsReference	ok	-		!	-	2			15:1b700870f49d2175 8:887e5262731b4ae8 0:14650fb0739d0383 0:14650fb0739d0383 0:14650fb0739d0383

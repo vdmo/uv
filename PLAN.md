@@ -171,8 +171,8 @@ meaningless.
 ## Status
 
 M0, M1 and M2 are done, and M3 has started (its first two slices, the compile-time pass
-and name resolution, are done). Run `tools/parity.sh` to re-check every gate (about a
-minute);
+and name resolution, are done). Run `tools/parity.sh` to re-check every gate (ten
+minutes or more);
 `tools/capture_goldens.sh` regenerates the goldens (needs Docker, and takes a while because
 of the inputs the reference does not terminate on).
 
@@ -387,8 +387,67 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: all 4,704 bodies compared (procedures, methods, transitions) with the stores typing fills, none mismatched or pending; the dynamic context remains |
-| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | done against the body gate: all 4,704 bodies compared (procedures, methods, transitions) with the stores typing fills and the context declaration typing sets, none mismatched or pending |
+| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | in progress: 1,896 of 6,822 declarations compared (27.8%), none mismatched |
+
+Part c and M3.5 are ported together against one gate, because declaration typing calls
+straight into the code of M3.5 (the borrow check of each body, contract checks, the
+initialisation plan). The oracle's `typecheck` mode runs the reference's
+`TypecheckModules` on every project as the driver does and prints, per declaration, the
+diagnostics reported inside its extent (code, severity, message, span, label,
+obligations, children), then the outcome and the diagnostics left over. The port
+(`typing::typecheck`) prints the same, or `PENDING` for a declaration of a kind it
+cannot type yet and for the tail of the check while anything before it is pending.
+`tools/compare_check.py` compares what is not pending. The corpus has 6,822
+declarations in 503 projects that resolve: 4,569 procedures, 1,500 `using`, 332 records,
+114 aliases, 82 classes, 76 enums, 72 statics, 44 extern blocks, 26 modals, 7 imports.
+The reference reports diagnostics with 260 different codes on them.
+
+In so far: how a failed rule becomes a diagnostic (`typing::typecheck_diag`: the
+overrides, the diagnostic tables, and the registry of static rules, generated into
+`uv-core` by `tools/gen_static_rules.py`), the check that no two procedures are given
+one symbol, the error limit, and `using` and `import` declarations
+(`typing::item_using`). Procedures that share a name wait for the check of overloads
+that erase to one signature (`ErasedOverloads`).
+
+Procedure declarations have their frame (`typing::item_procedure`, the reference's
+`TypeProcedureDecl`): attribute validation, the shape of a test procedure, parameter
+names, the signature (with the rule that a refinement on a parameter may not speak of
+`self`), generic parameters, the explicit return a non-unit body needs, the body typed
+under the context of part b, and its type against the declared one. Each check that is
+not ported makes the declaration pending when it would apply:
+
+| Waiting for | Procedures |
+| --- | --- |
+| the provenance check of the body (`BodyProvenance`: `ProvBindCheck` in `memory/regions`) | 3,870 |
+| contract intrinsics and well-formedness (`ContractWF`) | 154 |
+| foreign-interface attributes and export signatures (`ProcFfiAttrs`) | 66 |
+| the signature of `main` (`MainSignature`, needs the context bundle types of `caps`) | 56 |
+| overloads that erase to one signature | 17 |
+| the `inline(always)` warning | 10 |
+| opaque return types | 6 |
+
+The borrow check is in (`memory::borrow_bind`, the reference's `BindCheckBody`): for
+each binding whether it is valid, moved or partly moved, and for each `unique` place
+whether it is inactive because it has been lent. It walks the body with those two
+environments, joins them where branches meet, iterates loop bodies to a fixed point,
+passes arguments in order (a lent place stays inactive until the call is over), and
+checks closures by what they capture and how. The parameter modes of a callee come from
+the overload typing selected, the callee's type, or the declaration it names. A
+binding initialised from a call owns the result unless the callee only hands back
+something it was lent (`memory::return_responsibility`). The check also runs on a body
+that failed typing, and what it finds is reported alongside. 336 procedures of the
+corpus are decided by it or fail before it, and all match; the other 3,870 pass it.
+
+The type checker's entry point sets up the stores of part b for the whole check, as the
+reference does; the borrow check reads expression types back from them.
+
+Not as in the reference: the statics of a module are bound again for each body rather
+than cached, and the per-body timing is not kept.
+
+The provenance check is next: `ProvBindCheck` and the engine under it in
+`memory/regions` (about 3,600 lines of the reference), of which the port has only the
+expression-level tracking that typing needed.
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
 procedure body as declaration typing does (type parameters and parameters in scope, the
@@ -408,8 +467,8 @@ the state as the receiver of a state method, with the state's part of the modal'
 invariant; a transition typed against its target state without the environment
 reference or the diagnostic stream. That is 135 more bodies (111 methods of records and
 classes, 15 state methods, 9 transitions), 6 of which fail in their signature. Two
-things differ from the driver and wait for part c: the modal's own parameters are taken
-from the declaration without `ProcessGenericParams`, and the dynamic context is unset.
+thing differs from the driver and waits for part c: the modal's own parameters are
+taken from the declaration without `ProcessGenericParams`.
 
 The proof facts statements leave for later ones are tracked
 (`typing::stmt::proof_facts`, the reference's `FallthroughProofContextForStmt`): an
@@ -510,7 +569,7 @@ Refinement predicates are proved when a value is checked against a refinement ty
 the predicate with the value for `self` must follow from the facts in scope
 (`E-TYP-1953` otherwise). In a dynamic context a refinement that cannot be proved is
 left to a run-time check and the value only needs the base type; the check is
-recorded in the stores, but the gate has no dynamic contexts to exercise the fallback.
+recorded in the stores.
 
 The scoped statements are in (`typing::stmt::scoped`): `region` and `frame` with the
 active region they bind, `defer`, and `using`; so are `?` propagation, `transmute` with
@@ -552,7 +611,7 @@ body under another module's name needs a context of its own; the body dump went 
 
 The last small forms: attributed expressions as values, places and against an expected
 type (`typing::attributed`: attribute validation, a memory ordering only on an access
-to shared data, `[[dynamic]]` as a dynamic context), `alloc_raw` on a heap allocator
+to shared data, `#dynamic` as a dynamic context), `alloc_raw` on a heap allocator
 where a raw pointer is expected, the GPU barrier divergence check of `if`, and the
 provenance of a returned safe pointer or, at an exported boundary, raw pointer.
 
@@ -588,8 +647,16 @@ compared by value only.
 
 The readers of the stores outside typing (`memory/regions`, `borrow_bind`,
 `return_responsibility`, `caps`, layout) come with M3.5, and the provenance stores are
-written there. The dynamic contract context is still unset in the gate, as in the
-oracle's harness, and has to be set up the way the driver does before part c is gated.
+written there.
+
+The gate sets the rest of the typing context as declaration typing does
+(`typing::dynamic_context`): a body is in a dynamic context when its declaration, the
+type around a method, or the class method a record's method implements is marked
+`#dynamic`; an exported procedure is a foreign boundary; a test procedure's
+postcondition is left to run time. That changed 128 bodies of the corpus, 124 of them
+from a failure to success (unprovable contracts, non-constant array indices and
+dynamically indexed key paths become run-time checks), and 2 exported procedures now
+fail for returning a raw pointer into a region.
 
 Part b calls into code that belongs to M3.5 (`memory/regions`, `memory/calls`,
 `memory/borrow_bind`, `contracts/contract_check`, `keys/key_paths`, `caps`); what it needs
