@@ -223,6 +223,10 @@ fn type_expr_form(
         ExprNode::QualifiedNameExpr(_) | ExprNode::QualifiedApplyExpr(_) => {
             ExprTypeResult::failed(Some("ResolveExpr-Ident-Err"))
         }
+        ExprNode::FieldAccessExpr(node) => super::expr::field_access::type_field_access_expr(ctx, type_ctx, node, env),
+        ExprNode::TupleAccessExpr(node) => super::expr::tuple_access::type_tuple_access_expr(ctx, type_ctx, node, env),
+        ExprNode::CallExpr(node) => super::expr::call::type_call_expr(ctx, type_ctx, node, env),
+        ExprNode::CallTypeArgsExpr(node) => super::expr::call::type_call_type_args_expr(ctx, type_ctx, node, env),
         // Splices are gone before typing; the reference types them as nothing.
         ExprNode::SpliceExprNode(_) | ExprNode::SpliceIdentNode(_) => ExprTypeResult::default(),
         _ => {
@@ -253,15 +257,13 @@ pub fn type_place(
             }
             typed
         }
+        ExprNode::FieldAccessExpr(node) => super::expr::field_access::type_field_access_place(ctx, type_ctx, node, env),
+        ExprNode::TupleAccessExpr(node) => super::expr::tuple_access::type_tuple_access_place(ctx, type_ctx, node, env),
         ExprNode::AttributedExpr(_)
-        | ExprNode::FieldAccessExpr(_)
-        | ExprNode::TupleAccessExpr(_)
         | ExprNode::DerefExpr(_)
         | ExprNode::IndexAccessExpr(_) => {
             pending(match &e.node {
                 ExprNode::AttributedExpr(_) => "AttributedExpr place",
-                ExprNode::FieldAccessExpr(_) => "FieldAccessExpr place",
-                ExprNode::TupleAccessExpr(_) => "TupleAccessExpr place",
                 ExprNode::DerefExpr(_) => "DerefExpr place",
                 _ => "IndexAccessExpr place",
             });
@@ -347,6 +349,7 @@ pub fn check_expr_against(
         _ => {}
     }
     let type_expr_fn = |inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env);
+    let type_place_fn = |inner: &ExprPtr| type_place(ctx, type_ctx, inner, env);
     let type_ident_fn = |name: &str| type_identifier_expr(ctx, env, name);
     let if_case_check = |_: &ast::IfCaseExpr, _: &TypeRef| {
         pending("IfCaseExpr");
@@ -357,6 +360,7 @@ pub fn check_expr_against(
         expr,
         expected,
         &type_expr_fn,
+        Some(&type_place_fn),
         &type_ident_fn,
         Some(&if_case_check),
     );

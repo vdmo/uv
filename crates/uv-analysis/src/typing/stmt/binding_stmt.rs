@@ -104,7 +104,7 @@ fn is_shared_materialized_init_compatible(
     check_expr_against(ctx, read_ctx, init, &base, env).ok
 }
 
-fn normalize_deprecated_message(attrs_list: &[ast::AttributeItem]) -> Option<String> {
+pub(crate) fn normalize_deprecated_message(attrs_list: &[ast::AttributeItem]) -> Option<String> {
     let message = get_attribute_value(attrs_list, attrs::DEPRECATED, "")?;
     let bytes = message.as_bytes();
     let quoted = bytes.len() >= 2

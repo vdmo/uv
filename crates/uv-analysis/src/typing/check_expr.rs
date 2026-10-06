@@ -9,7 +9,7 @@ use uv_source::ast::{self, ArraySegment, ExprNode, ExprPtr};
 use uv_source::lexer::token::TokenKind;
 
 use super::alias_normalize::normalize_alias_type;
-use super::callbacks::{CheckResult, ExprTypeFn, IdentTypeFn};
+use super::callbacks::{CheckResult, ExprTypeFn, IdentTypeFn, PlaceTypeFn};
 use super::const_len::const_len;
 use super::expr_result::ExprTypeResult;
 use super::literals::{check_literal_expr, type_literal_expr};
@@ -21,6 +21,8 @@ use super::type_predicates::{bitcopy_type, perm_of_type, strip_perm};
 use super::types::*;
 use crate::composite::arrays_slices::coerce_array_to_slice;
 use crate::context::ScopeContext;
+use crate::memory::calls::type_call_with_subst;
+use crate::typing::expr::call::infer_generic_call_subst;
 use crate::modal::lookup::{has_state, lookup_modal_decl};
 use crate::modal::modal_widen::niche_compatible;
 use crate::resolve::scopes::{id_eq, id_key_of};
@@ -159,6 +161,7 @@ pub fn infer_expr(expr: &ExprPtr, type_expr: ExprTypeFn<'_>, type_ident: IdentTy
 struct Checker<'c, 'a, 'f> {
     ctx: &'c ScopeContext<'a>,
     type_expr: ExprTypeFn<'f>,
+    type_place: Option<PlaceTypeFn<'f>>,
     type_ident: IdentTypeFn<'f>,
     if_case_check: Option<IfCaseCheckFn<'f>>,
 }
@@ -305,13 +308,35 @@ impl Checker<'_, '_, '_> {
                 }
             }
             // A call whose type arguments may follow from the expected type.
-            ExprNode::CallExpr(call) if call.generic_args.is_empty() => {
-                pending("CallExpr");
-                return CheckResult::default();
-            }
             _ => {}
         }
-        let inferred = infer_expr(expr, self.type_expr, self.type_ident);
+        // A call whose type arguments may follow from the expected type.
+        let mut inferred_call_with_expected: Option<ExprTypeResult> = None;
+        if let ExprNode::CallExpr(call) = &e.node {
+            if call.generic_args.is_empty() {
+                let inferred_subst =
+                    infer_generic_call_subst(ctx, &call.callee, &call.args, expected, self.type_expr, self.type_place);
+                if inferred_subst.ok {
+                    let typed_call = type_call_with_subst(
+                        ctx,
+                        &call.callee,
+                        &call.args,
+                        &inferred_subst.subst,
+                        self.type_expr,
+                        self.type_place,
+                        None,
+                        None,
+                    );
+                    if !typed_call.ok {
+                        return CheckResult { diag_id: typed_call.diag_id, ..Default::default() };
+                    }
+                    inferred_call_with_expected =
+                        Some(ExprTypeResult { diag_detail: typed_call.diag_detail, ..ExprTypeResult::typed(typed_call.r#type) });
+                }
+            }
+        }
+        let inferred =
+            inferred_call_with_expected.unwrap_or_else(|| infer_expr(expr, self.type_expr, self.type_ident));
         if !inferred.ok {
             return CheckResult {
                 ok: false,
@@ -463,8 +488,9 @@ pub fn check_expr(
     expr: &ExprPtr,
     expected: &TypeRef,
     type_expr: ExprTypeFn<'_>,
+    type_place: Option<PlaceTypeFn<'_>>,
     type_ident: IdentTypeFn<'_>,
     if_case_check: Option<IfCaseCheckFn<'_>>,
 ) -> CheckResult {
-    Checker { ctx, type_expr, type_ident, if_case_check }.check(expr, expected)
+    Checker { ctx, type_expr, type_place, type_ident, if_case_check }.check(expr, expected)
 }

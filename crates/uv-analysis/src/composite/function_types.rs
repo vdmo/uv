@@ -148,6 +148,11 @@ fn proc_type(ctx: &ScopeContext<'_>, view: &ProcedureView<'_>) -> ValuePathTypeR
     build_proc_type(ctx, view.params, view.return_type_opt)
 }
 
+/// The type of a procedure with these parameters and return type.
+pub fn proc_type_of(ctx: &ScopeContext<'_>, params: &[ast::Param], return_type_opt: &ast::TypePtr) -> ValuePathTypeResult {
+    build_proc_type(ctx, params, return_type_opt)
+}
+
 /// The type of a procedure declaration used as a value.
 pub fn procedure_decl_type(
     ctx: &ScopeContext<'_>,

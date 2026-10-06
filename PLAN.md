@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 892 of 4,569 bodies compared (19.5%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 2,502 of 4,569 bodies compared (54.8%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -426,6 +426,22 @@ analysis the typer asks for (`contracts::purity`, from the reference's
 `contract_check`: it follows calls into procedure and method bodies). Purity is gated on
 its own in the `relations` dumps: every contract clause and every expression written
 directly in a body, 22,940 expressions on the corpus.
+
+Calls are in (`memory::calls`, `typing::expr::call`): which procedure a callee names,
+foreign procedures and the `unsafe` they need, default construction of a record named
+without arguments, overload resolution among procedures of one name, explicit type
+arguments with defaults and bounds, inference of type arguments from the arguments and
+from the expected type, argument passing (`move`, `copy`, places passed by reference),
+the write-key requirement for shared arguments to `unique` parameters, and the raw
+pointer check at the foreign boundary. Three checks at a call are not ported and make
+the body pending when they would apply: the proof of the callee's precondition
+(`CallPrecondition`), the proof of a foreign procedure's `assumes` clauses
+(`ForeignAssumes`), and the warning for a callee whose key accesses are unknown
+(`CalleeKeyAccessSummary`). The selected overload and the inferred substitution are
+not recorded for later passes yet; that comes with the expression-type store below.
+
+Field access (records, modal states, `Self` in a class) and tuple element access are in
+too, as values and as places (`typing::expr::field_access`, `tuple_access`).
 
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from
