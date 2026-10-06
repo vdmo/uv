@@ -356,6 +356,19 @@ pub fn block_captures(block: &ast::BlockPtr, env: &TypeEnv) -> (Vec<IdKey>, Hash
     (walker.captures.keys().cloned().collect(), walker.explicit_moves)
 }
 
+/// The outer bindings the body of a `dispatch` uses, with its index pattern's names
+/// local to it, and those of them it names under `move`.
+pub fn dispatch_captures(body: &ast::BlockPtr, pattern: &ast::PatternPtr, env: &TypeEnv) -> (Vec<IdKey>, HashSet<IdKey>) {
+    let mut walker = Walker::new(Mode::Captures, Some(env));
+    walker.push_scope();
+    walker.push_scope();
+    walker.declare_pattern(pattern);
+    if let Some(body) = body.as_deref() {
+        walker.visit_block_contents(body);
+    }
+    (walker.captures.keys().cloned().collect(), walker.explicit_moves)
+}
+
 /// The names a closure uses that are bound outside it.
 fn outer_captures(closure: &ast::ClosureExpr, env: &TypeEnv) -> Vec<IdKey> {
     let mut walker = Walker::new(Mode::Captures, Some(env));

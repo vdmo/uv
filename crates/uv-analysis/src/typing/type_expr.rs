@@ -235,6 +235,9 @@ fn type_expr_form(
         ExprNode::ParallelExpr(node) => {
             super::expr::parallel::type_parallel_expr(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
         }
+        ExprNode::DispatchExpr(node) => {
+            super::expr::parallel::type_dispatch_expr(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
         ExprNode::SpawnExpr(node) => {
             super::expr::parallel::type_spawn_expr(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
         }

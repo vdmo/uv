@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,483 of 4,569 bodies compared (98.1%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,503 of 4,569 bodies compared (98.6%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -515,8 +515,10 @@ options, the block's value (its tail, or the values of its tasks, which are type
 second time to collect them as the reference does), what a task may capture (a `unique`
 binding only by `move`, and a binding of the block by one child only), and the
 restrictions on captures into GPU code. Captures are visited in the order of the
-reference's hash set, which decides the error reported first. `dispatch` is still to
-do.
+reference's hash set, which decides the error reported first. `dispatch` is in as far
+as its range, index pattern, body, captures and options; the keys each iteration needs
+are not: a dispatch with a key clause (`DispatchKeyClause`), or whose body can see
+shared data and so may need keys inferred (`DispatchKeyInference`), is left pending.
 
 Key blocks are in for the ordinary forms (`typing::stmt::key_block`): the paths must be
 rooted in shared data and marked at most once at a record field, a key already held may

@@ -110,7 +110,7 @@ fn is_cancel_token_type(ty: &TypeRef) -> bool {
 }
 
 /// Three constant, non-zero `usize` dimensions.
-fn extract_dim3_const(ctx: &ScopeContext<'_>, expr: &ExprPtr, type_expr_fn: ExprTypeFn<'_>) -> Option<[u64; 3]> {
+pub(crate) fn extract_dim3_const(ctx: &ScopeContext<'_>, expr: &ExprPtr, type_expr_fn: ExprTypeFn<'_>) -> Option<[u64; 3]> {
     let ExprNode::TupleExpr(tuple) = &expr.as_deref()?.node else {
         return None;
     };
@@ -129,7 +129,7 @@ fn extract_dim3_const(ctx: &ScopeContext<'_>, expr: &ExprPtr, type_expr_fn: Expr
 }
 
 /// A workgroup may hold at most 1024 invocations.
-fn exceeds_max_workgroup_size([x, y, z]: [u64; 3]) -> bool {
+pub(crate) fn exceeds_max_workgroup_size([x, y, z]: [u64; 3]) -> bool {
     const MAX_WORKGROUP_SIZE: u64 = 1024;
     if x == 0 || y == 0 || z == 0 || x > MAX_WORKGROUP_SIZE {
         return true;
@@ -177,7 +177,7 @@ fn collect_parallel_result_expr(type_expr_fn: ExprTypeFn<'_>, expr: &ExprPtr, ty
     Ok(())
 }
 
-fn emit_supplemental_type_diag(type_ctx: &StmtTypeContext<'_>, code: &str) {
+pub(crate) fn emit_supplemental_type_diag(type_ctx: &StmtTypeContext<'_>, code: &str) {
     if let (Some(diags), Some(diag)) = (&type_ctx.diags, make_diagnostic_by_id(code, None)) {
         emit(&mut diags.borrow_mut(), diag);
     }
@@ -185,7 +185,7 @@ fn emit_supplemental_type_diag(type_ctx: &StmtTypeContext<'_>, code: &str) {
 
 /// What may be captured into GPU code: nothing shared, nothing on the heap, and only
 /// types a GPU can hold.
-fn check_gpu_capture(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, env: &TypeEnv, name: &str) -> Option<&'static str> {
+pub(crate) fn check_gpu_capture(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, env: &TypeEnv, name: &str) -> Option<&'static str> {
     let binding = bind_of(env, name)?;
     if perm_of_type(&binding.r#type) == Permission::Shared {
         return Some("E-CON-0151");
@@ -406,4 +406,140 @@ pub fn type_spawn_expr(
         }
     }
     spawned(body_result.r#type)
+}
+
+/// `dispatch pattern in range [key path mode] [opts] { … }`: the body runs once per
+/// index, in parallel. Without a key clause the keys each iteration needs are inferred
+/// from the shared data the body uses.
+///
+/// That inference, and the check of a written key clause, are not ported: a dispatch
+/// with a key clause, or whose body can see shared data, is left pending.
+pub fn type_dispatch_expr(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    expr: &ast::DispatchExpr,
+    env: &TypeEnv,
+    type_expr_fn: ExprTypeFn<'_>,
+) -> ExprTypeResult {
+    if !type_ctx.in_parallel {
+        return failed("E-CON-0140");
+    }
+    let range_result = type_expr_fn(&expr.range);
+    if !range_result.ok {
+        return ExprTypeResult::failed(range_result.diag_id);
+    }
+    let stripped_range = strip_perm(&range_result.r#type);
+    if !is_range_type(&stripped_range) || matches!(stripped_range.as_deref().map(|ty| &ty.node), Some(TypeNode::RangeFull)) {
+        return failed("E-SEM-3133");
+    }
+    let index_type = range_element_type(&stripped_range).unwrap_or_else(|| make_type_prim("usize"));
+    if let Some(key_clause) = &expr.key_clause {
+        if bind_of(env, &key_clause.key_path.root).is_none() {
+            return failed("ResolveExpr-Ident-Err");
+        }
+    }
+    let mut body_env = crate::typing::type_env::push_scope(env);
+    if expr.pattern.is_some() {
+        let bindings = match crate::typing::type_env::type_pattern(ctx, &expr.pattern, &index_type) {
+            Ok(bindings) => bindings,
+            Err(diag_id) => return ExprTypeResult::failed(diag_id),
+        };
+        if let Some(innermost) = body_env.scopes.last_mut() {
+            for (name, ty) in bindings {
+                innermost.insert(name, crate::typing::type_env::TypeBinding { r#mut: ast::Mutability::Let, r#type: ty, ..Default::default() });
+            }
+        }
+    }
+    let Some(body) = expr.body.as_deref() else {
+        return ExprTypeResult::typed(make_type_prim("()"));
+    };
+    let body_ctx = StmtTypeContext { env_ref: None, ..type_ctx.clone() };
+    let ident_fn = |name: &str| type_identifier_expr(ctx, env, name);
+    let place_fn = |inner: &ExprPtr| type_place(ctx, type_ctx, inner, env);
+    let body_result = type_block(ctx, &body_ctx, body, &body_env, type_expr_fn, &ident_fn, &place_fn, None);
+    if !body_result.ok {
+        return ExprTypeResult { diag_id: body_result.diag_id, diag_detail: body_result.diag_detail, diag_span: body_result.diag_span, ..Default::default() };
+    }
+    let (captures, explicit_moves) = crate::typing::closure_capture::dispatch_captures(&expr.body, &expr.pattern, env);
+    let scopes = type_ctx.parallel_capture_scopes.as_deref().map(|scopes| &scopes[..]).unwrap_or(&[]);
+    for captured_name in &captures {
+        let Some(binding) = bind_of(env, captured_name) else {
+            continue;
+        };
+        let is_explicit_move = explicit_moves.contains(captured_name);
+        if is_explicit_move {
+            if let Some(scope) = scopes.iter().rev().find(|scope| scope.bindings.borrow().contains(captured_name)) {
+                if !scope.first_child_moves.borrow_mut().insert(captured_name.clone()) {
+                    return failed("E-CON-0122");
+                }
+            }
+        }
+        if perm_of_type(&binding.r#type) == Permission::Unique && !is_explicit_move {
+            return failed("E-CON-0120");
+        }
+        if gpu_context(env) {
+            if let Some(diag_id) = check_gpu_capture(ctx, type_ctx, env, captured_name) {
+                return failed(diag_id);
+            }
+        }
+    }
+    let mut has_ordered = false;
+    let mut has_reduce = false;
+    let mut non_associative_reduce = false;
+    for opt in &expr.opts {
+        match opt.kind {
+            ast::DispatchOptionKind::Ordered => has_ordered = true,
+            ast::DispatchOptionKind::Chunk => {
+                let chunk_typed = type_expr_fn(&opt.chunk_expr);
+                if !chunk_typed.ok {
+                    return ExprTypeResult::failed(chunk_typed.diag_id);
+                }
+                if !matches!(strip_perm_and_refine(&chunk_typed.r#type).as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(name)) if name == "usize") {
+                    return failed("E-SEM-3133");
+                }
+            }
+            ast::DispatchOptionKind::Workgroup => {
+                let workgroup_typed = type_expr_fn(&opt.workgroup_expr);
+                if !workgroup_typed.ok {
+                    return ExprTypeResult::failed(workgroup_typed.diag_id);
+                }
+                let Some(dims) = extract_dim3_const(ctx, &opt.workgroup_expr, type_expr_fn) else {
+                    return failed("E-CON-0159");
+                };
+                if gpu_context(env) && exceeds_max_workgroup_size(dims) {
+                    return failed("E-CON-0157");
+                }
+            }
+            ast::DispatchOptionKind::Reduce => {
+                has_reduce = true;
+                // Only the built-in reductions are known to be associative.
+                if opt.reduce_op == ast::ReduceOp::Custom || !opt.custom_reduce_name.is_empty() {
+                    non_associative_reduce = true;
+                }
+            }
+        }
+    }
+    if non_associative_reduce && !has_ordered {
+        return failed("E-CON-0143");
+    }
+    if expr.key_clause.is_some() {
+        crate::typing::pending::pending("DispatchKeyClause");
+        return ExprTypeResult::default();
+    }
+    // Only shared data needs keys; a body that can see none has nothing to infer.
+    let sees_shared = body_env.scopes.iter().flat_map(|scope| scope.iter()).any(|(_, binding)| perm_of_type(&binding.r#type) == Permission::Shared);
+    if sees_shared {
+        crate::typing::pending::pending("DispatchKeyInference");
+        return ExprTypeResult::default();
+    }
+    if !has_reduce {
+        return ExprTypeResult::typed(make_type_prim("()"));
+    }
+    if gpu_context(env) {
+        if let Some(gpu_diag) = gpu_safe_diag_for_type(ctx, &body_result.r#type) {
+            emit_supplemental_type_diag(type_ctx, gpu_diag);
+            return failed(gpu_diag);
+        }
+    }
+    ExprTypeResult::typed(body_result.r#type)
 }
