@@ -14,23 +14,26 @@ use uv_source::ast::{self, Arg, ArgPassKind, ExprNode, ExprPtr};
 
 use super::call::emit_deprecated_reference_warning_from_attrs;
 use super::small::is_place_expr;
-use crate::caps::builtin_paths::{is_capability_class_path, is_context_type_path, path_matches_builtin_name};
+use crate::caps::builtin_paths::{is_capability_class_path, path_matches_builtin_name};
+use crate::caps::cap_methods::{lookup_capability_class_method_sig, lookup_capability_type_method_sig, CapMethodSig};
 use crate::composite::classes::{lookup_class_method, type_implements_class, vtable_eligible};
 use crate::composite::record_methods::{lookup_method_static, recv_type_for_receiver};
 use crate::context::{ScopeContext, TypeDecl};
 use crate::generics::generic_params::bind_type_params as bind_type_params_in_scope;
 use crate::generics::monomorphize::{build_substitution, instantiate_type, TypeSubst};
 use crate::keys::key_paths::{build_key_path, is_prefix};
+use crate::memory::string_bytes::lookup_string_bytes_builtin_method_sig;
 use crate::memory::calls::{
-    arg_pass_expr, has_source_provenance, is_place_expr_for_call, missing_required_move_for_consuming, ArgCheckFn,
+    arg_pass_expr, has_source_provenance, is_in_unsafe_span, is_place_expr_for_call, missing_required_move_for_consuming,
+    uses_call_temp_for_consuming, ArgCheckFn,
 };
 use crate::modal::builtin_modal_intrinsics::is_builtin_modal_general_member;
 use crate::modal::lookup::state_member_visible;
 use crate::resolve::scopes::{id_eq, path_key_of};
+use crate::resolve::scopes_lookup::resolve_type_name;
 use crate::typing::alias_normalize::expand_type_alias_apply;
 use crate::typing::callbacks::{CheckResult, ExprTypeFn, PlaceTypeFn};
 use crate::typing::expr_result::ExprTypeResult;
-use crate::typing::pending::pending;
 use crate::typing::stmt_context::{with_shared_access_mode, StmtTypeContext};
 use crate::typing::subtyping::{argument_type_compatible, permission_admits, subtyping};
 use crate::typing::type_env::TypeEnv;
@@ -169,6 +172,382 @@ fn bind_all(
     bindings: &mut BTreeMap<String, TypeRef>,
 ) -> bool {
     expected.len() == actual.len() && expected.iter().zip(actual).all(|(e, a)| bind_type_params(ctx, params, e, a, bindings))
+}
+
+/// A function or closure type as its parameters and return type.
+fn callable_sig_of(ty: &TypeRef) -> Option<(Vec<TypeFuncParam>, TypeRef)> {
+    match &strip_perm_and_refine(ty).as_deref()?.node {
+        TypeNode::Func { params, ret } => Some((params.clone(), ret.clone())),
+        TypeNode::Closure { params, ret, .. } => Some((
+            params.iter().map(|(is_move, ty)| TypeFuncParam { mode: is_move.then_some(ParamMode::Move), r#type: ty.clone() }).collect(),
+            ret.clone(),
+        )),
+        _ => None,
+    }
+}
+
+/// A type path as declared: itself when it names a declaration, or what a single name
+/// resolves to.
+fn resolve_comparable_type_path(ctx: &ScopeContext<'_>, path: &[String]) -> Option<TypePath> {
+    if ctx.sigma.types.contains_key(&path_key_of(path)) {
+        return Some(path.to_vec());
+    }
+    let [name] = path else {
+        return None;
+    };
+    let resolved = resolve_type_name(ctx, name)?;
+    let mut full_path = resolved.origin_opt?;
+    full_path.push(resolved.target_opt.unwrap_or_else(|| name.clone()));
+    ctx.sigma.types.contains_key(&path_key_of(&full_path)).then_some(full_path)
+}
+
+/// Equivalence that also holds between a type named in full and by a name in scope.
+fn type_equiv_in_scope(ctx: &ScopeContext<'_>, lhs: &TypeRef, rhs: &TypeRef) -> bool {
+    if type_equiv(lhs, rhs) {
+        return true;
+    }
+    let (Some(l), Some(r)) = (lhs.as_deref(), rhs.as_deref()) else {
+        return false;
+    };
+    let perm_of = |ty: &Type| match &ty.node {
+        TypeNode::Perm { perm, base } => Some((*perm, base.clone())),
+        _ => None,
+    };
+    let (lhs_perm, rhs_perm) = (perm_of(l), perm_of(r));
+    if lhs_perm.is_some() || rhs_perm.is_some() {
+        let (lhs_permission, lhs_base) = lhs_perm.unwrap_or((Permission::Const, lhs.clone()));
+        let (rhs_permission, rhs_base) = rhs_perm.unwrap_or((Permission::Const, rhs.clone()));
+        return lhs_permission == rhs_permission && type_equiv_in_scope(ctx, &lhs_base, &rhs_base);
+    }
+    let (Some(lhs_path), Some(rhs_path), Some(lhs_args), Some(rhs_args)) =
+        (applied_type_path(l), applied_type_path(r), applied_type_args(l), applied_type_args(r))
+    else {
+        return false;
+    };
+    let same_path = lhs_path == rhs_path
+        || matches!(
+            (resolve_comparable_type_path(ctx, lhs_path), resolve_comparable_type_path(ctx, rhs_path)),
+            (Some(lhs_resolved), Some(rhs_resolved)) if lhs_resolved == rhs_resolved
+        );
+    same_path && lhs_args.len() == rhs_args.len() && lhs_args.iter().zip(rhs_args).all(|(l, r)| type_equiv_in_scope(ctx, l, r))
+}
+
+const MISMATCH: Diag = Some("E-SEM-2533");
+
+fn typed_arg(arg: &Arg, type_expr: ExprTypeFn<'_>) -> Result<TypeRef, Diag> {
+    let typed = type_expr(&arg.value);
+    if typed.ok {
+        Ok(typed.r#type)
+    } else {
+        Err(typed.diag_id)
+    }
+}
+
+/// A callable argument taking `arity` parameters by reference.
+fn callable_arg(arg: &Arg, arity: usize, type_expr: ExprTypeFn<'_>) -> Result<(Vec<TypeFuncParam>, TypeRef), Diag> {
+    let typed = typed_arg(arg, type_expr)?;
+    callable_sig_of(&typed).filter(|(params, _)| params.len() == arity && params.iter().all(|param| param.mode.is_none())).ok_or(MISMATCH)
+}
+
+fn sub_or_mismatch(ctx: &ScopeContext<'_>, lhs: &TypeRef, rhs: &TypeRef) -> Result<(), Diag> {
+    let sub = subtyping(ctx, lhs, rhs);
+    if !sub.ok {
+        return Err(sub.diag_id);
+    }
+    if sub.subtype {
+        Ok(())
+    } else {
+        Err(MISMATCH)
+    }
+}
+
+fn async_type(out: TypeRef, input: TypeRef, result: TypeRef, err: TypeRef) -> TypeRef {
+    make_type_path_with(vec!["Async".to_string()], vec![out, input, result, err])
+}
+
+/// `shared~>until(predicate, action)`: waits until the predicate holds of the shared
+/// value, then runs the action on it.
+fn type_until_call(ctx: &ScopeContext<'_>, lookup_base: &TypeRef, args: &[Arg], type_expr: ExprTypeFn<'_>) -> Result<TypeRef, Diag> {
+    let [pred_arg, action_arg] = args else {
+        return Err(Some("E-SEM-2532"));
+    };
+    if pred_arg.pass == ArgPassKind::Move || action_arg.pass == ArgPassKind::Move {
+        return Err(Some("E-SEM-2535"));
+    }
+    let pred_typed = typed_arg(pred_arg, type_expr)?;
+    let action_typed = typed_arg(action_arg, type_expr)?;
+    let (Some(pred_sig), Some(action_sig)) = (callable_sig_of(&pred_typed), callable_sig_of(&action_typed)) else {
+        return Err(MISMATCH);
+    };
+    let ([pred_param], [action_param]) = (&pred_sig.0[..], &action_sig.0[..]) else {
+        return Err(MISMATCH);
+    };
+    if pred_param.mode.is_some() || action_param.mode.is_some() {
+        return Err(MISMATCH);
+    }
+    if !type_equiv_in_scope(ctx, &pred_param.r#type, &make_type_perm(Permission::Const, lookup_base.clone()))
+        || !type_equiv_in_scope(ctx, &action_param.r#type, &make_type_perm(Permission::Unique, lookup_base.clone()))
+        || !type_equiv(&pred_sig.1, &make_type_prim("bool"))
+    {
+        return Err(MISMATCH);
+    }
+    Ok(async_type(make_type_prim("()"), make_type_prim("()"), action_sig.1, make_type_prim("!")))
+}
+
+/// The combinators of an asynchronous computation: `map`, `filter`, `take`, `fold` and
+/// `chain`.
+fn type_async_combinator_call(
+    ctx: &ScopeContext<'_>,
+    async_sig: &AsyncSig,
+    lookup_base: &TypeRef,
+    name: &str,
+    args: &[Arg],
+    type_expr: ExprTypeFn<'_>,
+) -> Result<TypeRef, Diag> {
+    let unit_type = make_type_prim("()");
+    let is_unit = |ty: &TypeRef| type_equiv(ty, &unit_type);
+    let one_arg = || -> Result<&Arg, Diag> {
+        match args {
+            [arg] if arg.value.is_some() => {
+                if arg.pass == ArgPassKind::Move {
+                    Err(Some("E-SEM-2535"))
+                } else {
+                    Ok(arg)
+                }
+            }
+            _ => Err(Some("E-SEM-2532")),
+        }
+    };
+    // A stream of values: nothing is sent in and nothing comes back at the end.
+    let require_stream = || if is_unit(&async_sig.input) && is_unit(&async_sig.result) { Ok(()) } else { Err(MISMATCH) };
+    if id_eq(name, "map") {
+        let (params, ret) = callable_arg(one_arg()?, 1, type_expr)?;
+        sub_or_mismatch(ctx, &async_sig.out, &params[0].r#type)?;
+        return Ok(async_type(ret, async_sig.input.clone(), async_sig.result.clone(), async_sig.err.clone()));
+    }
+    if id_eq(name, "filter") {
+        let arg = one_arg()?;
+        require_stream()?;
+        let (params, ret) = callable_arg(arg, 1, type_expr)?;
+        if !type_equiv(&params[0].r#type, &make_type_perm(Permission::Const, async_sig.out.clone()))
+            || !type_equiv(&ret, &make_type_prim("bool"))
+        {
+            return Err(MISMATCH);
+        }
+        return Ok(lookup_base.clone());
+    }
+    if id_eq(name, "take") {
+        let arg = one_arg()?;
+        require_stream()?;
+        let n_typed = typed_arg(arg, type_expr)?;
+        sub_or_mismatch(ctx, &n_typed, &make_type_prim("usize"))?;
+        return Ok(lookup_base.clone());
+    }
+    if id_eq(name, "fold") {
+        let [init_arg, fn_arg] = args else {
+            return Err(Some("E-SEM-2532"));
+        };
+        if init_arg.value.is_none() || fn_arg.value.is_none() {
+            return Err(Some("E-SEM-2532"));
+        }
+        if init_arg.pass == ArgPassKind::Move || fn_arg.pass == ArgPassKind::Move {
+            return Err(Some("E-SEM-2535"));
+        }
+        require_stream()?;
+        let init_typed = typed_arg(init_arg, type_expr)?;
+        let (params, ret) = callable_arg(fn_arg, 2, type_expr)?;
+        if !type_equiv(&params[0].r#type, &init_typed) || !type_equiv(&params[1].r#type, &async_sig.out) || !type_equiv(&ret, &init_typed) {
+            return Err(MISMATCH);
+        }
+        return Ok(async_type(unit_type.clone(), unit_type, init_typed, async_sig.err.clone()));
+    }
+    // `chain`: the result of this computation starts the next one.
+    let arg = one_arg()?;
+    if !is_unit(&async_sig.out) || !is_unit(&async_sig.input) {
+        return Err(MISMATCH);
+    }
+    let (params, ret) = callable_arg(arg, 1, type_expr)?;
+    sub_or_mismatch(ctx, &async_sig.result, &params[0].r#type)?;
+    let chained_sig = get_async_sig(&ret).ok_or(MISMATCH)?;
+    if !is_unit(&chained_sig.out) || !is_unit(&chained_sig.input) || !type_equiv(&chained_sig.err, &async_sig.err) {
+        return Err(MISMATCH);
+    }
+    Ok(ret)
+}
+
+/// A member the language builds into a modal state.
+struct BuiltinModalMemberSig {
+    recv_perm: Permission,
+    /// A parameter without a type takes any argument.
+    params: Vec<(Option<ParamMode>, TypeRef)>,
+    ret: TypeRef,
+    /// The call has the type of its first argument.
+    ret_from_first_arg: bool,
+    /// The diagnostic outside `unsafe`, for a member that needs it.
+    unsafe_diag: Option<&'static str>,
+}
+
+fn builtin_member(recv_perm: Permission, ret: TypeRef) -> BuiltinModalMemberSig {
+    BuiltinModalMemberSig { recv_perm, params: Vec::new(), ret, ret_from_first_arg: false, unsafe_diag: None }
+}
+
+fn lookup_builtin_modal_member_sig(modal_path: &[String], state: &str, member_name: &str) -> Option<BuiltinModalMemberSig> {
+    let member_in = |member: &str, in_state: &str| id_eq(member_name, member) && id_eq(state, in_state);
+    if path_matches_single(modal_path, "Region") {
+        let region = |state: &str| make_type_perm(Permission::Unique, make_type_modal_state(vec!["Region".to_string()], state, Vec::new()));
+        let unchecked = |sig: BuiltinModalMemberSig| BuiltinModalMemberSig { unsafe_diag: Some("E-MEM-3030"), ..sig };
+        if member_in("alloc", "Active") {
+            return Some(BuiltinModalMemberSig {
+                params: vec![(None, None)],
+                ret_from_first_arg: true,
+                ..builtin_member(Permission::Unique, None)
+            });
+        }
+        if member_in("reset_unchecked", "Active") {
+            return Some(unchecked(builtin_member(Permission::Unique, region("Active"))));
+        }
+        if member_in("freeze", "Active") {
+            return Some(builtin_member(Permission::Unique, region("Frozen")));
+        }
+        if member_in("thaw", "Frozen") {
+            return Some(builtin_member(Permission::Unique, region("Active")));
+        }
+        if member_in("free_unchecked", "Active") || member_in("free_unchecked", "Frozen") {
+            return Some(unchecked(builtin_member(Permission::Unique, region("Freed"))));
+        }
+        return None;
+    }
+    if path_matches_single(modal_path, "CancelToken") {
+        if member_in("cancel", "Active") {
+            return Some(builtin_member(Permission::Const, make_type_prim("()")));
+        }
+        if member_in("is_cancelled", "Active") {
+            return Some(builtin_member(Permission::Const, make_type_prim("bool")));
+        }
+        if member_in("child", "Active") {
+            return Some(builtin_member(Permission::Const, make_type_modal_state(vec!["CancelToken".to_string()], "Active", Vec::new())));
+        }
+        if member_in("wait_cancelled", "Active") {
+            return Some(builtin_member(Permission::Const, make_type_path_with(vec!["Async".to_string()], vec![make_type_prim("()")])));
+        }
+    }
+    None
+}
+
+/// `resume` on a suspended asynchronous computation sends a value in and gives the
+/// computation back in whichever state it reached.
+fn lookup_async_resume_member_sig(
+    ctx: &ScopeContext<'_>,
+    lookup_base: &TypeRef,
+    modal: &TypeModalState,
+    member_name: &str,
+) -> Option<BuiltinModalMemberSig> {
+    if !is_async_modal_path(&modal.path) || !id_eq(&modal.state, "Suspended") || !id_eq(member_name, "resume") {
+        return None;
+    }
+    let sig = async_sig_of(ctx, lookup_base)?;
+    let state = |state: &str| {
+        let args = vec![sig.out.clone(), sig.input.clone(), sig.result.clone(), sig.err.clone()];
+        make_type_perm(Permission::Unique, make_type_modal_state(vec!["Async".to_string()], state, args))
+    };
+    let mut members = vec![state("Suspended"), state("Completed")];
+    let never_fails = matches!(strip_perm(&sig.err).as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(name)) if id_eq(name, "!"));
+    if !never_fails {
+        members.push(state("Failed"));
+    }
+    Some(BuiltinModalMemberSig { params: vec![(None, sig.input.clone())], ..builtin_member(Permission::Unique, make_type_union(members)) })
+}
+
+/// Checks the arguments of a built-in modal member and gives the call's type.
+fn check_builtin_modal_member_args(
+    ctx: &ScopeContext<'_>,
+    sig: &BuiltinModalMemberSig,
+    args: &[Arg],
+    type_expr: ExprTypeFn<'_>,
+    type_place: PlaceTypeFn<'_>,
+    check_expr: ArgCheckFn<'_>,
+) -> Result<TypeRef, Box<ExprTypeResult>> {
+    let fail = |diag_id: Diag| Box::new(ExprTypeResult::failed(diag_id));
+    if args.len() != sig.params.len() {
+        return Err(fail(Some("E-SEM-2532")));
+    }
+    if sig.params.iter().zip(args).any(|((mode, _), arg)| missing_required_move_for_consuming(*mode, arg)) {
+        return Err(fail(Some("E-SEM-2534")));
+    }
+    if sig.params.iter().zip(args).any(|((mode, _), arg)| mode.is_none() && arg.pass == ArgPassKind::Move) {
+        return Err(fail(Some("E-SEM-2535")));
+    }
+    let typed = |expr: &ExprPtr| {
+        let typed = type_expr(expr);
+        if typed.ok {
+            Ok(typed.r#type)
+        } else {
+            Err(fail(typed.diag_id))
+        }
+    };
+    // An argument that names no storage is first checked against the parameter type.
+    let checked_as_param = |expr: &ExprPtr, param_type: &TypeRef| -> Result<bool, Box<ExprTypeResult>> {
+        let checked = check_expr(expr, param_type);
+        if !checked.ok && checked.diag_id.is_some() {
+            return Err(fail(checked.diag_id));
+        }
+        Ok(checked.ok)
+    };
+    let mut arg_types: Vec<TypeRef> = Vec::with_capacity(args.len());
+    for ((mode, param_type), arg) in sig.params.iter().zip(args) {
+        if arg.value.is_none() {
+            return Err(fail(MISMATCH));
+        }
+        let arg_type = if mode.is_none() {
+            if arg.pass == ArgPassKind::Copy {
+                arg_types.push(typed(&arg_pass_expr(arg))?);
+                continue;
+            }
+            let has_source_prov = has_source_provenance(&arg.value);
+            if has_source_prov && !is_place_expr_for_call(&arg.value) {
+                return Err(fail(Some("E-TYP-1603")));
+            }
+            if param_type.is_some() && !has_source_prov && checked_as_param(&arg.value, param_type)? {
+                arg_types.push(param_type.clone());
+                continue;
+            }
+            if has_source_prov {
+                let place_type = type_place(&arg.value);
+                if !place_type.ok {
+                    return Err(Box::new(ExprTypeResult {
+                        diag_id: place_type.diag_id,
+                        diag_detail: place_type.diag_detail,
+                        diag_span: place_type.diag_span,
+                        ..Default::default()
+                    }));
+                }
+                place_type.r#type
+            } else {
+                typed(&arg.value)?
+            }
+        } else {
+            let moved = arg_pass_expr(arg);
+            if param_type.is_some() && uses_call_temp_for_consuming(*mode, arg) && checked_as_param(&moved, param_type)? {
+                arg_types.push(param_type.clone());
+                continue;
+            }
+            typed(&moved)?
+        };
+        if param_type.is_some() {
+            let sub = argument_type_compatible(ctx, &arg_type, param_type, *mode);
+            if !sub.ok {
+                return Err(fail(sub.diag_id));
+            }
+            if !sub.subtype {
+                return Err(fail(MISMATCH));
+            }
+        }
+        arg_types.push(arg_type);
+    }
+    if sig.ret_from_first_arg {
+        return arg_types.into_iter().next().ok_or_else(|| fail(Some("E-SEM-2532")));
+    }
+    Ok(sig.ret.clone())
 }
 
 /// Whether a reference may be taken to an argument: an indexed place must be indexed by
@@ -547,8 +926,6 @@ pub fn type_method_call_expr(
     env: &TypeEnv,
     span: &Span,
 ) -> ExprTypeResult {
-    // The span decides whether a built-in method that needs `unsafe` is inside it.
-    let _ = span;
     let failed = |diag_id: Diag| ExprTypeResult::failed(diag_id);
     let Some(receiver_expr) = expr.receiver.as_deref() else {
         return ExprTypeResult::default();
@@ -619,25 +996,32 @@ pub fn type_method_call_expr(
         diag_detail: format!("method '{}' on type '{}'", expr.name, type_to_string(&lookup_base)),
         ..Default::default()
     };
-    let unported = |what: &'static str| {
-        pending(what);
-        ExprTypeResult::default()
-    };
-
     if id_eq(&expr.name, "until") {
-        return unported("WaitUntilMethod");
+        if !permission_admits(caller_perm, Permission::Shared) {
+            return failed(Some("E-TYP-1605"));
+        }
+        return match type_until_call(ctx, &lookup_base, &expr.args, &type_expr_fn) {
+            Ok(ty) => ExprTypeResult::typed(ty),
+            Err(diag_id) => failed(diag_id),
+        };
     }
-    if async_sig_of(ctx, &lookup_base).is_some() && is_builtin_modal_general_member(&["Async".to_string()], &expr.name) {
-        return unported("AsyncCombinator");
+    if let Some(async_sig) = async_sig_of(ctx, &lookup_base) {
+        if is_builtin_modal_general_member(&["Async".to_string()], &expr.name) {
+            if !permission_admits(caller_perm, Permission::Const) {
+                return failed(Some("E-TYP-1605"));
+            }
+            return match type_async_combinator_call(ctx, &async_sig, &lookup_base, &expr.name, &expr.args, &type_expr_fn) {
+                Ok(ty) => ExprTypeResult::typed(ty),
+                Err(diag_id) => failed(diag_id),
+            };
+        }
     }
     let Some(base) = lookup_base.as_deref() else {
         return ExprTypeResult::default();
     };
-    if matches!(base.node, TypeNode::String(_) | TypeNode::Bytes(_)) {
-        return unported("StringBytesMethod");
-    }
-
-    if let Some(builtin_sig) = lookup_foundational_builtin_method_sig(Some(ctx), &lookup_base, &expr.name) {
+    let builtin_sig = lookup_string_bytes_builtin_method_sig(&lookup_base, &expr.name)
+        .or_else(|| lookup_foundational_builtin_method_sig(Some(ctx), &lookup_base, &expr.name));
+    if let Some(builtin_sig) = builtin_sig {
         if !permission_admits(caller_perm, builtin_sig.recv_perm) {
             return failed(Some("E-TYP-1605"));
         }
@@ -709,13 +1093,38 @@ pub fn type_method_call_expr(
         ExprTypeResult::typed(ret_type)
     };
 
+    // A built-in method of a capability: its parameters are checked as declared ones.
+    let call_cap_method = |sig: CapMethodSig| -> ExprTypeResult {
+        if !permission_admits(caller_perm, sig.recv_perm) {
+            return failed(Some("E-TYP-1605"));
+        }
+        if let Err(diag_id) = check_shared_receiver_access(sig.recv_perm) {
+            return failed(diag_id);
+        }
+        match args_ok(ctx, &sig.params, &expr.args, &type_expr_fn, Some(&type_place_fn), &lower_type_fn, None, Some(&check_expr_fn)) {
+            Ok(()) => ExprTypeResult::typed(sig.ret),
+            Err(diag_id) => failed(diag_id),
+        }
+    };
+
     match &base.node {
         TypeNode::ModalState(modal) => {
-            if path_matches_single(&modal.path, "Region") || path_matches_single(&modal.path, "CancelToken") {
-                return unported("BuiltinModalMember");
-            }
-            if is_async_modal_path(&modal.path) && id_eq(&modal.state, "Suspended") && id_eq(&expr.name, "resume") {
-                return unported("BuiltinModalMember");
+            let builtin_sig = lookup_async_resume_member_sig(ctx, &lookup_base, modal, &expr.name)
+                .or_else(|| lookup_builtin_modal_member_sig(&modal.path, &modal.state, &expr.name));
+            if let Some(builtin_sig) = builtin_sig {
+                if !permission_admits(caller_perm, builtin_sig.recv_perm) {
+                    return failed(Some("E-TYP-1605"));
+                }
+                if let Err(diag_id) = check_shared_receiver_access(builtin_sig.recv_perm) {
+                    return failed(diag_id);
+                }
+                if let Some(unsafe_diag) = builtin_sig.unsafe_diag.filter(|_| !is_in_unsafe_span(ctx, span)) {
+                    return failed(Some(unsafe_diag));
+                }
+                return match check_builtin_modal_member_args(ctx, &builtin_sig, &expr.args, &type_expr_fn, &type_place_fn, &check_expr_fn) {
+                    Ok(ty) => ExprTypeResult::typed(ty),
+                    Err(failure) => *failure,
+                };
             }
             let modal_subst = match ctx.sigma.types.get(&path_key_of(&modal.path)) {
                 Some(TypeDecl::Modal(modal_decl)) => modal_decl
@@ -798,9 +1207,11 @@ pub fn type_method_call_expr(
             return failed(Some(if modal_member.transition_in_other_state { "E-TYP-2056" } else { "E-TYP-2053" }));
         }
         TypeNode::Dynamic(path) => {
-            // The capability classes other than `Reactor` have built-in methods.
-            if is_capability_class_path(path) && !path_matches_builtin_name(path, "Reactor") {
-                return unported("CapabilityMethod");
+            if let Some(sig) = lookup_capability_class_method_sig(path, &expr.name) {
+                if sig.raw_heap && !is_in_unsafe_span(ctx, span) {
+                    return failed(Some("E-MEM-3030"));
+                }
+                return call_cap_method(sig);
             }
             // `Reactor` is declared in source; its methods are called without a vtable.
             if path_matches_builtin_name(path, "Reactor") {
@@ -827,11 +1238,8 @@ pub fn type_method_call_expr(
             return call_method(MethodSig::of_class(method), &lower_type_fn);
         }
         TypeNode::Path { path, .. } => {
-            let comptime_capability = ["ProjectFiles", "ComptimeDiagnostics", "Introspect", "TypeEmitter"]
-                .iter()
-                .any(|name| path_matches_single(path, name));
-            if comptime_capability || is_context_type_path(path) {
-                return unported("CapabilityMethod");
+            if let Some(sig) = lookup_capability_type_method_sig(path, &expr.name, expr.args.len()) {
+                return call_cap_method(sig);
             }
         }
         _ => {}

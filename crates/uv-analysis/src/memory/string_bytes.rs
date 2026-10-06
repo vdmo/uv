@@ -168,3 +168,79 @@ pub fn lookup_string_bytes_builtin_type(path: &[String], name: &str) -> Option<T
     }
     None
 }
+
+/// The built-in methods of strings and bytes, by the receiver's state.
+pub fn lookup_string_bytes_builtin_method_sig(
+    recv_base: &TypeRef,
+    name: &str,
+) -> Option<crate::typing::type_predicates::FoundationalBuiltinMethodSig> {
+    use crate::resolve::scopes::id_eq;
+    use crate::typing::outcome::make_outcome_type;
+    use crate::typing::type_predicates::FoundationalBuiltinMethodSig;
+    let sig = |recv_perm: Permission, recv_type: TypeRef, params: Vec<TypeRef>, ret: TypeRef| {
+        Some(FoundationalBuiltinMethodSig {
+            recv_perm,
+            recv_type,
+            params: params.into_iter().map(|ty| TypeFuncParam { mode: None, r#type: ty }).collect(),
+            ret,
+        })
+    };
+    let usize_type = || make_type_prim("usize");
+    let alloc_outcome = |value: TypeRef| make_outcome_type(value, alloc_error_type());
+    match &recv_base.as_deref()?.node {
+        TypeNode::String(state) => {
+            let any_string = make_type_string(None);
+            let managed = *state == Some(StringState::Managed);
+            let view = *state == Some(StringState::View);
+            if id_eq(name, "length") {
+                return sig(Permission::Const, any_string, Vec::new(), usize_type());
+            }
+            if id_eq(name, "is_empty") {
+                return sig(Permission::Const, any_string, Vec::new(), make_type_prim("bool"));
+            }
+            if id_eq(name, "as_view") && managed {
+                return sig(Permission::Const, string_managed(), Vec::new(), string_view());
+            }
+            if id_eq(name, "slice") && view {
+                return sig(Permission::Const, string_view(), vec![usize_type(), usize_type()], string_view());
+            }
+            if id_eq(name, "to_managed") && view {
+                return sig(Permission::Const, string_view(), vec![heap_allocator_type()], alloc_outcome(unique_of(string_managed())));
+            }
+            if id_eq(name, "clone_with") && managed {
+                return sig(Permission::Const, string_managed(), vec![heap_allocator_type()], alloc_outcome(unique_of(string_managed())));
+            }
+            if id_eq(name, "append") && managed {
+                let params = vec![string_view(), heap_allocator_type()];
+                return sig(Permission::Unique, string_managed(), params, alloc_outcome(make_type_prim("()")));
+            }
+            None
+        }
+        TypeNode::Bytes(state) => {
+            let any_bytes = make_type_bytes(None);
+            let managed = *state == Some(BytesState::Managed);
+            let view = *state == Some(BytesState::View);
+            if id_eq(name, "length") {
+                return sig(Permission::Const, any_bytes, Vec::new(), usize_type());
+            }
+            if id_eq(name, "is_empty") {
+                return sig(Permission::Const, any_bytes, Vec::new(), make_type_prim("bool"));
+            }
+            if id_eq(name, "as_slice") {
+                return sig(Permission::Const, any_bytes, Vec::new(), const_of(slice_u8()));
+            }
+            if id_eq(name, "as_view") && managed {
+                return sig(Permission::Const, bytes_managed(), Vec::new(), bytes_view());
+            }
+            if id_eq(name, "to_managed") && view {
+                return sig(Permission::Const, bytes_view(), vec![heap_allocator_type()], alloc_outcome(unique_of(bytes_managed())));
+            }
+            if id_eq(name, "append") && managed {
+                let params = vec![bytes_view(), heap_allocator_type()];
+                return sig(Permission::Unique, bytes_managed(), params, alloc_outcome(make_type_prim("()")));
+            }
+            None
+        }
+        _ => None,
+    }
+}

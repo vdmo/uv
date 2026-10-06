@@ -2,5 +2,6 @@
 
 pub mod builtin_paths;
 pub mod cap_concurrency;
+pub mod cap_methods;
 pub mod builtin_decls;
 pub mod context_caps;

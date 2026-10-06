@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 3,492 of 4,569 bodies compared (76.4%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 3,678 of 4,569 bodies compared (80.5%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -468,10 +468,9 @@ transitions of a modal state, class methods through dynamic and opaque types, a 
 own methods and those of the classes a type implements, inference of a generic method's
 type arguments, the receiver's permission and key requirements, the argument checker
 (`ArgsOk`), and `eq`/`successor`/`predecessor`. The methods the language builds in are
-not ported and make the body pending: those of the capability classes and compile-time
-capabilities (`CapabilityMethod`), of strings and bytes (`StringBytesMethod`), of
-`Region`, `CancelToken` and `Async@Suspended` (`BuiltinModalMember`), the asynchronous
-combinators (`AsyncCombinator`) and `until` (`WaitUntilMethod`).
+in too: those of the capability classes and compile-time capabilities
+(`caps::cap_methods`), of strings and bytes (`memory::string_bytes`), of `Region`,
+`CancelToken` and `Async@Suspended`, the asynchronous combinators, and `until`.
 
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from
