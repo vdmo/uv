@@ -232,6 +232,12 @@ fn type_expr_form(
         }
         ExprNode::AddressOfExpr(node) => super::expr::access::type_address_of_expr(ctx, type_ctx, node, env),
         ExprNode::RangeExpr(node) => super::expr::access::type_range_expr(ctx, type_ctx, node, env),
+        ExprNode::ParallelExpr(node) => {
+            super::expr::parallel::type_parallel_expr(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::SpawnExpr(node) => {
+            super::expr::parallel::type_spawn_expr(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
         ExprNode::YieldExpr(node) => {
             super::expr::async_forms::type_yield_expr(ctx, type_ctx, node, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
         }

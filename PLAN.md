@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,357 of 4,569 bodies compared (95.4%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,483 of 4,569 bodies compared (98.1%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -449,9 +449,9 @@ too, as values and as places (`typing::expr::field_access`, `tuple_access`).
 Assignment is in (`typing::stmt::assign_stmt`): the place must be a place, not `const`,
 rooted in a `var` unless written through a pointer, and the value is checked against the
 declared type of the place, with outcome introduction; the root binding then takes the
-value's provenance. Writing a `shared` place is not ported (it depends on the keys held
-and on whether the value reads the place written) and makes the body pending
-(`SharedAssign`). Compound assignment is still to do.
+value's provenance. Writing a `shared` place needs a write key that covers it, and a
+value that reads the place it writes is a read followed by a write of one location
+(`typing::stmt::shared_write`). Compound assignment is in with it.
 
 Record literals (records and modal states) and enum literals are in
 (`typing::expr::record_literal`, `enum_literal`), on their own and against an expected
@@ -504,12 +504,28 @@ the fallback.
 The scoped statements are in (`typing::stmt::scoped`): `region` and `frame` with the
 active region they bind, `defer`, and `using`; so are `?` propagation, `transmute` with
 the warning pass that runs after an `unsafe` block, and region allocation
-(`typing::expr::transmute`). Compound assignment is left with the shared-write analysis
-of plain assignment, which it shares.
+(`typing::expr::transmute`).
 
 The asynchronous forms are in (`typing::expr::async_forms`): `yield` and `yield from`
 with the release of keys at a suspension point, `sync`, `race` with returning or
 yielding handlers, `all`, and `wait` on spawned and tracked tasks.
+
+`parallel` and `spawn` are in (`typing::expr::parallel`): the execution domain and its
+options, the block's value (its tail, or the values of its tasks, which are typed a
+second time to collect them as the reference does), what a task may capture (a `unique`
+binding only by `move`, and a binding of the block by one child only), and the
+restrictions on captures into GPU code. Captures are visited in the order of the
+reference's hash set, which decides the error reported first. `dispatch` is still to
+do.
+
+Key blocks are in for the ordinary forms (`typing::stmt::key_block`): the paths must be
+rooted in shared data and marked at most once at a record field, a key already held may
+not be taken again in another mode except to release it, a block that writes under its
+own key needs write mode, and the body is typed with the keys held. Three variants are
+not ported and make the body pending: speculative blocks (`SpeculativeKeyBlock`), the
+`ordered` option (`OrderedKeyBlock`), and paths indexed by a value that is not a
+constant (`DynamicKeyPath`), which need the proof that the body's indices do not
+conflict.
 
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from

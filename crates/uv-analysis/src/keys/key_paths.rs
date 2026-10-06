@@ -260,3 +260,59 @@ pub fn is_prefix(prefix: &KeyPath, path: &KeyPath) -> bool {
             .zip(&path.segs)
             .all(|(lhs, rhs)| lhs == rhs)
 }
+
+/// A key path as a key block writes it. A marked segment ends the path.
+pub fn parse_key_path_spec(spec: &uv_source::ast::KeyPathExpr) -> KeyPath {
+    use uv_source::ast::KeySeg;
+    let mut path = KeyPath { root: spec.root.clone(), segs: Vec::new() };
+    for seg in &spec.segs {
+        let (lowered, marked) = match seg {
+            KeySeg::KeySegField(field) => (KeyPathSeg { boundary: false, name: field.name.clone(), is_index: false }, field.marked),
+            KeySeg::KeySegIndex(index) => {
+                (KeyPathSeg { boundary: false, name: canonical_expr_identity(&index.expr), is_index: true }, index.marked)
+            }
+        };
+        path.segs.push(lowered);
+        if marked {
+            break;
+        }
+    }
+    path
+}
+
+fn segment_less(lhs: &KeyPathSeg, rhs: &KeyPathSeg) -> bool {
+    if lhs.is_index != rhs.is_index {
+        return !lhs.is_index;
+    }
+    if lhs.is_index {
+        if let (Some(lhs_value), Some(rhs_value)) = (parse_static_index_value(&lhs.name), parse_static_index_value(&rhs.name)) {
+            return lhs_value < rhs_value;
+        }
+    }
+    lhs.name < rhs.name
+}
+
+/// The canonical order in which keys are taken: by root, then segment by segment,
+/// fields before indices and constant indices by value.
+pub fn key_path_less(lhs: &KeyPath, rhs: &KeyPath) -> bool {
+    if lhs.root != rhs.root {
+        return lhs.root < rhs.root;
+    }
+    for (l, r) in lhs.segs.iter().zip(&rhs.segs) {
+        if segment_less(l, r) {
+            return true;
+        }
+        if segment_less(r, l) {
+            return false;
+        }
+    }
+    lhs.segs.len() < rhs.segs.len()
+}
+
+/// A whole decimal `i64`, with an optional minus sign and nothing else.
+fn parse_static_index_value(text: &str) -> Option<i64> {
+    if text.starts_with('+') {
+        return None;
+    }
+    text.parse().ok()
+}

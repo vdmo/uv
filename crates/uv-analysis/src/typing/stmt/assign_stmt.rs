@@ -2,7 +2,11 @@
 
 use uv_source::ast::{self, ExprNode, ExprPtr};
 
+use uv_core::diagnostic_messages::make_diagnostic_by_id;
+use uv_core::diagnostics::emit;
+
 use super::block::StmtTypeResult;
+use super::shared_write::{covering_key_mode, expr_reads_exact_path, has_covering_write_key, is_compound_rewrite_candidate, try_build_key_path};
 use super::stmt_common::expr_needs_key_access;
 use crate::composite::function_types::lookup_module_static;
 use crate::context::ScopeContext;
@@ -12,7 +16,6 @@ use crate::typing::callbacks::{ExprTypeFn, IdentTypeFn, PlaceTypeFn, PlaceTypeRe
 use crate::typing::check_expr::infer_expr;
 use crate::typing::expr_result::ExprTypeResult;
 use crate::typing::outcome::{classify_outcome_intro, OutcomeIntro};
-use crate::typing::pending::pending;
 use crate::typing::stmt_context::{with_shared_access_mode, StmtTypeContext};
 use crate::typing::type_env::{apply_binding_provenance_seed, bind_of, mut_of, stable_binding_type, TypeBinding, TypeEnv};
 use crate::typing::type_expr::{check_expr_against, type_expr, type_place};
@@ -188,15 +191,35 @@ pub fn type_assign_stmt(
         return StmtTypeResult { diag_id: place_type.diag_id, diag_detail: detail, diag_span: place_type.diag_span, ..Default::default() };
     }
     let place_perm = perm_parts(&place_type.r#type);
-    match place_perm.map(|(perm, _)| perm) {
-        Some(Permission::Const) => return failed(Some("E-TYP-1601")),
-        Some(Permission::Shared) => {
-            // Writing shared data depends on the keys held and on whether the value
-            // reads the place it writes; that analysis is not ported.
-            pending("SharedAssign");
-            return failed(None);
+    if place_perm.map(|(perm, _)| perm) == Some(Permission::Const) {
+        return failed(Some("E-TYP-1601"));
+    }
+    // Shared data is written under a write key that covers the place; reading the
+    // place in the value written is a read followed by a write of one location.
+    let place_key_path = try_build_key_path(&node.place);
+    let read_then_write_same_path = place_key_path.as_ref().is_some_and(|path| expr_reads_exact_path(&node.value, path));
+    let mut shared_write_with_key = false;
+    if place_perm.map(|(perm, _)| perm) == Some(Permission::Shared) {
+        let has_write_key = match &place_key_path {
+            Some(path) => has_covering_write_key(type_ctx, path),
+            None => type_ctx.keys_held && type_ctx.key_mode == Some(ast::KeyMode::Write),
+        };
+        if !has_write_key {
+            let covering_mode = match &place_key_path {
+                Some(path) => covering_key_mode(type_ctx, path),
+                None => type_ctx.key_mode,
+            };
+            if read_then_write_same_path {
+                return failed(Some("E-CON-0060"));
+            }
+            if covering_mode.is_some() {
+                return failed(Some("E-CON-0005"));
+            }
+            if place_key_path.is_none() {
+                return failed(Some("E-TYP-1604"));
+            }
         }
-        _ => {}
+        shared_write_with_key = true;
     }
 
     let writes_through_deref = place_writes_through_deref(&node.place);
@@ -204,7 +227,7 @@ pub fn type_assign_stmt(
     if let (false, Some(root)) = (writes_through_deref, root) {
         match lookup_root_mutability(ctx, env, root) {
             Err(diag_id) => return failed(diag_id),
-            Ok(Some(ast::Mutability::Let)) => return failed(Some("E-MOD-2401")),
+            Ok(Some(ast::Mutability::Let)) if !shared_write_with_key => return failed(Some("E-MOD-2401")),
             Ok(_) => {}
         }
     }
@@ -241,6 +264,13 @@ pub fn type_assign_stmt(
         }
     }
 
+    if let (true, true, Some(diags), Some(path)) = (shared_write_with_key, read_then_write_same_path, &type_ctx.diags, &place_key_path) {
+        let code = if is_compound_rewrite_candidate(&node.value, path) { "W-CON-0006" } else { "W-CON-0004" };
+        if let Some(diag) = make_diagnostic_by_id(code, Some(node.span.clone())) {
+            emit(&mut diags.borrow_mut(), diag);
+        }
+    }
+
     let mut out_env = env.clone();
     if let (false, Some(root)) = (writes_through_deref, root) {
         let value_prov = track_expr_provenance(ctx, &node.value, env);
@@ -255,6 +285,99 @@ pub fn type_assign_stmt(
                 binding.derived_from_shared = derived_from_shared;
                 binding.stale_after_release = false;
             }
+        }
+    }
+    StmtTypeResult::typed(out_env)
+}
+
+/// `place op= value`: the place must be a writable number and the value of its type.
+pub fn type_compound_assign_stmt(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    node: &ast::CompoundAssignStmt,
+    env: &TypeEnv,
+    type_expr_fn: ExprTypeFn<'_>,
+) -> StmtTypeResult {
+    let failed = |diag_id: Option<&'static str>| StmtTypeResult { diag_id, ..Default::default() };
+    let read_ctx = with_shared_access_mode(type_ctx, ast::KeyMode::Read);
+    let write_ctx = with_shared_access_mode(type_ctx, ast::KeyMode::Write);
+    if !is_place_expr_local(&node.place) {
+        return failed(Some("E-SEM-3131"));
+    }
+    let place_type = type_place(ctx, &write_ctx, &node.place, env);
+    if !place_type.ok {
+        return StmtTypeResult { diag_id: place_type.diag_id, diag_detail: place_type.diag_detail, diag_span: place_type.diag_span, ..Default::default() };
+    }
+    let place_perm = perm_parts(&place_type.r#type).map(|(perm, _)| perm);
+    if place_perm == Some(Permission::Const) {
+        return failed(Some("E-TYP-1601"));
+    }
+    let mut assign_target_type = stable_place_type_for_assign(&node.place, env, &place_type.r#type);
+    if let Some((_, base)) = perm_parts(&assign_target_type) {
+        assign_target_type = base.clone();
+    }
+    let place_key_path = try_build_key_path(&node.place);
+    let mut shared_write_with_key = false;
+    if place_perm == Some(Permission::Shared) {
+        let has_write_key = match &place_key_path {
+            Some(path) => has_covering_write_key(type_ctx, path),
+            None => type_ctx.keys_held && type_ctx.key_mode == Some(ast::KeyMode::Write),
+        };
+        if !has_write_key {
+            let covering_mode = match &place_key_path {
+                Some(path) => covering_key_mode(type_ctx, path),
+                None => type_ctx.key_mode,
+            };
+            if covering_mode.is_some() {
+                return failed(Some("E-CON-0005"));
+            }
+            if place_key_path.is_none() {
+                return failed(Some("E-TYP-1604"));
+            }
+        }
+        shared_write_with_key = true;
+    }
+    let writes_through_deref = place_writes_through_deref(&node.place);
+    let root = place_root_name(&node.place);
+    if let (false, Some(root)) = (writes_through_deref, root) {
+        match lookup_root_mutability(ctx, env, root) {
+            Err(diag_id) => return failed(diag_id),
+            Ok(Some(ast::Mutability::Let)) if !shared_write_with_key => return failed(Some("E-MOD-2401")),
+            Ok(_) => {}
+        }
+    }
+    let is_numeric = matches!(
+        assign_target_type.as_deref().map(|ty| &ty.node),
+        Some(TypeNode::Prim(name)) if matches!(
+            name.as_str(),
+            "i8" | "i16" | "i32" | "i64" | "i128" | "isize" | "u8" | "u16" | "u32" | "u64" | "u128" | "usize" | "f16" | "f32" | "f64"
+        )
+    );
+    if !is_numeric {
+        return failed(Some("E-SEM-3133"));
+    }
+    let rhs_type = type_expr_with_current_env(ctx, &read_ctx, env, type_expr_fn, &node.value);
+    if !rhs_type.ok {
+        return failed(rhs_type.diag_id);
+    }
+    let sub = crate::typing::subtyping::subtyping(ctx, &rhs_type.r#type, &assign_target_type);
+    if !sub.ok {
+        return failed(sub.diag_id);
+    }
+    if !sub.subtype {
+        return failed(Some("E-SEM-3133"));
+    }
+    // A compound assignment reads the place it writes.
+    if let (true, Some(diags)) = (shared_write_with_key, &type_ctx.diags) {
+        if let Some(diag) = make_diagnostic_by_id("W-CON-0004", Some(node.span.clone())) {
+            emit(&mut diags.borrow_mut(), diag);
+        }
+    }
+    let mut out_env = env.clone();
+    if let (false, Some(root), true) = (writes_through_deref, root, is_root_identifier_place(&node.place)) {
+        if let Some(binding) = binding_mut(&mut out_env, root) {
+            binding.derived_from_shared = true;
+            binding.stale_after_release = false;
         }
     }
     StmtTypeResult::typed(out_env)

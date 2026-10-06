@@ -35,6 +35,13 @@ pub struct HeldKeyTypingInfo {
     pub mode: ast::KeyMode,
 }
 
+/// What one `parallel` block binds, and which of those bindings a child has taken.
+#[derive(Debug, Clone, Default)]
+pub struct ParallelCaptureScope {
+    pub bindings: Rc<RefCell<std::collections::HashSet<crate::context::IdKey>>>,
+    pub first_child_moves: Rc<RefCell<std::collections::HashSet<crate::context::IdKey>>>,
+}
+
 #[derive(Clone, Default)]
 pub struct StmtTypeContext<'t> {
     pub return_type: TypeRef,
@@ -65,6 +72,9 @@ pub struct StmtTypeContext<'t> {
     pub proof_ctx: Option<Rc<crate::contracts::verification::StaticProofContext>>,
     pub test_postcondition_runtime: bool,
     pub current_class_path: Option<TypePath>,
+    /// The bindings of each enclosing `parallel` block, outermost first, with those
+    /// already moved into a child task.
+    pub parallel_capture_scopes: Option<Rc<Vec<ParallelCaptureScope>>>,
     /// The range each loop variable in scope runs over, by name.
     pub loop_iteration_ranges: Option<Rc<std::collections::HashMap<crate::context::IdKey, ast::ExprPtr>>>,
 }

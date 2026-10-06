@@ -377,6 +377,8 @@ pub fn type_stmt(
         Stmt::FrameStmt(node) => super::scoped::type_frame_stmt(ctx, type_ctx, node, env, type_expr_fn, type_ident_fn, type_place_fn),
         Stmt::DeferStmt(node) => super::scoped::type_defer_stmt(ctx, type_ctx, node, env, type_expr_fn, type_ident_fn, type_place_fn),
         Stmt::UsingLocalStmt(node) => super::scoped::type_using_local_stmt(node, env),
+        Stmt::KeyBlockStmt(node) => super::key_block::type_key_block_stmt(ctx, type_ctx, node, env),
+        Stmt::CompoundAssignStmt(node) => super::assign_stmt::type_compound_assign_stmt(ctx, type_ctx, node, env, type_expr_fn),
         Stmt::BreakStmt(node) => crate::typing::expr::loops::type_break_stmt(ctx, type_ctx, node, env, type_expr_fn),
         Stmt::ContinueStmt(_) => crate::typing::expr::loops::type_continue_stmt(type_ctx, env),
         Stmt::ExprStmt(node) => super::expr_stmt::type_expr_stmt(ctx, type_ctx, node, env, type_expr_fn),
@@ -446,6 +448,7 @@ pub fn type_stmt_seq(
         }
         current = typed.env;
         current_proof_ctx = super::proof_facts::fallthrough_proof_context_for_stmt(ctx, &current, &current_proof_ctx, stmt);
+        crate::typing::expr::parallel::record_parallel_stmt_bindings(type_ctx, stmt);
         publish_env(type_ctx, env_ref, &current);
         flow.results.extend(typed.flow.results);
         merge_break_flow(

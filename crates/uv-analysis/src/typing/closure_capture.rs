@@ -2,6 +2,8 @@
 
 use std::collections::HashSet;
 
+use uv_core::std_unordered::UnorderedMap;
+
 use uv_source::ast::{self, ExprNode, ExprPtr, Stmt};
 
 use crate::context::IdKey;
@@ -26,7 +28,10 @@ struct Walker<'e> {
     mode: Mode,
     env: Option<&'e TypeEnv>,
     local_scopes: Vec<HashSet<IdKey>>,
-    captures: HashSet<IdKey>,
+    /// In the order the reference's hash set would iterate them.
+    captures: UnorderedMap<()>,
+    /// The outer bindings named under an explicit `move`.
+    explicit_moves: HashSet<IdKey>,
     found_spawn: bool,
     has_yield: bool,
     has_yield_from: bool,
@@ -34,7 +39,7 @@ struct Walker<'e> {
 
 impl<'e> Walker<'e> {
     fn new(mode: Mode, env: Option<&'e TypeEnv>) -> Self {
-        Walker { mode, env, local_scopes: Vec::new(), captures: HashSet::new(), found_spawn: false, has_yield: false, has_yield_from: false }
+        Walker { mode, env, local_scopes: Vec::new(), captures: UnorderedMap::new(), explicit_moves: HashSet::new(), found_spawn: false, has_yield: false, has_yield_from: false }
     }
 
     fn push_scope(&mut self) {
@@ -74,8 +79,18 @@ impl<'e> Walker<'e> {
             return;
         }
         if bind_of(env, name).is_some() {
-            self.captures.insert(key);
+            self.captures.emplace(key, ());
         }
+    }
+
+    fn mark_explicit_move_if_outer(&mut self, place: &ExprPtr) {
+        let (Some(env), Some(root)) = (self.env, root_binding_of_place(place)) else {
+            return;
+        };
+        if self.local_scopes.iter().any(|scope| scope.contains(&root)) || bind_of(env, &root).is_none() {
+            return;
+        }
+        self.explicit_moves.insert(root);
     }
 
     fn visit_key_path(&mut self, path: &ast::KeyPathExpr) {
@@ -210,7 +225,10 @@ impl<'e> Walker<'e> {
             ExprNode::EntryExpr(node) => self.visit_expr(&node.expr),
             ExprNode::AttributedExpr(node) => self.visit_expr(&node.expr),
             ExprNode::AddressOfExpr(node) => self.visit_expr(&node.place),
-            ExprNode::MoveExpr(node) => self.visit_expr(&node.place),
+            ExprNode::MoveExpr(node) => {
+                self.mark_explicit_move_if_outer(&node.place);
+                self.visit_expr(&node.place);
+            }
             ExprNode::TupleExpr(node) => self.visit_all(&node.elements),
             ExprNode::ArrayExpr(node) => self.visit_all(ast::array_expr_subexprs(node)),
             ExprNode::ArrayRepeatExpr(node) => self.visit_all([&node.value, &node.count]),
@@ -318,8 +336,28 @@ impl<'e> Walker<'e> {
     }
 }
 
+fn root_binding_of_place(place: &ExprPtr) -> Option<IdKey> {
+    match &place.as_deref()?.node {
+        ExprNode::IdentifierExpr(node) => Some(id_key_of(&node.name)),
+        ExprNode::PathExpr(node) => node.path.is_empty().then(|| id_key_of(&node.name)),
+        ExprNode::FieldAccessExpr(node) => root_binding_of_place(&node.base),
+        ExprNode::TupleAccessExpr(node) => root_binding_of_place(&node.base),
+        ExprNode::IndexAccessExpr(node) => root_binding_of_place(&node.base),
+        ExprNode::MoveExpr(node) => root_binding_of_place(&node.place),
+        _ => None,
+    }
+}
+
+/// The outer bindings a block uses, and those of them it names under `move`.
+pub fn block_captures(block: &ast::BlockPtr, env: &TypeEnv) -> (Vec<IdKey>, HashSet<IdKey>) {
+    let mut walker = Walker::new(Mode::Captures, Some(env));
+    walker.push_scope();
+    walker.visit_block(block);
+    (walker.captures.keys().cloned().collect(), walker.explicit_moves)
+}
+
 /// The names a closure uses that are bound outside it.
-fn outer_captures(closure: &ast::ClosureExpr, env: &TypeEnv) -> HashSet<IdKey> {
+fn outer_captures(closure: &ast::ClosureExpr, env: &TypeEnv) -> Vec<IdKey> {
     let mut walker = Walker::new(Mode::Captures, Some(env));
     walker.push_scope();
     walker.push_scope();
@@ -327,7 +365,7 @@ fn outer_captures(closure: &ast::ClosureExpr, env: &TypeEnv) -> HashSet<IdKey> {
         walker.declare_name(&param.name);
     }
     walker.visit_expr(&closure.body);
-    walker.captures
+    walker.captures.keys().cloned().collect()
 }
 
 fn contains_spawn_expr(expr: &ExprPtr) -> bool {
