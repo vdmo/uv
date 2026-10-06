@@ -12,6 +12,8 @@ use super::check_expr::check_expr;
 use super::closure_capture::check_escaping_closure_spawn;
 use super::expr::call::is_comptime_typing_env;
 use super::expr::small;
+use super::expr_store::{record_dynamic_refine_check, selected_call_target, store_expr_type, stored_value_expr_type};
+use crate::resolve::scopes::id_eq;
 use super::expr::path::{type_identifier_place, type_path_expr};
 use super::expr_result::ExprTypeResult;
 use super::literals::type_literal_expr;
@@ -131,6 +133,9 @@ pub fn type_expr(
             result.ok = false;
             result.diag_id = Some(diag_id);
         }
+    }
+    if result.ok {
+        store_expr_type(ctx, expr, &result.r#type, true);
     }
     result
 }
@@ -365,12 +370,15 @@ pub fn type_place(
             result.diag_span = Some(e.span.clone());
         }
     }
+    if result.ok {
+        store_expr_type(ctx, expr, &result.r#type, false);
+    }
     result
 }
 
 /// In a dynamic context a refinement that cannot be proved is checked at run time
-/// instead: the value only has to have the refinement's base type. The run-time check
-/// is not recorded for later passes yet.
+/// instead: the value only has to have the refinement's base type, and the refinement
+/// is recorded as a run-time check.
 fn try_dynamic_refinement_fallback(
     ctx: &ScopeContext<'_>,
     type_ctx: &StmtTypeContext<'_>,
@@ -396,12 +404,85 @@ fn try_dynamic_refinement_fallback(
     if !base_check.ok {
         return base_check;
     }
+    record_dynamic_refine_check(ctx, expr, &norm);
     CheckResult { ok: true, ..Default::default() }
 }
 
 /// Whether the expression has the expected type. The forms that are checked against
 /// the expectation in their own way are ported with their typing.
+/// Whether a check against an expected type has to look at the expression again even
+/// when its type is already known: the expectation shapes how these forms are typed.
+fn cached_check_needs_expected_traversal(ctx: &ScopeContext<'_>, e: &ast::Expr) -> bool {
+    match &e.node {
+        ExprNode::AttributedExpr(_)
+        | ExprNode::IfExpr(_)
+        | ExprNode::IfIsExpr(_)
+        | ExprNode::IfCaseExpr(_)
+        | ExprNode::RecordExpr(_)
+        | ExprNode::QuoteExpr(_)
+        | ExprNode::EnumLiteralExpr(_)
+        | ExprNode::ClosureExpr(_)
+        | ExprNode::PtrNullExpr(_)
+        | ExprNode::LiteralExpr(_)
+        | ExprNode::TupleExpr(_)
+        | ExprNode::ArrayExpr(_)
+        | ExprNode::ArrayRepeatExpr(_) => true,
+        ExprNode::UnaryExpr(node) => id_eq(&node.op, "-"),
+        ExprNode::CallExpr(node) => node.generic_args.is_empty() && selected_call_target(ctx, node).is_none_or(|target| target.generic),
+        ExprNode::MethodCallExpr(node) => id_eq(&node.name, "alloc_raw"),
+        _ => false,
+    }
+}
+
+/// The check answered from the type the expression was already given as a value, when
+/// that type fits the expectation.
+fn try_cached_expr_check(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    expr: &ExprPtr,
+    e: &ast::Expr,
+    expected: &TypeRef,
+    env: &TypeEnv,
+) -> Option<CheckResult> {
+    if cached_check_needs_expected_traversal(ctx, e) {
+        return None;
+    }
+    let cached = stored_value_expr_type(ctx, expr)?;
+    if matches!(strip_perm(&cached).as_deref().map(|ty| &ty.node), Some(TypeNode::ModalState(_))) {
+        return None;
+    }
+    if !super::type_equiv::type_equiv(&cached, expected) {
+        let sub = super::subtyping::subtyping(ctx, &cached, expected);
+        if !sub.ok {
+            return Some(CheckResult { diag_id: sub.diag_id, ..Default::default() });
+        }
+        if !sub.subtype {
+            return None;
+        }
+    }
+    if let ExprNode::IdentifierExpr(ident) = &e.node {
+        if let Some(binding) = bind_of(env, &ident.name) {
+            emit_deprecated_binding_reference_warning(binding, type_ctx, Some(&e.span));
+        }
+    }
+    Some(CheckResult { ok: true, ..Default::default() })
+}
+
 pub fn check_expr_against(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    expr: &ExprPtr,
+    expected: &TypeRef,
+    env: &TypeEnv,
+) -> CheckResult {
+    let result = check_expr_against_form(ctx, type_ctx, expr, expected, env);
+    if result.ok {
+        store_expr_type(ctx, expr, expected, true);
+    }
+    result
+}
+
+fn check_expr_against_form(
     ctx: &ScopeContext<'_>,
     type_ctx: &StmtTypeContext<'_>,
     expr: &ExprPtr,
@@ -413,6 +494,9 @@ pub fn check_expr_against(
     };
     if let Some(diag_id) = check_escaping_closure_spawn(expr, env, expected) {
         return CheckResult { diag_id: Some(diag_id), diag_span: Some(e.span.clone()), ..Default::default() };
+    }
+    if let Some(cached_check) = try_cached_expr_check(ctx, type_ctx, expr, e, expected, env) {
+        return cached_check;
     }
     // A record or enum literal takes its type arguments from the expected type; when it
     // neither fits nor names a rule, the general check below decides.

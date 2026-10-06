@@ -7,12 +7,17 @@ use std::sync::Arc;
 use uv_core::span::Span;
 
 use super::dump::AstDump;
+use super::walk::ExprWalk;
 use crate::lexer::{DocComment, Token};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
 pub enum ParamMode {
     #[default]
     Move,
+}
+
+impl ExprWalk for ParamMode {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for ParamMode {
@@ -29,6 +34,10 @@ pub enum TypePerm {
     Const,
     Unique,
     Shared,
+}
+
+impl ExprWalk for TypePerm {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for TypePerm {
@@ -48,6 +57,10 @@ pub enum RawPtrQual {
     Mut,
 }
 
+impl ExprWalk for RawPtrQual {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for RawPtrQual {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -63,6 +76,10 @@ pub enum ReceiverPerm {
     Const,
     Unique,
     Shared,
+}
+
+impl ExprWalk for ReceiverPerm {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for ReceiverPerm {
@@ -83,6 +100,10 @@ pub enum PtrState {
     Expired,
 }
 
+impl ExprWalk for PtrState {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for PtrState {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -98,6 +119,10 @@ pub enum StringState {
     #[default]
     Managed,
     View,
+}
+
+impl ExprWalk for StringState {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for StringState {
@@ -116,6 +141,10 @@ pub enum BytesState {
     View,
 }
 
+impl ExprWalk for BytesState {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for BytesState {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -132,6 +161,10 @@ pub enum KeyMode {
     Write,
 }
 
+impl ExprWalk for KeyMode {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for KeyMode {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -146,6 +179,10 @@ pub enum Mutability {
     #[default]
     Let,
     Var,
+}
+
+impl ExprWalk for Mutability {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for Mutability {
@@ -165,6 +202,10 @@ pub enum Visibility {
     Private,
 }
 
+impl ExprWalk for Visibility {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for Visibility {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -182,6 +223,10 @@ pub enum Variance {
     Contravariant,
     Invariant,
     Bivariant,
+}
+
+impl ExprWalk for Variance {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for Variance {
@@ -206,6 +251,10 @@ pub enum RangeKind {
     Inclusive,
 }
 
+impl ExprWalk for RangeKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for RangeKind {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -226,6 +275,10 @@ pub enum RaceHandlerKind {
     Yield,
 }
 
+impl ExprWalk for RaceHandlerKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for RaceHandlerKind {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -241,6 +294,10 @@ pub enum FenceOrder {
     Acquire,
     Release,
     SeqCst,
+}
+
+impl ExprWalk for FenceOrder {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for FenceOrder {
@@ -262,6 +319,10 @@ pub enum QuoteKind {
     Item,
     Type,
     Pattern,
+}
+
+impl ExprWalk for QuoteKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for QuoteKind {
@@ -289,6 +350,10 @@ pub enum ReduceOp {
     Custom,
 }
 
+impl ExprWalk for ReduceOp {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for ReduceOp {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -312,6 +377,10 @@ pub enum ParallelOptionKind {
     Workgroups,
 }
 
+impl ExprWalk for ParallelOptionKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for ParallelOptionKind {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -329,6 +398,10 @@ pub enum SpawnOptionKind {
     Name,
     Affinity,
     Priority,
+}
+
+impl ExprWalk for SpawnOptionKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for SpawnOptionKind {
@@ -350,6 +423,10 @@ pub enum DispatchOptionKind {
     Workgroup,
 }
 
+impl ExprWalk for DispatchOptionKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for DispatchOptionKind {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -368,6 +445,10 @@ pub enum KeyBlockKind {
     Write,
     Release,
     SpeculativeWrite,
+}
+
+impl ExprWalk for KeyBlockKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for KeyBlockKind {
@@ -394,6 +475,12 @@ impl Default for KeyBlockOptions {
     }
 }
 
+impl ExprWalk for KeyBlockOptions {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.ordered.walk_exprs(out);
+    }
+}
+
 impl AstDump for KeyBlockOptions {
     fn dump(&self, out: &mut String) {
         out.push_str("(KeyBlockOptions");
@@ -410,6 +497,10 @@ pub enum ForeignContractKind {
     Ensures,
     EnsuresError,
     EnsuresNullResult,
+}
+
+impl ExprWalk for ForeignContractKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for ForeignContractKind {
@@ -430,6 +521,10 @@ pub enum ContractIntrinsicKind {
     Entry,
 }
 
+impl ExprWalk for ContractIntrinsicKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for ContractIntrinsicKind {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -448,6 +543,15 @@ pub enum AttributeArgValue {
 impl Default for AttributeArgValue {
     fn default() -> Self {
         AttributeArgValue::Token(Default::default())
+    }
+}
+
+impl ExprWalk for AttributeArgValue {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            AttributeArgValue::Token(value) => value.walk_exprs(out),
+            AttributeArgValue::AttributeArgList(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -487,6 +591,13 @@ impl Default for AttributeArg {
     }
 }
 
+impl ExprWalk for AttributeArg {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.key.walk_exprs(out);
+        self.value.walk_exprs(out);
+    }
+}
+
 impl AstDump for AttributeArg {
     fn dump(&self, out: &mut String) {
         out.push_str("(AttributeArg");
@@ -512,6 +623,14 @@ impl Default for AttrName {
             leaf_name: Default::default(),
             full_name: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for AttrName {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.vendor_prefix_opt.walk_exprs(out);
+        self.leaf_name.walk_exprs(out);
+        self.full_name.walk_exprs(out);
     }
 }
 
@@ -545,6 +664,14 @@ impl Default for AttributeItem {
     }
 }
 
+impl ExprWalk for AttributeItem {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.args.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for AttributeItem {
     fn dump(&self, out: &mut String) {
         out.push_str("(AttributeItem");
@@ -564,6 +691,10 @@ pub enum ArgPassKind {
     Ref,
     Move,
     Copy,
+}
+
+impl ExprWalk for ArgPassKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
 }
 
 impl AstDump for ArgPassKind {
@@ -593,6 +724,14 @@ impl Default for Arg {
     }
 }
 
+impl ExprWalk for Arg {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.pass.walk_exprs(out);
+        self.value.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for Arg {
     fn dump(&self, out: &mut String) {
         out.push_str("(Arg");
@@ -616,6 +755,12 @@ impl Default for ParenArgs {
         ParenArgs {
             args: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ParenArgs {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.args.walk_exprs(out);
     }
 }
 
@@ -645,6 +790,14 @@ impl Default for FieldInit {
     }
 }
 
+impl ExprWalk for FieldInit {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.value.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for FieldInit {
     fn dump(&self, out: &mut String) {
         out.push_str("(FieldInit");
@@ -671,6 +824,12 @@ impl Default for BraceArgs {
     }
 }
 
+impl ExprWalk for BraceArgs {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.fields.walk_exprs(out);
+    }
+}
+
 impl AstDump for BraceArgs {
     fn dump(&self, out: &mut String) {
         out.push_str("(BraceArgs");
@@ -689,6 +848,15 @@ pub enum ApplyArgs {
 impl Default for ApplyArgs {
     fn default() -> Self {
         ApplyArgs::ParenArgs(Default::default())
+    }
+}
+
+impl ExprWalk for ApplyArgs {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            ApplyArgs::ParenArgs(value) => value.walk_exprs(out),
+            ApplyArgs::BraceArgs(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -726,6 +894,12 @@ impl Default for EnumPayloadParen {
     }
 }
 
+impl ExprWalk for EnumPayloadParen {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.elements.walk_exprs(out);
+    }
+}
+
 impl AstDump for EnumPayloadParen {
     fn dump(&self, out: &mut String) {
         out.push_str("(EnumPayloadParen");
@@ -748,6 +922,12 @@ impl Default for EnumPayloadBrace {
     }
 }
 
+impl ExprWalk for EnumPayloadBrace {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.fields.walk_exprs(out);
+    }
+}
+
 impl AstDump for EnumPayloadBrace {
     fn dump(&self, out: &mut String) {
         out.push_str("(EnumPayloadBrace");
@@ -766,6 +946,15 @@ pub enum EnumPayload {
 impl Default for EnumPayload {
     fn default() -> Self {
         EnumPayload::EnumPayloadParen(Default::default())
+    }
+}
+
+impl ExprWalk for EnumPayload {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            EnumPayload::EnumPayloadParen(value) => value.walk_exprs(out),
+            EnumPayload::EnumPayloadBrace(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -805,6 +994,13 @@ impl Default for KeySegField {
     }
 }
 
+impl ExprWalk for KeySegField {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.marked.walk_exprs(out);
+        self.name.walk_exprs(out);
+    }
+}
+
 impl AstDump for KeySegField {
     fn dump(&self, out: &mut String) {
         out.push_str("(KeySegField");
@@ -831,6 +1027,13 @@ impl Default for KeySegIndex {
     }
 }
 
+impl ExprWalk for KeySegIndex {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.marked.walk_exprs(out);
+        self.expr.walk_exprs(out);
+    }
+}
+
 impl AstDump for KeySegIndex {
     fn dump(&self, out: &mut String) {
         out.push_str("(KeySegIndex");
@@ -851,6 +1054,15 @@ pub enum KeySeg {
 impl Default for KeySeg {
     fn default() -> Self {
         KeySeg::KeySegField(Default::default())
+    }
+}
+
+impl ExprWalk for KeySeg {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            KeySeg::KeySegField(value) => value.walk_exprs(out),
+            KeySeg::KeySegIndex(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -892,6 +1104,14 @@ impl Default for KeyPathExpr {
     }
 }
 
+impl ExprWalk for KeyPathExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.root.walk_exprs(out);
+        self.segs.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for KeyPathExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(KeyPathExpr");
@@ -920,6 +1140,13 @@ impl Default for GenericTypeRef {
     }
 }
 
+impl ExprWalk for GenericTypeRef {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.generic_args.walk_exprs(out);
+    }
+}
+
 impl AstDump for GenericTypeRef {
     fn dump(&self, out: &mut String) {
         out.push_str("(GenericTypeRef");
@@ -940,6 +1167,15 @@ pub enum ModalRef {
 impl Default for ModalRef {
     fn default() -> Self {
         ModalRef::Path(Default::default())
+    }
+}
+
+impl ExprWalk for ModalRef {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            ModalRef::Path(value) => value.walk_exprs(out),
+            ModalRef::GenericTypeRef(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -983,6 +1219,15 @@ impl Default for ModalStateRef {
     }
 }
 
+impl ExprWalk for ModalStateRef {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.modal_ref.walk_exprs(out);
+        self.path.walk_exprs(out);
+        self.generic_args.walk_exprs(out);
+        self.state.walk_exprs(out);
+    }
+}
+
 impl AstDump for ModalStateRef {
     fn dump(&self, out: &mut String) {
         out.push_str("(ModalStateRef");
@@ -1013,6 +1258,13 @@ impl Default for ReceiverShorthand {
     }
 }
 
+impl ExprWalk for ReceiverShorthand {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.perm.walk_exprs(out);
+        self.mode_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for ReceiverShorthand {
     fn dump(&self, out: &mut String) {
         out.push_str("(ReceiverShorthand");
@@ -1039,6 +1291,13 @@ impl Default for ReceiverExplicit {
     }
 }
 
+impl ExprWalk for ReceiverExplicit {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.mode_opt.walk_exprs(out);
+        self.r#type.walk_exprs(out);
+    }
+}
+
 impl AstDump for ReceiverExplicit {
     fn dump(&self, out: &mut String) {
         out.push_str("(ReceiverExplicit");
@@ -1059,6 +1318,15 @@ pub enum Receiver {
 impl Default for Receiver {
     fn default() -> Self {
         Receiver::ReceiverShorthand(Default::default())
+    }
+}
+
+impl ExprWalk for Receiver {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            Receiver::ReceiverShorthand(value) => value.walk_exprs(out),
+            Receiver::ReceiverExplicit(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -1098,6 +1366,13 @@ impl Default for SpliceExprNode {
     }
 }
 
+impl ExprWalk for SpliceExprNode {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.expr.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for SpliceExprNode {
     fn dump(&self, out: &mut String) {
         out.push_str("(SpliceExprNode");
@@ -1121,6 +1396,13 @@ impl Default for SpliceIdentNode {
             name_expr: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for SpliceIdentNode {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name_expr.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -1150,6 +1432,13 @@ impl Default for LoopInvariant {
     }
 }
 
+impl ExprWalk for LoopInvariant {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.predicate.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for LoopInvariant {
     fn dump(&self, out: &mut String) {
         out.push_str("(LoopInvariant");
@@ -1171,6 +1460,12 @@ impl Default for TypePrim {
         TypePrim {
             name: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypePrim {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
     }
 }
 
@@ -1198,6 +1493,13 @@ impl Default for TypePermType {
     }
 }
 
+impl ExprWalk for TypePermType {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.perm.walk_exprs(out);
+        self.base.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypePermType {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypePermType");
@@ -1222,6 +1524,12 @@ impl Default for TypeUnion {
     }
 }
 
+impl ExprWalk for TypeUnion {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.types.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeUnion {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeUnion");
@@ -1243,6 +1551,13 @@ impl Default for TypeFuncParam {
             mode: Default::default(),
             r#type: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeFuncParam {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.mode.walk_exprs(out);
+        self.r#type.walk_exprs(out);
     }
 }
 
@@ -1272,6 +1587,13 @@ impl Default for TypeFunc {
     }
 }
 
+impl ExprWalk for TypeFunc {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.params.walk_exprs(out);
+        self.ret.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeFunc {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeFunc");
@@ -1295,6 +1617,13 @@ impl Default for SharedDep {
             name: Default::default(),
             r#type: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for SharedDep {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.r#type.walk_exprs(out);
     }
 }
 
@@ -1326,6 +1655,14 @@ impl Default for TypeClosure {
     }
 }
 
+impl ExprWalk for TypeClosure {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.params.walk_exprs(out);
+        self.ret.walk_exprs(out);
+        self.deps_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeClosure {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeClosure");
@@ -1349,6 +1686,12 @@ impl Default for TypeTuple {
         TypeTuple {
             elements: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeTuple {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.elements.walk_exprs(out);
     }
 }
 
@@ -1376,6 +1719,13 @@ impl Default for TypeArray {
     }
 }
 
+impl ExprWalk for TypeArray {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.element.walk_exprs(out);
+        self.length.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeArray {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeArray");
@@ -1400,6 +1750,12 @@ impl Default for TypeSlice {
     }
 }
 
+impl ExprWalk for TypeSlice {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.element.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeSlice {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeSlice");
@@ -1421,6 +1777,13 @@ impl Default for TypeSafePtr {
             element: Default::default(),
             state: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeSafePtr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.element.walk_exprs(out);
+        self.state.walk_exprs(out);
     }
 }
 
@@ -1450,6 +1813,13 @@ impl Default for TypeRawPtr {
     }
 }
 
+impl ExprWalk for TypeRawPtr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.qual.walk_exprs(out);
+        self.element.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeRawPtr {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeRawPtr");
@@ -1471,6 +1841,12 @@ impl Default for TypeString {
         TypeString {
             state: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeString {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.state.walk_exprs(out);
     }
 }
 
@@ -1496,6 +1872,12 @@ impl Default for TypeBytes {
     }
 }
 
+impl ExprWalk for TypeBytes {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.state.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeBytes {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeBytes");
@@ -1515,6 +1897,12 @@ impl Default for TypeDynamic {
         TypeDynamic {
             path: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeDynamic {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
     }
 }
 
@@ -1539,6 +1927,13 @@ impl Default for TypePathType {
             path: Default::default(),
             generic_args: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypePathType {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.generic_args.walk_exprs(out);
     }
 }
 
@@ -1568,6 +1963,13 @@ impl Default for TypeApply {
     }
 }
 
+impl ExprWalk for TypeApply {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.args.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeApply {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeApply");
@@ -1588,6 +1990,15 @@ pub enum TypeModalRef {
 impl Default for TypeModalRef {
     fn default() -> Self {
         TypeModalRef::TypePathType(Default::default())
+    }
+}
+
+impl ExprWalk for TypeModalRef {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            TypeModalRef::TypePathType(value) => value.walk_exprs(out),
+            TypeModalRef::TypeApply(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -1631,6 +2042,15 @@ impl Default for TypeModalState {
     }
 }
 
+impl ExprWalk for TypeModalState {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.modal_ref.walk_exprs(out);
+        self.path.walk_exprs(out);
+        self.generic_args.walk_exprs(out);
+        self.state.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeModalState {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeModalState");
@@ -1659,6 +2079,12 @@ impl Default for TypeOpaque {
     }
 }
 
+impl ExprWalk for TypeOpaque {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeOpaque {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeOpaque");
@@ -1680,6 +2106,13 @@ impl Default for TypeRefine {
             base: Default::default(),
             predicate: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeRefine {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
+        self.predicate.walk_exprs(out);
     }
 }
 
@@ -1707,6 +2140,12 @@ impl Default for TypeRange {
     }
 }
 
+impl ExprWalk for TypeRange {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeRange {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeRange");
@@ -1726,6 +2165,12 @@ impl Default for TypeRangeInclusive {
         TypeRangeInclusive {
             base: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeRangeInclusive {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
     }
 }
 
@@ -1751,6 +2196,12 @@ impl Default for TypeRangeFrom {
     }
 }
 
+impl ExprWalk for TypeRangeFrom {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeRangeFrom {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeRangeFrom");
@@ -1770,6 +2221,12 @@ impl Default for TypeRangeTo {
         TypeRangeTo {
             base: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeRangeTo {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
     }
 }
 
@@ -1795,6 +2252,12 @@ impl Default for TypeRangeToInclusive {
     }
 }
 
+impl ExprWalk for TypeRangeToInclusive {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeRangeToInclusive {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeRangeToInclusive");
@@ -1810,6 +2273,11 @@ pub struct TypeRangeFull {}
 impl Default for TypeRangeFull {
     fn default() -> Self {
         TypeRangeFull {}
+    }
+}
+
+impl ExprWalk for TypeRangeFull {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {
     }
 }
 
@@ -1852,6 +2320,38 @@ pub enum TypeNode {
 impl Default for TypeNode {
     fn default() -> Self {
         TypeNode::TypePrim(Default::default())
+    }
+}
+
+impl ExprWalk for TypeNode {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            TypeNode::TypePrim(value) => value.walk_exprs(out),
+            TypeNode::TypePermType(value) => value.walk_exprs(out),
+            TypeNode::TypeUnion(value) => value.walk_exprs(out),
+            TypeNode::TypeFunc(value) => value.walk_exprs(out),
+            TypeNode::TypeClosure(value) => value.walk_exprs(out),
+            TypeNode::TypeTuple(value) => value.walk_exprs(out),
+            TypeNode::TypeArray(value) => value.walk_exprs(out),
+            TypeNode::TypeSlice(value) => value.walk_exprs(out),
+            TypeNode::TypeSafePtr(value) => value.walk_exprs(out),
+            TypeNode::TypeRawPtr(value) => value.walk_exprs(out),
+            TypeNode::TypeString(value) => value.walk_exprs(out),
+            TypeNode::TypeBytes(value) => value.walk_exprs(out),
+            TypeNode::TypeDynamic(value) => value.walk_exprs(out),
+            TypeNode::TypeModalState(value) => value.walk_exprs(out),
+            TypeNode::TypePathType(value) => value.walk_exprs(out),
+            TypeNode::TypeApply(value) => value.walk_exprs(out),
+            TypeNode::SpliceExprNode(value) => value.walk_exprs(out),
+            TypeNode::TypeOpaque(value) => value.walk_exprs(out),
+            TypeNode::TypeRefine(value) => value.walk_exprs(out),
+            TypeNode::TypeRange(value) => value.walk_exprs(out),
+            TypeNode::TypeRangeInclusive(value) => value.walk_exprs(out),
+            TypeNode::TypeRangeFrom(value) => value.walk_exprs(out),
+            TypeNode::TypeRangeTo(value) => value.walk_exprs(out),
+            TypeNode::TypeRangeToInclusive(value) => value.walk_exprs(out),
+            TypeNode::TypeRangeFull(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -2052,6 +2552,13 @@ impl Default for Type {
     }
 }
 
+impl ExprWalk for Type {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.span.walk_exprs(out);
+        self.node.walk_exprs(out);
+    }
+}
+
 impl AstDump for Type {
     fn dump(&self, out: &mut String) {
         out.push_str("(Type");
@@ -2076,6 +2583,12 @@ impl Default for LiteralPattern {
     }
 }
 
+impl ExprWalk for LiteralPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.literal.walk_exprs(out);
+    }
+}
+
 impl AstDump for LiteralPattern {
     fn dump(&self, out: &mut String) {
         out.push_str("(LiteralPattern");
@@ -2091,6 +2604,11 @@ pub struct WildcardPattern {}
 impl Default for WildcardPattern {
     fn default() -> Self {
         WildcardPattern {}
+    }
+}
+
+impl ExprWalk for WildcardPattern {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {
     }
 }
 
@@ -2113,6 +2631,13 @@ impl Default for IdentifierPattern {
             name: Default::default(),
             name_splice_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for IdentifierPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.name_splice_opt.walk_exprs(out);
     }
 }
 
@@ -2144,6 +2669,14 @@ impl Default for TypedPattern {
     }
 }
 
+impl ExprWalk for TypedPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.r#type.walk_exprs(out);
+        self.name_splice_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypedPattern {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypedPattern");
@@ -2170,6 +2703,12 @@ impl Default for TuplePattern {
     }
 }
 
+impl ExprWalk for TuplePattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.elements.walk_exprs(out);
+    }
+}
+
 impl AstDump for TuplePattern {
     fn dump(&self, out: &mut String) {
         out.push_str("(TuplePattern");
@@ -2193,6 +2732,14 @@ impl Default for FieldPattern {
             pattern_opt: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for FieldPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.pattern_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -2224,6 +2771,13 @@ impl Default for RecordPattern {
     }
 }
 
+impl ExprWalk for RecordPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.fields.walk_exprs(out);
+    }
+}
+
 impl AstDump for RecordPattern {
     fn dump(&self, out: &mut String) {
         out.push_str("(RecordPattern");
@@ -2245,6 +2799,12 @@ impl Default for TuplePayloadPattern {
         TuplePayloadPattern {
             elements: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TuplePayloadPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.elements.walk_exprs(out);
     }
 }
 
@@ -2270,6 +2830,12 @@ impl Default for RecordPayloadPattern {
     }
 }
 
+impl ExprWalk for RecordPayloadPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.fields.walk_exprs(out);
+    }
+}
+
 impl AstDump for RecordPayloadPattern {
     fn dump(&self, out: &mut String) {
         out.push_str("(RecordPayloadPattern");
@@ -2288,6 +2854,15 @@ pub enum EnumPayloadPattern {
 impl Default for EnumPayloadPattern {
     fn default() -> Self {
         EnumPayloadPattern::TuplePayloadPattern(Default::default())
+    }
+}
+
+impl ExprWalk for EnumPayloadPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            EnumPayloadPattern::TuplePayloadPattern(value) => value.walk_exprs(out),
+            EnumPayloadPattern::RecordPayloadPattern(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -2329,6 +2904,14 @@ impl Default for EnumPattern {
     }
 }
 
+impl ExprWalk for EnumPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.payload_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for EnumPattern {
     fn dump(&self, out: &mut String) {
         out.push_str("(EnumPattern");
@@ -2355,6 +2938,12 @@ impl Default for ModalRecordPayload {
     }
 }
 
+impl ExprWalk for ModalRecordPayload {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.fields.walk_exprs(out);
+    }
+}
+
 impl AstDump for ModalRecordPayload {
     fn dump(&self, out: &mut String) {
         out.push_str("(ModalRecordPayload");
@@ -2376,6 +2965,13 @@ impl Default for ModalPattern {
             state: Default::default(),
             fields_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ModalPattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.state.walk_exprs(out);
+        self.fields_opt.walk_exprs(out);
     }
 }
 
@@ -2404,6 +3000,14 @@ impl Default for RangePattern {
             lo: Default::default(),
             hi: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for RangePattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.lo.walk_exprs(out);
+        self.hi.walk_exprs(out);
     }
 }
 
@@ -2437,6 +3041,23 @@ pub enum PatternNode {
 impl Default for PatternNode {
     fn default() -> Self {
         PatternNode::LiteralPattern(Default::default())
+    }
+}
+
+impl ExprWalk for PatternNode {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            PatternNode::LiteralPattern(value) => value.walk_exprs(out),
+            PatternNode::WildcardPattern(value) => value.walk_exprs(out),
+            PatternNode::IdentifierPattern(value) => value.walk_exprs(out),
+            PatternNode::TypedPattern(value) => value.walk_exprs(out),
+            PatternNode::SpliceExprNode(value) => value.walk_exprs(out),
+            PatternNode::TuplePattern(value) => value.walk_exprs(out),
+            PatternNode::RecordPattern(value) => value.walk_exprs(out),
+            PatternNode::EnumPattern(value) => value.walk_exprs(out),
+            PatternNode::ModalPattern(value) => value.walk_exprs(out),
+            PatternNode::RangePattern(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -2532,6 +3153,13 @@ impl Default for Pattern {
     }
 }
 
+impl ExprWalk for Pattern {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.span.walk_exprs(out);
+        self.node.walk_exprs(out);
+    }
+}
+
 impl AstDump for Pattern {
     fn dump(&self, out: &mut String) {
         out.push_str("(Pattern");
@@ -2558,6 +3186,13 @@ impl Default for IfCaseClause {
     }
 }
 
+impl ExprWalk for IfCaseClause {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.pattern.walk_exprs(out);
+        self.body.walk_exprs(out);
+    }
+}
+
 impl AstDump for IfCaseClause {
     fn dump(&self, out: &mut String) {
         out.push_str("(IfCaseClause");
@@ -2578,6 +3213,11 @@ impl Default for ErrorExpr {
     }
 }
 
+impl ExprWalk for ErrorExpr {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {
+    }
+}
+
 impl AstDump for ErrorExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(ErrorExpr");
@@ -2595,6 +3235,12 @@ impl Default for LiteralExpr {
         LiteralExpr {
             literal: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for LiteralExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.literal.walk_exprs(out);
     }
 }
 
@@ -2622,6 +3268,13 @@ impl Default for IdentifierExpr {
     }
 }
 
+impl ExprWalk for IdentifierExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.from_splice.walk_exprs(out);
+    }
+}
+
 impl AstDump for IdentifierExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(IdentifierExpr");
@@ -2645,6 +3298,13 @@ impl Default for QualifiedNameExpr {
             path: Default::default(),
             name: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for QualifiedNameExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.name.walk_exprs(out);
     }
 }
 
@@ -2676,6 +3336,14 @@ impl Default for QualifiedApplyExpr {
     }
 }
 
+impl ExprWalk for QualifiedApplyExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.args.walk_exprs(out);
+    }
+}
+
 impl AstDump for QualifiedApplyExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(QualifiedApplyExpr");
@@ -2701,6 +3369,13 @@ impl Default for PathExpr {
             path: Default::default(),
             name: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for PathExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.name.walk_exprs(out);
     }
 }
 
@@ -2730,6 +3405,13 @@ impl Default for EnumLiteralExpr {
     }
 }
 
+impl ExprWalk for EnumLiteralExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.payload_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for EnumLiteralExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(EnumLiteralExpr");
@@ -2754,6 +3436,12 @@ impl Default for TypeLiteralExpr {
     }
 }
 
+impl ExprWalk for TypeLiteralExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.r#type.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeLiteralExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeLiteralExpr");
@@ -2775,6 +3463,13 @@ impl Default for QuoteExpr {
             kind: QuoteKind::Unspecified,
             tokens: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for QuoteExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.tokens.walk_exprs(out);
     }
 }
 
@@ -2803,6 +3498,14 @@ impl Default for RangeExpr {
             lhs: Default::default(),
             rhs: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for RangeExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.lhs.walk_exprs(out);
+        self.rhs.walk_exprs(out);
     }
 }
 
@@ -2836,6 +3539,14 @@ impl Default for BinaryExpr {
     }
 }
 
+impl ExprWalk for BinaryExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.op.walk_exprs(out);
+        self.lhs.walk_exprs(out);
+        self.rhs.walk_exprs(out);
+    }
+}
+
 impl AstDump for BinaryExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(BinaryExpr");
@@ -2861,6 +3572,13 @@ impl Default for CastExpr {
             value: Default::default(),
             r#type: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for CastExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
+        self.r#type.walk_exprs(out);
     }
 }
 
@@ -2890,6 +3608,13 @@ impl Default for UnaryExpr {
     }
 }
 
+impl ExprWalk for UnaryExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.op.walk_exprs(out);
+        self.value.walk_exprs(out);
+    }
+}
+
 impl AstDump for UnaryExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(UnaryExpr");
@@ -2911,6 +3636,12 @@ impl Default for DerefExpr {
         DerefExpr {
             value: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for DerefExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
     }
 }
 
@@ -2936,6 +3667,12 @@ impl Default for AddressOfExpr {
     }
 }
 
+impl ExprWalk for AddressOfExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.place.walk_exprs(out);
+    }
+}
+
 impl AstDump for AddressOfExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(AddressOfExpr");
@@ -2958,6 +3695,12 @@ impl Default for MoveExpr {
     }
 }
 
+impl ExprWalk for MoveExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.place.walk_exprs(out);
+    }
+}
+
 impl AstDump for MoveExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(MoveExpr");
@@ -2977,6 +3720,12 @@ impl Default for CopyExpr {
         CopyExpr {
             value: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for CopyExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
     }
 }
 
@@ -3004,6 +3753,13 @@ impl Default for AllocExpr {
     }
 }
 
+impl ExprWalk for AllocExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.region_opt.walk_exprs(out);
+        self.value.walk_exprs(out);
+    }
+}
+
 impl AstDump for AllocExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(AllocExpr");
@@ -3021,6 +3777,11 @@ pub struct PtrNullExpr {}
 impl Default for PtrNullExpr {
     fn default() -> Self {
         PtrNullExpr {}
+    }
+}
+
+impl ExprWalk for PtrNullExpr {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {
     }
 }
 
@@ -3044,6 +3805,12 @@ impl Default for TupleExpr {
     }
 }
 
+impl ExprWalk for TupleExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.elements.walk_exprs(out);
+    }
+}
+
 impl AstDump for TupleExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(TupleExpr");
@@ -3063,6 +3830,12 @@ impl Default for ArrayElemSegment {
         ArrayElemSegment {
             value: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ArrayElemSegment {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
     }
 }
 
@@ -3090,6 +3863,13 @@ impl Default for ArrayRepeatSegment {
     }
 }
 
+impl ExprWalk for ArrayRepeatSegment {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
+        self.count.walk_exprs(out);
+    }
+}
+
 impl AstDump for ArrayRepeatSegment {
     fn dump(&self, out: &mut String) {
         out.push_str("(ArrayRepeatSegment");
@@ -3110,6 +3890,15 @@ pub enum ArraySegment {
 impl Default for ArraySegment {
     fn default() -> Self {
         ArraySegment::ArrayElemSegment(Default::default())
+    }
+}
+
+impl ExprWalk for ArraySegment {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            ArraySegment::ArrayElemSegment(value) => value.walk_exprs(out),
+            ArraySegment::ArrayRepeatSegment(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -3147,6 +3936,12 @@ impl Default for ArrayExpr {
     }
 }
 
+impl ExprWalk for ArrayExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.elements.walk_exprs(out);
+    }
+}
+
 impl AstDump for ArrayExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(ArrayExpr");
@@ -3168,6 +3963,13 @@ impl Default for ArrayRepeatExpr {
             value: Default::default(),
             count: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ArrayRepeatExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
+        self.count.walk_exprs(out);
     }
 }
 
@@ -3195,6 +3997,12 @@ impl Default for SizeofExpr {
     }
 }
 
+impl ExprWalk for SizeofExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.r#type.walk_exprs(out);
+    }
+}
+
 impl AstDump for SizeofExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(SizeofExpr");
@@ -3217,6 +4025,12 @@ impl Default for AlignofExpr {
     }
 }
 
+impl ExprWalk for AlignofExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.r#type.walk_exprs(out);
+    }
+}
+
 impl AstDump for AlignofExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(AlignofExpr");
@@ -3235,6 +4049,15 @@ pub enum RecordExprTarget {
 impl Default for RecordExprTarget {
     fn default() -> Self {
         RecordExprTarget::Path(Default::default())
+    }
+}
+
+impl ExprWalk for RecordExprTarget {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            RecordExprTarget::Path(value) => value.walk_exprs(out),
+            RecordExprTarget::ModalStateRef(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -3274,6 +4097,13 @@ impl Default for RecordExpr {
     }
 }
 
+impl ExprWalk for RecordExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.target.walk_exprs(out);
+        self.fields.walk_exprs(out);
+    }
+}
+
 impl AstDump for RecordExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(RecordExpr");
@@ -3299,6 +4129,14 @@ impl Default for IfExpr {
             then_expr: Default::default(),
             else_expr: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for IfExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.cond.walk_exprs(out);
+        self.then_expr.walk_exprs(out);
+        self.else_expr.walk_exprs(out);
     }
 }
 
@@ -3334,6 +4172,15 @@ impl Default for IfIsExpr {
     }
 }
 
+impl ExprWalk for IfIsExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.scrutinee.walk_exprs(out);
+        self.pattern.walk_exprs(out);
+        self.then_expr.walk_exprs(out);
+        self.else_expr.walk_exprs(out);
+    }
+}
+
 impl AstDump for IfIsExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(IfIsExpr");
@@ -3366,6 +4213,14 @@ impl Default for IfCaseExpr {
     }
 }
 
+impl ExprWalk for IfCaseExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.scrutinee.walk_exprs(out);
+        self.cases.walk_exprs(out);
+        self.else_expr.walk_exprs(out);
+    }
+}
+
 impl AstDump for IfCaseExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(IfCaseExpr");
@@ -3394,6 +4249,13 @@ impl Default for LoopInfiniteExpr {
     }
 }
 
+impl ExprWalk for LoopInfiniteExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.invariant_opt.walk_exprs(out);
+        self.body.walk_exprs(out);
+    }
+}
+
 impl AstDump for LoopInfiniteExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(LoopInfiniteExpr");
@@ -3419,6 +4281,14 @@ impl Default for LoopConditionalExpr {
             invariant_opt: Default::default(),
             body: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for LoopConditionalExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.cond.walk_exprs(out);
+        self.invariant_opt.walk_exprs(out);
+        self.body.walk_exprs(out);
     }
 }
 
@@ -3456,6 +4326,16 @@ impl Default for LoopIterExpr {
     }
 }
 
+impl ExprWalk for LoopIterExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.pattern.walk_exprs(out);
+        self.type_opt.walk_exprs(out);
+        self.iter.walk_exprs(out);
+        self.invariant_opt.walk_exprs(out);
+        self.body.walk_exprs(out);
+    }
+}
+
 impl AstDump for LoopIterExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(LoopIterExpr");
@@ -3486,6 +4366,12 @@ impl Default for BlockExpr {
     }
 }
 
+impl ExprWalk for BlockExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.block.walk_exprs(out);
+    }
+}
+
 impl AstDump for BlockExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(BlockExpr");
@@ -3505,6 +4391,12 @@ impl Default for UnsafeBlockExpr {
         UnsafeBlockExpr {
             block: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for UnsafeBlockExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.block.walk_exprs(out);
     }
 }
 
@@ -3529,6 +4421,13 @@ impl Default for ComptimeExpr {
             body: Default::default(),
             attrs_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ComptimeExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.body.walk_exprs(out);
+        self.attrs_opt.walk_exprs(out);
     }
 }
 
@@ -3557,6 +4456,14 @@ impl Default for CtIfExpr {
             then_block: Default::default(),
             else_block_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for CtIfExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.cond.walk_exprs(out);
+        self.then_block.walk_exprs(out);
+        self.else_block_opt.walk_exprs(out);
     }
 }
 
@@ -3592,6 +4499,15 @@ impl Default for CtLoopIterExpr {
     }
 }
 
+impl ExprWalk for CtLoopIterExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.pattern.walk_exprs(out);
+        self.type_opt.walk_exprs(out);
+        self.iter.walk_exprs(out);
+        self.body.walk_exprs(out);
+    }
+}
+
 impl AstDump for CtLoopIterExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(CtLoopIterExpr");
@@ -3622,6 +4538,13 @@ impl Default for AttributedExpr {
     }
 }
 
+impl ExprWalk for AttributedExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.expr.walk_exprs(out);
+    }
+}
+
 impl AstDump for AttributedExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(AttributedExpr");
@@ -3647,6 +4570,14 @@ impl Default for TransmuteExpr {
             to: Default::default(),
             value: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TransmuteExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.from.walk_exprs(out);
+        self.to.walk_exprs(out);
+        self.value.walk_exprs(out);
     }
 }
 
@@ -3680,6 +4611,14 @@ impl Default for ClosureParam {
     }
 }
 
+impl ExprWalk for ClosureParam {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.move_capture.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.type_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for ClosureParam {
     fn dump(&self, out: &mut String) {
         out.push_str("(ClosureParam");
@@ -3707,6 +4646,14 @@ impl Default for ClosureExpr {
             ret_type_opt: Default::default(),
             body: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ClosureExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.params.walk_exprs(out);
+        self.ret_type_opt.walk_exprs(out);
+        self.body.walk_exprs(out);
     }
 }
 
@@ -3738,6 +4685,13 @@ impl Default for PipelineExpr {
     }
 }
 
+impl ExprWalk for PipelineExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.lhs.walk_exprs(out);
+        self.rhs.walk_exprs(out);
+    }
+}
+
 impl AstDump for PipelineExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(PipelineExpr");
@@ -3761,6 +4715,13 @@ impl Default for FieldAccessExpr {
             base: Default::default(),
             name: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for FieldAccessExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
+        self.name.walk_exprs(out);
     }
 }
 
@@ -3790,6 +4751,13 @@ impl Default for TupleAccessExpr {
     }
 }
 
+impl ExprWalk for TupleAccessExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
+        self.index.walk_exprs(out);
+    }
+}
+
 impl AstDump for TupleAccessExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(TupleAccessExpr");
@@ -3813,6 +4781,13 @@ impl Default for IndexAccessExpr {
             base: Default::default(),
             index: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for IndexAccessExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.base.walk_exprs(out);
+        self.index.walk_exprs(out);
     }
 }
 
@@ -3841,6 +4816,14 @@ impl Default for CallExpr {
             generic_args: Default::default(),
             args: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for CallExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.callee.walk_exprs(out);
+        self.generic_args.walk_exprs(out);
+        self.args.walk_exprs(out);
     }
 }
 
@@ -3874,6 +4857,14 @@ impl Default for CallTypeArgsExpr {
     }
 }
 
+impl ExprWalk for CallTypeArgsExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.callee.walk_exprs(out);
+        self.type_args.walk_exprs(out);
+        self.args.walk_exprs(out);
+    }
+}
+
 impl AstDump for CallTypeArgsExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(CallTypeArgsExpr");
@@ -3904,6 +4895,14 @@ impl Default for MethodCallExpr {
     }
 }
 
+impl ExprWalk for MethodCallExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.receiver.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.args.walk_exprs(out);
+    }
+}
+
 impl AstDump for MethodCallExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(MethodCallExpr");
@@ -3930,6 +4929,12 @@ impl Default for PropagateExpr {
     }
 }
 
+impl ExprWalk for PropagateExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
+    }
+}
+
 impl AstDump for PropagateExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(PropagateExpr");
@@ -3945,6 +4950,11 @@ pub struct ResultExpr {}
 impl Default for ResultExpr {
     fn default() -> Self {
         ResultExpr {}
+    }
+}
+
+impl ExprWalk for ResultExpr {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {
     }
 }
 
@@ -3965,6 +4975,12 @@ impl Default for EntryExpr {
         EntryExpr {
             expr: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for EntryExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.expr.walk_exprs(out);
     }
 }
 
@@ -3989,6 +5005,13 @@ impl Default for YieldExpr {
             release: false,
             value: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for YieldExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.release.walk_exprs(out);
+        self.value.walk_exprs(out);
     }
 }
 
@@ -4018,6 +5041,13 @@ impl Default for YieldFromExpr {
     }
 }
 
+impl ExprWalk for YieldFromExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.release.walk_exprs(out);
+        self.value.walk_exprs(out);
+    }
+}
+
 impl AstDump for YieldFromExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(YieldFromExpr");
@@ -4042,6 +5072,12 @@ impl Default for SyncExpr {
     }
 }
 
+impl ExprWalk for SyncExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
+    }
+}
+
 impl AstDump for SyncExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(SyncExpr");
@@ -4063,6 +5099,13 @@ impl Default for RaceHandler {
             kind: RaceHandlerKind::Return,
             value: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for RaceHandler {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.value.walk_exprs(out);
     }
 }
 
@@ -4094,6 +5137,14 @@ impl Default for RaceArm {
     }
 }
 
+impl ExprWalk for RaceArm {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.expr.walk_exprs(out);
+        self.pattern.walk_exprs(out);
+        self.handler.walk_exprs(out);
+    }
+}
+
 impl AstDump for RaceArm {
     fn dump(&self, out: &mut String) {
         out.push_str("(RaceArm");
@@ -4120,6 +5171,12 @@ impl Default for RaceExpr {
     }
 }
 
+impl ExprWalk for RaceExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.arms.walk_exprs(out);
+    }
+}
+
 impl AstDump for RaceExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(RaceExpr");
@@ -4139,6 +5196,12 @@ impl Default for AllExpr {
         AllExpr {
             exprs: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for AllExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.exprs.walk_exprs(out);
     }
 }
 
@@ -4165,6 +5228,14 @@ impl Default for ParallelOption {
             value: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ParallelOption {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.value.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -4198,6 +5269,14 @@ impl Default for ParallelExpr {
     }
 }
 
+impl ExprWalk for ParallelExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.domain.walk_exprs(out);
+        self.opts.walk_exprs(out);
+        self.body.walk_exprs(out);
+    }
+}
+
 impl AstDump for ParallelExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(ParallelExpr");
@@ -4225,6 +5304,14 @@ impl Default for SpawnOption {
             value: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for SpawnOption {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.value.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -4256,6 +5343,13 @@ impl Default for SpawnExpr {
     }
 }
 
+impl ExprWalk for SpawnExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.opts.walk_exprs(out);
+        self.body.walk_exprs(out);
+    }
+}
+
 impl AstDump for SpawnExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(SpawnExpr");
@@ -4280,6 +5374,12 @@ impl Default for WaitExpr {
     }
 }
 
+impl ExprWalk for WaitExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.handle.walk_exprs(out);
+    }
+}
+
 impl AstDump for WaitExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(WaitExpr");
@@ -4299,6 +5399,12 @@ impl Default for FenceExpr {
         FenceExpr {
             order: FenceOrder::SeqCst,
         }
+    }
+}
+
+impl ExprWalk for FenceExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.order.walk_exprs(out);
     }
 }
 
@@ -4331,6 +5437,17 @@ impl Default for DispatchOption {
             workgroup_expr: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for DispatchOption {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.reduce_op.walk_exprs(out);
+        self.custom_reduce_name.walk_exprs(out);
+        self.chunk_expr.walk_exprs(out);
+        self.workgroup_expr.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -4370,6 +5487,14 @@ impl Default for DispatchKeyClause {
     }
 }
 
+impl ExprWalk for DispatchKeyClause {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.key_path.walk_exprs(out);
+        self.mode.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for DispatchKeyClause {
     fn dump(&self, out: &mut String) {
         out.push_str("(DispatchKeyClause");
@@ -4401,6 +5526,16 @@ impl Default for DispatchExpr {
             opts: Default::default(),
             body: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for DispatchExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.pattern.walk_exprs(out);
+        self.range.walk_exprs(out);
+        self.key_clause.walk_exprs(out);
+        self.opts.walk_exprs(out);
+        self.body.walk_exprs(out);
     }
 }
 
@@ -4489,6 +5624,74 @@ pub enum ExprNode {
 impl Default for ExprNode {
     fn default() -> Self {
         ExprNode::ErrorExpr(Default::default())
+    }
+}
+
+impl ExprWalk for ExprNode {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            ExprNode::ErrorExpr(value) => value.walk_exprs(out),
+            ExprNode::LiteralExpr(value) => value.walk_exprs(out),
+            ExprNode::IdentifierExpr(value) => value.walk_exprs(out),
+            ExprNode::QualifiedNameExpr(value) => value.walk_exprs(out),
+            ExprNode::QualifiedApplyExpr(value) => value.walk_exprs(out),
+            ExprNode::PathExpr(value) => value.walk_exprs(out),
+            ExprNode::RangeExpr(value) => value.walk_exprs(out),
+            ExprNode::BinaryExpr(value) => value.walk_exprs(out),
+            ExprNode::CastExpr(value) => value.walk_exprs(out),
+            ExprNode::UnaryExpr(value) => value.walk_exprs(out),
+            ExprNode::DerefExpr(value) => value.walk_exprs(out),
+            ExprNode::AddressOfExpr(value) => value.walk_exprs(out),
+            ExprNode::MoveExpr(value) => value.walk_exprs(out),
+            ExprNode::CopyExpr(value) => value.walk_exprs(out),
+            ExprNode::AllocExpr(value) => value.walk_exprs(out),
+            ExprNode::PtrNullExpr(value) => value.walk_exprs(out),
+            ExprNode::TupleExpr(value) => value.walk_exprs(out),
+            ExprNode::ArrayExpr(value) => value.walk_exprs(out),
+            ExprNode::ArrayRepeatExpr(value) => value.walk_exprs(out),
+            ExprNode::SizeofExpr(value) => value.walk_exprs(out),
+            ExprNode::AlignofExpr(value) => value.walk_exprs(out),
+            ExprNode::RecordExpr(value) => value.walk_exprs(out),
+            ExprNode::EnumLiteralExpr(value) => value.walk_exprs(out),
+            ExprNode::TypeLiteralExpr(value) => value.walk_exprs(out),
+            ExprNode::QuoteExpr(value) => value.walk_exprs(out),
+            ExprNode::SpliceExprNode(value) => value.walk_exprs(out),
+            ExprNode::SpliceIdentNode(value) => value.walk_exprs(out),
+            ExprNode::IfExpr(value) => value.walk_exprs(out),
+            ExprNode::IfIsExpr(value) => value.walk_exprs(out),
+            ExprNode::IfCaseExpr(value) => value.walk_exprs(out),
+            ExprNode::LoopInfiniteExpr(value) => value.walk_exprs(out),
+            ExprNode::LoopConditionalExpr(value) => value.walk_exprs(out),
+            ExprNode::LoopIterExpr(value) => value.walk_exprs(out),
+            ExprNode::BlockExpr(value) => value.walk_exprs(out),
+            ExprNode::UnsafeBlockExpr(value) => value.walk_exprs(out),
+            ExprNode::ComptimeExpr(value) => value.walk_exprs(out),
+            ExprNode::CtIfExpr(value) => value.walk_exprs(out),
+            ExprNode::CtLoopIterExpr(value) => value.walk_exprs(out),
+            ExprNode::AttributedExpr(value) => value.walk_exprs(out),
+            ExprNode::TransmuteExpr(value) => value.walk_exprs(out),
+            ExprNode::ClosureExpr(value) => value.walk_exprs(out),
+            ExprNode::PipelineExpr(value) => value.walk_exprs(out),
+            ExprNode::FieldAccessExpr(value) => value.walk_exprs(out),
+            ExprNode::TupleAccessExpr(value) => value.walk_exprs(out),
+            ExprNode::IndexAccessExpr(value) => value.walk_exprs(out),
+            ExprNode::CallExpr(value) => value.walk_exprs(out),
+            ExprNode::CallTypeArgsExpr(value) => value.walk_exprs(out),
+            ExprNode::MethodCallExpr(value) => value.walk_exprs(out),
+            ExprNode::PropagateExpr(value) => value.walk_exprs(out),
+            ExprNode::ResultExpr(value) => value.walk_exprs(out),
+            ExprNode::EntryExpr(value) => value.walk_exprs(out),
+            ExprNode::YieldExpr(value) => value.walk_exprs(out),
+            ExprNode::YieldFromExpr(value) => value.walk_exprs(out),
+            ExprNode::SyncExpr(value) => value.walk_exprs(out),
+            ExprNode::RaceExpr(value) => value.walk_exprs(out),
+            ExprNode::AllExpr(value) => value.walk_exprs(out),
+            ExprNode::ParallelExpr(value) => value.walk_exprs(out),
+            ExprNode::SpawnExpr(value) => value.walk_exprs(out),
+            ExprNode::WaitExpr(value) => value.walk_exprs(out),
+            ExprNode::FenceExpr(value) => value.walk_exprs(out),
+            ExprNode::DispatchExpr(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -4941,6 +6144,14 @@ impl Default for Expr {
     }
 }
 
+impl ExprWalk for Expr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        out.push(std::ptr::from_ref(self));
+        self.span.walk_exprs(out);
+        self.node.walk_exprs(out);
+    }
+}
+
 impl AstDump for Expr {
     fn dump(&self, out: &mut String) {
         out.push_str("(Expr");
@@ -4972,6 +6183,17 @@ impl Default for Binding {
             init: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for Binding {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.pat.walk_exprs(out);
+        self.type_opt.walk_exprs(out);
+        self.op.walk_exprs(out);
+        self.init.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5009,6 +6231,13 @@ impl Default for LetStmt {
     }
 }
 
+impl ExprWalk for LetStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.binding.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for LetStmt {
     fn dump(&self, out: &mut String) {
         out.push_str("(LetStmt");
@@ -5032,6 +6261,13 @@ impl Default for VarStmt {
             binding: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for VarStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.binding.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5064,6 +6300,16 @@ impl Default for UsingLocalStmt {
             alias_splice_opt: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for UsingLocalStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.source.walk_exprs(out);
+        self.source_splice_opt.walk_exprs(out);
+        self.alias.walk_exprs(out);
+        self.alias_splice_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5101,6 +6347,14 @@ impl Default for AssignStmt {
     }
 }
 
+impl ExprWalk for AssignStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.place.walk_exprs(out);
+        self.value.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for AssignStmt {
     fn dump(&self, out: &mut String) {
         out.push_str("(AssignStmt");
@@ -5130,6 +6384,15 @@ impl Default for CompoundAssignStmt {
             value: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for CompoundAssignStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.place.walk_exprs(out);
+        self.op.walk_exprs(out);
+        self.value.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5163,6 +6426,13 @@ impl Default for ExprStmt {
     }
 }
 
+impl ExprWalk for ExprStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for ExprStmt {
     fn dump(&self, out: &mut String) {
         out.push_str("(ExprStmt");
@@ -5186,6 +6456,13 @@ impl Default for DeferStmt {
             body: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for DeferStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5218,6 +6495,16 @@ impl Default for RegionStmt {
             body: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for RegionStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.opts_opt.walk_exprs(out);
+        self.alias_opt.walk_exprs(out);
+        self.alias_splice_opt.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5255,6 +6542,14 @@ impl Default for FrameStmt {
     }
 }
 
+impl ExprWalk for FrameStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.target_opt.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for FrameStmt {
     fn dump(&self, out: &mut String) {
         out.push_str("(FrameStmt");
@@ -5280,6 +6575,13 @@ impl Default for ReturnStmt {
             value_opt: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ReturnStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5309,6 +6611,13 @@ impl Default for BreakStmt {
     }
 }
 
+impl ExprWalk for BreakStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.value_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for BreakStmt {
     fn dump(&self, out: &mut String) {
         out.push_str("(BreakStmt");
@@ -5333,6 +6642,12 @@ impl Default for ContinueStmt {
     }
 }
 
+impl ExprWalk for ContinueStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for ContinueStmt {
     fn dump(&self, out: &mut String) {
         out.push_str("(ContinueStmt");
@@ -5354,6 +6669,13 @@ impl Default for UnsafeBlockStmt {
             body: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for UnsafeBlockStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5382,6 +6704,14 @@ impl Default for CtStmt {
             body: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for CtStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5423,6 +6753,18 @@ impl Default for KeyBlockStmt {
     }
 }
 
+impl ExprWalk for KeyBlockStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.kind.walk_exprs(out);
+        self.paths.walk_exprs(out);
+        self.mode.walk_exprs(out);
+        self.options.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for KeyBlockStmt {
     fn dump(&self, out: &mut String) {
         out.push_str("(KeyBlockStmt");
@@ -5454,6 +6796,12 @@ impl Default for ErrorStmt {
         ErrorStmt {
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ErrorStmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5489,6 +6837,29 @@ pub enum Stmt {
 impl Default for Stmt {
     fn default() -> Self {
         Stmt::LetStmt(Default::default())
+    }
+}
+
+impl ExprWalk for Stmt {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            Stmt::LetStmt(value) => value.walk_exprs(out),
+            Stmt::VarStmt(value) => value.walk_exprs(out),
+            Stmt::UsingLocalStmt(value) => value.walk_exprs(out),
+            Stmt::AssignStmt(value) => value.walk_exprs(out),
+            Stmt::CompoundAssignStmt(value) => value.walk_exprs(out),
+            Stmt::ExprStmt(value) => value.walk_exprs(out),
+            Stmt::DeferStmt(value) => value.walk_exprs(out),
+            Stmt::RegionStmt(value) => value.walk_exprs(out),
+            Stmt::FrameStmt(value) => value.walk_exprs(out),
+            Stmt::ReturnStmt(value) => value.walk_exprs(out),
+            Stmt::BreakStmt(value) => value.walk_exprs(out),
+            Stmt::ContinueStmt(value) => value.walk_exprs(out),
+            Stmt::UnsafeBlockStmt(value) => value.walk_exprs(out),
+            Stmt::CtStmt(value) => value.walk_exprs(out),
+            Stmt::KeyBlockStmt(value) => value.walk_exprs(out),
+            Stmt::ErrorStmt(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -5628,6 +6999,14 @@ impl Default for Block {
     }
 }
 
+impl ExprWalk for Block {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.stmts.walk_exprs(out);
+        self.tail_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for Block {
     fn dump(&self, out: &mut String) {
         out.push_str("(Block");
@@ -5659,6 +7038,16 @@ impl Default for Param {
             r#type: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for Param {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.mode.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.name_splice_opt.walk_exprs(out);
+        self.r#type.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -5694,6 +7083,13 @@ impl Default for UsingSpec {
     }
 }
 
+impl ExprWalk for UsingSpec {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.alias_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for UsingSpec {
     fn dump(&self, out: &mut String) {
         out.push_str("(UsingSpec");
@@ -5719,6 +7115,14 @@ impl Default for UsingItem {
             name: Default::default(),
             alias_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for UsingItem {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.module_path.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.alias_opt.walk_exprs(out);
     }
 }
 
@@ -5750,6 +7154,13 @@ impl Default for UsingList {
     }
 }
 
+impl ExprWalk for UsingList {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.module_path.walk_exprs(out);
+        self.specs.walk_exprs(out);
+    }
+}
+
 impl AstDump for UsingList {
     fn dump(&self, out: &mut String) {
         out.push_str("(UsingList");
@@ -5774,6 +7185,12 @@ impl Default for UsingWildcard {
     }
 }
 
+impl ExprWalk for UsingWildcard {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.module_path.walk_exprs(out);
+    }
+}
+
 impl AstDump for UsingWildcard {
     fn dump(&self, out: &mut String) {
         out.push_str("(UsingWildcard");
@@ -5793,6 +7210,16 @@ pub enum UsingClause {
 impl Default for UsingClause {
     fn default() -> Self {
         UsingClause::UsingItem(Default::default())
+    }
+}
+
+impl ExprWalk for UsingClause {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            UsingClause::UsingItem(value) => value.walk_exprs(out),
+            UsingClause::UsingList(value) => value.walk_exprs(out),
+            UsingClause::UsingWildcard(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -5845,6 +7272,16 @@ impl Default for UsingDecl {
     }
 }
 
+impl ExprWalk for UsingDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs_opt.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.clause.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for UsingDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(UsingDecl");
@@ -5882,6 +7319,17 @@ impl Default for ImportDecl {
             span: Default::default(),
             doc: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ImportDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs_opt.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.path.walk_exprs(out);
+        self.alias_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
     }
 }
 
@@ -5927,6 +7375,17 @@ impl Default for StaticDecl {
     }
 }
 
+impl ExprWalk for StaticDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs_opt.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.r#mut.walk_exprs(out);
+        self.binding.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for StaticDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(StaticDecl");
@@ -5958,6 +7417,13 @@ impl Default for TypeBound {
             class_path: Default::default(),
             generic_args: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeBound {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.class_path.walk_exprs(out);
+        self.generic_args.walk_exprs(out);
     }
 }
 
@@ -5993,6 +7459,16 @@ impl Default for TypeParam {
     }
 }
 
+impl ExprWalk for TypeParam {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.bounds.walk_exprs(out);
+        self.default_type.walk_exprs(out);
+        self.variance.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeParam {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeParam");
@@ -6025,6 +7501,13 @@ impl Default for GenericParams {
     }
 }
 
+impl ExprWalk for GenericParams {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.params.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for GenericParams {
     fn dump(&self, out: &mut String) {
         out.push_str("(GenericParams");
@@ -6048,6 +7531,13 @@ impl Default for GenericArgs {
             args: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for GenericArgs {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.args.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -6076,6 +7566,14 @@ impl Default for ContractClause {
             postcondition: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ContractClause {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.precondition.walk_exprs(out);
+        self.postcondition.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -6109,6 +7607,14 @@ impl Default for ForeignContractClause {
     }
 }
 
+impl ExprWalk for ForeignContractClause {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.predicates.walk_exprs(out);
+        self.span.walk_exprs(out);
+    }
+}
+
 impl AstDump for ForeignContractClause {
     fn dump(&self, out: &mut String) {
         out.push_str("(ForeignContractClause");
@@ -6137,6 +7643,13 @@ impl Default for ContractIntrinsicExpr {
     }
 }
 
+impl ExprWalk for ContractIntrinsicExpr {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.expr.walk_exprs(out);
+    }
+}
+
 impl AstDump for ContractIntrinsicExpr {
     fn dump(&self, out: &mut String) {
         out.push_str("(ContractIntrinsicExpr");
@@ -6160,6 +7673,13 @@ impl Default for TypeInvariant {
             predicate: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for TypeInvariant {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.predicate.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -6204,6 +7724,22 @@ impl Default for ProcedureDecl {
             span: Default::default(),
             doc: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ProcedureDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.visibility_explicit.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.params.walk_exprs(out);
+        self.return_type_opt.walk_exprs(out);
+        self.contract.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
     }
 }
 
@@ -6267,6 +7803,21 @@ impl Default for ComptimeProcedureDecl {
     }
 }
 
+impl ExprWalk for ComptimeProcedureDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.params.walk_exprs(out);
+        self.return_type_opt.walk_exprs(out);
+        self.contract.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for ComptimeProcedureDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(ComptimeProcedureDecl");
@@ -6307,6 +7858,12 @@ impl Default for ExternAbiString {
     }
 }
 
+impl ExprWalk for ExternAbiString {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.literal.walk_exprs(out);
+    }
+}
+
 impl AstDump for ExternAbiString {
     fn dump(&self, out: &mut String) {
         out.push_str("(ExternAbiString");
@@ -6329,6 +7886,12 @@ impl Default for ExternAbiIdent {
     }
 }
 
+impl ExprWalk for ExternAbiIdent {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+    }
+}
+
 impl AstDump for ExternAbiIdent {
     fn dump(&self, out: &mut String) {
         out.push_str("(ExternAbiIdent");
@@ -6347,6 +7910,15 @@ pub enum ExternAbi {
 impl Default for ExternAbi {
     fn default() -> Self {
         ExternAbi::ExternAbiString(Default::default())
+    }
+}
+
+impl ExprWalk for ExternAbi {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            ExternAbi::ExternAbiString(value) => value.walk_exprs(out),
+            ExternAbi::ExternAbiIdent(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -6402,6 +7974,21 @@ impl Default for ExternProcDecl {
     }
 }
 
+impl ExprWalk for ExternProcDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.params.walk_exprs(out);
+        self.return_type_opt.walk_exprs(out);
+        self.contract.walk_exprs(out);
+        self.foreign_contracts_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for ExternProcDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(ExternProcDecl");
@@ -6440,6 +8027,14 @@ impl Default for ExternItem {
     }
 }
 
+impl ExprWalk for ExternItem {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            ExternItem::ExternProcDecl(value) => value.walk_exprs(out),
+        }
+    }
+}
+
 impl AstDump for ExternItem {
     fn dump(&self, out: &mut String) {
         match self {
@@ -6474,6 +8069,17 @@ impl Default for ExternBlock {
             span: Default::default(),
             doc: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ExternBlock {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs_opt.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.abi_opt.walk_exprs(out);
+        self.items.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
     }
 }
 
@@ -6520,6 +8126,19 @@ impl Default for FieldDecl {
             span: Default::default(),
             doc_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for FieldDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.key_boundary.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.r#type.walk_exprs(out);
+        self.init_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
     }
 }
 
@@ -6581,6 +8200,23 @@ impl Default for MethodDecl {
     }
 }
 
+impl ExprWalk for MethodDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.override_flag.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.receiver.walk_exprs(out);
+        self.params.walk_exprs(out);
+        self.return_type_opt.walk_exprs(out);
+        self.contract.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for MethodDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(MethodDecl");
@@ -6622,6 +8258,16 @@ pub enum RecordMember {
 impl Default for RecordMember {
     fn default() -> Self {
         RecordMember::FieldDecl(Default::default())
+    }
+}
+
+impl ExprWalk for RecordMember {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            RecordMember::FieldDecl(value) => value.walk_exprs(out),
+            RecordMember::MethodDecl(value) => value.walk_exprs(out),
+            RecordMember::AssociatedTypeDecl(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -6682,6 +8328,20 @@ impl Default for RecordDecl {
     }
 }
 
+impl ExprWalk for RecordDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.implements.walk_exprs(out);
+        self.members.walk_exprs(out);
+        self.invariant_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for RecordDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(RecordDecl");
@@ -6720,6 +8380,12 @@ impl Default for VariantPayloadTuple {
     }
 }
 
+impl ExprWalk for VariantPayloadTuple {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.elements.walk_exprs(out);
+    }
+}
+
 impl AstDump for VariantPayloadTuple {
     fn dump(&self, out: &mut String) {
         out.push_str("(VariantPayloadTuple");
@@ -6742,6 +8408,12 @@ impl Default for VariantPayloadRecord {
     }
 }
 
+impl ExprWalk for VariantPayloadRecord {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.fields.walk_exprs(out);
+    }
+}
+
 impl AstDump for VariantPayloadRecord {
     fn dump(&self, out: &mut String) {
         out.push_str("(VariantPayloadRecord");
@@ -6760,6 +8432,15 @@ pub enum VariantPayload {
 impl Default for VariantPayload {
     fn default() -> Self {
         VariantPayload::VariantPayloadTuple(Default::default())
+    }
+}
+
+impl ExprWalk for VariantPayload {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            VariantPayload::VariantPayloadTuple(value) => value.walk_exprs(out),
+            VariantPayload::VariantPayloadRecord(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -6802,6 +8483,16 @@ impl Default for VariantDecl {
             span: Default::default(),
             doc_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for VariantDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.payload_opt.walk_exprs(out);
+        self.discriminant_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
     }
 }
 
@@ -6848,6 +8539,20 @@ impl Default for EnumDecl {
             span: Default::default(),
             doc: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for EnumDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.implements.walk_exprs(out);
+        self.variants.walk_exprs(out);
+        self.invariant_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
     }
 }
 
@@ -6898,6 +8603,18 @@ impl Default for StateFieldDecl {
             span: Default::default(),
             doc_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for StateFieldDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.key_boundary.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.r#type.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
     }
 }
 
@@ -6952,6 +8669,22 @@ impl Default for StateMethodDecl {
             span: Default::default(),
             doc_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for StateMethodDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.receiver.walk_exprs(out);
+        self.params.walk_exprs(out);
+        self.return_type_opt.walk_exprs(out);
+        self.contract.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
     }
 }
 
@@ -7011,6 +8744,19 @@ impl Default for TransitionDecl {
     }
 }
 
+impl ExprWalk for TransitionDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.params.walk_exprs(out);
+        self.target_state.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for TransitionDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(TransitionDecl");
@@ -7044,6 +8790,16 @@ pub enum StateMember {
 impl Default for StateMember {
     fn default() -> Self {
         StateMember::StateFieldDecl(Default::default())
+    }
+}
+
+impl ExprWalk for StateMember {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            StateMember::StateFieldDecl(value) => value.walk_exprs(out),
+            StateMember::StateMethodDecl(value) => value.walk_exprs(out),
+            StateMember::TransitionDecl(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -7094,6 +8850,15 @@ impl Default for StateBlock {
     }
 }
 
+impl ExprWalk for StateBlock {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.members.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for StateBlock {
     fn dump(&self, out: &mut String) {
         out.push_str("(StateBlock");
@@ -7135,6 +8900,20 @@ impl Default for ModalDecl {
             span: Default::default(),
             doc: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ModalDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.implements.walk_exprs(out);
+        self.states.walk_exprs(out);
+        self.invariant_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
     }
 }
 
@@ -7185,6 +8964,18 @@ impl Default for ClassFieldDecl {
             span: Default::default(),
             doc_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ClassFieldDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.key_boundary.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.r#type.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
     }
 }
 
@@ -7242,6 +9033,22 @@ impl Default for ClassMethodDecl {
     }
 }
 
+impl ExprWalk for ClassMethodDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.receiver.walk_exprs(out);
+        self.params.walk_exprs(out);
+        self.return_type_opt.walk_exprs(out);
+        self.contract.walk_exprs(out);
+        self.body_opt.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for ClassMethodDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(ClassMethodDecl");
@@ -7294,6 +9101,17 @@ impl Default for AssociatedTypeDecl {
     }
 }
 
+impl ExprWalk for AssociatedTypeDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.default_type.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for AssociatedTypeDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(AssociatedTypeDecl");
@@ -7335,6 +9153,18 @@ impl Default for AbstractFieldDecl {
             span: Default::default(),
             doc_opt: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for AbstractFieldDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.key_boundary.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.r#type.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
     }
 }
 
@@ -7382,6 +9212,17 @@ impl Default for AbstractStateDecl {
     }
 }
 
+impl ExprWalk for AbstractStateDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.fields.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc_opt.walk_exprs(out);
+    }
+}
+
 impl AstDump for AbstractStateDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(AbstractStateDecl");
@@ -7413,6 +9254,18 @@ pub enum ClassItem {
 impl Default for ClassItem {
     fn default() -> Self {
         ClassItem::ClassFieldDecl(Default::default())
+    }
+}
+
+impl ExprWalk for ClassItem {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            ClassItem::ClassFieldDecl(value) => value.walk_exprs(out),
+            ClassItem::ClassMethodDecl(value) => value.walk_exprs(out),
+            ClassItem::AssociatedTypeDecl(value) => value.walk_exprs(out),
+            ClassItem::AbstractFieldDecl(value) => value.walk_exprs(out),
+            ClassItem::AbstractStateDecl(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -7487,6 +9340,20 @@ impl Default for ClassDecl {
     }
 }
 
+impl ExprWalk for ClassDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.modal.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.supers.walk_exprs(out);
+        self.items.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for ClassDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(ClassDecl");
@@ -7537,6 +9404,18 @@ impl Default for TypeAliasDecl {
     }
 }
 
+impl ExprWalk for TypeAliasDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.attrs.walk_exprs(out);
+        self.vis.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.generic_params.walk_exprs(out);
+        self.r#type.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for TypeAliasDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(TypeAliasDecl");
@@ -7565,6 +9444,10 @@ pub enum DeriveClauseKind {
     Requires,
 }
 
+impl ExprWalk for DeriveClauseKind {
+    fn walk_exprs(&self, _out: &mut Vec<*const Expr>) {}
+}
+
 impl AstDump for DeriveClauseKind {
     fn dump(&self, out: &mut String) {
         out.push_str(match self {
@@ -7588,6 +9471,14 @@ impl Default for DeriveClause {
             name: Default::default(),
             span: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for DeriveClause {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.kind.walk_exprs(out);
+        self.name.walk_exprs(out);
+        self.span.walk_exprs(out);
     }
 }
 
@@ -7625,6 +9516,16 @@ impl Default for DeriveTargetDecl {
     }
 }
 
+impl ExprWalk for DeriveTargetDecl {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.name.walk_exprs(out);
+        self.contract_opt.walk_exprs(out);
+        self.body.walk_exprs(out);
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for DeriveTargetDecl {
     fn dump(&self, out: &mut String) {
         out.push_str("(DeriveTargetDecl");
@@ -7654,6 +9555,13 @@ impl Default for ErrorItem {
             span: Default::default(),
             doc: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ErrorItem {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.span.walk_exprs(out);
+        self.doc.walk_exprs(out);
     }
 }
 
@@ -7688,6 +9596,26 @@ pub enum ASTItem {
 impl Default for ASTItem {
     fn default() -> Self {
         ASTItem::UsingDecl(Default::default())
+    }
+}
+
+impl ExprWalk for ASTItem {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        match self {
+            ASTItem::UsingDecl(value) => value.walk_exprs(out),
+            ASTItem::ImportDecl(value) => value.walk_exprs(out),
+            ASTItem::ExternBlock(value) => value.walk_exprs(out),
+            ASTItem::StaticDecl(value) => value.walk_exprs(out),
+            ASTItem::ProcedureDecl(value) => value.walk_exprs(out),
+            ASTItem::ComptimeProcedureDecl(value) => value.walk_exprs(out),
+            ASTItem::RecordDecl(value) => value.walk_exprs(out),
+            ASTItem::EnumDecl(value) => value.walk_exprs(out),
+            ASTItem::ModalDecl(value) => value.walk_exprs(out),
+            ASTItem::ClassDecl(value) => value.walk_exprs(out),
+            ASTItem::TypeAliasDecl(value) => value.walk_exprs(out),
+            ASTItem::DeriveTargetDecl(value) => value.walk_exprs(out),
+            ASTItem::ErrorItem(value) => value.walk_exprs(out),
+        }
     }
 }
 
@@ -7808,6 +9736,15 @@ impl Default for ASTModule {
     }
 }
 
+impl ExprWalk for ASTModule {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.items.walk_exprs(out);
+        self.comptime_procedures.walk_exprs(out);
+        self.module_doc.walk_exprs(out);
+    }
+}
+
 impl AstDump for ASTModule {
     fn dump(&self, out: &mut String) {
         out.push_str("(ASTModule");
@@ -7837,6 +9774,14 @@ impl Default for ASTFile {
             items: Default::default(),
             module_doc: Default::default(),
         }
+    }
+}
+
+impl ExprWalk for ASTFile {
+    fn walk_exprs(&self, out: &mut Vec<*const Expr>) {
+        self.path.walk_exprs(out);
+        self.items.walk_exprs(out);
+        self.module_doc.walk_exprs(out);
     }
 }
 

@@ -100,6 +100,8 @@ pub struct ScopeContext<'a> {
     pub diagnostics: Option<std::rc::Rc<std::cell::RefCell<DiagnosticStream>>>,
     pub name_resolution_tables: Option<NameResolutionTables<'a>>,
     pub current_module: Vec<String>,
+    /// What typing records about expressions, when the caller wants it kept.
+    pub stores: Option<std::rc::Rc<crate::typing::expr_store::TypeStores>>,
     /// Innermost scope first; the last three are the procedure, module and universe scopes.
     pub scopes: ScopeList,
 }

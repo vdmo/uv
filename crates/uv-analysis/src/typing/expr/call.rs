@@ -32,6 +32,7 @@ use crate::resolve::scopes::{id_eq, id_key_of, path_key_of};
 use crate::resolve::scopes_lookup::{resolve_type_name, resolve_value_name};
 use crate::typing::callbacks::{CheckResult, ExprTypeFn, PlaceTypeFn};
 use crate::typing::expr_result::ExprTypeResult;
+use crate::typing::expr_store::{record_generic_call_subst, record_selected_call_target, store_expr_type, stored_expr_type};
 use crate::typing::outcome::{classify_outcome_intro, OutcomeIntro};
 use crate::typing::stmt::binding_stmt::normalize_deprecated_message;
 use crate::typing::stmt_context::{with_shared_access_mode, ContractPhase, StmtTypeContext};
@@ -879,11 +880,17 @@ fn check_ffi_boundary_region_local_raw_pointer_args(
         return None;
     }
     for arg in call.args.iter().filter(|arg| arg.value.is_some()) {
-        let typed = type_expr(ctx, type_ctx, &arg.value, env);
-        if !typed.ok {
-            return typed.diag_id;
-        }
-        if !matches!(strip_perm_and_refine(&typed.r#type).as_deref().map(|ty| &ty.node), Some(TypeNode::RawPtr { .. })) {
+        let arg_type = match stored_expr_type(ctx, &arg.value) {
+            Some(cached) => cached,
+            None => {
+                let typed = type_expr(ctx, type_ctx, &arg.value, env);
+                if !typed.ok {
+                    return typed.diag_id;
+                }
+                typed.r#type
+            }
+        };
+        if !matches!(strip_perm_and_refine(&arg_type).as_deref().map(|ty| &ty.node), Some(TypeNode::RawPtr { .. })) {
             continue;
         }
         if binding_for_ffi_boundary_expr(env, &arg.value)
@@ -1046,8 +1053,17 @@ pub fn type_call_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, no
         Some(ExprTypeResult::typed(value_type.r#type))
     };
     let callee_type: OnceCell<ExprTypeResult> = OnceCell::new();
-    let callee_type_for_call =
-        || callee_type.get_or_init(|| callee_value_type().unwrap_or_else(|| type_expr(ctx, type_ctx, &node.callee, env))).clone();
+    let callee_type_for_call = || {
+        callee_type
+            .get_or_init(|| {
+                let typed = callee_value_type().unwrap_or_else(|| type_expr(ctx, type_ctx, &node.callee, env));
+                if typed.ok {
+                    store_expr_type(ctx, &node.callee, &typed.r#type, false);
+                }
+                typed
+            })
+            .clone()
+    };
     let type_expr_fn = |inner: &ExprPtr| {
         if same_expr(inner, &node.callee) {
             return callee_type_for_call();
@@ -1174,6 +1190,9 @@ pub fn type_call_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, no
             if let Some(diag_id) = foreign_checks() {
                 return failed(diag_id);
             }
+            if let (Some(proc), Some(callee)) = (selected.proc, resolved_callee.as_ref()) {
+                record_selected_call_target(ctx, node, &callee.origin, proc);
+            }
             return ExprTypeResult::typed(overload.return_type);
         }
     }
@@ -1202,7 +1221,11 @@ pub fn type_call_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, no
         if !call.ok {
             return call_failure(call);
         }
-        return finish(call.r#type);
+        let finished = finish(call.r#type);
+        if finished.ok {
+            record_generic_call_subst(ctx, node, &subst);
+        }
+        return finished;
     }
 
     // A generic call whose type arguments follow from its arguments.
@@ -1228,7 +1251,11 @@ pub fn type_call_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, no
         if !call.ok {
             return call_failure(call);
         }
-        return finish(call.r#type);
+        let finished = finish(call.r#type);
+        if finished.ok {
+            record_generic_call_subst(ctx, node, &inferred.subst);
+        }
+        return finished;
     }
 
     let call = type_call(ctx, &node.callee, &node.args, &type_expr_fn, Some(&type_place_fn), Some(&check_expr_fn), Some(&callee_facts()));

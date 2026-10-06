@@ -247,7 +247,7 @@ pub fn type_assign_stmt(
             Some(binding) => ExprTypeResult::typed(binding.r#type.clone()),
             None => type_ident_fn(name),
         };
-        let inferred_intro = infer_expr(&node.value, &value_expr, &value_ident);
+        let inferred_intro = infer_expr(ctx, &node.value, &value_expr, &value_ident);
         let mut outcome_intro_ok = false;
         if inferred_intro.ok {
             match classify_outcome_intro(ctx, &inferred_intro.r#type, &assign_target_type) {

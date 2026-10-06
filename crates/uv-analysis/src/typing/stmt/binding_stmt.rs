@@ -237,7 +237,7 @@ pub fn type_binding_stmt(
         // A bare value or error introduces into an `Outcome` binding when only one fits.
         let mut outcome_intro_ok = false;
         if !is_var && !check.ok && !unique_move_ok && !shared_materialized_ok {
-            let inferred = infer_expr(&binding.init, &read_type_expr, &read_type_ident);
+            let inferred = infer_expr(ctx, &binding.init, &read_type_expr, &read_type_ident);
             if inferred.ok {
                 match classify_outcome_intro(ctx, &inferred.r#type, &ann) {
                     OutcomeIntro::Ambiguous => {
@@ -301,7 +301,7 @@ pub fn type_binding_stmt(
         } else {
             "T-LetStmt-Infer-Err"
         };
-        let inferred = infer_expr(&binding.init, &read_type_expr, &read_type_ident);
+        let inferred = infer_expr(ctx, &binding.init, &read_type_expr, &read_type_ident);
         if !inferred.ok {
             if inferred.diag_id.is_some() {
                 return fail_with(inferred.diag_id, inferred.diag_detail);

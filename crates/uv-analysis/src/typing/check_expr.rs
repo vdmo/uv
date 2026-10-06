@@ -14,6 +14,7 @@ use uv_source::attributes::{validate_attributes, AttributeTarget};
 use super::callbacks::{CheckResult, ExprTypeFn, IdentTypeFn, PlaceTypeFn};
 use super::const_len::const_len;
 use super::expr_result::ExprTypeResult;
+use super::expr_store::{record_generic_call_subst, store_expr_type};
 use super::literals::{check_literal_expr, type_literal_expr};
 use super::subtyping::subtyping;
 use super::type_equiv::type_equiv;
@@ -106,7 +107,15 @@ fn modal_non_niche(ctx: &ScopeContext<'_>, source: &TypeRef, target: &TypeRef) -
 }
 
 /// The type of an expression with nothing expected of it.
-pub fn infer_expr(expr: &ExprPtr, type_expr: ExprTypeFn<'_>, type_ident: IdentTypeFn<'_>) -> ExprTypeResult {
+pub fn infer_expr(ctx: &ScopeContext<'_>, expr: &ExprPtr, type_expr: ExprTypeFn<'_>, type_ident: IdentTypeFn<'_>) -> ExprTypeResult {
+    let result = infer_expr_form(ctx, expr, type_expr, type_ident);
+    if result.ok {
+        store_expr_type(ctx, expr, &result.r#type, false);
+    }
+    result
+}
+
+fn infer_expr_form(ctx: &ScopeContext<'_>, expr: &ExprPtr, type_expr: ExprTypeFn<'_>, type_ident: IdentTypeFn<'_>) -> ExprTypeResult {
     let Some(e) = expr.as_deref() else {
         return ExprTypeResult::default();
     };
@@ -135,7 +144,7 @@ pub fn infer_expr(expr: &ExprPtr, type_expr: ExprTypeFn<'_>, type_ident: IdentTy
         ExprNode::TupleExpr(tuple) => {
             let mut elements = Vec::with_capacity(tuple.elements.len());
             for elem in &tuple.elements {
-                let typed = infer_expr(elem, type_expr, type_ident);
+                let typed = infer_expr(ctx, elem, type_expr, type_ident);
                 if !typed.ok {
                     return ExprTypeResult::failed(typed.diag_id);
                 }
@@ -281,6 +290,14 @@ impl Checker<'_, '_, '_> {
     }
 
     fn check(&self, expr: &ExprPtr, expected: &TypeRef) -> CheckResult {
+        let result = self.check_form(expr, expected);
+        if result.ok && expected.is_some() {
+            store_expr_type(self.ctx, expr, expected, false);
+        }
+        result
+    }
+
+    fn check_form(&self, expr: &ExprPtr, expected: &TypeRef) -> CheckResult {
         let ctx = self.ctx;
         let (Some(e), Some(expected_ty)) = (expr.as_deref(), expected.as_deref()) else {
             return CheckResult::default();
@@ -425,13 +442,14 @@ impl Checker<'_, '_, '_> {
                     if !typed_call.ok {
                         return CheckResult { diag_id: typed_call.diag_id, ..Default::default() };
                     }
+                    record_generic_call_subst(ctx, call, &inferred_subst.subst);
                     inferred_call_with_expected =
                         Some(ExprTypeResult { diag_detail: typed_call.diag_detail, ..ExprTypeResult::typed(typed_call.r#type) });
                 }
             }
         }
         let inferred =
-            inferred_call_with_expected.unwrap_or_else(|| infer_expr(expr, self.type_expr, self.type_ident));
+            inferred_call_with_expected.unwrap_or_else(|| infer_expr(ctx, expr, self.type_expr, self.type_ident));
         if !inferred.ok {
             return CheckResult {
                 ok: false,

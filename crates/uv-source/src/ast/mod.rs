@@ -1,6 +1,7 @@
 //! Abstract syntax tree. Node types are generated from the reference headers.
 
 pub mod dump;
+pub mod walk;
 #[allow(clippy::derivable_impls)]
 mod generated;
 

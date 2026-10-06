@@ -51,7 +51,7 @@ fn binding_type(ctx: &ScopeContext<'_>, binding: &ast::Binding, env: &TypeEnv) -
     let type_ctx = StmtTypeContext::default();
     let type_expr_fn = |expr: &ExprPtr| type_expr(ctx, &type_ctx, expr, env);
     let type_ident_fn = |name: &str| type_identifier_expr(ctx, env, name);
-    let inferred = infer_expr(&binding.init, &type_expr_fn, &type_ident_fn);
+    let inferred = infer_expr(ctx, &binding.init, &type_expr_fn, &type_ident_fn);
     inferred.ok.then_some(inferred.r#type)
 }
 

@@ -1,4 +1,6 @@
 #include <cstdint>
+#include <cstdlib>
+#include <new>
 #include <cstdio>
 #include <fstream>
 #include <iostream>
@@ -198,6 +200,37 @@ template <typename T> void D(std::ostream& o, const std::vector<T>& v) {
 }
 template <typename... Ts> void D(std::ostream& o, const std::variant<Ts...>& v) {
   std::visit([&o](const auto& alt) { D(o, alt); }, v);
+}
+
+// Every expression node of a piece of syntax, by address; the same generated walk as
+// the port's `ExprWalk`.
+using ExprSet = std::unordered_set<const ast::Expr*>;
+template <typename E> requires std::is_enum_v<E> void W(ExprSet&, E) {}
+void W(ExprSet&, const std::string&) {}
+template <std::same_as<bool> B> void W(ExprSet&, B) {}
+template <std::same_as<std::size_t> N> void W(ExprSet&, N) {}
+void W(ExprSet&, const ast::TupleIndex&) {}
+void W(ExprSet&, const core::Span&) {}
+void W(ExprSet&, const lexer::Token&) {}
+void W(ExprSet&, const lexer::DocComment&) {}
+template <typename T> void W(ExprSet& s, const std::optional<T>& v);
+template <typename T> void W(ExprSet& s, const std::shared_ptr<T>& v);
+template <typename T> void W(ExprSet& s, const std::vector<T>& v);
+template <typename... Ts> void W(ExprSet& s, const std::variant<Ts...>& v);
+
+#include "ast_walk_generated.inc"
+
+template <typename T> void W(ExprSet& s, const std::optional<T>& v) {
+  if (v.has_value()) W(s, *v);
+}
+template <typename T> void W(ExprSet& s, const std::shared_ptr<T>& v) {
+  if (v) W(s, *v);
+}
+template <typename T> void W(ExprSet& s, const std::vector<T>& v) {
+  for (const auto& item : v) W(s, item);
+}
+template <typename... Ts> void W(ExprSet& s, const std::variant<Ts...>& v) {
+  std::visit([&s](const auto& alt) { W(s, alt); }, v);
 }
 
 int DumpAst(const std::string& label, const std::string& path) {
@@ -1954,6 +1987,37 @@ void DumpBody(const analysis::ScopeContext& ctx, const std::string& name,
   DumpTypedBody(proc_ctx, env, return_type, &contract, std::nullopt, nullptr, *body, true);
 }
 
+// One store of facts recorded while a body is typed, as its size and a hash of its
+// entries in order; `UV_STORE_VERBOSE` prints the entries themselves after the line.
+// The reference keys its expression stores by the address of the syntax node, also for
+// nodes it synthesizes and frees while typing. A later node at the same address would
+// then be answered from the stale entry, as the allocator happens to decide. While
+// bodies are typed the memory of expression nodes is therefore not given back, so that
+// no two nodes ever share an address.
+bool g_keep_expr_memory = false;
+const std::size_t kSharedExprSize =
+    sizeof(std::_Sp_counted_ptr_inplace<ast::Expr, std::allocator<void>, __gnu_cxx::__default_lock_policy>);
+
+std::vector<std::string>* g_store_lines = nullptr;
+// The expressions of the project's modules. An entry for any other expression is one
+// the checker synthesized and has freed since; its address says nothing.
+ExprSet g_syntax_exprs;
+
+void PrintStore(char tag, std::vector<std::string> entries) {
+  std::sort(entries.begin(), entries.end());
+  std::uint64_t hash = 1469598103934665603ull;
+  for (const auto& entry : entries) {
+    for (const unsigned char byte : entry) hash = (hash ^ byte) * 1099511628211ull;
+    hash = (hash ^ 0x0a) * 1099511628211ull;
+    if (g_store_lines) g_store_lines->push_back(std::string("S\t") + tag + '\t' + entry);
+  }
+  std::cout << entries.size() << ':' << std::hex << hash << std::dec;
+}
+
+std::string SpanKey(const ast::Expr* expr) {
+  return std::to_string(expr->span.start_offset) + '-' + std::to_string(expr->span.end_offset);
+}
+
 // The block of a body under its typing context, and the line that reports it. A
 // transition is typed without the environment reference and the diagnostic stream.
 void DumpTypedBody(analysis::ScopeContext& proc_ctx, analysis::TypeEnv& env, const analysis::TypeRef& return_type,
@@ -1964,6 +2028,17 @@ void DumpTypedBody(analysis::ScopeContext& proc_ctx, analysis::TypeEnv& env, con
   StmtTypeContext type_ctx;
   type_ctx.return_type = return_type;
   proc_ctx.diagnostics = &diags;
+  // The stores the type checker's entry point sets up; they are also read back.
+  ExprTypeMap expr_types;
+  ExprValueTypeMap expr_value_types;
+  DynamicRefineExprMap dynamic_refine_checks;
+  GenericCallSubstMap generic_call_substs;
+  SelectedCallTargetMap selected_call_targets;
+  proc_ctx.expr_types = &expr_types;
+  proc_ctx.expr_value_types = &expr_value_types;
+  proc_ctx.dynamic_refine_checks = &dynamic_refine_checks;
+  proc_ctx.generic_call_substs = &generic_call_substs;
+  proc_ctx.selected_call_targets = &selected_call_targets;
   if (with_env) {
     type_ctx.diags = &diags;
     type_ctx.env_ref = &env;
@@ -1985,7 +2060,44 @@ void DumpTypedBody(analysis::ScopeContext& proc_ctx, analysis::TypeEnv& env, con
   for (const auto& id : result.diagnostic_obligation_ids) std::cout << id << ',';
   std::cout << '\t';
   PrintDiagList(diags);
+  std::vector<std::string> store_lines;
+  if (std::getenv("UV_STORE_VERBOSE")) g_store_lines = &store_lines;
+  std::vector<std::string> entries;
+  for (const auto& [expr, type] : expr_types) if (g_syntax_exprs.count(expr)) entries.push_back(SpanKey(expr) + '=' + TypeText(type));
+  std::cout << '\t';
+  PrintStore('T', std::move(entries));
+  entries.clear();
+  for (const auto& [expr, type] : expr_value_types) if (g_syntax_exprs.count(expr)) entries.push_back(SpanKey(expr) + '=' + TypeText(type));
+  std::cout << ' ';
+  PrintStore('V', std::move(entries));
+  entries.clear();
+  for (const auto& [expr, types] : dynamic_refine_checks) {
+    if (!g_syntax_exprs.count(expr)) continue;
+    std::string entry = SpanKey(expr) + '=';
+    for (const auto& type : types) entry += TypeText(type) + ';';
+    entries.push_back(std::move(entry));
+  }
+  std::cout << ' ';
+  PrintStore('D', std::move(entries));
+  entries.clear();
+  for (const auto& [call, subst] : generic_call_substs) {
+    std::string entry;
+    for (const auto& [name, type] : subst) entry += name + '=' + TypeText(type) + ';';
+    entries.push_back(std::move(entry));
+  }
+  std::cout << ' ';
+  PrintStore('G', std::move(entries));
+  entries.clear();
+  for (const auto& [call, target] : selected_call_targets) {
+    std::string entry;
+    for (const auto& seg : target.module_path) entry += seg + "::";
+    entries.push_back(entry + (target.proc ? target.proc->name : std::string("-")));
+  }
+  std::cout << ' ';
+  PrintStore('C', std::move(entries));
   std::cout << '\n';
+  g_store_lines = nullptr;
+  for (const auto& line : store_lines) std::cout << line << '\n';
 }
 
 // The body of a method or transition under the bindings of its signature, as the typing
@@ -2141,6 +2253,9 @@ void DumpModalBodies(const analysis::ScopeContext& ctx, const ast::ModalDecl& de
 }
 
 void DumpBodies(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
+  g_keep_expr_memory = true;
+  g_syntax_exprs.clear();
+  for (const auto& module : ctx.sigma.mods) W(g_syntax_exprs, module.items);
   for (const auto& module : ctx.sigma.mods) {
     std::cout << "X\t";
     D(std::cout, module.path);
@@ -2412,4 +2527,15 @@ int main(int argc, char** argv) {
   }
   std::cerr << "usage: uv-oracle unicode | tokens <list-file> | ast <list-file> | comptime <list-file> | resolve <list-file>\n";
   return 2;
+}
+
+// See `g_keep_expr_memory`. Sized deallocation is what `std::make_shared` uses.
+void* operator new(std::size_t size) {
+  if (void* p = std::malloc(size ? size : 1)) return p;
+  throw std::bad_alloc();
+}
+void operator delete(void* p) noexcept { std::free(p); }
+void operator delete(void* p, std::size_t size) noexcept {
+  if (g_keep_expr_memory && size == kSharedExprSize) return;
+  std::free(p);
 }

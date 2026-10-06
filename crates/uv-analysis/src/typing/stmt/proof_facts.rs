@@ -12,6 +12,7 @@ use uv_source::ast::{self, ExprNode, ExprPtr, Stmt};
 use uv_source::attributes::{resolve_verification_mode_attribute, VerificationModeAttribute};
 use uv_source::lexer::token::{Token, TokenKind};
 
+use crate::typing::expr_store::selected_call_target;
 use crate::context::{IdKey, ScopeContext};
 use crate::contracts::purity::is_pure_in_scope;
 use crate::contracts::verification::{extend_proof_context_with_predicate_at, negated_predicate, StaticProofContext};
@@ -122,7 +123,7 @@ fn invalidate_assigned_proof_facts(current: &ProofCtx, stmt: &Stmt) -> ProofCtx 
 }
 
 /// A call whose callee is named directly, perhaps inside a bare `unsafe { … }`.
-fn direct_call_fact_view(expr: &ExprPtr) -> Option<(&ExprPtr, &[ast::Arg])> {
+fn direct_call_fact_view(expr: &ExprPtr) -> Option<(&ExprPtr, &[ast::Arg], Option<&ast::CallExpr>)> {
     let mut stripped = strip_attributed_expr(expr);
     if let Some(ExprNode::UnsafeBlockExpr(unsafe_block)) = stripped.as_deref().map(|expr| &expr.node) {
         if let Some(block) = unsafe_block.block.as_deref().filter(|block| block.stmts.is_empty() && block.tail_opt.is_some()) {
@@ -130,8 +131,8 @@ fn direct_call_fact_view(expr: &ExprPtr) -> Option<(&ExprPtr, &[ast::Arg])> {
         }
     }
     match &stripped.as_deref()?.node {
-        ExprNode::CallExpr(call) => Some((&call.callee, &call.args)),
-        ExprNode::CallTypeArgsExpr(call) => Some((&call.callee, &call.args)),
+        ExprNode::CallExpr(call) => Some((&call.callee, &call.args, Some(call))),
+        ExprNode::CallTypeArgsExpr(call) => Some((&call.callee, &call.args, None)),
         _ => None,
     }
 }
@@ -153,7 +154,16 @@ fn static_callee_module<'c>(ctx: &'c ScopeContext<'_>, callee: &ExprPtr) -> Opti
     Some((module, name))
 }
 
-fn static_callee_procedure<'c>(ctx: &'c ScopeContext<'_>, callee: &ExprPtr) -> Option<&'c ast::ProcedureDecl> {
+/// The procedure a direct call names: the overload typing selected, when it had to pick.
+fn static_callee_procedure<'c>(ctx: &'c ScopeContext<'_>, callee: &ExprPtr, call_expr: Option<&ast::CallExpr>) -> Option<&'c ast::ProcedureDecl> {
+    if let Some(selected) = call_expr.and_then(|call| selected_call_target(ctx, call)) {
+        let key = path_key_of(&selected.module_path);
+        let module = ctx.sigma.mods.iter().find(|module| path_key_of(&module.path) == key)?;
+        return module.items.iter().find_map(|item| match item {
+            ast::ASTItem::ProcedureDecl(proc) if proc.name == selected.proc_name && proc.span == selected.proc_span => Some(proc),
+            _ => None,
+        });
+    }
     let (module, name) = static_callee_module(ctx, callee)?;
     let key = id_key_of(&name);
     module.items.iter().find_map(|item| match item {
@@ -337,10 +347,10 @@ fn call_postcondition_proof_context_for_let(
     span: &Span,
     binding_name: &str,
 ) -> ProofCtx {
-    let Some((callee, args)) = direct_call_fact_view(&binding.init) else {
+    let Some((callee, args, call_expr)) = direct_call_fact_view(&binding.init) else {
         return current.clone();
     };
-    let Some(proc) = static_callee_procedure(ctx, callee) else {
+    let Some(proc) = static_callee_procedure(ctx, callee, call_expr) else {
         return current.clone();
     };
     let Some(postcondition) = proc.contract.as_ref().map(|contract| &contract.postcondition).filter(|post| post.is_some()) else {
@@ -367,7 +377,7 @@ fn foreign_postcondition_proof_context_for_let(
     span: &Span,
     binding_name: &str,
 ) -> ProofCtx {
-    let Some((callee, args)) = direct_call_fact_view(&binding.init) else {
+    let Some((callee, args, _)) = direct_call_fact_view(&binding.init) else {
         return current.clone();
     };
     let Some(proc) = static_callee_extern_procedure(ctx, callee) else {

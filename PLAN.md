@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: all 4,704 bodies compared (procedures, methods, transitions), none mismatched or pending; the expression-type store and the dynamic context remain |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: all 4,704 bodies compared (procedures, methods, transitions) with the stores typing fills, none mismatched or pending; the dynamic context remains |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -453,7 +453,7 @@ procedure's `assumes` clauses are proved at the call with the arguments substitu
 accesses are unknown warns (`typing::expr::callee_key_access`); the reference also
 collects the accesses themselves, which nothing reads during typing, so only whether
 they are unknown is computed. The selected overload and the inferred substitution are
-not recorded for later passes yet; that comes with the expression-type store below.
+recorded in the stores described below.
 
 Field access (records, modal states, `Self` in a class) and tuple element access are in
 too, as values and as places (`typing::expr::field_access`, `tuple_access`).
@@ -509,9 +509,8 @@ changed, and the predicate is simplified where the value decides a branch.
 Refinement predicates are proved when a value is checked against a refinement type:
 the predicate with the value for `self` must follow from the facts in scope
 (`E-TYP-1953` otherwise). In a dynamic context a refinement that cannot be proved is
-left to a run-time check and the value only needs the base type; that run-time check
-is not recorded for later passes yet, and the gate has no dynamic contexts to exercise
-the fallback.
+left to a run-time check and the value only needs the base type; the check is
+recorded in the stores, but the gate has no dynamic contexts to exercise the fallback.
 
 The scoped statements are in (`typing::stmt::scoped`): `region` and `frame` with the
 active region they bind, `defer`, and `using`; so are `?` propagation, `transmute` with
@@ -563,11 +562,34 @@ well-formedness of a refinement predicate, `comptime` expressions (also under
 attributes), a quote inside compile-time code and `@entry` inside a postcondition
 (outside those contexts both are rejected as in the reference).
 
-Two things the gate does not exercise yet, because the oracle's harness leaves them
-unset as well: the store of expression types (`ctx.expr_types`), which the reference
-also reads back as a cache when checking an expression a second time, and the dynamic
-contract context. Both have to be set up the way the driver does before part c is
-gated.
+The stores typing fills for the passes after it are in (`typing::expr_store`, on the
+context as `stores`): the type of each expression as last typed or checked, the same
+for expressions typed as values, the substitution of each generic call, the overload a
+call with several candidates selected, and the refinements left to a run-time check.
+Typing reads them back too: a check against an expected type is answered from the type
+the expression already has as a value when that fits, the purity analysis of contracts
+takes the type of a receiver from them, and the postcondition facts of a call use the
+selected overload. The gate sets the stores up as the type checker's entry point does
+and compares, per body, the size and a hash of each (`UV_STORE_VERBOSE` prints the
+entries; `tools/store_diff.sh` shows the ones that differ for a project). With the
+stores one body of the corpus types differently, through the purity analysis.
+
+The reference keys the stores by the address of the syntax node, also for nodes it
+synthesizes and frees while typing (the `move` it wraps a returned place in, for one).
+Two consequences for the gate. Only entries for nodes of the project's modules are
+compared, found by a walk generated from the tree's description for both sides
+(`tools/gen_ast.py`, `ast::walk`). And a freed node's address may be handed to a later
+node, which the reference then answers from the stale entry; 7 bodies of the corpus
+depended on that. The oracle now keeps the memory of expression nodes while it types
+bodies, so no two share an address, and the port keeps the node of each entry alive
+for the same reason. The port does not reproduce the reference's answers under address
+reuse. Calls are keyed by the address of the call inside its node; those entries are
+compared by value only.
+
+The readers of the stores outside typing (`memory/regions`, `borrow_bind`,
+`return_responsibility`, `caps`, layout) come with M3.5, and the provenance stores are
+written there. The dynamic contract context is still unset in the gate, as in the
+oracle's harness, and has to be set up the way the driver does before part c is gated.
 
 Part b calls into code that belongs to M3.5 (`memory/regions`, `memory/calls`,
 `memory/borrow_bind`, `contracts/contract_check`, `keys/key_paths`, `caps`); what it needs

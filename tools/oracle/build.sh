@@ -14,7 +14,7 @@ OBJS=""
 for src in $SRCS; do
   obj="$OUT/obj/$(echo "$src" | sed 's|/|_|g').o"
   OBJS="$OBJS $obj"
-  if [ ! -f "$obj" ] || [ "$src" -nt "$obj" ] || [ /w/tools/oracle/ast_dump_generated.inc -nt "$obj" -a "$src" = /w/tools/oracle/oracle_main.cpp ]; then
+  if [ ! -f "$obj" ] || [ "$src" -nt "$obj" ] || [ /w/tools/oracle/ast_dump_generated.inc -nt "$obj" -a "$src" = /w/tools/oracle/oracle_main.cpp ] || [ /w/tools/oracle/ast_walk_generated.inc -nt "$obj" -a "$src" = /w/tools/oracle/oracle_main.cpp ]; then
     while [ "$(pgrep -c cc1plus || true)" -ge 4 ]; do sleep 0.3; done
     g++ -std=c++20 -O1 -w -c "$src" -o "$obj" \
       -I"$B/Ultraviolet/include" -I"$B/Ultraviolet/src" -I/w/tools/oracle -I"$B/extern/icu/linux/include" -I"$B/extern/tomlplusplus/include" &

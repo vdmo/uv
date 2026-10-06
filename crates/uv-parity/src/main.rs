@@ -116,6 +116,8 @@ use uv_project::module_discovery::compilation_unit;
 use uv_project::project::{Assembly, AssemblyTarget};
 use uv_project::target_profile::TargetProfile;
 use uv_source::ast::dump::AstDump;
+use uv_source::ast::walk::ExprWalk;
+use uv_analysis::typing::expr_store::TypeStores;
 use uv_analysis::contracts::verification::extend_proof_context_with_predicate_at;
 use uv_analysis::generics::monomorphize::TypeSubst;
 use uv_analysis::resolve::scopes::id_eq;
@@ -2789,6 +2791,9 @@ fn dump_typed_body(
     let diags = Rc::new(RefCell::new(Vec::new()));
     let env = Rc::new(RefCell::new(env));
     proc_ctx.diagnostics = Some(diags.clone());
+    // The stores the type checker's entry point sets up; they are also read back.
+    let stores = Rc::new(TypeStores::default());
+    proc_ctx.stores = Some(stores.clone());
     let type_ctx = StmtTypeContext {
         return_type,
         diags: with_env.then(|| diags.clone()),
@@ -2841,7 +2846,59 @@ fn dump_typed_body(
     }
     out.push('\t');
     print_diag_list(out, &diags.borrow());
+    let span_key = |expr: &uv_source::ast::Expr| format!("{}-{}", expr.span.start_offset, expr.span.end_offset);
+    let verbose = std::env::var_os("UV_STORE_VERBOSE").is_some();
+    let mut store_lines = String::new();
+    let mut print_store = |out: &mut String, tag: char, mut entries: Vec<String>| {
+        entries.sort();
+        let mut hash: u64 = 1469598103934665603;
+        for entry in &entries {
+            for byte in entry.bytes().chain([0x0a]) {
+                hash = (hash ^ u64::from(byte)).wrapping_mul(1099511628211);
+            }
+            if verbose {
+                let _ = writeln!(store_lines, "S\t{tag}\t{entry}");
+            }
+        }
+        let _ = write!(out, "{}:{hash:x}", entries.len());
+    };
+    out.push('\t');
+    // Only the expressions of the project's modules: an entry for any other is one the
+    // checker synthesized, which the reference keys by an address it has freed since.
+    let in_syntax = |expr: &std::sync::Arc<uv_source::ast::Expr>| SYNTAX_EXPRS.with_borrow(|set| set.contains(&(std::sync::Arc::as_ptr(expr) as usize)));
+    let typed = |(expr, ty): &(std::sync::Arc<uv_source::ast::Expr>, TypeRef)| {
+        in_syntax(expr).then(|| format!("{}={}", span_key(expr), type_text(ty)))
+    };
+    print_store(out, 'T', stores.expr_types.borrow().values().filter_map(typed).collect());
+    out.push(' ');
+    print_store(out, 'V', stores.expr_value_types.borrow().values().filter_map(typed).collect());
+    out.push(' ');
+    let refinements = stores
+        .dynamic_refine_checks
+        .borrow()
+        .values()
+        .filter(|(expr, _)| in_syntax(expr))
+        .map(|(expr, types)| format!("{}={}", span_key(expr), types.iter().map(|ty| type_text(ty) + ";").collect::<String>()))
+        .collect();
+    print_store(out, 'D', refinements);
+    out.push(' ');
+    let substs = stores
+        .generic_call_substs
+        .borrow()
+        .values()
+        .map(|subst| subst.iter().map(|(name, ty)| format!("{name}={};", type_text(ty))).collect::<String>())
+        .collect();
+    print_store(out, 'G', substs);
+    out.push(' ');
+    let targets = stores
+        .selected_call_targets
+        .borrow()
+        .values()
+        .map(|target| target.module_path.iter().map(|seg| format!("{seg}::")).collect::<String>() + &target.proc_name)
+        .collect();
+    print_store(out, 'C', targets);
     out.push('\n');
+    out.push_str(&store_lines);
 }
 
 /// The body of a method or transition under the bindings of its signature, as the typing
@@ -3065,7 +3122,17 @@ fn dump_modal_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &ModalDecl,
     }
 }
 
+thread_local! {
+    /// The addresses of the expressions of the project's modules.
+    static SYNTAX_EXPRS: RefCell<std::collections::HashSet<usize>> = RefCell::default();
+}
+
 fn dump_bodies(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
+    let mut syntax_exprs = Vec::new();
+    for module in &ctx.sigma.mods {
+        module.items.walk_exprs(&mut syntax_exprs);
+    }
+    SYNTAX_EXPRS.set(syntax_exprs.into_iter().map(|expr| expr as usize).collect());
     for index in 0..ctx.sigma.mods.len() {
         let module = ctx.sigma.mods[index].clone();
         dump_line("X", &module.path, out);

@@ -11,6 +11,7 @@ use uv_source::ast::{self, ApplyArgs, ArraySegment, EnumPayload, ExprNode, ExprP
 
 use crate::caps::builtin_paths::{is_capability_class_path, is_context_type_path};
 use crate::composite::record_methods::lookup_method_static;
+use crate::typing::expr_store::stored_expr_type;
 use crate::context::{ScopeContext, TypeDecl};
 use crate::generics::monomorphize::{build_modal_ref_substitution, build_substitution, instantiate_type};
 use crate::modal::lookup::{lookup_modal_decl, lookup_modal_field_decl, lookup_state_method_decl, lookup_transition_decl};
@@ -287,10 +288,19 @@ impl<'c, 'a> ContractContext<'c, 'a> {
         self.normalized(&field_ty)
     }
 
-    /// The type of an expression, as far as a contract can tell without the typer: a
-    /// known binding, `@result`, a cast, or a field of one of these.
+    /// The type of an expression: a known binding, `@result`, the type the typer
+    /// recorded for it, or else what a contract can tell by itself (a cast, or a field
+    /// of one of these).
     fn infer_expr_type(&self, expr: &ExprPtr) -> TypeRef {
         let e = expr.as_deref()?;
+        let from_typer = match &e.node {
+            ExprNode::IdentifierExpr(node) if self.binding_type(&node.name).is_some() => None,
+            ExprNode::ResultExpr(_) => None,
+            _ => self.scope_ctx.and_then(|scope_ctx| stored_expr_type(scope_ctx, expr)),
+        };
+        if let Some(from_typer) = from_typer {
+            return self.normalized(&from_typer);
+        }
         match &e.node {
             ExprNode::IdentifierExpr(node) => self.normalized(&self.binding_type(&node.name)),
             ExprNode::ResultExpr(_) => {
