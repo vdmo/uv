@@ -29,7 +29,7 @@ each piece matching the reference on the corpus:
 | M3.3 | Type core, generics, modal types, composite types, layout | done |
 | M3.4a | Literals, patterns, constraint solving | done |
 | M3.4b | Expression and statement typing | done against its gate: 4,704 bodies |
-| M3.4c | Declaration typing and the type-check entry points | in progress: 6,478 of 6,822 declarations |
+| M3.4c | Declaration typing and the type-check entry points | in progress: 6,478 of 6,822 declarations; 449 of 546 projects identical end to end |
 | M3.5 | Memory, provenance, capabilities, keys, contracts | ported with M3.4c, against the same gate; parts that typing needs are in |
 | M3.6 | Driver phases 2 and 3: `uvc --check` end to end | not started |
 | M4 | Language server in Rust | not started |

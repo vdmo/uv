@@ -20,7 +20,10 @@ use uv_source::attributes::{attrs, get_attribute_value, has_attribute};
 use super::item_procedure::{type_procedure_decl, DeclOutcome};
 use super::expr_store::TypeStores;
 use super::item_class::type_class_decl;
-use super::item_procedure::build_procedure_signature;
+use super::item_procedure::{build_procedure_signature, main_sig_ok, main_signature_fix_its};
+use super::typecheck_diag::build_resolved_typecheck_diagnostic;
+use crate::memory::init_planner::build_init_plan;
+use uv_core::symbols::string_of_path;
 use super::types::{make_type, type_key_of, ParamMode, TypeKey, TypeNode};
 use crate::generics::generic_params::bind_type_params;
 use crate::generics::monomorphize::{instantiate_type, TypeSubst};
@@ -273,6 +276,46 @@ fn decl_typing_modules(ctx: &mut ScopeContext<'_>, modules: &[ast::ASTModule], n
     result.diags = shared.take();
 }
 
+/// There is exactly one `main`, generic-free, with the signature of an entry point.
+fn main_check_project(ctx: &mut ScopeContext<'_>, modules: &[ast::ASTModule], name_maps: &NameMapTable, diags: &mut DiagnosticStream) {
+    let harness_entry_module = ctx.project.and_then(|project| project.test_harness_entry_module.clone());
+    let mut mains: Vec<(&ast::ProcedureDecl, &Vec<String>)> = Vec::new();
+    for module in modules {
+        if harness_entry_module.as_ref().is_some_and(|entry| string_of_path(&module.path) != *entry) {
+            continue;
+        }
+        for item in &module.items {
+            if let ASTItem::ProcedureDecl(proc) = item {
+                if id_eq(&proc.name, "main") {
+                    mains.push((proc, &module.path));
+                }
+            }
+        }
+    }
+    let Some(&(main_decl, main_module_path)) = mains.first() else {
+        emit_resolved_typecheck_diagnostic(diags, "E-MOD-2434", None, "");
+        return;
+    };
+    if mains.len() > 1 {
+        emit_resolved_typecheck_diagnostic(diags, "E-MOD-2430", Some(main_decl.span.clone()), "");
+        return;
+    }
+    if main_decl.generic_params.as_ref().is_some_and(|params| !params.params.is_empty()) {
+        emit_resolved_typecheck_diagnostic(diags, "E-MOD-2432", Some(main_decl.span.clone()), "");
+        return;
+    }
+    let saved_module = std::mem::replace(&mut ctx.current_module, main_module_path.clone());
+    let module_scope = name_maps.get(&path_key_of(main_module_path)).cloned().unwrap_or_default();
+    let saved_scopes = std::mem::replace(&mut ctx.scopes, vec![Scope::new(), module_scope, universe_bindings()]);
+    if !main_sig_ok(ctx, main_decl) {
+        let mut diag = build_resolved_typecheck_diagnostic("E-MOD-2431", Some(main_decl.span.clone()));
+        diag.children.extend(main_signature_fix_its(main_decl));
+        emit(diags, diag);
+    }
+    ctx.current_module = saved_module;
+    ctx.scopes = saved_scopes;
+}
+
 /// See `TypecheckModules`. The modules are the context's own.
 pub fn typecheck_modules(ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) -> TypecheckResult {
     let mut result = TypecheckResult::default();
@@ -282,11 +325,19 @@ pub fn typecheck_modules(ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) -
     let prev_stores = ctx.stores.replace(Rc::new(TypeStores::default()));
     decl_typing_modules(ctx, &sigma.mods, name_maps, &mut result);
     result.stores = std::mem::replace(&mut ctx.stores, prev_stores);
-    if !result.pending_items.is_empty() && result.pending_tail.is_none() {
+    if !result.pending_items.is_empty() {
         result.pending_tail = Some("declarations".to_string());
+        result.ok = !uv_core::diagnostics::has_error(&result.diags);
+        return result;
     }
-    if result.pending_tail.is_none() {
-        result.pending_tail = Some("InitPlan".to_string());
+    // What follows runs only when the declarations raised no error.
+    if !uv_core::diagnostics::has_error(&result.diags) {
+        let init_plan = build_init_plan(ctx, name_maps);
+        result.diags.extend(init_plan.diags);
+        result.has_init_plan = init_plan.ok;
+    }
+    if !uv_core::diagnostics::has_error(&result.diags) && ctx.project.is_none_or(|project| project.assembly.is_executable()) {
+        main_check_project(ctx, &sigma.mods, name_maps, &mut result.diags);
     }
     result.ok = !uv_core::diagnostics::has_error(&result.diags);
     result

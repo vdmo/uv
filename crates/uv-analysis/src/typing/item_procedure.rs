@@ -240,7 +240,7 @@ fn type_params_of(decl: &ast::ProcedureDecl) -> &[ast::TypeParam] {
 }
 
 /// `public procedure main(move ctx: Context) -> i32`, or a record of capabilities.
-fn main_sig_ok(ctx: &ScopeContext<'_>, decl: &ast::ProcedureDecl) -> bool {
+pub(crate) fn main_sig_ok(ctx: &ScopeContext<'_>, decl: &ast::ProcedureDecl) -> bool {
     if decl.vis != ast::Visibility::Public {
         return false;
     }
@@ -257,7 +257,7 @@ fn main_sig_ok(ctx: &ScopeContext<'_>, decl: &ast::ProcedureDecl) -> bool {
 }
 
 /// The one-line fix for a `main` that only misspells its signature.
-fn main_signature_fix_its(decl: &ast::ProcedureDecl) -> Vec<SubDiagnostic> {
+pub(crate) fn main_signature_fix_its(decl: &ast::ProcedureDecl) -> Vec<SubDiagnostic> {
     let is_context_syntax = |ty: &ast::Type| match &ty.node {
         ast::TypeNode::TypePathType(path) => path.generic_args.is_empty() && is_context_type_path(&path.path),
         ast::TypeNode::TypePrim(prim) => id_eq(&prim.name, "Context"),

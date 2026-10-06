@@ -460,11 +460,17 @@ that erase to one signature. A type invariant, and a contract on a method of a r
 class or one it inherits, still make the declaration pending (`TypeInvariant`,
 `ContractWF`, `BehavioralSubtyping`: 2, 154 and 6).
 
-Left after these: modals (26) and extern blocks (44), the foreign-interface attributes
-of procedures (66), and the tail of the check. A project's last line also waits for the
-initialisation plan (`InitPlan`, `memory/init_planner`, about 2,000 lines of the
-reference) and the project-wide check that exactly one `main` exists; 406 projects are
-held there.
+The tail of the check is in too: the initialisation plan (`memory::init_planner`, the
+reference's `BuildInitPlan`: for each module the modules its types, its `static`
+initialisers and its bodies depend on, a cycle among the eager ones reported as
+`E-MOD-1401`, and the topological order) and the project-wide check that exactly one
+`main` exists, is generic-free and has the signature of an entry point. With them 449
+of the 546 projects compare identically from start to finish, up from 43; the other 97
+hold a declaration that is still pending.
+
+Left: modals (26) and extern blocks (44), the foreign-interface attributes of
+procedures (66), contracts (154), the `#dynamic` no-effect warning (18), refinement
+well-formedness (12), the `inline(always)` warning (10) and opaque return types (6).
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
 procedure body as declaration typing does (type parameters and parameters in scope, the
