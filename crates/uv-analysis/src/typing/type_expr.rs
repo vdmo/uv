@@ -303,6 +303,42 @@ pub fn type_place(
     result
 }
 
+/// In a dynamic context a refinement that cannot be proved is checked at run time
+/// instead: the value only has to have the refinement's base type. The run-time check
+/// is not recorded for later passes yet.
+fn try_dynamic_refinement_fallback(
+    ctx: &ScopeContext<'_>,
+    type_ctx: &StmtTypeContext<'_>,
+    expr: &ExprPtr,
+    expected: &TypeRef,
+    env: &TypeEnv,
+) -> CheckResult {
+    let Some(e) = expr.as_deref() else {
+        return CheckResult::default();
+    };
+    // An attribute on the expression may itself make the context dynamic.
+    if matches!(e.node, ExprNode::AttributedExpr(_)) {
+        pending("AttributedExpr");
+        return CheckResult::default();
+    }
+    if !type_ctx.contract_dynamic || expected.is_none() {
+        return CheckResult::default();
+    }
+    let norm = match super::alias_normalize::normalize_alias_type(ctx, expected) {
+        Ok(norm) if norm.is_some() => norm,
+        Ok(_) => return CheckResult::default(),
+        Err(diag_id) => return CheckResult { diag_id, ..Default::default() },
+    };
+    let Some(TypeNode::Refine { base, .. }) = norm.as_deref().map(|ty| &ty.node) else {
+        return CheckResult::default();
+    };
+    let base_check = check_expr_against(ctx, type_ctx, expr, base, env);
+    if !base_check.ok {
+        return base_check;
+    }
+    CheckResult { ok: true, ..Default::default() }
+}
+
 /// Whether the expression has the expected type. The forms that are checked against
 /// the expectation in their own way are ported with their typing.
 pub fn check_expr_against(
@@ -358,16 +394,21 @@ pub fn check_expr_against(
     match &e.node {
         ExprNode::IfExpr(node) => {
             let result = super::expr::if_expr::check_if_expr(ctx, type_ctx, node, expected, env);
-            // In a dynamic context a refinement that cannot be proved is checked at run time.
-            if !result.ok && type_ctx.contract_dynamic {
-                pending("DynamicRefinement");
+            if !result.ok {
+                let dynamic_fallback = try_dynamic_refinement_fallback(ctx, type_ctx, expr, expected, env);
+                if dynamic_fallback.ok {
+                    return dynamic_fallback;
+                }
             }
             return result;
         }
         ExprNode::IfIsExpr(node) => {
             let result = super::expr::if_case::check_if_is_expr(ctx, type_ctx, node, env, expected);
-            if !result.ok && type_ctx.contract_dynamic {
-                pending("DynamicRefinement");
+            if !result.ok {
+                let dynamic_fallback = try_dynamic_refinement_fallback(ctx, type_ctx, expr, expected, env);
+                if dynamic_fallback.ok {
+                    return dynamic_fallback;
+                }
             }
             return result;
         }
@@ -431,13 +472,24 @@ pub fn check_expr_against(
         Some(&type_place_fn),
         &type_ident_fn,
         Some(&if_case_check),
+        type_ctx.proof_ctx.as_deref(),
     );
     if !check.ok {
-        // In a dynamic context a refinement that cannot be proved is checked at run time.
-        if type_ctx.contract_dynamic {
-            pending("DynamicRefinement");
+        let dynamic_fallback = try_dynamic_refinement_fallback(ctx, type_ctx, expr, expected, env);
+        if dynamic_fallback.ok {
+            return CheckResult { ok: true, ..Default::default() };
         }
-        return check;
+        return CheckResult {
+            ok: false,
+            diag_id: dynamic_fallback.diag_id.or(check.diag_id),
+            diag_detail: if dynamic_fallback.diag_detail.is_empty() { check.diag_detail } else { dynamic_fallback.diag_detail },
+            diag_span: dynamic_fallback.diag_span.or(check.diag_span),
+            diagnostic_obligation_ids: if dynamic_fallback.diagnostic_obligation_ids.is_empty() {
+                check.diagnostic_obligation_ids
+            } else {
+                dynamic_fallback.diagnostic_obligation_ids
+            },
+        };
     }
     if let ExprNode::IdentifierExpr(ident) = &e.node {
         if let Some(binding) = bind_of(env, &ident.name) {

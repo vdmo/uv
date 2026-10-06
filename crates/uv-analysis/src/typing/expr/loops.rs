@@ -6,12 +6,12 @@ use std::rc::Rc;
 
 use uv_source::ast::{self, ExprPtr};
 
+use super::loop_invariant::{loop_invariant_maintained_by_body, validate_loop_invariant_expr, violates_loop_invariant_maintenance};
 use crate::context::ScopeContext;
 use crate::generics::where_bounds::check_class_bound;
 use crate::resolve::scopes::id_key_of;
 use crate::typing::callbacks::{ExprTypeFn, IdentTypeFn};
 use crate::typing::expr_result::ExprTypeResult;
-use crate::typing::pending::pending;
 use crate::typing::stmt::assign_stmt::type_expr_with_current_env;
 use crate::typing::stmt::block::{loop_type_fin, loop_type_inf, type_block_info, BlockInfoResult, FlowInfo, StmtTypeResult};
 use crate::typing::stmt_context::{with_shared_access_mode, LoopFlag, StmtTypeContext};
@@ -44,13 +44,20 @@ fn body_failure(info: BlockInfoResult) -> ExprTypeResult {
     ExprTypeResult { diag_id: info.diag_id, diag_detail: info.diag_detail, diag_span: info.diag_span, ..Default::default() }
 }
 
-/// A loop invariant must be a pure `bool` that holds on entry and is maintained by the
-/// body. Its proof is not ported; a loop with an invariant is left pending.
-fn note_invariant(invariant: &Option<ast::LoopInvariant>) -> bool {
-    if invariant.is_some() {
-        pending("LoopInvariant");
+/// Checks a loop's invariant, if it has one: the invariant itself, and that the body
+/// leaves alone the names it speaks of.
+fn check_invariant(
+    ctx: &ScopeContext<'_>,
+    loop_ctx: &StmtTypeContext<'_>,
+    env: &TypeEnv,
+    invariant: &Option<ast::LoopInvariant>,
+    body: &ast::BlockPtr,
+) -> Option<&'static str> {
+    let invariant = invariant.as_ref()?;
+    if let diag @ Some(_) = validate_loop_invariant_expr(ctx, loop_ctx, env, invariant) {
+        return diag;
     }
-    invariant.is_some()
+    (!loop_ctx.contract_dynamic && violates_loop_invariant_maintenance(invariant, body)).then_some("E-SEM-2831")
 }
 
 fn loop_result(loop_type: Option<TypeRef>, rule: &'static str) -> ExprTypeResult {
@@ -76,8 +83,8 @@ pub fn type_loop_infinite_expr(
     if !body_info.ok {
         return body_failure(body_info);
     }
-    if note_invariant(&expr.invariant_opt) {
-        return ExprTypeResult::default();
+    if let Some(diag_id) = check_invariant(ctx, &loop_ctx, env, &expr.invariant_opt, &expr.body) {
+        return ExprTypeResult::failed(Some(diag_id));
     }
     loop_result(loop_type_inf(&body_info.breaks, body_info.break_void), "T-Loop-Infinite")
 }
@@ -110,8 +117,15 @@ pub fn type_loop_conditional_expr(
     if !body_info.ok {
         return body_failure(body_info);
     }
-    if note_invariant(&expr.invariant_opt) {
-        return ExprTypeResult::default();
+    // A conditional loop may assign to the invariant's names if the invariant still
+    // follows afterwards.
+    if let Some(invariant) = &expr.invariant_opt {
+        if let Some(diag_id) = validate_loop_invariant_expr(ctx, &loop_ctx, env, invariant) {
+            return ExprTypeResult::failed(Some(diag_id));
+        }
+        if !loop_ctx.contract_dynamic && !loop_invariant_maintained_by_body(&loop_ctx, invariant, &expr.cond, &expr.body) {
+            return ExprTypeResult::failed(Some("E-SEM-2831"));
+        }
     }
     loop_result(loop_type_fin(&body_info.breaks, body_info.break_void), "T-Loop-Conditional")
 }
@@ -229,8 +243,8 @@ pub fn type_loop_iter_expr(
     if !body_info.ok {
         return body_failure(body_info);
     }
-    if note_invariant(&expr.invariant_opt) {
-        return ExprTypeResult::default();
+    if let Some(diag_id) = check_invariant(ctx, &loop_ctx, &extended_env, &expr.invariant_opt, &expr.body) {
+        return ExprTypeResult::failed(Some(diag_id));
     }
     loop_result(loop_type_fin(&body_info.breaks, body_info.break_void), "T-Loop-Iter")
 }

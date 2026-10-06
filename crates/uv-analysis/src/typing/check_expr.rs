@@ -21,6 +21,8 @@ use super::type_predicates::{bitcopy_type, perm_of_type, strip_perm};
 use super::types::*;
 use crate::composite::arrays_slices::coerce_array_to_slice;
 use crate::context::ScopeContext;
+use crate::contracts::verification::{static_proof_at, StaticProofContext};
+use crate::typing::stmt::postcondition::substitute_refinement_self;
 use crate::memory::calls::type_call_with_subst;
 use crate::typing::expr::call::infer_generic_call_subst;
 use crate::modal::lookup::{has_state, lookup_modal_decl};
@@ -164,6 +166,8 @@ struct Checker<'c, 'a, 'f> {
     type_place: Option<PlaceTypeFn<'f>>,
     type_ident: IdentTypeFn<'f>,
     if_case_check: Option<IfCaseCheckFn<'f>>,
+    /// The facts in scope, from which refinement predicates are proved.
+    proof_ctx: Option<&'f StaticProofContext>,
 }
 
 impl Checker<'_, '_, '_> {
@@ -469,8 +473,19 @@ impl Checker<'_, '_, '_> {
                 return no(base_check.diag_id);
             }
             // The predicate, with the value for `self`, is proved from the facts in scope.
-            pending("RefinePredicate");
-            return CheckResult::default();
+            let Some(TypeNode::Refine { predicate, .. }) = expected_norm.as_deref().map(|ty| &ty.node) else {
+                return no(None);
+            };
+            if predicate.is_none() {
+                return no(None);
+            }
+            let substituted = substitute_refinement_self(predicate, expr);
+            let empty_proof_ctx = StaticProofContext::default();
+            let location = expr.as_deref().or(substituted.as_deref()).map(|expr| expr.span.clone()).unwrap_or_default();
+            if !static_proof_at(self.proof_ctx.unwrap_or(&empty_proof_ctx), &location, &substituted).provable {
+                return no(Some("E-TYP-1953"));
+            }
+            return ok();
         }
         CheckResult {
             ok: false,
@@ -482,6 +497,7 @@ impl Checker<'_, '_, '_> {
 }
 
 /// Whether the expression has the expected type.
+#[allow(clippy::too_many_arguments)]
 pub fn check_expr(
     ctx: &ScopeContext<'_>,
     expr: &ExprPtr,
@@ -490,6 +506,7 @@ pub fn check_expr(
     type_place: Option<PlaceTypeFn<'_>>,
     type_ident: IdentTypeFn<'_>,
     if_case_check: Option<IfCaseCheckFn<'_>>,
+    proof_ctx: Option<&StaticProofContext>,
 ) -> CheckResult {
-    Checker { ctx, type_expr, type_place, type_ident, if_case_check }.check(expr, expected)
+    Checker { ctx, type_expr, type_place, type_ident, if_case_check, proof_ctx }.check(expr, expected)
 }

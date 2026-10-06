@@ -63,10 +63,21 @@ fn with_tail(block_expr: &ast::BlockExpr, f: &dyn Fn(&ExprPtr) -> ExprPtr) -> as
 /// The expression with every use of the name replaced, except where a pattern rebinds
 /// it.
 pub fn substitute_identifier_expr(expr: &ExprPtr, name: &str, replacement: &ExprPtr) -> ExprPtr {
+    substitute_ident(expr, name, replacement, false)
+}
+
+/// The predicate of a refinement with the value for `self`. This substitution reaches
+/// into copies and enum payloads but not into blocks, and does not look at patterns.
+pub fn substitute_refinement_self(predicate: &ExprPtr, value: &ExprPtr) -> ExprPtr {
+    substitute_ident(predicate, "self", value, true)
+}
+
+fn substitute_ident(expr: &ExprPtr, name: &str, replacement: &ExprPtr, for_refinement: bool) -> ExprPtr {
     let Some(e) = expr.as_deref() else {
         return expr.clone();
     };
-    let sub = |inner: &ExprPtr| substitute_identifier_expr(inner, name, replacement);
+    let sub = |inner: &ExprPtr| substitute_ident(inner, name, replacement, for_refinement);
+    let pattern_binds_name = |pattern: &ast::PatternPtr, name: &str| !for_refinement && pattern_binds_name(pattern, name);
     let sub_args = |args: &[ast::Arg]| -> Vec<ast::Arg> { args.iter().map(|arg| ast::Arg { value: sub(&arg.value), ..arg.clone() }).collect() };
     let node = match &e.node {
         ExprNode::IdentifierExpr(ident) => return if id_eq(&ident.name, name) { replacement.clone() } else { expr.clone() },
@@ -131,7 +142,25 @@ pub fn substitute_identifier_expr(expr: &ExprPtr, name: &str, replacement: &Expr
             }
             ExprNode::RecordExpr(out)
         }
-        ExprNode::BlockExpr(node) => ExprNode::BlockExpr(with_tail(node, &sub)),
+        ExprNode::BlockExpr(node) if !for_refinement => ExprNode::BlockExpr(with_tail(node, &sub)),
+        ExprNode::CopyExpr(node) if for_refinement => ExprNode::CopyExpr(ast::CopyExpr { value: sub(&node.value) }),
+        ExprNode::EnumLiteralExpr(node) if for_refinement => {
+            let mut out = node.clone();
+            match &mut out.payload_opt {
+                Some(ast::EnumPayload::EnumPayloadParen(paren)) => {
+                    for element in &mut paren.elements {
+                        *element = sub(element);
+                    }
+                }
+                Some(ast::EnumPayload::EnumPayloadBrace(brace)) => {
+                    for field in &mut brace.fields {
+                        field.value = sub(&field.value);
+                    }
+                }
+                None => {}
+            }
+            ExprNode::EnumLiteralExpr(out)
+        }
         ExprNode::PropagateExpr(node) => ExprNode::PropagateExpr(ast::PropagateExpr { value: sub(&node.value) }),
         ExprNode::EntryExpr(node) => ExprNode::EntryExpr(ast::EntryExpr { expr: sub(&node.expr) }),
         _ => return expr.clone(),

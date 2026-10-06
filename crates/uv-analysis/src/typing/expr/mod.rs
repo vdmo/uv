@@ -11,6 +11,7 @@ pub mod record_literal;
 pub mod tuple_access;
 pub mod if_case;
 pub mod if_expr;
+pub mod loop_invariant;
 pub mod loops;
 pub mod method_call;
 pub mod path;

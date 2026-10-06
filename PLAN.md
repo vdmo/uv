@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,129 of 4,569 bodies compared (90.4%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,146 of 4,569 bodies compared (90.7%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -480,8 +480,10 @@ and places), address-of, ranges and `unsafe` blocks as expressions and statement
 (`typing::expr::access`), and the three loops with `break` and `continue`
 (`typing::expr::loops`). Two things in them are not ported and make the body pending:
 the warnings about transmutes to types with invalid values after an `unsafe` block
-(`TransmuteWarnings`, for a block that contains a transmute), and loop invariants
-(`LoopInvariant`), whose proof needs the prover applied to the body's assignments.
+(`TransmuteWarnings`, for a block that contains a transmute). Loop invariants are in
+(`typing::expr::loop_invariant`): the invariant must be a pure `bool` without
+`@result` that holds on entry, and the body must leave its names alone, or, in a
+conditional loop, leave the invariant provable with its assignments applied.
 
 Closures and pipelines are in (`typing::expr::closure_expr`), with the capture analysis
 (`typing::closure_capture`): the names a closure uses from outside, whether any is
@@ -494,15 +496,20 @@ The postcondition is proved at `return` (`typing::stmt::postcondition`): the ret
 value takes the place of `@result`, `@entry(e)` becomes `e` where it cannot have
 changed, and the predicate is simplified where the value decides a branch.
 
+Refinement predicates are proved when a value is checked against a refinement type:
+the predicate with the value for `self` must follow from the facts in scope
+(`E-TYP-1953` otherwise). In a dynamic context a refinement that cannot be proved is
+left to a run-time check and the value only needs the base type; that run-time check
+is not recorded for later passes yet, and the gate has no dynamic contexts to exercise
+the fallback.
+
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from
 37 to 5 seconds.
 
 Known gaps inside what is ported, each of which makes a body pending when reached
-rather than answering: names of module-level declarations (`ValuePathType`), the proof
-of a refinement predicate,
-provenance of returned pointers, opaque return types, attributed expressions, and the
-shared-access check under held keys.
+rather than answering: provenance of returned pointers, opaque return types,
+attributed expressions, and the shared-access check under held keys.
 
 Two things the gate does not exercise yet, because the oracle's harness leaves them
 unset as well: the store of expression types (`ctx.expr_types`), which the reference
