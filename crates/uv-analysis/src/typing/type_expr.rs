@@ -225,6 +225,8 @@ fn type_expr_form(
         }
         ExprNode::FieldAccessExpr(node) => super::expr::field_access::type_field_access_expr(ctx, type_ctx, node, env),
         ExprNode::TupleAccessExpr(node) => super::expr::tuple_access::type_tuple_access_expr(ctx, type_ctx, node, env),
+        ExprNode::RecordExpr(node) => super::expr::record_literal::type_record_expr(ctx, type_ctx, node, env, None),
+        ExprNode::EnumLiteralExpr(node) => super::expr::enum_literal::type_enum_literal_expr(ctx, type_ctx, node, env),
         ExprNode::CallExpr(node) => super::expr::call::type_call_expr(ctx, type_ctx, node, env),
         ExprNode::CallTypeArgsExpr(node) => super::expr::call::type_call_type_args_expr(ctx, type_ctx, node, env),
         // Splices are gone before typing; the reference types them as nothing.
@@ -308,6 +310,43 @@ pub fn check_expr_against(
         pending("ClosureCapture");
         return CheckResult::default();
     }
+    // A record or enum literal takes its type arguments from the expected type; when it
+    // neither fits nor names a rule, the general check below decides.
+    match &e.node {
+        ExprNode::RecordExpr(node) => {
+            let typed_record = super::expr::record_literal::type_record_expr(ctx, type_ctx, node, env, Some(expected));
+            if typed_record.ok {
+                let sub = super::subtyping::subtyping(ctx, &typed_record.r#type, expected);
+                if !sub.ok {
+                    return CheckResult { diag_id: sub.diag_id, ..Default::default() };
+                }
+                if sub.subtype {
+                    return CheckResult { ok: true, ..Default::default() };
+                }
+            }
+            if typed_record.diag_id.is_some() {
+                return CheckResult {
+                    diag_id: typed_record.diag_id,
+                    diag_detail: typed_record.diag_detail,
+                    diag_span: typed_record.diag_span,
+                    ..Default::default()
+                };
+            }
+        }
+        ExprNode::EnumLiteralExpr(node) => {
+            let enum_check = super::expr::enum_literal::check_enum_literal_expr_against(ctx, type_ctx, node, expected, env);
+            if enum_check.ok || enum_check.diag_id.is_some() {
+                return CheckResult {
+                    ok: enum_check.ok,
+                    diag_id: enum_check.diag_id,
+                    diag_detail: enum_check.diag_detail,
+                    diag_span: enum_check.diag_span,
+                    ..Default::default()
+                };
+            }
+        }
+        _ => {}
+    }
     match &e.node {
         ExprNode::IfExpr(node) => {
             let result = super::expr::if_expr::check_if_expr(ctx, type_ctx, node, expected, env);
@@ -330,9 +369,7 @@ pub fn check_expr_against(
         ExprNode::AttributedExpr(_)
         | ExprNode::ComptimeExpr(_)
         | ExprNode::IfIsExpr(_)
-        | ExprNode::RecordExpr(_)
         | ExprNode::QuoteExpr(_)
-        | ExprNode::EnumLiteralExpr(_)
         | ExprNode::UnsafeBlockExpr(_) => {
             pending(ast::expr_kind(e));
             return CheckResult::default();
