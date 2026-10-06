@@ -11,6 +11,7 @@ use uv_source::ast::{self, ExprNode, ExprPtr};
 
 use super::block::StmtTypeResult;
 use crate::context::ScopeContext;
+use crate::typing::closure_capture::{analyze_closure_capture_info, closure_type_has_shared_deps};
 use crate::typing::callbacks::ExprTypeFn;
 use crate::typing::expr_result::ExprTypeResult;
 use crate::typing::outcome::{classify_outcome_intro, OutcomeIntro};
@@ -100,15 +101,29 @@ fn check_escaping_closure_return(ret_expr: &ExprPtr, env: &TypeEnv, expected: &T
     if !type_may_be(expected, |node| matches!(node, TypeNode::Closure { .. })) {
         return None;
     }
-    let captures_known = match ret_expr.as_deref().map(|expr| &expr.node) {
+    let expects_shared_deps = closure_type_has_shared_deps(expected);
+    let info = match ret_expr.as_deref().map(|expr| &expr.node) {
         Some(ExprNode::IdentifierExpr(ident)) => {
-            bind_of(env, &ident.name).is_some_and(|binding| binding.closure_capture_info.is_some())
+            let binding = bind_of(env, &ident.name)?;
+            let mut info = binding.closure_capture_info?;
+            info.has_shared_deps = info.has_shared_deps || closure_type_has_shared_deps(&binding.r#type) || expects_shared_deps;
+            info
         }
-        Some(ExprNode::ClosureExpr(_)) => true,
-        _ => false,
+        Some(_) => {
+            let mut info = analyze_closure_capture_info(ret_expr, env, expected)?;
+            info.has_shared_deps = info.has_shared_deps || expects_shared_deps;
+            info
+        }
+        None => return None,
     };
-    if captures_known {
-        pending("ClosureCapture");
+    if !info.captures_any {
+        return None;
+    }
+    if expects_shared_deps && info.contains_spawn {
+        return Some("E-CON-0131");
+    }
+    if info.captures_shared && !info.has_shared_deps {
+        return Some("E-CON-0085");
     }
     None
 }

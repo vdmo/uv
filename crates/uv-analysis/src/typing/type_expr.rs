@@ -8,6 +8,7 @@ use uv_core::span::Span;
 
 use super::callbacks::{CheckResult, PlaceTypeResult};
 use super::check_expr::check_expr;
+use super::closure_capture::check_escaping_closure_spawn;
 use super::expr::small;
 use super::expr::path::{type_identifier_place, type_path_expr};
 use super::expr_result::ExprTypeResult;
@@ -246,6 +247,8 @@ fn type_expr_form(
         ExprNode::RecordExpr(node) => super::expr::record_literal::type_record_expr(ctx, type_ctx, node, env, None),
         ExprNode::EnumLiteralExpr(node) => super::expr::enum_literal::type_enum_literal_expr(ctx, type_ctx, node, env),
         ExprNode::MethodCallExpr(node) => super::expr::method_call::type_method_call_expr(ctx, type_ctx, node, env, &e.span),
+        ExprNode::ClosureExpr(node) => super::expr::closure_expr::type_closure_expr(ctx, type_ctx, node, expr, env, None),
+        ExprNode::PipelineExpr(node) => super::expr::closure_expr::type_pipeline_expr(ctx, type_ctx, node, env),
         ExprNode::CallExpr(node) => super::expr::call::type_call_expr(ctx, type_ctx, node, env),
         ExprNode::CallTypeArgsExpr(node) => super::expr::call::type_call_type_args_expr(ctx, type_ctx, node, env),
         // Splices are gone before typing; the reference types them as nothing.
@@ -300,16 +303,6 @@ pub fn type_place(
     result
 }
 
-fn closure_type_has_shared_deps(hint: &TypeRef) -> bool {
-    matches!(
-        strip_perm(hint).as_deref().map(|ty| &ty.node),
-        Some(TypeNode::Closure {
-            deps_opt: Some(_),
-            ..
-        })
-    )
-}
-
 /// Whether the expression has the expected type. The forms that are checked against
 /// the expectation in their own way are ported with their typing.
 pub fn check_expr_against(
@@ -322,10 +315,8 @@ pub fn check_expr_against(
     let Some(e) = expr.as_deref().filter(|_| expected.is_some()) else {
         return CheckResult::default();
     };
-    // A closure expected to declare its shared dependencies must not spawn.
-    if closure_type_has_shared_deps(expected) {
-        pending("ClosureCapture");
-        return CheckResult::default();
+    if let Some(diag_id) = check_escaping_closure_spawn(expr, env, expected) {
+        return CheckResult { diag_id: Some(diag_id), diag_span: Some(e.span.clone()), ..Default::default() };
     }
     // A record or enum literal takes its type arguments from the expected type; when it
     // neither fits nor names a rule, the general check below decides.
@@ -406,14 +397,23 @@ pub fn check_expr_against(
             pending(ast::expr_kind(e));
             return CheckResult::default();
         }
-        ExprNode::ClosureExpr(_)
-            if matches!(
-                strip_perm(expected).as_deref().map(|ty| &ty.node),
-                Some(TypeNode::Closure { .. })
-            ) =>
-        {
-            pending("ClosureExpr");
-            return CheckResult::default();
+        ExprNode::ClosureExpr(node) if matches!(strip_perm(expected).as_deref().map(|ty| &ty.node), Some(TypeNode::Closure { .. })) => {
+            let typed_closure = super::expr::closure_expr::type_closure_expr(ctx, type_ctx, node, expr, env, Some(expected));
+            if !typed_closure.ok {
+                return CheckResult {
+                    diag_id: typed_closure.diag_id,
+                    diag_detail: typed_closure.diag_detail,
+                    diag_span: typed_closure.diag_span,
+                    ..Default::default()
+                };
+            }
+            let sub = super::subtyping::subtyping(ctx, &typed_closure.r#type, expected);
+            if !sub.ok {
+                return CheckResult { diag_id: sub.diag_id, ..Default::default() };
+            }
+            if sub.subtype {
+                return CheckResult { ok: true, ..Default::default() };
+            }
         }
         _ => {}
     }

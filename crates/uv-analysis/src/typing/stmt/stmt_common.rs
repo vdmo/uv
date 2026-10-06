@@ -4,12 +4,11 @@
 use uv_source::ast::{self, ExprNode, ExprPtr, Stmt};
 
 use crate::context::ScopeContext;
-use crate::typing::pending::pending;
 use crate::typing::stmt_context::StmtTypeContext;
-use crate::typing::type_env::{ClosureCaptureInfo, TypeEnv};
+use crate::typing::type_env::TypeEnv;
 use crate::typing::type_expr::{type_expr, type_place};
 use crate::typing::type_predicates::perm_of_type;
-use crate::typing::types::{Permission, TypeRef};
+use crate::typing::types::Permission;
 
 /// A copy of the context for queries: they emit nothing and update no environment.
 pub fn read_only<'t>(type_ctx: &StmtTypeContext<'t>) -> StmtTypeContext<'t> {
@@ -155,16 +154,4 @@ pub fn expr_needs_key_access(
     }
 }
 
-/// What a closure bound by `let` or `var` captures. Only closures have capture facts;
-/// their analysis is not ported yet.
-pub fn analyze_closure_capture_info(
-    expr: &ExprPtr,
-    env: &TypeEnv,
-    closure_type_hint: &TypeRef,
-) -> Option<ClosureCaptureInfo> {
-    let _ = (env, closure_type_hint);
-    if let Some(ExprNode::ClosureExpr(_)) = expr.as_deref().map(|e| &e.node) {
-        pending("ClosureCapture");
-    }
-    None
-}
+pub use crate::typing::closure_capture::analyze_closure_capture_info;

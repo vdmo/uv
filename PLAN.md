@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 3,895 of 4,569 bodies compared (85.2%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 3,950 of 4,569 bodies compared (86.5%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -480,13 +480,20 @@ the warnings about transmutes to types with invalid values after an `unsafe` blo
 (`TransmuteWarnings`, for a block that contains a transmute), and loop invariants
 (`LoopInvariant`), whose proof needs the prover applied to the body's assignments.
 
+Closures and pipelines are in (`typing::expr::closure_expr`), with the capture analysis
+(`typing::closure_capture`): the names a closure uses from outside, whether any is
+shared, and whether its body spawns. A closure that captures nothing is a function
+type; an expected closure type supplies what the closure leaves out. The checks that
+use the capture facts are in with it: a closure expected to declare shared dependencies
+must not spawn, and a returned closure must declare the shared data it captures.
+
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from
 37 to 5 seconds.
 
 Known gaps inside what is ported, each of which makes a body pending when reached
 rather than answering: names of module-level declarations (`ValuePathType`), the proof
-of a refinement predicate, postconditions at `return`, closure capture analysis,
+of a refinement predicate, postconditions at `return`,
 provenance of returned pointers, opaque return types, attributed expressions, and the
 shared-access check under held keys.
 

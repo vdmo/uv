@@ -3,6 +3,7 @@
 pub mod alias_normalize;
 pub mod callbacks;
 pub mod check_expr;
+pub mod closure_capture;
 pub mod const_len;
 pub mod expr;
 pub mod expr_result;
