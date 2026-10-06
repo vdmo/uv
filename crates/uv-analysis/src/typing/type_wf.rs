@@ -3,7 +3,12 @@
 
 use uv_source::ast;
 
+use super::stmt_context::StmtTypeContext;
+use super::type_env::{TypeBinding, TypeEnv};
 use super::type_equiv::type_equiv;
+use super::type_expr::type_expr;
+use crate::contracts::purity::{check_purity, ContractContext};
+use crate::resolve::scopes::id_key_of;
 use super::type_lookup::type_params_of;
 use super::type_lower::lower_type;
 use super::type_predicates::{perm_of_type, strip_perm};
@@ -177,8 +182,22 @@ pub fn type_wf(ctx: &ScopeContext<'_>, type_ref: &TypeRef) -> Result<(), WfError
             if predicate.is_none() {
                 return Err(None);
             }
-            super::pending::pending("RefinementWF");
-            Err(Some(REFINEMENT_WF_PENDING))
+            // The predicate is a pure `bool` expression that may speak of `self`.
+            let mut env = TypeEnv::default();
+            env.scopes.push(Default::default());
+            env.scopes[0].insert(id_key_of("self"), TypeBinding { r#type: base.clone(), ..Default::default() });
+            let type_ctx = StmtTypeContext { return_type: make_type_prim("bool"), ..Default::default() };
+            let pred_type = type_expr(ctx, &type_ctx, predicate, &env);
+            if !pred_type.ok {
+                return Err(pred_type.diag_id);
+            }
+            if !matches!(strip_perm(&pred_type.r#type).as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(name)) if name == "bool") {
+                return Err(Some("E-TYP-1955"));
+            }
+            if !check_purity(&ContractContext::default(), predicate).ok {
+                return Err(Some("E-TYP-1954"));
+            }
+            Ok(())
         }
         TypeNode::String(_) | TypeNode::Bytes(_) | TypeNode::RangeFull => Ok(()),
         TypeNode::ModalState(node) => {

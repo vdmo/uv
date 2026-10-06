@@ -3,6 +3,11 @@
 pub mod alias_normalize;
 pub mod attributed;
 pub mod item_class;
+pub mod comptime_avail;
+pub mod dynamic_runtime;
+pub mod inline_always;
+pub mod item_ffi;
+pub mod item_modal;
 pub mod item_procedure;
 pub mod item_record;
 pub mod item_simple;

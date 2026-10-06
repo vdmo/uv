@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-PRJ-0205","severity":"error","message":"Assembly selection failed (missing target or target not found) (`Assembly-Select-Err`)","span":null,"source_line":null,"children":[{"kind":"note","message":"available assemblies: Lib, Other","span":null}]}]}

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-SEM-3011","severity":"error","message":"Method defined outside of type context","span":{"file":"/w/target/p1cases/self_second_param/Source/Main.uv","start_line":1,"start_col":21,"end_line":1,"end_col":30},"source_line":"procedure f(a: i32, self: i32, self: i32) {","children":[]}]}

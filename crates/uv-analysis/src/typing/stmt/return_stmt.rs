@@ -11,12 +11,13 @@ use uv_source::ast::{self, ExprNode, ExprPtr};
 
 use super::block::StmtTypeResult;
 use super::postcondition::verify_postcondition_at_return;
+use crate::composite::classes::type_implements_class;
 use crate::context::ScopeContext;
+use crate::typing::type_equiv::type_equiv;
 use crate::typing::closure_capture::{analyze_closure_capture_info, closure_type_has_shared_deps};
 use crate::typing::callbacks::ExprTypeFn;
 use crate::typing::expr_result::ExprTypeResult;
 use crate::typing::outcome::{classify_outcome_intro, OutcomeIntro};
-use crate::typing::pending::pending;
 use crate::typing::stmt_context::StmtTypeContext;
 use crate::memory::regions::ProvenanceKind;
 use crate::provenance::prov_expr::track_expr_provenance;
@@ -256,9 +257,25 @@ pub fn type_return_stmt(
     if node.value_opt.is_none() {
         return without_value(&type_ctx.return_type, "E-SEM-3161");
     }
-    if type_ctx.opaque_return {
-        pending("OpaqueReturn");
-        return failed(None);
+    if let Some(opaque) = &type_ctx.opaque_return {
+        let return_expr = return_dest_expr(&node.value_opt);
+        let typed = type_expr_with_current_env(ctx, type_ctx, env, type_expr_fn, &return_expr);
+        if !typed.ok {
+            return StmtTypeResult { diag_id: typed.diag_id, diag_detail: typed.diag_detail, ..Default::default() };
+        }
+        let class_path = opaque.borrow().class_path.clone();
+        if !type_implements_class(ctx, &typed.r#type, &class_path) {
+            return failed(Some("E-TYP-2511"));
+        }
+        let underlying = opaque.borrow().underlying.clone();
+        if underlying.is_some() {
+            if !type_equiv(&underlying, &typed.r#type) {
+                return failed(Some("E-TYP-2512"));
+            }
+        } else {
+            opaque.borrow_mut().underlying = typed.r#type.clone();
+        }
+        return after_checks(&typed.r#type);
     }
     let return_expr = return_dest_expr(&node.value_opt);
     let check = check_expr_against(ctx, type_ctx, &return_expr, &type_ctx.return_type, env);

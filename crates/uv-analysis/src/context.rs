@@ -73,7 +73,28 @@ pub struct Sigma {
     pub types: BTreeMap<PathKey, TypeDecl>,
     pub classes: BTreeMap<PathKey, ClassDecl>,
     /// What each `opaque` return type stands for, once the type checker has found out.
-    pub opaque_underlying_by_class_path: BTreeMap<PathKey, crate::typing::types::TypeRef>,
+    pub opaque_underlying_by_class_path: OpaqueUnderlying,
+}
+
+/// The table of what each `opaque` return type stands for. Typing a procedure fills it
+/// through a shared reference to the program, as the reference compiler does.
+#[derive(Debug, Default)]
+pub struct OpaqueUnderlying(std::sync::Mutex<BTreeMap<PathKey, crate::typing::types::TypeRef>>);
+
+impl OpaqueUnderlying {
+    pub fn get(&self, key: &PathKey) -> Option<crate::typing::types::TypeRef> {
+        self.0.lock().unwrap_or_else(|poisoned| poisoned.into_inner()).get(key).cloned()
+    }
+
+    pub fn insert(&self, key: PathKey, ty: crate::typing::types::TypeRef) {
+        self.0.lock().unwrap_or_else(|poisoned| poisoned.into_inner()).insert(key, ty);
+    }
+}
+
+impl Clone for OpaqueUnderlying {
+    fn clone(&self) -> Self {
+        OpaqueUnderlying(std::sync::Mutex::new(self.0.lock().unwrap_or_else(|poisoned| poisoned.into_inner()).clone()))
+    }
 }
 
 /// Names to entities. Iteration follows the reference's hash table, which decides which

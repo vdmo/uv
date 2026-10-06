@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2431","severity":"error","message":"Invalid `main` signature (`Main-Signature-Err`)","span":{"file":"/w/target/p1cases/self_in_record_method/Source/Main.uv","start_line":7,"start_col":8,"end_line":9,"end_col":2},"source_line":"public procedure main() -> i32 {","children":[]}]}

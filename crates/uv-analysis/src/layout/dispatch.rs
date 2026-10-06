@@ -33,7 +33,7 @@ fn is_gpu_ptr_layout_type(path: &[String], args: &[TypeRef]) -> bool {
 }
 
 fn opaque_underlying(ctx: &ScopeContext<'_>, class_path: &[String]) -> Option<TypeRef> {
-    ctx.sigma.opaque_underlying_by_class_path.get(&path_key_of(class_path)).filter(|ty| ty.is_some()).cloned()
+    ctx.sigma.opaque_underlying_by_class_path.get(&path_key_of(class_path)).filter(|ty| ty.is_some())
 }
 
 thread_local! {

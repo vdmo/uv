@@ -6,6 +6,7 @@
 //! errors says so and exits with status 3 instead of reporting a successful build.
 
 mod cli;
+mod sema;
 
 use std::collections::HashMap;
 use std::time::Instant;
@@ -288,7 +289,7 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
     if let (false, Some(project)) = (has_error(&diags), &project) {
         selected_target_profile = resolve_selected_target_profile(opts, project, &mut diags);
     }
-    let mut phase1_ok = false;
+    let mut sema_pending: Option<String> = None;
     if let (false, Some(project), Some(target_profile)) =
         (has_error(&diags), &project, selected_target_profile)
     {
@@ -309,7 +310,7 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
         log.machine("phase=parse-modules");
         Conformance::set_phase("parse");
         let mut phase1 = run_phase1(project, &LogObserver(&log));
-        phase1_ok = phase1.ok;
+        let mut phase1_ok = phase1.ok;
         let parse_phase_error_count =
             count_error_diagnostics(&diags) + count_error_diagnostics(&phase1.diags);
         if error_policy.max_error_count.is_some_and(|cap| parse_phase_error_count >= cap) {
@@ -355,8 +356,12 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
                 println!("{line}");
             }
         }
+        if phase1_ok && !opts.phase1_only {
+            let outcome = sema::run_sema(project, &phase1, target_profile, &mut diags, |verb, what| log.progress(verb, what, Color::BoldGreen));
+            sema_pending = outcome.pending;
+        }
     }
-    let reached_unimplemented_phase = phase1_ok && !opts.phase1_only && !has_error(&diags);
+    let reached_unimplemented_phase = sema_pending.is_some();
     truncate_diagnostics_to_error_cap(&mut diags, error_policy);
 
     let mut source_cache: HashMap<String, Option<String>> = HashMap::new();
@@ -387,7 +392,7 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
         }
     }
     if reached_unimplemented_phase {
-        return not_implemented("compile-time execution and every later compiler phase");
+        return not_implemented(sema_pending.as_deref().unwrap_or("every later compiler phase"));
     }
     let ok = compile_status(&diags) == CompileStatusResult::Ok;
     if !opts.diag_json && show_build_progress {

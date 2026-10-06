@@ -14,10 +14,13 @@ use uv_source::ast::{self, ExprNode, ExprPtr, Stmt, TypePtr};
 use uv_source::attributes::{attrs, has_attribute, validate_attributes, AttributeTarget};
 
 use super::dynamic_context::{compute_dynamic_context, DynamicScopeAncestor};
+use super::dynamic_runtime::emit_dynamic_no_runtime_warning_if_needed;
+use super::inline_always::procedure_warning_inline_always;
+use super::item_ffi::{check_export_signature, emit_procedure_ffi_warnings, validate_procedure_ffi_attributes};
 use super::item_generic_params::process_generic_params;
 use super::pending::{reset_scaffolding, take_pending};
 use super::stmt::block::type_block;
-use super::stmt_context::{ContractPhase, StmtTypeContext};
+use super::stmt_context::{ContractPhase, OpaqueReturnState, StmtTypeContext};
 use super::subtyping::subtyping;
 use super::type_env::{BindingProvenanceSeedKind, TypeBinding, TypeEnv};
 use super::type_equiv::type_equiv;
@@ -27,6 +30,7 @@ use super::type_wf::{type_wf, REFINEMENT_WF_PENDING};
 use super::typecheck_diag::emit_resolved_typecheck_diagnostic;
 use super::types::{make_type_func, make_type_prim, TypeFuncParam, TypeNode, TypeRef};
 use crate::context::ScopeContext;
+use crate::resolve::scopes::path_key_of;
 use crate::caps::builtin_paths::is_context_type_path;
 use crate::contracts::contract_check::check_contract_well_formed;
 use crate::contracts::intrinsics::validate_contract_intrinsics;
@@ -328,15 +332,15 @@ pub fn type_procedure_decl(
         return failed("E-SEM-3011");
     }
     // The attributes of the foreign interface, and what they demand of the signature.
-    let foreign = [attrs::EXPORT, attrs::HOST_EXPORT, attrs::MANGLE, attrs::UNWIND].iter().any(|name| has_attribute(&decl.attrs, name));
-    if foreign {
-        return pending("ProcFfiAttrs");
+    if let Some(diag_id) = validate_procedure_ffi_attributes(ctx, decl) {
+        return failed(diag_id);
     }
+    if let Some(warning) = procedure_warning_inline_always(ctx, decl, module_path) {
+        emit_resolved_typecheck_diagnostic(&mut diags.borrow_mut(), warning, Some(decl.span.clone()), "");
+    }
+    emit_procedure_ffi_warnings(decl, &mut diags.borrow_mut());
     if has_attribute(&decl.attrs, attrs::STATIC) {
         return failed("E-MOD-2452");
-    }
-    if has_attribute(&decl.attrs, attrs::INLINE) {
-        return pending("InlineAlways");
     }
     if decl.name == "main" {
         if !type_params_of(decl).is_empty() {
@@ -357,6 +361,9 @@ pub fn type_procedure_decl(
         Err(Some(REFINEMENT_WF_PENDING)) => return pending("RefinementWF"),
         Err(diag_id) => return DeclOutcome::Failed(DeclFailure::of(diag_id)),
     };
+    if let Some(diag_id) = check_export_signature(&proc_ctx, module_path, decl, &sig) {
+        return failed(diag_id);
+    }
 
     let mut env = TypeEnv::default();
     env.scopes.push(Default::default());
@@ -392,9 +399,10 @@ pub fn type_procedure_decl(
         if !is_unit && !has_explicit_return(body) {
             return failed("E-TYP-1507");
         }
-        if matches!(sig.return_type.as_deref().map(|ty| &ty.node), Some(TypeNode::Opaque { .. })) {
-            return pending("OpaqueReturn");
-        }
+        let opaque_return = match sig.return_type.as_deref().map(|ty| &ty.node) {
+            Some(TypeNode::Opaque { class_path, .. }) => Some(Rc::new(RefCell::new(OpaqueReturnState { class_path: class_path.clone(), underlying: None }))),
+            _ => None,
+        };
         proc_ctx.diagnostics = Some(diags.clone());
         let env = Rc::new(RefCell::new(env));
         let ancestors = [DynamicScopeAncestor { attrs: &decl.attrs, span: &decl.span }];
@@ -403,6 +411,7 @@ pub fn type_procedure_decl(
             ffi_export_boundary: has_attribute(&decl.attrs, attrs::EXPORT) || has_attribute(&decl.attrs, attrs::HOST_EXPORT),
             diags: Some(diags.clone()),
             env_ref: Some(env.clone()),
+            opaque_return: opaque_return.clone(),
             contract_dynamic: compute_dynamic_context(&body.span, &ancestors),
             test_postcondition_runtime: has_attribute(&decl.attrs, attrs::TEST),
             contract: decl.contract.as_ref(),
@@ -460,7 +469,15 @@ pub fn type_procedure_decl(
                 children: Vec::new(),
             });
         }
-        if body_result.r#type.is_some() {
+        // The first return fixed what the opaque type stands for; later code sees it.
+        if let Some(opaque) = &opaque_return {
+            let opaque = opaque.borrow();
+            if opaque.underlying.is_some() {
+                ctx.sigma.opaque_underlying_by_class_path.insert(path_key_of(&opaque.class_path), opaque.underlying.clone());
+            }
+        }
+        // An opaque return is checked at its return sites instead.
+        if body_result.r#type.is_some() && opaque_return.is_none() {
             let sub = subtyping(&proc_ctx, &body_result.r#type, &sig.return_type);
             if !sub.ok {
                 return DeclOutcome::Failed(DeclFailure::of(sub.diag_id));
@@ -484,8 +501,6 @@ pub fn type_procedure_decl(
             return DeclOutcome::Failed(DeclFailure::of(prov.diag_id));
         }
     }
-    if has_attribute(&decl.attrs, attrs::DYNAMIC) {
-        return pending("DynamicNoRuntime");
-    }
+    emit_dynamic_no_runtime_warning_if_needed(decl, &mut diags.borrow_mut());
     DeclOutcome::Ok
 }

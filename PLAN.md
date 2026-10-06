@@ -244,7 +244,7 @@ M3 is split into slices, each gated on its own against the oracle before the nex
 | M3.3 typing context, generics, modal, composite, layout | `typing` (core), `generics`, `modal`, `composite`, `layout` | about 45k | done, with the gaps noted below |
 | M3.4 expression, statement and declaration typing | `typing` (rest) | about 52k | in progress, see below |
 | M3.5 memory, provenance, capabilities, keys, contracts | `memory`, `provenance`, `caps`, `keys`, `contracts` | 36k | |
-| M3.6 driver phases 2 and 3 end to end | `06_driver` (sema section), `conformance` | | gate: `--check --diag-json` identical on every fixture |
+| M3.6 driver phases 2 and 3 end to end | `06_driver` (sema section), `conformance` | | in progress, see below; gate: `--check --diag-json` identical on every fixture |
 
 What M3.1 added:
 
@@ -388,7 +388,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
 | b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | done against the body gate: all 4,704 bodies compared (procedures, methods, transitions) with the stores typing fills and the context declaration typing sets, none mismatched or pending |
-| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | in progress: 6,635 of 6,822 declarations compared (97.3%), none mismatched |
+| c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | done against the type-check gate: all 6,822 declarations compared, none mismatched or pending; all 546 projects identical end to end (diagnostics, initialisation plan, main check) |
 
 Part c and M3.5 are ported together against one gate, because declaration typing calls
 straight into the code of M3.5 (the borrow check of each body, contract checks, the
@@ -407,22 +407,23 @@ In so far: how a failed rule becomes a diagnostic (`typing::typecheck_diag`: the
 overrides, the diagnostic tables, and the registry of static rules, generated into
 `uv-core` by `tools/gen_static_rules.py`), the check that no two procedures are given
 one symbol, the error limit, and `using` and `import` declarations
-(`typing::item_using`). Procedures that share a name wait for the check of overloads
-that erase to one signature (`ErasedOverloads`).
+(`typing::item_using`), and the check of overloads that erase to one signature.
 
 Procedure declarations have their frame (`typing::item_procedure`, the reference's
 `TypeProcedureDecl`): attribute validation, the shape of a test procedure, parameter
 names, the signature (with the rule that a refinement on a parameter may not speak of
 `self`), generic parameters, the explicit return a non-unit body needs, the body typed
 under the context of part b, and its type against the declared one. Each check that is
-not ported makes the declaration pending when it would apply:
-
-| Waiting for | Procedures |
-| --- | --- |
-| foreign-interface attributes and export signatures (`ProcFfiAttrs`) | 66 |
-| the warning for `#dynamic` where nothing needs a run-time check | 23 |
-| the `inline(always)` warning | 10 |
-| opaque return types | 6 |
+not ported makes the declaration pending when it would apply; none is left. The
+foreign-interface attributes and export signatures (`typing::item_ffi`: ABI, mangle and
+unwind checks, the mixed-mode and host-export rules, the by-value and zeroable checks, and
+the two warnings), extern blocks (`item_ffi::type_extern_block`), modal declarations
+(`typing::item_modal`: states, methods and transitions with their bodies, the invariant,
+and the abstract states of the classes a modal implements), the `#dynamic` warning where
+nothing needs a run-time check (`typing::dynamic_runtime`), the `inline(always)` warning
+(`typing::inline_always`), refinement predicates (`type_wf`) and opaque return types
+(the first `return` fixes the underlying type, kept in `Sigma::opaque_underlying_by_class_path`,
+which typing fills through a shared reference as the reference compiler does) are all in.
 
 The borrow check is in (`memory::borrow_bind`, the reference's `BindCheckBody`): for
 each binding whether it is valid, moved or partly moved, and for each `unique` place
@@ -455,17 +456,14 @@ capability, which is all that has been asked so far). So are enums
 (`typing::item_simple`), records (`typing::item_record`: fields, implemented classes,
 methods and their bodies), classes (`typing::item_class`), the signature of `main` with
 its fix-it (`caps::context_caps::is_context_bundle_type`), and the check for overloads
-that erase to one signature. A type invariant, and a contract on a method of a record or
-class or one it inherits, still make the declaration pending (`TypeInvariant`,
-`ContractWF`, `BehavioralSubtyping`: 2, 154 and 6).
+that erase to one signature, type invariants, and contracts (also those a method inherits).
 
 The tail of the check is in too: the initialisation plan (`memory::init_planner`, the
 reference's `BuildInitPlan`: for each module the modules its types, its `static`
 initialisers and its bodies depend on, a cycle among the eager ones reported as
 `E-MOD-1401`, and the topological order) and the project-wide check that exactly one
-`main` exists, is generic-free and has the signature of an entry point. With them 449
-of the 546 projects compare identically from start to finish, up from 43; the other 97
-hold a declaration that is still pending.
+`main` exists, is generic-free and has the signature of an entry point. With the rest of
+declaration typing in, all 546 projects compare identically from start to finish.
 
 Contracts are in (`contracts::intrinsics`, `contracts::contract_check`, and
 `typing::expr::contract_entry` for `@entry`): `@result` only in a postcondition, an
@@ -646,8 +644,7 @@ where a raw pointer is expected, the GPU barrier divergence check of `if`, and t
 provenance of a returned safe pointer or, at an exported boundary, raw pointer.
 
 Known gaps inside what is ported, each of which makes a body pending when reached
-rather than answering; no body of the gate reaches one: opaque return types, the
-well-formedness of a refinement predicate, `comptime` expressions (also under
+rather than answering; no body of the gate reaches one: `comptime` expressions (also under
 attributes), a quote inside compile-time code and `@entry` inside a postcondition
 (outside those contexts both are rejected as in the reference).
 
@@ -795,3 +792,25 @@ Not ported yet, although it lives in the source directories of finished mileston
   uses its own copies of what they define), as are the step-wise name collection
   (`NamesStep`) and `DeclNames`.
 - Driver: `test`, `init`, `clean`, `--conformance`, `--profile-compiler`.
+
+## M3.6: the driver, phases 2 and 3
+
+`uvc build --check` runs, in the order of the reference driver (`crates/uvc/src/sema.rs`):
+the signature check of compile-time procedures (`typing::comptime_avail`), the
+compile-time pass, the visibility check, name collection and resolution, the graph of
+imports between assemblies and its two validations (`resolve::assembly_import_graph`),
+type checking, the call graph and capability chain (`caps::callgraph_caps`), and the
+authority model (`caps::authority_model`: ambient authority, attenuation, extern
+isolation). The capability sets and signatures they use are in `caps::cap_requirements`.
+
+Gate: `tools/parity_check.py` runs `uvc build --check --diag-json` on every project that
+has a reference result (`projects`, `project_cases`, `phase1_cases`: 685) and compares
+the exit status and the JSON. Result: 593 identical, none different, 92 pending. A
+project is pending when the run reaches the lowerability check, which in the reference
+lowers every module to IR (`driver::ValidateLowerability`), so it waits for the lowering
+of M6.
+
+Simplifications, all of which can only change the order of two reports from the same
+check: the call graph keeps its nodes in the order they were added where the reference
+iterates a hash table, and so does the attenuation check with its bindings. The rest of
+the output of the assembly graph (the modules and libraries to emit) waits for M6.

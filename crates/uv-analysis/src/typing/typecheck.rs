@@ -29,6 +29,8 @@ use crate::generics::generic_params::bind_type_params;
 use crate::generics::monomorphize::{instantiate_type, TypeSubst};
 use super::item_record::type_record_decl;
 use super::item_simple::{type_enum_decl, type_static_decl, type_type_alias_decl};
+use super::item_ffi::type_extern_block;
+use super::item_modal::type_modal_decl;
 use super::item_using::{type_import_decl, type_using_decl};
 use super::typecheck_diag::{emit_decl_diag, emit_resolved_typecheck_diagnostic};
 use crate::resolve::scopes::id_eq;
@@ -91,6 +93,7 @@ fn type_item(ctx: &ScopeContext<'_>, item: &ASTItem, module_path: &[String], sha
     let with_diags = match item {
         ASTItem::RecordDecl(node) => Some((type_record_decl(ctx, node, module_path, shared), &node.span)),
         ASTItem::ClassDecl(node) => Some((type_class_decl(ctx, node, module_path, shared), &node.span)),
+        ASTItem::ModalDecl(node) => Some((type_modal_decl(ctx, node, module_path, shared), &node.span)),
         _ => None,
     };
     if let Some((outcome, span)) = with_diags {
@@ -125,6 +128,13 @@ fn type_item(ctx: &ScopeContext<'_>, item: &ASTItem, module_path: &[String], sha
     match item {
         // The reference has no case for an item that failed to parse.
         ASTItem::ErrorItem(_) => Ok(()),
+        ASTItem::ExternBlock(node) => match type_extern_block(ctx, node, module_path) {
+            Err(what) => Err(what),
+            Ok(diag_id) => {
+                emit_decl_diag(diags, diag_id, Some(node.span.clone()), "", Vec::new(), &[]);
+                Ok(())
+            }
+        },
         ASTItem::UsingDecl(node) => {
             if let Err(diag_id) = type_using_decl(ctx, node, module_path) {
                 emit_decl_diag(diags, diag_id, Some(node.span.clone()), "", Vec::new(), &[]);

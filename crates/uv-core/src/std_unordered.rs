@@ -118,6 +118,14 @@ impl<V> UnorderedMap<V> {
         }
     }
 
+    /// `reserve(n)`: room for `n` elements, with the bucket count the library picks for it.
+    pub fn reserve(&mut self, n: usize) {
+        let buckets = self.next_bucket_count(n.max(self.len() + 1));
+        if buckets != self.bucket_count {
+            self.rehash(buckets);
+        }
+    }
+
     fn rehash(&mut self, bucket_count: usize) {
         self.bucket_count = bucket_count;
         for (hash, key) in std::mem::take(&mut self.order) {

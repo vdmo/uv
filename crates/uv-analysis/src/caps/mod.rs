@@ -6,3 +6,5 @@ pub mod cap_methods;
 pub mod cap_requirements;
 pub mod builtin_decls;
 pub mod context_caps;
+pub mod callgraph_caps;
+pub mod authority_model;

@@ -48,11 +48,13 @@ phase only: loading the project, lexing and parsing.
 `path/to/project` is a directory with an `Ultraviolet.toml`, or a file inside one.
 `ultraviolet/HelloUltraviolet` and `ultraviolet-lsp/examples/shapes` are two to try.
 
-A run that needs a later phase, such as `--check` or a plain `build`, prints the
-phase-1 diagnostics, then this, and exits with status 3:
+`--check` also runs the compile-time pass, name resolution, type checking and the
+capability and authority checks, and prints their diagnostics. A program that passes
+them all reaches the lowering to IR, which is not ported, so the run (and a plain
+`build`) prints the diagnostics so far, then this, and exits with status 3:
 
 ```
-error: compile-time execution and every later compiler phase is not implemented in this build of uvc (Rust port in progress)
+error: the lowerability check is not implemented in this build of uvc (Rust port in progress)
 ```
 
 Exit statuses otherwise follow the reference: 0 success, 1 errors reported, 2 bad

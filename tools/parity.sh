@@ -155,6 +155,9 @@ echo "== type check (every declaration of every project; declarations of a kind 
 ./target/release/uv-parity typecheck target/parity/comptime.list | sed "s|$ROOT/|/w/|g" > target/parity/typecheck.tsv
 python3 tools/compare_check.py tests/golden/typecheck.tsv target/parity/typecheck.tsv || fail=1
 
+echo "== driver: uvc build --check --diag-json against the reference, every project (projects that reach the lowerability check, which is the lowering of M6, are pending)"
+python3 tools/parity_check.py || fail=1
+
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1
 

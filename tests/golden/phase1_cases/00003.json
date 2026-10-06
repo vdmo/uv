@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-CTE-0310","severity":"error","message":"Unknown derive target name","span":{"file":"/w/target/p1cases/derive_deprecated_ok/Source/Main.uv","start_line":3,"start_col":1,"end_line":5,"end_col":2},"source_line":"record R {","children":[]}]}

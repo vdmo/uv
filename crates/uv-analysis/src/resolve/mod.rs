@@ -1,5 +1,6 @@
 //! Name resolution.
 
+pub mod assembly_import_graph;
 pub mod collect_toplevel;
 pub mod module_relations;
 pub mod populate_sigma;

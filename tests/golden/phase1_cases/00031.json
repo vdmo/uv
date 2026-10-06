@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2451","severity":"error","message":"Unknown attribute: bogus","span":{"file":"/w/target/p1cases/derive_with_unknown_attr/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":7},"source_line":"#bogus","children":[]}]}

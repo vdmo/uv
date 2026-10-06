@@ -9,3 +9,4 @@ uv-core = { path = "../uv-core" }
 uv-project = { path = "../uv-project" }
 uv-source = { path = "../uv-source" }
 uv-analysis = { path = "../uv-analysis" }
+uv-comptime = { path = "../uv-comptime" }

@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-TST-0109","severity":"error","message":"Attribute 'test' cannot be applied here","span":{"file":"/w/target/p1cases/derive_with_test_attr/Source/Main.uv","start_line":1,"start_col":1,"end_line":1,"end_col":6},"source_line":"#test","children":[]}]}

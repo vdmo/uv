@@ -119,3 +119,36 @@ fn is_context_bundle_type_impl(ctx: &crate::context::ScopeContext<'_>, ty: &ast:
 pub fn is_context_bundle_type(ctx: &crate::context::ScopeContext<'_>, ty: &ast::TypePtr) -> bool {
     is_context_bundle_type_impl(ctx, ty, &mut std::collections::HashSet::new())
 }
+
+fn is_alias_normalized_context_type_impl(ctx: &crate::context::ScopeContext<'_>, ty: &ast::TypePtr, visiting: &mut std::collections::HashSet<String>) -> bool {
+    use crate::context::TypeDecl;
+    let Some(ast::TypeNode::TypePathType(path)) = strip_ast_perm_and_refine(ty).map(|ty| &ty.node) else {
+        return false;
+    };
+    if !path.generic_args.is_empty() {
+        return false;
+    }
+    if is_context_type_path(&path.path) {
+        return true;
+    }
+    let Some((resolved, decl)) = resolve_visible_type_decl(ctx, &path.path) else {
+        return false;
+    };
+    let visit_key = resolved.join("::");
+    if !visiting.insert(visit_key.clone()) {
+        return false;
+    }
+    let is_context = match decl {
+        TypeDecl::TypeAlias(alias) => {
+            alias.generic_params.as_ref().is_none_or(|params| params.params.is_empty()) && alias.r#type.is_some() && is_alias_normalized_context_type_impl(ctx, &alias.r#type, visiting)
+        }
+        _ => false,
+    };
+    visiting.remove(&visit_key);
+    is_context
+}
+
+/// A context bundle that is not `Context` itself (even behind aliases): the host supplies it.
+pub fn is_hosted_context_bundle_type(ctx: &crate::context::ScopeContext<'_>, ty: &ast::TypePtr) -> bool {
+    !is_alias_normalized_context_type_impl(ctx, ty, &mut std::collections::HashSet::new()) && is_context_bundle_type(ctx, ty)
+}

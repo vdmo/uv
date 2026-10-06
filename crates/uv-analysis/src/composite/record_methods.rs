@@ -75,15 +75,11 @@ pub fn lookup_method_static<'c>(
         return Err(None);
     };
     // An opaque type is looked through once its underlying type is known.
-    let lookup_base = match &base_ty.node {
-        TypeNode::Opaque { class_path, .. } => ctx
-            .sigma
-            .opaque_underlying_by_class_path
-            .get(&path_key_of(class_path))
-            .and_then(|underlying| underlying.as_deref())
-            .unwrap_or(base_ty),
-        _ => base_ty,
+    let underlying = match &base_ty.node {
+        TypeNode::Opaque { class_path, .. } => ctx.sigma.opaque_underlying_by_class_path.get(&path_key_of(class_path)).flatten(),
+        _ => None,
     };
+    let lookup_base = underlying.as_deref().unwrap_or(base_ty);
     let method_type_path = applied_type_path(lookup_base);
     let mut record = None;
     let mut implements: Vec<Vec<String>> = Vec::new();

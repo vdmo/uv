@@ -823,3 +823,47 @@ pub fn lookup_foundational_builtin_method_sig(
     }
     None
 }
+
+fn has_ffi_pass_by_value_attr(ctx: &ScopeContext<'_>, path: &[String]) -> bool {
+    use uv_source::attributes::{attrs, has_attribute};
+    match ctx.sigma.types.get(&path_key_of(path)) {
+        Some(TypeDecl::Record(decl)) => has_attribute(&decl.attrs, attrs::FFI_PASS_BY_VALUE),
+        Some(TypeDecl::Enum(decl)) => has_attribute(&decl.attrs, attrs::FFI_PASS_BY_VALUE),
+        _ => false,
+    }
+}
+
+fn has_ffi_pass_by_value_type_attr(ctx: &ScopeContext<'_>, ty: &TypeRef) -> bool {
+    match ty.as_deref().map(|ty| &ty.node) {
+        Some(TypeNode::Perm { base, .. }) | Some(TypeNode::Refine { base, .. }) => has_ffi_pass_by_value_type_attr(ctx, base),
+        Some(TypeNode::Apply { path, .. }) | Some(TypeNode::Path { path, .. }) => has_ffi_pass_by_value_attr(ctx, path),
+        _ => false,
+    }
+}
+
+/// Whether a value of the type needs dropping, looking through the members of declared
+/// types first (a record whose fields need dropping does, whatever its own `Drop`).
+fn type_requires_drop_for_ffi(ctx: &ScopeContext<'_>, ty: &TypeRef) -> bool {
+    let requires = |written: &ast::TypePtr| lower_type(ctx, written).is_ok_and(|lowered| type_requires_drop_for_ffi(ctx, &lowered));
+    match ty.as_deref().map(|ty| &ty.node) {
+        None => false,
+        Some(TypeNode::Perm { base, .. }) | Some(TypeNode::Refine { base, .. }) => type_requires_drop_for_ffi(ctx, base),
+        Some(TypeNode::Tuple(elements)) => elements.iter().any(|elem| type_requires_drop_for_ffi(ctx, elem)),
+        Some(TypeNode::Array { element, .. }) => type_requires_drop_for_ffi(ctx, element),
+        Some(TypeNode::String(state)) => *state == Some(StringState::Managed),
+        Some(TypeNode::Bytes(state)) => *state == Some(BytesState::Managed),
+        Some(TypeNode::Ptr { .. }) => true,
+        Some(TypeNode::Path { path, .. }) => match ctx.sigma.types.get(&path_key_of(path)) {
+            Some(TypeDecl::Record(decl)) => record_field_types(decl).into_iter().any(requires) || drop_type(ctx, ty),
+            Some(TypeDecl::Enum(decl)) => decl.variants.iter().any(|variant| variant_payload_types(variant).into_iter().any(requires)) || drop_type(ctx, ty),
+            _ => drop_type(ctx, ty),
+        },
+        Some(_) => drop_type(ctx, ty),
+    }
+}
+
+/// Whether the type may cross the foreign boundary by value: it needs no drop, or it is
+/// declared `ffi_pass_by_value`.
+pub fn ffi_by_value_ok(ctx: &ScopeContext<'_>, ty: &TypeRef) -> bool {
+    ty.is_some() && (!type_requires_drop_for_ffi(ctx, ty) || has_ffi_pass_by_value_type_attr(ctx, ty))
+}

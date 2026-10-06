@@ -11,8 +11,11 @@ part starts.
 
 ## Where the port is
 
-The Rust `uvc` cannot check or build a program yet. It runs the first phase (project
-loading, lexing, parsing) and stops with exit status 3 where the later phases begin.
+The Rust `uvc` cannot yet say a program is accepted, or build it. `uvc build --check`
+runs project loading, parsing, the compile-time pass, name resolution, type checking
+and the capability and authority checks, and reports the diagnostics the reference does
+(identical on 593 of the 685 projects of the corpus, none different). A program that
+passes all of that stops with exit status 3 where the lowering to IR begins.
 To check or build Ultraviolet code today, use the reference compiler
 ([docs/running.md](docs/running.md#the-reference-compiler)).
 
@@ -29,9 +32,9 @@ each piece matching the reference on the corpus:
 | M3.3 | Type core, generics, modal types, composite types, layout | done |
 | M3.4a | Literals, patterns, constraint solving | done |
 | M3.4b | Expression and statement typing | done against its gate: 4,704 bodies |
-| M3.4c | Declaration typing and the type-check entry points | in progress: 6,635 of 6,822 declarations; 471 of 546 projects identical end to end |
-| M3.5 | Memory, provenance, capabilities, keys, contracts | ported with M3.4c, against the same gate; parts that typing needs are in |
-| M3.6 | Driver phases 2 and 3: `uvc --check` end to end | not started |
+| M3.4c | Declaration typing and the type-check entry points | done against its gate: all 6,822 declarations; all 546 projects identical end to end |
+| M3.5 | Memory, provenance, capabilities, keys, contracts | done with M3.4c, against the same gate |
+| M3.6 | Driver phases 2 and 3: `uvc --check` end to end | in progress: everything up to the lowerability check, which is the IR lowering of M6; 593 of 685 projects identical, 92 waiting for it |
 | M4 | Language server in Rust | not started |
 | M5 | Editors connected to the Rust server | not started |
 | M6 | IR, lowering, LLVM emission, linking | not started |

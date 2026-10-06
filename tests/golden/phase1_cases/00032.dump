@@ -1,0 +1,11 @@
+<project_root, /w/target/p1cases/docs_only>
+<assemblies, [App]>
+<assembly_name, App>
+<assembly_kind, executable>
+<link_kind, <bottom>>
+<source_root, /w/target/p1cases/docs_only/Source>
+<output_root, /w/target/p1cases/docs_only/Build>
+<module_list, [App]>
+<module, App, obj, /w/target/p1cases/docs_only/Build/Intermediate/Obj/Source/App.o, ir, <bottom>>
+<artifact, /w/target/p1cases/docs_only/Build/Binary/App, import_lib, <bottom>>
+file:/w/target/p1cases/docs_only/Source/Main.uv

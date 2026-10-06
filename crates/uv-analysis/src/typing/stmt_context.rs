@@ -42,6 +42,13 @@ pub struct ParallelCaptureScope {
     pub first_child_moves: Rc<RefCell<std::collections::HashSet<crate::context::IdKey>>>,
 }
 
+/// What the returns of a procedure with an opaque return type have shown so far.
+#[derive(Debug, Default)]
+pub struct OpaqueReturnState {
+    pub class_path: TypePath,
+    pub underlying: TypeRef,
+}
+
 #[derive(Clone, Default)]
 pub struct StmtTypeContext<'t> {
     pub return_type: TypeRef,
@@ -54,7 +61,7 @@ pub struct StmtTypeContext<'t> {
     /// the callbacks that type sub-expressions read it too.
     pub env_ref: Option<Rc<RefCell<TypeEnv>>>,
     /// The body returns an opaque type, whose underlying type the first `return` fixes.
-    pub opaque_return: bool,
+    pub opaque_return: Option<Rc<RefCell<OpaqueReturnState>>>,
     pub in_parallel: bool,
     pub parallel_domain: TypeRef,
     pub keys_held: bool,

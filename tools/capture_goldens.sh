@@ -32,6 +32,7 @@ find target/fixtures -name Ultraviolet.toml | LC_ALL=C sort > tests/golden/fixtu
 python3 tools/gen_project_cases.py
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_projects.sh projects fixture_projects.list
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_projects.sh project_cases project_cases.list
+run ubuntu:24.04 sh /w/tools/oracle/run_reference_projects.sh phase1_cases phase1_cases.list
 python3 tools/gen_phase1_cases.py
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_phase1.sh projects fixture_projects.list
 run ubuntu:24.04 sh /w/tools/oracle/run_reference_phase1.sh project_cases project_cases.list

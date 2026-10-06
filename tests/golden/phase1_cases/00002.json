@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2450","severity":"error","message":"Malformed #deprecated syntax","span":{"file":"/w/target/p1cases/derive_deprecated_bad/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":18},"source_line":"#deprecated(1, 2)","children":[]}]}

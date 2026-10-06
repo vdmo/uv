@@ -1,0 +1,1 @@
+{"diagnostics":[{"code":"E-MOD-2452","severity":"error","message":"Attribute 'inline' cannot be applied here","span":{"file":"/w/target/p1cases/derive_with_bad_target_attr/Source/Main.uv","start_line":2,"start_col":1,"end_line":2,"end_col":8},"source_line":"#inline","children":[]}]}
