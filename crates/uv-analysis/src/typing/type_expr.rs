@@ -232,6 +232,25 @@ fn type_expr_form(
         }
         ExprNode::AddressOfExpr(node) => super::expr::access::type_address_of_expr(ctx, type_ctx, node, env),
         ExprNode::RangeExpr(node) => super::expr::access::type_range_expr(ctx, type_ctx, node, env),
+        ExprNode::YieldExpr(node) => {
+            super::expr::async_forms::type_yield_expr(ctx, type_ctx, node, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::YieldFromExpr(node) => {
+            super::expr::async_forms::type_yield_from_expr(ctx, type_ctx, node, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::SyncExpr(node) => {
+            super::expr::async_forms::type_sync_expr(ctx, type_ctx, node, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::AllExpr(node) => super::expr::async_forms::type_all_expr(ctx, node, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env)),
+        ExprNode::RaceExpr(node) => {
+            super::expr::async_forms::type_race_expr(ctx, type_ctx, node, env, &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env))
+        }
+        ExprNode::WaitExpr(node) => super::expr::async_forms::type_wait_expr(
+            type_ctx,
+            node,
+            &|inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env),
+            &|inner: &ExprPtr| type_place(ctx, type_ctx, inner, env),
+        ),
         ExprNode::TransmuteExpr(node) => super::expr::transmute::type_transmute_expr(ctx, type_ctx, node, env, &e.span),
         ExprNode::AllocExpr(node) => super::expr::transmute::type_alloc_expr(ctx, type_ctx, node, env),
         ExprNode::PropagateExpr(node) => super::expr::access::type_propagate_expr(ctx, type_ctx, node, env),

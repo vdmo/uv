@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,236 of 4,569 bodies compared (92.7%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,357 of 4,569 bodies compared (95.4%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -506,6 +506,10 @@ active region they bind, `defer`, and `using`; so are `?` propagation, `transmut
 the warning pass that runs after an `unsafe` block, and region allocation
 (`typing::expr::transmute`). Compound assignment is left with the shared-write analysis
 of plain assignment, which it shares.
+
+The asynchronous forms are in (`typing::expr::async_forms`): `yield` and `yield from`
+with the release of keys at a suspension point, `sync`, `race` with returning or
+yielding handlers, `all`, and `wait` on spawned and tracked tasks.
 
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from

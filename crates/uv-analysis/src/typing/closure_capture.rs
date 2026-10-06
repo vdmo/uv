@@ -10,17 +10,33 @@ use crate::typing::type_env::{bind_of, collect_pat_names, ClosureCaptureInfo, Ty
 use crate::typing::type_predicates::{perm_of_type, strip_perm};
 use crate::typing::types::*;
 
-/// Walks an expression with the names it declares itself. With an environment it
-/// collects the names used that are bound outside; without one it only looks for a
-/// `spawn`, and then does not look inside one.
+/// What a walk looks for.
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum Mode {
+    /// The names used that are bound outside.
+    Captures,
+    /// A `spawn`; the walk stops at the first and does not look inside it.
+    Spawn,
+    /// `yield` and `yield from`.
+    Yields,
+}
+
+/// Walks an expression with the names it declares itself.
 struct Walker<'e> {
+    mode: Mode,
     env: Option<&'e TypeEnv>,
     local_scopes: Vec<HashSet<IdKey>>,
     captures: HashSet<IdKey>,
     found_spawn: bool,
+    has_yield: bool,
+    has_yield_from: bool,
 }
 
-impl Walker<'_> {
+impl<'e> Walker<'e> {
+    fn new(mode: Mode, env: Option<&'e TypeEnv>) -> Self {
+        Walker { mode, env, local_scopes: Vec::new(), captures: HashSet::new(), found_spawn: false, has_yield: false, has_yield_from: false }
+    }
+
     fn push_scope(&mut self) {
         self.local_scopes.push(HashSet::new());
     }
@@ -124,7 +140,7 @@ impl Walker<'_> {
             Stmt::DeferStmt(node) => self.visit_block(&node.body),
             Stmt::UnsafeBlockStmt(node) => self.visit_block(&node.body),
             // Only the search for a spawn looks into a compile-time statement.
-            Stmt::CtStmt(node) if self.env.is_none() => self.visit_block(&node.body),
+            Stmt::CtStmt(node) if self.mode == Mode::Spawn => self.visit_block(&node.body),
             Stmt::RegionStmt(node) => {
                 self.visit_expr(&node.opts_opt);
                 if let Some(body) = node.body.as_deref() {
@@ -167,7 +183,6 @@ impl Walker<'_> {
         let Some(e) = expr.as_deref() else {
             return;
         };
-        let collecting = self.env.is_some();
         match &e.node {
             ExprNode::IdentifierExpr(node) => self.capture_if_outer(&node.name),
             ExprNode::QualifiedApplyExpr(node) => match &node.args {
@@ -183,8 +198,14 @@ impl Walker<'_> {
             ExprNode::AllocExpr(node) => self.visit_expr(&node.value),
             ExprNode::TransmuteExpr(node) => self.visit_expr(&node.value),
             ExprNode::PropagateExpr(node) => self.visit_expr(&node.value),
-            ExprNode::YieldExpr(node) => self.visit_expr(&node.value),
-            ExprNode::YieldFromExpr(node) => self.visit_expr(&node.value),
+            ExprNode::YieldExpr(node) => {
+                self.has_yield = true;
+                self.visit_expr(&node.value);
+            }
+            ExprNode::YieldFromExpr(node) => {
+                self.has_yield_from = true;
+                self.visit_expr(&node.value);
+            }
             ExprNode::SyncExpr(node) => self.visit_expr(&node.value),
             ExprNode::EntryExpr(node) => self.visit_expr(&node.expr),
             ExprNode::AttributedExpr(node) => self.visit_expr(&node.expr),
@@ -274,7 +295,7 @@ impl Walker<'_> {
                 self.visit_block(&node.body);
             }
             ExprNode::SpawnExpr(node) => {
-                if !collecting {
+                if self.mode == Mode::Spawn {
                     self.found_spawn = true;
                     return;
                 }
@@ -299,7 +320,8 @@ impl Walker<'_> {
 
 /// The names a closure uses that are bound outside it.
 fn outer_captures(closure: &ast::ClosureExpr, env: &TypeEnv) -> HashSet<IdKey> {
-    let mut walker = Walker { env: Some(env), local_scopes: vec![HashSet::new()], captures: HashSet::new(), found_spawn: false };
+    let mut walker = Walker::new(Mode::Captures, Some(env));
+    walker.push_scope();
     walker.push_scope();
     for param in &closure.params {
         walker.declare_name(&param.name);
@@ -309,9 +331,17 @@ fn outer_captures(closure: &ast::ClosureExpr, env: &TypeEnv) -> HashSet<IdKey> {
 }
 
 fn contains_spawn_expr(expr: &ExprPtr) -> bool {
-    let mut walker = Walker { env: None, local_scopes: Vec::new(), captures: HashSet::new(), found_spawn: false };
+    let mut walker = Walker::new(Mode::Spawn, None);
     walker.visit_expr(expr);
     walker.found_spawn
+}
+
+/// Whether the expression contains a `yield`, and whether a `yield from`, anywhere
+/// outside compile-time code.
+pub fn analyze_yield_usage(expr: &ExprPtr) -> (bool, bool) {
+    let mut walker = Walker::new(Mode::Yields, None);
+    walker.visit_expr(expr);
+    (walker.has_yield, walker.has_yield_from)
 }
 
 /// A closure type that declares the shared data it depends on.
