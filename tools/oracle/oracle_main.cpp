@@ -1910,6 +1910,10 @@ void DumpPatterns(analysis::ScopeContext& ctx, const analysis::NameMapTable& nam
 
 // ---- body typing; see `TypeProcedureDeclBody` ----
 
+void DumpTypedBody(analysis::ScopeContext& proc_ctx, analysis::TypeEnv& env, const analysis::TypeRef& return_type,
+                   const std::optional<ast::ContractClause>* contract, const std::optional<analysis::TypePath>& class_path,
+                   const std::shared_ptr<analysis::StaticProofContext>& proof_ctx, const ast::Block& body, bool with_env);
+
 // Types the body of a procedure as declaration typing does, up to and including the
 // block: type parameters and parameters in scope, the declared return type expected.
 // One line per body, so that a port that cannot type a body yet can say so in its place.
@@ -1947,19 +1951,32 @@ void DumpBody(const analysis::ScopeContext& ctx, const std::string& name,
     }
     return_type = lowered.type;
   }
+  DumpTypedBody(proc_ctx, env, return_type, &contract, std::nullopt, nullptr, *body, true);
+}
+
+// The block of a body under its typing context, and the line that reports it. A
+// transition is typed without the environment reference and the diagnostic stream.
+void DumpTypedBody(analysis::ScopeContext& proc_ctx, analysis::TypeEnv& env, const analysis::TypeRef& return_type,
+                   const std::optional<ast::ContractClause>* contract, const std::optional<analysis::TypePath>& class_path,
+                   const std::shared_ptr<analysis::StaticProofContext>& proof_ctx, const ast::Block& body, bool with_env) {
+  using namespace analysis;
   core::DiagnosticStream diags;
   StmtTypeContext type_ctx;
   type_ctx.return_type = return_type;
   proc_ctx.diagnostics = &diags;
-  type_ctx.diags = &diags;
-  type_ctx.env_ref = &env;
-  if (contract.has_value()) type_ctx.contract = &*contract;
+  if (with_env) {
+    type_ctx.diags = &diags;
+    type_ctx.env_ref = &env;
+  }
+  if (contract && contract->has_value()) type_ctx.contract = &**contract;
+  type_ctx.current_class_path = class_path;
+  type_ctx.proof_ctx = proof_ctx;
   ExprTypeFn type_expr = [&](const ast::ExprPtr& inner) { return TypeExpr(proc_ctx, type_ctx, inner, env); };
   IdentTypeFn type_ident = [&](std::string_view ident) -> ExprTypeResult {
     return expr::TypeIdentifierExprImpl(proc_ctx, ast::IdentifierExpr{std::string(ident)}, env);
   };
   PlaceTypeFn type_place = [&](const ast::ExprPtr& inner) { return TypePlace(proc_ctx, type_ctx, inner, env); };
-  const auto result = TypeBlock(proc_ctx, type_ctx, *body, env, type_expr, type_ident, type_place, &env);
+  const auto result = TypeBlock(proc_ctx, type_ctx, body, env, type_expr, type_ident, type_place, with_env ? &env : nullptr);
   std::cout << (result.ok ? "ok" : "fail") << '\t' << DiagOr(result.diag_id) << '\t' << Escape(result.diag_detail) << '\t'
             << TypeText(result.type) << '\t';
   if (result.diag_span) std::cout << result.diag_span->start_offset << '-' << result.diag_span->end_offset;
@@ -1969,6 +1986,158 @@ void DumpBody(const analysis::ScopeContext& ctx, const std::string& name,
   std::cout << '\t';
   PrintDiagList(diags);
   std::cout << '\n';
+}
+
+// The body of a method or transition under the bindings of its signature, as the typing
+// of record, class and modal declarations sets it up; `self` of a `unique` shorthand
+// receiver is mutable.
+void DumpSignatureBody(const analysis::ScopeContext& ctx, const std::string& name, const analysis::SignatureResult& sig,
+                       bool self_var, const analysis::TypeRef& return_type,
+                       const std::optional<ast::ContractClause>* contract, const std::optional<analysis::TypePath>& class_path,
+                       const std::shared_ptr<analysis::StaticProofContext>& proof_ctx,
+                       const std::shared_ptr<ast::Block>& body, bool with_env) {
+  using namespace analysis;
+  if (!body) return;
+  std::cout << "B\t" << name << '\t';
+  if (!sig.ok) {
+    std::cout << "sig-fail\t" << DiagOr(sig.diag_id) << '\n';
+    return;
+  }
+  ScopeContext method_ctx = ctx;
+  method_ctx.sigma_source = ctx.sigma_source ? ctx.sigma_source : &ctx.sigma;
+  TypeEnv env;
+  env.scopes.emplace_back();
+  for (const auto& binding : sig.bindings) {
+    const bool is_var = self_var && binding.first == "self";
+    env.scopes.back()[IdKeyOf(binding.first)] = {is_var ? ast::Mutability::Var : ast::Mutability::Let, binding.second};
+  }
+  DumpTypedBody(method_ctx, env, return_type, contract, class_path, proof_ctx, *body, with_env);
+}
+
+bool UniqueShorthand(const ast::Receiver& receiver) {
+  const auto* shorthand = std::get_if<ast::ReceiverShorthand>(&receiver);
+  return shorthand && shorthand->perm == ast::ReceiverPerm::Unique;
+}
+
+bool ConstShorthand(const ast::Receiver& receiver) {
+  const auto* shorthand = std::get_if<ast::ReceiverShorthand>(&receiver);
+  return shorthand && shorthand->perm == ast::ReceiverPerm::Const && !shorthand->mode_opt.has_value();
+}
+
+analysis::TypePath DeclPath(const ast::ModulePath& module_path, const std::string& name) {
+  analysis::TypePath path(module_path.begin(), module_path.end());
+  path.push_back(name);
+  return path;
+}
+
+// See `TypeRecordDecl`: the record's associated types stand in for `Self::Name`, and a
+// method with a plain `~` receiver may assume the record's invariant.
+void DumpRecordMethodBodies(const analysis::ScopeContext& ctx, const ast::RecordDecl& decl, const ast::ModulePath& module_path) {
+  using namespace analysis;
+  const TypeRef self_type = MakeTypePath(DeclPath(module_path, decl.name));
+  TypeSubst assoc_subst;
+  std::optional<std::string_view> assoc_diag;
+  bool assoc_ok = true;
+  for (const auto& member : decl.members) {
+    const auto* assoc = std::get_if<ast::AssociatedTypeDecl>(&member);
+    if (!assoc || !assoc_ok) continue;
+    if (!assoc->default_type) {
+      if (!decl.implements.empty()) {
+        assoc_ok = false;
+        assoc_diag = "E-TYP-2503";
+      }
+      continue;
+    }
+    auto lowered = LowerType(ctx, assoc->default_type);
+    if (lowered.ok) {
+      const auto wf = TypeWF(ctx, lowered.type);
+      if (!wf.ok) lowered = {false, wf.diag_id, {}};
+    }
+    if (!lowered.ok) {
+      assoc_ok = false;
+      assoc_diag = lowered.diag_id;
+      continue;
+    }
+    assoc_subst[assoc->name] = SubstSelfType(self_type, lowered.type, &assoc_subst);
+  }
+  for (const auto& member : decl.members) {
+    const auto* method = std::get_if<ast::MethodDecl>(&member);
+    if (!method || !method->body) continue;
+    const std::string name = decl.name + "::" + method->name;
+    if (!assoc_ok) {
+      std::cout << "B\t" << name << "\tassoc-fail\t" << DiagOr(assoc_diag) << '\n';
+      continue;
+    }
+    const auto sig = BuildMethodSignature(ctx, self_type, method->receiver, method->params, method->return_type_opt, &assoc_subst);
+    std::shared_ptr<StaticProofContext> proof_ctx;
+    if (decl.invariant_opt.has_value() && ConstShorthand(method->receiver)) {
+      proof_ctx = ExtendProofContextWithPredicateAt(proof_ctx, decl.invariant_opt->predicate, method->body->span);
+    }
+    DumpSignatureBody(ctx, name, sig, UniqueShorthand(method->receiver), sig.return_type, &method->contract, std::nullopt,
+                      proof_ctx, method->body, true);
+  }
+}
+
+// See `TypeClassDecl`: `Self` stays a variable, and the class is the current one.
+void DumpClassMethodBodies(const analysis::ScopeContext& ctx, const ast::ClassDecl& decl, const ast::ModulePath& module_path) {
+  using namespace analysis;
+  const TypePath class_path = DeclPath(module_path, decl.name);
+  for (const auto& item : decl.items) {
+    const auto* method = std::get_if<ast::ClassMethodDecl>(&item);
+    if (!method || !method->body_opt) continue;
+    const auto sig = BuildMethodSignature(ctx, SelfVarType(), method->receiver, method->params, method->return_type_opt);
+    DumpSignatureBody(ctx, decl.name + "::" + method->name, sig, UniqueShorthand(method->receiver), sig.return_type,
+                      &method->contract, class_path, nullptr, method->body_opt, true);
+  }
+}
+
+// The part of a modal invariant that speaks of one state; see `StateInvariantPredicateFor`.
+ast::ExprPtr StateInvariantOf(const ast::TypeInvariant& invariant, std::string_view state_name) {
+  if (!invariant.predicate) return nullptr;
+  const auto* if_case = std::get_if<ast::IfCaseExpr>(&invariant.predicate->node);
+  if (!if_case) return invariant.predicate;
+  const auto* ident = if_case->scrutinee ? std::get_if<ast::IdentifierExpr>(&if_case->scrutinee->node) : nullptr;
+  if (!ident || !analysis::IdEq(ident->name, "self")) return invariant.predicate;
+  for (const auto& arm : if_case->cases) {
+    if (!arm.pattern) continue;
+    const auto* modal_pattern = std::get_if<ast::ModalPattern>(&arm.pattern->node);
+    if (modal_pattern && analysis::IdEq(modal_pattern->state, state_name)) return arm.body;
+  }
+  return invariant.predicate;
+}
+
+// See `TypeModalDecl`: the receiver is the state, applied to the modal's own parameters;
+// a transition returns its target state and is typed without the environment reference.
+void DumpModalBodies(const analysis::ScopeContext& ctx, const ast::ModalDecl& decl, const ast::ModulePath& module_path) {
+  using namespace analysis;
+  const TypePath type_path = DeclPath(module_path, decl.name);
+  std::vector<TypeRef> self_args;
+  if (decl.generic_params) {
+    for (const auto& param : decl.generic_params->params) self_args.push_back(MakeTypePath(TypePath{param.name}));
+  }
+  for (const auto& state : decl.states) {
+    const TypeRef state_type = MakeTypeModalState(type_path, state.name, self_args);
+    for (const auto& member : state.members) {
+      const auto* method = std::get_if<ast::StateMethodDecl>(&member);
+      if (!method || !method->body) continue;
+      const auto sig = BuildMethodSignature(ctx, state_type, method->receiver, method->params, method->return_type_opt);
+      std::shared_ptr<StaticProofContext> proof_ctx;
+      if (decl.invariant_opt.has_value() && ConstShorthand(method->receiver)) {
+        proof_ctx = ExtendProofContextWithPredicateAt(proof_ctx, StateInvariantOf(*decl.invariant_opt, state.name),
+                                                      method->body->span);
+      }
+      DumpSignatureBody(ctx, decl.name + "@" + state.name + "::" + method->name, sig, UniqueShorthand(method->receiver),
+                        sig.return_type, &method->contract, std::nullopt, proof_ctx, method->body, true);
+    }
+    for (const auto& member : state.members) {
+      const auto* transition = std::get_if<ast::TransitionDecl>(&member);
+      if (!transition || !transition->body) continue;
+      const TypeRef target_type = MakeTypeModalState(type_path, transition->target_state, self_args);
+      const auto sig = BuildTransitionSignature(ctx, state_type, target_type, transition->params);
+      DumpSignatureBody(ctx, decl.name + "@" + state.name + "->" + transition->target_state + "::" + transition->name, sig,
+                        false, target_type, nullptr, std::nullopt, nullptr, transition->body, false);
+    }
+  }
 }
 
 void DumpBodies(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_maps) {
@@ -1984,6 +2153,12 @@ void DumpBodies(analysis::ScopeContext& ctx, const analysis::NameMapTable& name_
     for (const auto& item : module.items) {
       if (const auto* node = std::get_if<ast::ProcedureDecl>(&item)) {
         DumpBody(ctx, node->name, node->generic_params, node->params, node->return_type_opt, node->contract, node->body);
+      } else if (const auto* record = std::get_if<ast::RecordDecl>(&item)) {
+        DumpRecordMethodBodies(ctx, *record, module.path);
+      } else if (const auto* class_decl = std::get_if<ast::ClassDecl>(&item)) {
+        DumpClassMethodBodies(ctx, *class_decl, module.path);
+      } else if (const auto* modal = std::get_if<ast::ModalDecl>(&item)) {
+        DumpModalBodies(ctx, *modal, module.path);
       }
     }
   }

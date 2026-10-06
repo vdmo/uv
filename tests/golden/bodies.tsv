@@ -1,5 +1,7 @@
 F	/w/target/fixtures/Fixtures/AcceptedProjects/ComptimeConformance/Ultraviolet.toml
 X	["ComptimeConformance"]
+B	ComptimeConformanceModal@Ready::readValue	ok	-		!	-	2		
+B	ComptimeConformanceModal@Ready->Done::finish	ok	-		!	-	1		
 B	emittedRequiredComptimeConformanceDeriveValue	ok	-		!	-	2		
 B	emittedComptimeConformanceDeriveValue	ok	-		!	-	2		
 B	emittedFirstTieComptimeConformanceDeriveValue	ok	-		!	-	2		
@@ -60,6 +62,7 @@ B	asyncCompositionUntilArtifactReference	ok	-		!	-	2
 B	asyncKeyYieldReleaseArtifactReference	ok	-		!	-	2		
 B	asyncKeyYieldReleaseFromArtifactReference	ok	-		!	-	2		
 B	asyncKeyYieldReleaseFailureArtifactReference	ok	-		!	-	2		
+B	LowerMethodCallFamilyReceiver::readValue	ok	-		!	-	2		
 B	lowerMethodCallFamilyReference	ok	-		!	-	2		
 B	lowerGenericIdentity	ok	-		!	-	2		
 B	callTypeArgsLoweringElaborationReference	ok	-		!	-	2		
@@ -309,6 +312,7 @@ B	emittedRuntimeErasureIdentifierSpliceValue	ok	-		!	-	2
 B	compileTimeRuntimeErasureEntryPoint	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/ArtifactProjects/DynamicReceiverExpiredPanic/Ultraviolet.toml
 X	["DynamicReceiverExpiredPanic"]
+B	DynamicReceiverExpiredOwner::readExpiredDynamicValue	ok	-		!	-	2		
 B	dynamicReceiverExpiredPanicValue	ok	-		!	-	2		
 B	main	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/ArtifactProjects/EmitBcLibrary/Ultraviolet.toml
@@ -319,6 +323,24 @@ X	["EmitLlDependency"]
 B	emitLlDependencyValue	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Ultraviolet.toml
 X	["EmitLlLibrary"]
+B	EmitLlDroppingFfiByValueRecord::drop	ok	-		()	-	2		
+B	EmitLlCleanupProbe::drop	ok	-		()	-	2		
+B	EmitLlPermissionAdmissibilityRecord::readValue	ok	-		!	-	2		
+B	EmitLlPermissionAdmissibilityRecord::replaceValue	ok	-		!	-	2		
+B	EmitLlDynamicOwner::readValue	ok	-		!	-	2		
+B	EmitLlDynamicOwner::shiftedValue	ok	-		!	-	2		
+B	EmitLlDynamicDefaultReadable::defaultValue	ok	-		!	-	2		
+B	EmitLlFirstMethodPrimary::selectedFirstMethod	ok	-		!	-	2		
+B	EmitLlFirstMethodDuplicate::selectedFirstMethod	ok	-		!	-	2		
+B	EmitLlFirstFieldSelection::selectedFirstField	ok	-		!	-	2		
+B	EmitLlAssociatedOwner::associatedCarrier	ok	-		!	-	2		
+B	EmitLlOpaqueOwner::readOpaqueValue	ok	-		!	-	2		
+B	EmitLlHashLawValue::eq	ok	-		!	-	2		
+B	EmitLlHashLawValue::hash	ok	-		!	-	2		
+B	EmitLlFnvHasher::write	ok	-		!	-	3		
+B	EmitLlFnvHasher::finish	ok	-		!	-	2		
+B	EmitLlTaggedModal@Small::readValue	ok	-		!	-	2		
+B	EmitLlTaggedModal@Small->Wide::finishWide	ok	-		!	-	1		
 B	emitLlLibraryValue	ok	-		!	-	2		
 B	emitLlConstBytesEncodingProbe	ok	-		!	-	2		
 B	emitLlCleanupNoop	ok	-		()	-	2		
@@ -456,6 +478,7 @@ F	/w/target/fixtures/Fixtures/ArtifactProjects/FlowProofRuntimeErasure/Ultraviol
 X	["FlowProofRuntimeErasure"]
 B	requirePositiveValue	ok	-		!	-	2		
 B	branchValidatedValue	ok	-		!	-	2		
+B	FlowBehavioralReadableOwner::readFlowBehavioralValue	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence/Ultraviolet.toml
 X	["GpuRuntimeEvidence"]
 B	gpuRuntimeEvidence	ok	-		!	-	2		 [W-SAF-0100|`transmute` target type is known to admit invalid bit patterns|1741]
@@ -494,6 +517,9 @@ X	["MacOSStaticLibraryArchive"]
 B	macOSStaticLibraryArchiveValue	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/ArtifactProjects/ModalSpecialLowering/Ultraviolet.toml
 X	["ModalSpecialLowering"]
+B	ModalSpecialLoweringState@Ready::readValue	ok	-		!	-	2		
+B	ModalSpecialLoweringState@Ready::replaceValue	ok	-		!	-	2		
+B	ModalSpecialLoweringState@Ready->Done::finish	ok	-		!	-	1		
 B	modalSpecialStateFieldReadProbe	ok	-		!	-	2		
 B	modalSpecialStateMethodProbe	ok	-		!	-	2		
 B	modalSpecialTransitionProbe	ok	-		!	-	2		
@@ -532,6 +558,7 @@ B	refinementRuntimePanicValue	fail	E-TYP-1953	statement failed typing: LetStmt	-
 B	main	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/ArtifactProjects/RuntimeInterfaceSymbols/Ultraviolet.toml
 X	["RuntimeInterfaceSymbols"]
+B	RuntimeInterfaceDynamicValueOwner::readRuntimeInterfaceDynamicValue	ok	-		!	-	2		
 B	runtimeInterfaceValueFunction	ok	-		!	-	2		
 B	runtimeInterfaceUnitValueScore	ok	-		!	-	2		
 B	runtimeInterfaceValueEnumScore	ok	-		!	-	2		
@@ -604,9 +631,11 @@ X	["SystemExitExecutable"]
 B	main	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/ClassDefaultMethodFieldAccess/Ultraviolet.toml
 X	["ClassDefaultMethodFieldAccess"]
+B	Inspectable::inspectedValue	ok	-		!	-	2		
 B	classDefaultMethodFieldAccessReference	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/GenericClassBoundMethodLookup/Ultraviolet.toml
 X	["GenericClassBoundMethodLookup"]
+B	Readable::readValue	ok	-		!	-	2		
 B	boundedRead	ok	-		!	-	2		
 B	genericClassBoundMethodLookupReference	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/BootstrapNonCompliance/Polymorphism/GenericRecordLiteralExpectedType/Ultraviolet.toml
@@ -679,6 +708,7 @@ X	["SharedClosureCaptureWarning"]
 B	sharedClosureCaptureWarningReference	ok	-		!	-	2		 [W-CON-0009|Closure captures `shared` data|194]
 F	/w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning/Ultraviolet.toml
 X	["SpeculativeExpensiveBodyWarning"]
+B	SpeculativeDiagnosticCounter::nextValue	ok	-		!	-	2		
 B	speculativeExpensiveBodyWarningReference	ok	-		!	-	2		 [W-CON-0021|Speculative block body may be expensive to re-execute|436]
 F	/w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeLargeStructWarning/Ultraviolet.toml
 X	["SpeculativeLargeStructWarning"]
@@ -691,6 +721,7 @@ X	["StaleOkSuppressesReleaseWarning"]
 B	staleOkSuppressesReleaseWarningReference	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning/Ultraviolet.toml
 X	["UnknownCalleeAccessWarning"]
+B	UnknownAccessTarget::readValue	ok	-		!	-	2		
 B	summarizeAsUnknown	ok	-		!	-	2		
 B	unknownCalleeAccessWarningReference	ok	-		!	-	2		 [W-CON-0005|Callee access pattern unknown; assuming full access|519]
 F	/w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/CancellationNoAdditionalDiagnostics/Ultraviolet.toml
@@ -1253,6 +1284,7 @@ X	["FfiAttributeDiagnostics"]
 B	mangleOnOrdinaryProcedure	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiPassByValueRequired/Ultraviolet.toml
 X	["FfiPassByValueRequired"]
+B	DroppingFfiRecord::drop	ok	-		()	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/FFI/FfiReturnRegionLocalRawPtr/Ultraviolet.toml
 X	["FfiReturnRegionLocalRawPtr"]
 B	ffiReturnRegionLocalRawPtrReference	ok	-		!	-	2		
@@ -1377,6 +1409,7 @@ X	["SharedClosureYieldKeys"]
 B	sharedClosureYieldKeysReference	fail	E-CON-0213	statement failed typing: LetStmt	-	212-336	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Keys/SharedDynamicMutatingReceiver/Ultraviolet.toml
 X	["SharedDynamicMutatingReceiver"]
+B	SharedDynamicReceiverClass::mutate	ok	-		!	-	2		
 B	sharedDynamicMutatingReceiverReference	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Keys/SharedReadThenWrite/Ultraviolet.toml
 X	["SharedReadThenWrite"]
@@ -1594,6 +1627,7 @@ B	noAmbientRecursiveIOProvider	ok	-		!	-	2
 B	noAmbientCapabilityGlobalReference	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Permissions/ReceiverPermissionMismatch/Ultraviolet.toml
 X	["ReceiverPermissionMismatch"]
+B	PermissionDiagnosticCell::uniqueRead	ok	-		!	-	2		
 B	receiverPermissionMismatchReference	fail	E-TYP-1605	statement failed typing: ReturnStmt	-	383-408	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Permissions/SharedMutationWithoutKey/Ultraviolet.toml
 X	["SharedMutationWithoutKey"]
@@ -1608,6 +1642,7 @@ F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/AssociatedTypeUnboundM
 X	["AssociatedTypeUnboundMember"]
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyDropConflict/Ultraviolet.toml
 X	["BitcopyDropConflict"]
+B	BitcopyDropConflictOwner::drop	ok	-		()	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/BitcopyFieldNonBitcopy/Ultraviolet.toml
 X	["BitcopyFieldNonBitcopy"]
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/CapabilityClassNameReserved/Ultraviolet.toml
@@ -1617,31 +1652,41 @@ X	["CapabilityClassesDiagnostics"]
 B	capabilityClassesDiagnosticsReference	fail	E-MEM-3030		-	195-237	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ClassMemberNameConflict/Ultraviolet.toml
 X	["ClassMemberNameConflict"]
+B	ConflictingMemberClass::value	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateAssociatedTypeName/Ultraviolet.toml
 X	["DuplicateAssociatedTypeName"]
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassImplementationRequirement/Ultraviolet.toml
 X	["DuplicateClassImplementationRequirement"]
+B	RepeatedImplementationClass::marker	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassImplementationRule/Ultraviolet.toml
 X	["DuplicateClassImplementationRule"]
+B	DuplicateImplementationClass::marker	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateClassProcedureName/Ultraviolet.toml
 X	["DuplicateClassProcedureName"]
+B	DuplicateProcedureClass::repeated	ok	-		!	-	2		
+B	DuplicateProcedureClass::repeated	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DuplicateTypeParameterName/Ultraviolet.toml
 X	["DuplicateTypeParameterName"]
 B	duplicateTypeParameterNameReference	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicClassObjectDiagnostics/Ultraviolet.toml
 X	["DynamicClassObjectDiagnostics"]
+B	DynamicDiagnosticClass::compareDiagnosticSelf	ok	-		!	-	2		
 B	makeDiagnosticDynamic	fail	E-TYP-2541	statement failed typing: ReturnStmt	-	456-495	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicGenericMethodNonDispatchable/Ultraviolet.toml
 X	["DynamicGenericMethodNonDispatchable"]
+B	GenericDispatchClass::genericDynamicValue	sig-fail	-
 B	makeGenericDynamic	fail	E-TYP-2542	statement failed typing: ReturnStmt	-	458-495	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicMissingMethod/Ultraviolet.toml
 X	["DynamicMissingMethod"]
+B	DynamicLookupClass::presentDynamicValue	ok	-		!	-	2		
 B	readMissingDynamicMethod	fail	LookupMethod-NotFound	method 'missingDynamicValue' on type '$DynamicMissingMethod::DynamicLookupClass'	-	473-508	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicNonDispatchableRequirement/Ultraviolet.toml
 X	["DynamicNonDispatchableRequirement"]
+B	RequiredDispatchClass::matchRequiredSelf	ok	-		!	-	2		
 B	makeRequiredDynamic	fail	E-TYP-2541	statement failed typing: ReturnStmt	-	451-489	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicSelfParameterNonDispatchable/Ultraviolet.toml
 X	["DynamicSelfParameterNonDispatchable"]
+B	SelfParameterDispatchClass::compareDynamicSelf	ok	-		!	-	2		
 B	makeSelfParameterDynamic	fail	E-TYP-2541	statement failed typing: ReturnStmt	-	485-528	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/DynamicUndefinedClassType/Ultraviolet.toml
 X	["DynamicUndefinedClassType"]
@@ -1801,6 +1846,7 @@ X	["GenericTypeApplyArgCount"]
 B	genericTypeApplyArgCountReference	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/HashWithoutEq/Ultraviolet.toml
 X	["HashWithoutEq"]
+B	HashWithoutEqValue::hash	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/HeapAllocRawUnsafe/Ultraviolet.toml
 X	["HeapAllocRawUnsafe"]
 B	heapAllocRawUnsafeReference	fail	E-MEM-3030	statement failed typing: ReturnStmt	-	172-211	2		
@@ -1812,8 +1858,11 @@ X	["HeapDeallocRawUnsafe"]
 B	heapDeallocRawUnsafeReference	fail	E-MEM-3030		-	203-246	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationAbstractMethodSignatureMismatch/Ultraviolet.toml
 X	["ImplementationAbstractMethodSignatureMismatch"]
+B	AbstractSignatureOwner::value	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationDefaultMethodSignatureMismatch/Ultraviolet.toml
 X	["ImplementationDefaultMethodSignatureMismatch"]
+B	DefaultSignatureClass::value	ok	-		!	-	2		
+B	DefaultSignatureOwner::value	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationFieldTypeMismatch/Ultraviolet.toml
 X	["ImplementationFieldTypeMismatch"]
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/ImplementationMissingAbstractMethod/Ultraviolet.toml
@@ -1824,10 +1873,13 @@ F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedFieldSignatur
 X	["InheritedFieldSignatureConflict"]
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/InheritedMethodSignatureConflict/Ultraviolet.toml
 X	["InheritedMethodSignatureConflict"]
+B	MethodConflictLeft::inheritedConflict	ok	-		!	-	2		
+B	MethodConflictRight::inheritedConflict	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/NonModalImplementsModalClass/Ultraviolet.toml
 X	["NonModalImplementsModalClass"]
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueMemberNotDefined/Ultraviolet.toml
 X	["OpaqueMemberNotDefined"]
+B	OpaqueVisibleOwner::visibleOpaqueValue	ok	-		!	-	2		
 B	makeVisibleOpaque	fail	E-SEM-3161	expected opaque OpaqueMemberNotDefined::OpaqueVisibleClass, found OpaqueMemberNotDefined::OpaqueVisibleOwner	-	405-443	2		
 B	readHiddenOpaqueMember	fail	E-TYP-2510	method 'hiddenOpaqueValue' on type 'opaque OpaqueMemberNotDefined::OpaqueVisibleClass'	-	567-600	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OpaqueReturnMissingImplementation/Ultraviolet.toml
@@ -1838,10 +1890,15 @@ X	["OpaqueUndefinedClassType"]
 B	acceptMissingOpaque	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideAbstractMethod/Ultraviolet.toml
 X	["OverrideAbstractMethod"]
+B	OverrideAbstractOwner::value	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideMissingOnDefault/Ultraviolet.toml
 X	["OverrideMissingOnDefault"]
+B	DefaultOverrideClass::value	ok	-		!	-	2		
+B	OverrideMissingOwner::value	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/OverrideNoConcrete/Ultraviolet.toml
 X	["OverrideNoConcrete"]
+B	OverrideNoConcreteOwner::unrelated	ok	-		!	-	2		
+B	OverrideNoConcreteOwner::required	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/RefinementDiagnosticsOwnership/Ultraviolet.toml
 X	["RefinementDiagnosticsOwnership"]
 B	refinementDiagnosticsOwnershipPredicate	ok	-		!	-	2		
@@ -1866,12 +1923,16 @@ F	/w/target/fixtures/Fixtures/RejectedSource/Polymorphism/SuperclassCycle/Ultrav
 X	["SuperclassCycle"]
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingDiagnostics/Ultraviolet.toml
 X	["BehavioralSubtypingDiagnostics"]
+B	BehavioralDiagnosticOwner::readValue	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingLiskov/Ultraviolet.toml
 X	["BehavioralSubtypingLiskov"]
+B	LiskovViolationOwner::readValue	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingPostcondition/Ultraviolet.toml
 X	["BehavioralSubtypingPostcondition"]
+B	WeakerPostconditionOwner::readValue	fail	E-SEM-2801	statement failed typing: ReturnStmt	-	396-421	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/BehavioralSubtypingPrecondition/Ultraviolet.toml
 X	["BehavioralSubtypingPrecondition"]
+B	StrongerPreconditionOwner::readValue	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/ContractDynamicAttribute/Ultraviolet.toml
 X	["ContractDynamicAttribute"]
 B	contractDynamicAttributeReference	ok	-		!	-	2		
@@ -1926,12 +1987,15 @@ X	["MainSignature"]
 B	main	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupAmbiguousDefault/Ultraviolet.toml
 X	["MethodLookupAmbiguousDefault"]
+B	FirstDefaultClass::readValue	ok	-		!	-	2		
+B	SecondDefaultClass::readValue	ok	-		!	-	2		
 B	methodLookupAmbiguousDefaultReference	fail	LookupMethod-Ambig	statement failed typing: ReturnStmt	-	530-555	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodLookupDiagnostics/Ultraviolet.toml
 X	["MethodLookupDiagnostics"]
 B	methodLookupDiagnosticsReference	fail	LookupMethod-NotFound	statement failed typing: ReturnStmt	-	297-326	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/MethodsAndReceiversDiagnostic/Ultraviolet.toml
 X	["MethodsAndReceiversDiagnostic"]
+B	MethodsAndReceiversOwner::readValue	sig-fail	Record-Method-RecvSelf-Err
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/MissingExplicitReturn/Ultraviolet.toml
 X	["MissingExplicitReturn"]
 B	missingExplicitReturnReference	ok	-		i32	-	2		
@@ -1971,15 +2035,21 @@ X	["ProcedureDeclarationsDiagnostic"]
 B	procedureDeclarationsDiagnosticReference	ok	-		i32	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodBodyExplicitReturn/Ultraviolet.toml
 X	["RecordMethodBodyExplicitReturn"]
+B	MethodBodyOwner::readValue	ok	-		i32	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodCallArgumentType/Ultraviolet.toml
 X	["RecordMethodCallArgumentType"]
+B	MethodCallOwner::add	ok	-		!	-	2		
 B	recordMethodCallArgumentTypeReference	fail	E-SEM-2526		-	356-372	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodDuplicate/Ultraviolet.toml
 X	["RecordMethodDuplicate"]
+B	DuplicateMethodOwner::readValue	ok	-		!	-	2		
+B	DuplicateMethodOwner::readValue	ok	-		!	-	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodReceiverNotSelf/Ultraviolet.toml
 X	["RecordMethodReceiverNotSelf"]
+B	ReceiverOwner::readValue	sig-fail	Record-Method-RecvSelf-Err
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/RecordMethodWellFormedness/Ultraviolet.toml
 X	["RecordMethodWellFormedness"]
+B	RecordMethodWellFormedOwner::readValue	sig-fail	Record-Method-RecvSelf-Err
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/ResultGenericConstraint/Ultraviolet.toml
 X	["ResultGenericConstraint"]
 B	genericResultConstraint	ok	-		!	-	2		
@@ -1988,6 +2058,7 @@ X	["ReturnAnnotationPresence"]
 B	returnAnnotationPresenceReference	fail	E-SEM-3161	expected (), found i32	-	142-150	2		
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/SelfTypeDefinition/Ultraviolet.toml
 X	["SelfTypeDefinition"]
+B	SelfTypeOwner::readValue	sig-fail	Record-Method-RecvSelf-Err
 F	/w/target/fixtures/Fixtures/RejectedSource/Procedures/UnsatisfiedPrecondition/Ultraviolet.toml
 X	["UnsatisfiedPrecondition"]
 B	requiresPositive	ok	-		!	-	2		
@@ -2178,6 +2249,7 @@ X	["App"]
 B	main	ok	-		!	-	2		
 F	/w/target/p1cases/self_in_record_method/Ultraviolet.toml
 X	["App"]
+B	R::get	ok	-		!	-	2		
 B	main	ok	-		!	-	2		
 F	/w/target/p1cases/warning_only/Ultraviolet.toml
 X	["App"]
@@ -4075,6 +4147,7 @@ B	diagnosticDynamicAttributeValue	ok	-		!	-	2		 [I-CON-0013|Static key safety pr
 B	diagnosticStaleOkAttributeValue	ok	-		!	-	2		 [W-CON-0010|`%release` block permits interleaving|1521]
 B	diagnosticCompileTimeAttributeValue	ok	-		!	-	2		
 B	runAttributesDiagnosticAttributesReference	ok	-		!	-	2		 [W-CNF-0601|Reference to declaration marked `#deprecated`|2532]
+B	GeneralMethodAttributeRecord::readValue	ok	-		!	-	2		
 B	generalAttributeReference	ok	-		!	-	2		
 B	generalAttributeHasValidName	ok	-		!	-	2		
 B	generalBareInlineAttributeValue	ok	-		!	-	2		
@@ -4089,6 +4162,8 @@ B	layoutAttributeTargetIsValid	ok	-		!	-	2
 B	layoutAttributeConcreteRecordValue	ok	-		!	-	2		
 B	layoutAttributeConcreteEnumValue	ok	-		!	-	2		
 B	runAttributesLayoutAttributesReference	ok	-		!	-	2		
+B	OptimizationMethodAttributeRecord::readNeverInlinedValue	ok	-		!	-	2		
+B	OptimizationMethodAttributeRecord::readColdValue	ok	-		!	-	2		
 B	optimizationBareInlineValue	ok	-		!	-	2		
 B	optimizationDefaultInlineValue	ok	-		!	-	2		
 B	optimizationAlwaysInlineValue	ok	-		!	-	2		
@@ -4369,6 +4444,8 @@ B	stringSpliceIdentifierHygieneReference	ok	-		!	-	2
 B	hygienizeAstPropertiesReference	ok	-		!	-	2		
 B	hygienicInternalReferencesReference	ok	-		!	-	2		
 B	quoteBuildSpliceOrderReference	ok	-		!	-	2		
+B	ComptimeReflectedModal@Ready::readValue	ok	-		!	-	2		
+B	ComptimeReflectedModal@Ready->Done::finish	ok	-		!	-	1		
 B	introspectCategoryValidityReference	ok	-		!	-	2		
 B	reflectionCanonicalOrderReference	ok	-		!	-	2		
 B	introspectImplementsFormSemanticsReference	ok	-		!	-	2		
@@ -4465,6 +4542,8 @@ B	sizeRangeFullReference	ok	-		!	-	2
 B	alignRangeFullReference	ok	-		!	-	2		
 B	layoutRangeFullReference	ok	-		!	-	2		
 B	runDataTypesRangesReference	ok	-		!	-	2		
+B	RecordMemberReference::readValue	ok	-		!	-	2		
+B	RecordMemberReference::addToValue	ok	-		!	-	2		
 B	recordReference	ok	-		!	-	2		
 B	recordShorthandLiteralReference	ok	-		!	-	2		
 B	recordOutOfOrderLiteralReference	ok	-		!	-	2		
@@ -4557,6 +4636,8 @@ B	evalSigmaTupleAccessReference	ok	-		!	-	2
 B	evalSigmaIndexReference	ok	-		!	-	2		
 B	evalSigmaIndexRangeReference	ok	-		!	-	2		
 B	runExpressionsAccessAndPlacesReference	ok	-		!	-	2		
+B	CallMethodReference::readValue	ok	-		!	-	2		
+B	CallMethodReference::addToValue	ok	-		!	-	2		
 B	callReferenceNoArgs	ok	-		!	-	2		
 B	callReferenceAdd	ok	-		!	-	2		
 B	callReferenceApply	ok	-		!	-	2		
@@ -4790,6 +4871,7 @@ B	ffiCallbackReference	ok	-		!	-	2
 B	callImportedReferenceFunction	ok	-		!	-	2		
 B	callImportedReferenceDroppingRecord	ok	-		!	-	2		
 B	runFFIExternProceduresReference	ok	-		!	-	2		
+B	FFIDroppingRecord::drop	ok	-		()	-	2		
 B	ffiPrimitiveRecord	ok	-		!	-	2		
 B	runFFIFfiSafeReference	ok	-		!	-	2		
 B	ffiImportedStaticForeignContractProvider	ok	-		!	-	2		
@@ -4800,6 +4882,8 @@ B	callDynamicForeignContract	ok	-		!	-	2
 B	callNullableForeignContract	ok	-		!	-	2		
 B	runFFIForeignContractsReference	ok	-		!	-	2		
 X	["HelloUltraviolet" "Reference" "Keys"]
+B	KeyModeContextCell::readConst	ok	-		!	-	2		
+B	KeyModeContextCell::readShared	ok	-		!	-	2		
 B	readConstModeContext	ok	-		!	-	2		
 B	readAndWriteKeyBlockValue	ok	-		!	-	2		
 B	orderedKeyBlockValue	ok	-		!	-	2		 [W-CON-0013|`ordered` key option used with statically-comparable indices (`K-Ordered-Redundant-Warn`)|896]
@@ -4873,6 +4957,7 @@ B	canonicalOrderDeadlockFreedomReference	ok	-		!	-	2
 B	staticAndRuntimeKeySafetyEquivalenceReference	ok	-		!	-	2		
 B	dynamicContextStaticSafeLoweringReference	ok	-		!	-	2		
 B	runKeysDynamicVerificationReference	ok	-		!	-	2		
+B	SharedDynamicKeyOwner::readKeyValue	ok	-		!	-	2		
 B	fieldBoundaryKeyPathValue	ok	-		!	-	2		
 B	fieldKeyBoundaryReference	ok	-		!	-	2		
 B	pointerDereferenceKeyPathValue	ok	-		!	-	2		
@@ -4908,6 +4993,7 @@ B	nestedReleaseSharedArgumentRead	ok	-		!	-	2
 B	nestedReleaseForwardSharedArgument	ok	-		!	-	2		
 B	reentrantCalleeCoveredValue	ok	-		!	-	2		
 B	runKeysNestedReleaseReference	ok	-		!	-	2		
+B	SpeculativeKeyCounter::nextValue	ok	-		!	-	2		
 B	speculativeWriteValue	ok	-		!	-	2		
 B	speculativeConstReceiverCallValue	ok	-		!	-	2		 [W-CON-0021|Speculative block body may be expensive to re-execute|761]
 B	speculativeMultiPathWriteValue	ok	-		!	-	2		
@@ -4934,6 +5020,9 @@ B	backendClosureValue	ok	-		!	-	2
 B	backendSliceAndStringValue	ok	-		!	-	2		
 B	runLoweringBackendRequirementsReference	ok	-		!	-	2		
 B	cleanupDeferValue	ok	-		!	-	2		
+B	LoweringDropRecord::drop	ok	-		()	-	2		
+B	CleanupTraceDropRecord::drop	ok	-		()	-	2		
+B	CleanupPanickingDropRecord::drop	fail	E-UNS-0102	fixed-size array index expression is not compile-time constant; runtime fixed-array indexing requires #dynamic, or use a slice for runtime indexing	-	1689-1694	2		
 B	cleanupDropValue	ok	-		!	-	2		
 B	cleanupDeferPanicBoundaryProvider	fail	E-UNS-0102	statement failed typing: DeferStmt	-	2256-2379	2		
 B	cleanupDropPanicBoundaryProvider	ok	-		!	-	2		
@@ -5006,6 +5095,15 @@ B	sizeFuncReference	ok	-		!	-	2
 B	alignFuncReference	ok	-		!	-	2		
 B	layoutFuncReference	ok	-		!	-	2		
 B	runModalTypesFunctionTypesReference	ok	-		!	-	2		
+B	ModalReference@Closed::isOpen	ok	-		!	-	2		
+B	ModalReference@Closed->Open::open	ok	-		!	-	1		
+B	ModalReference@Open::isOpen	ok	-		!	-	2		
+B	ModalReference@Open::readValue	ok	-		!	-	2		
+B	ModalReference@Open::readValueWithOffset	ok	-		!	-	2		
+B	ModalReference@Open::uniqueReceiverOffset	ok	-		!	-	2		
+B	ModalReference@Open->Open::replace	ok	-		!	-	1		
+B	ModalReference@Open->Closed::close	ok	-		!	-	1		
+B	GenericModalReference@Present::read	sig-fail	-
 B	closedModalReference	ok	-		!	-	2		
 B	modalReferenceOpenValue	ok	-		!	-	2		
 B	genericModalPresentValue	ok	-		!	-	2		
@@ -5032,6 +5130,10 @@ B	layoutRawPointerReference	ok	-		!	-	2
 B	runModalTypesPointersReference	ok	-		!	-	2		
 B	modalStateFieldScore	ok	-		!	-	2		
 B	runModalTypesStateFieldsReference	ok	-		!	-	2		
+B	ModalStateMethodReference@Idle::readValue	ok	-		!	-	2		
+B	ModalStateMethodReference@Ready::readValue	ok	-		!	-	2		
+B	ModalStateMethodReference@Ready::addValue	ok	-		!	-	2		
+B	ModalStateMethodReference@Ready::uniqueReceiverValue	ok	-		!	-	2		
 B	runModalTypesStateMethodsReference	ok	-		!	-	2		
 B	stringReferenceLayoutMatches	ok	-		!	-	2		
 B	managedStringRuntimeLengthResultMatches	ok	-		!	-	2		
@@ -5045,6 +5147,8 @@ B	sizeStringModalReference	ok	-		!	-	2
 B	alignStringModalReference	ok	-		!	-	2		
 B	stringRuntimeLengthReference	ok	-		!	-	2		
 B	runModalTypesStringsReference	ok	-		!	-	2		
+B	ModalTransitionReference@Draft->Submitted::submit	ok	-		!	-	1		
+B	ModalTransitionReference@Submitted->Draft::reset	ok	-		!	-	1		
 B	modalTransitionDraftScore	ok	-		!	-	2		
 B	transitionRuntimeSemanticsReference	ok	-		!	-	2		
 B	runModalTypesTransitionsReference	ok	-		!	-	2		
@@ -5094,6 +5198,7 @@ B	runNamesDisambiguationReference	ok	-		!	-	2
 B	importNameReference	ok	-		!	-	2		
 B	importIntroducesAccessibleName	ok	-		!	-	2		
 B	runNamesImportsReference	ok	-		!	-	2		
+B	QualifiedLocalOwner::qualifiedLocalValue	ok	-		!	-	2		
 B	qualifiedNameReference	ok	-		!	-	2		
 B	qualifiedNameCanResolve	ok	-		!	-	2		
 B	qualifiedModuleAliasProcedureValue	ok	-		!	-	2		
@@ -5240,10 +5345,15 @@ B	inspectSharedPermissionCell	ok	-		!	-	2
 B	inspectUniquePermissionCell	ok	-		!	-	2		
 B	aliasExclusivityValue	ok	-		!	-	2		
 B	runPermissionsAliasExclusivityReference	ok	-		!	-	2		
+B	PermissionCell::readConst	ok	-		!	-	2		
+B	PermissionCell::readShared	ok	-		!	-	2		
+B	PermissionCell::readUnique	ok	-		!	-	2		
 B	permissionQualifiedLayoutMatches	ok	-		!	-	2		
 B	permissionQualifiedBindingValue	ok	-		!	-	2		 [W-CON-0006|Explicit read-then-write form used; compound assignment available (`K-RMW-Explicit-Warn`)|1461]
 B	runPermissionsPermissionFormsReference	ok	-		!	-	2		
 X	["HelloUltraviolet" "Reference" "Polymorphism"]
+B	AssociatedValueClass::associatedDefaultValue	ok	-		!	-	2		
+B	AssociatedDefaultClass::associatedDefaultBindingValue	ok	-		!	-	2		
 B	runPolymorphismAssociatedTypesReference	ok	-		!	-	2		
 B	runPolymorphismCapabilityClassesReference	ok	-		!	-	2		
 B	capabilityClassSyntaxAndTypeModelReference	ok	-		!	-	2		
@@ -5302,7 +5412,19 @@ B	capabilityExecutionDomainSupport	ok	-		!	-	2
 B	capabilityTimeObserved	ok	-		!	-	2		
 B	capabilityContextFields	ok	-		!	-	2		
 B	capabilityContextBundleObserved	ok	-		!	-	2		
+B	ClassReadable::classValue	ok	-		!	-	2		
+B	ClassDerived::derivedValue	ok	-		!	-	2		
+B	ClassInspectable::inspectedValue	ok	-		!	-	2		
+B	ClassCombined::combinedValue	ok	-		!	-	2		
+B	ClassFirstMethodPrimary::firstByNameValue	ok	-		!	-	2		
+B	ClassFirstMethodDuplicate::firstByNameValue	ok	-		!	-	2		
+B	ClassFirstSelection::firstFieldByNameValue	ok	-		!	-	2		
+B	ClassPermissionOwner::readConst	ok	-		!	-	2		
+B	ClassPermissionOwner::readShared	ok	-		!	-	2		
+B	ClassPermissionOwner::readUnique	ok	-		!	-	2		
 B	runPolymorphismClassesReference	ok	-		!	-	2		
+B	DynamicReadableOwner::readDynamicValue	ok	-		!	-	2		
+B	DynamicDefaultClass::defaultDynamicValue	ok	-		!	-	2		
 B	runPolymorphismDynamicClassObjectsReference	ok	-		!	-	2		
 B	defaultedGenericValue	ok	-		!	-	2		
 B	genericAliasValue	ok	-		!	-	2		
@@ -5317,15 +5439,22 @@ B	selectGeneric	ok	-		!	-	2
 B	expectedReturnGeneric	ok	-		!	-	2		
 B	pairGeneric	ok	-		!	-	2		
 B	runPolymorphismGenericProceduresReference	ok	-		!	-	2		
+B	ImplementationReadable::defaultValue	ok	-		!	-	2		
+B	ImplementationOwner::readValue	ok	-		!	-	2		
+B	ImplementationOverrideOwner::readValue	ok	-		!	-	2		
+B	ImplementationOverrideOwner::defaultValue	ok	-		!	-	2		
 B	runPolymorphismImplementationsReference	ok	-		!	-	2		
+B	OpaqueReadableOwner::readOpaqueValue	ok	-		!	-	2		
 B	makeOpaqueReadable	fail	E-SEM-3161	expected opaque HelloUltraviolet::Reference::Polymorphism::OpaqueReadableClass, found HelloUltraviolet::Reference::Polymorphism::OpaqueReadableOwner	-	404-447	2		
 B	makeAlternateOpaqueReadable	fail	E-SEM-3161	expected opaque HelloUltraviolet::Reference::Polymorphism::OpaqueReadableClass, found HelloUltraviolet::Reference::Polymorphism::OpaqueReadableOwner	-	546-593	2		
 B	readOpaqueArgument	ok	-		!	-	2		
 B	runPolymorphismOpaqueTypesReference	ok	-		!	-	2		
 X	["HelloUltraviolet" "Reference" "Procedures"]
+B	BehavioralReadableOwner::readBehavioralValue	ok	-		!	-	2		
 B	makeBehavioralReadable	fail	E-SEM-3161	expected opaque HelloUltraviolet::Reference::Procedures::BehavioralReadableClass, found HelloUltraviolet::Reference::Procedures::BehavioralReadableOwner	-	504-536	2		
 B	readOpaqueBehavioralValue	ok	-		!	-	2		
 B	runProceduresBehavioralSubtypingReference	ok	-		!	-	2		
+B	ContractPureBox::valueAtLeast	ok	-		!	-	2		
 B	contractPureProcedure	ok	-		!	-	2		
 B	contractNoClauseReference	ok	-		!	-	2		
 B	contractReference	ok	-		!	-	2		
@@ -5380,6 +5509,8 @@ B	runProceduresDeclarationsReference	ok	-		!	-	2
 B	procedureInvariantReference	ok	-		!	-	2		
 B	procedureInvariantIsVerified	ok	-		!	-	2		
 B	runProceduresInvariantsReference	ok	-		!	-	3		
+B	LeftOverloadReceiver::selectedByReceiver	ok	-		!	-	2		
+B	RightOverloadReceiver::selectedByReceiver	ok	-		!	-	2		
 B	selectFreeOverload	ok	-		!	-	2		
 B	selectFreeOverload	ok	-		!	-	2		
 B	selectFreeOverload	ok	-		!	-	2		
@@ -5410,6 +5541,7 @@ B	preconditionCallAfterThenFact	ok	-		!	-	2
 B	preconditionCallAfterFallthroughNegFact	ok	-		!	-	2		
 B	preconditionCallAfterLinearEntailment	ok	-		!	-	2		
 B	runProceduresPreconditionsReference	ok	-		!	-	2		
+B	ReceiverReference::readValue	ok	-		!	-	2		
 B	receiverReference	ok	-		!	-	2		
 B	runProceduresReceiversReference	ok	-		!	-	2		
 B	verificationFactReference	ok	-		!	-	2		
@@ -5530,6 +5662,7 @@ B	runSourceTextLiteralsReference	ok	-		!	-	2
 B	logicalLineContinuedByOperator	ok	-		!	-	2		
 B	logicalLineContinuedInDelimitedList	ok	-		!	-	2		
 B	runSourceTextLogicalLinesReference	ok	-		!	-	2		
+B	TokenMethodReference::readTokenValue	ok	-		!	-	2		
 B	tokenReference	ok	-		!	-	2		
 B	tokenReferenceCoversCoreSurface	ok	-		!	-	2		
 B	compoundAssignmentTokensReference	ok	-		!	-	2		
@@ -5551,6 +5684,7 @@ B	compoundAssignmentControlValue	ok	-		!	-	2
 B	lowerStmtAssignReference	ok	-		!	-	2		
 B	lowerStmtCompoundAssignReference	ok	-		!	-	2		
 B	runStatementsAssignmentReference	ok	-		!	-	2		
+B	BindingPermissionCell::readConst	ok	-		!	-	2		
 B	annotatedBindingValue	ok	-		!	-	2		
 B	inferredBindingValue	ok	-		!	-	2		
 B	tuplePatternBindingValue	ok	-		!	-	2		
@@ -5591,6 +5725,7 @@ B	lowerLoopInfiniteReference	ok	-		!	-	2
 B	lowerLoopCondReference	ok	-		!	-	2		
 B	lowerLoopIterReference	ok	-		!	-	2		
 B	runStatementsBlocksReference	ok	-		!	-	2		
+B	ControlDropRecord::drop	ok	-		()	-	2		
 B	consumeControlDropRecord	ok	-		!	-	2		
 B	returnValueReference	ok	-		!	-	2		
 B	returnUnitReference	ok	-		!	-	2		

@@ -116,6 +116,12 @@ use uv_project::module_discovery::compilation_unit;
 use uv_project::project::{Assembly, AssemblyTarget};
 use uv_project::target_profile::TargetProfile;
 use uv_source::ast::dump::AstDump;
+use uv_analysis::contracts::verification::extend_proof_context_with_predicate_at;
+use uv_analysis::generics::monomorphize::TypeSubst;
+use uv_analysis::resolve::scopes::id_eq;
+use uv_analysis::typing::signature::subst_self_type;
+use uv_analysis::typing::types::self_var_type;
+use uv_source::ast::{Block, ClassDecl, ModalDecl, ReceiverPerm, RecordDecl, TypeInvariant};
 use uv_source::ast::ASTModule;
 use uv_source::ast::ContractClause;
 use uv_source::ast::LiteralExpr;
@@ -2763,33 +2769,53 @@ fn dump_body(
     } else {
         make_type_prim("()")
     };
+    dump_typed_body(out, &mut proc_ctx, env, return_type, contract.as_ref(), None, None, body, true);
+}
+
+/// The block of a body under its typing context, and the line that reports it. A
+/// transition is typed without the environment reference and the diagnostic stream.
+#[allow(clippy::too_many_arguments)]
+fn dump_typed_body(
+    out: &mut String,
+    proc_ctx: &mut ScopeContext<'_>,
+    env: TypeEnv,
+    return_type: TypeRef,
+    contract: Option<&ContractClause>,
+    class_path: Option<Vec<String>>,
+    proof_ctx: Option<StaticProofContext>,
+    body: &Block,
+    with_env: bool,
+) {
     let diags = Rc::new(RefCell::new(Vec::new()));
     let env = Rc::new(RefCell::new(env));
     proc_ctx.diagnostics = Some(diags.clone());
     let type_ctx = StmtTypeContext {
         return_type,
-        diags: Some(diags.clone()),
-        env_ref: Some(env.clone()),
-        contract: contract.as_ref(),
+        diags: with_env.then(|| diags.clone()),
+        env_ref: with_env.then(|| env.clone()),
+        contract,
+        current_class_path: class_path,
+        proof_ctx: proof_ctx.map(Rc::new),
         ..Default::default()
     };
     // The callbacks read the environment as it stands when they are called.
+    let proc_ctx = &*proc_ctx;
     let type_expr_fn =
-        |inner: &ExprPtr| type_expr(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
-    let type_ident_fn = |ident: &str| type_identifier_expr(&proc_ctx, &env.borrow(), ident);
+        |inner: &ExprPtr| type_expr(proc_ctx, &type_ctx, inner, &env.borrow().clone());
+    let type_ident_fn = |ident: &str| type_identifier_expr(proc_ctx, &env.borrow(), ident);
     let type_place_fn =
-        |inner: &ExprPtr| type_place(&proc_ctx, &type_ctx, inner, &env.borrow().clone());
+        |inner: &ExprPtr| type_place(proc_ctx, &type_ctx, inner, &env.borrow().clone());
     let start_env = env.borrow().clone();
     reset_scaffolding();
     let result = type_block(
-        &proc_ctx,
+        proc_ctx,
         &type_ctx,
         body,
         &start_env,
         &type_expr_fn,
         &type_ident_fn,
         &type_place_fn,
-        Some(&env),
+        with_env.then_some(&env),
     );
     if let Some(what) = take_pending() {
         let _ = writeln!(out, "PENDING\t{what}");
@@ -2818,6 +2844,227 @@ fn dump_body(
     out.push('\n');
 }
 
+/// The body of a method or transition under the bindings of its signature, as the typing
+/// of record, class and modal declarations sets it up; `self` of a `unique` shorthand
+/// receiver is mutable.
+#[allow(clippy::too_many_arguments)]
+fn dump_signature_body(
+    out: &mut String,
+    ctx: &ScopeContext<'_>,
+    name: &str,
+    sig: Result<Signature, Option<&'static str>>,
+    self_var: bool,
+    return_type: Option<TypeRef>,
+    contract: Option<&ContractClause>,
+    class_path: Option<Vec<String>>,
+    proof_ctx: Option<StaticProofContext>,
+    body: &BlockPtr,
+    with_env: bool,
+) {
+    let Some(body) = body.as_deref() else {
+        return;
+    };
+    let _ = write!(out, "B\t{name}\t");
+    let sig = match sig {
+        Ok(sig) => sig,
+        Err(diag_id) => {
+            let _ = writeln!(out, "sig-fail\t{}", diag_or(diag_id));
+            return;
+        }
+    };
+    let mut env = TypeEnv::default();
+    env.scopes.push(Default::default());
+    for (binding_name, binding_type) in &sig.bindings {
+        let r#mut = if self_var && binding_name == "self" { Mutability::Var } else { Mutability::Let };
+        env.scopes[0].insert(id_key_of(binding_name), TypeBinding { r#mut, r#type: binding_type.clone(), ..Default::default() });
+    }
+    let mut method_ctx = ctx.clone();
+    dump_typed_body(out, &mut method_ctx, env, return_type.unwrap_or(sig.return_type), contract, class_path, proof_ctx, body, with_env);
+}
+
+fn unique_shorthand(receiver: &Receiver) -> bool {
+    matches!(receiver, Receiver::ReceiverShorthand(shorthand) if shorthand.perm == ReceiverPerm::Unique)
+}
+
+fn const_shorthand(receiver: &Receiver) -> bool {
+    matches!(receiver, Receiver::ReceiverShorthand(shorthand) if shorthand.perm == ReceiverPerm::Const && shorthand.mode_opt.is_none())
+}
+
+fn decl_path(module_path: &[String], name: &str) -> Vec<String> {
+    module_path.iter().cloned().chain([name.to_string()]).collect()
+}
+
+/// See `TypeRecordDecl`: the record's associated types stand in for `Self::Name`, and a
+/// method with a plain `~` receiver may assume the record's invariant.
+fn dump_record_method_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &RecordDecl, module_path: &[String]) {
+    let self_type = make_type_path(decl_path(module_path, &decl.name));
+    let mut assoc_subst = TypeSubst::new();
+    let mut assoc_fail: Option<Option<&'static str>> = None;
+    for member in &decl.members {
+        let RecordMember::AssociatedTypeDecl(assoc) = member else {
+            continue;
+        };
+        if assoc_fail.is_some() {
+            continue;
+        }
+        if assoc.default_type.is_none() {
+            if !decl.implements.is_empty() {
+                assoc_fail = Some(Some("E-TYP-2503"));
+            }
+            continue;
+        }
+        match lower_type(ctx, &assoc.default_type).and_then(|lowered| type_wf(ctx, &lowered).map(|()| lowered)) {
+            Ok(lowered) => {
+                let substituted = subst_self_type(&self_type, &lowered, Some(&assoc_subst));
+                assoc_subst.insert(assoc.name.clone(), substituted);
+            }
+            Err(diag_id) => assoc_fail = Some(diag_id),
+        }
+    }
+    for member in &decl.members {
+        let RecordMember::MethodDecl(method) = member else {
+            continue;
+        };
+        let Some(body) = method.body.as_deref() else {
+            continue;
+        };
+        let name = format!("{}::{}", decl.name, method.name);
+        if let Some(diag_id) = assoc_fail {
+            let _ = writeln!(out, "B\t{name}\tassoc-fail\t{}", diag_or(diag_id));
+            continue;
+        }
+        let sig = build_method_signature(ctx, &self_type, &method.receiver, &method.params, &method.return_type_opt, Some(&assoc_subst));
+        let proof_ctx = match &decl.invariant_opt {
+            Some(invariant) if const_shorthand(&method.receiver) => {
+                extend_proof_context_with_predicate_at(None, &invariant.predicate, &body.span)
+            }
+            _ => None,
+        };
+        dump_signature_body(
+            out,
+            ctx,
+            &name,
+            sig,
+            unique_shorthand(&method.receiver),
+            None,
+            method.contract.as_ref(),
+            None,
+            proof_ctx,
+            &method.body,
+            true,
+        );
+    }
+}
+
+/// See `TypeClassDecl`: `Self` stays a variable, and the class is the current one.
+fn dump_class_method_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &ClassDecl, module_path: &[String]) {
+    for item in &decl.items {
+        let ClassItem::ClassMethodDecl(method) = item else {
+            continue;
+        };
+        if method.body_opt.is_none() {
+            continue;
+        }
+        let sig = build_method_signature(ctx, &self_var_type(), &method.receiver, &method.params, &method.return_type_opt, None);
+        dump_signature_body(
+            out,
+            ctx,
+            &format!("{}::{}", decl.name, method.name),
+            sig,
+            unique_shorthand(&method.receiver),
+            None,
+            method.contract.as_ref(),
+            Some(decl_path(module_path, &decl.name)),
+            None,
+            &method.body_opt,
+            true,
+        );
+    }
+}
+
+/// The part of a modal invariant that speaks of one state; see
+/// `StateInvariantPredicateFor`.
+fn state_invariant_of(invariant: &TypeInvariant, state_name: &str) -> ExprPtr {
+    let Some(ExprNode::IfCaseExpr(if_case)) = invariant.predicate.as_deref().map(|predicate| &predicate.node) else {
+        return invariant.predicate.clone();
+    };
+    let on_self = matches!(if_case.scrutinee.as_deref().map(|scrutinee| &scrutinee.node),
+        Some(ExprNode::IdentifierExpr(ident)) if id_eq(&ident.name, "self"));
+    if !on_self {
+        return invariant.predicate.clone();
+    }
+    for arm in &if_case.cases {
+        if let Some(PatternNode::ModalPattern(pattern)) = arm.pattern.as_deref().map(|pattern| &pattern.node) {
+            if id_eq(&pattern.state, state_name) {
+                return arm.body.clone();
+            }
+        }
+    }
+    invariant.predicate.clone()
+}
+
+/// See `TypeModalDecl`: the receiver is the state, applied to the modal's own parameters;
+/// a transition returns its target state and is typed without the environment reference.
+fn dump_modal_bodies(out: &mut String, ctx: &ScopeContext<'_>, decl: &ModalDecl, module_path: &[String]) {
+    let type_path = decl_path(module_path, &decl.name);
+    let self_args: Vec<TypeRef> =
+        decl.generic_params.iter().flat_map(|params| &params.params).map(|param| make_type_path(vec![param.name.clone()])).collect();
+    for state in &decl.states {
+        let state_type = make_type_modal_state(type_path.clone(), &state.name, self_args.clone());
+        for member in &state.members {
+            let StateMember::StateMethodDecl(method) = member else {
+                continue;
+            };
+            let Some(body) = method.body.as_deref() else {
+                continue;
+            };
+            let sig = build_method_signature(ctx, &state_type, &method.receiver, &method.params, &method.return_type_opt, None);
+            let proof_ctx = match &decl.invariant_opt {
+                Some(invariant) if const_shorthand(&method.receiver) => {
+                    extend_proof_context_with_predicate_at(None, &state_invariant_of(invariant, &state.name), &body.span)
+                }
+                _ => None,
+            };
+            dump_signature_body(
+                out,
+                ctx,
+                &format!("{}@{}::{}", decl.name, state.name, method.name),
+                sig,
+                unique_shorthand(&method.receiver),
+                None,
+                method.contract.as_ref(),
+                None,
+                proof_ctx,
+                &method.body,
+                true,
+            );
+        }
+        for member in &state.members {
+            let StateMember::TransitionDecl(transition) = member else {
+                continue;
+            };
+            if transition.body.is_none() {
+                continue;
+            }
+            let target_type = make_type_modal_state(type_path.clone(), &transition.target_state, self_args.clone());
+            let sig = build_transition_signature(ctx, &state_type, &target_type, &transition.params, None);
+            dump_signature_body(
+                out,
+                ctx,
+                &format!("{}@{}->{}::{}", decl.name, state.name, transition.target_state, transition.name),
+                sig,
+                false,
+                Some(target_type),
+                None,
+                None,
+                None,
+                &transition.body,
+                false,
+            );
+        }
+    }
+}
+
 fn dump_bodies(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) {
     for index in 0..ctx.sigma.mods.len() {
         let module = ctx.sigma.mods[index].clone();
@@ -2840,6 +3087,12 @@ fn dump_bodies(out: &mut String, ctx: &mut ScopeContext<'_>, name_maps: &NameMap
                     &node.contract,
                     &node.body,
                 );
+            }
+            match item {
+                ASTItem::RecordDecl(node) => dump_record_method_bodies(out, ctx, node, &module.path),
+                ASTItem::ClassDecl(node) => dump_class_method_bodies(out, ctx, node, &module.path),
+                ASTItem::ModalDecl(node) => dump_modal_bodies(out, ctx, node, &module.path),
+                _ => {}
             }
         }
     }

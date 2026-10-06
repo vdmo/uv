@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compare body-typing dumps while the port of the typer is incomplete.
 
-Each dump has one `B` line per procedure body. The port prints `PENDING` in place of a
+Each dump has one `B` line per procedure, method or transition body. The port prints `PENDING` in place of a
 result when typing the body reached a construct that is not ported yet; those bodies are
 counted, with what they are waiting for, and not compared. Every other line must match.
 Exits non-zero on any mismatch; pending bodies do not fail the gate.

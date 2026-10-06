@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: all 4,569 bodies compared, none mismatched or pending; method bodies and the expression-type store remain |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: all 4,704 bodies compared (procedures, methods, transitions), none mismatched or pending; the expression-type store and the dynamic context remain |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -397,8 +397,19 @@ type, span and the diagnostics emitted. The port prints the same line, or `PENDI
 the first construct it reached that is not ported (`typing::pending`, scaffolding that
 goes away with the last such construct). `tools/compare_typing.py` compares the bodies
 that are not pending, fails on any mismatch, and reports how many bodies are compared and
-what the rest wait for. The reference types 4,569 bodies on the corpus, 4,203 of them
-successfully and the rest with 120 different rules.
+what the rest wait for. The reference types 4,569 procedure bodies on the corpus, 4,203
+of them successfully and the rest with 120 different rules.
+
+The same mode types the bodies of methods and transitions under the bindings of their
+signatures, set up as the typing of record, class and modal declarations does: a
+record's associated types substituted for `Self::Name` and its invariant assumed under
+a plain `~` receiver; `Self` left a variable and the class current in a class method;
+the state as the receiver of a state method, with the state's part of the modal's
+invariant; a transition typed against its target state without the environment
+reference or the diagnostic stream. That is 135 more bodies (111 methods of records and
+classes, 15 state methods, 9 transitions), 6 of which fail in their signature. Two
+things differ from the driver and wait for part c: the modal's own parameters are taken
+from the declaration without `ProcessGenericParams`, and the dynamic context is unset.
 
 The proof facts statements leave for later ones are tracked
 (`typing::stmt::proof_facts`, the reference's `FallthroughProofContextForStmt`): an

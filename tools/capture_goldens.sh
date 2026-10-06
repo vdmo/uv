@@ -116,7 +116,7 @@ for pair in comptime_projects:patterns comptime_cases:patterns_cases resolve_tar
     /w/reference/oracle/uv-oracle patterns "$ROOT/target/parity/${pair%%:*}.oracle.list" \
     | sed "s|$ROOT/|/w/|g" > "tests/golden/${pair##*:}.tsv"
 done
-# Body typing: every procedure body of every project that resolves.
+# Body typing: every procedure, method and transition body of every project that resolves.
 docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT":/w -v "$ROOT":"$ROOT" -e LD_LIBRARY_PATH="$ICU" uv-oracle \
   /w/reference/oracle/uv-oracle bodies "$ROOT/target/parity/comptime_projects.oracle.list" \
   | sed "s|$ROOT/|/w/|g" > tests/golden/bodies.tsv
