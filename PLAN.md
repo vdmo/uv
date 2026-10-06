@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 3,088 of 4,569 bodies compared (67.6%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 3,417 of 4,569 bodies compared (74.8%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -453,6 +453,15 @@ and on whether the value reads the place written) and makes the body pending
 Record literals (records and modal states) and enum literals are in
 (`typing::expr::record_literal`, `enum_literal`), on their own and against an expected
 type, which supplies the type arguments of a generic record, modal or enum.
+
+`if … is` and `if … case` are in (`typing::expr::if_case`, from the reference's
+`if_case_check`), typed on their own and checked against an expected type: the arm
+environments with the scrutinee narrowed to what the pattern matched and `else` to what
+the patterns rejected, unreachable arms, and exhaustiveness over enums, modals (an
+asynchronous computation that cannot fail has no `Failed` state to cover) and unions.
+One simplification: a typed pattern's type is lowered with the general `lower_type`
+where the reference uses a local lowering that does not handle every type form; the
+gate shows no difference on the corpus.
 
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from

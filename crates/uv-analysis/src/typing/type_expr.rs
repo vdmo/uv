@@ -225,6 +225,8 @@ fn type_expr_form(
         }
         ExprNode::FieldAccessExpr(node) => super::expr::field_access::type_field_access_expr(ctx, type_ctx, node, env),
         ExprNode::TupleAccessExpr(node) => super::expr::tuple_access::type_tuple_access_expr(ctx, type_ctx, node, env),
+        ExprNode::IfIsExpr(node) => super::expr::if_case::type_if_is_expr(ctx, type_ctx, node, env),
+        ExprNode::IfCaseExpr(node) => super::expr::if_case::type_if_case_expr(ctx, type_ctx, node, env),
         ExprNode::RecordExpr(node) => super::expr::record_literal::type_record_expr(ctx, type_ctx, node, env, None),
         ExprNode::EnumLiteralExpr(node) => super::expr::enum_literal::type_enum_literal_expr(ctx, type_ctx, node, env),
         ExprNode::CallExpr(node) => super::expr::call::type_call_expr(ctx, type_ctx, node, env),
@@ -356,6 +358,13 @@ pub fn check_expr_against(
             }
             return result;
         }
+        ExprNode::IfIsExpr(node) => {
+            let result = super::expr::if_case::check_if_is_expr(ctx, type_ctx, node, env, expected);
+            if !result.ok && type_ctx.contract_dynamic {
+                pending("DynamicRefinement");
+            }
+            return result;
+        }
         ExprNode::BlockExpr(node) => {
             let checked = super::stmt::block::check_block_expr(ctx, type_ctx, node, env, expected);
             return CheckResult {
@@ -368,7 +377,6 @@ pub fn check_expr_against(
         }
         ExprNode::AttributedExpr(_)
         | ExprNode::ComptimeExpr(_)
-        | ExprNode::IfIsExpr(_)
         | ExprNode::QuoteExpr(_)
         | ExprNode::UnsafeBlockExpr(_) => {
             pending(ast::expr_kind(e));
@@ -388,9 +396,8 @@ pub fn check_expr_against(
     let type_expr_fn = |inner: &ExprPtr| type_expr(ctx, type_ctx, inner, env);
     let type_place_fn = |inner: &ExprPtr| type_place(ctx, type_ctx, inner, env);
     let type_ident_fn = |name: &str| type_identifier_expr(ctx, env, name);
-    let if_case_check = |_: &ast::IfCaseExpr, _: &TypeRef| {
-        pending("IfCaseExpr");
-        CheckResult::default()
+    let if_case_check = |if_case: &ast::IfCaseExpr, expected_type: &TypeRef| {
+        super::expr::if_case::check_if_case_expr(ctx, type_ctx, if_case, env, expected_type)
     };
     let check = check_expr(
         ctx,
