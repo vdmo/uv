@@ -232,6 +232,9 @@ fn type_expr_form(
         }
         ExprNode::AddressOfExpr(node) => super::expr::access::type_address_of_expr(ctx, type_ctx, node, env),
         ExprNode::RangeExpr(node) => super::expr::access::type_range_expr(ctx, type_ctx, node, env),
+        ExprNode::TransmuteExpr(node) => super::expr::transmute::type_transmute_expr(ctx, type_ctx, node, env, &e.span),
+        ExprNode::AllocExpr(node) => super::expr::transmute::type_alloc_expr(ctx, type_ctx, node, env),
+        ExprNode::PropagateExpr(node) => super::expr::access::type_propagate_expr(ctx, type_ctx, node, env),
         ExprNode::UnsafeBlockExpr(node) => super::expr::access::type_unsafe_block_expr(ctx, type_ctx, node, env),
         ExprNode::LoopInfiniteExpr(node) => {
             super::expr::loops::type_loop_infinite_expr(ctx, type_ctx, node, env, &|name: &str| type_identifier_expr(ctx, env, name))

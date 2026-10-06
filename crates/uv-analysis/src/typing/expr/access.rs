@@ -2,11 +2,11 @@
 
 use uv_core::numeric_literals::{parse_int_core, strip_int_suffix};
 use uv_core::span::Span;
-use uv_source::ast::dump::AstDump;
 use uv_source::ast::{self, ExprNode, ExprPtr};
 use uv_source::lexer::token::TokenKind;
 
 use super::small::is_place_expr;
+use super::transmute::emit_invalid_transmute_target_warnings_in_block;
 use crate::context::ScopeContext;
 use crate::memory::calls::{is_in_unsafe_span, is_packed_record};
 use crate::resolve::scopes::id_key_of;
@@ -14,7 +14,6 @@ use crate::typing::alias_normalize::{expand_type_alias_apply, normalize_index_ba
 use crate::typing::callbacks::{CheckResult, ExprTypeFn, IdentTypeFn, PlaceTypeFn, PlaceTypeResult};
 use crate::typing::const_len::const_len;
 use crate::typing::expr_result::ExprTypeResult;
-use crate::typing::pending::pending;
 use crate::typing::stmt::block::{check_block, type_block, type_block_info, FlowInfo, StmtTypeResult};
 use crate::typing::stmt_context::{suppress_shared_access_check, StmtTypeContext};
 use crate::typing::type_env::{gpu_context, TypeEnv};
@@ -469,17 +468,6 @@ pub fn type_range_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, e
     ExprTypeResult::typed(range_type)
 }
 
-/// After an `unsafe` block is typed the reference warns about transmutes to types with
-/// invalid values. That pass is not ported; a block that contains a transmute is left
-/// pending.
-fn note_transmute_warnings(block: &ast::Block) {
-    let mut dumped = String::new();
-    block.dump(&mut dumped);
-    if dumped.contains("(TransmuteExpr") {
-        pending("TransmuteWarnings");
-    }
-}
-
 pub fn type_unsafe_block_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, expr: &ast::UnsafeBlockExpr, env: &TypeEnv) -> ExprTypeResult {
     let Some(block) = expr.block.as_deref() else {
         return ExprTypeResult::typed(make_type_prim("()"));
@@ -493,7 +481,7 @@ pub fn type_unsafe_block_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext
     if !body_result.ok {
         return ExprTypeResult::failed(body_result.diag_id);
     }
-    note_transmute_warnings(block);
+    emit_invalid_transmute_target_warnings_in_block(ctx, type_ctx, block);
     ExprTypeResult::typed(body_result.r#type)
 }
 
@@ -516,7 +504,7 @@ pub fn check_unsafe_block_expr(
     if !checked.ok {
         return checked;
     }
-    note_transmute_warnings(block);
+    emit_invalid_transmute_target_warnings_in_block(ctx, type_ctx, block);
     CheckResult { ok: true, ..Default::default() }
 }
 
@@ -546,4 +534,84 @@ pub fn type_unsafe_block_stmt(
         flow.results.push(info.r#type);
     }
     StmtTypeResult { ok: true, env: env.clone(), flow, ..Default::default() }
+}
+
+/// `value?`: an outcome's error, or the members of a union that the enclosing
+/// procedure can return, leave through it; the rest is the value.
+pub fn type_propagate_expr(ctx: &ScopeContext<'_>, type_ctx: &StmtTypeContext<'_>, expr: &ast::PropagateExpr, env: &TypeEnv) -> ExprTypeResult {
+    let none = ExprTypeResult::default;
+    let inner = type_expr(ctx, type_ctx, &expr.value, env);
+    if !inner.ok {
+        return ExprTypeResult::failed(inner.diag_id);
+    }
+    let mut source_type = strip_perm(&inner.r#type);
+    if source_type.is_none() {
+        return none();
+    }
+    for _ in 0..16 {
+        let Some(t) = source_type.as_deref() else {
+            break;
+        };
+        let (Some(path), Some(args)) = (applied_type_path(t), applied_type_args(t)) else {
+            break;
+        };
+        match expand_type_alias_apply(ctx, path, args) {
+            Err(diag_id) => return ExprTypeResult::failed(diag_id),
+            Ok(None) => break,
+            Ok(expanded) => source_type = expanded,
+        }
+    }
+    if source_type.is_none() || type_ctx.return_type.is_none() {
+        return none();
+    }
+    // In an asynchronous procedure the error leaves through the computation's error.
+    let mut propagate_target = type_ctx.return_type.clone();
+    let mut async_try = false;
+    if let Some(async_sig) = crate::typing::type_lookup::async_sig_of(ctx, &type_ctx.return_type) {
+        if matches!(async_sig.err.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(name)) if name == "!") {
+            return ExprTypeResult::failed(Some("E-CON-0230"));
+        }
+        async_try = true;
+        propagate_target = async_sig.err;
+    }
+    if propagate_target.is_none() {
+        return none();
+    }
+    if let Some(outcome_sig) = crate::typing::outcome::outcome_sig_of(&source_type) {
+        let error_target = if async_try {
+            propagate_target
+        } else {
+            crate::typing::outcome::outcome_sig_of(&type_ctx.return_type).map(|sig| sig.error).unwrap_or_default()
+        };
+        if error_target.is_none() {
+            return none();
+        }
+        let sub = crate::typing::subtyping::subtyping(ctx, &outcome_sig.error, &error_target);
+        if !sub.ok {
+            return ExprTypeResult::failed(sub.diag_id);
+        }
+        return if sub.subtype { ExprTypeResult::typed(outcome_sig.value) } else { none() };
+    }
+    let Some(TypeNode::Union(members)) = source_type.as_deref().map(|ty| &ty.node) else {
+        return none();
+    };
+    // Exactly one member must stay behind as the value.
+    let mut success: Option<TypeRef> = None;
+    for member in members {
+        let sub = crate::typing::subtyping::subtyping(ctx, member, &propagate_target);
+        if !sub.ok {
+            return ExprTypeResult::failed(sub.diag_id);
+        }
+        if sub.subtype {
+            continue;
+        }
+        if success.is_some() {
+            return none();
+        }
+        success = Some(member.clone());
+    }
+    match success {
+        Some(value) => ExprTypeResult::typed(value),
+        None => none(),
+    }
 }

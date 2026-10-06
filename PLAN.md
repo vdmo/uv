@@ -387,7 +387,7 @@ all there. It is cut so that everything that can be compared alone is compared f
 | Part | Reference source | Lines | State |
 | --- | --- | --- | --- |
 | a. Leaves that stand alone: literals, patterns, the result and environment types, constraint solving | `literals`, `pattern/pattern_common`, `type_infer` (`Solve`, `ApplySubstitution`), environment operations of `stmt_common` | 3k | done |
-| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,146 of 4,569 bodies compared (90.7%), none mismatched |
+| b. Expression and statement typing | `type_expr`, `type_infer`, `if_case_check`, `expr/*`, `stmt/*`, the expression-typing functions of `composite` and `record_methods` left over from M3.3, refinement well-formedness | 36k | in progress: 4,236 of 4,569 bodies compared (92.7%), none mismatched |
 | c. Declaration typing and the type-check entry points | `item/*`, `typecheck` | 13k | gate: diagnostics of the reference's declaration typing on every project |
 
 Part b is ported against a gate that measures it. The oracle's `bodies` mode types every
@@ -478,9 +478,7 @@ in too: those of the capability classes and compile-time capabilities
 The smaller forms are in: dereference, indexing (elements and range slices, as values
 and places), address-of, ranges and `unsafe` blocks as expressions and statements
 (`typing::expr::access`), and the three loops with `break` and `continue`
-(`typing::expr::loops`). Two things in them are not ported and make the body pending:
-the warnings about transmutes to types with invalid values after an `unsafe` block
-(`TransmuteWarnings`, for a block that contains a transmute). Loop invariants are in
+(`typing::expr::loops`). Loop invariants are in
 (`typing::expr::loop_invariant`): the invariant must be a pure `bool` without
 `@result` that holds on entry, and the body must leave its names alone, or, in a
 conditional loop, leave the invariant provable with its assignments applied.
@@ -502,6 +500,12 @@ the predicate with the value for `self` must follow from the facts in scope
 left to a run-time check and the value only needs the base type; that run-time check
 is not recorded for later passes yet, and the gate has no dynamic contexts to exercise
 the fallback.
+
+The scoped statements are in (`typing::stmt::scoped`): `region` and `frame` with the
+active region they bind, `defer`, and `using`; so are `?` propagation, `transmute` with
+the warning pass that runs after an `unsafe` block, and region allocation
+(`typing::expr::transmute`). Compound assignment is left with the shared-write analysis
+of plain assignment, which it shares.
 
 The declaration tables are now shared between contexts instead of copied, as typing a
 body under another module's name needs a context of its own; the body dump went from

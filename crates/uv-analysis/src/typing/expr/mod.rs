@@ -8,6 +8,7 @@ pub mod closure_expr;
 pub mod enum_literal;
 pub mod field_access;
 pub mod record_literal;
+pub mod transmute;
 pub mod tuple_access;
 pub mod if_case;
 pub mod if_expr;

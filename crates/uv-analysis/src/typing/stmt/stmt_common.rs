@@ -75,7 +75,7 @@ fn stmt_needs_key_access(
     }
 }
 
-fn block_needs_key_access(
+pub(crate) fn block_needs_key_access(
     ctx: &ScopeContext<'_>,
     type_ctx: &StmtTypeContext<'_>,
     block: &ast::Block,
