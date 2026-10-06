@@ -11,3 +11,5 @@ node_modules/
 *.o
 *.so
 *.wasm
+editors/zed/target/
+editors/tree-sitter-ultraviolet/node_modules/

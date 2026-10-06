@@ -1,0 +1,15 @@
+id = "ultraviolet"
+name = "Ultraviolet"
+version = "0.4.0"
+schema_version = 1
+authors = ["vdmo"]
+description = "Ultraviolet language support: structural highlighting, outline, brackets and indentation from a tree-sitter grammar, and diagnostics, hover, completion and navigation from uv-lsp."
+repository = "https://github.com/vdmo/uv"
+
+[language_servers.uv-lsp]
+name = "Ultraviolet Language Server"
+languages = ["Ultraviolet"]
+
+[grammars.ultraviolet]
+repository = "file://./tree-sitter-ultraviolet"
+rev = "main"

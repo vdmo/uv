@@ -815,6 +815,17 @@ check: the call graph keeps its nodes in the order they were added where the ref
 iterates a hash table, and so does the attenuation check with its bindings. The rest of
 the output of the assembly graph (the modules and libraries to emit) waits for M6.
 
+## M5: editors
+
+`editors/zed` is a Zed extension that uses `editors/tree-sitter-ultraviolet` (copied in
+by `tools/sync_zed_grammar.sh`, checked by `--check`), has highlight, bracket, indent and
+outline queries, and starts `uv-lsp`. Checks: it compiles to `wasm32-wasip1`, every query
+runs under the tree-sitter CLI against a sample file, the grammar's corpus passes, and
+upstream's `tests/validate_adapters.py` passes for the Neovim, VS Code, JetBrains and
+Sublime adapters (they start the server by name, so they use the Rust one unchanged).
+Not done: opening the extension in Zed, VS Code and Neovim by hand, and downloading the
+server from releases (M7).
+
 ## M4: the language server
 
 `crates/uv-tooling` (paths and URIs, line index, open documents, one analysis of the

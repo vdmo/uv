@@ -17,6 +17,26 @@ available.
 The steps below follow upstream's instructions and Zed's rules for dev extensions.
 They have not been run on this machine.
 
+## Installing this repository's extension
+
+`editors/zed` is an extension that uses the structural grammar (highlighting, outline,
+brackets, indentation) and starts `uv-lsp`. It looks for the server in
+`ULTRAVIOLET_LSP_SERVER`, then `uv-lsp` on the `PATH`, then `target/release/uv-lsp` in
+the open worktree, and passes `ULTRAVIOLET_TARGET_PROFILE` to it as the target profile.
+
+1. `cargo build --release -p uv-lsp`, and either put `target/release` on the `PATH` or
+   set `ULTRAVIOLET_LSP_SERVER` to the binary.
+2. Have Rust installed through `rustup` with the `wasm32-wasip1` target (Zed builds the
+   extension itself; `cargo build --release --target wasm32-wasip1` in `editors/zed`
+   shows it compiles).
+3. In Zed, run `zed: install dev extension` and pick `editors/zed`.
+
+The extension needs its own copy of the grammar; `sh tools/sync_zed_grammar.sh` makes it
+and `--check` (part of `tools/parity.sh`) fails when it is out of date. The extension
+has been compiled and its queries run against a sample file with the tree-sitter CLI;
+it has not been opened in Zed on this machine. Fetching the server from a release
+waits for M7, when there are releases.
+
 ## Installing upstream's extension
 
 1. Install Rust through `rustup` on the machine Zed runs on. Zed compiles a dev

@@ -1,0 +1,11 @@
+(procedure_declaration name: (identifier) @name) @item
+(comptime_procedure_declaration name: (identifier) @name) @item
+(procedure_signature name: (identifier) @name) @item
+(transition_declaration name: (identifier) @name) @item
+(record_declaration name: (identifier) @name) @item
+(enum_declaration name: (identifier) @name) @item
+(modal_declaration name: (identifier) @name) @item
+(class_declaration name: (identifier) @name) @item
+(type_alias_declaration name: (identifier) @name) @item
+(variant name: (identifier) @name) @item
+(field_declaration name: (identifier) @name) @item

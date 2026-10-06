@@ -1,0 +1,16 @@
+[package]
+name = "ultraviolet-zed"
+version = "0.4.0"
+edition = "2021"
+license = "Apache-2.0"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[dependencies]
+zed_extension_api = "0.7.0"
+
+# The extension is built by Zed to WebAssembly; it is not part of the workspace.
+[workspace]

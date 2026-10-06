@@ -1,0 +1,14 @@
+{
+  "name": "tree-sitter-ultraviolet",
+  "version": "0.4.0",
+  "description": "Tree-sitter grammar for the Ultraviolet language.",
+  "main": "grammar.js",
+  "license": "Apache-2.0",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.24.5"
+  }
+}

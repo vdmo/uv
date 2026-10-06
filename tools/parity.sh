@@ -161,6 +161,11 @@ python3 tools/parity_check.py || fail=1
 echo "== language server: the protocol suite and the Shapes example against uv-lsp"
 python3 ultraviolet-lsp/tests/lsp_protocol_driver.py target/release/uv-lsp && python3 ultraviolet-lsp/examples/shapes/validate_lsp.py target/release/uv-lsp > /dev/null && echo "identical behaviour: protocol suite and 13 example checks pass" || fail=1
 
+echo "== editors: the adapters' metadata, and the Zed extension's copy of the grammar"
+if python3 -c "import tomllib" 2>/dev/null; then python3 ultraviolet-lsp/tests/validate_adapters.py || fail=1
+else mkdir -p target/pyshim && printf 'from tomli import *\n' > target/pyshim/tomllib.py && PYTHONPATH=target/pyshim python3 ultraviolet-lsp/tests/validate_adapters.py || fail=1; fi
+sh tools/sync_zed_grammar.sh --check && echo "Zed grammar copy is current" || fail=1
+
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1
 
