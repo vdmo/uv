@@ -1,0 +1,6 @@
+warning[W-MOD-2452]: `inline(always)` but inlining failed
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Attributes/InlineAlwaysRecursive/Source/Main.uv:4:8
+4 | public procedure inlineAlwaysRecursive(value: i32) -> i32 {
+4 |        
+
+1 warning emitted

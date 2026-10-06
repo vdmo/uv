@@ -1,0 +1,126 @@
+proc @ModuleDiscoveryOrdering_x3a_x3amoduleDiscoveryOrderingRootValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x1
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aModuleDiscoveryOrdering {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aModuleDiscoveryOrdering {
+  nop
+}
+
+
+proc @ModuleDiscoveryOrdering_x3a_x3aAlpha_x3a_x3amoduleDiscoveryOrderingAlphaExtraValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x3
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ModuleDiscoveryOrdering_x3a_x3aAlpha_x3a_x3amoduleDiscoveryOrderingAlphaValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x2
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aModuleDiscoveryOrdering_x3a_x3aAlpha {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aModuleDiscoveryOrdering_x3a_x3aAlpha {
+  nop
+}
+
+
+proc @ModuleDiscoveryOrdering_x3a_x3aBeta_x3a_x3amoduleDiscoveryOrderingBetaValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x4
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aModuleDiscoveryOrdering_x3a_x3aBeta {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aModuleDiscoveryOrdering_x3a_x3aBeta {
+  nop
+}
+
+
+proc @ModuleDiscoveryOrdering_x3a_x3aBeta_x3a_x3aNested_x3a_x3amoduleDiscoveryOrderingNestedValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x5
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aModuleDiscoveryOrdering_x3a_x3aBeta_x3a_x3aNested {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aModuleDiscoveryOrdering_x3a_x3aBeta_x3a_x3aNested {
+  nop
+}
+
+

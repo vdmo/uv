@@ -1,0 +1,6 @@
+warning[W-CON-0004]: Read-then-write may cause contention if parallelized (`K-RMW-Contention-Warn`)
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteContentionWarning/Source/Main.uv:10:9
+10 |         shared_value = holdValue(shared_value)
+10 |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1 warning emitted

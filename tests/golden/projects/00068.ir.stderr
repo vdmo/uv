@@ -1,0 +1,6 @@
+warning[W-CTE-0071]: compile-time user warning
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Comptime/UserDiagnosticWarning/Source/Main.uv:5:9
+5 |         diagnostics~>warning("compile-time user warning")
+5 |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1 warning emitted

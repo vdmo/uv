@@ -1,0 +1,6 @@
+warning[W-CON-0401]: `#dynamic` present but all proofs succeed statically
+  --> /w/target/fixtures/Fixtures/ArtifactProjects/RawPointerNullReadPanic/Source/Main.uv:5:8
+5 | public procedure rawPointerNullReadPanicValue(pointer: *mut i32) -> i32 {
+5 |        
+
+1 warning emitted

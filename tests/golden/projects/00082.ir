@@ -1,0 +1,172 @@
+proc @UnknownCalleeAccessWarning_x3a_x3aUnknownAccessTarget_x3a_x3areadValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x0
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          fence seqcst
+          seq {
+            seq {
+              seq {
+                call @uv_key_scope_enter
+                bind %UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$__uv_implicit_key_scope_3 = UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$implicit_key_scope_enter
+              }
+              call @uv_key_check_conflict (0x746567726174, 0x0)
+              call @uv_key_acquire (%UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$__uv_implicit_key_scope_3, 0x746567726174, 0x0)
+            }
+            addr_of target
+            nop
+            call @UnknownCalleeAccessWarning_x3a_x3aUnknownAccessTarget_x3a_x3areadValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$panic_flag_ptr
+                    load_ptr UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                  call @uv_key_scope_exit (%UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$__uv_implicit_key_scope_3)
+                  nop
+                  nop
+                }              }
+            }
+          }
+          fence seqcst
+        }
+        nop
+        seq {
+          nop
+          nop
+          call @uv_key_scope_exit (%UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$__uv_implicit_key_scope_3)
+          nop
+          nop
+        }
+        ret UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$method_call
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        call @uv_key_scope_exit (%UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown$tmp$__uv_implicit_key_scope_3)
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %target = UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$record
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$__uv_key_scope_28 = UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x746567726174, 0x0)
+          call @uv_key_acquire (%UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$__uv_key_scope_28, 0x746567726174, 0x0)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read @UnknownCalleeAccessWarning::summarizeAsUnknown
+                }
+                seq {
+                  nop
+                  addr_of target
+                }
+                call @UnknownCalleeAccessWarning_x3a_x3asummarizeAsUnknown (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$panic_flag_ptr
+                        load_ptr UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                      call @uv_key_scope_exit (%UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$__uv_key_scope_28)
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              bind %observed = UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$call
+              nop
+            }
+          } seq {
+            nop
+            seq {
+              nop
+              nop
+            }
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%UnknownCalleeAccessWarning_x3a_x3aunknownCalleeAccessWarningReference$tmp$__uv_key_scope_28)
+            nop
+            nop
+          }
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aUnknownCalleeAccessWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aUnknownCalleeAccessWarning {
+  nop
+}
+
+

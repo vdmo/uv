@@ -1,0 +1,147 @@
+proc @DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference {
+  seq {
+    nop
+    seq {
+      seq {
+        seq {
+          nop
+          read %__bind_1_index
+        }
+        nop
+        binop >= %__bind_1_index, 0x0
+      }
+      if DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$binop then nop else seq {
+        nop
+        panic ContractViolation(Pre,P=span(/w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Source/Main.uv:5:4-5:19),s=/w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Source/Main.uv:5:4-5:19)
+      }
+    }
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          bind %values = DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$array
+          nop
+        }
+        seq {
+          nop
+          bind %observed = 0x0
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$__uv_key_scope_10 = DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x2E7365756C6176, 0x0)
+          call @uv_key_acquire (%DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$__uv_key_scope_10, 0x2E7365756C6176, 0x0)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    fence seqcst
+                    seq {
+                      addr_of values
+                      seq {
+                        nop
+                        read %__bind_1_index
+                      }
+                      nop
+                      check_index addr_of, %__bind_1_index
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$panic_flag_ptr
+                              load_ptr DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                            call @uv_key_scope_exit (%DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$__uv_key_scope_10)
+                            nop
+                            nop
+                          }                        }
+                      }
+                    }
+                    fence seqcst
+                  }
+                  nop
+                  check_op Overflow + DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$index_elem, 0x0
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$panic_flag_ptr
+                          load_ptr DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                        call @uv_key_scope_exit (%DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$__uv_key_scope_10)
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$index_elem, 0x0
+                }
+                seq {
+                  nop
+                  store %observed = DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          } seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%DynamicKeyRuntimeInfo_x3a_x3adynamicKeyRuntimeInfoReference$tmp$__uv_key_scope_10)
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_3_observed
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret %__bind_3_observed
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aDynamicKeyRuntimeInfo {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aDynamicKeyRuntimeInfo {
+  nop
+}
+
+

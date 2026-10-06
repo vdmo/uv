@@ -1,0 +1,27 @@
+proc @LeadingBOMWarning_x3a_x3aleadingBOMWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x1
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aLeadingBOMWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aLeadingBOMWarning {
+  nop
+}
+
+

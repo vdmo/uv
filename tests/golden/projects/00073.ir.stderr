@@ -1,0 +1,10 @@
+warning[W-CON-0002]: Redundant key acquisition (already covered)
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/NestedReleaseInterleavingWarning/Source/Main.uv:7:9
+7 |         %release read shared_value {
+7 |         ^
+warning[W-CON-0010]: `%release` block permits interleaving
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/NestedReleaseInterleavingWarning/Source/Main.uv:7:9
+7 |         %release read shared_value {
+7 |         ^
+
+2 warnings emitted

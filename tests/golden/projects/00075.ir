@@ -1,0 +1,107 @@
+proc @ReadThenWriteContentionWarning_x3a_x3aholdValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_1_value
+        }
+        nop
+        nop
+        ret %__bind_1_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %shared_value = 0x1
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference$tmp$__uv_key_scope_3 = ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x65756C61765F646572616873, 0x1)
+          call @uv_key_acquire (%ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference$tmp$__uv_key_scope_3, 0x65756C61765F646572616873, 0x1)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read @ReadThenWriteContentionWarning::holdValue
+                }
+                seq {
+                  nop
+                  addr_of shared_value
+                }
+                call @ReadThenWriteContentionWarning_x3a_x3aholdValue (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference$tmp$panic_flag_ptr
+                        load_ptr ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                      call @uv_key_scope_exit (%ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference$tmp$__uv_key_scope_3)
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              seq {
+                nop
+                store %shared_value = ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference$tmp$call
+              }
+            }
+          } seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%ReadThenWriteContentionWarning_x3a_x3areadThenWriteContentionWarningReference$tmp$__uv_key_scope_3)
+            nop
+            nop
+          }
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aReadThenWriteContentionWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aReadThenWriteContentionWarning {
+  nop
+}
+
+

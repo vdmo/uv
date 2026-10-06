@@ -1,0 +1,6 @@
+warning[W-CON-0013]: `ordered` key option used with statically-comparable indices (`K-Ordered-Redundant-Warn`)
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/OrderedRedundantWarning/Source/Main.uv:5:5
+5 |     %read values[0usize], values[1usize] [ordered] {
+5 |     ^
+
+1 warning emitted

@@ -166,6 +166,9 @@ if python3 -c "import tomllib" 2>/dev/null; then python3 ultraviolet-lsp/tests/v
 else mkdir -p target/pyshim && printf 'from tomli import *\n' > target/pyshim/tomllib.py && PYTHONPATH=target/pyshim python3 ultraviolet-lsp/tests/validate_adapters.py || fail=1; fi
 sh tools/sync_zed_grammar.sh --check && echo "Zed grammar copy is current" || fail=1
 
+echo "== IR: uvc build --emit-ir against the reference, per declaration (projects that stop at the lowering are pending)"
+python3 tools/parity_ir.py || fail=1
+
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1
 

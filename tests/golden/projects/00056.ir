@@ -1,0 +1,81 @@
+proc @default_x3a_x3aClassDefaultMethodFieldAccess_x3a_x3aInspectableOwner_x3a_x3acl_x3a_x3aClassDefaultMethodFieldAccess_x3a_x3aInspectable_x3a_x3ainspectedValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret default_x3a_x3aClassDefaultMethodFieldAccess_x3a_x3aInspectableOwner_x3a_x3acl_x3a_x3aClassDefaultMethodFieldAccess_x3a_x3aInspectable_x3a_x3ainspectedValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ClassDefaultMethodFieldAccess_x3a_x3aclassDefaultMethodFieldAccessReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %owner = ClassDefaultMethodFieldAccess_x3a_x3aclassDefaultMethodFieldAccessReference$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of owner
+            nop
+            call @default_x3a_x3aClassDefaultMethodFieldAccess_x3a_x3aInspectableOwner_x3a_x3acl_x3a_x3aClassDefaultMethodFieldAccess_x3a_x3aInspectable_x3a_x3ainspectedValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ClassDefaultMethodFieldAccess_x3a_x3aclassDefaultMethodFieldAccessReference$tmp$panic_flag_ptr
+                    load_ptr ClassDefaultMethodFieldAccess_x3a_x3aclassDefaultMethodFieldAccessReference$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret ClassDefaultMethodFieldAccess_x3a_x3aclassDefaultMethodFieldAccessReference$tmp$method_call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aClassDefaultMethodFieldAccess {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aClassDefaultMethodFieldAccess {
+  nop
+}
+
+

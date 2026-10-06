@@ -1,0 +1,6 @@
+warning[W-CON-0006]: Explicit read-then-write form used; compound assignment available (`K-RMW-Explicit-Warn`)
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/ReadThenWriteExplicitWarning/Source/Main.uv:6:9
+6 |         shared_value = shared_value + 1
+6 |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1 warning emitted

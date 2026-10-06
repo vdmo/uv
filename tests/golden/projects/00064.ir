@@ -1,0 +1,321 @@
+proc @StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %shared_value = 0x1
+          nop
+        }
+        seq {
+          seq {
+            bind %StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_env_storage_3 = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_env_zero
+            store_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_field_ptr = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$capture_addr
+          }
+          bind %producer = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_8_producer
+          }
+          call StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_code (StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_env, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+seq {
+                seq {
+                  load_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$panic_flag_ptr
+                  load_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$panic_code_ptr
+                }
+                nop
+                nop
+              }            }
+          }
+          bind %StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_call_value_50 = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_call_result
+        }
+        seq {
+          async_complete value: StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$unit -> StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$async_result
+          seq {
+            nop
+            nop
+          }
+          ret StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @StaleValueMarkIRDiagnostics_x5fx3a_x5fx3astaleValueMarkIRDiagnosticsReference_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      seq {
+        block seq {
+          call @uv_key_scope_enter
+          bind %StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_key_scope_7 = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x65756C61765F646572616873, 0x0)
+          call @uv_key_acquire (%StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_key_scope_7, 0x65756C61765F646572616873, 0x0)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    nop
+                    seq {
+                      load_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$capture_ptr
+                      load_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$capture_ptr
+                    }
+                  }
+                  fence seqcst
+                }
+                bind %observed_value = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$capture_val
+                nop
+              }
+              seq {
+                seq {
+                  nop
+                  yield release 0x1 [state=1] -> StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$yield_input
+                }
+                seq {
+                  nop
+                  nop
+                }
+              }
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    seq {
+                      seq {
+                        call @uv_key_scope_enter
+                        bind %StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_implicit_key_scope_18 = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$implicit_key_scope_enter
+                      }
+                      call @uv_key_check_conflict (0x65756C61765F646576726573626F, 0x0)
+                      call @uv_key_acquire (%StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_implicit_key_scope_18, 0x65756C61765F646576726573626F, 0x0)
+                    }
+                    read %__bind_5_observed_value
+                  }
+                  fence seqcst
+                }
+                bind %resumed_value = %__bind_5_observed_value
+                nop
+              }
+            }
+          } seq {
+            nop
+            seq {
+              nop
+              nop
+              call @uv_key_scope_exit (%StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_implicit_key_scope_18)
+              nop
+              nop
+            }
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_key_scope_7)
+            nop
+            nop
+          }
+        }
+        seq {
+          async_complete value: StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$unit -> StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$async_result
+          seq {
+            nop
+            nop
+          }
+          ret StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$unit
+  }
+}
+
+proc @StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$resume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %shared_value = 0x1
+          nop
+        }
+        seq {
+          seq {
+            bind %StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_env_storage_3 = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_env_zero
+            store_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_field_ptr = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$capture_addr
+          }
+          bind %producer = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_8_producer
+          }
+          call StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_code (StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_env, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+seq {
+                seq {
+                  load_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$panic_flag_ptr
+                  load_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$panic_code_ptr
+                }
+                nop
+                nop
+              }            }
+          }
+          bind %StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_call_value_50 = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$closure_call_result
+        }
+        seq {
+          async_complete value: StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$unit -> StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$async_result
+          seq {
+            nop
+            nop
+          }
+          ret StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @StaleValueMarkIRDiagnostics_x5fx3a_x5fx3astaleValueMarkIRDiagnosticsReference_x3a_x3a_x5fclosure0$resume {
+  seq {
+    block seq {
+      nop
+      seq {
+        block seq {
+          call @uv_key_scope_enter
+          bind %StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_key_scope_7 = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x65756C61765F646572616873, 0x0)
+          call @uv_key_acquire (%StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_key_scope_7, 0x65756C61765F646572616873, 0x0)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    nop
+                    seq {
+                      load_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$capture_ptr
+                      load_ptr StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$capture_ptr
+                    }
+                  }
+                  fence seqcst
+                }
+                bind %observed_value = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$capture_val
+                nop
+              }
+              seq {
+                seq {
+                  nop
+                  yield release 0x1 [state=1] -> StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$yield_input
+                }
+                seq {
+                  nop
+                  nop
+                }
+              }
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    seq {
+                      seq {
+                        call @uv_key_scope_enter
+                        bind %StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_implicit_key_scope_18 = StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$implicit_key_scope_enter
+                      }
+                      call @uv_key_check_conflict (0x65756C61765F646576726573626F, 0x0)
+                      call @uv_key_acquire (%StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_implicit_key_scope_18, 0x65756C61765F646576726573626F, 0x0)
+                    }
+                    read %__bind_5_observed_value
+                  }
+                  fence seqcst
+                }
+                bind %resumed_value = %__bind_5_observed_value
+                nop
+              }
+            }
+          } seq {
+            nop
+            seq {
+              nop
+              nop
+              call @uv_key_scope_exit (%StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_implicit_key_scope_18)
+              nop
+              nop
+            }
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$__uv_key_scope_7)
+            nop
+            nop
+          }
+        }
+        seq {
+          async_complete value: StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$unit -> StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$async_result
+          seq {
+            nop
+            nop
+          }
+          ret StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret StaleValueMarkIRDiagnostics_x3a_x3astaleValueMarkIRDiagnosticsReference$tmp$unit
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aStaleValueMarkIRDiagnostics {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aStaleValueMarkIRDiagnostics {
+  nop
+}
+
+

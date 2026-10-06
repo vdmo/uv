@@ -1,0 +1,6 @@
+warning[W-CON-0021]: Speculative block body may be expensive to re-execute
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/SpeculativeExpensiveBodyWarning/Source/Main.uv:15:5
+15 |     %speculative write counter {
+15 |     ^
+
+1 warning emitted

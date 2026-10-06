@@ -1,0 +1,144 @@
+proc @FreeProcedureOverloadResolution_x3a_x3aselectOverload_x3a_x3a_x24overload_x3a_x3a0 {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_value
+          }
+          nop
+          check_op Overflow + %__bind_1_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_1_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret FreeProcedureOverloadResolution_x3a_x3aselectOverload_x3a_x3a_x24overload_x3a_x3a0$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @FreeProcedureOverloadResolution_x3a_x3aselectOverload_x3a_x3a_x24overload_x3a_x3a1 {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_2_value
+          }
+          nop
+          if %__bind_2_value then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x2
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            seq {
+              nop
+              seq {
+                nop
+                bind %FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$call_ref_tmp_10 = 0x4
+                addr_of FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$call_ref_tmp_10
+              }
+            }
+            call @FreeProcedureOverloadResolution_x3a_x3aselectOverload_x3a_x3a_x24overload_x3a_x3a0 (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          seq {
+            nop
+            seq {
+              nop
+              seq {
+                nop
+                bind %FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$call_ref_tmp_14 = 0x1
+                addr_of FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$call_ref_tmp_14
+              }
+            }
+            call @FreeProcedureOverloadResolution_x3a_x3aselectOverload_x3a_x3a_x24overload_x3a_x3a1 (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          check_op Overflow + FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$call, FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$call
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$call, FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$call
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret FreeProcedureOverloadResolution_x3a_x3afreeProcedureOverloadResolutionReference$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aFreeProcedureOverloadResolution {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aFreeProcedureOverloadResolution {
+  nop
+}
+
+

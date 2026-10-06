@@ -1,0 +1,272 @@
+proc @SpeculativeExpensiveBodyWarning_x3a_x3aSpeculativeDiagnosticCounter_x3a_x3anextValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_1_self
+            }
+            nop
+          }
+          nop
+          check_op Overflow + SpeculativeExpensiveBodyWarning_x3a_x3aSpeculativeDiagnosticCounter_x3a_x3anextValue$tmp$place_field, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + SpeculativeExpensiveBodyWarning_x3a_x3aSpeculativeDiagnosticCounter_x3a_x3anextValue$tmp$place_field, 0x1
+        }
+        nop
+        nop
+        nop
+        ret SpeculativeExpensiveBodyWarning_x3a_x3aSpeculativeDiagnosticCounter_x3a_x3anextValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %counter = SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$record
+          nop
+        }
+        spec_loop {
+          snapshot: spec_snapshot paths=[counter] -> SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$spec_snapshot
+          body: block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    nop
+                    addr_of counter
+                    nop
+                    call @SpeculativeExpensiveBodyWarning_x3a_x3aSpeculativeDiagnosticCounter_x3a_x3anextValue (addr_of, %__panic)
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_flag_ptr
+                            load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                        }                      }
+                    }
+                  }
+                  fence seqcst
+                }
+                bind %next_value = SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$method_call
+                nop
+              }
+              seq {
+                seq {
+                  nop
+                  read %__bind_3_next_value
+                }
+                seq {
+                  addr_of counter
+                  nop
+                  addr_of counter.value
+                  nop
+                  rec_update counter.value
+                }
+              }
+            }
+          } seq {
+            nop
+            seq {
+              nop
+              nop
+            }
+          }
+          validate: spec_validate paths=[counter] -> SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$spec_validate
+          commit: spec_commit paths=[counter] value=SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$unit -> SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$spec_commit
+          retry: spec_retry -> SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$spec_retry
+          fallback: spec_fallback block seq {
+            call @uv_key_scope_enter
+            bind %SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_key_scope_26 = SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$key_scope_enter
+            call @uv_key_check_conflict (0x7265746E756F63, 0x1)
+            call @uv_key_acquire (%SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_key_scope_26, 0x7265746E756F63, 0x1)
+            seq {
+              seq {
+                nop
+                read %counter
+              }
+              bind %SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_spec_snapshot_29 = %counter
+            }
+          } seq {
+            block seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    fence seqcst
+                    seq {
+                      nop
+                      addr_of counter
+                      nop
+                      call @SpeculativeExpensiveBodyWarning_x3a_x3aSpeculativeDiagnosticCounter_x3a_x3anextValue (addr_of, %__panic)
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_flag_ptr
+                              load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                            seq {
+                              seq {
+                                load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_flag_ptr
+                                load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_code_ptr
+                              }
+                              if SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_flag then store_nodrop %__bind_2_counter = %__bind_5_SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_spec_snapshot_29 else nop
+                            }
+                            nop
+                            nop
+                            call @uv_key_scope_exit (%SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_key_scope_26)
+                            nop
+                            nop
+                          }                        }
+                      }
+                    }
+                    fence seqcst
+                  }
+                  bind %next_value = SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$method_call
+                  nop
+                }
+                seq {
+                  seq {
+                    nop
+                    read %__bind_6_next_value
+                  }
+                  seq {
+                    addr_of counter
+                    nop
+                    addr_of counter.value
+                    nop
+                    rec_update counter.value
+                  }
+                }
+              }
+            } seq {
+              nop
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              nop
+              nop
+              seq {
+                seq {
+                  load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_flag_ptr
+                  load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_code_ptr
+                }
+                if SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_flag then store_nodrop %__bind_2_counter = %__bind_5_SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_spec_snapshot_29 else nop
+              }
+              nop
+              nop
+              call @uv_key_scope_exit (%SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_key_scope_26)
+              nop
+              nop
+            }
+          } -> SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$unit
+          result: SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$unit
+        }
+        seq {
+          seq {
+            seq {
+              fence seqcst
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    seq {
+                      seq {
+                        call @uv_key_scope_enter
+                        bind %SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_implicit_key_scope_63 = SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$implicit_key_scope_enter
+                      }
+                      call @uv_key_check_conflict (0x7265746E756F63, 0x0)
+                      call @uv_key_acquire (%SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_implicit_key_scope_63, 0x7265746E756F63, 0x0)
+                    }
+                    read %__bind_2_counter
+                  }
+                  fence seqcst
+                }
+                nop
+              }
+              fence seqcst
+            }
+            nop
+            check_op Overflow + SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$place_field, 0x0
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_flag_ptr
+                    load_ptr SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                  call @uv_key_scope_exit (%SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_implicit_key_scope_63)
+                  nop
+                  nop
+                }              }
+            }
+            binop + SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$place_field, 0x0
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_implicit_key_scope_63)
+            nop
+            nop
+          }
+          ret SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        call @uv_key_scope_exit (%SpeculativeExpensiveBodyWarning_x3a_x3aspeculativeExpensiveBodyWarningReference$tmp$__uv_implicit_key_scope_63)
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aSpeculativeExpensiveBodyWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aSpeculativeExpensiveBodyWarning {
+  nop
+}
+
+

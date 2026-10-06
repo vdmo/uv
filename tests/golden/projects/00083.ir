@@ -1,0 +1,113 @@
+proc @CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            read @CancelToken::new
+            nop
+            cancel_create -> CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$call
+          }
+          bind %token = CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3acpu (addr_of)
+            }
+            parallel {
+              domain: CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$method_call
+              body:
+                block seq {
+                  nop
+                  nop
+                } seq {
+                  seq {
+                    seq {
+                      nop
+                      addr_of token
+                      nop
+                      cancel_check addr_of -> CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$method_call
+                    }
+                    nop
+                    if CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$method_call then block seq {
+                      nop
+                      nop
+                    } seq {
+                      nop
+                      nop
+                    } else block seq {
+                      nop
+                      nop
+                    } seq {
+                      nop
+                      nop
+                    }
+                  }
+                  nop
+                }
+            }
+            seq {
+              nop
+              nop
+              clear_panic
+              seq {
+                call @uv_parallel_join (CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$parallel_join)
+                binop != CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$parallel_join_status, 0x0
+                if CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$parallel_join_panicked then seq {
+                  store_ptr CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_flag_ptr = 0x1
+                  store_ptr CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_code_ptr = CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$parallel_join_status
+                } else nop
+              }
+              seq {
+                load_ptr CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_flag_ptr
+                load_ptr CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_code_ptr
+              }
+              binop && 0x0, CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_flag
+              if CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_code) else nop
+              unop ! CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_flag
+              binop && 0x0, CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_clear
+              if CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_restore then seq {
+                store_ptr CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_flag_ptr = 0x1
+                store_ptr CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_code_ptr = 0x0
+              } else nop
+              binop || 0x0, CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_flag
+              if CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$panic_flag then nop else nop
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret CancellationNoAdditionalDiagnostics_x3a_x3acancellationNoAdditionalDiagnosticsReference$tmp$if
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aCancellationNoAdditionalDiagnostics {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aCancellationNoAdditionalDiagnostics {
+  nop
+}
+
+

@@ -1,0 +1,10 @@
+info[I-CON-0011]: Runtime synchronization emitted under `#dynamic`
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeSyncInfo/Source/Main.uv:10:13
+10 |             %write values[index] {
+10 |             ^
+info[I-CON-0011]: Runtime synchronization emitted under `#dynamic`
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeSyncInfo/Source/Main.uv:18:13
+18 |             %write values[index] {
+18 |             ^
+
+2 infos emitted

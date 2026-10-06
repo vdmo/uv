@@ -1,0 +1,132 @@
+proc @AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of authority
+              addr_of authority.time
+              nop
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic (addr_of)
+          }
+          bind %monotonic = AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            addr_of monotonic
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic_x5fresolution (addr_of)
+          }
+          bind %resolution = AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                read @string::is_empty
+                seq {
+                  nop
+                  seq {
+                    addr_of authority
+                    addr_of authority.compiler_executable_path
+                    nop
+                  }
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3ais_x5fempty (addr_of)
+              }
+              unop ! AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$call
+            }
+            if AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$unop then seq {
+              seq {
+                read @string::is_empty
+                seq {
+                  nop
+                  seq {
+                    addr_of authority
+                    addr_of authority.temporary_directory
+                    nop
+                  }
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3ais_x5fempty (addr_of)
+              }
+              unop ! AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$call
+            } else nop
+            if AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$and then seq {
+              seq {
+                read @string::is_empty
+                seq {
+                  nop
+                  seq {
+                    addr_of authority
+                    addr_of authority.compiler_current_directory
+                    nop
+                  }
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3ais_x5fempty (addr_of)
+              }
+              unop ! AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$call
+            } else nop
+            if AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_3_resolution
+                }
+                nop
+              }
+              nop
+              binop > AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$place_field, 0x0
+            } else nop
+          }
+          bind %AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$return_snapshot_23 = AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$and
+          nop
+          seq {
+            nop
+            if %AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$return_snapshot_23 then nop else seq {
+              nop
+              panic ContractViolation(Post,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness/Source/Tests/Harness.uv:5:7-5:14),s=/w/target/fixtures/Fixtures/ArtifactProjects/AttributeTestHarness/Source/Tests/Harness.uv:5:7-5:14)
+            }
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret %AttributeTestHarness_x3a_x3aTests_x3a_x3aattributeHarnessRecordsAuthority$tmp$return_snapshot_23
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aAttributeTestHarness_x3a_x3aTests {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aAttributeTestHarness_x3a_x3aTests {
+  nop
+}
+
+

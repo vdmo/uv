@@ -1,0 +1,6 @@
+warning[W-CON-0009]: Closure captures `shared` data
+  --> /w/target/fixtures/Fixtures/ArtifactProjects/AsyncObligations/Source/Main.uv:395:48
+395 |     let producer = || -> Async<i32, (), (), !> {
+395 |                                                
+
+1 warning emitted

@@ -1,0 +1,27 @@
+proc @MacOSStaticLibraryArchive_x3a_x3amacOSStaticLibraryArchiveValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0xB
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aMacOSStaticLibraryArchive {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aMacOSStaticLibraryArchive {
+  nop
+}
+
+

@@ -1,0 +1,133 @@
+proc @NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %shared_value = 0x1
+          nop
+        }
+        seq {
+          nop
+          bind %observed = 0x0
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_3 = NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x65756C61765F646572616873, 0x1)
+          call @uv_key_acquire (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_3, 0x65756C61765F646572616873, 0x1)
+        } seq {
+          block seq {
+            nop
+            block seq {
+              call @uv_key_release_one (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_3, 0x65756C61765F646572616873)
+              bind %NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_released_key_7 = NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$key_release_one
+              call @uv_key_scope_enter
+              bind %NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_9 = NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$key_scope_enter
+              call @uv_key_check_conflict (0x65756C61765F646572616873, 0x0)
+              call @uv_key_acquire (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_9, 0x65756C61765F646572616873, 0x0)
+            } seq {
+              block seq {
+                nop
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        fence seqcst
+                        seq {
+                          nop
+                          read %__bind_1_shared_value
+                        }
+                        fence seqcst
+                      }
+                      nop
+                      check_op Overflow + %__bind_1_shared_value, 0x0
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$panic_flag_ptr
+                              load_ptr NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                            call @uv_key_scope_exit (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_9)
+                            nop
+                            nop
+                            call @uv_key_reacquire_one (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_released_key_7)
+                            nop
+                            nop
+                            call @uv_key_scope_exit (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_3)
+                            nop
+                            nop
+                          }                        }
+                      }
+                      binop + %__bind_1_shared_value, 0x0
+                    }
+                    seq {
+                      nop
+                      store %observed = NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$binop
+                    }
+                  }
+                  seq {
+                    nop
+                    nop
+                  }
+                }
+              } seq {
+                nop
+                nop
+              }
+              seq {
+                nop
+                nop
+                call @uv_key_scope_exit (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_9)
+                nop
+                nop
+                call @uv_key_reacquire_one (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_released_key_7)
+                nop
+                nop
+              }
+            }
+          } seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%NestedReleaseInterleavingWarning_x3a_x3anestedReleaseInterleavingWarningReference$tmp$__uv_key_scope_3)
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_2_observed
+          }
+          nop
+          nop
+          ret %__bind_2_observed
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aNestedReleaseInterleavingWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aNestedReleaseInterleavingWarning {
+  nop
+}
+
+

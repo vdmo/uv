@@ -845,3 +845,23 @@ use it); the Windows forms of paths and URIs (drive letters) are not carried; th
 analysis worker hands a snapshot to the main thread with the types of expressions as
 pairs of span and type instead of the reference's pointer-keyed map.
 
+## M6: IR, lowering, LLVM, linking
+
+Started with the end that can be checked: `crates/uv-codegen` has the IR model
+(`ir.rs`, from `ir_model.h`) and the text dump (`ir_dump.rs`, from `ir_dump.cpp`). The
+gate is `tools/parity_ir.py`: the reference's `uvc build --emit-ir` was recorded for the
+90 projects it accepts (`tests/golden/*/<id>.ir`, by `tools/oracle/run_reference_ir.sh`),
+840 procedures, 7 constants, 3 zeroed globals and 9 extern procedures in all, and the
+Rust output is compared declaration by declaration. Those 90 projects are exactly the
+ones `uvc --check` leaves pending at the lowerability check, so lowering them is also what
+finishes M3.6.
+
+Still to port, by size of the C++ it comes from (lines): `lower` 36k (expressions,
+statements, patterns, procedures, modules), `globals` 3.5k (initialisation, literals,
+entry points), `intrinsics` 3.9k, `cleanup` 3.5k (drops, unwinding), `abi` 2.1k,
+`checks` 1.4k, `symbols` 1.3k (mangling, linkage), `dyn_dispatch` 1.2k, and the driver's
+`BuildCodegenCache` and `PopulateCodegenModules`. Then `llvm` 46k for code emission and
+the linker driver. The lowering is the next step; each slice is judged by how many of the
+859 declarations of the gate come out identical, with the constructs not ported yet
+reported as pending, as the typing was.
+

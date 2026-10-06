@@ -1,0 +1,123 @@
+proc @FlowProofRuntimeErasure_x3a_x3arequirePositiveValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_1_value
+        }
+        nop
+        nop
+        ret %__bind_1_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @FlowProofRuntimeErasure_x3a_x3abranchValidatedValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_2_value
+            }
+            nop
+            binop > %__bind_2_value, 0x0
+          }
+          seq {
+            nop
+            nop
+          }
+          if FlowProofRuntimeErasure_x3a_x3abranchValidatedValue$tmp$binop then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read @FlowProofRuntimeErasure::requirePositiveValue
+                }
+                seq {
+                  nop
+                  addr_of value
+                }
+                call @FlowProofRuntimeErasure_x3a_x3arequirePositiveValue (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+nop                  }
+                }
+              }
+              nop
+              nop
+              ret FlowProofRuntimeErasure_x3a_x3abranchValidatedValue$tmp$call
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @FlowProofRuntimeErasure_x3a_x3aFlowBehavioralReadableOwner_x3a_x3areadFlowBehavioralValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_4_value
+          }
+          nop
+          check_op Overflow + %__bind_4_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_4_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret FlowProofRuntimeErasure_x3a_x3aFlowBehavioralReadableOwner_x3a_x3areadFlowBehavioralValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aFlowProofRuntimeErasure {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aFlowProofRuntimeErasure {
+  nop
+}
+
+

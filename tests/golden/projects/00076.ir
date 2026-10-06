@@ -1,0 +1,94 @@
+proc @ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %shared_value = 0x1
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference$tmp$__uv_key_scope_2 = ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x65756C61765F646572616873, 0x1)
+          call @uv_key_acquire (%ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference$tmp$__uv_key_scope_2, 0x65756C61765F646572616873, 0x1)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    fence seqcst
+                    seq {
+                      nop
+                      read %__bind_1_shared_value
+                    }
+                    fence seqcst
+                  }
+                  nop
+                  check_op Overflow + %__bind_1_shared_value, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference$tmp$panic_flag_ptr
+                          load_ptr ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                        call @uv_key_scope_exit (%ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference$tmp$__uv_key_scope_2)
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_1_shared_value, 0x1
+                }
+                seq {
+                  nop
+                  store %shared_value = ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          } seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%ReadThenWriteExplicitWarning_x3a_x3areadThenWriteExplicitWarningReference$tmp$__uv_key_scope_2)
+            nop
+            nop
+          }
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aReadThenWriteExplicitWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aReadThenWriteExplicitWarning {
+  nop
+}
+
+

@@ -1,0 +1,6253 @@
+proc @EmitLlLibrary_x3a_x3aEmitLlDroppingFfiByValueRecord_x3a_x3adrop {
+  seq {
+    nop
+    block seq {
+      nop
+      nop
+    } seq {
+      nop
+      nop
+    }
+    nop
+    ret EmitLlLibrary_x3a_x3aEmitLlDroppingFfiByValueRecord_x3a_x3adrop$tmp$unit
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlCleanupProbe_x3a_x3adrop {
+  seq {
+    nop
+    block seq {
+      nop
+      nop
+    } seq {
+      nop
+      nop
+    }
+    nop
+    ret EmitLlLibrary_x3a_x3aEmitLlCleanupProbe_x3a_x3adrop$tmp$unit
+  }
+}
+
+global_zero @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fSTATIC_x5fCLEANUP_x5fPROBE size=8
+
+global_const @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fCONST_x5fBYTES_x5fINT bytes=4
+
+global_const @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fCONST_x5fBYTES_x5fFLOAT bytes=8
+
+global_const @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fCONST_x5fBYTES_x5fNULL bytes=8
+
+global_const @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fCONST_x5fBYTES_x5fUNIT bytes=0
+
+proc @EmitLlLibrary_x3a_x3aEmitLlPermissionAdmissibilityRecord_x3a_x3areadValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_3_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aEmitLlPermissionAdmissibilityRecord_x3a_x3areadValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlPermissionAdmissibilityRecord_x3a_x3areplaceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_5_value
+          }
+          seq {
+            addr_of self
+            nop
+            addr_of self.value
+            nop
+            rec_update self.value
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_4_self
+            }
+            nop
+          }
+          nop
+          nop
+          ret EmitLlLibrary_x3a_x3aEmitLlPermissionAdmissibilityRecord_x3a_x3areplaceValue$tmp$place_field
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlDynamicOwner_x3a_x3areadValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_6_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aEmitLlDynamicOwner_x3a_x3areadValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlDynamicOwner_x3a_x3ashiftedValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_7_self
+            }
+            nop
+          }
+          seq {
+            nop
+            read %__bind_8_delta
+          }
+          check_op Overflow + EmitLlLibrary_x3a_x3aEmitLlDynamicOwner_x3a_x3ashiftedValue$tmp$place_field, %__bind_8_delta
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + EmitLlLibrary_x3a_x3aEmitLlDynamicOwner_x3a_x3ashiftedValue$tmp$place_field, %__bind_8_delta
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aEmitLlDynamicOwner_x3a_x3ashiftedValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @default_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlDynamicDefaultOwner_x3a_x3acl_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlDynamicDefaultReadable_x3a_x3adefaultValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x11
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @default_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlFirstFieldOwner_x3a_x3acl_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlFirstFieldSelection_x3a_x3aselectedFirstField {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_10_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret default_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlFirstFieldOwner_x3a_x3acl_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlFirstFieldSelection_x3a_x3aselectedFirstField$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlAssociatedOwner_x3a_x3aassociatedCarrier {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_11_self
+            }
+            nop
+          }
+          seq {
+            nop
+            read %__bind_12_value
+          }
+          check_op Overflow + EmitLlLibrary_x3a_x3aEmitLlAssociatedOwner_x3a_x3aassociatedCarrier$tmp$place_field, %__bind_12_value
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + EmitLlLibrary_x3a_x3aEmitLlAssociatedOwner_x3a_x3aassociatedCarrier$tmp$place_field, %__bind_12_value
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aEmitLlAssociatedOwner_x3a_x3aassociatedCarrier$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlOpaqueOwner_x3a_x3areadOpaqueValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_13_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aEmitLlOpaqueOwner_x3a_x3areadOpaqueValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3aeq {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_14_self
+            }
+            nop
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_15_other
+            }
+            nop
+          }
+          binop == EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3aeq$tmp$place_field, EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3aeq$tmp$place_field
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3aeq$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3ahash {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_17_hasher
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  read @bytes::view_string
+                  nop
+                }
+                bind %EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3ahash$tmp$call_ref_tmp_28 = 0x65756C615677614C687361486C4C74696D45
+                addr_of EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3ahash$tmp$call_ref_tmp_28
+              }
+            }
+            seq {
+              call_vtable %__bind_17_hasher [0] check_dynamic_receiver_addr_active (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+          }
+          seq {
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3ahash$tmp$unit
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            read @bytes::as_slice
+            seq {
+              nop
+              addr_of data
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3aas_x5fslice (addr_of)
+          }
+          bind %data_slice = EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$call
+          nop
+        }
+        seq {
+          nop
+          bind %index = 0x0
+          nop
+        }
+        seq {
+          loop while {
+            cond_ir seq {
+              seq {
+                nop
+                read %__bind_22_index
+              }
+              seq {
+                read @bytes::length
+                seq {
+                  nop
+                  addr_of data
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3alength (addr_of)
+              }
+              binop < %__bind_22_index, EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$call
+            }
+            cond_value EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$binop
+            body block seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        seq {
+                          seq {
+                            nop
+                            read %__bind_19_self
+                          }
+                          nop
+                        }
+                        seq {
+                          seq {
+                            addr_of data_slice
+                            seq {
+                              nop
+                              read %__bind_22_index
+                            }
+                            nop
+                            check_index addr_of, %__bind_22_index
+                            seq {
+                              nop
+                              cleanup_panic_check {
+seq {
+                                  seq {
+                                    load_ptr EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$panic_flag_ptr
+                                    load_ptr EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$panic_code_ptr
+                                  }
+                                  nop
+                                  nop
+                                }                              }
+                            }
+                          }
+                          check_cast EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$index_elem to u64
+                          seq {
+                            nop
+                            cleanup_panic_check {
+seq {
+                                seq {
+                                  load_ptr EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$panic_flag_ptr
+                                  load_ptr EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$panic_code_ptr
+                                }
+                                nop
+                                nop
+                              }                            }
+                          }
+                          cast EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$index_elem to u64
+                        }
+                        binop ^ EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$place_field, EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$cast
+                      }
+                      nop
+                      check_op Overflow * EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$binop, 0x100000001B3
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$panic_flag_ptr
+                              load_ptr EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                      binop * EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$binop, 0x100000001B3
+                    }
+                    seq {
+                      addr_of self
+                      nop
+                      addr_of self.state
+                      nop
+                      rec_update self.state
+                    }
+                  }
+                  seq {
+                    nop
+                    nop
+                    nop
+                    nop
+                  }
+                }
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_22_index
+                      }
+                      nop
+                      check_op Overflow + %__bind_22_index, 0x1
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$panic_flag_ptr
+                              load_ptr EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                      binop + %__bind_22_index, 0x1
+                    }
+                    seq {
+                      nop
+                      store %index = EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$binop
+                    }
+                  }
+                  seq {
+                    nop
+                    nop
+                  }
+                }
+              }
+            } seq {
+              nop
+              nop
+            }
+            body_value EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$unit
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3awrite$tmp$unit
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3afinish {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_23_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3afinish$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3areadValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_24_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3areadValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3afinishWide {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_25_self
+              }
+              nop
+            }
+            check_cast EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3afinishWide$tmp$place_field to i64
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3afinishWide$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3afinishWide$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            cast EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3afinishWide$tmp$place_field to i64
+          }
+          seq {
+            nop
+            read %__bind_26_right
+          }
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        ret EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3afinishWide$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlLibraryValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0xB
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @EmitLlLibrary::EMIT_LL_CONST_BYTES_UNIT
+          }
+          bind %empty_value = @EMIT_LL_CONST_BYTES_UNIT
+          nop
+        }
+        seq {
+          nop
+          bind %empty_size = 0x0
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              read @bytes::view_string
+              nop
+            }
+            bind %empty_text = ""
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            read @bytes::length
+            seq {
+              nop
+              addr_of empty_text
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3alength (addr_of)
+          }
+          bind %empty_text_size = EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @EmitLlLibrary::EMIT_LL_CONST_BYTES_NULL
+              }
+              nop
+              binop == @EMIT_LL_CONST_BYTES_NULL, 0x0
+            }
+            if EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$binop then seq {
+              seq {
+                nop
+                read @EmitLlLibrary::EMIT_LL_CONST_BYTES_FLOAT
+              }
+              nop
+              binop > @EMIT_LL_CONST_BYTES_FLOAT, 0x4018000000000000
+            } else nop
+          }
+          seq {
+            nop
+            nop
+          }
+          if EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$and then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read @EmitLlLibrary::EMIT_LL_CONST_BYTES_INT
+                }
+                move_state EMIT_LL_CONST_BYTES_INT
+              }
+              nop
+              seq {
+                nop
+                nop
+              }
+              ret @EMIT_LL_CONST_BYTES_INT
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_28_empty_size
+              }
+              seq {
+                nop
+                read %__bind_30_empty_text_size
+              }
+              check_op Overflow + %__bind_28_empty_size, %__bind_30_empty_text_size
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$panic_flag_ptr
+                      load_ptr EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+              binop + %__bind_28_empty_size, %__bind_30_empty_text_size
+            }
+            check_cast EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$binop to i32
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            cast EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$binop to i32
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlConstBytesEncodingProbe$tmp$cast
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlCleanupNoop {
+  seq {
+    nop
+    block seq {
+      nop
+      nop
+    } seq {
+      nop
+      nop
+    }
+    nop
+    ret EmitLlLibrary_x3a_x3aemitLlCleanupNoop$tmp$unit
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlLocalDropCleanupProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            seq {
+              nop
+              read %__bind_31_value
+            }
+          }
+          bind %payload = EmitLlLibrary_x3a_x3aemitLlLocalDropCleanupProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %payload
+              }
+              nop
+            }
+            move_state payload.visible_value
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlLocalDropCleanupProbe$tmp$place_field
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlStaticCleanupProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::EMIT_LL_STATIC_CLEANUP_PROBE
+            }
+            nop
+          }
+          move_state EMIT_LL_STATIC_CLEANUP_PROBE.visible_value
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlStaticCleanupProbe$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        defer
+        seq {
+          seq {
+            nop
+            read %__bind_33_value
+          }
+          nop
+          seq {
+            nop
+            nop
+            clear_panic
+            block seq {
+              nop
+              nop
+            } seq {
+              seq {
+                seq {
+                  nop
+                  read @EmitLlLibrary::emitLlCleanupNoop
+                }
+                nop
+                call @EmitLlLibrary_x3a_x3aemitLlCleanupNoop (%__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+nop                  }
+                }
+              }
+              nop
+            }
+            seq {
+              load_ptr EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag_ptr
+              load_ptr EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_code_ptr
+            }
+            binop && 0x0, EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag
+            if EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_code) else nop
+            unop ! EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag
+            binop && 0x0, EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_clear
+            if EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_restore then seq {
+              store_ptr EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag_ptr = 0x1
+              store_ptr EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_code_ptr = 0x0
+            } else nop
+            binop || 0x0, EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag
+            if EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag then nop else nop
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          ret %__bind_33_value
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        clear_panic
+        block seq {
+          nop
+          nop
+        } seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlCleanupNoop
+            }
+            nop
+            call @EmitLlLibrary_x3a_x3aemitLlCleanupNoop (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+        }
+        seq {
+          load_ptr EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag_ptr
+          load_ptr EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_code_ptr
+        }
+        binop && 0x0, EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag
+        if EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_code) else nop
+        unop ! EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag
+        binop && 0x0, EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_clear
+        if EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_restore then seq {
+          store_ptr EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag_ptr = 0x1
+          store_ptr EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_code_ptr = 0x0
+        } else nop
+        binop || 0x0, EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag
+        if EmitLlLibrary_x3a_x3aemitLlDeferCleanupProbe$tmp$panic_flag then nop else nop
+        nop
+        cleanup_panic_check {
+nop        }
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlAssociatedTypeErasureProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %owner = EmitLlLibrary_x3a_x3aemitLlAssociatedTypeErasureProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of owner
+            seq {
+              nop
+              addr_of value
+            }
+            call @EmitLlLibrary_x3a_x3aEmitLlAssociatedOwner_x3a_x3aassociatedCarrier (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlAssociatedTypeErasureProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlAssociatedTypeErasureProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlAssociatedTypeErasureProbe$tmp$method_call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlOpaqueConcreteReturnProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_36_value
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlOpaqueConcreteReturnProbe$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlOpaqueConcreteProjectProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          addr_of value
+          nop
+          call @EmitLlLibrary_x3a_x3aEmitLlOpaqueOwner_x3a_x3areadOpaqueValue (addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlOpaqueConcreteProjectProbe$tmp$method_call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPrimitiveTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_38_value
+        }
+        nop
+        nop
+        ret %__bind_38_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlAliasTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_39_value
+        }
+        nop
+        nop
+        ret %__bind_39_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRefinementTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_40_value
+        }
+        nop
+        nop
+        ret %__bind_40_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRecordTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_41_flag
+          }
+          seq {
+            nop
+            read %__bind_42_count
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlRecordTypeProbe$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      nop
+                      nop
+                      check_op Overflow + 0x8, 0x4
+                      seq {
+                        nop
+                        cleanup_panic_check {
+nop                        }
+                      }
+                      binop + 0x8, 0x4
+                    }
+                    nop
+                    check_op Overflow + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x8
+                    seq {
+                      nop
+                      cleanup_panic_check {
+nop                      }
+                    }
+                    binop + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x8
+                  }
+                  nop
+                  check_op Overflow + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x4
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x4
+                }
+                nop
+                check_op Overflow + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x8
+                seq {
+                  nop
+                  cleanup_panic_check {
+nop                  }
+                }
+                binop + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x8
+              }
+              nop
+              check_op Overflow + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x4
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+              binop + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x4
+            }
+            nop
+            check_op Overflow + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x8
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x8
+          }
+          nop
+          check_op Overflow + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x4
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop, 0x4
+        }
+        nop
+        seq {
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+        }
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlPermissionLayoutProbe$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityReceiverProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            addr_of value
+            nop
+            call @EmitLlLibrary_x3a_x3aEmitLlPermissionAdmissibilityRecord_x3a_x3areadValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %observed = EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityReceiverProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of value
+            seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_45_observed
+                  }
+                  nop
+                  check_op Overflow + %__bind_45_observed, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_45_observed, 0x1
+                }
+                bind %EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityReceiverProbe$tmp$call_ref_tmp_220 = EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityReceiverProbe$tmp$binop
+                addr_of EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityReceiverProbe$tmp$call_ref_tmp_220
+              }
+            }
+            call @EmitLlLibrary_x3a_x3aEmitLlPermissionAdmissibilityRecord_x3a_x3areplaceValue (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          nop
+          ret EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityReceiverProbe$tmp$method_call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlTupleTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_47_value
+          }
+          seq {
+            nop
+            read %__bind_48_flag
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlTupleTypeProbe$tmp$tuple
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlTupleValueBitsConsume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_49_value
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlTupleValueBitsConsume$tmp$tuple_elem
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlTupleValueBitsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @EmitLlLibrary::emitLlTupleValueBitsConsume
+          }
+          seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_50_seed
+                }
+                seq {
+                  nop
+                  check_cast 0x25 to i64
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  cast 0x25 to i64
+                }
+              }
+              bind %EmitLlLibrary_x3a_x3aemitLlTupleValueBitsProbe$tmp$call_ref_tmp_231 = EmitLlLibrary_x3a_x3aemitLlTupleValueBitsProbe$tmp$tuple
+              addr_of EmitLlLibrary_x3a_x3aemitLlTupleValueBitsProbe$tmp$call_ref_tmp_231
+            }
+          }
+          call @EmitLlLibrary_x3a_x3aemitLlTupleValueBitsConsume (addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlTupleValueBitsProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsConsume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_52_value
+            }
+            if EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsConsume$tmp$tuple_elem then seq {
+              seq {
+                nop
+                read %__bind_52_value
+              }
+              nop
+              binop == EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsConsume$tmp$tuple_elem, 0x51
+            } else nop
+            if EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsConsume$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_52_value
+              }
+              nop
+              binop > EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsConsume$tmp$tuple_elem, 0x4000000000000000
+            } else nop
+          }
+          seq {
+            nop
+            nop
+          }
+          if EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsConsume$tmp$and then block seq {
+            nop
+            seq {
+              seq {
+                nop
+                read %__bind_52_value
+              }
+              nop
+              nop
+              ret EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsConsume$tmp$tuple_elem
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %raw_null = 0x0
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_53_raw_null
+            }
+            nop
+            binop == %__bind_53_raw_null, 0x0
+          }
+          seq {
+            nop
+            nop
+          }
+          if EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsProbe$tmp$binop then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read @EmitLlLibrary::emitLlPrimitiveValueBitsConsume
+                }
+                seq {
+                  nop
+                  seq {
+                    seq {
+                      nop
+                      nop
+                      nop
+                      nop
+                      nop
+                    }
+                    bind %EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsProbe$tmp$call_ref_tmp_265 = EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsProbe$tmp$tuple
+                    addr_of EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsProbe$tmp$call_ref_tmp_265
+                  }
+                }
+                call @EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsConsume (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+nop                  }
+                }
+              }
+              nop
+              nop
+              nop
+              ret EmitLlLibrary_x3a_x3aemitLlPrimitiveValueBitsProbe$tmp$call
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNeverReturnTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            addr_of context
+            addr_of context.sys
+            nop
+          }
+          seq {
+            nop
+            addr_of code
+          }
+          call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aexit (addr_of, addr_of)
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlNeverReturnTypeProbe$tmp$method_call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsConsume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_56_value
+          }
+          nop
+          if EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsConsume$tmp$tuple_elem then block seq {
+            nop
+            seq {
+              seq {
+                nop
+                read %__bind_56_value
+              }
+              nop
+              nop
+              ret EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsConsume$tmp$tuple_elem
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @EmitLlLibrary::emitLlPermissionValueBitsConsume
+          }
+          seq {
+            nop
+            seq {
+              seq {
+                nop
+                nop
+              }
+              bind %EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsProbe$tmp$call_ref_tmp_288 = EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsProbe$tmp$tuple
+              addr_of EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsProbe$tmp$call_ref_tmp_288
+            }
+          }
+          call @EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsConsume (addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlPermissionValueBitsProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_58_value
+          }
+          nop
+          if_case %__bind_58_value {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      check_cast 0x0 to i64
+                      seq {
+                        nop
+                        cleanup_panic_check {
+nop                        }
+                      }
+                      cast 0x0 to i64
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$if_case_clause_result_294 = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$cast
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$if_case_clause_result_294
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  seq {
+                    bind %seed_value = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$pat_enum_payload_elem
+                    bind %payload_value = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$pat_enum_payload_elem
+                  }
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_60_payload_value
+                        }
+                        seq {
+                          seq {
+                            nop
+                            read %__bind_59_seed_value
+                          }
+                          check_cast %__bind_59_seed_value to i64
+                          seq {
+                            nop
+                            cleanup_panic_check {
+nop                            }
+                          }
+                          cast %__bind_59_seed_value to i64
+                        }
+                        check_op Overflow + %__bind_60_payload_value, EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$cast
+                        seq {
+                          nop
+                          cleanup_panic_check {
+nop                          }
+                        }
+                        binop + %__bind_60_payload_value, EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$cast
+                      }
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_59_seed_value
+                        }
+                        check_cast %__bind_59_seed_value to i64
+                        seq {
+                          nop
+                          cleanup_panic_check {
+nop                          }
+                        }
+                        cast %__bind_59_seed_value to i64
+                      }
+                      check_op Overflow - EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$binop, EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$cast
+                      seq {
+                        nop
+                        cleanup_panic_check {
+nop                        }
+                      }
+                      binop - EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$binop, EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$cast
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$if_case_clause_result_304 = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$binop
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$if_case_clause_result_304
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  seq {
+                    bind %is_ready = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$pat_enum_payload_field
+                    bind %payload_value = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$pat_enum_payload_field
+                  }
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_59_is_ready
+                      }
+                      nop
+                      if %__bind_59_is_ready then block seq {
+                        nop
+                        nop
+                      } seq {
+                        seq {
+                          nop
+                          read %__bind_60_payload_value
+                        }
+                        nop
+                      } else seq {
+                        block seq {
+                          nop
+                          nop
+                        } seq {
+                          seq {
+                            seq {
+                              nop
+                              read %__bind_60_payload_value
+                            }
+                            nop
+                            check_op Overflow - %__bind_60_payload_value, 0x1
+                            seq {
+                              nop
+                              cleanup_panic_check {
+nop                              }
+                            }
+                            binop - %__bind_60_payload_value, 0x1
+                          }
+                          nop
+                        }
+                        seq {
+                          nop
+                          nop
+                        }
+                      }
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$if_case_clause_result_316 = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$if
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$if_case_clause_result_316
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlEnumValueBitsUnitProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @EmitLlLibrary::emitLlEnumValueBitsConsume
+          }
+          seq {
+            nop
+            seq {
+              nop
+              bind %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsUnitProbe$tmp$call_ref_tmp_320 = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsUnitProbe$tmp$enum_unit
+              addr_of EmitLlLibrary_x3a_x3aemitLlEnumValueBitsUnitProbe$tmp$call_ref_tmp_320
+            }
+          }
+          call @EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume (addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlEnumValueBitsUnitProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlEnumValueBitsTupleProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @EmitLlLibrary::emitLlEnumValueBitsConsume
+          }
+          seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_60_seed
+                }
+                seq {
+                  nop
+                  check_cast 0x29 to i64
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  cast 0x29 to i64
+                }
+              }
+              bind %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsTupleProbe$tmp$call_ref_tmp_327 = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsTupleProbe$tmp$enum_tuple
+              addr_of EmitLlLibrary_x3a_x3aemitLlEnumValueBitsTupleProbe$tmp$call_ref_tmp_327
+            }
+          }
+          call @EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume (addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlEnumValueBitsTupleProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlEnumValueBitsRecordProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @EmitLlLibrary::emitLlEnumValueBitsConsume
+          }
+          seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_62_flag
+                }
+                seq {
+                  nop
+                  check_cast 0x2B to i64
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  cast 0x2B to i64
+                }
+              }
+              bind %EmitLlLibrary_x3a_x3aemitLlEnumValueBitsRecordProbe$tmp$call_ref_tmp_334 = EmitLlLibrary_x3a_x3aemitLlEnumValueBitsRecordProbe$tmp$enum_record
+              addr_of EmitLlLibrary_x3a_x3aemitLlEnumValueBitsRecordProbe$tmp$call_ref_tmp_334
+            }
+          }
+          call @EmitLlLibrary_x3a_x3aemitLlEnumValueBitsConsume (addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlEnumValueBitsRecordProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlArrayTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          nop
+          nop
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlArrayTypeProbe$tmp$array
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSliceTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x10
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRangeTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_65_value
+        }
+        nop
+        nop
+        ret %__bind_65_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRangeInclusiveTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_66_value
+        }
+        nop
+        nop
+        ret %__bind_66_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRangeFromTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_67_value
+        }
+        nop
+        nop
+        ret %__bind_67_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRangeToTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_68_value
+        }
+        nop
+        nop
+        ret %__bind_68_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRangeToInclusiveTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_69_value
+        }
+        nop
+        nop
+        ret %__bind_69_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRangeFullTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_70_value
+        }
+        nop
+        nop
+        ret %__bind_70_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %full = EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$range
+          nop
+        }
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %from_start = EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$range
+          nop
+        }
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %to_end = EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$range
+          nop
+        }
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %to_inclusive_end = EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$range
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              nop
+            }
+            bind %exclusive = EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$range
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              nop
+            }
+            bind %inclusive = EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$range
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    nop
+                    check_op Overflow + 0x0, 0x8
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_flag_ptr
+                            load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                        }                      }
+                    }
+                    binop + 0x0, 0x8
+                  }
+                  nop
+                  check_op Overflow + EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop, 0x8
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_flag_ptr
+                          load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop, 0x8
+                }
+                nop
+                check_op Overflow + EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop, 0x8
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_flag_ptr
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                binop + EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop, 0x8
+              }
+              nop
+              check_op Overflow + EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop, 0x10
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_flag_ptr
+                      load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+              binop + EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop, 0x10
+            }
+            nop
+            check_op Overflow + EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop, 0x10
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop + EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop, 0x10
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlRangeLowerOptProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_77_tagged
+          }
+          nop
+          if_case %__bind_77_tagged {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$if_case_clause_result_402 = 0x0
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$if_case_clause_result_402
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %count = EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_78_count
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$if_case_clause_result_404 = %__bind_78_count
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$if_case_clause_result_404
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  seq {
+                    bind %value = EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$pat_enum_payload_field
+                    bind %is_ready = EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$pat_enum_payload_field
+                  }
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_79_is_ready
+                      }
+                      nop
+                      if %__bind_79_is_ready then block seq {
+                        nop
+                        nop
+                      } seq {
+                        seq {
+                          nop
+                          read %__bind_78_value
+                        }
+                        nop
+                      } else block seq {
+                        nop
+                        nop
+                      } seq {
+                        nop
+                        nop
+                      }
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$if_case_clause_result_409 = EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$if
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$if_case_clause_result_409
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlEnumTypeProbe$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_78_value
+          }
+          nop
+          if_case %__bind_78_value {
+            case_clause {
+              pat number
+              body {
+seq {
+                  nop
+                  nop
+                  bind %number = EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$pat_union_payload
+                  bind %value = EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$ifcase_scrutinee_payload
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_79_number
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$if_case_clause_result_414 = %__bind_79_number
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$if_case_clause_result_414
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat flag
+              body {
+seq {
+                  nop
+                  nop
+                  bind %flag = EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$pat_union_payload
+                  bind %value = EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$ifcase_scrutinee_payload
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_79_flag
+                      }
+                      nop
+                      if %__bind_79_flag then block seq {
+                        nop
+                        nop
+                      } seq {
+                        nop
+                        nop
+                      } else block seq {
+                        nop
+                        nop
+                      } seq {
+                        nop
+                        nop
+                      }
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$if_case_clause_result_420 = EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$if
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$if_case_clause_result_420
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlTaggedUnionTypeProbe$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNicheUnionTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlClosureTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_80_callback
+          }
+          seq {
+            nop
+            addr_of value
+          }
+          call EmitLlLibrary_x3a_x3aemitLlClosureTypeProbe$tmp$closure_code (EmitLlLibrary_x3a_x3aemitLlClosureTypeProbe$tmp$closure_env, addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          bind %EmitLlLibrary_x3a_x3aemitLlClosureTypeProbe$tmp$closure_call_value_428 = EmitLlLibrary_x3a_x3aemitLlClosureTypeProbe$tmp$closure_call_result
+        }
+        nop
+        nop
+        ret %EmitLlLibrary_x3a_x3aemitLlClosureTypeProbe$tmp$closure_call_value_428
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %left_bias = 0x7
+          nop
+        }
+        seq {
+          nop
+          bind %is_enabled = 0x1
+          nop
+        }
+        seq {
+          seq {
+            bind %EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_env_storage_434 = EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_env_zero
+            store_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_field_ptr = EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_addr
+            store_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_field_ptr = EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_addr
+          }
+          bind %closure = EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_88_closure
+            }
+            seq {
+              nop
+              addr_of value
+            }
+            call EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_code (EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_env, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            bind %EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_call_value_474 = EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_call_result
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret %EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$closure_call_value_474
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x5fx3a_x5fx3aemitLlClosureEnvReferenceCaptureProbe_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            seq {
+              load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_ptr
+              load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_ptr
+            }
+          }
+          nop
+          if EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_val then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_86_input
+                }
+                seq {
+                  nop
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_ptr
+                  }
+                }
+                check_op Overflow + %__bind_86_input, EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_val
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$panic_flag_ptr
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                binop + %__bind_86_input, EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$capture_val
+              }
+              nop
+              seq {
+                nop
+                nop
+              }
+              ret EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$binop
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %input
+            }
+            move_state input
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret %input
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret EmitLlLibrary_x3a_x3aemitLlClosureEnvReferenceCaptureProbe$tmp$unit
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %closure = EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_93_closure
+            }
+            seq {
+              nop
+              addr_of value
+            }
+            call EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$closure_code (EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$closure_env, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            bind %EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$closure_call_value_499 = EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$closure_call_result
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret %EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$closure_call_value_499
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x5fx3a_x5fx3aemitLlClosureEnvEmptyProbe_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_91_input
+        }
+        nop
+        check_op Overflow + %__bind_91_input, 0x3
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$panic_flag_ptr
+                load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_91_input, 0x3
+      }
+      nop
+    }
+    ret EmitLlLibrary_x3a_x3aemitLlClosureEnvEmptyProbe$tmp$binop
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_94_value
+            }
+            nop
+            check_op Overflow + %__bind_94_value, 0x4
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + %__bind_94_value, 0x4
+          }
+          bind %captured = EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$binop
+          nop
+        }
+        seq {
+          seq {
+            bind %EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure_env_storage_511 = EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure_env_zero
+            seq {
+              seq {
+                nop
+                read %captured
+              }
+              move_state captured
+            }
+            store_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure_field_ptr = %captured
+          }
+          bind %closure = EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_98_closure
+            }
+            call EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure_code (EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure_env, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            bind %EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure_call_value_527 = EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure_call_result
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret %EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$closure_call_value_527
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x5fx3a_x5fx3aemitLlClosureEnvMoveCaptureProbe_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          load_ptr EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$capture_ptr
+        }
+        move_state captured
+      }
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret EmitLlLibrary_x3a_x3aemitLlClosureEnvMoveCaptureProbe$tmp$capture_val
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPipelineIncrement {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_99_value
+          }
+          nop
+          check_op Overflow + %__bind_99_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_99_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlPipelineIncrement$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPipelineFunctionProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_100_value
+          }
+          seq {
+            nop
+            read @EmitLlLibrary::emitLlPipelineIncrement
+          }
+          call @emitLlPipelineIncrement (%__bind_100_value, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlPipelineFunctionProbe$tmp$pipeline
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %bias = 0x5
+          nop
+        }
+        seq {
+          seq {
+            bind %EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$closure_env_storage_543 = EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$closure_env_zero
+            store_ptr EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$closure_field_ptr = EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$capture_addr
+          }
+          bind %closure = EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_101_value
+            }
+            seq {
+              nop
+              read %__bind_106_closure
+            }
+            call EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$closure_code (EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$closure_env, %__bind_101_value, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$pipeline
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x5fx3a_x5fx3aemitLlPipelineClosureProbe_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_104_input
+        }
+        seq {
+          nop
+          seq {
+            load_ptr EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$capture_ptr
+            load_ptr EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$capture_ptr
+          }
+        }
+        check_op Overflow + %__bind_104_input, EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$capture_val
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$panic_flag_ptr
+                load_ptr EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_104_input, EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$capture_val
+      }
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret EmitLlLibrary_x3a_x3aemitLlPipelineClosureProbe$tmp$binop
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlStringViewTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x10
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        seq {
+          nop
+          nop
+          nop
+          clear_panic
+          call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3adrop_x5fmanaged (%text)
+          seq {
+            load_ptr EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_flag_ptr
+            load_ptr EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_code_ptr
+          }
+          binop && 0x0, EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_flag
+          if EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_code) else nop
+          unop ! EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_flag
+          binop && 0x0, EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_clear
+          if EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_restore then seq {
+            store_ptr EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_flag_ptr = 0x1
+            store_ptr EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_code_ptr = 0x0
+          } else nop
+          binop || 0x0, EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_flag
+          if EmitLlLibrary_x3a_x3aemitLlStringManagedTypeProbe$tmp$panic_flag then nop else nop
+          nop
+          cleanup_panic_check {
+nop          }
+        }
+        ret 0x18
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlBytesViewTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x10
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        seq {
+          nop
+          nop
+          nop
+          clear_panic
+          call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3adrop_x5fmanaged (%data)
+          seq {
+            load_ptr EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_flag_ptr
+            load_ptr EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_code_ptr
+          }
+          binop && 0x0, EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_flag
+          if EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_code) else nop
+          unop ! EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_flag
+          binop && 0x0, EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_clear
+          if EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_restore then seq {
+            store_ptr EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_flag_ptr = 0x1
+            store_ptr EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_code_ptr = 0x0
+          } else nop
+          binop || 0x0, EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_flag
+          if EmitLlLibrary_x3a_x3aemitLlBytesManagedTypeProbe$tmp$panic_flag then nop else nop
+          nop
+          cleanup_panic_check {
+nop          }
+        }
+        ret 0x18
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlModalStringTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x20
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlModalBytesTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x20
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNicheModalTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlTaggedModalTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x18
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlModalStateTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_115_value
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlModalStateTypeProbe$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_116_value
+          }
+          nop
+          if_case %__bind_116_value {
+            case_clause {
+              pat @Absent
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe$tmp$if_case_clause_result_637 = 0x0
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe$tmp$if_case_clause_result_637
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat @Present {pointer}
+              body {
+seq {
+                  nop
+                  nop
+                  bind %pointer = EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe$tmp$pat_modal_field
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_117_pointer
+                      }
+                      seq {
+                        check_op NullDeref nonnull %__bind_117_pointer
+                        seq {
+                          nop
+                          cleanup_panic_check {
+nop                          }
+                        }
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5fis_x5factive (%__bind_117_pointer)
+                        check_op ExpiredDeref addr_active EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe$tmp$addr_active
+                        seq {
+                          nop
+                          cleanup_panic_check {
+nop                          }
+                        }
+                        load_ptr %__bind_117_pointer
+                      }
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe$tmp$if_case_clause_result_641 = EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe$tmp$deref
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe$tmp$if_case_clause_result_641
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_117_value
+          }
+          nop
+          if_case %__bind_117_value {
+            case_clause {
+              pat @Empty
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$if_case_clause_result_645 = 0x0
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$if_case_clause_result_645
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat @Small {value: small_value}
+              body {
+seq {
+                  nop
+                  nop
+                  bind %small_value = EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$pat_modal_field
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_118_small_value
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$if_case_clause_result_647 = %__bind_118_small_value
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$if_case_clause_result_647
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat @Wide {left, right}
+              body {
+seq {
+                  nop
+                  nop
+                  seq {
+                    bind %left = EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$pat_modal_field
+                    bind %right = EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$pat_modal_field
+                  }
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_118_left
+                        }
+                        check_cast %__bind_118_left to i32
+                        seq {
+                          nop
+                          cleanup_panic_check {
+nop                          }
+                        }
+                        cast %__bind_118_left to i32
+                      }
+                      seq {
+                        nop
+                        read %__bind_119_right
+                      }
+                      check_op Overflow + EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$cast, %__bind_119_right
+                      seq {
+                        nop
+                        cleanup_panic_check {
+nop                        }
+                      }
+                      binop + EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$cast, %__bind_119_right
+                    }
+                    nop
+                  }
+                  bind %EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$if_case_clause_result_652 = EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$binop
+                }              }
+              value %EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$if_case_clause_result_652
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNicheModalWidenProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_118_pointer
+          }
+          bind %present = EmitLlLibrary_x3a_x3aemitLlNicheModalWidenProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_119_present
+            }
+            unop widen %__bind_119_present
+          }
+          bind %general = EmitLlLibrary_x3a_x3aemitLlNicheModalWidenProbe$tmp$unop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlNicheModalLayoutProbe
+            }
+            seq {
+              nop
+              addr_of general
+            }
+            call @EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlNicheModalWidenProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlNicheModalWidenProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlNicheModalWidenProbe$tmp$call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNicheModalAbsentWidenProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %absent = EmitLlLibrary_x3a_x3aemitLlNicheModalAbsentWidenProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_121_absent
+            }
+            unop widen %__bind_121_absent
+          }
+          bind %general = EmitLlLibrary_x3a_x3aemitLlNicheModalAbsentWidenProbe$tmp$unop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlNicheModalLayoutProbe
+            }
+            seq {
+              nop
+              addr_of general
+            }
+            call @EmitLlLibrary_x3a_x3aemitLlNicheModalLayoutProbe (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlNicheModalAbsentWidenProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlNicheModalAbsentWidenProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlNicheModalAbsentWidenProbe$tmp$call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlTaggedModalWidenProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %wide = EmitLlLibrary_x3a_x3aemitLlTaggedModalWidenProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_123_wide
+            }
+            unop widen %__bind_123_wide
+          }
+          bind %general = EmitLlLibrary_x3a_x3aemitLlTaggedModalWidenProbe$tmp$unop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlTaggedModalLayoutProbe
+            }
+            seq {
+              nop
+              addr_of general
+            }
+            call @EmitLlLibrary_x3a_x3aemitLlTaggedModalLayoutProbe (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlTaggedModalWidenProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlTaggedModalWidenProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlTaggedModalWidenProbe$tmp$call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %small_for_read = EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of small_for_read
+            nop
+            call @EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3areadValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %read_value = EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$method_call
+          nop
+        }
+        seq {
+          nop
+          bind %small_for_transition = EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            seq {
+              seq {
+                nop
+                read %small_for_transition
+              }
+              move_state small_for_transition
+            }
+            seq {
+              nop
+              addr_of read_value
+            }
+            call @EmitLlLibrary_x3a_x3aEmitLlTaggedModal_x3a_x3aSmall_x3a_x3afinishWide (%small_for_transition, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %wide = EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %wide
+              }
+              nop
+            }
+            move_state wide.right
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlModalMethodAndTransitionParamsProbe$tmp$place_field
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlDynamicTypeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x10
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe {
+  seq {
+    nop
+    block seq {
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fenter (0xCE)
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_130_value
+          }
+          bind %owner = EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            addr_of owner
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5ftag_x5fscope (addr_of, 0xCE)
+          }
+          bind %dynamic_owner = EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$dyn
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_133_dynamic_owner
+              }
+              nop
+              seq {
+                call_vtable %__bind_133_dynamic_owner [0] check_dynamic_receiver_addr_active (%__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$panic_flag_ptr
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+            }
+            seq {
+              seq {
+                nop
+                read %__bind_133_dynamic_owner
+              }
+              seq {
+                nop
+                addr_of delta
+              }
+              seq {
+                call_vtable %__bind_133_dynamic_owner [1] check_dynamic_receiver_addr_active (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$panic_flag_ptr
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+            }
+            check_op Overflow + EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$dyncall_result, EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$dyncall_result
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop + EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$dyncall_result, EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$dyncall_result
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlDynamicDispatchProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fexit (0xCE)
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlDynamicDefaultDispatchProbe {
+  seq {
+    nop
+    block seq {
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fenter (0xD0)
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_134_value
+          }
+          bind %owner = EmitLlLibrary_x3a_x3aemitLlDynamicDefaultDispatchProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            addr_of owner
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5ftag_x5fscope (addr_of, 0xD0)
+          }
+          bind %dynamic_owner = EmitLlLibrary_x3a_x3aemitLlDynamicDefaultDispatchProbe$tmp$dyn
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_136_dynamic_owner
+            }
+            nop
+            seq {
+              call_vtable %__bind_136_dynamic_owner [0] check_dynamic_receiver_addr_active (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr EmitLlLibrary_x3a_x3aemitLlDynamicDefaultDispatchProbe$tmp$panic_flag_ptr
+                      load_ptr EmitLlLibrary_x3a_x3aemitLlDynamicDefaultDispatchProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlDynamicDefaultDispatchProbe$tmp$dyncall_result
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fexit (0xD0)
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_137_value
+          }
+          bind %left = EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_137_value
+          }
+          bind %right = EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$record
+          nop
+        }
+        seq {
+          nop
+          bind %first_hasher_owner = EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$record
+          nop
+        }
+        seq {
+          nop
+          bind %second_hasher_owner = EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$record
+          nop
+        }
+        seq {
+          nop
+          addr_of left
+          seq {
+            nop
+            addr_of first_hasher_owner
+          }
+          call @EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3ahash (addr_of, addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+seq {
+                seq {
+                  load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_flag_ptr
+                  load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_code_ptr
+                }
+                nop
+                nop
+              }            }
+          }
+        }
+        seq {
+          nop
+          addr_of right
+          seq {
+            nop
+            addr_of second_hasher_owner
+          }
+          call @EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3ahash (addr_of, addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+seq {
+                seq {
+                  load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_flag_ptr
+                  load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_code_ptr
+                }
+                nop
+                nop
+              }            }
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              addr_of left
+              seq {
+                nop
+                addr_of right
+              }
+              call @EmitLlLibrary_x3a_x3aEmitLlHashLawValue_x3a_x3aeq (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_flag_ptr
+                      load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+            if EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$method_call then seq {
+              seq {
+                nop
+                addr_of first_hasher_owner
+                nop
+                call @EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3afinish (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_flag_ptr
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              seq {
+                nop
+                addr_of second_hasher_owner
+                nop
+                call @EmitLlLibrary_x3a_x3aEmitLlFnvHasher_x3a_x3afinish (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_flag_ptr
+                        load_ptr EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              binop == EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$method_call, EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$method_call
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlHashRequiresEqProbe$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlFoundationalEqIntrinsicProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_142_left
+          }
+          seq {
+            nop
+            read %__bind_143_right
+          }
+          call @ultraviolet_x3a_x3aintrinsic_x3a_x3aeq_x3a_x3aeq (%__bind_142_left, %__bind_143_right)
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlFoundationalEqIntrinsicProbe$tmp$method_call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_144_value
+            }
+            nop
+            call @ultraviolet_x3a_x3aintrinsic_x3a_x3adiscrete_x3a_x3asuccessor (%__bind_144_value)
+          }
+          bind %successor = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_144_value
+            }
+            nop
+            call @ultraviolet_x3a_x3aintrinsic_x3a_x3adiscrete_x3a_x3apredecessor (%__bind_144_value)
+          }
+          bind %predecessor = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_145_successor
+            }
+            nop
+            if_case %__bind_145_successor {
+              case_clause {
+                pat next_value
+                body {
+seq {
+                    nop
+                    nop
+                    bind %next_value = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$pat_union_payload
+                    bind %successor = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$ifcase_scrutinee_payload
+                    block seq {
+                      nop
+                      nop
+                    } seq {
+                      seq {
+                        nop
+                        read %__bind_147_next_value
+                      }
+                      nop
+                    }
+                    bind %EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$if_case_clause_result_845 = %__bind_147_next_value
+                  }                }
+                value %EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$if_case_clause_result_845
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+              case_clause {
+                pat empty_value
+                body {
+seq {
+                    nop
+                    nop
+                    bind %empty_value = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$pat_union_payload
+                    bind %successor = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$ifcase_scrutinee_payload
+                    block seq {
+                      nop
+                      nop
+                    } seq {
+                      seq {
+                        nop
+                        read %__bind_144_value
+                      }
+                      nop
+                    }
+                    bind %EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$if_case_clause_result_848 = %__bind_144_value
+                  }                }
+                value %EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$if_case_clause_result_848
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+            }
+          }
+          bind %successor_value = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$ifcase
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_146_predecessor
+            }
+            nop
+            if_case %__bind_146_predecessor {
+              case_clause {
+                pat previous_value
+                body {
+seq {
+                    nop
+                    nop
+                    bind %previous_value = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$pat_union_payload
+                    bind %predecessor = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$ifcase_scrutinee_payload
+                    block seq {
+                      nop
+                      nop
+                    } seq {
+                      seq {
+                        nop
+                        read %__bind_148_previous_value
+                      }
+                      nop
+                    }
+                    bind %EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$if_case_clause_result_852 = %__bind_148_previous_value
+                  }                }
+                value %EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$if_case_clause_result_852
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+              case_clause {
+                pat empty_value
+                body {
+seq {
+                    nop
+                    nop
+                    bind %empty_value = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$pat_union_payload
+                    bind %predecessor = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$ifcase_scrutinee_payload
+                    block seq {
+                      nop
+                      nop
+                    } seq {
+                      seq {
+                        nop
+                        read %__bind_144_value
+                      }
+                      nop
+                    }
+                    bind %EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$if_case_clause_result_855 = %__bind_144_value
+                  }                }
+                value %EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$if_case_clause_result_855
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+            }
+          }
+          bind %predecessor_value = EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$ifcase
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_147_successor_value
+            }
+            seq {
+              nop
+              read %__bind_148_predecessor_value
+            }
+            check_op Overflow - %__bind_147_successor_value, %__bind_148_predecessor_value
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop - %__bind_147_successor_value, %__bind_148_predecessor_value
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlFoundationalDiscreteIntrinsicProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlFirstFieldByNameProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_149_value
+          }
+          bind %owner = EmitLlLibrary_x3a_x3aemitLlFirstFieldByNameProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of owner
+            nop
+            call @default_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlFirstFieldOwner_x3a_x3acl_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlFirstFieldSelection_x3a_x3aselectedFirstField (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlFirstFieldByNameProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlFirstFieldByNameProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlFirstFieldByNameProbe$tmp$method_call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlUnknownPointerAttrsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlValidPointerAttrsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlConstPointerArgAttrsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlUniquePointerArgAttrsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityArgumentProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlConstPointerArgAttrsProbe
+            }
+            seq {
+              nop
+              addr_of pointer
+            }
+            call @EmitLlLibrary_x3a_x3aemitLlConstPointerArgAttrsProbe (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %const_size = EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityArgumentProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlUniquePointerArgAttrsProbe
+            }
+            seq {
+              nop
+              addr_of pointer
+            }
+            call @EmitLlLibrary_x3a_x3aemitLlUniquePointerArgAttrsProbe (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityArgumentProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityArgumentProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %unique_size = EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityArgumentProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_156_const_size
+            }
+            seq {
+              nop
+              read %__bind_157_unique_size
+            }
+            check_op Overflow + %__bind_156_const_size, %__bind_157_unique_size
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityArgumentProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityArgumentProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop + %__bind_156_const_size, %__bind_157_unique_size
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlPermissionAdmissibilityArgumentProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRawPointerAttrsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @uv_emit_ll_raw_pointer_foreign_attrs_probe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSelectedOverload_x3a_x3a_x24overload_x3a_x3a0 {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_160_value
+          }
+          nop
+          check_op Overflow + %__bind_160_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_160_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlSelectedOverload_x3a_x3a_x24overload_x3a_x3a0$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSelectedOverload_x3a_x3a_x24overload_x3a_x3a1 {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_161_value
+          }
+          nop
+          if %__bind_161_value then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0xD
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNoRuntimeOverloadSearchProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            seq {
+              nop
+              addr_of value
+            }
+            call @EmitLlLibrary_x3a_x3aemitLlSelectedOverload_x3a_x3a_x24overload_x3a_x3a0 (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          seq {
+            nop
+            seq {
+              nop
+              seq {
+                nop
+                bind %EmitLlLibrary_x3a_x3aemitLlNoRuntimeOverloadSearchProbe$tmp$call_ref_tmp_925 = 0x1
+                addr_of EmitLlLibrary_x3a_x3aemitLlNoRuntimeOverloadSearchProbe$tmp$call_ref_tmp_925
+              }
+            }
+            call @EmitLlLibrary_x3a_x3aemitLlSelectedOverload_x3a_x3a_x24overload_x3a_x3a1 (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          check_op Overflow + EmitLlLibrary_x3a_x3aemitLlNoRuntimeOverloadSearchProbe$tmp$call, EmitLlLibrary_x3a_x3aemitLlNoRuntimeOverloadSearchProbe$tmp$call
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + EmitLlLibrary_x3a_x3aemitLlNoRuntimeOverloadSearchProbe$tmp$call, EmitLlLibrary_x3a_x3aemitLlNoRuntimeOverloadSearchProbe$tmp$call
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlNoRuntimeOverloadSearchProbe$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlLoopInvariantRuntimeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %index = 0x0
+          nop
+        }
+        seq {
+          loop while {
+            cond_ir seq {
+              seq {
+                nop
+                read %__bind_165_index
+              }
+              seq {
+                nop
+                read %__bind_164_limit
+              }
+              binop < %__bind_165_index, %__bind_164_limit
+            }
+            cond_value EmitLlLibrary_x3a_x3aemitLlLoopInvariantRuntimeProbe$tmp$binop
+            body block seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      nop
+                      read %__bind_165_index
+                    }
+                    nop
+                    check_op Overflow + %__bind_165_index, 0x1
+                    seq {
+                      nop
+                      cleanup_panic_check {
+nop                      }
+                    }
+                    binop + %__bind_165_index, 0x1
+                  }
+                  seq {
+                    nop
+                    store %index = EmitLlLibrary_x3a_x3aemitLlLoopInvariantRuntimeProbe$tmp$binop
+                  }
+                }
+                seq {
+                  nop
+                  nop
+                }
+              }
+            } seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_165_index
+                  }
+                  nop
+                  binop < %__bind_165_index, 0x2
+                }
+                seq {
+                  nop
+                  nop
+                }
+                if EmitLlLibrary_x3a_x3aemitLlLoopInvariantRuntimeProbe$tmp$binop then block seq {
+                  nop
+                  seq {
+                    nop
+                    continue
+                  }
+                } seq {
+                  nop
+                  nop
+                } else nop
+              }
+              nop
+            }
+            invariant_entry seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_165_index
+                }
+                nop
+                binop >= %__bind_165_index, 0x0
+              }
+              if EmitLlLibrary_x3a_x3aemitLlLoopInvariantRuntimeProbe$tmp$binop then nop else seq {
+                nop
+                panic ContractViolation(LoopInv,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:753:29-753:39),s=/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:753:29-753:39)
+              }
+            }
+            invariant_backedge seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_165_index
+                }
+                nop
+                binop >= %__bind_165_index, 0x0
+              }
+              if EmitLlLibrary_x3a_x3aemitLlLoopInvariantRuntimeProbe$tmp$binop then nop else seq {
+                nop
+                panic ContractViolation(LoopInv,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:753:29-753:39),s=/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:753:29-753:39)
+              }
+            }
+            body_value EmitLlLibrary_x3a_x3aemitLlLoopInvariantRuntimeProbe$tmp$if
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_165_index
+          }
+          nop
+          nop
+          ret %__bind_165_index
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe {
+  seq {
+    nop
+    seq {
+      seq {
+        seq {
+          nop
+          read %__bind_166_value
+        }
+        nop
+        binop >= %__bind_166_value, 0x0
+      }
+      if EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe$tmp$binop then nop else seq {
+        nop
+        panic ContractViolation(Pre,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:764:4-764:14),s=/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:764:4-764:14)
+      }
+    }
+    bind %EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe$tmp$contract_param_entry_953 = %value
+    seq {
+      seq {
+        nop
+        read %__bind_166_value
+      }
+      bind %__uv_entry_capture_0 = %__bind_166_value
+    }
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_166_value
+          }
+          nop
+          check_op Overflow + %__bind_166_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_166_value, 0x1
+        }
+        bind %EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe$tmp$return_snapshot_956 = EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe$tmp$binop
+        nop
+        seq {
+          seq {
+            nop
+            seq {
+              nop
+              nop
+              check_op Overflow + %__uv_entry_capture_0, 0x1
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+              binop + %__uv_entry_capture_0, 0x1
+            }
+            binop == %EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe$tmp$return_snapshot_956, EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe$tmp$binop
+          }
+          if EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe$tmp$binop then nop else seq {
+            nop
+            panic ContractViolation(Post,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:764:18-764:46),s=/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:764:18-764:46)
+          }
+        }
+        seq {
+          nop
+          nop
+          nop
+          nop
+          nop
+        }
+        nop
+        ret %EmitLlLibrary_x3a_x3aemitLlDynamicProcedureContractProbe$tmp$return_snapshot_956
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+extern_proc @emitLlDynamicForeignContract "C"
+
+extern_proc @emitLlNullableForeignContract "C"
+
+extern_proc @emitLlStaticForeignContract "C"
+
+extern_proc @emitLlUnwindAbortImport "C-unwind"
+
+extern_proc @emitLlUnwindCatchImport "C-unwind"
+
+proc @EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          nop
+        } seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlDynamicForeignContract
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  nop
+                  read %__bind_170_value
+                }
+                bind %EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$call_move_tmp_962 = %__bind_170_value
+                addr_of EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$call_move_tmp_962
+              }
+            }
+            seq {
+              seq {
+                nop
+                nop
+                binop >= addr_of, 0x0
+              }
+              unop ! EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$binop
+              if EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$foreign_pre_not then seq {
+                nop
+                panic ContractViolation(ForeignPre,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:772:29-772:39),s=/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:772:29-772:39)
+              } else nop
+            }
+            call @emitLlDynamicForeignContract (addr_of)
+            seq {
+              unop ! 0x0
+              seq {
+                nop
+                nop
+                binop >= EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$call, 0x0
+              }
+              unop ! EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$binop
+              binop && EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$foreign_success_cond, EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$foreign_post_not
+              if EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$foreign_post_fail then seq {
+                nop
+                panic ContractViolation(ForeignPost,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:773:29-773:41),s=/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:773:29-773:41)
+              } else nop
+            }
+          }
+          nop
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlDynamicForeignContractProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          nop
+        } seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlNullableForeignContract
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  nop
+                  read %__bind_172_value
+                }
+                bind %EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$call_move_tmp_976 = %__bind_172_value
+                addr_of EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$call_move_tmp_976
+              }
+            }
+            call @emitLlNullableForeignContract (addr_of)
+            seq {
+              unop ! 0x0
+              binop == EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$call, null
+              seq {
+                nop
+                nop
+                binop == EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$call, 0x0
+              }
+              unop ! EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$binop
+              binop && EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$foreign_null_cond, EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$foreign_null_post_not
+              if EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$foreign_null_post_fail then seq {
+                nop
+                panic ContractViolation(ForeignPost,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:777:43-777:58),s=/w/target/fixtures/Fixtures/ArtifactProjects/EmitLlLibrary/Source/Library.uv:777:43-777:58)
+              } else nop
+            }
+          }
+          nop
+        }
+        nop
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlNullableForeignContractProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlStaticForeignContractProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              seq {
+                nop
+                read @EmitLlLibrary::emitLlStaticForeignContract
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %EmitLlLibrary_x3a_x3aemitLlStaticForeignContractProbe$tmp$call_move_tmp_988 = 0x1
+                  addr_of EmitLlLibrary_x3a_x3aemitLlStaticForeignContractProbe$tmp$call_move_tmp_988
+                }
+              }
+              call @emitLlStaticForeignContract (addr_of)
+            }
+            nop
+          }
+          bind %result = EmitLlLibrary_x3a_x3aemitLlStaticForeignContractProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_175_result
+          }
+          bind %refined = %__bind_175_result
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_176_refined
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret %__bind_176_refined
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlUnwindAbortImportProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          nop
+        } seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlUnwindAbortImport
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  nop
+                  read %__bind_177_value
+                }
+                bind %EmitLlLibrary_x3a_x3aemitLlUnwindAbortImportProbe$tmp$call_move_tmp_998 = %__bind_177_value
+                addr_of EmitLlLibrary_x3a_x3aemitLlUnwindAbortImportProbe$tmp$call_move_tmp_998
+              }
+            }
+            call @emitLlUnwindAbortImport (addr_of)
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlUnwindAbortImportProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlUnwindCatchImportProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          nop
+        } seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlUnwindCatchImport
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  nop
+                  read %__bind_179_value
+                }
+                bind %EmitLlLibrary_x3a_x3aemitLlUnwindCatchImportProbe$tmp$call_move_tmp_1002 = %__bind_179_value
+                addr_of EmitLlLibrary_x3a_x3aemitLlUnwindCatchImportProbe$tmp$call_move_tmp_1002
+              }
+            }
+            call @emitLlUnwindCatchImport (addr_of)
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlUnwindCatchImportProbe$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @uv_emit_ll_unwind_abort_export_probe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %values = uv_emit_ll_unwind_abort_export_probe$tmp$array
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of values
+              seq {
+                nop
+                read %__bind_181_index
+              }
+              nop
+              check_index addr_of, %__bind_181_index
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr uv_emit_ll_unwind_abort_export_probe$tmp$panic_flag_ptr
+                      load_ptr uv_emit_ll_unwind_abort_export_probe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+            move_state values[?]
+          }
+          nop
+          nop
+          ret uv_emit_ll_unwind_abort_export_probe$tmp$place_index_elem
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @uv_emit_ll_unwind_catch_export_probe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %values = uv_emit_ll_unwind_catch_export_probe$tmp$array
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of values
+              seq {
+                nop
+                read %__bind_183_index
+              }
+              nop
+              check_index addr_of, %__bind_183_index
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr uv_emit_ll_unwind_catch_export_probe$tmp$panic_flag_ptr
+                      load_ptr uv_emit_ll_unwind_catch_export_probe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+            move_state values[?]
+          }
+          nop
+          nop
+          ret uv_emit_ll_unwind_catch_export_probe$tmp$place_index_elem
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @uv_emit_ll_foreign_byref_record_probe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_185_payload
+          }
+          nop
+        }
+        nop
+        nop
+        ret uv_emit_ll_foreign_byref_record_probe$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @uv_emit_ll_dropping_by_value_probe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x1F
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @uv_emit_ll_generic_ffi_box_probe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_187_payload
+          }
+          nop
+        }
+        nop
+        nop
+        ret uv_emit_ll_generic_ffi_box_probe$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @uv_emit_ll_raw_catch_return_probe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_188_value
+        }
+        nop
+        nop
+        ret %__bind_188_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlNullPointerConstructorProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x0
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlExpiredPointerConstructorProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_189_pointer
+        }
+        nop
+        nop
+        ret %__bind_189_pointer
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSafePointerReadProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_190_pointer
+          }
+          seq {
+            check_op NullDeref nonnull %__bind_190_pointer
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5fis_x5factive (%__bind_190_pointer)
+            check_op ExpiredDeref addr_active EmitLlLibrary_x3a_x3aemitLlSafePointerReadProbe$tmp$addr_active
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            load_ptr %__bind_190_pointer
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlSafePointerReadProbe$tmp$deref
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSafePointerWriteProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_192_value
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_191_pointer
+            }
+            check_op NullDeref nonnull %__bind_191_pointer
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5fis_x5factive (%__bind_191_pointer)
+            check_op ExpiredDeref addr_active EmitLlLibrary_x3a_x3aemitLlSafePointerWriteProbe$tmp$addr_active
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            store_ptr %__bind_191_pointer = %__bind_192_value
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_192_value
+          }
+          nop
+          nop
+          ret %__bind_192_value
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSafePointerNullReadProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_193_pointer
+          }
+          seq {
+            check_op NullDeref nonnull %__bind_193_pointer
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5fis_x5factive (%__bind_193_pointer)
+            check_op ExpiredDeref addr_active EmitLlLibrary_x3a_x3aemitLlSafePointerNullReadProbe$tmp$addr_active
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            load_ptr %__bind_193_pointer
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlSafePointerNullReadProbe$tmp$deref
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSafePointerNullWriteProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_195_value
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_194_pointer
+            }
+            check_op NullDeref nonnull %__bind_194_pointer
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5fis_x5factive (%__bind_194_pointer)
+            check_op ExpiredDeref addr_active EmitLlLibrary_x3a_x3aemitLlSafePointerNullWriteProbe$tmp$addr_active
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            store_ptr %__bind_194_pointer = %__bind_195_value
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_195_value
+          }
+          nop
+          nop
+          ret %__bind_195_value
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRawPointerReadProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          nop
+        } seq {
+          seq {
+            seq {
+              nop
+              read %__bind_196_pointer
+            }
+            seq {
+              check_op NullDeref nonnull %__bind_196_pointer
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+              load_ptr %__bind_196_pointer
+            }
+          }
+          nop
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlRawPointerReadProbe$tmp$deref
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRawPointerWriteProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          seq {
+            seq {
+              nop
+              read %__bind_198_value
+            }
+            seq {
+              seq {
+                nop
+                read %__bind_197_pointer
+              }
+              check_op NullDeref nonnull %__bind_197_pointer
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+              store_ptr %__bind_197_pointer = %__bind_198_value
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_198_value
+          }
+          nop
+          nop
+          ret %__bind_198_value
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlConstFunctionArgAttrsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSRetPair {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_200_left
+          }
+          seq {
+            nop
+            read %__bind_201_right
+          }
+        }
+        nop
+        nop
+        ret EmitLlLibrary_x3a_x3aemitLlSRetPair$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @EmitLlLibrary::emitLlSRetPair
+            }
+            seq {
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call_ref_tmp_1055 = 0x544552532D4D564C4C2D5655482D45
+                  addr_of EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call_ref_tmp_1055
+                }
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call_ref_tmp_1058 = 0x7372747441746552536C6C61434D564C4C2E34322E6E6F6973736572676572
+                  addr_of EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call_ref_tmp_1058
+                }
+              }
+            }
+            call @EmitLlLibrary_x3a_x3aemitLlSRetPair (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %pair = EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              read @string::length
+              seq {
+                nop
+                seq {
+                  addr_of pair
+                  addr_of pair.left
+                  nop
+                }
+              }
+              call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+            }
+            seq {
+              read @string::length
+              seq {
+                nop
+                seq {
+                  addr_of pair
+                  addr_of pair.right
+                  nop
+                }
+              }
+              call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+            }
+            check_op Overflow + EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call, EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$panic_flag_ptr
+                    load_ptr EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop + EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call, EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$call
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret EmitLlLibrary_x3a_x3aemitLlSRetCallSiteProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.io
+              nop
+            }
+            seq {
+              nop
+              addr_of path
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3acreate_x5fwrite (addr_of, addr_of)
+          }
+          bind %created = EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %created
+              }
+              move_state created
+            }
+            nop
+            if_case %created {
+              case_clause {
+                pat <pattern>
+                body {
+seq {
+                    nop
+                    nop
+                    bind %value = EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe$tmp$pat_enum_payload_elem
+                    nop
+                    block seq {
+                      nop
+                      seq {
+                        seq {
+                          seq {
+                            nop
+                            seq {
+                              seq {
+                                nop
+                                read %value
+                              }
+                              move_state value
+                            }
+                            nop
+                            call @File_x3a_x3aWrite_x3a_x3aclose (%value)
+                          }
+                          bind %closed = EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe$tmp$method_call
+                          nop
+                        }
+                        seq {
+                          seq {
+                            nop
+                            read %__bind_209_closed
+                          }
+                          nop
+                          nop
+                        }
+                      }
+                    } seq {
+                      nop
+                      seq {
+                        nop
+                        nop
+                      }
+                    }
+                    bind %EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe$tmp$if_case_clause_result_1090 = 0x1
+                  }                }
+                value %EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe$tmp$if_case_clause_result_1090
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+              case_clause {
+                pat <pattern>
+                body {
+seq {
+                    nop
+                    nop
+                    nop
+                    nop
+                    block seq {
+                      nop
+                      nop
+                    } seq {
+                      nop
+                      nop
+                    }
+                    bind %EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe$tmp$if_case_clause_result_1093 = 0x0
+                  }                }
+                value %EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe$tmp$if_case_clause_result_1093
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+            }
+          }
+          nop
+          nop
+          ret EmitLlLibrary_x3a_x3aemitLlRuntimeCreateWriteCarrierProbe$tmp$ifcase
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aEmitLlLibrary {
+  seq {
+    seq {
+      seq {
+        nop
+        nop
+      }
+      store @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fSTATIC_x5fCLEANUP_x5fPROBE = record
+      seq {
+        nop
+        init_panic_handle EmitLlLibrary [EmitLlLibrary] cleanup
+      }
+    }
+    seq {
+      nop
+      store @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fCONST_x5fBYTES_x5fINT = 0x49
+      seq {
+        nop
+        init_panic_handle EmitLlLibrary [EmitLlLibrary] cleanup
+      }
+    }
+    seq {
+      nop
+      store @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fCONST_x5fBYTES_x5fFLOAT = 0x4019000000000000
+      seq {
+        nop
+        init_panic_handle EmitLlLibrary [EmitLlLibrary] cleanup
+      }
+    }
+    seq {
+      nop
+      store @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fCONST_x5fBYTES_x5fNULL = 0x0
+      seq {
+        nop
+        init_panic_handle EmitLlLibrary [EmitLlLibrary] cleanup
+      }
+    }
+    seq {
+      nop
+      store @EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fCONST_x5fBYTES_x5fUNIT = unit
+      seq {
+        nop
+        init_panic_handle EmitLlLibrary [EmitLlLibrary] cleanup
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aEmitLlLibrary {
+  seq {
+    nop
+    nop
+    nop
+    nop
+    call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlCleanupProbe (@EmitLlLibrary_x3a_x3aEMIT_x5fLL_x5fSTATIC_x5fCLEANUP_x5fPROBE, %__panic)
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlCleanupProbe {
+  call @EmitLlLibrary_x3a_x3aEmitLlCleanupProbe_x3a_x3adrop (drop_data, %__panic)
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlDynamicDefaultOwner {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aEmitLlLibrary_x3a_x3aEmitLlDynamicOwner {
+  nop
+}
+
+

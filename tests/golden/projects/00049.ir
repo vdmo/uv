@@ -1,0 +1,120 @@
+proc @RefinementRuntimePanic_x3a_x3arefinementRuntimePanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_1_value
+              }
+              seq {
+                seq {
+                  nop
+                  nop
+                  binop > %__bind_1_value, 0x0
+                }
+                if RefinementRuntimePanic_x3a_x3arefinementRuntimePanicValue$tmp$binop then nop else seq {
+                  nop
+                  panic ContractViolation(TypeInv,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Source/Main.uv:3:43-3:51),s=/w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Source/Main.uv:7:45-7:50)
+                }
+              }
+            }
+            bind %refined_value = %__bind_1_value
+            seq {
+              seq {
+                nop
+                nop
+                binop > %refined_value, 0x0
+              }
+              if RefinementRuntimePanic_x3a_x3arefinementRuntimePanicValue$tmp$binop then nop else seq {
+                nop
+                panic ContractViolation(TypeInv,P=span(/w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Source/Main.uv:3:43-3:51),s=/w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Source/Main.uv:7:45-7:50)
+              }
+            }
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_2_refined_value
+          }
+          nop
+          nop
+          ret %__bind_2_refined_value
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RefinementRuntimePanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_3_context
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RefinementRuntimePanic::refinementRuntimePanicValue
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %RefinementRuntimePanic_x3a_x3amain$tmp$call_ref_tmp_8 = 0x0
+                addr_of RefinementRuntimePanic_x3a_x3amain$tmp$call_ref_tmp_8
+              }
+            }
+            call @RefinementRuntimePanic_x3a_x3arefinementRuntimePanicValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret RefinementRuntimePanic_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aRefinementRuntimePanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aRefinementRuntimePanic {
+  nop
+}
+
+

@@ -1,0 +1,95 @@
+proc @RawPointerNullReadPanic_x3a_x3arawPointerNullReadPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          nop
+        } seq {
+          seq {
+            seq {
+              nop
+              read %__bind_1_pointer
+            }
+            seq {
+              check_op NullDeref nonnull %__bind_1_pointer
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+              load_ptr %__bind_1_pointer
+            }
+          }
+          nop
+        }
+        nop
+        nop
+        ret RawPointerNullReadPanic_x3a_x3arawPointerNullReadPanicValue$tmp$deref
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RawPointerNullReadPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_2_context
+          }
+          nop
+          nop
+        }
+        seq {
+          nop
+          bind %pointer = 0x0
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RawPointerNullReadPanic::rawPointerNullReadPanicValue
+            }
+            seq {
+              nop
+              addr_of pointer
+            }
+            call @RawPointerNullReadPanic_x3a_x3arawPointerNullReadPanicValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret RawPointerNullReadPanic_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aRawPointerNullReadPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aRawPointerNullReadPanic {
+  nop
+}
+
+

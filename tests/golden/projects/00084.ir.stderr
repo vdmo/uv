@@ -1,0 +1,6 @@
+warning[W-CON-0140]: Dynamic key pattern; runtime serialization (`Dispatch-DynamicKey-Warn`)
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Parallelism/DispatchDynamicKeyWarning/Source/Main.uv:9:42
+9 |         dispatch index in 0usize..4usize {
+9 |                                          
+
+1 warning emitted

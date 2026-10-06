@@ -1,0 +1,108 @@
+proc @AsyncLargeCaptureWarningEmission_x3a_x3aacceptsLargeAsyncPayload {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        async_complete value: 0x1 -> AsyncLargeCaptureWarningEmission_x3a_x3aacceptsLargeAsyncPayload$tmp$async_result
+        nop
+        nop
+        ret AsyncLargeCaptureWarningEmission_x3a_x3aacceptsLargeAsyncPayload$tmp$async_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AsyncLargeCaptureWarningEmission_x3a_x3aacceptsLargeAsyncPayload$resume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        async_complete value: 0x1 -> AsyncLargeCaptureWarningEmission_x3a_x3aacceptsLargeAsyncPayload$tmp$async_result
+        nop
+        nop
+        ret AsyncLargeCaptureWarningEmission_x3a_x3aacceptsLargeAsyncPayload$tmp$async_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AsyncLargeCaptureWarningEmission_x3a_x3aasyncLargeCaptureWarningEmissionReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %payload = AsyncLargeCaptureWarningEmission_x3a_x3aasyncLargeCaptureWarningEmissionReference$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @AsyncLargeCaptureWarningEmission::acceptsLargeAsyncPayload
+            }
+            seq {
+              nop
+              addr_of payload
+            }
+            call @AsyncLargeCaptureWarningEmission_x3a_x3aacceptsLargeAsyncPayload (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr AsyncLargeCaptureWarningEmission_x3a_x3aasyncLargeCaptureWarningEmissionReference$tmp$panic_flag_ptr
+                    load_ptr AsyncLargeCaptureWarningEmission_x3a_x3aasyncLargeCaptureWarningEmissionReference$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %operation = AsyncLargeCaptureWarningEmission_x3a_x3aasyncLargeCaptureWarningEmissionReference$tmp$call
+          nop
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aAsyncLargeCaptureWarningEmission {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aAsyncLargeCaptureWarningEmission {
+  nop
+}
+
+

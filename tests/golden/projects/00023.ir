@@ -1,0 +1,105 @@
+proc @CastPanic_x3a_x3acastPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_value
+          }
+          check_cast %__bind_1_value to char
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          cast %__bind_1_value to char
+        }
+        nop
+        nop
+        ret CastPanic_x3a_x3acastPanicValue$tmp$cast
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @CastPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_2_context
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @CastPanic::castPanicValue
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %CastPanic_x3a_x3amain$tmp$call_ref_tmp_3 = 0x110000
+                addr_of CastPanic_x3a_x3amain$tmp$call_ref_tmp_3
+              }
+            }
+            call @CastPanic_x3a_x3acastPanicValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %invalid = CastPanic_x3a_x3amain$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_4_invalid
+          }
+          nop
+          nop
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aCastPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aCastPanic {
+  nop
+}
+
+

@@ -1,0 +1,163 @@
+proc @ReducedEmptyDispatchPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                addr_of context
+                nop
+                call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3acpu (addr_of)
+              }
+              parallel {
+                domain: ReducedEmptyDispatchPanic_x3a_x3amain$tmp$method_call
+                body:
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        nop
+                      }
+                      dispatch {
+                        range: ReducedEmptyDispatchPanic_x3a_x3amain$tmp$range
+                        workgroup_size: ReducedEmptyDispatchPanic_x3a_x3amain$tmp$dispatch_workgroup
+                        reduce_op: +
+                        body:
+                          nop
+                        body_result: ReducedEmptyDispatchPanic_x3a_x3amain$tmp$unit
+                        result: ReducedEmptyDispatchPanic_x3a_x3amain$tmp$dispatch_result
+                      }
+                    }
+                    nop
+                  }
+              }
+              seq {
+                nop
+                nop
+                clear_panic
+                seq {
+                  call @uv_parallel_join (ReducedEmptyDispatchPanic_x3a_x3amain$tmp$parallel_join)
+                  binop != ReducedEmptyDispatchPanic_x3a_x3amain$tmp$parallel_join_status, 0x0
+                  if ReducedEmptyDispatchPanic_x3a_x3amain$tmp$parallel_join_panicked then seq {
+                    store_ptr ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_flag_ptr = 0x1
+                    store_ptr ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_code_ptr = ReducedEmptyDispatchPanic_x3a_x3amain$tmp$parallel_join_status
+                  } else nop
+                }
+                seq {
+                  load_ptr ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_flag_ptr
+                  load_ptr ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_code_ptr
+                }
+                binop && 0x0, ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_flag
+                if ReducedEmptyDispatchPanic_x3a_x3amain$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_code) else nop
+                unop ! ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_flag
+                binop && 0x0, ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_clear
+                if ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_restore then seq {
+                  store_ptr ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_flag_ptr = 0x1
+                  store_ptr ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_code_ptr = 0x0
+                } else nop
+                binop || 0x0, ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_flag
+                if ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_flag then nop else nop
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            bind %value = ReducedEmptyDispatchPanic_x3a_x3amain$tmp$dispatch_result
+            nop
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %value
+            }
+            move_state value
+          }
+          nop
+          nop
+          ret %value
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @__cx_dispatch_body_ReducedEmptyDispatchPanic_0 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (ReducedEmptyDispatchPanic_x3a_x3amain$tmp$record_ctor)
+      bind %region$0 = ReducedEmptyDispatchPanic_x3a_x3amain$tmp$synthetic_proc_region
+    }
+    load_ptr %__bind_3_elem
+    bind %index = ReducedEmptyDispatchPanic_x3a_x3amain$tmp$dispatch_elem
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_8_index
+        }
+        check_cast %__bind_8_index to i32
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_flag_ptr
+                load_ptr ReducedEmptyDispatchPanic_x3a_x3amain$tmp$panic_code_ptr
+              }
+              nop
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+              nop
+              nop
+            }          }
+        }
+        cast %__bind_8_index to i32
+      }
+      nop
+    }
+    store_ptr %__bind_5_result = ReducedEmptyDispatchPanic_x3a_x3amain$tmp$cast
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret ReducedEmptyDispatchPanic_x3a_x3amain$tmp$unit
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aReducedEmptyDispatchPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aReducedEmptyDispatchPanic {
+  nop
+}
+
+

@@ -1,0 +1,195 @@
+proc @StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %shared_value = 0x1
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_key_scope_2 = StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x65756C61765F646572616873, 0x0)
+          call @uv_key_acquire (%StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_key_scope_2, 0x65756C61765F646572616873, 0x0)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    nop
+                    read %__bind_1_shared_value
+                  }
+                  fence seqcst
+                }
+                bind %observed_value = %__bind_1_shared_value
+                nop
+              }
+              seq {
+                seq {
+                  nop
+                  yield release 0x1 [state=1] -> StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$yield_input
+                }
+                seq {
+                  nop
+                  nop
+                }
+              }
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    seq {
+                      seq {
+                        call @uv_key_scope_enter
+                        bind %StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_implicit_key_scope_10 = StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$implicit_key_scope_enter
+                      }
+                      call @uv_key_check_conflict (0x65756C61765F646576726573626F, 0x0)
+                      call @uv_key_acquire (%StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_implicit_key_scope_10, 0x65756C61765F646576726573626F, 0x0)
+                    }
+                    read %__bind_3_observed_value
+                  }
+                  fence seqcst
+                }
+                bind %resumed_value = %__bind_3_observed_value
+                nop
+              }
+            }
+          } seq {
+            nop
+            seq {
+              nop
+              nop
+              call @uv_key_scope_exit (%StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_implicit_key_scope_10)
+              nop
+              nop
+            }
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_key_scope_2)
+            nop
+            nop
+          }
+        }
+        seq {
+          async_complete value: StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$unit -> StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$async_result
+          nop
+          ret StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$resume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %shared_value = 0x1
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_key_scope_2 = StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x65756C61765F646572616873, 0x0)
+          call @uv_key_acquire (%StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_key_scope_2, 0x65756C61765F646572616873, 0x0)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    nop
+                    read %__bind_1_shared_value
+                  }
+                  fence seqcst
+                }
+                bind %observed_value = %__bind_1_shared_value
+                nop
+              }
+              seq {
+                seq {
+                  nop
+                  yield release 0x1 [state=1] -> StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$yield_input
+                }
+                seq {
+                  nop
+                  nop
+                }
+              }
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    seq {
+                      seq {
+                        call @uv_key_scope_enter
+                        bind %StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_implicit_key_scope_10 = StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$implicit_key_scope_enter
+                      }
+                      call @uv_key_check_conflict (0x65756C61765F646576726573626F, 0x0)
+                      call @uv_key_acquire (%StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_implicit_key_scope_10, 0x65756C61765F646576726573626F, 0x0)
+                    }
+                    read %__bind_3_observed_value
+                  }
+                  fence seqcst
+                }
+                bind %resumed_value = %__bind_3_observed_value
+                nop
+              }
+            }
+          } seq {
+            nop
+            seq {
+              nop
+              nop
+              call @uv_key_scope_exit (%StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_implicit_key_scope_10)
+              nop
+              nop
+            }
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$__uv_key_scope_2)
+            nop
+            nop
+          }
+        }
+        seq {
+          async_complete value: StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$unit -> StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$async_result
+          nop
+          ret StaleOkSuppressesReleaseWarning_x3a_x3astaleOkSuppressesReleaseWarningReference$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aStaleOkSuppressesReleaseWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aStaleOkSuppressesReleaseWarning {
+  nop
+}
+
+

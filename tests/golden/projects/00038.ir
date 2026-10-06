@@ -1,0 +1,84 @@
+extern_proc @getpid "C"
+
+proc @MacOSDylibLibrary_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              seq {
+                nop
+                read @MacOSDylibLibrary::macOSDylibGetPidReference
+              }
+              nop
+              call @getpid
+            }
+            nop
+          }
+          bind %process_id = MacOSDylibLibrary_x3a_x3amain$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_2_process_id
+            }
+            nop
+            binop >= %__bind_2_process_id, 0x0
+          }
+          seq {
+            nop
+            nop
+          }
+          if MacOSDylibLibrary_x3a_x3amain$tmp$binop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              seq {
+                nop
+                nop
+              }
+              ret 0x0
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x1
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aMacOSDylibLibrary {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aMacOSDylibLibrary {
+  nop
+}
+
+

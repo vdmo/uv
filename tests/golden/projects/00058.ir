@@ -1,0 +1,72 @@
+proc @GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %carrier = GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_1_carrier
+              }
+              nop
+            }
+            seq {
+              seq {
+                nop
+                read %__bind_1_carrier
+              }
+              nop
+            }
+            check_op Overflow + GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference$tmp$place_field, GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference$tmp$place_field
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference$tmp$panic_flag_ptr
+                    load_ptr GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop + GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference$tmp$place_field, GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference$tmp$place_field
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret GenericRecordLiteralExpectedType_x3a_x3agenericRecordLiteralExpectedTypeReference$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aGenericRecordLiteralExpectedType {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aGenericRecordLiteralExpectedType {
+  nop
+}
+
+

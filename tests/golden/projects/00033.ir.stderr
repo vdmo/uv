@@ -1,0 +1,6 @@
+warning[W-SAF-0100]: `transmute` target type is known to admit invalid bit patterns
+  --> /w/target/fixtures/Fixtures/ArtifactProjects/GpuRuntimeEvidence/Source/Main.uv:30:21
+30 |                     transmute<Ptr<i32>, GpuPtr<i32, Private>>(&private_value)
+30 |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1 warning emitted

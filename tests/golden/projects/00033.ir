@@ -1,0 +1,1096 @@
+proc @GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                addr_of context
+                nop
+                call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3agpu (addr_of)
+              }
+              parallel {
+                domain: GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$method_call
+                body:
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        nop
+                      }
+                      seq {
+                        nop
+                        nop
+                        nop
+                      }
+                      dispatch {
+                        range: GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$range
+                        workgroup_size: GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple
+                        reduce_op: +
+                        body:
+                          nop
+                        body_result: GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$unit
+                        result: GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$dispatch_result
+                      }
+                    }
+                    nop
+                  }
+              }
+              seq {
+                nop
+                nop
+                clear_panic
+                seq {
+                  call @uv_parallel_join (GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$parallel_join)
+                  binop != GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$parallel_join_status, 0x0
+                  if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$parallel_join_panicked then seq {
+                    store_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr = 0x1
+                    store_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$parallel_join_status
+                  } else nop
+                }
+                seq {
+                  load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                  load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                }
+                binop && 0x0, GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag
+                if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code) else nop
+                unop ! GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag
+                binop && 0x0, GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_clear
+                if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_restore then seq {
+                  store_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr = 0x1
+                  store_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr = 0x0
+                } else nop
+                binop || 0x0, GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag
+                if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag then nop else nop
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            bind %observed = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$dispatch_result
+            nop
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_27_observed
+            }
+            nop
+            binop == %__bind_27_observed, 0x88
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @__cx_dispatch_body_GpuRuntimeEvidence_0 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$record_ctor)
+      bind %region$0 = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$synthetic_proc_region
+    }
+    load_ptr %__bind_3_elem
+    bind %index = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$dispatch_elem
+    block seq {
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fenter (0x6)
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @gpu_global_id
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3agpu_x3a_x3aglobal_x5fid
+          }
+          bind %global_id = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @gpu_local_id
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3agpu_x3a_x3alocal_x5fid
+          }
+          bind %local_id = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @gpu_workgroup_id
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3agpu_x3a_x3aworkgroup_x5fid
+          }
+          bind %workgroup_id = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @gpu_workgroup_size
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3agpu_x3a_x3aworkgroup_x5fsize
+          }
+          bind %workgroup_size = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @gpu_global_size
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3agpu_x3a_x3aglobal_x5fsize
+          }
+          bind %global_size = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @gpu_num_workgroups
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3agpu_x3a_x3anum_x5fworkgroups
+          }
+          bind %num_workgroups = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_8_index
+          }
+          bind %relative_index = %__bind_8_index
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_15_relative_index
+            }
+            nop
+            check_op DivZero % %__bind_15_relative_index, 0x8
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                    load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                  nop
+                  nop
+                }              }
+            }
+            binop % %__bind_15_relative_index, 0x8
+          }
+          bind %expected_local_linear = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_16_expected_local_linear
+            }
+            nop
+            check_op DivZero % %__bind_16_expected_local_linear, 0x2
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                    load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                  nop
+                  nop
+                }              }
+            }
+            binop % %__bind_16_expected_local_linear, 0x2
+          }
+          bind %expected_local_x = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_16_expected_local_linear
+                }
+                nop
+                check_op DivZero / %__bind_16_expected_local_linear, 0x2
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                        load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                      nop
+                      nop
+                    }                  }
+                }
+                binop / %__bind_16_expected_local_linear, 0x2
+              }
+              nop
+              check_op DivZero % GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop, 0x2
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                      load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                    nop
+                    nop
+                  }                }
+              }
+              binop % GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop, 0x2
+            }
+            bind %expected_local_y = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+            nop
+          }
+          seq {
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_16_expected_local_linear
+            }
+            nop
+            check_op DivZero / %__bind_16_expected_local_linear, 0x4
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                    load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                  nop
+                  nop
+                }              }
+            }
+            binop / %__bind_16_expected_local_linear, 0x4
+          }
+          bind %expected_local_z = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_15_relative_index
+            }
+            nop
+            check_op DivZero / %__bind_15_relative_index, 0x8
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                    load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                  nop
+                  nop
+                }              }
+            }
+            binop / %__bind_15_relative_index, 0x8
+          }
+          bind %expected_workgroup_x = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_17_expected_local_x
+              }
+              seq {
+                seq {
+                  nop
+                  read %__bind_20_expected_workgroup_x
+                }
+                nop
+                check_op Overflow * %__bind_20_expected_workgroup_x, 0x2
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                        load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                      nop
+                      nop
+                    }                  }
+                }
+                binop * %__bind_20_expected_workgroup_x, 0x2
+              }
+              check_op Overflow + %__bind_17_expected_local_x, GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                      load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                    nop
+                    nop
+                  }                }
+              }
+              binop + %__bind_17_expected_local_x, GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+            }
+            bind %expected_global_x = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          nop
+          bind %private_value = 0x29
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                nop
+                binop == 0x8, 0x8
+              }
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop then seq {
+                nop
+                nop
+                binop == 0x8, 0x8
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                nop
+                nop
+                binop == 0x8, 0x8
+              } else nop
+            }
+            bind %forms_have_pointer_layout = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and
+            nop
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  addr_of private_value
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5ftag_x5fscope (addr_of, 0x6)
+                }
+                transmute addr_of to GpuPtr<i32, Private>
+              }
+              bind %private_pointer = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$transmute
+              nop
+            }
+          } seq {
+            seq {
+              seq {
+                nop
+                read %__bind_24_private_pointer
+              }
+              load_ptr %__bind_24_private_pointer
+            }
+            seq {
+              nop
+              nop
+            }
+          }
+          bind %private_read = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$deref
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read @gpu_memory_barrier
+          }
+          nop
+          gpu_barrier memory -> GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+        }
+        seq {
+          seq {
+            nop
+            read @gpu_workgroup_barrier
+          }
+          nop
+          gpu_barrier workgroup -> GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+        }
+        seq {
+          seq {
+            nop
+            read @gpu_barrier
+          }
+          nop
+          gpu_barrier full -> GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_9_global_id
+                }
+                seq {
+                  nop
+                  read %__bind_21_expected_global_x
+                }
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, %__bind_21_expected_global_x
+              }
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$binop then seq {
+                seq {
+                  nop
+                  read %__bind_9_global_id
+                }
+                seq {
+                  nop
+                  read %__bind_18_expected_local_y
+                }
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, %__bind_18_expected_local_y
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_9_global_id
+                }
+                seq {
+                  nop
+                  read %__bind_19_expected_local_z
+                }
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, %__bind_19_expected_local_z
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_10_local_id
+                }
+                seq {
+                  nop
+                  read %__bind_17_expected_local_x
+                }
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, %__bind_17_expected_local_x
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_10_local_id
+                }
+                seq {
+                  nop
+                  read %__bind_18_expected_local_y
+                }
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, %__bind_18_expected_local_y
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_10_local_id
+                }
+                seq {
+                  nop
+                  read %__bind_19_expected_local_z
+                }
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, %__bind_19_expected_local_z
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_11_workgroup_id
+                }
+                seq {
+                  nop
+                  read %__bind_20_expected_workgroup_x
+                }
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, %__bind_20_expected_workgroup_x
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_11_workgroup_id
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x0
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_11_workgroup_id
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x0
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_12_workgroup_size
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x2
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_12_workgroup_size
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x2
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_12_workgroup_size
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x2
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_13_global_size
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x4
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_13_global_size
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x2
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_13_global_size
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x2
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_14_num_workgroups
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x2
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_14_num_workgroups
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x1
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_14_num_workgroups
+                }
+                nop
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$tuple_elem, 0x1
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  seq {
+                    nop
+                    read @gpu_linear_id
+                  }
+                  nop
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3agpu_x3a_x3alinear_x5fid
+                }
+                seq {
+                  nop
+                  read %__bind_15_relative_index
+                }
+                binop == GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$call, %__bind_15_relative_index
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                nop
+                read %__bind_23_forms_have_pointer_layout
+              } else nop
+              if GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and then seq {
+                seq {
+                  nop
+                  read %__bind_25_private_read
+                }
+                nop
+                binop == %__bind_25_private_read, 0x29
+              } else nop
+            }
+            bind %matches_topology = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$and
+            nop
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+      }
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_26_matches_topology
+        }
+        nop
+        if %__bind_26_matches_topology then seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              seq {
+                nop
+                read %__bind_15_relative_index
+              }
+              nop
+              check_op Overflow + %__bind_15_relative_index, 0x1
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                      load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                    nop
+                    nop
+                  }                }
+              }
+              binop + %__bind_15_relative_index, 0x1
+            }
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        } else seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              nop
+              seq {
+                nop
+                read %__bind_15_relative_index
+              }
+              check_op Overflow + 0x3E8, %__bind_15_relative_index
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_flag_ptr
+                      load_ptr GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                    nop
+                    nop
+                  }                }
+              }
+              binop + 0x3E8, %__bind_15_relative_index
+            }
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+      }
+      seq {
+        nop
+        nop
+        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fexit (0x6)
+        nop
+        nop
+      }
+    }
+    store_ptr %__bind_5_result = GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$if
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence$tmp$unit
+  }
+}
+
+proc @GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of context
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3ainline (addr_of)
+            }
+            parallel {
+              domain: GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$method_call
+              body:
+                block seq {
+                  nop
+                  nop
+                } seq {
+                  nop
+                  nop
+                }
+            }
+            seq {
+              nop
+              nop
+              clear_panic
+              seq {
+                call @uv_parallel_join (GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$parallel_join)
+                binop != GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$parallel_join_status, 0x0
+                if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$parallel_join_panicked then seq {
+                  store_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag_ptr = 0x1
+                  store_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_code_ptr = GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$parallel_join_status
+                } else nop
+              }
+              seq {
+                load_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag_ptr
+                load_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_code_ptr
+              }
+              binop && 0x0, GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag
+              if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_code) else nop
+              unop ! GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag
+              binop && 0x0, GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_clear
+              if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_restore then seq {
+                store_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag_ptr = 0x1
+                store_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_code_ptr = 0x0
+              } else nop
+              binop || 0x0, GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag
+              if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag then nop else nop
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %inline_value = 0x7
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3acpu (addr_of)
+            }
+            parallel {
+              domain: GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$method_call
+              body:
+                block seq {
+                  nop
+                  nop
+                } seq {
+                  nop
+                  nop
+                }
+            }
+            seq {
+              nop
+              nop
+              clear_panic
+              seq {
+                call @uv_parallel_join (GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$parallel_join)
+                binop != GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$parallel_join_status, 0x0
+                if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$parallel_join_panicked then seq {
+                  store_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag_ptr = 0x1
+                  store_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_code_ptr = GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$parallel_join_status
+                } else nop
+              }
+              seq {
+                load_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag_ptr
+                load_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_code_ptr
+              }
+              binop && 0x0, GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag
+              if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_code) else nop
+              unop ! GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag
+              binop && 0x0, GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_clear
+              if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_restore then seq {
+                store_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag_ptr = 0x1
+                store_ptr GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_code_ptr = 0x0
+              } else nop
+              binop || 0x0, GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag
+              if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$panic_flag then nop else nop
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %cpu_value = 0xB
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_29_inline_value
+              }
+              nop
+              binop == %__bind_29_inline_value, 0x7
+            }
+            if GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$binop then seq {
+              seq {
+                nop
+                read %__bind_30_cpu_value
+              }
+              nop
+              binop == %__bind_30_cpu_value, 0xB
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @GpuRuntimeEvidence_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @GpuRuntimeEvidence::gpuRuntimeEvidence
+              }
+              seq {
+                nop
+                addr_of context
+              }
+              call @GpuRuntimeEvidence_x3a_x3agpuRuntimeEvidence (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            if GpuRuntimeEvidence_x3a_x3amain$tmp$call then seq {
+              seq {
+                nop
+                read @GpuRuntimeEvidence::domainLoweringEvidence
+              }
+              seq {
+                nop
+                addr_of context
+              }
+              call @GpuRuntimeEvidence_x3a_x3adomainLoweringEvidence (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            } else nop
+          }
+          seq {
+            nop
+            nop
+          }
+          if GpuRuntimeEvidence_x3a_x3amain$tmp$and then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x0
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x1
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aGpuRuntimeEvidence {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aGpuRuntimeEvidence {
+  nop
+}
+
+

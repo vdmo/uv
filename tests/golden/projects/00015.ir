@@ -1,0 +1,210 @@
+proc @AsyncFailedSpawnedWaitPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            addr_of context
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3acpu (addr_of)
+          }
+          parallel {
+            domain: AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$method_call
+            body:
+              block seq {
+                nop
+                seq {
+                  spawn {
+                    captured_env:
+                      bind %AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$spawn_env_storage_5 = AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$spawn_env_zero
+                    body:
+                      nop
+                    body_result: AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$unit
+                    result: AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$spawn_handle
+                  }
+                  bind %handle = AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$spawn_handle
+                  nop
+                }
+              } seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_14_handle
+                  }
+                  wait %__bind_14_handle -> AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$wait_result [spawned]
+                }
+                seq {
+                  nop
+                  nop
+                }
+              }
+          }
+          seq {
+            nop
+            nop
+            clear_panic
+            seq {
+              call @uv_parallel_join (AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$parallel_join)
+              binop != AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$parallel_join_status, 0x0
+              if AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$parallel_join_panicked then seq {
+                store_ptr AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_flag_ptr = 0x1
+                store_ptr AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_code_ptr = AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$parallel_join_status
+              } else nop
+            }
+            seq {
+              load_ptr AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_flag_ptr
+              load_ptr AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_code_ptr
+            }
+            binop && 0x0, AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_flag
+            if AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_code) else nop
+            unop ! AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_flag
+            binop && 0x0, AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_clear
+            if AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_restore then seq {
+              store_ptr AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_flag_ptr = 0x1
+              store_ptr AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_code_ptr = 0x0
+            } else nop
+            binop || 0x0, AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_flag
+            if AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_flag then nop else nop
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        nop
+        nop
+        ret AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$wait_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @__cx_dispatch_body_AsyncFailedSpawnedWaitPanic_1 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$record_ctor)
+      bind %region$0 = AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$synthetic_proc_region
+    }
+    load_ptr %__bind_6_elem
+    bind %index = AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$dispatch_elem
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_11_index
+        }
+        check_cast %__bind_11_index to i32
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_flag_ptr
+                load_ptr AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$panic_code_ptr
+              }
+              nop
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+              nop
+              nop
+            }          }
+        }
+        cast %__bind_11_index to i32
+      }
+      nop
+    }
+    store_ptr %__bind_8_result = AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$cast
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$unit
+  }
+}
+
+proc @__cx_spawn_body_AsyncFailedSpawnedWaitPanic_0 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$record_ctor)
+      bind %region$0 = AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$synthetic_proc_region
+    }
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              nop
+            }
+            dispatch {
+              range: AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$range
+              workgroup_size: AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$dispatch_workgroup
+              reduce_op: +
+              body:
+                nop
+              body_result: AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$unit
+              result: AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$dispatch_result
+            }
+          }
+          bind %value = AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$dispatch_result
+          nop
+        }
+        seq {
+          nop
+          nop
+          nop
+        }
+      }
+    } seq {
+      seq {
+        nop
+        read %__bind_12_value
+      }
+      seq {
+        nop
+        nop
+      }
+    }
+    store_ptr %__bind_13_result = %__bind_12_value
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret AsyncFailedSpawnedWaitPanic_x3a_x3amain$tmp$unit
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aAsyncFailedSpawnedWaitPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aAsyncFailedSpawnedWaitPanic {
+  nop
+}
+
+

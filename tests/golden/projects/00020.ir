@@ -1,0 +1,302 @@
+proc @AttributeSemantics_x3a_x3aattributePackedSize {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x5
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributePackedAlign {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x1
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributeAlignedSize {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x10
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributeAlignedAlign {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x10
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributeSmallEnumSize {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x1
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributeSmallEnumAlign {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x1
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributeAlwaysInlineValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_value
+          }
+          nop
+          check_op Overflow + %__bind_1_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_1_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret AttributeSemantics_x3a_x3aattributeAlwaysInlineValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributeNeverInlineValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_2_value
+          }
+          nop
+          check_op Overflow + %__bind_2_value, 0x2
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_2_value, 0x2
+        }
+        nop
+        nop
+        nop
+        ret AttributeSemantics_x3a_x3aattributeNeverInlineValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributeColdValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_3_value
+          }
+          nop
+          check_op Overflow - %__bind_3_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop - %__bind_3_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret AttributeSemantics_x3a_x3aattributeColdValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AttributeSemantics_x3a_x3aattributeOptimizationUse {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @AttributeSemantics::attributeAlwaysInlineValue
+              }
+              seq {
+                nop
+                addr_of value
+              }
+              call @AttributeSemantics_x3a_x3aattributeAlwaysInlineValue (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            seq {
+              seq {
+                nop
+                read @AttributeSemantics::attributeNeverInlineValue
+              }
+              seq {
+                nop
+                addr_of value
+              }
+              call @AttributeSemantics_x3a_x3aattributeNeverInlineValue (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            check_op Overflow + AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$call, AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$call
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$call, AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$call
+          }
+          seq {
+            seq {
+              nop
+              read @AttributeSemantics::attributeColdValue
+            }
+            seq {
+              nop
+              addr_of value
+            }
+            call @AttributeSemantics_x3a_x3aattributeColdValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          check_op Overflow + AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$binop, AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$call
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$binop, AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$call
+        }
+        nop
+        seq {
+          nop
+          nop
+          nop
+          nop
+        }
+        nop
+        ret AttributeSemantics_x3a_x3aattributeOptimizationUse$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aAttributeSemantics {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aAttributeSemantics {
+  nop
+}
+
+

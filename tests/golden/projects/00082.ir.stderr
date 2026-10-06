@@ -1,0 +1,6 @@
+warning[W-CON-0005]: Callee access pattern unknown; assuming full access
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/UnknownCalleeAccessWarning/Source/Main.uv:18:29
+18 |         let observed: i32 = summarizeAsUnknown(target)
+18 |                             ^^^^^^^^^^^^^^^^^^
+
+1 warning emitted

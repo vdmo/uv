@@ -1,0 +1,78 @@
+proc @LibraryArtifactConsumer_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            read @LibraryArtifactProvider::providedArtifactValue
+            nop
+            call @LibraryArtifactProvider_x3a_x3aprovidedArtifactValue (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          check_op Overflow - LibraryArtifactConsumer_x3a_x3amain$tmp$call, 0x11
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop - LibraryArtifactConsumer_x3a_x3amain$tmp$call, 0x11
+        }
+        nop
+        seq {
+          nop
+          nop
+          nop
+        }
+        nop
+        ret LibraryArtifactConsumer_x3a_x3amain$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aLibraryArtifactConsumer {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aLibraryArtifactConsumer {
+  nop
+}
+
+
+proc @LibraryArtifactProvider_x3a_x3aprovidedArtifactValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x11
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aLibraryArtifactProvider {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aLibraryArtifactProvider {
+  nop
+}
+
+

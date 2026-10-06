@@ -1,0 +1,431 @@
+proc @IRLoweringForms_x3a_x3airLoweringLoopProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %index = 0x0
+          nop
+        }
+        seq {
+          nop
+          bind %total = 0x0
+          nop
+        }
+        seq {
+          loop while {
+            cond_ir seq {
+              seq {
+                nop
+                read %__bind_2_index
+              }
+              seq {
+                nop
+                read %__bind_1_limit
+              }
+              binop < %__bind_2_index, %__bind_1_limit
+            }
+            cond_value IRLoweringForms_x3a_x3airLoweringLoopProbe$tmp$binop
+            body block seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      nop
+                      read %__bind_3_total
+                    }
+                    seq {
+                      nop
+                      read %__bind_2_index
+                    }
+                    check_op Overflow + %__bind_3_total, %__bind_2_index
+                    seq {
+                      nop
+                      cleanup_panic_check {
+nop                      }
+                    }
+                    binop + %__bind_3_total, %__bind_2_index
+                  }
+                  seq {
+                    nop
+                    store %total = IRLoweringForms_x3a_x3airLoweringLoopProbe$tmp$binop
+                  }
+                }
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_2_index
+                      }
+                      nop
+                      check_op Overflow + %__bind_2_index, 0x1
+                      seq {
+                        nop
+                        cleanup_panic_check {
+nop                        }
+                      }
+                      binop + %__bind_2_index, 0x1
+                    }
+                    seq {
+                      nop
+                      store %index = IRLoweringForms_x3a_x3airLoweringLoopProbe$tmp$binop
+                    }
+                  }
+                  seq {
+                    nop
+                    nop
+                  }
+                }
+              }
+            } seq {
+              nop
+              nop
+            }
+            body_value IRLoweringForms_x3a_x3airLoweringLoopProbe$tmp$unit
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_3_total
+          }
+          nop
+          nop
+          ret %__bind_3_total
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @IRLoweringForms_x3a_x3airLoweringIfCaseProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_4_choice
+          }
+          nop
+          if_case %__bind_4_choice {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %payload = IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_5_payload
+                      }
+                      nop
+                      check_op Overflow + %__bind_5_payload, 0x1
+                      seq {
+                        nop
+                        cleanup_panic_check {
+nop                        }
+                      }
+                      binop + %__bind_5_payload, 0x1
+                    }
+                    nop
+                  }
+                  bind %IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$if_case_clause_result_12 = IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$binop
+                }              }
+              value %IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$if_case_clause_result_12
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %payload = IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_5_payload
+                      }
+                      nop
+                      check_op Overflow - %__bind_5_payload, 0x1
+                      seq {
+                        nop
+                        cleanup_panic_check {
+nop                        }
+                      }
+                      binop - %__bind_5_payload, 0x1
+                    }
+                    nop
+                  }
+                  bind %IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$if_case_clause_result_19 = IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$binop
+                }              }
+              value %IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$if_case_clause_result_19
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret IRLoweringForms_x3a_x3airLoweringIfCaseProbe$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @IRLoweringForms_x3a_x3airLoweringBranchPhiProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_5_flag
+          }
+          nop
+          if %__bind_5_flag then block seq {
+            nop
+            nop
+          } seq {
+            nop
+            nop
+          } else block seq {
+            nop
+            nop
+          } seq {
+            nop
+            nop
+          }
+        }
+        nop
+        nop
+        ret IRLoweringForms_x3a_x3airLoweringBranchPhiProbe$tmp$if
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @IRLoweringForms_x3a_x3airLoweringRegionFrameProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %score = 0x0
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              nop
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fenter (0x11)
+            region IRLoweringForms_x3a_x3airLoweringRegionFrameProbe$tmp$record_ctor
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_6_score
+          }
+          nop
+          nop
+          ret %__bind_6_score
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @IRLoweringForms_x3a_x3airLoweringFormsProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  nop
+                  read @IRLoweringForms::irLoweringLoopProbe
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call_ref_tmp_112 = 0x4
+                    addr_of IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call_ref_tmp_112
+                  }
+                }
+                call @IRLoweringForms_x3a_x3airLoweringLoopProbe (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+nop                  }
+                }
+              }
+              seq {
+                seq {
+                  nop
+                  read @IRLoweringForms::irLoweringBranchPhiProbe
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call_ref_tmp_116 = 0x1
+                    addr_of IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call_ref_tmp_116
+                  }
+                }
+                call @IRLoweringForms_x3a_x3airLoweringBranchPhiProbe (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+nop                  }
+                }
+              }
+              check_op Overflow + IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call, IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+              binop + IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call, IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call
+            }
+            seq {
+              seq {
+                nop
+                read @IRLoweringForms::irLoweringIfCaseProbe
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call_ref_tmp_122 = IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$enum_tuple
+                  addr_of IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call_ref_tmp_122
+                }
+              }
+              call @IRLoweringForms_x3a_x3airLoweringIfCaseProbe (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            check_op Overflow + IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$binop, IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$binop, IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call
+          }
+          seq {
+            seq {
+              nop
+              read @IRLoweringForms::irLoweringRegionFrameProbe
+            }
+            nop
+            call @IRLoweringForms_x3a_x3airLoweringRegionFrameProbe (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          check_op Overflow + IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$binop, IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$binop, IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$call
+        }
+        nop
+        seq {
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+        }
+        nop
+        ret IRLoweringForms_x3a_x3airLoweringFormsProbe$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aIRLoweringForms {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aIRLoweringForms {
+  nop
+}
+
+

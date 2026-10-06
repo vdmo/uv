@@ -1,0 +1,6 @@
+warning[W-SRC-0301]: Leading zeros in decimal literal
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/SourceText/DecimalLeadingZeroWarning/Source/Main.uv:4:12
+4 |     return 001
+4 |            ^^^
+
+1 warning emitted

@@ -211,6 +211,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "uv-codegen"
+version = "0.4.0-alpha"
+dependencies = [
+ "uv-analysis",
+ "uv-core",
+ "uv-project",
+ "uv-source",
+]
+
+[[package]]
 name = "uv-comptime"
 version = "0.4.0-alpha"
 dependencies = [

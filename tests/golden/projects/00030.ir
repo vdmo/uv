@@ -1,0 +1,3238 @@
+proc @ExecutableOutput_x3a_x3aexecutableOutputFuture {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_1_value
+        }
+        async_complete value: %__bind_1_value -> ExecutableOutput_x3a_x3aexecutableOutputFuture$tmp$async_result
+        nop
+        nop
+        ret ExecutableOutput_x3a_x3aexecutableOutputFuture$tmp$async_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableOutputFuture$resume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_1_value
+        }
+        async_complete value: %__bind_1_value -> ExecutableOutput_x3a_x3aexecutableOutputFuture$tmp$async_result
+        nop
+        nop
+        ret ExecutableOutput_x3a_x3aexecutableOutputFuture$tmp$async_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableOutputFutureValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_2_value
+          }
+          nop
+          if_case %__bind_2_value {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %actual = ExecutableOutput_x3a_x3aexecutableOutputFutureValue$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_4_actual
+                      }
+                      seq {
+                        nop
+                        read %__bind_3_expected
+                      }
+                      binop == %__bind_4_actual, %__bind_3_expected
+                    }
+                    nop
+                  }
+                  bind %ExecutableOutput_x3a_x3aexecutableOutputFutureValue$tmp$if_case_clause_result_4 = ExecutableOutput_x3a_x3aexecutableOutputFutureValue$tmp$binop
+                }              }
+              value %ExecutableOutput_x3a_x3aexecutableOutputFutureValue$tmp$if_case_clause_result_4
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %failure = ExecutableOutput_x3a_x3aexecutableOutputFutureValue$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %ExecutableOutput_x3a_x3aexecutableOutputFutureValue$tmp$if_case_clause_result_7 = 0x0
+                }              }
+              value %ExecutableOutput_x3a_x3aexecutableOutputFutureValue$tmp$if_case_clause_result_7
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret ExecutableOutput_x3a_x3aexecutableOutputFutureValue$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              read @string::length
+              seq {
+                nop
+                seq {
+                  seq {
+                    addr_of domain
+                    nop
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aexecution_x5fdomain_x3a_x3aname (addr_of)
+                  }
+                  bind %ExecutableOutput_x3a_x3aexecutableOutputDomainObserved$tmp$call_ref_tmp_12 = ExecutableOutput_x3a_x3aexecutableOutputDomainObserved$tmp$method_call
+                  addr_of ExecutableOutput_x3a_x3aexecutableOutputDomainObserved$tmp$call_ref_tmp_12
+                }
+              }
+              call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+            }
+            nop
+            binop > ExecutableOutput_x3a_x3aexecutableOutputDomainObserved$tmp$call, 0x0
+          }
+          if ExecutableOutput_x3a_x3aexecutableOutputDomainObserved$tmp$binop then seq {
+            seq {
+              addr_of domain
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aexecution_x5fdomain_x3a_x3amax_x5fconcurrency (addr_of)
+            }
+            nop
+            binop > ExecutableOutput_x3a_x3aexecutableOutputDomainObserved$tmp$method_call, 0x0
+          } else nop
+        }
+        nop
+        seq {
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+        }
+        nop
+        ret ExecutableOutput_x3a_x3aexecutableOutputDomainObserved$tmp$and
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutablePipelineIncrement {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_6_value
+          }
+          nop
+          check_op Overflow + %__bind_6_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_6_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret ExecutableOutput_x3a_x3aexecutablePipelineIncrement$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %closure = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_10_closure
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$call_ref_tmp_37 = 0x4
+                  addr_of ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$call_ref_tmp_37
+                }
+              }
+              call ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$closure_env, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$panic_flag_ptr
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+              bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$closure_call_value_45 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$closure_call_result
+            }
+            nop
+            binop == %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$closure_call_value_45, 0x7
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaClosureNonCapturing_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_8_value
+        }
+        nop
+        check_op Overflow + %__bind_8_value, 0x3
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$panic_flag_ptr
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_8_value, 0x3
+      }
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing$tmp$binop
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %bias = 0x5
+          nop
+        }
+        seq {
+          seq {
+            bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_env_storage_58 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_env_zero
+            store_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_field_ptr = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$capture_addr
+          }
+          bind %closure = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure
+          nop
+        }
+        seq {
+          nop
+          bind %moved_value = 0xB
+          nop
+        }
+        seq {
+          seq {
+            bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_env_storage_77 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_env_zero
+            seq {
+              seq {
+                nop
+                read %moved_value
+              }
+              move_state moved_value
+            }
+            store_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_field_ptr = %moved_value
+          }
+          bind %move_capture = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_16_closure
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$call_ref_tmp_88 = 0x4
+                    addr_of ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$call_ref_tmp_88
+                  }
+                }
+                call ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_env, addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$panic_flag_ptr
+                        load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_call_value_96 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_call_result
+              }
+              nop
+              binop == %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_call_value_96, 0x9
+            }
+            if ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$binop then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_20_move_capture
+                }
+                call ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_env, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$panic_flag_ptr
+                        load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_call_value_107 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_call_result
+              }
+              nop
+              binop == %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$closure_call_value_107, 0xB
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaClosureCapturing_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_14_value
+        }
+        seq {
+          nop
+          seq {
+            load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$capture_ptr
+            load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$capture_ptr
+          }
+        }
+        check_op Overflow + %__bind_14_value, ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$capture_val
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$panic_flag_ptr
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_14_value, ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$capture_val
+      }
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$binop
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaClosureCapturing_x3a_x3a_x5fclosure1 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$capture_ptr
+        }
+        move_state moved_value
+      }
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing$tmp$capture_val
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %closure = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_25_closure
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$call_ref_tmp_129 = 0x4
+                  addr_of ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$call_ref_tmp_129
+                }
+              }
+              call ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$closure_env, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$panic_flag_ptr
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+              bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$closure_call_value_137 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$closure_call_result
+            }
+            nop
+            binop == %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$closure_call_value_137, 0x5
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaClosureCall_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_23_value
+        }
+        nop
+        check_op Overflow + %__bind_23_value, 0x1
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$panic_flag_ptr
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_23_value, 0x1
+      }
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall$tmp$binop
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableApplyClosure {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_27_closure
+          }
+          seq {
+            nop
+            addr_of value
+          }
+          call ExecutableOutput_x3a_x3aexecutableApplyClosure$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableApplyClosure$tmp$closure_env, addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          bind %ExecutableOutput_x3a_x3aexecutableApplyClosure$tmp$closure_call_value_151 = ExecutableOutput_x3a_x3aexecutableApplyClosure$tmp$closure_call_result
+        }
+        nop
+        nop
+        ret %ExecutableOutput_x3a_x3aexecutableApplyClosure$tmp$closure_call_value_151
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %bias = 0x6
+          nop
+        }
+        seq {
+          seq {
+            bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$closure_env_storage_156 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$closure_env_zero
+            store_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$closure_field_ptr = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$capture_addr
+          }
+          bind %closure = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableApplyClosure
+              }
+              seq {
+                seq {
+                  nop
+                  addr_of closure
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$call_ref_tmp_174 = 0x4
+                    addr_of ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$call_ref_tmp_174
+                  }
+                }
+              }
+              call @ExecutableOutput_x3a_x3aexecutableApplyClosure (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$panic_flag_ptr
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+            nop
+            binop == ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$call, 0xA
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaClosureRuntimeHelpers_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_31_value
+        }
+        seq {
+          nop
+          seq {
+            load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$capture_ptr
+            load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$capture_ptr
+          }
+        }
+        check_op Overflow + %__bind_31_value, ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$capture_val
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$panic_flag_ptr
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_31_value, ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$capture_val
+      }
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers$tmp$binop
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %fallback = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              nop
+              if 0x1 then block seq {
+                nop
+                seq {
+                  nop
+                  nop
+                  seq {
+                    nop
+                    nop
+                  }
+                  ret 0x11
+                }
+              } seq {
+                nop
+                nop
+              } else block seq {
+                nop
+                nop
+              } seq {
+                seq {
+                  seq {
+                    nop
+                    read %fallback
+                  }
+                  move_state fallback
+                }
+                nop
+              }
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$call_ref_tmp_209 = 0x4
+                addr_of ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$call_ref_tmp_209
+              }
+            }
+            call ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$closure_env, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$closure_call_value_212 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$closure_call_result
+          }
+          nop
+          nop
+          nop
+          ret %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$closure_call_value_212
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaClosureCallCalleeControlValue_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_36_value
+        }
+        nop
+        check_op Overflow + %__bind_36_value, 0x1
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$panic_flag_ptr
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_36_value, 0x1
+      }
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue$tmp$binop
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %closure = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_43_closure
+            }
+            seq {
+              nop
+              seq {
+                block seq {
+                  nop
+                  seq {
+                    nop
+                    nop
+                    seq {
+                      nop
+                      nop
+                    }
+                    ret 0x13
+                  }
+                } seq {
+                  nop
+                  nop
+                }
+                bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$call_ref_tmp_229 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$unit
+                addr_of ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$call_ref_tmp_229
+              }
+            }
+            call ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$closure_env, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$panic_flag_ptr
+                    load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$closure_call_value_237 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$closure_call_result
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$closure_call_value_237
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaClosureCallArgsControlValue_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_41_value
+        }
+        nop
+        check_op Overflow + %__bind_41_value, 0x1
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$panic_flag_ptr
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_41_value, 0x1
+      }
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue$tmp$binop
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %bias = 0x8
+          nop
+        }
+        seq {
+          seq {
+            bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure_env_storage_248 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure_env_zero
+            store_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure_field_ptr = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$capture_addr
+          }
+          bind %closure = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_49_closure
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$call_ref_tmp_267 = 0x4
+                  addr_of ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$call_ref_tmp_267
+                }
+              }
+              call ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure_env, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$panic_flag_ptr
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+              bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure_call_value_275 = ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure_call_result
+            }
+            nop
+            binop == %ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$closure_call_value_275, 0xC
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_47_value
+        }
+        seq {
+          nop
+          seq {
+            load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$capture_ptr
+            load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$capture_ptr
+          }
+        }
+        check_op Overflow + %__bind_47_value, ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$capture_val
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$panic_flag_ptr
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_47_value, ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$capture_val
+      }
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime$tmp$binop
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineFunc {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @ExecutableOutput::executablePipelineIncrement
+          }
+          bind %function_value = @executablePipelineIncrement
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              seq {
+                nop
+                read %__bind_51_function_value
+              }
+              call %__bind_51_function_value (0x4, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop == ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineFunc$tmp$pipeline, 0x5
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+          }
+          nop
+          ret ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineFunc$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %bias = 0x3
+          nop
+        }
+        seq {
+          seq {
+            bind %ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$closure_env_storage_293 = ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$closure_env_zero
+            store_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$closure_field_ptr = ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$capture_addr
+          }
+          bind %closure = ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$closure
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              seq {
+                nop
+                read %__bind_56_closure
+              }
+              call ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$closure_code (ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$closure_env, 0x4, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$panic_flag_ptr
+                      load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+            nop
+            binop == ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$pipeline, 0x7
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ExecutableOutput_x5fx3a_x5fx3aexecutableEvalSigmaPipelineClosure_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read %__bind_54_value
+        }
+        seq {
+          nop
+          seq {
+            load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$capture_ptr
+            load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$capture_ptr
+          }
+        }
+        check_op Overflow + %__bind_54_value, ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$capture_val
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$panic_flag_ptr
+                load_ptr ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$panic_code_ptr
+              }
+              nop
+              nop
+            }          }
+        }
+        binop + %__bind_54_value, ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$capture_val
+      }
+      nop
+    }
+    seq {
+      nop
+      nop
+    }
+    ret ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure$tmp$binop
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlLeftValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @ExecutableOutput::executablePipelineIncrement
+          }
+          bind %function_value = @executablePipelineIncrement
+          nop
+        }
+        seq {
+          seq {
+            block seq {
+              nop
+              seq {
+                nop
+                nop
+                nop
+                ret 0x17
+              }
+            } seq {
+              nop
+              nop
+            }
+            seq {
+              nop
+              read %__bind_57_function_value
+            }
+            call %__bind_57_function_value (ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlLeftValue$tmp$unit, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %result = ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlLeftValue$tmp$pipeline
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          nop
+          ret %result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlRightValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @ExecutableOutput::executablePipelineIncrement
+          }
+          bind %function_value = @executablePipelineIncrement
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              seq {
+                nop
+                nop
+                if 0x1 then block seq {
+                  nop
+                  seq {
+                    nop
+                    nop
+                    nop
+                    ret 0x1D
+                  }
+                } seq {
+                  nop
+                  nop
+                } else block seq {
+                  nop
+                  nop
+                } seq {
+                  seq {
+                    seq {
+                      nop
+                      read %function_value
+                    }
+                    move_state function_value
+                  }
+                  nop
+                }
+              }
+              call ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlRightValue$tmp$if (0x4, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            bind %result = ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlRightValue$tmp$pipeline
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          nop
+          ret %result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableEvalSigmaClosureNonCapturing
+            }
+            nop
+            call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$call then seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableEvalSigmaClosureCapturing
+            }
+            nop
+            call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableEvalSigmaClosureCall
+            }
+            nop
+            call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableEvalSigmaClosureRuntimeHelpers
+            }
+            nop
+            call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureCallCalleeControlValue
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop == ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$call, 0x11
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureCallArgsControlValue
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop == ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$call, 0x13
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableEvalSigmaClosureCallResolvedInternalFormRuntime
+            }
+            nop
+            call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableEvalSigmaPipelineFunc
+            }
+            nop
+            call @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineFunc (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableEvalSigmaPipelineClosure
+            }
+            nop
+            call @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaPipelineCtrlLeftValue
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlLeftValue (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop == ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$call, 0x17
+          } else nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and then seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaPipelineCtrlRightValue
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlRightValue (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop == ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$call, 0x1D
+          } else nop
+        }
+        nop
+        seq {
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+          nop
+        }
+        nop
+        ret ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk$tmp$and
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureNonCapturing
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureNonCapturing (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x29
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureCapturing
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCapturing (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x2A
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureCall
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCall (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x2B
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureRuntimeHelpers
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureRuntimeHelpers (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x2C
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureCallCalleeControlValue
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallCalleeControlValue (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop != ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call, 0x11
+          }
+          seq {
+            nop
+            nop
+          }
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$binop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x2D
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureCallArgsControlValue
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallArgsControlValue (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop != ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call, 0x13
+          }
+          seq {
+            nop
+            nop
+          }
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$binop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x2E
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaClosureCallResolvedInternalFormRuntime
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaClosureCallResolvedInternalFormRuntime (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x2F
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaPipelineFunc
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineFunc (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x30
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaPipelineClosure
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineClosure (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x31
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaPipelineCtrlLeftValue
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlLeftValue (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop != ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call, 0x17
+          }
+          seq {
+            nop
+            nop
+          }
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$binop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x32
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableEvalSigmaPipelineCtrlRightValue
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableEvalSigmaPipelineCtrlRightValue (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            nop
+            binop != ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$call, 0x1D
+          }
+          seq {
+            nop
+            nop
+          }
+          if ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode$tmp$binop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x33
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableOutputDomainObserved
+              }
+              seq {
+                nop
+                seq {
+                  seq {
+                    seq {
+                      addr_of context
+                      addr_of context.primary
+                      nop
+                    }
+                    addr_of context.primary.domains
+                    nop
+                  }
+                  addr_of context.primary.domains.cpu
+                  nop
+                }
+              }
+              call @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x21
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableOutputDomainObserved
+              }
+              seq {
+                nop
+                seq {
+                  seq {
+                    seq {
+                      addr_of context
+                      addr_of context.primary
+                      nop
+                    }
+                    addr_of context.primary.domains
+                    nop
+                  }
+                  addr_of context.primary.domains.gpu
+                  nop
+                }
+              }
+              call @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x22
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableOutputDomainObserved
+              }
+              seq {
+                nop
+                seq {
+                  seq {
+                    seq {
+                      addr_of context
+                      addr_of context.primary
+                      nop
+                    }
+                    addr_of context.primary.domains
+                    nop
+                  }
+                  addr_of context.primary.domains.inline
+                  nop
+                }
+              }
+              call @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x23
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableOutputDomainObserved
+              }
+              seq {
+                nop
+                seq {
+                  seq {
+                    seq {
+                      addr_of context
+                      addr_of context.secondary
+                      nop
+                    }
+                    addr_of context.secondary.domains
+                    nop
+                  }
+                  addr_of context.secondary.domains.cpu
+                  nop
+                }
+              }
+              call @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x24
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              read @string::length
+              seq {
+                nop
+                addr_of current_directory
+              }
+              call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+            }
+            nop
+            binop == ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call, 0x0
+          }
+          seq {
+            nop
+            nop
+          }
+          if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$binop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0xA
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_66_io_ok
+            }
+            unop ! %__bind_66_io_ok
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        addr_of context
+                        addr_of context.primary
+                        nop
+                      }
+                      addr_of context.primary.io
+                      nop
+                    }
+                    seq {
+                      nop
+                      seq {
+                        nop
+                        bind %ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call_ref_tmp_510 = 0x2F
+                        addr_of ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call_ref_tmp_510
+                      }
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aexists (addr_of, addr_of)
+                  }
+                  unop ! ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$method_call
+                }
+                nop
+                if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+                  nop
+                  seq {
+                    nop
+                    nop
+                    nop
+                    ret 0xE
+                  }
+                } seq {
+                  nop
+                  nop
+                } else nop
+              }
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        addr_of context
+                        addr_of context.primary
+                        nop
+                      }
+                      addr_of context.primary.io
+                      nop
+                    }
+                    seq {
+                      nop
+                      addr_of current_directory
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aexists (addr_of, addr_of)
+                  }
+                  unop ! ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$method_call
+                }
+                nop
+                if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+                  nop
+                  seq {
+                    nop
+                    nop
+                    nop
+                    ret 0xB
+                  }
+                } seq {
+                  nop
+                  nop
+                } else nop
+              }
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        addr_of context
+                        addr_of context.secondary
+                        nop
+                      }
+                      addr_of context.secondary.io
+                      nop
+                    }
+                    seq {
+                      nop
+                      seq {
+                        nop
+                        bind %ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call_ref_tmp_532 = 0x2F
+                        addr_of ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call_ref_tmp_532
+                      }
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aexists (addr_of, addr_of)
+                  }
+                  unop ! ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$method_call
+                }
+                nop
+                if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+                  nop
+                  seq {
+                    nop
+                    nop
+                    nop
+                    ret 0xF
+                  }
+                } seq {
+                  nop
+                  nop
+                } else nop
+              }
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        addr_of context
+                        addr_of context.secondary
+                        nop
+                      }
+                      addr_of context.secondary.io
+                      nop
+                    }
+                    seq {
+                      nop
+                      addr_of current_directory
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aexists (addr_of, addr_of)
+                  }
+                  unop ! ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$method_call
+                }
+                nop
+                if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+                  nop
+                  seq {
+                    nop
+                    nop
+                    nop
+                    ret 0xC
+                  }
+                } seq {
+                  nop
+                  nop
+                } else nop
+              }
+              seq {
+                nop
+                nop
+                nop
+                ret 0xD
+              }
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_67_system_ok
+            }
+            unop ! %__bind_67_system_ok
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        seq {
+                          addr_of context
+                          addr_of context.secondary
+                          nop
+                        }
+                        addr_of context.secondary.sys
+                        nop
+                      }
+                      nop
+                      call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aargument_x5fcount (addr_of)
+                    }
+                    nop
+                    binop >= ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$method_call, 0x0
+                  }
+                  unop ! ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$binop
+                }
+                seq {
+                  nop
+                  nop
+                }
+                if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+                  nop
+                  seq {
+                    nop
+                    nop
+                    nop
+                    ret 0x16
+                  }
+                } seq {
+                  nop
+                  nop
+                } else nop
+              }
+              seq {
+                nop
+                nop
+                nop
+                ret 0x17
+              }
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableOutputFutureValue
+              }
+              seq {
+                seq {
+                  nop
+                  addr_of reactor_value
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call_ref_tmp_575 = 0x7
+                    addr_of ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call_ref_tmp_575
+                  }
+                }
+              }
+              call @ExecutableOutput_x3a_x3aexecutableOutputFutureValue (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x1F
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_65_resolution
+                }
+                nop
+              }
+              nop
+              binop > ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$place_field, 0x0
+            }
+            unop ! ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$binop
+          }
+          seq {
+            nop
+            nop
+          }
+          if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x20
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_68_domains_ok
+            }
+            unop ! %__bind_68_domains_ok
+          }
+          nop
+          if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$unop then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read @ExecutableOutput::executableOutputDomainRuntimeFailureCode
+                  }
+                  seq {
+                    nop
+                    addr_of context
+                  }
+                  call @ExecutableOutput_x3a_x3aexecutableOutputDomainRuntimeFailureCode (addr_of, %__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                }
+                bind %domain_failure_code = ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call
+                nop
+              }
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_70_domain_failure_code
+                  }
+                  nop
+                  binop != %__bind_70_domain_failure_code, 0x0
+                }
+                seq {
+                  nop
+                  nop
+                }
+                if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$binop then block seq {
+                  nop
+                  seq {
+                    seq {
+                      seq {
+                        nop
+                        read %domain_failure_code
+                      }
+                      move_state domain_failure_code
+                    }
+                    nop
+                    nop
+                    ret %domain_failure_code
+                  }
+                } seq {
+                  nop
+                  nop
+                } else nop
+              }
+              seq {
+                nop
+                nop
+                nop
+                ret 0x27
+              }
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableClosureAndPipelineRuntimeFailureCode
+            }
+            nop
+            call @ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeFailureCode (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %closure_failure_code = ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_70_closure_failure_code
+            }
+            nop
+            binop != %__bind_70_closure_failure_code, 0x0
+          }
+          seq {
+            nop
+            nop
+          }
+          if ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode$tmp$binop then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %closure_failure_code
+                }
+                move_state closure_failure_code
+              }
+              nop
+              nop
+              ret %closure_failure_code
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x63
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExecutableOutput_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                addr_of context
+                addr_of context.primary
+                nop
+              }
+              addr_of context.primary.net
+              nop
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_624 = 0x74736F686C61636F6C
+                addr_of ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_624
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3anet_x3a_x3arestrict_x5fto_x5fhost (addr_of, addr_of)
+          }
+          bind %net = ExecutableOutput_x3a_x3amain$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                addr_of context
+                addr_of context.primary
+                nop
+              }
+              addr_of context.primary.heap
+              nop
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_631 = 0x40
+                addr_of ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_631
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aheap_x3a_x3awith_x5fquota (addr_of, addr_of)
+          }
+          bind %heap = ExecutableOutput_x3a_x3amain$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_73_net
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_75_heap
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                addr_of context
+                addr_of context.primary
+                nop
+              }
+              addr_of context.primary.time
+              nop
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic (addr_of)
+          }
+          bind %monotonic = ExecutableOutput_x3a_x3amain$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            addr_of monotonic
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic_x5fresolution (addr_of)
+          }
+          bind %resolution = ExecutableOutput_x3a_x3amain$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            seq {
+              seq {
+                addr_of context
+                addr_of context.primary
+                nop
+              }
+              addr_of context.primary.reactor
+              nop
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read @ExecutableOutput::executableOutputFuture
+                  }
+                  seq {
+                    nop
+                    seq {
+                      nop
+                      bind %ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_644 = 0x7
+                      addr_of ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_644
+                    }
+                  }
+                  call @ExecutableOutput_x3a_x3aexecutableOutputFuture (addr_of, %__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_flag_ptr
+                          load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                }
+                bind %ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_652 = ExecutableOutput_x3a_x3amain$tmp$call
+                addr_of ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_652
+              }
+            }
+            load_ptr addr_of
+            sync ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_652 runtime_symbol=ultraviolet_x3a_x3aruntime_x3a_x3areactor_x3a_x3arun runtime_receiver=addr_of -> ExecutableOutput_x3a_x3amain$tmp$method_call
+          }
+          bind %reactor_value = ExecutableOutput_x3a_x3amain$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                addr_of context
+                addr_of context.primary
+                nop
+              }
+              addr_of context.primary.sys
+              nop
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3acurrent_x5fdirectory (addr_of)
+          }
+          bind %current_directory = ExecutableOutput_x3a_x3amain$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    addr_of context
+                    addr_of context.primary
+                    nop
+                  }
+                  addr_of context.primary.io
+                  nop
+                }
+                seq {
+                  nop
+                  addr_of current_directory
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aexists (addr_of, addr_of)
+              }
+              if ExecutableOutput_x3a_x3amain$tmp$method_call then seq {
+                seq {
+                  seq {
+                    addr_of context
+                    addr_of context.secondary
+                    nop
+                  }
+                  addr_of context.secondary.io
+                  nop
+                }
+                seq {
+                  nop
+                  addr_of current_directory
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aexists (addr_of, addr_of)
+              } else nop
+            }
+            bind %io_ok = ExecutableOutput_x3a_x3amain$tmp$and
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  read @string::length
+                  seq {
+                    nop
+                    addr_of current_directory
+                  }
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+                }
+                nop
+                binop > ExecutableOutput_x3a_x3amain$tmp$call, 0x0
+              }
+              if ExecutableOutput_x3a_x3amain$tmp$binop then seq {
+                seq {
+                  seq {
+                    seq {
+                      addr_of context
+                      addr_of context.secondary
+                      nop
+                    }
+                    addr_of context.secondary.sys
+                    nop
+                  }
+                  nop
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aargument_x5fcount (addr_of)
+                }
+                nop
+                binop >= ExecutableOutput_x3a_x3amain$tmp$method_call, 0x0
+              } else nop
+            }
+            bind %system_ok = ExecutableOutput_x3a_x3amain$tmp$and
+            nop
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  nop
+                  read @ExecutableOutput::executableOutputDomainObserved
+                }
+                seq {
+                  nop
+                  seq {
+                    seq {
+                      seq {
+                        addr_of context
+                        addr_of context.primary
+                        nop
+                      }
+                      addr_of context.primary.domains
+                      nop
+                    }
+                    addr_of context.primary.domains.cpu
+                    nop
+                  }
+                }
+                call @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_flag_ptr
+                        load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              if ExecutableOutput_x3a_x3amain$tmp$call then seq {
+                seq {
+                  nop
+                  read @ExecutableOutput::executableOutputDomainObserved
+                }
+                seq {
+                  nop
+                  seq {
+                    seq {
+                      seq {
+                        addr_of context
+                        addr_of context.primary
+                        nop
+                      }
+                      addr_of context.primary.domains
+                      nop
+                    }
+                    addr_of context.primary.domains.gpu
+                    nop
+                  }
+                }
+                call @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_flag_ptr
+                        load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              } else nop
+              if ExecutableOutput_x3a_x3amain$tmp$and then seq {
+                seq {
+                  nop
+                  read @ExecutableOutput::executableOutputDomainObserved
+                }
+                seq {
+                  nop
+                  seq {
+                    seq {
+                      seq {
+                        addr_of context
+                        addr_of context.primary
+                        nop
+                      }
+                      addr_of context.primary.domains
+                      nop
+                    }
+                    addr_of context.primary.domains.inline
+                    nop
+                  }
+                }
+                call @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_flag_ptr
+                        load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              } else nop
+              if ExecutableOutput_x3a_x3amain$tmp$and then seq {
+                seq {
+                  nop
+                  read @ExecutableOutput::executableOutputDomainObserved
+                }
+                seq {
+                  nop
+                  seq {
+                    seq {
+                      seq {
+                        addr_of context
+                        addr_of context.secondary
+                        nop
+                      }
+                      addr_of context.secondary.domains
+                      nop
+                    }
+                    addr_of context.secondary.domains.cpu
+                    nop
+                  }
+                }
+                call @ExecutableOutput_x3a_x3aexecutableOutputDomainObserved (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_flag_ptr
+                        load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              } else nop
+            }
+            bind %domains_ok = ExecutableOutput_x3a_x3amain$tmp$and
+            nop
+          }
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_82_io_ok
+            }
+            if %__bind_82_io_ok then seq {
+              nop
+              read %__bind_83_system_ok
+            } else nop
+            if ExecutableOutput_x3a_x3amain$tmp$and then seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableOutputFutureValue
+              }
+              seq {
+                seq {
+                  nop
+                  addr_of reactor_value
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_728 = 0x7
+                    addr_of ExecutableOutput_x3a_x3amain$tmp$call_ref_tmp_728
+                  }
+                }
+              }
+              call @ExecutableOutput_x3a_x3aexecutableOutputFutureValue (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_flag_ptr
+                      load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            } else nop
+            if ExecutableOutput_x3a_x3amain$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_77_resolution
+                }
+                nop
+              }
+              nop
+              binop > ExecutableOutput_x3a_x3amain$tmp$place_field, 0x0
+            } else nop
+            if ExecutableOutput_x3a_x3amain$tmp$and then seq {
+              nop
+              read %__bind_84_domains_ok
+            } else nop
+            if ExecutableOutput_x3a_x3amain$tmp$and then seq {
+              seq {
+                nop
+                read @ExecutableOutput::executableClosureAndPipelineRuntimeOk
+              }
+              nop
+              call @ExecutableOutput_x3a_x3aexecutableClosureAndPipelineRuntimeOk (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_flag_ptr
+                      load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            } else nop
+          }
+          seq {
+            nop
+            nop
+          }
+          if ExecutableOutput_x3a_x3amain$tmp$and then block seq {
+            nop
+            seq {
+              nop
+              nop
+              seq {
+                nop
+                nop
+              }
+              ret 0x0
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @ExecutableOutput::executableOutputRuntimeFailureCode
+            }
+            seq {
+              seq {
+                nop
+                addr_of context
+              }
+              seq {
+                nop
+                addr_of current_directory
+              }
+              seq {
+                nop
+                addr_of reactor_value
+              }
+              seq {
+                nop
+                addr_of resolution
+              }
+              seq {
+                nop
+                addr_of io_ok
+              }
+              seq {
+                nop
+                addr_of system_ok
+              }
+              seq {
+                nop
+                addr_of domains_ok
+              }
+            }
+            call @ExecutableOutput_x3a_x3aexecutableOutputRuntimeFailureCode (addr_of, addr_of, addr_of, addr_of, addr_of, addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_flag_ptr
+                    load_ptr ExecutableOutput_x3a_x3amain$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret ExecutableOutput_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aExecutableOutput {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aExecutableOutput {
+  nop
+}
+
+

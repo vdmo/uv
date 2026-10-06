@@ -1,0 +1,97 @@
+proc @IntegerOverflowPanic_x3a_x3aintegerOverflowPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %maximum = 0x7FFFFFFF
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_2_maximum
+            }
+            seq {
+              nop
+              read %__bind_1_delta
+            }
+            check_op Overflow + %__bind_2_maximum, %__bind_1_delta
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + %__bind_2_maximum, %__bind_1_delta
+          }
+          nop
+          nop
+          ret IntegerOverflowPanic_x3a_x3aintegerOverflowPanicValue$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @IntegerOverflowPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_3_context
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @IntegerOverflowPanic::integerOverflowPanicValue
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %IntegerOverflowPanic_x3a_x3amain$tmp$call_ref_tmp_4 = 0x1
+                addr_of IntegerOverflowPanic_x3a_x3amain$tmp$call_ref_tmp_4
+              }
+            }
+            call @IntegerOverflowPanic_x3a_x3aintegerOverflowPanicValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret IntegerOverflowPanic_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aIntegerOverflowPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aIntegerOverflowPanic {
+  nop
+}
+
+

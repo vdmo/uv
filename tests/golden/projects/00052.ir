@@ -1,0 +1,140 @@
+proc @SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+            nop
+          }
+          bind %values = SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue$tmp$array
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_2_values
+            }
+            seq {
+              nop
+              seq {
+                nop
+                read %__bind_1_end_index
+              }
+            }
+            nop
+            check_range %__bind_2_values, 0x1..%__bind_1_end_index
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue$tmp$panic_flag_ptr
+                    load_ptr SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %invalid = SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue$tmp$slice
+          nop
+        }
+        seq {
+          seq {
+            addr_of invalid
+            nop
+            nop
+            check_index addr_of, 0x0
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue$tmp$panic_flag_ptr
+                    load_ptr SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue$tmp$index_elem
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @SliceRangeOOBPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_4_context
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @SliceRangeOOBPanic::sliceRangeOOBPanicValue
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %SliceRangeOOBPanic_x3a_x3amain$tmp$call_ref_tmp_28 = 0x5
+                addr_of SliceRangeOOBPanic_x3a_x3amain$tmp$call_ref_tmp_28
+              }
+            }
+            call @SliceRangeOOBPanic_x3a_x3asliceRangeOOBPanicValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret SliceRangeOOBPanic_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aSliceRangeOOBPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aSliceRangeOOBPanic {
+  nop
+}
+
+

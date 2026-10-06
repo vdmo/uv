@@ -1,0 +1,115 @@
+proc @RawPointerNullWritePanic_x3a_x3arawPointerNullWritePanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          seq {
+            seq {
+              nop
+              read %__bind_2_value
+            }
+            seq {
+              seq {
+                nop
+                read %__bind_1_pointer
+              }
+              check_op NullDeref nonnull %__bind_1_pointer
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+              store_ptr %__bind_1_pointer = %__bind_2_value
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_2_value
+          }
+          nop
+          nop
+          ret %__bind_2_value
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RawPointerNullWritePanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_3_context
+          }
+          nop
+          nop
+        }
+        seq {
+          nop
+          bind %pointer = 0x0
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RawPointerNullWritePanic::rawPointerNullWritePanicValue
+            }
+            seq {
+              seq {
+                nop
+                addr_of pointer
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %RawPointerNullWritePanic_x3a_x3amain$tmp$call_ref_tmp_5 = 0x11
+                  addr_of RawPointerNullWritePanic_x3a_x3amain$tmp$call_ref_tmp_5
+                }
+              }
+            }
+            call @RawPointerNullWritePanic_x3a_x3arawPointerNullWritePanicValue (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret RawPointerNullWritePanic_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aRawPointerNullWritePanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aRawPointerNullWritePanic {
+  nop
+}
+
+

@@ -1,0 +1,104 @@
+proc @default_x3a_x3aGenericClassBoundMethodLookup_x3a_x3aReadableOwner_x3a_x3acl_x3a_x3aGenericClassBoundMethodLookup_x3a_x3aReadable_x3a_x3areadValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0xB
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @GenericClassBoundMethodLookup_x3a_x3agenericClassBoundMethodLookupReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %owner = GenericClassBoundMethodLookup_x3a_x3agenericClassBoundMethodLookupReference$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              addr_of owner
+            }
+            call @GenericClassBoundMethodLookup_x3a_x3aboundedRead_x3a_x3ainst_x3a_x3aGenericClassBoundMethodLookup_x3a_x3aReadableOwner (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr GenericClassBoundMethodLookup_x3a_x3agenericClassBoundMethodLookupReference$tmp$panic_flag_ptr
+                    load_ptr GenericClassBoundMethodLookup_x3a_x3agenericClassBoundMethodLookupReference$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret GenericClassBoundMethodLookup_x3a_x3agenericClassBoundMethodLookupReference$tmp$call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @GenericClassBoundMethodLookup_x3a_x3aboundedRead_x3a_x3ainst_x3a_x3aGenericClassBoundMethodLookup_x3a_x3aReadableOwner {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          addr_of value
+          nop
+          call @default_x3a_x3aGenericClassBoundMethodLookup_x3a_x3aReadableOwner_x3a_x3acl_x3a_x3aGenericClassBoundMethodLookup_x3a_x3aReadable_x3a_x3areadValue (addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        nop
+        ret GenericClassBoundMethodLookup_x3a_x3aboundedRead_x3a_x3ainst_x3a_x3aGenericClassBoundMethodLookup_x3a_x3aReadableOwner$tmp$method_call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aGenericClassBoundMethodLookup {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aGenericClassBoundMethodLookup {
+  nop
+}
+
+

@@ -1,0 +1,41 @@
+proc @MacOSHostedSharedLibrary_x5fx3a_x5fx3amacOSHostedReferenceIncrement_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_2_value
+          }
+          nop
+          check_op Overflow + %__bind_2_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_2_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret MacOSHostedSharedLibrary_x5fx3a_x5fx3amacOSHostedReferenceIncrement_x3a_x3a_x5f_x5fhost_x5fbody$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aMacOSHostedSharedLibrary {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aMacOSHostedSharedLibrary {
+  nop
+}
+
+

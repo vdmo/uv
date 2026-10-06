@@ -1,0 +1,5273 @@
+proc @RuntimeInterfaceSymbols_x3a_x3aRuntimeInterfaceDynamicValueOwner_x3a_x3areadRuntimeInterfaceDynamicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aRuntimeInterfaceDynamicValueOwner_x3a_x3areadRuntimeInterfaceDynamicValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueFunction {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x11
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceUnitValueScore {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_2_value
+          }
+          nop
+          nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x1
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_3_value
+          }
+          nop
+          if_case %__bind_3_value {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$if_case_clause_result_7 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$if_case_clause_result_7
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %count = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_4_count
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$if_case_clause_result_9 = %__bind_4_count
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$if_case_clause_result_9
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %payload_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$pat_enum_payload_field
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_4_payload_value
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$if_case_clause_result_11 = %__bind_4_payload_value
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$if_case_clause_result_11
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueModalScore {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_4_value
+          }
+          nop
+          if_case %__bind_4_value {
+            case_clause {
+              pat @Ready {value: payload_value}
+              body {
+seq {
+                  nop
+                  nop
+                  bind %payload_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueModalScore$tmp$pat_modal_field
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_5_payload_value
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueModalScore$tmp$if_case_clause_result_15 = %__bind_5_payload_value
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueModalScore$tmp$if_case_clause_result_15
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueModalScore$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        read @string::length
+                        seq {
+                          nop
+                          seq {
+                            seq {
+                              read @string::as_view
+                              seq {
+                                nop
+                                addr_of value
+                              }
+                              call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3aas_x5fview (addr_of)
+                            }
+                            bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$call_ref_tmp_21 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$call
+                            addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$call_ref_tmp_21
+                          }
+                        }
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+                      }
+                      seq {
+                        nop
+                        read %__bind_6_expected_length
+                      }
+                      binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$call, %__bind_6_expected_length
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$if_case_clause_result_25 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$binop
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$if_case_clause_result_25
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  seq {
+                    nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3adrop_x5fmanaged (%value)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_code_ptr
+                    }
+                    binop && 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_flag
+                    binop && 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_code_ptr = 0x0
+                    } else nop
+                    binop || 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$panic_flag then nop else nop
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$if_case_clause_result_44 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$if_case_clause_result_44
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        read @bytes::length
+                        seq {
+                          nop
+                          seq {
+                            seq {
+                              read @bytes::as_view
+                              seq {
+                                nop
+                                addr_of value
+                              }
+                              call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3aas_x5fview (addr_of)
+                            }
+                            bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$call_ref_tmp_50 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$call
+                            addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$call_ref_tmp_50
+                          }
+                        }
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3alength (addr_of)
+                      }
+                      seq {
+                        nop
+                        read %__bind_8_expected_length
+                      }
+                      binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$call, %__bind_8_expected_length
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$if_case_clause_result_54 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$binop
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$if_case_clause_result_54
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  seq {
+                    nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3adrop_x5fmanaged (%value)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_code_ptr
+                    }
+                    binop && 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_flag
+                    binop && 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_code_ptr = 0x0
+                    } else nop
+                    binop || 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$panic_flag then nop else nop
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$if_case_clause_result_73 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$if_case_clause_result_73
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %truth = 0x1
+          nop
+        }
+        seq {
+          nop
+          bind %letter = 0x41
+          nop
+        }
+        seq {
+          nop
+          bind %unit_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$unit
+          nop
+        }
+        seq {
+          seq {
+            nop
+            check_op Overflow - 0x29
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            unop - 0x29
+          }
+          bind %signed_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$unop
+          nop
+        }
+        seq {
+          nop
+          bind %unsigned_value = 0x29
+          nop
+        }
+        seq {
+          nop
+          bind %wide_value = 0x4B0
+          nop
+        }
+        seq {
+          nop
+          bind %ratio = 0x400E000000000000
+          nop
+        }
+        seq {
+          nop
+          bind %narrow_ratio = 0x40200000
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  nop
+                  read @RuntimeInterfaceSymbols::runtimeInterfaceUnitValueScore
+                }
+                seq {
+                  nop
+                  addr_of unit_value
+                }
+                call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceUnitValueScore (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$call, 0x1
+            }
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$binop then seq {
+              nop
+              read %__bind_9_truth
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_10_letter
+              }
+              nop
+              binop == %__bind_10_letter, 0x41
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_12_signed_value
+              }
+              seq {
+                nop
+                check_op Overflow - 0x29
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                unop - 0x29
+              }
+              binop == %__bind_12_signed_value, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$unop
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_13_unsigned_value
+              }
+              nop
+              binop == %__bind_13_unsigned_value, 0x29
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_14_wide_value
+              }
+              nop
+              binop == %__bind_14_wide_value, 0x4B0
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_15_ratio
+              }
+              nop
+              binop > %__bind_15_ratio, 0x4008000000000000
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_15_ratio
+              }
+              nop
+              binop < %__bind_15_ratio, 0x4010000000000000
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_16_narrow_ratio
+              }
+              nop
+              binop > %__bind_16_narrow_ratio, 0x40000000
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_16_narrow_ratio
+              }
+              nop
+              binop < %__bind_16_narrow_ratio, 0x40400000
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe {
+  seq {
+    nop
+    block seq {
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fenter (0x22)
+      seq {
+        seq {
+          nop
+          bind %value = 0x53
+          nop
+        }
+        seq {
+          seq {
+            addr_of value
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5ftag_x5fscope (addr_of, 0x22)
+          }
+          bind %safe_pointer = addr_of
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              seq {
+                nop
+                read %__bind_18_safe_pointer
+              }
+              seq {
+                check_op NullDeref nonnull %__bind_18_safe_pointer
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5fis_x5factive (%__bind_18_safe_pointer)
+                check_op ExpiredDeref addr_active RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$addr_active
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                load_ptr %__bind_18_safe_pointer
+              }
+            }
+            nop
+          }
+          bind %safe_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$deref
+          nop
+        }
+        seq {
+          nop
+          bind %safe_null = 0x0
+          nop
+        }
+        seq {
+          nop
+          bind %same_safe_null = 0x0
+          nop
+        }
+        seq {
+          nop
+          bind %raw_null = 0x0
+          nop
+        }
+        seq {
+          nop
+          bind %same_raw_null = 0x0
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_19_safe_value
+              }
+              nop
+              binop == %__bind_19_safe_value, 0x53
+            }
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$binop then seq {
+              seq {
+                nop
+                read %__bind_20_safe_null
+              }
+              seq {
+                nop
+                read %__bind_21_same_safe_null
+              }
+              binop == %__bind_20_safe_null, %__bind_21_same_safe_null
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_22_raw_null
+              }
+              seq {
+                nop
+                read %__bind_23_same_raw_null
+              }
+              binop == %__bind_22_raw_null, %__bind_23_same_raw_null
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fexit (0x22)
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %tuple_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$tuple
+          nop
+        }
+        seq {
+          seq {
+            nop
+            nop
+            nop
+          }
+          bind %array_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$array
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              nop
+            }
+            bind %range_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$range
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_25_array_value
+            }
+            seq {
+              nop
+              read %__bind_26_range_value
+            }
+            nop
+            check_range %__bind_25_array_value, ?..?
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %slice_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$slice
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_24_tuple_value
+              }
+              seq {
+                addr_of array_value
+                nop
+                nop
+              }
+              check_op Overflow + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$tuple_elem, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$index_elem
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+              binop + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$tuple_elem, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$index_elem
+            }
+            seq {
+              nop
+              read %__bind_24_tuple_value
+            }
+          }
+          bind %record_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_28_record_value
+            }
+            nop
+          }
+          bind %enum_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$enum_record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            unop widen RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$record
+          }
+          bind %modal_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$unop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                addr_of slice_value
+                nop
+                nop
+                check_index addr_of, 0x0
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$index_elem, 0xB
+            }
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$binop then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_28_record_value
+                }
+                nop
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$place_field, 0x10
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_28_record_value
+              }
+              nop
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read @RuntimeInterfaceSymbols::runtimeInterfaceValueEnumScore
+                }
+                seq {
+                  nop
+                  addr_of enum_value
+                }
+                call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueEnumScore (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$call, 0x10
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read @RuntimeInterfaceSymbols::runtimeInterfaceValueModalScore
+                }
+                seq {
+                  nop
+                  addr_of modal_value
+                }
+                call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceValueModalScore (addr_of, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$call, 0x17
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe {
+  seq {
+    nop
+    block seq {
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fenter (0x27)
+      seq {
+        seq {
+          seq {
+            nop
+            read @RuntimeInterfaceSymbols::runtimeInterfaceValueFunction
+          }
+          bind %function_value = @runtimeInterfaceValueFunction
+          nop
+        }
+        seq {
+          nop
+          bind %closure_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$closure
+          nop
+        }
+        seq {
+          nop
+          bind %text_value = 0x6E69616D6F642D65756C6176
+          nop
+        }
+        seq {
+          seq {
+            read @string::slice
+            seq {
+              seq {
+                nop
+                addr_of text_value
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call_ref_tmp_252 = 0x0
+                  addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call_ref_tmp_252
+                }
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call_ref_tmp_255 = 0x5
+                  addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call_ref_tmp_255
+                }
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3aslice (addr_of, addr_of, addr_of)
+          }
+          bind %text_slice = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            read @bytes::view_string
+            seq {
+              nop
+              addr_of text_value
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3aview_x5fstring (addr_of)
+          }
+          bind %bytes_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            read @string::to_managed
+            seq {
+              seq {
+                nop
+                addr_of text_slice
+              }
+              seq {
+                nop
+                seq {
+                  addr_of context
+                  addr_of context.heap
+                  nop
+                }
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3ato_x5fmanaged (addr_of, addr_of)
+          }
+          bind %managed_text = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            read @bytes::to_managed
+            seq {
+              seq {
+                nop
+                addr_of bytes_value
+              }
+              seq {
+                nop
+                seq {
+                  addr_of context
+                  addr_of context.heap
+                  nop
+                }
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3ato_x5fmanaged (addr_of, addr_of)
+          }
+          bind %managed_bytes = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call
+          nop
+        }
+        seq {
+          nop
+          bind %dynamic_owner = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            addr_of dynamic_owner
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5ftag_x5fscope (addr_of, 0x27)
+          }
+          bind %dynamic_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$dyn
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceScalarValueProbe
+              }
+              nop
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceScalarValueProbe (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20bytes_x40Managed_x2c_x20AllocationError_x3e (%managed_bytes, %__panic)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code
+                    } else nop
+                    binop || 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20string_x40Managed_x2c_x20AllocationError_x3e (%managed_text, %__panic)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_sel
+                    } else nop
+                    binop || RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                    nop
+                  }                }
+              }
+            }
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call then seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfacePointerValueProbe
+              }
+              nop
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfacePointerValueProbe (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20bytes_x40Managed_x2c_x20AllocationError_x3e (%managed_bytes, %__panic)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code
+                    } else nop
+                    binop || 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20string_x40Managed_x2c_x20AllocationError_x3e (%managed_text, %__panic)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_sel
+                    } else nop
+                    binop || RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                    nop
+                  }                }
+              }
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and then seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceAggregateValueProbe
+              }
+              nop
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceAggregateValueProbe (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20bytes_x40Managed_x2c_x20AllocationError_x3e (%managed_bytes, %__panic)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code
+                    } else nop
+                    binop || 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20string_x40Managed_x2c_x20AllocationError_x3e (%managed_text, %__panic)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_sel
+                    } else nop
+                    binop || RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                    nop
+                  }                }
+              }
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_32_function_value
+                }
+                nop
+                call %__bind_32_function_value (%__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                      nop
+                      clear_panic
+                      call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20bytes_x40Managed_x2c_x20AllocationError_x3e (%managed_bytes, %__panic)
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                      }
+                      binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                      unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                        store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                        store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code
+                      } else nop
+                      binop || 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                      nop
+                      nop
+                      clear_panic
+                      call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20string_x40Managed_x2c_x20AllocationError_x3e (%managed_text, %__panic)
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                      }
+                      binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                      unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                        store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                        store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_sel
+                      } else nop
+                      binop || RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                      nop
+                    }                  }
+                }
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call, 0x11
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_35_closure_value
+                }
+                call RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$closure_code (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$closure_env, %__panic)
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                      nop
+                      clear_panic
+                      call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20bytes_x40Managed_x2c_x20AllocationError_x3e (%managed_bytes, %__panic)
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                      }
+                      binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                      unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                        store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                        store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code
+                      } else nop
+                      binop || 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                      nop
+                      nop
+                      clear_panic
+                      call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20string_x40Managed_x2c_x20AllocationError_x3e (%managed_text, %__panic)
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                      }
+                      binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                      unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      binop && RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                        store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                        store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_sel
+                      } else nop
+                      binop || RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panicking, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                      nop
+                    }                  }
+                }
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$closure_call_value_410 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$closure_call_result
+              }
+              nop
+              binop == %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$closure_call_value_410, 0x13
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and then seq {
+              seq {
+                read @string::length
+                seq {
+                  nop
+                  addr_of text_value
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call, 0xC
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and then seq {
+              seq {
+                read @bytes::length
+                seq {
+                  nop
+                  addr_of bytes_value
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3alength (addr_of)
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call, 0xC
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and then seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceManagedStringValueSucceeded
+              }
+              seq {
+                seq {
+                  nop
+                  seq {
+                    addr_of managed_text
+                    move_state managed_text
+                  }
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call_ref_tmp_426 = 0x5
+                    addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call_ref_tmp_426
+                  }
+                }
+              }
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedStringValueSucceeded (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20bytes_x40Managed_x2c_x20AllocationError_x3e (%managed_bytes, %__panic)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    binop && 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code
+                    } else nop
+                    binop || 0x1, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag then nop else nop
+                    nop
+                  }                }
+              }
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and then seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceManagedBytesValueSucceeded
+              }
+              seq {
+                seq {
+                  nop
+                  seq {
+                    addr_of managed_bytes
+                    move_state managed_bytes
+                  }
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call_ref_tmp_447 = 0xC
+                    addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$call_ref_tmp_447
+                  }
+                }
+              }
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesValueSucceeded (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_44_dynamic_value
+                }
+                nop
+                seq {
+                  call_vtable %__bind_44_dynamic_value [0] check_dynamic_receiver_addr_active (%__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_flag_ptr
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                }
+              }
+              nop
+              binop == RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$dyncall_result, 0x1F
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRuntimeValueDomainProbe$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fexit (0x27)
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x5fx3a_x5fx3aruntimeInterfaceRuntimeValueDomainProbe_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      nop
+      nop
+    }
+    ret 0x13
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_45_result
+          }
+          nop
+          if_case %__bind_45_result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded$tmp$if_case_clause_result_476 = 0x1
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded$tmp$if_case_clause_result_476
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded$tmp$if_case_clause_result_479 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded$tmp$if_case_clause_result_479
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    seq {
+                      seq {
+                        read @string::as_view
+                        seq {
+                          nop
+                          addr_of value
+                        }
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3aas_x5fview (addr_of)
+                      }
+                      bind %text = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$call
+                      nop
+                    }
+                  } seq {
+                    seq {
+                      seq {
+                        read @string::length
+                        seq {
+                          nop
+                          addr_of text
+                        }
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+                      }
+                      nop
+                      binop >= RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$call, 0x0
+                    }
+                    seq {
+                      nop
+                      nop
+                    }
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$if_case_clause_result_492 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$binop
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$if_case_clause_result_492
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  seq {
+                    nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3adrop_x5fmanaged (%value)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_code_ptr
+                    }
+                    binop && 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_flag
+                    binop && 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_code_ptr = 0x0
+                    } else nop
+                    binop || 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$panic_flag then nop else nop
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$if_case_clause_result_511 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$if_case_clause_result_511
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    seq {
+                      seq {
+                        read @bytes::as_view
+                        seq {
+                          nop
+                          addr_of value
+                        }
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3aas_x5fview (addr_of)
+                      }
+                      bind %data = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$call
+                      nop
+                    }
+                  } seq {
+                    seq {
+                      seq {
+                        read @bytes::length
+                        seq {
+                          nop
+                          addr_of data
+                        }
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3alength (addr_of)
+                      }
+                      nop
+                      binop >= RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$call, 0x0
+                    }
+                    seq {
+                      nop
+                      nop
+                    }
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$if_case_clause_result_524 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$binop
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$if_case_clause_result_524
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  seq {
+                    nop
+                    nop
+                    nop
+                    clear_panic
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3adrop_x5fmanaged (%value)
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_code_ptr
+                    }
+                    binop && 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_code) else nop
+                    unop ! RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_flag
+                    binop && 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_clear
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_restore then seq {
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_flag_ptr = 0x1
+                      store_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_code_ptr = 0x0
+                    } else nop
+                    binop || 0x0, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_flag
+                    if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$panic_flag then nop else nop
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$if_case_clause_result_543 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$if_case_clause_result_543
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          addr_of value
+                          nop
+                          call @File_x3a_x3aRead_x3a_x3aread_x5fall (addr_of)
+                        }
+                        bind %read_result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          seq {
+                            seq {
+                              nop
+                              read %value
+                            }
+                            move_state value
+                          }
+                          nop
+                          call @File_x3a_x3aRead_x3a_x3aclose (%value)
+                        }
+                        bind %closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_51_closed
+                        }
+                        nop
+                        nop
+                      }
+                    }
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read @RuntimeInterfaceSymbols::runtimeInterfaceManagedTextSucceeded
+                      }
+                      seq {
+                        nop
+                        seq {
+                          addr_of read_result
+                          move_state read_result
+                        }
+                      }
+                      call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedTextSucceeded (addr_of, %__panic)
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$panic_flag_ptr
+                              load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                    }
+                    seq {
+                      nop
+                      nop
+                    }
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$if_case_clause_result_560 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$call
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$if_case_clause_result_560
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$if_case_clause_result_563 = 0x1
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$if_case_clause_result_563
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          addr_of value
+                          nop
+                          call @File_x3a_x3aRead_x3a_x3aread_x5fall_x5fbytes (addr_of)
+                        }
+                        bind %read_result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          seq {
+                            seq {
+                              nop
+                              read %value
+                            }
+                            move_state value
+                          }
+                          nop
+                          call @File_x3a_x3aRead_x3a_x3aclose (%value)
+                        }
+                        bind %closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_52_closed
+                        }
+                        nop
+                        nop
+                      }
+                    }
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read @RuntimeInterfaceSymbols::runtimeInterfaceManagedBytesSucceeded
+                      }
+                      seq {
+                        nop
+                        seq {
+                          addr_of read_result
+                          move_state read_result
+                        }
+                      }
+                      call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceManagedBytesSucceeded (addr_of, %__panic)
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$panic_flag_ptr
+                              load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                    }
+                    seq {
+                      nop
+                      nop
+                    }
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$if_case_clause_result_580 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$call
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$if_case_clause_result_580
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$if_case_clause_result_583 = 0x1
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$if_case_clause_result_583
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          addr_of value
+                          seq {
+                            nop
+                            addr_of data
+                          }
+                          call @File_x3a_x3aWrite_x3a_x3awrite (addr_of, addr_of)
+                        }
+                        bind %write_result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          addr_of value
+                          nop
+                          call @File_x3a_x3aWrite_x3a_x3aflush (addr_of)
+                        }
+                        bind %flush_result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          seq {
+                            seq {
+                              nop
+                              read %value
+                            }
+                            move_state value
+                          }
+                          nop
+                          call @File_x3a_x3aWrite_x3a_x3aclose (%value)
+                        }
+                        bind %closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_55_closed
+                        }
+                        nop
+                        nop
+                      }
+                    }
+                  } seq {
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          read @RuntimeInterfaceSymbols::runtimeInterfaceIoUnitSucceeded
+                        }
+                        seq {
+                          nop
+                          addr_of write_result
+                        }
+                        call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded (addr_of, %__panic)
+                        seq {
+                          nop
+                          cleanup_panic_check {
+seq {
+                              seq {
+                                load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$panic_flag_ptr
+                                load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$panic_code_ptr
+                              }
+                              nop
+                              nop
+                            }                          }
+                        }
+                      }
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$call then seq {
+                        seq {
+                          nop
+                          read @RuntimeInterfaceSymbols::runtimeInterfaceIoUnitSucceeded
+                        }
+                        seq {
+                          nop
+                          addr_of flush_result
+                        }
+                        call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded (addr_of, %__panic)
+                        seq {
+                          nop
+                          cleanup_panic_check {
+seq {
+                              seq {
+                                load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$panic_flag_ptr
+                                load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$panic_code_ptr
+                              }
+                              nop
+                              nop
+                            }                          }
+                        }
+                      } else nop
+                    }
+                    seq {
+                      nop
+                      nop
+                    }
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$if_case_clause_result_611 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$and
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$if_case_clause_result_611
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$if_case_clause_result_617 = 0x1
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$if_case_clause_result_617
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          addr_of value
+                          seq {
+                            nop
+                            addr_of data
+                          }
+                          call @File_x3a_x3aAppend_x3a_x3awrite (addr_of, addr_of)
+                        }
+                        bind %write_result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          addr_of value
+                          nop
+                          call @File_x3a_x3aAppend_x3a_x3aflush (addr_of)
+                        }
+                        bind %flush_result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          seq {
+                            seq {
+                              nop
+                              read %value
+                            }
+                            move_state value
+                          }
+                          nop
+                          call @File_x3a_x3aAppend_x3a_x3aclose (%value)
+                        }
+                        bind %closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_57_closed
+                        }
+                        nop
+                        nop
+                      }
+                    }
+                  } seq {
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          read @RuntimeInterfaceSymbols::runtimeInterfaceIoUnitSucceeded
+                        }
+                        seq {
+                          nop
+                          addr_of write_result
+                        }
+                        call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded (addr_of, %__panic)
+                        seq {
+                          nop
+                          cleanup_panic_check {
+seq {
+                              seq {
+                                load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$panic_flag_ptr
+                                load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$panic_code_ptr
+                              }
+                              nop
+                              nop
+                            }                          }
+                        }
+                      }
+                      if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$call then seq {
+                        seq {
+                          nop
+                          read @RuntimeInterfaceSymbols::runtimeInterfaceIoUnitSucceeded
+                        }
+                        seq {
+                          nop
+                          addr_of flush_result
+                        }
+                        call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIoUnitSucceeded (addr_of, %__panic)
+                        seq {
+                          nop
+                          cleanup_panic_check {
+seq {
+                              seq {
+                                load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$panic_flag_ptr
+                                load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$panic_code_ptr
+                              }
+                              nop
+                              nop
+                            }                          }
+                        }
+                      } else nop
+                    }
+                    seq {
+                      nop
+                      nop
+                    }
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$if_case_clause_result_645 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$and
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$if_case_clause_result_645
+              cleanup {
+seq {
+                  seq {
+                    nop
+                    nop
+                  }
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$if_case_clause_result_651 = 0x1
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$if_case_clause_result_651
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          nop
+          if_case %result {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          addr_of value
+                          nop
+                          call @DirIter_x3a_x3aOpen_x3a_x3anext (addr_of)
+                        }
+                        nop
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          seq {
+                            seq {
+                              nop
+                              read %value
+                            }
+                            move_state value
+                          }
+                          nop
+                          call @DirIter_x3a_x3aOpen_x3a_x3aclose (%value)
+                        }
+                        bind %closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory$tmp$method_call
+                        nop
+                      }
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_56_closed
+                        }
+                        nop
+                        nop
+                      }
+                    }
+                  } seq {
+                    nop
+                    seq {
+                      nop
+                      nop
+                    }
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory$tmp$if_case_clause_result_662 = 0x1
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory$tmp$if_case_clause_result_662
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory$tmp$if_case_clause_result_665 = 0x1
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory$tmp$if_case_clause_result_665
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.io
+              nop
+            }
+            seq {
+              nop
+              addr_of base_path
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3arestrict (addr_of, addr_of)
+          }
+          bind %restricted = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$method_call
+          nop
+        }
+        seq {
+          nop
+          bind %file_path = 0x7478742E656361667265746E692D656D69746E7572
+          nop
+        }
+        seq {
+          seq {
+            read @bytes::view_string
+            seq {
+              nop
+              addr_of data
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3aview_x5fstring (addr_of)
+          }
+          bind %data_bytes = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              seq {
+                nop
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_ref_tmp_677 = 0x2E
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_ref_tmp_677
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aensure_x5fdir (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              seq {
+                nop
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_ref_tmp_682 = 0x656361667265746E692D656D69746E7572
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_ref_tmp_682
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3acreate_x5fdir (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              seq {
+                nop
+                addr_of file_path
+              }
+              seq {
+                nop
+                addr_of data_bytes
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3awrite_x5ffile (addr_of, addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              addr_of file_path
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aread_x5ffile (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              addr_of file_path
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aread_x5fbytes (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              addr_of data
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3awrite_x5fstdout (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              addr_of data
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3awrite_x5fstderr (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              addr_of file_path
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aexists (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              addr_of file_path
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3akind (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RuntimeInterfaceSymbols::runtimeInterfaceCloseRead
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  addr_of restricted
+                  seq {
+                    nop
+                    addr_of file_path
+                  }
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aopen_x5fread (addr_of, addr_of)
+                }
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_710 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$method_call
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_710
+              }
+            }
+            call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseRead (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %read_closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RuntimeInterfaceSymbols::runtimeInterfaceReadBytesAndClose
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  addr_of restricted
+                  seq {
+                    nop
+                    addr_of file_path
+                  }
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aopen_x5fread (addr_of, addr_of)
+                }
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_721 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$method_call
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_721
+              }
+            }
+            call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReadBytesAndClose (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %read_bytes_closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RuntimeInterfaceSymbols::runtimeInterfaceCloseWrite
+            }
+            seq {
+              seq {
+                nop
+                seq {
+                  seq {
+                    addr_of restricted
+                    seq {
+                      nop
+                      addr_of file_path
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aopen_x5fwrite (addr_of, addr_of)
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_732 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$method_call
+                  addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_732
+                }
+              }
+              seq {
+                nop
+                addr_of data_bytes
+              }
+            }
+            call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %write_closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RuntimeInterfaceSymbols::runtimeInterfaceCloseAppend
+            }
+            seq {
+              seq {
+                nop
+                seq {
+                  seq {
+                    addr_of restricted
+                    seq {
+                      nop
+                      addr_of file_path
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aopen_x5fappend (addr_of, addr_of)
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_744 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$method_call
+                  addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_744
+                }
+              }
+              seq {
+                nop
+                addr_of data_bytes
+              }
+            }
+            call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseAppend (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %append_closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RuntimeInterfaceSymbols::runtimeInterfaceCloseWrite
+            }
+            seq {
+              seq {
+                nop
+                seq {
+                  seq {
+                    addr_of restricted
+                    seq {
+                      nop
+                      addr_of file_path
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3acreate_x5fwrite (addr_of, addr_of)
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_756 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$method_call
+                  addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_756
+                }
+              }
+              seq {
+                nop
+                addr_of data_bytes
+              }
+            }
+            call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseWrite (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %create_closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @RuntimeInterfaceSymbols::runtimeInterfaceCloseDirectory
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  addr_of restricted
+                  seq {
+                    nop
+                    seq {
+                      nop
+                      bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_ref_tmp_767 = 0x2E
+                      addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_ref_tmp_767
+                    }
+                  }
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aopen_x5fdir (addr_of, addr_of)
+                }
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_770 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$method_call
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call_move_tmp_770
+              }
+            }
+            call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCloseDirectory (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %directory_closed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            addr_of restricted
+            seq {
+              nop
+              addr_of file_path
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aremove (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_64_read_closed
+            }
+            if %__bind_64_read_closed then seq {
+              nop
+              read %__bind_66_read_bytes_closed
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$and then seq {
+              nop
+              read %__bind_68_write_closed
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$and then seq {
+              nop
+              read %__bind_70_append_closed
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$and then seq {
+              nop
+              read %__bind_72_create_closed
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$and then seq {
+              nop
+              read %__bind_75_directory_closed
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceIOProbe$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceNetworkProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.net
+              nop
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceNetworkProbe$tmp$call_ref_tmp_796 = 0x74736F686C61636F6C
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceNetworkProbe$tmp$call_ref_tmp_796
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3anet_x3a_x3arestrict_x5fto_x5fhost (addr_of, addr_of)
+          }
+          bind %restricted = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceNetworkProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_78_restricted
+          }
+          nop
+          nop
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x1
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.heap
+              nop
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe$tmp$call_ref_tmp_810 = 0x40
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe$tmp$call_ref_tmp_810
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aheap_x3a_x3awith_x5fquota (addr_of, addr_of)
+          }
+          bind %limited = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe$tmp$method_call
+          nop
+        }
+        block seq {
+          nop
+          seq {
+            seq {
+              addr_of limited
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe$tmp$call_ref_tmp_815 = 0x0
+                  addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe$tmp$call_ref_tmp_815
+                }
+              }
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aheap_x3a_x3aalloc_x5fraw (addr_of, addr_of)
+            }
+            bind %ptr = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe$tmp$method_call
+            nop
+          }
+        } seq {
+          seq {
+            addr_of limited
+            seq {
+              seq {
+                nop
+                addr_of ptr
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe$tmp$call_ref_tmp_821 = 0x0
+                  addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceHeapProbe$tmp$call_ref_tmp_821
+                }
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aheap_x3a_x3adealloc_x5fraw (addr_of, addr_of, addr_of)
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x1
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %options = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            read @Region::new_scoped
+            seq {
+              nop
+              addr_of options
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (addr_of)
+          }
+          bind %opened = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_86_opened
+            }
+            nop
+            alloc in %__bind_86_opened 0x47
+          }
+          bind %allocated = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$alloc_val
+          nop
+        }
+        seq {
+          seq {
+            addr_of allocated
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5ftag_x5ffrom (addr_of, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$alloc_ptr)
+          }
+          bind %allocated_pointer = addr_of
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              seq {
+                nop
+                read %__bind_88_allocated_pointer
+              }
+              seq {
+                check_op NullDeref nonnull %__bind_88_allocated_pointer
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5fis_x5factive (%__bind_88_allocated_pointer)
+                check_op ExpiredDeref addr_active RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$addr_active
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                load_ptr %__bind_88_allocated_pointer
+              }
+            }
+            nop
+          }
+          bind %allocated_value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$deref
+          nop
+        }
+        seq {
+          seq {
+            nop
+            seq {
+              seq {
+                nop
+                read %opened
+              }
+              move_state opened
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afreeze (%opened)
+          }
+          bind %frozen = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            seq {
+              seq {
+                nop
+                read %frozen
+              }
+              move_state frozen
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3athaw (%frozen)
+          }
+          bind %thawed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$method_call
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              nop
+              seq {
+                seq {
+                  nop
+                  read %thawed
+                }
+                move_state thawed
+              }
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3areset_x5funchecked (%thawed)
+            }
+            nop
+          }
+          bind %reset = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$method_call
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              nop
+              seq {
+                seq {
+                  nop
+                  read %reset
+                }
+                move_state reset
+              }
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%reset)
+            }
+            nop
+          }
+          bind %freed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_89_allocated_value
+            }
+            nop
+            binop == %__bind_89_allocated_value, 0x47
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionModalProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionFrameProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %score = 0x0
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              nop
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fenter (0x68)
+            region RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionFrameProbe$tmp$record_ctor
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_94_score
+            }
+            nop
+            binop == %__bind_94_score, 0x2
+          }
+          nop
+          nop
+          nop
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionFrameProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionAddressProbe {
+  seq {
+    nop
+    block seq {
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fenter (0x6E)
+      seq {
+        seq {
+          nop
+          bind %value = 0x4F
+          nop
+        }
+        seq {
+          seq {
+            addr_of value
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5ftag_x5fscope (addr_of, 0x6E)
+          }
+          bind %pointer = addr_of
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              seq {
+                nop
+                read %__bind_99_pointer
+              }
+              seq {
+                check_op NullDeref nonnull %__bind_99_pointer
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionAddressProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionAddressProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5fis_x5factive (%__bind_99_pointer)
+                check_op ExpiredDeref addr_active RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionAddressProbe$tmp$addr_active
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionAddressProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionAddressProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                load_ptr %__bind_99_pointer
+              }
+            }
+            nop
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceRegionAddressProbe$tmp$deref
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3ascope_x5fexit (0x6E)
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            read @CancelToken::new
+            nop
+            cancel_create -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe$tmp$call
+          }
+          bind %token = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of token
+            nop
+            call @CancelToken_x3a_x3aActive_x3a_x3achild (addr_of)
+          }
+          bind %child = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of child
+            nop
+            cancel_wait addr_of -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe$tmp$method_call
+          }
+          bind %pending = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_102_pending
+          }
+          nop
+          nop
+        }
+        seq {
+          nop
+          addr_of token
+          nop
+          cancel_request addr_of -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe$tmp$method_call
+        }
+        seq {
+          seq {
+            nop
+            addr_of child
+            nop
+            cancel_check addr_of -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe$tmp$method_call
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceCancelTokenProbe$tmp$method_call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcome {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_103_should_fail
+          }
+          nop
+          if %__bind_103_should_fail then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x1
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_104_value
+          }
+          nop
+          nop
+          ret %__bind_104_value
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorCompleted {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_105_value
+        }
+        async_complete value: %__bind_105_value -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorCompleted$tmp$async_result
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorCompleted$tmp$async_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorCompleted$resume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_105_value
+        }
+        async_complete value: %__bind_105_value -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorCompleted$tmp$async_result
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorCompleted$tmp$async_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceReactorOutcome
+              }
+              seq {
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$call_ref_tmp_1002 = 0x1
+                    addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$call_ref_tmp_1002
+                  }
+                }
+                seq {
+                  nop
+                  addr_of value
+                }
+              }
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcome (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            if_case RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$call {
+              case_clause {
+                pat __case0
+                body {
+seq {
+                    bind %__uv_async_error_0 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_error
+                    nop
+                    async_fail value: %__uv_async_error_0 -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_failed_async
+                    ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_failed_async
+                  }                }
+                value RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_unreach
+              }
+              case_clause {
+                pat __case1
+                body {
+nop                }
+                value RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_success
+              }
+            }
+          }
+          bind %result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_result
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          async_complete value: %result -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$async_result
+          nop
+          nop
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$resume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceReactorOutcome
+              }
+              seq {
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$call_ref_tmp_1002 = 0x1
+                    addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$call_ref_tmp_1002
+                  }
+                }
+                seq {
+                  nop
+                  addr_of value
+                }
+              }
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcome (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            if_case RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$call {
+              case_clause {
+                pat __case0
+                body {
+seq {
+                    bind %__uv_async_error_0 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_error
+                    nop
+                    async_fail value: %__uv_async_error_0 -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_failed_async
+                    ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_failed_async
+                  }                }
+                value RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_unreach
+              }
+              case_clause {
+                pat __case1
+                body {
+nop                }
+                value RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_success
+              }
+            }
+          }
+          bind %result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$propagate_result
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %result
+            }
+            move_state result
+          }
+          async_complete value: %result -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$async_result
+          nop
+          nop
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            yield RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$tmp$unit [state=1] -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$tmp$yield_input
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_110_value
+          }
+          async_complete value: %__bind_110_value -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$tmp$async_result
+          nop
+          nop
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$resume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            yield RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$tmp$unit [state=1] -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$tmp$yield_input
+          }
+          seq {
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_110_value
+          }
+          async_complete value: %__bind_110_value -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$tmp$async_result
+          nop
+          nop
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended$tmp$async_result
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_111_value
+          }
+          nop
+          if_case %__bind_111_value {
+            case_clause {
+              pat actual
+              body {
+seq {
+                  nop
+                  nop
+                  bind %actual = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$pat_union_payload
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$ifcase_scrutinee_payload
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_113_actual
+                      }
+                      seq {
+                        nop
+                        read %__bind_112_expected
+                      }
+                      binop == %__bind_113_actual, %__bind_112_expected
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$if_case_clause_result_1020 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$binop
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$if_case_clause_result_1020
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat failed
+              body {
+seq {
+                  nop
+                  nop
+                  bind %failed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$pat_union_payload
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$ifcase_scrutinee_payload
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$if_case_clause_result_1024 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$if_case_clause_result_1024
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_113_value
+          }
+          nop
+          if_case %__bind_113_value {
+            case_clause {
+              pat actual
+              body {
+seq {
+                  nop
+                  nop
+                  bind %actual = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$pat_union_payload
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$ifcase_scrutinee_payload
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$if_case_clause_result_1030 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$if_case_clause_result_1030
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat failed
+              body {
+seq {
+                  nop
+                  nop
+                  bind %failed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$pat_union_payload
+                  bind %value = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$ifcase_scrutinee_payload
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_114_failed
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$if_case_clause_result_1033 = %__bind_114_failed
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$if_case_clause_result_1033
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailureIs$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_114_value
+          }
+          nop
+          if_case %__bind_114_value {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %actual = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_116_actual
+                      }
+                      seq {
+                        nop
+                        read %__bind_115_expected
+                      }
+                      binop == %__bind_116_actual, %__bind_115_expected
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs$tmp$if_case_clause_result_1038 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs$tmp$binop
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs$tmp$if_case_clause_result_1038
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs$tmp$if_case_clause_result_1041 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs$tmp$if_case_clause_result_1041
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeFailureIs {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_116_value
+          }
+          nop
+          if_case %__bind_116_value {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeFailureIs$tmp$if_case_clause_result_1046 = 0x0
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeFailureIs$tmp$if_case_clause_result_1046
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %failed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeFailureIs$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_117_failed
+                    }
+                    nop
+                  }
+                  bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeFailureIs$tmp$if_case_clause_result_1048 = %__bind_117_failed
+                }              }
+              value %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeFailureIs$tmp$if_case_clause_result_1048
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeFailureIs$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            seq {
+              addr_of context
+              addr_of context.reactor
+              nop
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read @RuntimeInterfaceSymbols::runtimeInterfaceReactorCompleted
+                  }
+                  seq {
+                    nop
+                    seq {
+                      nop
+                      bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1054 = 0x41
+                      addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1054
+                    }
+                  }
+                  call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorCompleted (addr_of, %__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                }
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1057 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1057
+              }
+            }
+            load_ptr addr_of
+            sync RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1057 runtime_symbol=ultraviolet_x3a_x3aruntime_x3a_x3areactor_x3a_x3arun runtime_receiver=addr_of -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$method_call
+          }
+          bind %run_completed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            seq {
+              addr_of context
+              addr_of context.reactor
+              nop
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read @RuntimeInterfaceSymbols::runtimeInterfaceReactorFailed
+                  }
+                  seq {
+                    nop
+                    seq {
+                      nop
+                      bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1064 = 0x42
+                      addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1064
+                    }
+                  }
+                  call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorFailed (addr_of, %__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_flag_ptr
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                }
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1072 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1072
+              }
+            }
+            load_ptr addr_of
+            sync RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1072 runtime_symbol=ultraviolet_x3a_x3aruntime_x3a_x3areactor_x3a_x3arun runtime_receiver=addr_of -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$method_call
+          }
+          bind %run_failed = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            seq {
+              addr_of context
+              addr_of context.reactor
+              nop
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read @RuntimeInterfaceSymbols::runtimeInterfaceReactorSuspended
+                  }
+                  seq {
+                    nop
+                    seq {
+                      nop
+                      bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1079 = 0x43
+                      addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1079
+                    }
+                  }
+                  call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended (addr_of, %__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_flag_ptr
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                }
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1087 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1087
+              }
+            }
+            load_ptr addr_of
+            sync RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1087 runtime_symbol=ultraviolet_x3a_x3aruntime_x3a_x3areactor_x3a_x3arun runtime_receiver=addr_of -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$method_call
+          }
+          bind %run_suspended = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            seq {
+              addr_of context
+              addr_of context.reactor
+              nop
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read @RuntimeInterfaceSymbols::runtimeInterfaceReactorSuspended
+                  }
+                  seq {
+                    nop
+                    seq {
+                      nop
+                      bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1094 = 0x44
+                      addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1094
+                    }
+                  }
+                  call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorSuspended (addr_of, %__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_flag_ptr
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                }
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1102 = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1102
+              }
+            }
+            load_ptr addr_of
+            spawn {
+              captured_env:
+                alloc in %thawed RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1102
+              body:
+                nop
+              body_result: unit
+              result: RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$method_call
+              runtime_symbol: ultraviolet_x3a_x3aruntime_x3a_x3areactor_x3a_x3aregister
+              runtime_receiver: addr_of
+            }
+          }
+          bind %tracked = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_129_tracked
+            }
+            wait %__bind_129_tracked -> RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$wait_result [tracked]
+          }
+          bind %tracked_result = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$wait_result
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceReactorOutcomeValueIs
+              }
+              seq {
+                seq {
+                  nop
+                  addr_of run_completed
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1110 = 0x41
+                    addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1110
+                  }
+                }
+              }
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call then seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceReactorOutcomeFailureIs
+              }
+              seq {
+                nop
+                addr_of run_failed
+              }
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeFailureIs (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$and then seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceReactorOutcomeValueIs
+              }
+              seq {
+                seq {
+                  nop
+                  addr_of run_suspended
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1128 = 0x43
+                    addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1128
+                  }
+                }
+              }
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorOutcomeValueIs (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            } else nop
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$and then seq {
+              seq {
+                nop
+                read @RuntimeInterfaceSymbols::runtimeInterfaceReactorValueIs
+              }
+              seq {
+                seq {
+                  nop
+                  addr_of tracked_result
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1139 = 0x44
+                    addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$call_ref_tmp_1139
+                  }
+                }
+              }
+              call @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorValueIs (addr_of, addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceReactorProbe$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.sys
+              nop
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call_ref_tmp_1158 = 0x48544150
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call_ref_tmp_1158
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aget_x5fenv (addr_of, addr_of)
+          }
+          bind %env = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.sys
+              nop
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aexecutable_x5fpath (addr_of)
+          }
+          bind %executable_path = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.sys
+              nop
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3acurrent_x5fdirectory (addr_of)
+          }
+          bind %current_directory = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.sys
+              nop
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aargument_x5fcount (addr_of)
+          }
+          bind %argument_count = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_137_argument_count
+              }
+              nop
+              binop > %__bind_137_argument_count, 0x0
+            }
+            seq {
+              nop
+              nop
+            }
+            if RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$binop then block seq {
+              nop
+              nop
+            } seq {
+              seq {
+                seq {
+                  addr_of context
+                  addr_of context.sys
+                  nop
+                }
+                seq {
+                  nop
+                  seq {
+                    nop
+                    bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call_ref_tmp_1178 = 0x0
+                    addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call_ref_tmp_1178
+                  }
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aargument (addr_of, addr_of)
+              }
+              nop
+            } else block seq {
+              nop
+              nop
+            } seq {
+              nop
+              nop
+            }
+          }
+          bind %first_argument = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$if
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.sys
+              nop
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call_ref_tmp_1186 = 0x656361667265746E692D656D69746E7572206F686365
+                addr_of RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call_ref_tmp_1186
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3arun (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    read @string::length
+                    seq {
+                      nop
+                      addr_of env
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+                  }
+                  seq {
+                    read @string::length
+                    seq {
+                      nop
+                      addr_of executable_path
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+                  }
+                  check_op Overflow + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$panic_flag_ptr
+                          load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call
+                }
+                seq {
+                  read @string::length
+                  seq {
+                    nop
+                    addr_of current_directory
+                  }
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+                }
+                check_op Overflow + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$binop, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$panic_flag_ptr
+                        load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                binop + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$binop, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call
+              }
+              seq {
+                read @string::length
+                seq {
+                  nop
+                  addr_of first_argument
+                }
+                call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3alength (addr_of)
+              }
+              check_op Overflow + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$binop, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$panic_flag_ptr
+                      load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+              binop + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$binop, RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$call
+            }
+            seq {
+              nop
+              read %__bind_137_argument_count
+            }
+            check_op Overflow + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$binop, %__bind_137_argument_count
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$panic_flag_ptr
+                    load_ptr RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop + RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$binop, %__bind_137_argument_count
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemExitProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            addr_of context
+            addr_of context.sys
+            nop
+          }
+          seq {
+            nop
+            addr_of code
+          }
+          call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aexit (addr_of, addr_of)
+        }
+        nop
+        nop
+        ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceSystemExitProbe$tmp$method_call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceTimeProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.time
+              nop
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic (addr_of)
+          }
+          bind %monotonic = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceTimeProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.time
+              nop
+            }
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3awall (addr_of)
+          }
+          bind %wall = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceTimeProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            addr_of monotonic
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic_x5fnow (addr_of)
+          }
+          bind %start = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceTimeProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            addr_of monotonic
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic_x5fnow (addr_of)
+          }
+          bind %end = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceTimeProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            addr_of monotonic
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic_x5fresolution (addr_of)
+          }
+          bind %resolution = RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceTimeProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            addr_of monotonic
+            seq {
+              seq {
+                nop
+                addr_of start
+              }
+              seq {
+                nop
+                addr_of end
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic_x5felapsed (addr_of, addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of monotonic
+            seq {
+              nop
+              addr_of resolution
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3amonotonic_x5fcoarsen (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of wall
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3awall_x5fnow_x5futc (addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of wall
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3awall_x5fresolution (addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            addr_of wall
+            seq {
+              nop
+              addr_of resolution
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3atime_x3a_x3awall_x5fcoarsen (addr_of, addr_of)
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_147_resolution
+              }
+              nop
+            }
+            nop
+            binop > RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceTimeProbe$tmp$place_field, 0x0
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret RuntimeInterfaceSymbols_x3a_x3aruntimeInterfaceTimeProbe$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aRuntimeInterfaceSymbols {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aRuntimeInterfaceSymbols {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20bytes_x40Managed_x2c_x20AllocationError_x3e {
+  if_case drop_data {
+    case_clause {
+      pat <pattern>
+      body {
+call @ultraviolet_x3a_x3aruntime_x3a_x3abytes_x3a_x3adrop_x5fmanaged (drop_data_1269_payload)      }
+      value ()
+    }
+    case_clause {
+      pat <pattern>
+      body {
+nop      }
+      value ()
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aOutcome_x3cunique_x20string_x40Managed_x2c_x20AllocationError_x3e {
+  if_case drop_data {
+    case_clause {
+      pat <pattern>
+      body {
+call @ultraviolet_x3a_x3aruntime_x3a_x3astring_x3a_x3adrop_x5fmanaged (drop_data_1270_payload)      }
+      value ()
+    }
+    case_clause {
+      pat <pattern>
+      body {
+nop      }
+      value ()
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aRuntimeInterfaceSymbols_x3a_x3aRuntimeInterfaceDynamicValueOwner {
+  nop
+}
+
+

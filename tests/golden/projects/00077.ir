@@ -1,0 +1,88 @@
+proc @SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %shared_value = 0x1
+          nop
+        }
+        seq {
+          seq {
+            bind %SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$closure_env_storage_3 = SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$closure_env_zero
+            store_ptr SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$closure_field_ptr = SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$capture_addr
+          }
+          bind %reader = SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$closure
+          nop
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @SharedClosureCaptureWarning_x5fx3a_x5fx3asharedClosureCaptureWarningReference_x3a_x3a_x5fclosure0 {
+  seq {
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        fence seqcst
+        seq {
+          seq {
+            seq {
+              call @uv_key_scope_enter
+              bind %SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$__uv_implicit_key_scope_10 = SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$implicit_key_scope_enter
+            }
+            call @uv_key_check_conflict (0x65756C61765F646572616873, 0x0)
+            call @uv_key_acquire (%SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$__uv_implicit_key_scope_10, 0x65756C61765F646572616873, 0x0)
+          }
+          seq {
+            load_ptr SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$capture_ptr
+            load_ptr SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$capture_ptr
+          }
+        }
+        fence seqcst
+      }
+      seq {
+        nop
+        nop
+        call @uv_key_scope_exit (%SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$__uv_implicit_key_scope_10)
+        nop
+        nop
+      }
+    }
+    seq {
+      nop
+      nop
+    }
+    ret SharedClosureCaptureWarning_x3a_x3asharedClosureCaptureWarningReference$tmp$capture_val
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aSharedClosureCaptureWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aSharedClosureCaptureWarning {
+  nop
+}
+
+

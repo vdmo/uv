@@ -1,0 +1,6 @@
+info[I-CON-0013]: Static key safety proven under `#dynamic`
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Keys/DynamicKeyRuntimeInfo/Source/Main.uv:10:5
+10 |     %read values[index] {
+10 |     ^
+
+1 info emitted

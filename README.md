@@ -37,7 +37,7 @@ each piece matching the reference on the corpus:
 | M3.6 | Driver phases 2 and 3: `uvc --check` end to end | in progress: everything up to the lowerability check, which is the IR lowering of M6; 593 of 685 projects identical, 92 waiting for it |
 | M4 | Language server in Rust | done against its gate: `uv-lsp` passes upstream's protocol suite and the Shapes example |
 | M5 | Editors connected to the Rust server | Zed extension in `editors/zed`; the other editors' adapters are upstream's and start `uv-lsp` by name |
-| M6 | IR, lowering, LLVM emission, linking | not started |
+| M6 | IR, lowering, LLVM emission, linking | started: the IR model and its text dump (`crates/uv-codegen`), and the gate against the reference's `--emit-ir`; the lowering is not ported |
 | M7 | Packaging, installers, CI | not started |
 
 A structural tree-sitter grammar for the language is in `editors/tree-sitter-ultraviolet`.

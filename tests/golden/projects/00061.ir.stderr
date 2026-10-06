@@ -1,0 +1,6 @@
+warning[W-CON-0201]: Large captured state (performance)
+  --> /w/target/fixtures/Fixtures/DiagnosticSource/Async/AsyncLargeCaptureWarning/Source/Main.uv:15:44
+15 |     let operation: Async<(), (), i32, !> = acceptsLargeAsyncPayload(payload)
+15 |                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1 warning emitted

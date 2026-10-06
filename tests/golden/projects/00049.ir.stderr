@@ -1,0 +1,6 @@
+warning[W-CON-0401]: `#dynamic` present but all proofs succeed statically
+  --> /w/target/fixtures/Fixtures/ArtifactProjects/RefinementRuntimePanic/Source/Main.uv:6:8
+6 | public procedure refinementRuntimePanicValue(value: i32) -> i32 {
+6 |        
+
+1 warning emitted

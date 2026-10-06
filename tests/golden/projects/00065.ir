@@ -1,0 +1,128 @@
+proc @InlineAlwaysRecursive_x3a_x3ainlineAlwaysRecursive {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_1_value
+            }
+            nop
+            binop <= %__bind_1_value, 0x0
+          }
+          seq {
+            nop
+            nop
+          }
+          if InlineAlwaysRecursive_x3a_x3ainlineAlwaysRecursive$tmp$binop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x0
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @InlineAlwaysRecursive::inlineAlwaysRecursive
+            }
+            seq {
+              nop
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_1_value
+                  }
+                  nop
+                  check_op Overflow - %__bind_1_value, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop - %__bind_1_value, 0x1
+                }
+                bind %InlineAlwaysRecursive_x3a_x3ainlineAlwaysRecursive$tmp$call_ref_tmp_11 = InlineAlwaysRecursive_x3a_x3ainlineAlwaysRecursive$tmp$binop
+                addr_of InlineAlwaysRecursive_x3a_x3ainlineAlwaysRecursive$tmp$call_ref_tmp_11
+              }
+            }
+            call @InlineAlwaysRecursive_x3a_x3ainlineAlwaysRecursive (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          nop
+          ret InlineAlwaysRecursive_x3a_x3ainlineAlwaysRecursive$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @InlineAlwaysRecursive_x3a_x3acallInlineAlwaysRecursive {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @InlineAlwaysRecursive::inlineAlwaysRecursive
+          }
+          seq {
+            nop
+            seq {
+              nop
+              bind %InlineAlwaysRecursive_x3a_x3acallInlineAlwaysRecursive$tmp$call_ref_tmp_16 = 0x2
+              addr_of InlineAlwaysRecursive_x3a_x3acallInlineAlwaysRecursive$tmp$call_ref_tmp_16
+            }
+          }
+          call @InlineAlwaysRecursive_x3a_x3ainlineAlwaysRecursive (addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        nop
+        ret InlineAlwaysRecursive_x3a_x3acallInlineAlwaysRecursive$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aInlineAlwaysRecursive {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aInlineAlwaysRecursive {
+  nop
+}
+
+

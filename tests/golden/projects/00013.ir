@@ -1,0 +1,27 @@
+proc @AArch64DependencyObject_x3a_x3aaarch64DependencyObjectValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x40
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aAArch64DependencyObject {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aAArch64DependencyObject {
+  nop
+}
+
+

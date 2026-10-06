@@ -1,0 +1,108 @@
+proc @ArrayIndexOOBPanic_x3a_x3aarrayIndexOOBPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+            nop
+          }
+          bind %values = ArrayIndexOOBPanic_x3a_x3aarrayIndexOOBPanicValue$tmp$array
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of values
+              seq {
+                nop
+                read %__bind_1_index
+              }
+              nop
+              check_index addr_of, %__bind_1_index
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr ArrayIndexOOBPanic_x3a_x3aarrayIndexOOBPanicValue$tmp$panic_flag_ptr
+                      load_ptr ArrayIndexOOBPanic_x3a_x3aarrayIndexOOBPanicValue$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+            move_state values[?]
+          }
+          nop
+          nop
+          ret ArrayIndexOOBPanic_x3a_x3aarrayIndexOOBPanicValue$tmp$place_index_elem
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ArrayIndexOOBPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_3_context
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @ArrayIndexOOBPanic::arrayIndexOOBPanicValue
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %ArrayIndexOOBPanic_x3a_x3amain$tmp$call_ref_tmp_14 = 0x3
+                addr_of ArrayIndexOOBPanic_x3a_x3amain$tmp$call_ref_tmp_14
+              }
+            }
+            call @ArrayIndexOOBPanic_x3a_x3aarrayIndexOOBPanicValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret ArrayIndexOOBPanic_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aArrayIndexOOBPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aArrayIndexOOBPanic {
+  nop
+}
+
+

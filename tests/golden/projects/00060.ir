@@ -1,0 +1,97 @@
+proc @AsyncLargeCaptureNoWarning_x3a_x3aacceptsSmallAsyncPayload {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_1_payload
+        }
+        async_complete value: %__bind_1_payload -> AsyncLargeCaptureNoWarning_x3a_x3aacceptsSmallAsyncPayload$tmp$async_result
+        nop
+        nop
+        ret AsyncLargeCaptureNoWarning_x3a_x3aacceptsSmallAsyncPayload$tmp$async_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AsyncLargeCaptureNoWarning_x3a_x3aacceptsSmallAsyncPayload$resume {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_1_payload
+        }
+        async_complete value: %__bind_1_payload -> AsyncLargeCaptureNoWarning_x3a_x3aacceptsSmallAsyncPayload$tmp$async_result
+        nop
+        nop
+        ret AsyncLargeCaptureNoWarning_x3a_x3aacceptsSmallAsyncPayload$tmp$async_result
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @AsyncLargeCaptureNoWarning_x3a_x3aasyncLargeCaptureNoWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @AsyncLargeCaptureNoWarning::acceptsSmallAsyncPayload
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %AsyncLargeCaptureNoWarning_x3a_x3aasyncLargeCaptureNoWarningReference$tmp$call_ref_tmp_3 = 0x1
+                addr_of AsyncLargeCaptureNoWarning_x3a_x3aasyncLargeCaptureNoWarningReference$tmp$call_ref_tmp_3
+              }
+            }
+            call @AsyncLargeCaptureNoWarning_x3a_x3aacceptsSmallAsyncPayload (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %operation = AsyncLargeCaptureNoWarning_x3a_x3aasyncLargeCaptureNoWarningReference$tmp$call
+          nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aAsyncLargeCaptureNoWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aAsyncLargeCaptureNoWarning {
+  nop
+}
+
+

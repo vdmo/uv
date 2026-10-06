@@ -1,0 +1,200 @@
+proc @FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %container = FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$record
+          nop
+        }
+        seq {
+          nop
+          bind %index = 0x0
+          nop
+        }
+        seq {
+          nop
+          bind %total = 0x0
+          nop
+        }
+        seq {
+          loop while {
+            cond_ir seq {
+              seq {
+                nop
+                read %__bind_2_index
+              }
+              nop
+              binop < %__bind_2_index, 0x4
+            }
+            cond_value FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$binop
+            body block seq {
+              nop
+              seq {
+                block seq {
+                  call @uv_key_scope_enter
+                  bind %FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$__uv_key_scope_8 = FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$key_scope_enter
+                  call @uv_key_check_conflict (0x65756C61763A662E6661656C3A662E72656E6961746E6F63, 0x0)
+                  call @uv_key_acquire (%FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$__uv_key_scope_8, 0x65756C61763A662E6661656C3A662E72656E6961746E6F63, 0x0)
+                } seq {
+                  block seq {
+                    nop
+                    seq {
+                      seq {
+                        seq {
+                          nop
+                          read %__bind_3_total
+                        }
+                        seq {
+                          fence seqcst
+                          seq {
+                            seq {
+                              fence seqcst
+                              seq {
+                                seq {
+                                  fence seqcst
+                                  seq {
+                                    seq {
+                                      seq {
+                                        call @uv_key_scope_enter
+                                        bind %FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$__uv_implicit_key_scope_12 = FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$implicit_key_scope_enter
+                                      }
+                                      call @uv_key_check_conflict (0x72656E6961746E6F63, 0x0)
+                                      call @uv_key_acquire (%FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$__uv_implicit_key_scope_12, 0x72656E6961746E6F63, 0x0)
+                                    }
+                                    read %__bind_1_container
+                                  }
+                                  fence seqcst
+                                }
+                                nop
+                              }
+                              fence seqcst
+                            }
+                            nop
+                          }
+                          fence seqcst
+                        }
+                        check_op Overflow + %__bind_3_total, FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$place_field
+                        seq {
+                          nop
+                          cleanup_panic_check {
+seq {
+                              seq {
+                                load_ptr FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$panic_flag_ptr
+                                load_ptr FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$panic_code_ptr
+                              }
+                              nop
+                              nop
+                              call @uv_key_scope_exit (%FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$__uv_implicit_key_scope_12)
+                              nop
+                              nop
+                              call @uv_key_scope_exit (%FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$__uv_key_scope_8)
+                              nop
+                              nop
+                            }                          }
+                        }
+                        binop + %__bind_3_total, FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$place_field
+                      }
+                      seq {
+                        nop
+                        store %total = FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$binop
+                      }
+                    }
+                  } seq {
+                    nop
+                    seq {
+                      nop
+                      nop
+                      call @uv_key_scope_exit (%FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$__uv_implicit_key_scope_12)
+                      nop
+                      nop
+                    }
+                  }
+                  seq {
+                    nop
+                    nop
+                    call @uv_key_scope_exit (%FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$__uv_key_scope_8)
+                    nop
+                    nop
+                  }
+                }
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_2_index
+                      }
+                      nop
+                      check_op Overflow + %__bind_2_index, 0x1
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$panic_flag_ptr
+                              load_ptr FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                      binop + %__bind_2_index, 0x1
+                    }
+                    seq {
+                      nop
+                      store %index = FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$binop
+                    }
+                  }
+                  seq {
+                    nop
+                    nop
+                  }
+                }
+              }
+            } seq {
+              nop
+              nop
+            }
+            body_value FineGrainedLoopKeyWarning_x3a_x3afineGrainedLoopKeyWarningReference$tmp$unit
+          }
+          seq {
+            nop
+            nop
+            nop
+          }
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_3_total
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret %__bind_3_total
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aFineGrainedLoopKeyWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aFineGrainedLoopKeyWarning {
+  nop
+}
+
+

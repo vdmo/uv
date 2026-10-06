@@ -1,0 +1,99 @@
+proc @VerificationFactPrecondition_x3a_x3avalueRequiresPositive {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_1_value
+        }
+        nop
+        nop
+        ret %__bind_1_value
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @VerificationFactPrecondition_x3a_x3averificationFactPreconditionReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_2_value
+            }
+            nop
+            binop > %__bind_2_value, 0x0
+          }
+          seq {
+            nop
+            nop
+          }
+          if VerificationFactPrecondition_x3a_x3averificationFactPreconditionReference$tmp$binop then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read @VerificationFactPrecondition::valueRequiresPositive
+                  }
+                  seq {
+                    nop
+                    addr_of value
+                  }
+                  call @VerificationFactPrecondition_x3a_x3avalueRequiresPositive (addr_of, %__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                }
+                seq {
+                  nop
+                  read %__bind_2_value
+                }
+                binop == VerificationFactPrecondition_x3a_x3averificationFactPreconditionReference$tmp$call, %__bind_2_value
+              }
+              nop
+              nop
+              nop
+              ret VerificationFactPrecondition_x3a_x3averificationFactPreconditionReference$tmp$binop
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          nop
+          ret 0x1
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aVerificationFactPrecondition {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aVerificationFactPrecondition {
+  nop
+}
+
+

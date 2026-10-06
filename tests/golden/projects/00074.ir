@@ -1,0 +1,111 @@
+proc @OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          bind %values = OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$array
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$__uv_key_scope_6 = OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x657A697375303A692E7365756C6176, 0x0)
+          call @uv_key_acquire (%OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$__uv_key_scope_6, 0x657A697375303A692E7365756C6176, 0x0)
+          call @uv_key_check_conflict (0x657A697375313A692E7365756C6176, 0x0)
+          call @uv_key_acquire (%OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$__uv_key_scope_6, 0x657A697375313A692E7365756C6176, 0x0)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  fence seqcst
+                  seq {
+                    addr_of values
+                    nop
+                    nop
+                  }
+                  fence seqcst
+                }
+                seq {
+                  fence seqcst
+                  seq {
+                    addr_of values
+                    nop
+                    nop
+                  }
+                  fence seqcst
+                }
+                check_op Overflow + OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$index_elem, OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$index_elem
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$panic_flag_ptr
+                        load_ptr OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                      call @uv_key_scope_exit (%OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$__uv_key_scope_6)
+                      nop
+                      nop
+                    }                  }
+                }
+                binop + OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$index_elem, OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$index_elem
+              }
+              bind %total = OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$binop
+              nop
+            }
+          } seq {
+            nop
+            seq {
+              nop
+              nop
+            }
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%OrderedRedundantWarning_x3a_x3aorderedRedundantWarningReference$tmp$__uv_key_scope_6)
+            nop
+            nop
+          }
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aOrderedRedundantWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aOrderedRedundantWarning {
+  nop
+}
+
+

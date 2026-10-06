@@ -1,0 +1,449 @@
+proc @DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          bind %backing = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$array
+          nop
+        }
+        seq {
+          seq {
+            fence seqcst
+            seq {
+              seq {
+                fence seqcst
+                seq {
+                  seq {
+                    seq {
+                      call @uv_key_scope_enter
+                      bind %DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_implicit_key_scope_6 = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$implicit_key_scope_enter
+                    }
+                    call @uv_key_check_conflict (0x676E696B636162, 0x0)
+                    call @uv_key_acquire (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_implicit_key_scope_6, 0x676E696B636162, 0x0)
+                  }
+                  read %__bind_3_backing
+                }
+                fence seqcst
+              }
+              seq {
+                nop
+                nop
+              }
+              nop
+              check_range %__bind_3_backing, ..
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr
+                      load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    call @uv_key_scope_exit (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_implicit_key_scope_6)
+                    nop
+                    nop
+                  }                }
+              }
+            }
+            fence seqcst
+          }
+          bind %values = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$slice
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3ainline (addr_of)
+            }
+            parallel {
+              domain: DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$method_call
+              body:
+                block seq {
+                  nop
+                  seq {
+                    seq {
+                      spawn {
+                        captured_env:
+                          seq {
+                            bind %DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$spawn_env_storage_25 = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$spawn_env_zero
+                            store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_field_ptr = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_addr
+                            store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_field_ptr = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_addr
+                          }
+                        body:
+                          nop
+                        body_result: DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$unit
+                        result: DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$spawn_handle
+                      }
+                      bind %first = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$spawn_handle
+                      nop
+                    }
+                    seq {
+                      spawn {
+                        captured_env:
+                          seq {
+                            bind %DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$spawn_env_storage_66 = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$spawn_env_zero
+                            store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_field_ptr = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_addr
+                            store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_field_ptr = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_addr
+                          }
+                        body:
+                          nop
+                        body_result: DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$unit
+                        result: DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$spawn_handle
+                      }
+                      bind %second = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$spawn_handle
+                      nop
+                    }
+                  }
+                } seq {
+                  seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_12_first
+                      }
+                      wait %__bind_12_first -> DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$wait_result [spawned]
+                    }
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_19_second
+                      }
+                      wait %__bind_19_second -> DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$wait_result [spawned]
+                    }
+                    check_op Overflow + DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$wait_result, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$wait_result
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr
+                            load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                          clear_panic
+                          seq {
+                            call @uv_parallel_join (DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$parallel_join)
+                            binop != DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$parallel_join_status, 0x0
+                            if DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$parallel_join_panicked then seq {
+                              store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr = 0x1
+                              store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$parallel_join_status
+                            } else nop
+                          }
+                          seq {
+                            load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr
+                            load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr
+                          }
+                          binop && 0x1, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag
+                          if DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code) else nop
+                          unop ! DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag
+                          binop && 0x1, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_clear
+                          if DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_restore then seq {
+                            store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr = 0x1
+                            store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code
+                          } else nop
+                          binop || 0x1, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag
+                          if DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag then nop else nop
+                          nop
+                          call @uv_key_scope_exit (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_implicit_key_scope_6)
+                          nop
+                          nop
+                        }                      }
+                    }
+                    binop + DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$wait_result, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$wait_result
+                  }
+                  seq {
+                    nop
+                    nop
+                  }
+                }
+            }
+            seq {
+              nop
+              nop
+              clear_panic
+              seq {
+                call @uv_parallel_join (DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$parallel_join)
+                binop != DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$parallel_join_status, 0x0
+                if DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$parallel_join_panicked then seq {
+                  store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr = 0x1
+                  store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$parallel_join_status
+                } else nop
+              }
+              seq {
+                load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr
+                load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr
+              }
+              binop && 0x0, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag
+              if DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code) else nop
+              unop ! DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag
+              binop && 0x0, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_clear
+              if DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_restore then seq {
+                store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr = 0x1
+                store_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr = 0x0
+              } else nop
+              binop || 0x0, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag
+              if DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag then nop else nop
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_implicit_key_scope_6)
+            nop
+            nop
+          }
+          ret DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+        call @uv_key_scope_exit (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_implicit_key_scope_6)
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @__cx_spawn_body_DynamicKeyRuntimeSyncInfo_0 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$record_ctor)
+      bind %region$0 = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$synthetic_proc_region
+    }
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %observed = 0x0
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_key_scope_36 = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x2E7365756C6176, 0x1)
+          call @uv_key_acquire (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_key_scope_36, 0x2E7365756C6176, 0x1)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                nop
+                seq {
+                  load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_ptr
+                  seq {
+                    nop
+                    seq {
+                      load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_ptr
+                      load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_ptr
+                    }
+                  }
+                  nop
+                  check_index DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$addr_of, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_val
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr
+                          load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                        call @uv_key_scope_exit (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_key_scope_36)
+                        nop
+                        nop
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                        nop
+                        nop
+                      }                    }
+                  }
+                  addr_of values[?]
+                  nop
+                  rec_update values[?]
+                }
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  store %observed = 0xB
+                }
+              }
+            }
+          } seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_key_scope_36)
+            nop
+            nop
+          }
+        }
+      }
+    } seq {
+      seq {
+        nop
+        read %__bind_9_observed
+      }
+      nop
+    }
+    store_ptr %__bind_11_result = %__bind_9_observed
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$unit
+  }
+}
+
+proc @__cx_spawn_body_DynamicKeyRuntimeSyncInfo_1 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$record_ctor)
+      bind %region$0 = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$synthetic_proc_region
+    }
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %observed = 0x0
+          nop
+        }
+        block seq {
+          call @uv_key_scope_enter
+          bind %DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_key_scope_77 = DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$key_scope_enter
+          call @uv_key_check_conflict (0x2E7365756C6176, 0x1)
+          call @uv_key_acquire (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_key_scope_77, 0x2E7365756C6176, 0x1)
+        } seq {
+          block seq {
+            nop
+            seq {
+              seq {
+                nop
+                seq {
+                  load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_ptr
+                  seq {
+                    nop
+                    seq {
+                      load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_ptr
+                      load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_ptr
+                    }
+                  }
+                  nop
+                  check_index DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$addr_of, DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$capture_val
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_flag_ptr
+                          load_ptr DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                        call @uv_key_scope_exit (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_key_scope_77)
+                        nop
+                        nop
+                        call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                        nop
+                        nop
+                      }                    }
+                  }
+                  addr_of values[?]
+                  nop
+                  rec_update values[?]
+                }
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  store %observed = 0xD
+                }
+              }
+            }
+          } seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+            call @uv_key_scope_exit (%DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$__uv_key_scope_77)
+            nop
+            nop
+          }
+        }
+      }
+    } seq {
+      seq {
+        nop
+        read %__bind_16_observed
+      }
+      nop
+    }
+    store_ptr %__bind_18_result = %__bind_16_observed
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret DynamicKeyRuntimeSyncInfo_x3a_x3adynamicKeyRuntimeSyncInfoReference$tmp$unit
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aDynamicKeyRuntimeSyncInfo {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aDynamicKeyRuntimeSyncInfo {
+  nop
+}
+
+

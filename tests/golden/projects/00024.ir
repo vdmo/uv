@@ -1,0 +1,738 @@
+global_const @ComptimeRuntimeErasure_x3a_x3aRUNTIME_x5fERASURE_x5fCAPTURED_x5fVALUE bytes=4
+
+proc @ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureDerivedValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x25
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureCapabilityAndReflectionChecks {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %reflected_field_count = 0x0
+          nop
+        }
+        block seq {
+          nop
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_1_reflected_field_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_1_reflected_field_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_1_reflected_field_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_field_count = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_1_reflected_field_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_1_reflected_field_count, 0x0
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_1_reflected_field_count, 0x0
+                }
+                seq {
+                  nop
+                  store %reflected_field_count = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_1_reflected_field_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_1_reflected_field_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_1_reflected_field_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_field_count = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_1_reflected_field_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_1_reflected_field_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_1_reflected_field_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_field_count = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_1_reflected_field_count
+            }
+            nop
+            binop == %__bind_1_reflected_field_count, 0x3
+          }
+          nop
+          nop
+          nop
+          ret ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureCapabilityAndReflectionChecks$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %total = 0x7
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            nop
+            nop
+          }
+          bind %selected = 0x7
+          nop
+        }
+        block seq {
+          nop
+          nop
+        } seq {
+          nop
+          nop
+        }
+        block seq {
+          nop
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_2_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_2_total, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$panic_flag_ptr
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_2_total, 0x1
+                }
+                seq {
+                  nop
+                  store %total = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_2_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_2_total, 0x2
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$panic_flag_ptr
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_2_total, 0x2
+                }
+                seq {
+                  nop
+                  store %total = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_2_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_2_total, 0x3
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$panic_flag_ptr
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_2_total, 0x3
+                }
+                seq {
+                  nop
+                  store %total = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_2_total
+            }
+            seq {
+              nop
+              read %__bind_3_selected
+            }
+            check_op Overflow + %__bind_2_total, %__bind_3_selected
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$panic_flag_ptr
+                    load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop + %__bind_2_total, %__bind_3_selected
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ComptimeRuntimeErasure_x3a_x3aemitRuntimeErasureQuoteSpliceItems {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x1
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureQuoteCaptureValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @ComptimeRuntimeErasure::RUNTIME_ERASURE_CAPTURED_VALUE
+          }
+          move_state RUNTIME_ERASURE_CAPTURED_VALUE
+        }
+        nop
+        nop
+        ret @RUNTIME_ERASURE_CAPTURED_VALUE
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureSplicedValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          nop
+          check_op Overflow + 0x13, 0x17
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + 0x13, 0x17
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureSplicedValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureIdentifierSpliceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_4_runtime_erasure_input
+          }
+          nop
+          check_op Overflow + %__bind_4_runtime_erasure_input, 0x2
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_4_runtime_erasure_input, 0x2
+        }
+        nop
+        nop
+        nop
+        ret ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureIdentifierSpliceValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @ComptimeRuntimeErasure::emitRuntimeErasureQuoteSpliceItems
+            }
+            nop
+            call @ComptimeRuntimeErasure_x3a_x3aemitRuntimeErasureQuoteSpliceItems (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %emitted = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @ComptimeRuntimeErasure::compileTimeRuntimeErasureCapabilityAndReflectionChecks
+            }
+            nop
+            call @ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureCapabilityAndReflectionChecks (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                    load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %capabilities_ok = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @ComptimeRuntimeErasure::compileTimeRuntimeErasureForms
+            }
+            nop
+            call @ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureForms (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                    load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %forms_value = ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_5_emitted
+            }
+            if %__bind_5_emitted then seq {
+              nop
+              read %__bind_6_capabilities_ok
+            } else nop
+            if ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_7_forms_value
+              }
+              nop
+              binop == %__bind_7_forms_value, 0x14
+            } else nop
+          }
+          seq {
+            nop
+            nop
+          }
+          if ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$and then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        nop
+                        read @ComptimeRuntimeErasure::emittedRuntimeErasureQuoteCaptureValue
+                      }
+                      nop
+                      call @ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureQuoteCaptureValue (%__panic)
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                              load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                    }
+                    seq {
+                      seq {
+                        nop
+                        read @ComptimeRuntimeErasure::emittedRuntimeErasureSplicedValue
+                      }
+                      nop
+                      call @ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureSplicedValue (%__panic)
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                              load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                    }
+                    check_op Overflow + ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call, ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                            load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                        }                      }
+                    }
+                    binop + ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call, ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+                  }
+                  seq {
+                    seq {
+                      nop
+                      read @ComptimeRuntimeErasure::emittedRuntimeErasureIdentifierSpliceValue
+                    }
+                    seq {
+                      nop
+                      seq {
+                        nop
+                        bind %ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call_ref_tmp_102 = 0x3B
+                        addr_of ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call_ref_tmp_102
+                      }
+                    }
+                    call @ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureIdentifierSpliceValue (addr_of, %__panic)
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                            load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                        }                      }
+                    }
+                  }
+                  check_op Overflow + ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$binop, ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$binop, ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+                }
+                seq {
+                  seq {
+                    nop
+                    read @ComptimeRuntimeErasure::emittedRuntimeErasureDerivedValue
+                  }
+                  nop
+                  call @ComptimeRuntimeErasure_x3a_x3aemittedRuntimeErasureDerivedValue (%__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                          load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                }
+                check_op Overflow + ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$binop, ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_flag_ptr
+                        load_ptr ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                binop + ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$binop, ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$call
+              }
+              nop
+              seq {
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+              }
+              seq {
+                nop
+                nop
+              }
+              ret ComptimeRuntimeErasure_x3a_x3acompileTimeRuntimeErasureEntryPoint$tmp$binop
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aComptimeRuntimeErasure {
+  seq {
+    nop
+    store @ComptimeRuntimeErasure_x3a_x3aRUNTIME_x5fERASURE_x5fCAPTURED_x5fVALUE = 0x11
+    seq {
+      nop
+      init_panic_handle ComptimeRuntimeErasure [ComptimeRuntimeErasure] cleanup
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aComptimeRuntimeErasure {
+  nop
+}
+
+

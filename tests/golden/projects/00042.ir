@@ -1,0 +1,243 @@
+proc @ModalSpecialLowering_x3a_x3aModalSpecialLoweringState_x3a_x3aReady_x3a_x3areadValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret ModalSpecialLowering_x3a_x3aModalSpecialLoweringState_x3a_x3aReady_x3a_x3areadValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ModalSpecialLowering_x3a_x3aModalSpecialLoweringState_x3a_x3aReady_x3a_x3areplaceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_3_value
+          }
+          seq {
+            addr_of self
+            nop
+            addr_of self.value
+            nop
+            rec_update self.value
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_2_self
+            }
+            nop
+          }
+          nop
+          nop
+          ret ModalSpecialLowering_x3a_x3aModalSpecialLoweringState_x3a_x3aReady_x3a_x3areplaceValue$tmp$place_field
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ModalSpecialLowering_x3a_x3aModalSpecialLoweringState_x3a_x3aReady_x3a_x3afinish {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          read %__bind_5_value
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        ret ModalSpecialLowering_x3a_x3aModalSpecialLoweringState_x3a_x3aReady_x3a_x3afinish$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ModalSpecialLowering_x3a_x3amodalSpecialStateFieldReadProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_6_value
+          }
+          nop
+        }
+        nop
+        nop
+        ret ModalSpecialLowering_x3a_x3amodalSpecialStateFieldReadProbe$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ModalSpecialLowering_x3a_x3amodalSpecialStateMethodProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %ready = ModalSpecialLowering_x3a_x3amodalSpecialStateMethodProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of ready
+            seq {
+              nop
+              seq {
+                nop
+                bind %ModalSpecialLowering_x3a_x3amodalSpecialStateMethodProbe$tmp$call_ref_tmp_20 = 0xB
+                addr_of ModalSpecialLowering_x3a_x3amodalSpecialStateMethodProbe$tmp$call_ref_tmp_20
+              }
+            }
+            call @ModalSpecialLowering_x3a_x3aModalSpecialLoweringState_x3a_x3aReady_x3a_x3areplaceValue (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ModalSpecialLowering_x3a_x3amodalSpecialStateMethodProbe$tmp$panic_flag_ptr
+                    load_ptr ModalSpecialLowering_x3a_x3amodalSpecialStateMethodProbe$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret ModalSpecialLowering_x3a_x3amodalSpecialStateMethodProbe$tmp$method_call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ModalSpecialLowering_x3a_x3amodalSpecialTransitionProbe {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %ready = ModalSpecialLowering_x3a_x3amodalSpecialTransitionProbe$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            nop
+            seq {
+              seq {
+                nop
+                read %ready
+              }
+              move_state ready
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %ModalSpecialLowering_x3a_x3amodalSpecialTransitionProbe$tmp$call_ref_tmp_38 = 0x11
+                addr_of ModalSpecialLowering_x3a_x3amodalSpecialTransitionProbe$tmp$call_ref_tmp_38
+              }
+            }
+            call @ModalSpecialLowering_x3a_x3aModalSpecialLoweringState_x3a_x3aReady_x3a_x3afinish (%ready, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %done = ModalSpecialLowering_x3a_x3amodalSpecialTransitionProbe$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %done
+              }
+              nop
+            }
+            move_state done.value
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret ModalSpecialLowering_x3a_x3amodalSpecialTransitionProbe$tmp$place_field
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aModalSpecialLowering {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aModalSpecialLowering {
+  nop
+}
+
+

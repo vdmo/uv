@@ -1,0 +1,152 @@
+proc @SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %payload = SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$record
+          nop
+        }
+        spec_loop {
+          snapshot: spec_snapshot paths=[payload] -> SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$spec_snapshot
+          body: block seq {
+            nop
+            seq {
+              nop
+              seq {
+                seq {
+                  addr_of payload
+                  addr_of payload.words
+                  nop
+                }
+                nop
+                nop
+                addr_of payload.words[0usize]
+                nop
+                rec_update payload.words[0usize]
+              }
+            }
+          } seq {
+            nop
+            nop
+          }
+          validate: spec_validate paths=[payload] -> SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$spec_validate
+          commit: spec_commit paths=[payload] value=SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$unit -> SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$spec_commit
+          retry: spec_retry -> SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$spec_retry
+          fallback: spec_fallback block seq {
+            call @uv_key_scope_enter
+            bind %SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$__uv_key_scope_15 = SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$key_scope_enter
+            call @uv_key_check_conflict (0x64616F6C796170, 0x1)
+            call @uv_key_acquire (%SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$__uv_key_scope_15, 0x64616F6C796170, 0x1)
+            seq {
+              seq {
+                nop
+                read %payload
+              }
+              bind %SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$__uv_spec_snapshot_18 = %payload
+            }
+          } seq {
+            block seq {
+              nop
+              seq {
+                nop
+                seq {
+                  seq {
+                    addr_of payload
+                    addr_of payload.words
+                    nop
+                  }
+                  nop
+                  nop
+                  addr_of payload.words[0usize]
+                  nop
+                  rec_update payload.words[0usize]
+                }
+              }
+            } seq {
+              nop
+              nop
+            }
+            seq {
+              nop
+              nop
+              seq {
+                seq {
+                  load_ptr SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$panic_flag_ptr
+                  load_ptr SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$panic_code_ptr
+                }
+                if SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$panic_flag then store_nodrop %__bind_1_payload = %__bind_3_SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$__uv_spec_snapshot_18 else nop
+              }
+              nop
+              nop
+              call @uv_key_scope_exit (%SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$__uv_key_scope_15)
+              nop
+              nop
+            }
+          } -> SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$unit
+          result: SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$unit
+        }
+        seq {
+          seq {
+            seq {
+              fence seqcst
+              seq {
+                seq {
+                  addr_of payload
+                  addr_of payload.words
+                  nop
+                }
+                nop
+                nop
+              }
+              fence seqcst
+            }
+            nop
+            check_op Overflow + SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$index_elem, 0x0
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$panic_flag_ptr
+                    load_ptr SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+            binop + SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$index_elem, 0x0
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret SpeculativeLargeStructWarning_x3a_x3aspeculativeLargeStructWarningReference$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aSpeculativeLargeStructWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aSpeculativeLargeStructWarning {
+  nop
+}
+
+

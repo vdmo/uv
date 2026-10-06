@@ -1,0 +1,121 @@
+global_zero @ExternAbiForms_x3a_x3aEXTERN_x5fABI_x5fFORMS_x5fSTATIC size=4
+
+extern_proc @externAbiDefaultValue "C"
+
+extern_proc @externAbiStringValue "C"
+
+extern_proc @externAbiIdentValue "C"
+
+proc @ExternAbiForms_x3a_x3aexternAbiFormsMarker {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @ExternAbiForms::EXTERN_ABI_FORMS_STATIC
+          }
+          seq {
+            seq {
+              nop
+              read @ExternAbiForms::Support::supportUsingValue
+            }
+            nop
+            call @ExternAbiForms_x3a_x3aSupport_x3a_x3asupportUsingValue (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          check_op Overflow + @EXTERN_ABI_FORMS_STATIC, ExternAbiForms_x3a_x3aexternAbiFormsMarker$tmp$call
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + @EXTERN_ABI_FORMS_STATIC, ExternAbiForms_x3a_x3aexternAbiFormsMarker$tmp$call
+        }
+        nop
+        nop
+        nop
+        ret ExternAbiForms_x3a_x3aexternAbiFormsMarker$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aExternAbiForms {
+  seq {
+    seq {
+      read @ExternAbiForms::Support::supportValue
+      nop
+      call @ExternAbiForms_x3a_x3aSupport_x3a_x3asupportValue (%__panic)
+      seq {
+        nop
+        init_panic_handle ExternAbiForms [ExternAbiForms, ExternAbiForms::Support] cleanup
+      }
+    }
+    store @ExternAbiForms_x3a_x3aEXTERN_x5fABI_x5fFORMS_x5fSTATIC = call
+    seq {
+      nop
+      init_panic_handle ExternAbiForms [ExternAbiForms, ExternAbiForms::Support] cleanup
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aExternAbiForms {
+  nop
+}
+
+
+proc @ExternAbiForms_x3a_x3aSupport_x3a_x3asupportValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x11
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ExternAbiForms_x3a_x3aSupport_x3a_x3asupportUsingValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x17
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aExternAbiForms_x3a_x3aSupport {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aExternAbiForms_x3a_x3aSupport {
+  nop
+}
+
+

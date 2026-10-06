@@ -1,0 +1,1276 @@
+proc @StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            read @CancelToken::new
+            nop
+            cancel_create -> StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$call
+          }
+          bind %token = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of token
+            nop
+            call @CancelToken_x3a_x3aActive_x3a_x3achild (addr_of)
+          }
+          bind %child = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$method_call
+          nop
+        }
+        seq {
+          nop
+          addr_of token
+          nop
+          cancel_request addr_of -> StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$method_call
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3ainline (addr_of)
+            }
+            parallel {
+              domain: StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$method_call
+              body:
+                block seq {
+                  nop
+                  seq {
+                    seq {
+                      spawn {
+                        captured_env:
+                          bind %StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$spawn_env_storage_10 = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$spawn_env_zero
+                        body:
+                          nop
+                        body_result: StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$unit
+                        result: StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$spawn_handle
+                      }
+                      bind %spawned = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$spawn_handle
+                      nop
+                    }
+                    seq {
+                      seq {
+                        seq {
+                          seq {
+                            nop
+                            nop
+                          }
+                          dispatch {
+                            range: StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$range
+                            ordered: true
+                            workgroup_size: StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$dispatch_workgroup
+                            reduce_op: +
+                            body:
+                              nop
+                            body_result: StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$unit
+                            result: StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$dispatch_result
+                          }
+                        }
+                        bind %reduced = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$dispatch_result
+                        nop
+                      }
+                      seq {
+                        nop
+                        nop
+                        nop
+                      }
+                    }
+                  }
+                } seq {
+                  seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_8_spawned
+                      }
+                      wait %__bind_8_spawned -> StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$wait_result [spawned]
+                    }
+                    seq {
+                      nop
+                      read %__bind_16_reduced
+                    }
+                    check_op Overflow + StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$wait_result, %__bind_16_reduced
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag_ptr
+                            load_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                          clear_panic
+                          seq {
+                            call @uv_parallel_join (StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$parallel_join)
+                            binop != StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$parallel_join_status, 0x0
+                            if StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$parallel_join_panicked then seq {
+                              store_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag_ptr = 0x1
+                              store_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$parallel_join_status
+                            } else nop
+                          }
+                          seq {
+                            load_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag_ptr
+                            load_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code_ptr
+                          }
+                          binop && 0x1, StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag
+                          if StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code) else nop
+                          unop ! StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag
+                          binop && 0x1, StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_clear
+                          if StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_restore then seq {
+                            store_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag_ptr = 0x1
+                            store_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code
+                          } else nop
+                          binop || 0x1, StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag
+                          if StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag then nop else nop
+                          nop
+                        }                      }
+                    }
+                    binop + StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$wait_result, %__bind_16_reduced
+                  }
+                  seq {
+                    nop
+                    nop
+                  }
+                }
+            }
+            seq {
+              nop
+              nop
+              clear_panic
+              seq {
+                call @uv_parallel_join (StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$parallel_join)
+                binop != StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$parallel_join_status, 0x0
+                if StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$parallel_join_panicked then seq {
+                  store_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag_ptr = 0x1
+                  store_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$parallel_join_status
+                } else nop
+              }
+              seq {
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag_ptr
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code_ptr
+              }
+              binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag
+              if StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code) else nop
+              unop ! StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag
+              binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_clear
+              if StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_restore then seq {
+                store_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag_ptr = 0x1
+                store_ptr StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_code_ptr = 0x0
+              } else nop
+              binop || 0x0, StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag
+              if StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$panic_flag then nop else nop
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @__cx_spawn_body_StructuredParallelLoweringEvidence_0 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$record_ctor)
+      bind %region$0 = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$synthetic_proc_region
+    }
+    block seq {
+      nop
+      nop
+    } seq {
+      nop
+      nop
+    }
+    store_ptr %__bind_7_result = 0x29
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$unit
+  }
+}
+
+proc @__cx_dispatch_body_StructuredParallelLoweringEvidence_1 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$record_ctor)
+      bind %region$0 = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$synthetic_proc_region
+    }
+    load_ptr %__bind_10_elem
+    bind %index = StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$dispatch_elem
+    block seq {
+      nop
+      nop
+    } seq {
+      nop
+      nop
+    }
+    store_ptr %__bind_12_result = 0x7
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence$tmp$unit
+  }
+}
+
+proc @StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            read @CancelToken::new
+            nop
+            cancel_create -> StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$call
+          }
+          bind %token = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of token
+            nop
+            call @CancelToken_x3a_x3aActive_x3a_x3achild (addr_of)
+          }
+          bind %child = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3ainline (addr_of)
+            }
+            parallel {
+              domain: StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$method_call
+              body:
+                block seq {
+                  nop
+                  seq {
+                    spawn {
+                      captured_env:
+                        seq {
+                          bind %StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$spawn_env_storage_104 = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$spawn_env_zero
+                          store_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$capture_field_ptr = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$capture_addr
+                        }
+                      body:
+                        nop
+                      body_result: StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$unit
+                      result: StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$spawn_handle
+                    }
+                    bind %spawned = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$spawn_handle
+                    nop
+                  }
+                } seq {
+                  seq {
+                    seq {
+                      nop
+                      read %__bind_25_spawned
+                    }
+                    wait %__bind_25_spawned -> StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$wait_result [spawned]
+                  }
+                  seq {
+                    nop
+                    nop
+                  }
+                }
+            }
+            seq {
+              nop
+              nop
+              clear_panic
+              seq {
+                call @uv_parallel_join (StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$parallel_join)
+                binop != StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$parallel_join_status, 0x0
+                if StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$parallel_join_panicked then seq {
+                  store_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_flag_ptr = 0x1
+                  store_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$parallel_join_status
+                } else nop
+              }
+              seq {
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_flag_ptr
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_code_ptr
+              }
+              binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_flag
+              if StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_code) else nop
+              unop ! StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_flag
+              binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_clear
+              if StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_restore then seq {
+                store_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_flag_ptr = 0x1
+                store_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_code_ptr = 0x0
+              } else nop
+              binop || 0x0, StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_flag
+              if StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$panic_flag then nop else nop
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$wait_result
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @__cx_spawn_body_StructuredParallelLoweringEvidence_2 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$record_ctor)
+      bind %region$0 = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$synthetic_proc_region
+    }
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            load_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$capture_ptr
+            nop
+            cancel_wait StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$addr_of -> StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$method_call
+          }
+          bind %spawn_pending = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_23_spawn_pending
+          }
+          nop
+          nop
+        }
+        seq {
+          nop
+          load_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$capture_ptr
+          nop
+          cancel_request StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$addr_of -> StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$method_call
+        }
+      }
+    } seq {
+      seq {
+        seq {
+          nop
+          load_ptr StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$capture_ptr
+          nop
+          cancel_check StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$addr_of -> StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$method_call
+        }
+        nop
+        if StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$method_call then block seq {
+          nop
+          nop
+        } seq {
+          nop
+          nop
+        } else block seq {
+          nop
+          nop
+        } seq {
+          nop
+          nop
+        }
+      }
+      seq {
+        nop
+        nop
+      }
+    }
+    store_ptr %__bind_24_result = StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$if
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence$tmp$unit
+  }
+}
+
+proc @StructuredParallelLoweringEvidence_x3a_x3acancellationLoweringEvidence {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @StructuredParallelLoweringEvidence::queuedCancellationRuntimeEvidence
+            }
+            seq {
+              nop
+              addr_of context
+            }
+            call @StructuredParallelLoweringEvidence_x3a_x3aqueuedCancellationRuntimeEvidence (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          seq {
+            seq {
+              nop
+              read @StructuredParallelLoweringEvidence::midExecutionCancellationRuntimeEvidence
+            }
+            seq {
+              nop
+              addr_of context
+            }
+            call @StructuredParallelLoweringEvidence_x3a_x3amidExecutionCancellationRuntimeEvidence (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          check_op Overflow + StructuredParallelLoweringEvidence_x3a_x3acancellationLoweringEvidence$tmp$call, StructuredParallelLoweringEvidence_x3a_x3acancellationLoweringEvidence$tmp$call
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + StructuredParallelLoweringEvidence_x3a_x3acancellationLoweringEvidence$tmp$call, StructuredParallelLoweringEvidence_x3a_x3acancellationLoweringEvidence$tmp$call
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret StructuredParallelLoweringEvidence_x3a_x3acancellationLoweringEvidence$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            addr_of context
+            nop
+            call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3ainline (addr_of)
+          }
+          parallel {
+            domain: StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$method_call
+            body:
+              block seq {
+                nop
+                nop
+              } seq {
+                seq {
+                  seq {
+                    addr_of context
+                    nop
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3ainline (addr_of)
+                  }
+                  parallel {
+                    domain: StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$method_call
+                    body:
+                      block seq {
+                        nop
+                        nop
+                      } seq {
+                        nop
+                        nop
+                      }
+                  }
+                  seq {
+                    nop
+                    nop
+                    clear_panic
+                    seq {
+                      call @uv_parallel_join (StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$parallel_join)
+                      binop != StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$parallel_join_status, 0x0
+                      if StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$parallel_join_panicked then seq {
+                        store_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag_ptr = 0x1
+                        store_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$parallel_join_status
+                      } else nop
+                    }
+                    seq {
+                      load_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag_ptr
+                      load_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_code_ptr
+                    }
+                    binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag
+                    if StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_code) else nop
+                    unop ! StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag
+                    binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_clear
+                    if StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_restore then seq {
+                      store_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag_ptr = 0x1
+                      store_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_code_ptr = 0x0
+                    } else nop
+                    binop || 0x0, StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag
+                    if StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag then nop else nop
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                }
+                nop
+              }
+          }
+          seq {
+            nop
+            nop
+            clear_panic
+            seq {
+              call @uv_parallel_join (StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$parallel_join)
+              binop != StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$parallel_join_status, 0x0
+              if StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$parallel_join_panicked then seq {
+                store_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag_ptr = 0x1
+                store_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$parallel_join_status
+              } else nop
+            }
+            seq {
+              load_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag_ptr
+              load_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_code_ptr
+            }
+            binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag
+            if StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_code) else nop
+            unop ! StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag
+            binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_clear
+            if StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_restore then seq {
+              store_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag_ptr = 0x1
+              store_ptr StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_code_ptr = 0x0
+            } else nop
+            binop || 0x0, StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag
+            if StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence$tmp$panic_flag then nop else nop
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret 0x8
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @StructuredParallelLoweringEvidence_x3a_x3aoperatorUndefinedPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %numerator = 0x2A
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_29_numerator
+            }
+            seq {
+              nop
+              read %__bind_28_divisor
+            }
+            check_op DivZero / %__bind_29_numerator, %__bind_28_divisor
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop / %__bind_29_numerator, %__bind_28_divisor
+          }
+          nop
+          nop
+          ret StructuredParallelLoweringEvidence_x3a_x3aoperatorUndefinedPanicValue$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @StructuredParallelLoweringEvidence_x3a_x3aintegerOverflowPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %maximum = 0x7FFFFFFF
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_31_maximum
+            }
+            seq {
+              nop
+              read %__bind_30_delta
+            }
+            check_op Overflow + %__bind_31_maximum, %__bind_30_delta
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + %__bind_31_maximum, %__bind_30_delta
+          }
+          nop
+          nop
+          ret StructuredParallelLoweringEvidence_x3a_x3aintegerOverflowPanicValue$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            read @CancelToken::new
+            nop
+            cancel_create -> StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$call
+          }
+          bind %token = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            addr_of token
+            nop
+            call @CancelToken_x3a_x3aActive_x3a_x3achild (addr_of)
+          }
+          bind %child = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              addr_of context
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3ainline (addr_of)
+            }
+            parallel {
+              domain: StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$method_call
+              body:
+                block seq {
+                  nop
+                  seq {
+                    seq {
+                      spawn {
+                        captured_env:
+                          bind %StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$spawn_env_storage_228 = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$spawn_env_zero
+                        body:
+                          nop
+                        body_result: StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$unit
+                        result: StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$spawn_handle
+                      }
+                      bind %first = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$spawn_handle
+                      nop
+                    }
+                    seq {
+                      spawn {
+                        captured_env:
+                          bind %StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$spawn_env_storage_250 = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$spawn_env_zero
+                        body:
+                          nop
+                        body_result: StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$unit
+                        result: StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$spawn_handle
+                      }
+                      bind %second = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$spawn_handle
+                      nop
+                    }
+                  }
+                } seq {
+                  seq {
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_40_first
+                      }
+                      wait %__bind_40_first -> StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$wait_result [spawned]
+                    }
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_46_second
+                      }
+                      wait %__bind_46_second -> StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$wait_result [spawned]
+                    }
+                    check_op Overflow + StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$wait_result, StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$wait_result
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr
+                            load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                          clear_panic
+                          seq {
+                            call @uv_parallel_join (StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$parallel_join)
+                            binop != StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$parallel_join_status, 0x0
+                            if StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$parallel_join_panicked then seq {
+                              store_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr = 0x1
+                              store_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$parallel_join_status
+                            } else nop
+                          }
+                          seq {
+                            load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr
+                            load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr
+                          }
+                          binop && 0x1, StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag
+                          if StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code) else nop
+                          unop ! StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag
+                          binop && 0x1, StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_clear
+                          if StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_restore then seq {
+                            store_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr = 0x1
+                            store_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code
+                          } else nop
+                          binop || 0x1, StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag
+                          if StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag then nop else nop
+                          nop
+                        }                      }
+                    }
+                    binop + StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$wait_result, StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$wait_result
+                  }
+                  seq {
+                    nop
+                    nop
+                  }
+                }
+            }
+            seq {
+              nop
+              nop
+              clear_panic
+              seq {
+                call @uv_parallel_join (StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$parallel_join)
+                binop != StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$parallel_join_status, 0x0
+                if StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$parallel_join_panicked then seq {
+                  store_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr = 0x1
+                  store_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$parallel_join_status
+                } else nop
+              }
+              seq {
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr
+              }
+              binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag
+              if StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code) else nop
+              unop ! StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag
+              binop && 0x0, StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_clear
+              if StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_restore then seq {
+                store_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr = 0x1
+                store_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr = 0x0
+              } else nop
+              binop || 0x0, StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag
+              if StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag then nop else nop
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @__cx_spawn_body_StructuredParallelLoweringEvidence_3 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$record_ctor)
+      bind %region$0 = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$synthetic_proc_region
+    }
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read @StructuredParallelLoweringEvidence::operatorUndefinedPanicValue
+        }
+        seq {
+          nop
+          seq {
+            nop
+            bind %StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$call_ref_tmp_234 = 0x0
+            addr_of StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$call_ref_tmp_234
+          }
+        }
+        call @StructuredParallelLoweringEvidence_x3a_x3aoperatorUndefinedPanicValue (addr_of, %__panic)
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr
+              }
+              nop
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+              nop
+              nop
+            }          }
+        }
+      }
+      nop
+    }
+    store_ptr %__bind_39_result = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$call
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$unit
+  }
+}
+
+proc @__cx_spawn_body_StructuredParallelLoweringEvidence_4 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$record_ctor)
+      bind %region$0 = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$synthetic_proc_region
+    }
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          nop
+          read @StructuredParallelLoweringEvidence::integerOverflowPanicValue
+        }
+        seq {
+          nop
+          seq {
+            nop
+            bind %StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$call_ref_tmp_256 = 0x1
+            addr_of StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$call_ref_tmp_256
+          }
+        }
+        call @StructuredParallelLoweringEvidence_x3a_x3aintegerOverflowPanicValue (addr_of, %__panic)
+        seq {
+          nop
+          cleanup_panic_check {
+seq {
+              seq {
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_flag_ptr
+                load_ptr StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$panic_code_ptr
+              }
+              nop
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+              nop
+              nop
+            }          }
+        }
+      }
+      nop
+    }
+    store_ptr %__bind_45_result = StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$call
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence$tmp$unit
+  }
+}
+
+proc @StructuredParallelLoweringEvidence_x3a_x3aruntimeEvidenceSucceeded {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @StructuredParallelLoweringEvidence::cancellationLoweringEvidence
+            }
+            seq {
+              nop
+              addr_of context
+            }
+            call @StructuredParallelLoweringEvidence_x3a_x3acancellationLoweringEvidence (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %cancellation_result = StructuredParallelLoweringEvidence_x3a_x3aruntimeEvidenceSucceeded$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @StructuredParallelLoweringEvidence::nestedParallelLoweringEvidence
+            }
+            seq {
+              nop
+              addr_of context
+            }
+            call @StructuredParallelLoweringEvidence_x3a_x3anestedParallelLoweringEvidence (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr StructuredParallelLoweringEvidence_x3a_x3aruntimeEvidenceSucceeded$tmp$panic_flag_ptr
+                    load_ptr StructuredParallelLoweringEvidence_x3a_x3aruntimeEvidenceSucceeded$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %nested_result = StructuredParallelLoweringEvidence_x3a_x3aruntimeEvidenceSucceeded$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_48_cancellation_result
+              }
+              nop
+              binop == %__bind_48_cancellation_result, 0x5
+            }
+            if StructuredParallelLoweringEvidence_x3a_x3aruntimeEvidenceSucceeded$tmp$binop then seq {
+              seq {
+                nop
+                read %__bind_49_nested_result
+              }
+              nop
+              binop == %__bind_49_nested_result, 0x8
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret StructuredParallelLoweringEvidence_x3a_x3aruntimeEvidenceSucceeded$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @StructuredParallelLoweringEvidence_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @StructuredParallelLoweringEvidence::runtimeEvidenceSucceeded
+              }
+              seq {
+                nop
+                addr_of context
+              }
+              call @StructuredParallelLoweringEvidence_x3a_x3aruntimeEvidenceSucceeded (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! StructuredParallelLoweringEvidence_x3a_x3amain$tmp$call
+          }
+          nop
+          if StructuredParallelLoweringEvidence_x3a_x3amain$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x1
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                addr_of context
+                addr_of context.sys
+                nop
+              }
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aargument_x5fcount (addr_of)
+            }
+            nop
+            binop > StructuredParallelLoweringEvidence_x3a_x3amain$tmp$method_call, 0x1
+          }
+          seq {
+            nop
+            nop
+          }
+          if StructuredParallelLoweringEvidence_x3a_x3amain$tmp$binop then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    addr_of context
+                    addr_of context.sys
+                    nop
+                  }
+                  seq {
+                    nop
+                    seq {
+                      nop
+                      bind %StructuredParallelLoweringEvidence_x3a_x3amain$tmp$call_ref_tmp_362 = 0x0
+                      addr_of StructuredParallelLoweringEvidence_x3a_x3amain$tmp$call_ref_tmp_362
+                    }
+                  }
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3asystem_x3a_x3aargument (addr_of, addr_of)
+                }
+                bind %evidence_path = StructuredParallelLoweringEvidence_x3a_x3amain$tmp$method_call
+                nop
+              }
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      addr_of context
+                      addr_of context.io
+                      nop
+                    }
+                    seq {
+                      seq {
+                        nop
+                        addr_of evidence_path
+                      }
+                      seq {
+                        nop
+                        seq {
+                          seq {
+                            read @bytes::view_string
+                            nop
+                          }
+                          bind %StructuredParallelLoweringEvidence_x3a_x3amain$tmp$call_ref_tmp_370 = 0x353D746E696F706B636568635F6E6F697475636578655F64696D3B303D6E6F6973736572707075735F646574726174736E755F646575657571
+                          addr_of StructuredParallelLoweringEvidence_x3a_x3amain$tmp$call_ref_tmp_370
+                        }
+                      }
+                    }
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3awrite_x5ffile (addr_of, addr_of, addr_of)
+                  }
+                  nop
+                  nop
+                }
+                seq {
+                  nop
+                  nop
+                }
+              }
+              seq {
+                nop
+                nop
+                seq {
+                  nop
+                  nop
+                }
+                ret 0x0
+              }
+            }
+          } seq {
+            nop
+            seq {
+              nop
+              nop
+            }
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @StructuredParallelLoweringEvidence::parallelSpawnPanicEvidence
+            }
+            seq {
+              nop
+              addr_of context
+            }
+            call @StructuredParallelLoweringEvidence_x3a_x3aparallelSpawnPanicEvidence (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret StructuredParallelLoweringEvidence_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aStructuredParallelLoweringEvidence {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aStructuredParallelLoweringEvidence {
+  nop
+}
+
+

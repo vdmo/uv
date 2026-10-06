@@ -1,0 +1,408 @@
+global_zero @HostedExportLibrary_x3a_x3a_x5fHOSTED_x5fSTATE_x5fREFERENCE size=4
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceIncrement_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_2_value
+          }
+          nop
+          check_op Overflow + %__bind_2_value, 0x1
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_2_value, 0x1
+        }
+        nop
+        nop
+        nop
+        ret HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceIncrement_x3a_x3a_x5f_x5fhost_x5fbody$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferencePairSum_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_4_pair
+            }
+            nop
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_4_pair
+            }
+            nop
+          }
+          check_op Overflow + HostedExportLibrary_x5fx3a_x5fx3ahostedReferencePairSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field, HostedExportLibrary_x5fx3a_x5fx3ahostedReferencePairSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + HostedExportLibrary_x5fx3a_x5fx3ahostedReferencePairSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field, HostedExportLibrary_x5fx3a_x5fx3ahostedReferencePairSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field
+        }
+        nop
+        nop
+        ret HostedExportLibrary_x5fx3a_x5fx3ahostedReferencePairSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferencePairEcho_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_6_pair
+            }
+            nop
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_6_pair
+            }
+            nop
+          }
+        }
+        nop
+        nop
+        ret HostedExportLibrary_x5fx3a_x5fx3ahostedReferencePairEcho_x3a_x3a_x5f_x5fhost_x5fbody$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_8_triple
+              }
+              nop
+            }
+            seq {
+              seq {
+                nop
+                read %__bind_8_triple
+              }
+              nop
+            }
+            check_op Overflow + HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field, HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field, HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_8_triple
+            }
+            nop
+          }
+          check_op Overflow + HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$binop, HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$binop, HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$place_field
+        }
+        nop
+        nop
+        nop
+        ret HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleSum_x3a_x3a_x5f_x5fhost_x5fbody$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleEcho_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_10_triple
+            }
+            nop
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_10_triple
+            }
+            nop
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_10_triple
+            }
+            nop
+          }
+        }
+        nop
+        nop
+        ret HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceTripleEcho_x3a_x3a_x5f_x5fhost_x5fbody$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceLargeEcho_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_12_large
+            }
+            nop
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_12_large
+            }
+            nop
+          }
+          seq {
+            seq {
+              nop
+              read %__bind_12_large
+            }
+            nop
+          }
+        }
+        nop
+        nop
+        ret HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceLargeEcho_x3a_x3a_x5f_x5fhost_x5fbody$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceIOProbe_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              addr_of context
+              addr_of context.io
+              nop
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceIOProbe_x3a_x3a_x5f_x5fhost_x5fbody$tmp$call_ref_tmp_30 = 0x74656C6F69766172746C556F6C6C6548
+                addr_of HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceIOProbe_x3a_x3a_x5f_x5fhost_x5fbody$tmp$call_ref_tmp_30
+              }
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aio_x3a_x3aexists (addr_of, addr_of)
+          }
+          nop
+          if HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceIOProbe_x3a_x3a_x5f_x5fhost_x5fbody$tmp$method_call then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_14_fallback
+                }
+                nop
+                check_op Overflow + %__bind_14_fallback, 0x1
+                seq {
+                  nop
+                  cleanup_panic_check {
+nop                  }
+                }
+                binop + %__bind_14_fallback, 0x1
+              }
+              nop
+              nop
+              nop
+              ret HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceIOProbe_x3a_x3a_x5f_x5fhost_x5fbody$tmp$binop
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_14_fallback
+          }
+          nop
+          nop
+          ret %__bind_14_fallback
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceStateIncrement_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @HostedExportLibrary::_HOSTED_STATE_REFERENCE
+            }
+            seq {
+              nop
+              read %__bind_17_value
+            }
+            check_op Overflow + @_HOSTED_STATE_REFERENCE, %__bind_17_value
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + @_HOSTED_STATE_REFERENCE, %__bind_17_value
+          }
+          seq {
+            seq {
+              nop
+              check_poison HostedExportLibrary
+            }
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            seq {
+              read @HostedExportLibrary::_HOSTED_STATE_REFERENCE
+              nop
+            }
+            nop
+            store @HostedExportLibrary_x3a_x3a_x5fHOSTED_x5fSTATE_x5fREFERENCE = HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceStateIncrement_x3a_x3a_x5f_x5fhost_x5fbody$tmp$binop
+          }
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @HostedExportLibrary::_HOSTED_STATE_REFERENCE
+            }
+            move_state _HOSTED_STATE_REFERENCE
+          }
+          nop
+          nop
+          ret @_HOSTED_STATE_REFERENCE
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @HostedExportLibrary_x5fx3a_x5fx3ahostedReferenceCatchValue_x3a_x3a_x5f_x5fhost_x5fbody {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x7
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aHostedExportLibrary {
+  seq {
+    nop
+    store @HostedExportLibrary_x3a_x3a_x5fHOSTED_x5fSTATE_x5fREFERENCE = 0x5
+    seq {
+      nop
+      init_panic_handle HostedExportLibrary [HostedExportLibrary] cleanup
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aHostedExportLibrary {
+  nop
+}
+
+

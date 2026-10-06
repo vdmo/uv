@@ -1,0 +1,37 @@
+proc @ValidTransmuteTarget_x3a_x3avalidTransmuteTargetReference {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        block seq {
+          nop
+          nop
+        } seq {
+          seq {
+            nop
+            transmute 0x2 to bool
+          }
+          nop
+        }
+        nop
+        nop
+        nop
+        ret ValidTransmuteTarget_x3a_x3avalidTransmuteTargetReference$tmp$transmute
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aValidTransmuteTarget {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aValidTransmuteTarget {
+  nop
+}
+
+

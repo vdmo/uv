@@ -1,0 +1,172 @@
+proc @DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference {
+  seq {
+    nop
+    block seq {
+      nop
+      nop
+    } seq {
+      seq {
+        seq {
+          addr_of context
+          nop
+          call @ultraviolet_x3a_x3aruntime_x3a_x3acontext_x3a_x3acpu (addr_of)
+        }
+        parallel {
+          domain: DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$method_call
+          body:
+            block seq {
+              nop
+              nop
+            } seq {
+              seq {
+                seq {
+                  nop
+                  nop
+                }
+                dispatch {
+                  range: DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$range
+                  workgroup_size: DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$dispatch_workgroup
+                  body:
+                    nop
+                  body_result: DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$unit
+                  result: DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$dispatch_result
+                }
+              }
+              nop
+            }
+        }
+        seq {
+          nop
+          nop
+          clear_panic
+          seq {
+            call @uv_parallel_join (DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$parallel_join)
+            binop != DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$parallel_join_status, 0x0
+            if DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$parallel_join_panicked then seq {
+              store_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag_ptr = 0x1
+              store_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_code_ptr = DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$parallel_join_status
+            } else nop
+          }
+          seq {
+            load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag_ptr
+            load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_code_ptr
+          }
+          binop && 0x0, DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag
+          if DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$double_panic then call @ultraviolet_x3a_x3aruntime_x3a_x3apanic (DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_code) else nop
+          unop ! DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag
+          binop && 0x0, DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_clear
+          if DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_restore then seq {
+            store_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag_ptr = 0x1
+            store_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_code_ptr = 0x0
+          } else nop
+          binop || 0x0, DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag
+          if DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag then nop else nop
+          nop
+          cleanup_panic_check {
+nop          }
+        }
+      }
+      nop
+    }
+    nop
+    ret DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$dispatch_result
+  }
+}
+
+proc @__cx_dispatch_body_DispatchDynamicKeyWarning_0 {
+  seq {
+    cancel_suppress
+    seq {
+      seq {
+        nop
+        nop
+      }
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$record_ctor)
+      bind %region$0 = DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$synthetic_proc_region
+    }
+    load_ptr %__bind_4_elem
+    bind %index = DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$dispatch_elem
+    block seq {
+      nop
+      seq {
+        seq {
+          fence seqcst
+          seq {
+            load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$capture_ptr
+            seq {
+              seq {
+                nop
+                read %__bind_9_index
+              }
+              seq {
+                nop
+                seq {
+                  load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$capture_ptr
+                  load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$capture_ptr
+                }
+              }
+              check_op Overflow + %__bind_9_index, DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$capture_val
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag_ptr
+                      load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                    call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                    nop
+                    nop
+                  }                }
+              }
+              binop + %__bind_9_index, DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$capture_val
+            }
+            nop
+            check_index DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$addr_of, DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$binop
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_flag_ptr
+                    load_ptr DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                  call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+                  nop
+                  nop
+                }              }
+            }
+          }
+          fence seqcst
+        }
+        bind %observed = DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$index_elem
+        nop
+      }
+    } seq {
+      nop
+      nop
+    }
+    seq {
+      nop
+      nop
+      call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%region$0)
+      nop
+      nop
+    }
+    ret DispatchDynamicKeyWarning_x3a_x3adispatchDynamicKeyWarningReference$tmp$unit
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aDispatchDynamicKeyWarning {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aDispatchDynamicKeyWarning {
+  nop
+}
+
+

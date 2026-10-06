@@ -1,0 +1,2059 @@
+global_const @ComptimeConformance_x3a_x3aQUOTE_x5fCAPTURED_x5fVALUE bytes=4
+
+proc @ComptimeConformance_x3a_x3aComptimeConformanceModal_x3a_x3aReady_x3a_x3areadValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret ComptimeConformance_x3a_x3aComptimeConformanceModal_x3a_x3aReady_x3a_x3areadValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aComptimeConformanceModal_x3a_x3aReady_x3a_x3afinish {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        seq {
+          nop
+          nop
+        }
+        ret ComptimeConformance_x3a_x3aComptimeConformanceModal_x3a_x3aReady_x3a_x3afinish$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedRequiredComptimeConformanceDeriveValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x29
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedComptimeConformanceDeriveValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x25
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedFirstTieComptimeConformanceDeriveValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x2B
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedSecondTieComptimeConformanceDeriveValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x2F
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %reflected_field_count = 0x0
+          nop
+        }
+        seq {
+          nop
+          bind %reflected_field_index_total = 0x0
+          nop
+        }
+        block seq {
+          nop
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_3_reflected_field_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_3_reflected_field_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_3_reflected_field_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_field_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_4_reflected_field_index_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_4_reflected_field_index_total, 0x0
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_4_reflected_field_index_total, 0x0
+                }
+                seq {
+                  nop
+                  store %reflected_field_index_total = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_3_reflected_field_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_3_reflected_field_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_3_reflected_field_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_field_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_4_reflected_field_index_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_4_reflected_field_index_total, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_4_reflected_field_index_total, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_field_index_total = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        seq {
+          nop
+          bind %reflected_variant_count = 0x0
+          nop
+        }
+        block seq {
+          nop
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_5_reflected_variant_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_5_reflected_variant_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_5_reflected_variant_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_variant_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_5_reflected_variant_count
+                  }
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  check_op Overflow + %__bind_5_reflected_variant_count, 0x0
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_5_reflected_variant_count, 0x0
+                }
+                seq {
+                  nop
+                  store %reflected_variant_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_5_reflected_variant_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_5_reflected_variant_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_5_reflected_variant_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_variant_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_5_reflected_variant_count
+                  }
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  check_op Overflow + %__bind_5_reflected_variant_count, 0x0
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_5_reflected_variant_count, 0x0
+                }
+                seq {
+                  nop
+                  store %reflected_variant_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_5_reflected_variant_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_5_reflected_variant_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_5_reflected_variant_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_variant_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_5_reflected_variant_count
+                  }
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  check_op Overflow + %__bind_5_reflected_variant_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_5_reflected_variant_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_variant_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        seq {
+          nop
+          bind %reflected_state_count = 0x0
+          nop
+        }
+        block seq {
+          nop
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_6_reflected_state_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_6_reflected_state_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_6_reflected_state_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_state_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_6_reflected_state_count
+                  }
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  check_op Overflow + %__bind_6_reflected_state_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_6_reflected_state_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_state_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_6_reflected_state_count
+                  }
+                  nop
+                  check_op Overflow + %__bind_6_reflected_state_count, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_6_reflected_state_count, 0x1
+                }
+                seq {
+                  nop
+                  store %reflected_state_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_6_reflected_state_count
+                  }
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  check_op Overflow + %__bind_6_reflected_state_count, 0x0
+                  seq {
+                    nop
+                    cleanup_panic_check {
+nop                    }
+                  }
+                  binop + %__bind_6_reflected_state_count, 0x0
+                }
+                seq {
+                  nop
+                  store %reflected_state_count = ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_3_reflected_field_count
+              }
+              nop
+              binop == %__bind_3_reflected_field_count, 0x2
+            }
+            if ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$binop then seq {
+              seq {
+                nop
+                read %__bind_4_reflected_field_index_total
+              }
+              nop
+              binop == %__bind_4_reflected_field_index_total, 0x1
+            } else nop
+            if ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_5_reflected_variant_count
+              }
+              nop
+              binop == %__bind_5_reflected_variant_count, 0x4
+            } else nop
+            if ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_6_reflected_state_count
+              }
+              nop
+              binop == %__bind_6_reflected_state_count, 0x3
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          nop
+          ret ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks$tmp$and
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3acompileTimeFormsChecks {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %total = 0x7
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            nop
+            nop
+          }
+          bind %selected = 0x7
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            block seq {
+              nop
+              nop
+            } seq {
+              nop
+              nop
+            }
+            nop
+          }
+          bind %else_if_selected = 0xB
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            nop
+            nop
+          }
+          bind %false_else_selected = 0x11
+          nop
+        }
+        block seq {
+          nop
+          nop
+        } seq {
+          nop
+          nop
+        }
+        block seq {
+          nop
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_7_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_7_total, 0x1
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_7_total, 0x1
+                }
+                seq {
+                  nop
+                  store %total = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_7_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_7_total, 0x2
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_7_total, 0x2
+                }
+                seq {
+                  nop
+                  store %total = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_7_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_7_total, 0x3
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_7_total, 0x3
+                }
+                seq {
+                  nop
+                  store %total = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        block seq {
+          nop
+          seq {
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_7_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_7_total, 0x4
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_7_total, 0x4
+                }
+                seq {
+                  nop
+                  store %total = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+            seq {
+              seq {
+                seq {
+                  seq {
+                    nop
+                    read %__bind_7_total
+                  }
+                  nop
+                  check_op Overflow + %__bind_7_total, 0x5
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + %__bind_7_total, 0x5
+                }
+                seq {
+                  nop
+                  store %total = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop
+                }
+              }
+              seq {
+                nop
+                nop
+              }
+            }
+          }
+        } seq {
+          nop
+          nop
+        }
+        block seq {
+          nop
+          nop
+        } seq {
+          nop
+          nop
+        }
+        seq {
+          nop
+          bind %chosen = 0x13
+          nop
+        }
+        seq {
+          nop
+          bind %generic_chosen = 0x1F
+          nop
+        }
+        seq {
+          nop
+          bind %literal_number = 0x3
+          nop
+        }
+        seq {
+          nop
+          bind %literal_bool = 0x1
+          nop
+        }
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %literal_tuple = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$tuple
+          nop
+        }
+        seq {
+          seq {
+            nop
+            nop
+            nop
+          }
+          bind %literal_array = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$array
+          nop
+        }
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %literal_record = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$record
+          nop
+        }
+        seq {
+          nop
+          bind %literal_enum = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$enum_record
+          nop
+        }
+        seq {
+          nop
+          bind %literal_modal_state = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_18_literal_enum
+            }
+            nop
+            if_case %__bind_18_literal_enum {
+              case_clause {
+                pat <pattern>
+                body {
+seq {
+                    nop
+                    nop
+                    nop
+                    nop
+                    block seq {
+                      nop
+                      nop
+                    } seq {
+                      nop
+                      nop
+                    }
+                    bind %ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$if_case_clause_result_127 = 0x0
+                  }                }
+                value %ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$if_case_clause_result_127
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+              case_clause {
+                pat <pattern>
+                body {
+seq {
+                    nop
+                    nop
+                    bind %value = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$pat_enum_payload_elem
+                    nop
+                    block seq {
+                      nop
+                      nop
+                    } seq {
+                      seq {
+                        nop
+                        read %__bind_20_value
+                      }
+                      nop
+                    }
+                    bind %ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$if_case_clause_result_129 = %__bind_20_value
+                  }                }
+                value %ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$if_case_clause_result_129
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+              case_clause {
+                pat <pattern>
+                body {
+seq {
+                    nop
+                    nop
+                    bind %value = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$pat_enum_payload_field
+                    nop
+                    block seq {
+                      nop
+                      nop
+                    } seq {
+                      seq {
+                        nop
+                        read %__bind_20_value
+                      }
+                      nop
+                    }
+                    bind %ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$if_case_clause_result_131 = %__bind_20_value
+                  }                }
+                value %ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$if_case_clause_result_131
+                cleanup {
+seq {
+                    nop
+                    nop
+                  }                }
+              }
+            }
+          }
+          bind %enum_value = ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$ifcase
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_14_literal_bool
+            }
+            if %__bind_14_literal_bool then seq {
+              nop
+              read %__bind_15_literal_tuple
+            } else nop
+            if ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_17_literal_record
+              }
+              nop
+            } else nop
+          }
+          nop
+          if ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$and then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        seq {
+                          seq {
+                            seq {
+                              seq {
+                                seq {
+                                  seq {
+                                    seq {
+                                      seq {
+                                        seq {
+                                          nop
+                                          read %__bind_7_total
+                                        }
+                                        seq {
+                                          nop
+                                          read %__bind_8_selected
+                                        }
+                                        check_op Overflow + %__bind_7_total, %__bind_8_selected
+                                        seq {
+                                          nop
+                                          cleanup_panic_check {
+seq {
+                                              seq {
+                                                load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                                load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                                              }
+                                              nop
+                                              nop
+                                            }                                          }
+                                        }
+                                        binop + %__bind_7_total, %__bind_8_selected
+                                      }
+                                      seq {
+                                        nop
+                                        read %__bind_9_else_if_selected
+                                      }
+                                      check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_9_else_if_selected
+                                      seq {
+                                        nop
+                                        cleanup_panic_check {
+seq {
+                                            seq {
+                                              load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                              load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                                            }
+                                            nop
+                                            nop
+                                          }                                        }
+                                      }
+                                      binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_9_else_if_selected
+                                    }
+                                    seq {
+                                      nop
+                                      read %__bind_10_false_else_selected
+                                    }
+                                    check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_10_false_else_selected
+                                    seq {
+                                      nop
+                                      cleanup_panic_check {
+seq {
+                                          seq {
+                                            load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                            load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                                          }
+                                          nop
+                                          nop
+                                        }                                      }
+                                    }
+                                    binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_10_false_else_selected
+                                  }
+                                  seq {
+                                    nop
+                                    read %__bind_11_chosen
+                                  }
+                                  check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_11_chosen
+                                  seq {
+                                    nop
+                                    cleanup_panic_check {
+seq {
+                                        seq {
+                                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                                        }
+                                        nop
+                                        nop
+                                      }                                    }
+                                  }
+                                  binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_11_chosen
+                                }
+                                seq {
+                                  nop
+                                  read %__bind_12_generic_chosen
+                                }
+                                check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_12_generic_chosen
+                                seq {
+                                  nop
+                                  cleanup_panic_check {
+seq {
+                                      seq {
+                                        load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                        load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                                      }
+                                      nop
+                                      nop
+                                    }                                  }
+                                }
+                                binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_12_generic_chosen
+                              }
+                              seq {
+                                nop
+                                read %__bind_13_literal_number
+                              }
+                              check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_13_literal_number
+                              seq {
+                                nop
+                                cleanup_panic_check {
+seq {
+                                    seq {
+                                      load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                      load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                                    }
+                                    nop
+                                    nop
+                                  }                                }
+                              }
+                              binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_13_literal_number
+                            }
+                            seq {
+                              nop
+                              read %__bind_15_literal_tuple
+                            }
+                            check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$tuple_elem
+                            seq {
+                              nop
+                              cleanup_panic_check {
+seq {
+                                  seq {
+                                    load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                    load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                                  }
+                                  nop
+                                  nop
+                                }                              }
+                            }
+                            binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$tuple_elem
+                          }
+                          seq {
+                            addr_of literal_array
+                            nop
+                            nop
+                          }
+                          check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$index_elem
+                          seq {
+                            nop
+                            cleanup_panic_check {
+seq {
+                                seq {
+                                  load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                  load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                                }
+                                nop
+                                nop
+                              }                            }
+                          }
+                          binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$index_elem
+                        }
+                        seq {
+                          addr_of literal_array
+                          nop
+                          nop
+                        }
+                        check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$index_elem
+                        seq {
+                          nop
+                          cleanup_panic_check {
+seq {
+                              seq {
+                                load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                                load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                              }
+                              nop
+                              nop
+                            }                          }
+                        }
+                        binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$index_elem
+                      }
+                      seq {
+                        addr_of literal_array
+                        nop
+                        nop
+                      }
+                      check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$index_elem
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                              load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                      binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$index_elem
+                    }
+                    seq {
+                      seq {
+                        nop
+                        read %__bind_17_literal_record
+                      }
+                      nop
+                    }
+                    check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$place_field
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                            load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                        }                      }
+                    }
+                    binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$place_field
+                  }
+                  seq {
+                    nop
+                    read %__bind_20_enum_value
+                  }
+                  check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_20_enum_value
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, %__bind_20_enum_value
+                }
+                seq {
+                  seq {
+                    nop
+                    read %__bind_19_literal_modal_state
+                  }
+                  nop
+                }
+                check_op Overflow + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$place_field
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_flag_ptr
+                        load_ptr ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                binop + ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop, ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$place_field
+              }
+              nop
+              seq {
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+              }
+              seq {
+                nop
+                nop
+              }
+              ret ComptimeConformance_x3a_x3acompileTimeFormsChecks$tmp$binop
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemitQuoteSpliceConformanceItems {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x1
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedQuoteCaptureConformanceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @ComptimeConformance::QUOTE_CAPTURED_VALUE
+          }
+          move_state QUOTE_CAPTURED_VALUE
+        }
+        nop
+        nop
+        ret @QUOTE_CAPTURED_VALUE
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedSplicedConformanceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          nop
+          check_op Overflow + 0x13, 0x17
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + 0x13, 0x17
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret ComptimeConformance_x3a_x3aemittedSplicedConformanceValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedIdentifierSpliceConformanceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %spliced_conformance_value = 0x34
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_21_spliced_conformance_value
+            }
+            nop
+            check_op Overflow + %__bind_21_spliced_conformance_value, 0x1
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + %__bind_21_spliced_conformance_value, 0x1
+          }
+          nop
+          nop
+          nop
+          ret ComptimeConformance_x3a_x3aemittedIdentifierSpliceConformanceValue$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedParameterSpliceConformanceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_22_input_value
+          }
+          nop
+          check_op Overflow + %__bind_22_input_value, 0x2
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop + %__bind_22_input_value, 0x2
+        }
+        nop
+        nop
+        nop
+        ret ComptimeConformance_x3a_x3aemittedParameterSpliceConformanceValue$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedUsingAliasConformanceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        nop
+        nop
+        nop
+        ret 0x47
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3aemittedHygienicInternalReferenceConformanceValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %hyg_bd9d674317640d73_0_local_value = 0x53
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_23_hyg_bd9d674317640d73_0_local_value
+          }
+          nop
+          nop
+          ret %__bind_23_hyg_bd9d674317640d73_0_local_value
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @ComptimeConformance::emitQuoteSpliceConformanceItems
+            }
+            nop
+            call @ComptimeConformance_x3a_x3aemitQuoteSpliceConformanceItems (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %emitted = ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @ComptimeConformance::compileTimeCapabilityAndReflectionChecks
+            }
+            nop
+            call @ComptimeConformance_x3a_x3acompileTimeCapabilityAndReflectionChecks (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                    load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %capabilities_ok = ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @ComptimeConformance::compileTimeFormsChecks
+            }
+            nop
+            call @ComptimeConformance_x3a_x3acompileTimeFormsChecks (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                    load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          bind %forms_value = ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_24_emitted
+            }
+            if %__bind_24_emitted then seq {
+              nop
+              read %__bind_25_capabilities_ok
+            } else nop
+            if ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$and then seq {
+              seq {
+                nop
+                read %__bind_26_forms_value
+              }
+              nop
+              binop == %__bind_26_forms_value, 0xD4
+            } else nop
+          }
+          seq {
+            nop
+            nop
+          }
+          if ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$and then block seq {
+            nop
+            seq {
+              seq {
+                seq {
+                  seq {
+                    seq {
+                      seq {
+                        seq {
+                          seq {
+                            seq {
+                              seq {
+                                seq {
+                                  seq {
+                                    nop
+                                    read @ComptimeConformance::emittedQuoteCaptureConformanceValue
+                                  }
+                                  nop
+                                  call @ComptimeConformance_x3a_x3aemittedQuoteCaptureConformanceValue (%__panic)
+                                  seq {
+                                    nop
+                                    cleanup_panic_check {
+seq {
+                                        seq {
+                                          load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                          load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                        }
+                                        nop
+                                        nop
+                                      }                                    }
+                                  }
+                                }
+                                seq {
+                                  seq {
+                                    nop
+                                    read @ComptimeConformance::emittedSplicedConformanceValue
+                                  }
+                                  nop
+                                  call @ComptimeConformance_x3a_x3aemittedSplicedConformanceValue (%__panic)
+                                  seq {
+                                    nop
+                                    cleanup_panic_check {
+seq {
+                                        seq {
+                                          load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                          load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                        }
+                                        nop
+                                        nop
+                                      }                                    }
+                                  }
+                                }
+                                check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                                seq {
+                                  nop
+                                  cleanup_panic_check {
+seq {
+                                      seq {
+                                        load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                        load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                      }
+                                      nop
+                                      nop
+                                    }                                  }
+                                }
+                                binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                              }
+                              seq {
+                                seq {
+                                  nop
+                                  read @ComptimeConformance::emittedIdentifierSpliceConformanceValue
+                                }
+                                nop
+                                call @ComptimeConformance_x3a_x3aemittedIdentifierSpliceConformanceValue (%__panic)
+                                seq {
+                                  nop
+                                  cleanup_panic_check {
+seq {
+                                      seq {
+                                        load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                        load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                      }
+                                      nop
+                                      nop
+                                    }                                  }
+                                }
+                              }
+                              check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                              seq {
+                                nop
+                                cleanup_panic_check {
+seq {
+                                    seq {
+                                      load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                      load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                    }
+                                    nop
+                                    nop
+                                  }                                }
+                              }
+                              binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                            }
+                            seq {
+                              seq {
+                                nop
+                                read @ComptimeConformance::emittedParameterSpliceConformanceValue
+                              }
+                              seq {
+                                nop
+                                seq {
+                                  nop
+                                  bind %ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call_ref_tmp_313 = 0x3B
+                                  addr_of ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call_ref_tmp_313
+                                }
+                              }
+                              call @ComptimeConformance_x3a_x3aemittedParameterSpliceConformanceValue (addr_of, %__panic)
+                              seq {
+                                nop
+                                cleanup_panic_check {
+seq {
+                                    seq {
+                                      load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                      load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                    }
+                                    nop
+                                    nop
+                                  }                                }
+                              }
+                            }
+                            check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                            seq {
+                              nop
+                              cleanup_panic_check {
+seq {
+                                  seq {
+                                    load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                    load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                  }
+                                  nop
+                                  nop
+                                }                              }
+                            }
+                            binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                          }
+                          seq {
+                            seq {
+                              nop
+                              read @ComptimeConformance::emittedUsingAliasConformanceValue
+                            }
+                            nop
+                            call @ComptimeConformance_x3a_x3aemittedUsingAliasConformanceValue (%__panic)
+                            seq {
+                              nop
+                              cleanup_panic_check {
+seq {
+                                  seq {
+                                    load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                    load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                  }
+                                  nop
+                                  nop
+                                }                              }
+                            }
+                          }
+                          check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                          seq {
+                            nop
+                            cleanup_panic_check {
+seq {
+                                seq {
+                                  load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                  load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                }
+                                nop
+                                nop
+                              }                            }
+                          }
+                          binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                        }
+                        seq {
+                          seq {
+                            nop
+                            read @ComptimeConformance::emittedHygienicInternalReferenceConformanceValue
+                          }
+                          nop
+                          call @ComptimeConformance_x3a_x3aemittedHygienicInternalReferenceConformanceValue (%__panic)
+                          seq {
+                            nop
+                            cleanup_panic_check {
+seq {
+                                seq {
+                                  load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                  load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                                }
+                                nop
+                                nop
+                              }                            }
+                          }
+                        }
+                        check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                        seq {
+                          nop
+                          cleanup_panic_check {
+seq {
+                              seq {
+                                load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                              }
+                              nop
+                              nop
+                            }                          }
+                        }
+                        binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                      }
+                      seq {
+                        seq {
+                          nop
+                          read @ComptimeConformance::emittedComptimeConformanceDeriveValue
+                        }
+                        nop
+                        call @ComptimeConformance_x3a_x3aemittedComptimeConformanceDeriveValue (%__panic)
+                        seq {
+                          nop
+                          cleanup_panic_check {
+seq {
+                              seq {
+                                load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                                load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                              }
+                              nop
+                              nop
+                            }                          }
+                        }
+                      }
+                      check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                              load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                      binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                    }
+                    seq {
+                      seq {
+                        nop
+                        read @ComptimeConformance::emittedRequiredComptimeConformanceDeriveValue
+                      }
+                      nop
+                      call @ComptimeConformance_x3a_x3aemittedRequiredComptimeConformanceDeriveValue (%__panic)
+                      seq {
+                        nop
+                        cleanup_panic_check {
+seq {
+                            seq {
+                              load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                              load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                            }
+                            nop
+                            nop
+                          }                        }
+                      }
+                    }
+                    check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                            load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                        }                      }
+                    }
+                    binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                  }
+                  seq {
+                    seq {
+                      nop
+                      read @ComptimeConformance::emittedFirstTieComptimeConformanceDeriveValue
+                    }
+                    nop
+                    call @ComptimeConformance_x3a_x3aemittedFirstTieComptimeConformanceDeriveValue (%__panic)
+                    seq {
+                      nop
+                      cleanup_panic_check {
+seq {
+                          seq {
+                            load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                            load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                          }
+                          nop
+                          nop
+                        }                      }
+                    }
+                  }
+                  check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                  binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                }
+                seq {
+                  seq {
+                    nop
+                    read @ComptimeConformance::emittedSecondTieComptimeConformanceDeriveValue
+                  }
+                  nop
+                  call @ComptimeConformance_x3a_x3aemittedSecondTieComptimeConformanceDeriveValue (%__panic)
+                  seq {
+                    nop
+                    cleanup_panic_check {
+seq {
+                        seq {
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                          load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                        }
+                        nop
+                        nop
+                      }                    }
+                  }
+                }
+                check_op Overflow + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+                seq {
+                  nop
+                  cleanup_panic_check {
+seq {
+                      seq {
+                        load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_flag_ptr
+                        load_ptr ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$panic_code_ptr
+                      }
+                      nop
+                      nop
+                    }                  }
+                }
+                binop + ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop, ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$call
+              }
+              nop
+              seq {
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+                nop
+              }
+              seq {
+                nop
+                nop
+              }
+              ret ComptimeConformance_x3a_x3acompileTimeConformanceEntryPoint$tmp$binop
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          nop
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret 0x0
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aComptimeConformance {
+  seq {
+    nop
+    store @ComptimeConformance_x3a_x3aQUOTE_x5fCAPTURED_x5fVALUE = 0x11
+    seq {
+      nop
+      init_panic_handle ComptimeConformance [ComptimeConformance] cleanup
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aComptimeConformance {
+  nop
+}
+
+

@@ -1,0 +1,396 @@
+proc @Shapes_x3a_x3amakeRectangle {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_width
+          }
+          seq {
+            nop
+            read %__bind_2_height
+          }
+        }
+        nop
+        nop
+        ret Shapes_x3a_x3amakeRectangle$tmp$record
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @Shapes_x3a_x3adescribeRectangle {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @Shapes::Geometry::rectangleArea
+            }
+            seq {
+              seq {
+                nop
+                seq {
+                  addr_of shape
+                  addr_of shape.width
+                  nop
+                }
+              }
+              seq {
+                nop
+                seq {
+                  addr_of shape
+                  addr_of shape.height
+                  nop
+                }
+              }
+            }
+            call @Shapes_x3a_x3aGeometry_x3a_x3arectangleArea (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %area = Shapes_x3a_x3adescribeRectangle$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            nop
+            read %__bind_4_area
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret Shapes_x3a_x3adescribeRectangle$tmp$enum_tuple
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @Shapes_x3a_x3areportArea {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_5_report
+          }
+          nop
+          if_case %__bind_5_report {
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  nop
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    nop
+                    nop
+                  }
+                  bind %Shapes_x3a_x3areportArea$tmp$if_case_clause_result_16 = 0x0
+                }              }
+              value %Shapes_x3a_x3areportArea$tmp$if_case_clause_result_16
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+            case_clause {
+              pat <pattern>
+              body {
+seq {
+                  nop
+                  nop
+                  bind %area = Shapes_x3a_x3areportArea$tmp$pat_enum_payload_elem
+                  nop
+                  block seq {
+                    nop
+                    nop
+                  } seq {
+                    seq {
+                      nop
+                      read %__bind_6_area
+                    }
+                    nop
+                  }
+                  bind %Shapes_x3a_x3areportArea$tmp$if_case_clause_result_18 = %__bind_6_area
+                }              }
+              value %Shapes_x3a_x3areportArea$tmp$if_case_clause_result_18
+              cleanup {
+seq {
+                  nop
+                  nop
+                }              }
+            }
+          }
+        }
+        nop
+        nop
+        ret Shapes_x3a_x3areportArea$tmp$ifcase
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @Shapes_x3a_x3arectangleEdges {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read @Shapes::Geometry::rectanglePerimeter
+          }
+          seq {
+            seq {
+              nop
+              seq {
+                addr_of shape
+                addr_of shape.width
+                nop
+              }
+            }
+            seq {
+              nop
+              seq {
+                addr_of shape
+                addr_of shape.height
+                nop
+              }
+            }
+          }
+          call @Shapes_x3a_x3aGeometry_x3a_x3arectanglePerimeter (addr_of, addr_of, %__panic)
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+        }
+        nop
+        nop
+        ret Shapes_x3a_x3arectangleEdges$tmp$call
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @Shapes_x3a_x3asampleReport {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read @Shapes::makeRectangle
+            }
+            seq {
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %Shapes_x3a_x3asampleReport$tmp$call_ref_tmp_28 = 0x3
+                  addr_of Shapes_x3a_x3asampleReport$tmp$call_ref_tmp_28
+                }
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %Shapes_x3a_x3asampleReport$tmp$call_ref_tmp_31 = 0x4
+                  addr_of Shapes_x3a_x3asampleReport$tmp$call_ref_tmp_31
+                }
+              }
+            }
+            call @Shapes_x3a_x3amakeRectangle (addr_of, addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          bind %shape = Shapes_x3a_x3asampleReport$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @Shapes::describeRectangle
+            }
+            seq {
+              nop
+              addr_of shape
+            }
+            call @Shapes_x3a_x3adescribeRectangle (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+seq {
+                  seq {
+                    load_ptr Shapes_x3a_x3asampleReport$tmp$panic_flag_ptr
+                    load_ptr Shapes_x3a_x3asampleReport$tmp$panic_code_ptr
+                  }
+                  nop
+                  nop
+                }              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret Shapes_x3a_x3asampleReport$tmp$call
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aShapes {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aShapes {
+  nop
+}
+
+
+proc @Shapes_x3a_x3aGeometry_x3a_x3arectangleArea {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_10_width
+          }
+          seq {
+            nop
+            read %__bind_11_height
+          }
+          check_op Overflow * %__bind_10_width, %__bind_11_height
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop * %__bind_10_width, %__bind_11_height
+        }
+        nop
+        nop
+        ret Shapes_x3a_x3aGeometry_x3a_x3arectangleArea$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @Shapes_x3a_x3aGeometry_x3a_x3arectanglePerimeter {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_12_width
+            }
+            seq {
+              nop
+              read %__bind_13_height
+            }
+            check_op Overflow + %__bind_12_width, %__bind_13_height
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop + %__bind_12_width, %__bind_13_height
+          }
+          nop
+          check_op Overflow * Shapes_x3a_x3aGeometry_x3a_x3arectanglePerimeter$tmp$binop, 0x2
+          seq {
+            nop
+            cleanup_panic_check {
+nop            }
+          }
+          binop * Shapes_x3a_x3aGeometry_x3a_x3arectanglePerimeter$tmp$binop, 0x2
+        }
+        nop
+        seq {
+          nop
+          nop
+        }
+        nop
+        ret Shapes_x3a_x3aGeometry_x3a_x3arectanglePerimeter$tmp$binop
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aShapes_x3a_x3aGeometry {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aShapes_x3a_x3aGeometry {
+  nop
+}
+
+

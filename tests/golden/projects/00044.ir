@@ -1,0 +1,263 @@
+proc @OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %zero = 0x0
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_2_zero
+            }
+            seq {
+              nop
+              read %__bind_1_divisor
+            }
+            binop / %__bind_2_zero, %__bind_1_divisor
+          }
+          bind %not_a_number = OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$binop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read %__bind_3_not_a_number
+              }
+              seq {
+                nop
+                read %__bind_3_not_a_number
+              }
+              binop != %__bind_3_not_a_number, %__bind_3_not_a_number
+            }
+            if OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$binop then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_3_not_a_number
+                }
+                seq {
+                  nop
+                  read %__bind_3_not_a_number
+                }
+                binop == %__bind_3_not_a_number, %__bind_3_not_a_number
+              }
+              unop ! OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$binop
+            } else nop
+            if OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_3_not_a_number
+                }
+                nop
+                binop < %__bind_3_not_a_number, 0x3FF0000000000000
+              }
+              unop ! OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$binop
+            } else nop
+            if OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_3_not_a_number
+                }
+                nop
+                binop <= %__bind_3_not_a_number, 0x3FF0000000000000
+              }
+              unop ! OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$binop
+            } else nop
+            if OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_3_not_a_number
+                }
+                nop
+                binop > %__bind_3_not_a_number, 0x3FF0000000000000
+              }
+              unop ! OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$binop
+            } else nop
+            if OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$and then seq {
+              seq {
+                seq {
+                  nop
+                  read %__bind_3_not_a_number
+                }
+                nop
+                binop >= %__bind_3_not_a_number, 0x3FF0000000000000
+              }
+              unop ! OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$binop
+            } else nop
+          }
+          nop
+          seq {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
+          }
+          seq {
+            nop
+            nop
+          }
+          ret OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold$tmp$and
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @OperatorUndefinedPanic_x3a_x3aoperatorUndefinedPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          nop
+          bind %numerator = 0x2A
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_5_numerator
+            }
+            seq {
+              nop
+              read %__bind_4_divisor
+            }
+            check_op DivZero / %__bind_5_numerator, %__bind_4_divisor
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+            binop / %__bind_5_numerator, %__bind_4_divisor
+          }
+          nop
+          nop
+          ret OperatorUndefinedPanic_x3a_x3aoperatorUndefinedPanicValue$tmp$binop
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @OperatorUndefinedPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_6_context
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              seq {
+                nop
+                read @OperatorUndefinedPanic::operatorNaNComparisonsHold
+              }
+              seq {
+                nop
+                seq {
+                  nop
+                  bind %OperatorUndefinedPanic_x3a_x3amain$tmp$call_ref_tmp_33 = 0x0
+                  addr_of OperatorUndefinedPanic_x3a_x3amain$tmp$call_ref_tmp_33
+                }
+              }
+              call @OperatorUndefinedPanic_x3a_x3aoperatorNaNComparisonsHold (addr_of, %__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+nop                }
+              }
+            }
+            unop ! OperatorUndefinedPanic_x3a_x3amain$tmp$call
+          }
+          nop
+          if OperatorUndefinedPanic_x3a_x3amain$tmp$unop then block seq {
+            nop
+            seq {
+              nop
+              nop
+              nop
+              ret 0x0
+            }
+          } seq {
+            nop
+            nop
+          } else nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @OperatorUndefinedPanic::operatorUndefinedPanicValue
+            }
+            seq {
+              nop
+              seq {
+                nop
+                bind %OperatorUndefinedPanic_x3a_x3amain$tmp$call_ref_tmp_42 = 0x0
+                addr_of OperatorUndefinedPanic_x3a_x3amain$tmp$call_ref_tmp_42
+              }
+            }
+            call @OperatorUndefinedPanic_x3a_x3aoperatorUndefinedPanicValue (addr_of, %__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret OperatorUndefinedPanic_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aOperatorUndefinedPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aOperatorUndefinedPanic {
+  nop
+}
+
+

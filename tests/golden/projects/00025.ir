@@ -1,0 +1,197 @@
+proc @DynamicReceiverExpiredPanic_x3a_x3aDynamicReceiverExpiredOwner_x3a_x3areadExpiredDynamicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_1_self
+          }
+          nop
+        }
+        nop
+        nop
+        ret DynamicReceiverExpiredPanic_x3a_x3aDynamicReceiverExpiredOwner_x3a_x3areadExpiredDynamicValue$tmp$place_field
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            nop
+          }
+          bind %options = DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$record
+          nop
+        }
+        seq {
+          seq {
+            read @Region::new_scoped
+            seq {
+              nop
+              addr_of options
+            }
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3anew_x5fscoped (addr_of)
+          }
+          bind %opened = DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_3_opened
+            }
+            nop
+            alloc in %__bind_3_opened DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$record
+          }
+          bind %owner = DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$alloc_val
+          nop
+        }
+        seq {
+          seq {
+            addr_of owner
+            call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3aaddr_x5ftag_x5ffrom (addr_of, DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$alloc_ptr)
+          }
+          bind %dynamic_owner = DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$dyn
+          nop
+        }
+        seq {
+          block seq {
+            nop
+            nop
+          } seq {
+            seq {
+              nop
+              seq {
+                seq {
+                  nop
+                  read %opened
+                }
+                move_state opened
+              }
+              nop
+              call @ultraviolet_x3a_x3aruntime_x3a_x3aregion_x3a_x3afree_x5funchecked (%opened)
+            }
+            nop
+          }
+          bind %freed = DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$method_call
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %freed
+            }
+            move_state freed
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read %__bind_5_dynamic_owner
+            }
+            nop
+            seq {
+              call_vtable %__bind_5_dynamic_owner [0] check_dynamic_receiver_addr_active (%__panic)
+              seq {
+                nop
+                cleanup_panic_check {
+seq {
+                    seq {
+                      load_ptr DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$panic_flag_ptr
+                      load_ptr DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$panic_code_ptr
+                    }
+                    nop
+                    nop
+                  }                }
+              }
+            }
+          }
+          nop
+          seq {
+            nop
+            nop
+          }
+          ret DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue$tmp$dyncall_result
+        }
+      }
+    } seq {
+      nop
+      seq {
+        nop
+        nop
+      }
+    }
+  }
+}
+
+proc @DynamicReceiverExpiredPanic_x3a_x3amain {
+  seq {
+    nop
+    block seq {
+      nop
+      seq {
+        seq {
+          seq {
+            nop
+            read %__bind_7_context
+          }
+          nop
+          nop
+        }
+        seq {
+          seq {
+            seq {
+              nop
+              read @DynamicReceiverExpiredPanic::dynamicReceiverExpiredPanicValue
+            }
+            nop
+            call @DynamicReceiverExpiredPanic_x3a_x3adynamicReceiverExpiredPanicValue (%__panic)
+            seq {
+              nop
+              cleanup_panic_check {
+nop              }
+            }
+          }
+          nop
+          nop
+          ret DynamicReceiverExpiredPanic_x3a_x3amain$tmp$call
+        }
+      }
+    } seq {
+      nop
+      nop
+    }
+  }
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3ainit_x3a_x3aDynamicReceiverExpiredPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adeinit_x3a_x3aDynamicReceiverExpiredPanic {
+  nop
+}
+
+proc @ultraviolet_x3a_x3aruntime_x3a_x3adrop_x3a_x3aDynamicReceiverExpiredPanic_x3a_x3aDynamicReceiverExpiredOwner {
+  nop
+}
+
+
