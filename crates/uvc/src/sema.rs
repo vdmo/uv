@@ -118,6 +118,7 @@ pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: Target
             can_access: Some(can_access),
             parse_ok: true,
             parse_diags: Some(&Vec::new()),
+            language_service: None,
         };
         resolve_modules(&mut res_ctx)
     };

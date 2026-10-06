@@ -15,6 +15,7 @@ use super::resolve_contracts::resolve_loop_invariant_opt;
 use super::resolve_pattern::resolve_pattern;
 use super::resolve_qual::{resolve_enum_variant, resolve_qualified_form, resolve_record_path, VariantKind};
 use super::resolve_types::{resolve_type, resolve_type_path};
+use crate::language_service::LanguageSymbolKind;
 use super::resolver::*;
 use super::scopes::{id_eq, id_key_of, path_key_of};
 use super::scopes_intro::intro;
@@ -202,7 +203,8 @@ fn bind_pattern(ctx: &mut ResolveContext<'_, '_>, pat: &PatternPtr) -> Res<()> {
         return Err(ResError::at("Pat-Dup-Err", &pattern.span));
     }
     for name in &names {
-        let introduced = intro(ctx.ctx, name, &local_entity(&pattern.span));
+        let entity = ctx.local_language_entity(name, &pattern.span, LanguageSymbolKind::Variable, "local binding");
+        let introduced = intro(ctx.ctx, name, &entity);
         if !introduced.ok {
             return Err(ResError::from_id(introduced.diag_id, Some(pattern.span.clone())));
         }
@@ -279,9 +281,10 @@ fn resolve_enum_payload(ctx: &mut ResolveContext<'_, '_>, payload_opt: &Option<E
 }
 
 fn resolve_key_path_expr(ctx: &mut ResolveContext<'_, '_>, path: &KeyPathExpr) -> Res<KeyPathExpr> {
-    if resolve_value_name(ctx.ctx, &path.root).is_none() {
+    let Some(root) = resolve_value_name(ctx.ctx, &path.root) else {
         return Err(unresolved_value_name(ctx.ctx, &path.root, &path.span));
-    }
+    };
+    ctx.record_reference(&path.root, &path.span, &root);
     let mut segs = Vec::with_capacity(path.segs.len());
     for seg in &path.segs {
         segs.push(match seg {
@@ -349,7 +352,8 @@ fn resolve_callee(ctx: &mut ResolveContext<'_, '_>, callee: &ExprPtr, args: &[Ar
     };
     match &callee_expr.node {
         ExprNode::IdentifierExpr(node) => {
-            if resolve_value_name(ctx.ctx, &node.name).is_some() {
+            if let Some(ent) = resolve_value_name(ctx.ctx, &node.name) {
+                ctx.record_reference(&node.name, &callee_expr.span, &ent);
                 return Ok(callee.clone());
             }
             if args.is_empty() {
@@ -379,7 +383,13 @@ fn resolve_callee(ctx: &mut ResolveContext<'_, '_>, callee: &ExprPtr, args: &[Ar
                 EntityKind::Value,
                 ctx.can_access,
             );
-            if value.ok || (args.is_empty() && resolve_record_path(ctx, &node.path, &node.name).is_some()) {
+            if value.ok {
+                if let Some(entity) = &value.entity {
+                    ctx.record_reference(&node.name, &callee_expr.span, entity);
+                }
+                return Ok(callee.clone());
+            }
+            if args.is_empty() && resolve_record_path(ctx, &node.path, &node.name).is_some() {
                 return Ok(callee.clone());
             }
             resolve_expr(ctx, callee)
@@ -419,7 +429,10 @@ pub fn resolve_expr(ctx: &mut ResolveContext<'_, '_>, expr_ptr: &ExprPtr) -> Res
     let expr: &Expr = expr_arc;
     match &expr.node {
         ExprNode::IdentifierExpr(node) => match resolve_value_name(ctx.ctx, &node.name) {
-            Some(_) => Ok(expr_ptr.clone()),
+            Some(ent) => {
+                ctx.record_reference(&node.name, &expr.span, &ent);
+                Ok(expr_ptr.clone())
+            }
             None => Err(unresolved_value_name(ctx.ctx, &node.name, &expr.span)),
         },
         ExprNode::QualifiedNameExpr(QualifiedNameExpr { path, name })
@@ -780,6 +793,7 @@ pub fn resolve_stmt(ctx: &mut ResolveContext<'_, '_>, stmt: &Stmt) -> Res<Stmt> 
             let Some(ent) = resolve_value_name(ctx.ctx, &node.source) else {
                 return Err(ResError::at("ResolveExpr-Ident-Err", &node.span));
             };
+            ctx.record_reference(&node.source, &node.span, &ent);
             let introduced = intro(ctx.ctx, &node.alias, &ent);
             if !introduced.ok {
                 return Err(ResError::from_id(introduced.diag_id, Some(node.span.clone())));
@@ -791,10 +805,11 @@ pub fn resolve_stmt(ctx: &mut ResolveContext<'_, '_>, stmt: &Stmt) -> Res<Stmt> 
         }
         Stmt::FrameStmt(node) => {
             if let Some(target) = &node.target_opt {
-                if resolve_value_name(ctx.ctx, target).is_none() {
+                let Some(ent) = resolve_value_name(ctx.ctx, target) else {
                     let detail = format!("unresolved name '{target}'");
                     return Err(ResError::with_detail("ResolveExpr-Ident-Err", &node.span, detail));
-                }
+                };
+                ctx.record_reference(target, &node.span, &ent);
             }
             Stmt::FrameStmt(FrameStmt { body: resolve_block_opt(ctx, &node.body)?, ..node.clone() })
         }
@@ -809,7 +824,7 @@ pub fn resolve_stmt(ctx: &mut ResolveContext<'_, '_>, stmt: &Stmt) -> Res<Stmt> 
                     return Err(ResError::with_detail("ResolveExpr-Ident-Err", &node.span, detail));
                 };
                 saved_scope = Some(innermost.clone());
-                let mut alias_entity = local_entity(&node.span);
+                let mut alias_entity = ctx.local_language_entity(alias, &node.span, LanguageSymbolKind::Variable, "region alias");
                 alias_entity.source = EntitySource::RegionAlias;
                 let introduced = intro(ctx.ctx, alias, &alias_entity);
                 if !introduced.ok {

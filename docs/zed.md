@@ -8,7 +8,7 @@
 | Highlighting in that extension | a flat token grammar: keywords, literals and comments are coloured, with no structure. It lacks `region`, `frame`, `spawn`, `parallel`, `dispatch`, `wait`, `transition`, `~>`, octal literals and literal suffixes |
 | Language server (`uv-lsp`) | upstream's, in C++. The v0.4.0-alpha release archive does not contain a built one, so it has to be built from source |
 | Structural grammar | written, in this repository at `editors/tree-sitter-ultraviolet`, with highlight, indent, fold, injection, locals and tags queries. Not yet packaged as a Zed extension |
-| Language server in Rust | not started (milestone M4) |
+| Language server in Rust | `uv-lsp`, in this workspace (`crates/uv-lsp`): `cargo build --release -p uv-lsp` gives `target/release/uv-lsp`. It passes upstream's protocol suite and the Shapes example |
 
 So what can be installed now is upstream's extension. It gives basic colouring by
 itself, and diagnostics, hover, completion and the rest only if a `uv-lsp` binary is
@@ -59,8 +59,11 @@ documents this for Windows, and the compiler build pulls LLVM 21 and ICU 72.
 
 ## What changes with the port
 
-- M4 replaces the C++ server with a Rust `uv-lsp` built from this workspace by
-  `cargo build`, checked against upstream's protocol test suite.
+- M4 is done: the Rust `uv-lsp` replaces the C++ server and is checked against
+  upstream's protocol test suite (`python3 ultraviolet-lsp/tests/lsp_protocol_driver.py
+  target/release/uv-lsp`) and the Shapes example (`ultraviolet-lsp/examples/shapes/validate_lsp.py`).
+  To use it in Zed today, build it with the command above and point
+  `ULTRAVIOLET_LSP_SERVER` at it.
 - M5 ships a Zed extension from this repository that uses the structural grammar,
   adds outline and bracket queries, and downloads the server from the releases
   instead of needing it on `PATH`.

@@ -9,6 +9,7 @@ pub mod contracts;
 pub mod ffi;
 pub mod generics;
 pub mod keys;
+pub mod language_service;
 pub mod layout;
 pub mod memory;
 pub mod modal;

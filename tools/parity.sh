@@ -158,6 +158,9 @@ python3 tools/compare_check.py tests/golden/typecheck.tsv target/parity/typechec
 echo "== driver: uvc build --check --diag-json against the reference, every project (projects that reach the lowerability check, which is the lowering of M6, are pending)"
 python3 tools/parity_check.py || fail=1
 
+echo "== language server: the protocol suite and the Shapes example against uv-lsp"
+python3 ultraviolet-lsp/tests/lsp_protocol_driver.py target/release/uv-lsp && python3 ultraviolet-lsp/examples/shapes/validate_lsp.py target/release/uv-lsp > /dev/null && echo "identical behaviour: protocol suite and 13 example checks pass" || fail=1
+
 echo "== projects: conformance fixtures"
 python3 tools/parity_projects.py projects || fail=1
 

@@ -814,3 +814,23 @@ Simplifications, all of which can only change the order of two reports from the 
 check: the call graph keeps its nodes in the order they were added where the reference
 iterates a hash table, and so does the attenuation check with its bindings. The rest of
 the output of the assembly graph (the modules and libraries to emit) waits for M6.
+
+## M4: the language server
+
+`crates/uv-tooling` (paths and URIs, line index, open documents, one analysis of the
+workspace as the reference's `AnalyzeWorkspace`) and `crates/uv-lsp` (the server) port
+`06_driver/tooling`, `04_analysis/language_service/facts.cpp` and the C++ server of
+`ultraviolet-lsp`. Name resolution records the facts the server answers from
+(`uv-analysis::language_service`, threaded through the resolver as an optional index, so
+the resolver's output is unchanged: the resolve gates still pass). A written type is
+printed for signatures by `uv-source::ast::pretty`.
+
+Gate: `ultraviolet-lsp/tests/lsp_protocol_driver.py` (the upstream protocol suite,
+unchanged) and `examples/shapes/validate_lsp.py` pass against `target/release/uv-lsp`;
+both are in `tools/parity.sh`.
+
+Simplifications: the tooling's older `SymbolIndex` is not ported (the server does not
+use it); the Windows forms of paths and URIs (drive letters) are not carried; the
+analysis worker hands a snapshot to the main thread with the types of expressions as
+pairs of span and type instead of the reference's pointer-keyed map.
+

@@ -134,8 +134,18 @@ pub fn resolve_type(ctx: &mut ResolveContext<'_, '_>, type_ptr: &TypePtr) -> Res
         return Err(ResError::default());
     };
     // A path that does not resolve is reported at the type that names it.
-    let named = |ctx: &mut ResolveContext<'_, '_>, path: &[String]| {
-        resolve_type_path(ctx, path).map_err(|err| err.span_or(&ty.span).no_children())
+    let named = |ctx: &mut ResolveContext<'_, '_>, path: &[String]| -> Res<Vec<String>> {
+        let resolved = resolve_type_path(ctx, path).map_err(|err| err.span_or(&ty.span).no_children())?;
+        ctx.record_type_path_reference(&resolved, &ty.span);
+        Ok(resolved)
+    };
+    let class_named = |ctx: &mut ResolveContext<'_, '_>, path: &[String]| -> Res<Vec<String>> {
+        let resolved = resolve_class_path(ctx, path).map_err(ResError::id_only)?;
+        if let Some((last, origin)) = resolved.split_last() {
+            let entity = Entity::new(EntityKind::Class, Some(origin.to_vec()), Some(last.clone()), EntitySource::Decl);
+            ctx.record_reference(last, &ty.span, &entity);
+        }
+        Ok(resolved)
     };
     match &ty.node {
         TypeNode::TypePathType(node) => {
@@ -156,11 +166,11 @@ pub fn resolve_type(ctx: &mut ResolveContext<'_, '_>, type_ptr: &TypePtr) -> Res
             rebuilt(ty, TypeNode::TypePathType(TypePathType { path, generic_args }))
         }
         TypeNode::TypeDynamic(node) => {
-            let path = resolve_class_path(ctx, &node.path).map_err(ResError::id_only)?;
+            let path = class_named(ctx, &node.path)?;
             rebuilt(ty, TypeNode::TypeDynamic(TypeDynamic { path }))
         }
         TypeNode::TypeOpaque(node) => {
-            let path = resolve_class_path(ctx, &node.path).map_err(ResError::id_only)?;
+            let path = class_named(ctx, &node.path)?;
             rebuilt(ty, TypeNode::TypeOpaque(TypeOpaque { path }))
         }
         TypeNode::TypeModalState(node) => {

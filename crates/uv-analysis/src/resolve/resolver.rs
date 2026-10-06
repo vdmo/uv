@@ -6,6 +6,10 @@ use uv_core::span::Span;
 use uv_source::ast::*;
 use uv_source::module_paths::ModuleNames;
 
+use crate::language_service::{
+    make_language_service_local_entity, record_language_service_member_reference, record_language_service_reference, record_language_service_type_path_reference,
+    LanguageServiceIndex, LanguageSymbolKind,
+};
 use super::scopes_lookup::CanAccessFn;
 use crate::context::*;
 
@@ -16,6 +20,36 @@ pub struct ResolveContext<'c, 'a> {
     pub can_access: Option<CanAccessFn>,
     pub parse_ok: bool,
     pub parse_diags: Option<&'c DiagnosticStream>,
+    /// Where the language server's facts are collected, when something asks for them.
+    pub language_service: Option<&'c std::cell::RefCell<LanguageServiceIndex>>,
+}
+
+impl ResolveContext<'_, '_> {
+    /// A local name, with its declaration recorded for the language service.
+    pub fn local_language_entity(&self, name: &str, span: &Span, kind: LanguageSymbolKind, detail: &str) -> Entity {
+        match self.language_service {
+            Some(index) => make_language_service_local_entity(Some(&mut index.borrow_mut()), self.ctx, name, span, kind, detail),
+            None => make_language_service_local_entity(None, self.ctx, name, span, kind, detail),
+        }
+    }
+
+    pub fn record_reference(&self, fallback_name: &str, span: &Span, entity: &Entity) {
+        if let Some(index) = self.language_service {
+            record_language_service_reference(Some(&mut index.borrow_mut()), fallback_name, span, entity);
+        }
+    }
+
+    pub fn record_type_path_reference(&self, path: &[String], span: &Span) {
+        if let Some(index) = self.language_service {
+            record_language_service_type_path_reference(Some(&mut index.borrow_mut()), path, span);
+        }
+    }
+
+    pub fn record_member_reference(&self, owner_path: &[String], member: &str, span: &Span) {
+        if let Some(index) = self.language_service {
+            record_language_service_member_reference(Some(&mut index.borrow_mut()), owner_path, member, span);
+        }
+    }
 }
 
 /// Why resolution failed. `diag_id` is a rule name or a diagnostic code; it is absent

@@ -10,6 +10,7 @@ use super::resolve_expr::{resolve_block, resolve_expr};
 use super::resolve_generics::resolve_generic_params_opt;
 use super::resolve_pattern::resolve_pattern;
 use super::resolve_types::{resolve_class_path, resolve_type};
+use crate::language_service::LanguageSymbolKind;
 use super::resolver::*;
 use super::scopes::id_key_of;
 use crate::context::*;
@@ -23,10 +24,14 @@ fn add_to_scope(scope: &mut Scope, name: &str, entity: Entity) {
     scope.entry(id_key_of(name)).or_insert(entity);
 }
 
-fn param_scope(params: &[Param]) -> Scope {
+fn param_entity(ctx: &ResolveContext<'_, '_>, param: &Param) -> Entity {
+    ctx.local_language_entity(&param.name, &param.span, LanguageSymbolKind::Parameter, "parameter")
+}
+
+fn param_scope(ctx: &ResolveContext<'_, '_>, params: &[Param]) -> Scope {
     let mut scope = Scope::new();
     for param in params {
-        add_to_scope(&mut scope, &param.name, local_entity(&param.span));
+        add_to_scope(&mut scope, &param.name, param_entity(ctx, param));
     }
     scope
 }
@@ -123,8 +128,8 @@ fn resolve_associated_type(ctx: &mut ResolveContext<'_, '_>, node: &AssociatedTy
     Ok(AssociatedTypeDecl { default_type: decl_type_opt(ctx, &node.default_type)?, ..node.clone() })
 }
 
-fn self_entity(span: &Span) -> Entity {
-    local_entity(span)
+fn self_entity(ctx: &ResolveContext<'_, '_>, span: &Span) -> Entity {
+    ctx.local_language_entity("self", span, LanguageSymbolKind::Variable, "receiver")
 }
 
 /// Record methods see `Self` as the record. Their own type parameters are not bound here.
@@ -132,8 +137,8 @@ fn resolve_record_member(ctx: &mut ResolveContext<'_, '_>, record: &RecordDecl, 
     Ok(match member {
         RecordMember::FieldDecl(node) => RecordMember::FieldDecl(resolve_field_decl(ctx, node)?),
         RecordMember::MethodDecl(node) => {
-            let mut proc_scope = param_scope(&node.params);
-            add_to_scope(&mut proc_scope, "self", self_entity(&node.span));
+            let mut proc_scope = param_scope(ctx, &node.params);
+            add_to_scope(&mut proc_scope, "self", self_entity(ctx, &node.span));
             let self_type = Entity::new(
                 EntityKind::Type,
                 Some(ctx.ctx.current_module.clone()),
@@ -175,9 +180,9 @@ fn resolve_class_item(ctx: &mut ResolveContext<'_, '_>, item: &ClassItem) -> Res
             let mut proc_scope = Scope::new();
             add_type_params(&mut proc_scope, &node.generic_params);
             for param in &node.params {
-                add_to_scope(&mut proc_scope, &param.name, local_entity(&param.span));
+                add_to_scope(&mut proc_scope, &param.name, param_entity(ctx, param));
             }
-            add_to_scope(&mut proc_scope, "self", self_entity(&node.span));
+            add_to_scope(&mut proc_scope, "self", self_entity(ctx, &node.span));
             add_to_scope(&mut proc_scope, "Self", type_entity());
             ClassItem::ClassMethodDecl(in_proc_scopes(ctx, proc_scope, |ctx| {
                 let receiver = resolve_receiver(ctx, &node.receiver)?;
@@ -197,8 +202,8 @@ fn resolve_state_member(ctx: &mut ResolveContext<'_, '_>, member: &StateMember) 
             StateMember::StateFieldDecl(StateFieldDecl { r#type: decl_type(ctx, &node.r#type)?, ..node.clone() })
         }
         StateMember::StateMethodDecl(node) => {
-            let mut proc_scope = param_scope(&node.params);
-            add_to_scope(&mut proc_scope, "self", self_entity(&node.span));
+            let mut proc_scope = param_scope(ctx, &node.params);
+            add_to_scope(&mut proc_scope, "self", self_entity(ctx, &node.span));
             StateMember::StateMethodDecl(in_proc_scopes(ctx, proc_scope, |ctx| {
                 let params = resolve_params(ctx, &node.params)?;
                 let return_type_opt = decl_type_opt(ctx, &node.return_type_opt)?;
@@ -208,8 +213,8 @@ fn resolve_state_member(ctx: &mut ResolveContext<'_, '_>, member: &StateMember) 
             })?)
         }
         StateMember::TransitionDecl(node) => {
-            let mut proc_scope = param_scope(&node.params);
-            add_to_scope(&mut proc_scope, "self", self_entity(&node.span));
+            let mut proc_scope = param_scope(ctx, &node.params);
+            add_to_scope(&mut proc_scope, "self", self_entity(ctx, &node.span));
             StateMember::TransitionDecl(in_proc_scopes(ctx, proc_scope, |ctx| {
                 let params = resolve_params(ctx, &node.params)?;
                 let body = resolve_body(ctx, &node.body)?;
@@ -220,7 +225,7 @@ fn resolve_state_member(ctx: &mut ResolveContext<'_, '_>, member: &StateMember) 
 }
 
 fn resolve_extern_proc(ctx: &mut ResolveContext<'_, '_>, ext: &ExternProcDecl) -> Res<ExternProcDecl> {
-    in_proc_scopes(ctx, param_scope(&ext.params), |ctx| {
+    in_proc_scopes(ctx, param_scope(ctx, &ext.params), |ctx| {
         let generic_params = resolve_generic_params_opt(ctx, &ext.generic_params)?;
         let params = resolve_params(ctx, &ext.params)?;
         let return_type_opt = decl_type_opt(ctx, &ext.return_type_opt)?;
@@ -242,7 +247,7 @@ pub fn resolve_item(ctx: &mut ResolveContext<'_, '_>, item: &ASTItem) -> Res<AST
             binding.init = resolve_expr(ctx, &node.binding.init)?;
             ASTItem::StaticDecl(StaticDecl { binding, ..node.clone() })
         }
-        ASTItem::ProcedureDecl(node) => ASTItem::ProcedureDecl(in_proc_scopes(ctx, param_scope(&node.params), |ctx| {
+        ASTItem::ProcedureDecl(node) => ASTItem::ProcedureDecl(in_proc_scopes(ctx, param_scope(ctx, &node.params), |ctx| {
             let generic_params = resolve_generic_params_opt(ctx, &node.generic_params)?;
             let params = resolve_params(ctx, &node.params)?;
             // Unlike other declarations, a procedure keeps the detail of a return type
@@ -256,7 +261,7 @@ pub fn resolve_item(ctx: &mut ResolveContext<'_, '_>, item: &ASTItem) -> Res<AST
             Ok(ProcedureDecl { generic_params, params, return_type_opt, contract, body, ..node.clone() })
         })?),
         ASTItem::ComptimeProcedureDecl(node) => {
-            ASTItem::ComptimeProcedureDecl(in_proc_scopes(ctx, param_scope(&node.params), |ctx| {
+            ASTItem::ComptimeProcedureDecl(in_proc_scopes(ctx, param_scope(ctx, &node.params), |ctx| {
                 let generic_params = resolve_generic_params_opt(ctx, &node.generic_params)?;
                 let params = resolve_params(ctx, &node.params)?;
                 let return_type_opt = decl_type_opt(ctx, &node.return_type_opt)?;

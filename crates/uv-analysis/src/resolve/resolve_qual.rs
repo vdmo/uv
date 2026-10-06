@@ -120,11 +120,12 @@ fn builtin_qualified(path: &[String], name: &str) -> QualRes<bool> {
 }
 
 /// `path::name` as a value; the result names the declaring module and declared name.
-fn qualified_value(ctx: &mut ResolveContext<'_, '_>, path: &[String], name: &str) -> Option<ExprNode> {
+fn qualified_value(ctx: &mut ResolveContext<'_, '_>, path: &[String], name: &str, span: &uv_core::span::Span) -> Option<ExprNode> {
     let value =
         resolve_qualified(ctx.ctx, ctx.name_maps, ctx.module_names, path, name, EntityKind::Value, ctx.can_access);
     let ent = value.entity.filter(|_| value.ok)?;
-    let origin = ent.origin_opt?;
+    let origin = ent.origin_opt.clone()?;
+    ctx.record_reference(name, span, &ent);
     Some(path_expr(&origin, ent.target_opt.as_deref().unwrap_or(name)))
 }
 
@@ -154,13 +155,15 @@ pub fn resolve_qualified_form(ctx: &mut ResolveContext<'_, '_>, expr: &Expr) -> 
             if builtin_qualified(path, name)? {
                 return Ok(make_expr(span, path_expr(path, name)));
             }
-            if let Some(value) = qualified_value(ctx, path, name) {
+            if let Some(value) = qualified_value(ctx, path, name, span) {
                 return Ok(make_expr(span, value));
             }
             if let Some(record) = resolve_record_path(ctx, path, name) {
+                ctx.record_type_path_reference(&record, span);
                 return Ok(make_expr(span, record_path_expr(&record)?));
             }
             if let Some(unit) = resolve_enum_variant(ctx, path, name, VariantKind::Unit) {
+                ctx.record_member_reference(&unit, name, span);
                 let literal = EnumLiteralExpr { path: full_path(&unit, name), payload_opt: None };
                 return Ok(make_expr(span, ExprNode::EnumLiteralExpr(literal)));
             }
@@ -174,13 +177,15 @@ pub fn resolve_qualified_form(ctx: &mut ResolveContext<'_, '_>, expr: &Expr) -> 
                     if builtin_qualified(path, name)? {
                         return Ok(make_expr(span, call(path_expr(path, name), args)));
                     }
-                    if let Some(value) = qualified_value(ctx, path, name) {
+                    if let Some(value) = qualified_value(ctx, path, name, span) {
                         return Ok(make_expr(span, call(value, args)));
                     }
                     if let Some(record) = resolve_record_path(ctx, path, name) {
+                        ctx.record_type_path_reference(&record, span);
                         return Ok(make_expr(span, call(record_path_expr(&record)?, args)));
                     }
                     if let Some(tuple) = resolve_enum_variant(ctx, path, name, VariantKind::Tuple) {
+                        ctx.record_member_reference(&tuple, name, span);
                         let payload = EnumPayloadParen { elements: args.into_iter().map(|arg| arg.value).collect() };
                         let literal = EnumLiteralExpr {
                             path: full_path(&tuple, name),
@@ -193,10 +198,12 @@ pub fn resolve_qualified_form(ctx: &mut ResolveContext<'_, '_>, expr: &Expr) -> 
                 ApplyArgs::BraceArgs(brace) => {
                     let fields = qual_field_inits(ctx, &brace.fields)?;
                     if let Some(record) = resolve_record_path(ctx, path, name) {
+                        ctx.record_type_path_reference(&record, span);
                         let rec = RecordExpr { target: RecordExprTarget::Path(record), fields };
                         return Ok(make_expr(span, ExprNode::RecordExpr(rec)));
                     }
                     if let Some(record_enum) = resolve_enum_variant(ctx, path, name, VariantKind::Record) {
+                        ctx.record_member_reference(&record_enum, name, span);
                         let literal = EnumLiteralExpr {
                             path: full_path(&record_enum, name),
                             payload_opt: Some(EnumPayload::EnumPayloadBrace(EnumPayloadBrace { fields })),

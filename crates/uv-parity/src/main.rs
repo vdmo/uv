@@ -498,6 +498,7 @@ fn dump_resolve(out: &mut String, block: &[&str], mode: &str) {
         can_access: Some(can_access),
         parse_ok: true,
         parse_diags: Some(&no_parse_diags),
+        language_service: None,
     };
     let resolved = resolve_modules(&mut res_ctx);
     if types_mode {

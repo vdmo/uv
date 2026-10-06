@@ -35,7 +35,7 @@ each piece matching the reference on the corpus:
 | M3.4c | Declaration typing and the type-check entry points | done against its gate: all 6,822 declarations; all 546 projects identical end to end |
 | M3.5 | Memory, provenance, capabilities, keys, contracts | done with M3.4c, against the same gate |
 | M3.6 | Driver phases 2 and 3: `uvc --check` end to end | in progress: everything up to the lowerability check, which is the IR lowering of M6; 593 of 685 projects identical, 92 waiting for it |
-| M4 | Language server in Rust | not started |
+| M4 | Language server in Rust | done against its gate: `uv-lsp` passes upstream's protocol suite and the Shapes example |
 | M5 | Editors connected to the Rust server | not started |
 | M6 | IR, lowering, LLVM emission, linking | not started |
 | M7 | Packaging, installers, CI | not started |

@@ -53,7 +53,10 @@ def main() -> int:
                 stats["rejected_diff"] += 1
                 problems.append(f"REJECTED {manifest}: rc {rc} vs {ref_rc}\n  ref ={ref_json_text[:300]}\n  rust={out[:300]}")
         else:
-            if out == ref_phase1_text and rc == NOT_IMPLEMENTED_RC:
+            # Phase 1 alone; the later phases are compared by tools/parity_check.py.
+            rc, out = run(manifest_dir, ["--diag-json", "--phase1-only"])
+            out = out.strip()
+            if out == ref_phase1_text and rc == phase1_rc[ident]:
                 stats["phase1_same"] += 1
             else:
                 stats["phase1_diff"] += 1
