@@ -865,3 +865,33 @@ the linker driver. The lowering is the next step; each slice is judged by how ma
 859 declarations of the gate come out identical, with the constructs not ported yet
 reported as pending, as the typing was.
 
+
+### M6 progress: lowering
+
+`crates/uv-codegen/src/lower.rs` lowers procedures and modules. A construct that is not
+ported yet is recorded and its declaration is left out of the output; `uvc --emit-ir`
+prints what lowered and exits 3 when anything did not, with one `pending:` line per
+declaration on stderr (`tools/pending_ir.py` counts them over the golden projects).
+`tools/parity_ir.py` compares the declarations that were printed and counts the others
+as pending. Ported so far: literals, identifier reads of locals, `let`/`var` of simple
+names, `return`, blocks, expression statements, calls of procedures of the program
+(selected, or named by an identifier) with by-reference and by-move arguments of locals
+and temporaries, binary operators including `&&` and `||`, record expressions,
+parameters, the `inline` and `cold` attributes, the module initialisation and
+deinitialisation procedures of modules without statics, and the expression provenance
+map (`compute_expr_provenance_map`, in `uv-analysis/src/memory/region_prov.rs`).
+
+Simplifications, each of which leaves a declaration pending rather than wrong:
+
+- The numbering of bindings (`__bind_<n>_<name>`) is one counter over the whole program.
+  Once a declaration is left out, later declarations that bind names are left out too,
+  because the counter would no longer match the reference's.
+- `NeedsPanicOut` is `symbol != "main"` and not a record constructor; the catalogue of
+  runtime symbols, which the reference also excludes, is not ported. It is exact for the
+  symbols of procedures of the program.
+- Drops are ported for values of primitive types only (their drop is `nop`).
+- `BuiltinSym` is not ported, so a user module named `string` or `bytes` is refused.
+- The derived-value table holds record literals only; the other kinds come with the
+  expressions that make them.
+- `LowerTypeForLayout` is used for annotations of `let` and `var`; a callee's signature
+  is read with `lower_type`.

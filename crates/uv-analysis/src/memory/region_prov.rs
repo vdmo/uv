@@ -2,14 +2,15 @@
 //! stack, the heap, a global, a parameter), and that nothing is stored in or captured
 //! by something that outlives it. See `ProvBindCheck` in the reference's `regions`.
 //!
-//! The maps of expression provenance the reference also fills for later phases are not
-//! kept yet. Their presence still decides one thing, mirrored by `infer`: while they
-//! are filled, an expression's type comes from the stores only, and inside a loop body
-//! (walked without them) it may also be inferred.
+//! The maps of expression provenance the reference fills for later phases are kept by
+//! `compute_expr_provenance_map`. Their presence decides one thing, mirrored by `infer`:
+//! while they are filled, an expression's type comes from the stores only, and inside a
+//! loop body (walked without them) it may also be inferred.
 
 use std::cell::RefCell;
 use std::collections::{HashMap, HashSet};
 use std::rc::Rc;
+use std::sync::Arc;
 
 use uv_core::diagnostic_messages::make_diagnostic_by_id;
 use uv_core::diagnostics::{emit, DiagnosticStream};
@@ -19,7 +20,7 @@ use uv_source::ast::{self, ExprNode, ExprPtr, Stmt};
 
 use super::borrow_bind::BindSelfParam;
 use super::calls::arg_pass_expr;
-use super::regions::{innermost_active_region, region_active_type};
+use super::regions::{innermost_active_region, region_active_type, ProvenanceKind};
 use crate::caps::cap_methods::lookup_heap_allocator_method_sig;
 use crate::composite::function_types::value_path_type;
 use crate::composite::record_methods::lookup_method_static;
@@ -641,6 +642,8 @@ thread_local! {
 
 struct Prov<'d> {
     diags: Option<&'d Rc<RefCell<DiagnosticStream>>>,
+    /// Where the provenance of each expression is recorded, when it is wanted.
+    map: Option<&'d RefCell<HashMap<usize, (Tag, Option<IdKey>)>>>,
 }
 
 impl Prov<'_> {
@@ -807,10 +810,12 @@ impl Prov<'_> {
         let Some(body) = body.as_deref() else {
             return Ok(Tag::Bottom);
         };
+        // A loop body is walked without the map, as `BreakProv` does.
+        let unrecorded = Prov { diags: self.diags, map: None };
         let (inner_env, inner_gamma) = Self::inner_scope(body_env, gamma);
-        let (seq_env, seq_gamma, flow) = self.stmt_seq(ctx, &body.stmts, inner_env, inner_gamma, true)?;
+        let (seq_env, seq_gamma, flow) = unrecorded.stmt_seq(ctx, &body.stmts, inner_env, inner_gamma, true)?;
         if body.tail_opt.is_some() {
-            self.expr(ctx, &body.tail_opt, &seq_env, &seq_gamma, true)?;
+            unrecorded.expr(ctx, &body.tail_opt, &seq_env, &seq_gamma, true)?;
         }
         if flow.breaks.is_empty() || flow.break_void {
             return Ok(Tag::Bottom);
@@ -931,7 +936,22 @@ impl Prov<'_> {
         Some(follow())
     }
 
+    /// `ProvExpr`: the provenance of an expression, recorded when it is not bottom.
     fn expr(&self, ctx: &ScopeContext<'_>, expr: &ExprPtr, env: &Env, gamma: &TypeEnv, infer: bool) -> ExprResult {
+        let result = self.expr_form(ctx, expr, env, gamma, infer);
+        if let (Some(map), Some(node), Ok(tag)) = (self.map, expr.as_ref(), &result) {
+            if *tag != Tag::Bottom {
+                let target = match tag {
+                    Tag::Region(region) => env.regions.iter().rev().find(|entry| entry.tag == *region).map(|entry| entry.target.clone()),
+                    _ => None,
+                };
+                map.borrow_mut().insert(Arc::as_ptr(node) as usize, (tag.clone(), target));
+            }
+        }
+        result
+    }
+
+    fn expr_form(&self, ctx: &ScopeContext<'_>, expr: &ExprPtr, env: &Env, gamma: &TypeEnv, infer: bool) -> ExprResult {
         let Some(e) = expr.as_deref() else {
             return Ok(Tag::Bottom);
         };
@@ -1249,8 +1269,69 @@ pub fn prov_bind_check(
     let (env, gamma) = initial_envs(&prov_ctx, module_path, params, self_param, param_tags, regions);
     // The maps of expression provenance are filled during a type check, so types come
     // from the stores only.
-    match (Prov { diags }).block(&prov_ctx, body, &env, &gamma, false) {
+    match (Prov { diags, map: None }).block(&prov_ctx, body, &env, &gamma, false) {
         Ok(_) => ProvCheckResult { ok: true, diag_id: None, span: None },
         Err(failure) => ProvCheckResult { ok: false, diag_id: failure.diag_id, span: failure.span },
     }
+}
+
+/// What the provenance of each expression of a body is, by the address of the expression.
+#[derive(Default)]
+pub struct ExprProvMaps {
+    pub prov: HashMap<usize, ProvenanceKind>,
+    pub region_tags: HashMap<usize, IdKey>,
+    pub region_targets: HashMap<usize, IdKey>,
+}
+
+/// See `ComputeExprProvenanceMap`: the provenance of every expression of a body whose
+/// provenance is not bottom, or nothing when the body does not pass the check.
+pub fn compute_expr_provenance_map(
+    ctx: &ScopeContext<'_>,
+    module_path: &[String],
+    params: &[ast::Param],
+    body: &ast::BlockPtr,
+    self_param: Option<&BindSelfParam>,
+) -> Option<ExprProvMaps> {
+    let body = body.as_deref()?;
+    let mut prov_ctx = ctx.clone();
+    prov_ctx.current_module = module_path.to_vec();
+    prov_ctx.scopes.clear();
+    let mut param_tags: Vec<(String, Tag)> = Vec::new();
+    let mut regions = Vec::new();
+    if self_param.is_some() {
+        param_tags.push(("self".to_string(), Tag::Param(0)));
+    }
+    for param in params {
+        let is_region = lower_type(&prov_ctx, &param.r#type).is_ok_and(|ty| ty.is_some() && region_active_type(&ty)) || ast_region_active_type(&param.r#type);
+        let tag = if is_region {
+            let region_key = id_key_of(&param.name);
+            regions.push(RegionEntry { tag: region_key.clone(), target: region_key.clone(), frame_active: false });
+            Tag::Region(region_key)
+        } else {
+            Tag::Param(param_tags.len())
+        };
+        param_tags.push((param.name.clone(), tag));
+    }
+    let (env, gamma) = initial_envs(&prov_ctx, module_path, params, self_param, param_tags, regions);
+    let recorded = RefCell::new(HashMap::new());
+    (Prov { diags: None, map: Some(&recorded) }).block(&prov_ctx, body, &env, &gamma, false).ok()?;
+    let mut maps = ExprProvMaps::default();
+    for (key, (tag, target)) in recorded.into_inner() {
+        let kind = match &tag {
+            Tag::Global => ProvenanceKind::Global,
+            Tag::Stack(_) => ProvenanceKind::Stack,
+            Tag::Heap => ProvenanceKind::Heap,
+            Tag::Region(region) => {
+                maps.region_tags.insert(key, region.clone());
+                if let Some(target) = target {
+                    maps.region_targets.insert(key, target);
+                }
+                ProvenanceKind::Region
+            }
+            Tag::Bottom => ProvenanceKind::Bottom,
+            Tag::Param(_) => ProvenanceKind::Param,
+        };
+        maps.prov.insert(key, kind);
+    }
+    Some(maps)
 }
