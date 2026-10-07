@@ -812,8 +812,10 @@ pub(super) fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResu
             }
         },
         ExprNode::CallExpr(call) => lower_call(call, ctx),
+        ExprNode::RangeExpr(node) => lower_range_expr(expr, node, ctx),
         ExprNode::CastExpr(node) => lower_cast_expr(node, ctx),
         ExprNode::LoopConditionalExpr(node) => lower_loop_conditional(expr, node, ctx),
+        ExprNode::LoopIterExpr(node) => lower_loop_iter(expr, node, ctx),
         ExprNode::LoopInfiniteExpr(node) => lower_loop_infinite(expr, node, ctx),
         ExprNode::EnumLiteralExpr(node) => lower_enum_literal(expr, node, ctx),
         // `LowerPtrNull`: the null pointer is the immediate of eight zero bytes.
@@ -906,4 +908,54 @@ pub(super) fn lower_cast_expr(node: &ast::CastExpr, ctx: &mut LowerCtx) -> Lower
         Some(Arc::new(Ir::Cast { target, value: value_result.value, result: result_value.clone() })),
     ];
     LowerResult { ir: seq_ir(parts), value: result_value }
+}
+
+/// `LowerRangeExpr`: the bounds written, each lowered as an expression.
+fn lower_range_bounds(node: &ast::RangeExpr, ctx: &mut LowerCtx) -> (IrPtr, IrRange) {
+    let mut parts = Vec::new();
+    let mut lower_opt = |bound: &Option<Arc<Expr>>, ctx: &mut LowerCtx| match bound {
+        Some(expr) => {
+            let result = lower_expr(expr, ctx);
+            parts.push(Some(result.ir));
+            Some(result.value)
+        }
+        None => {
+            parts.push(Some(empty_ir()));
+            None
+        }
+    };
+    let lo = lower_opt(&node.lhs, ctx);
+    let hi = lower_opt(&node.rhs, ctx);
+    (seq_ir(parts), IrRange { kind: ir_range_kind(node.kind), lo, hi })
+}
+
+/// `LowerRange`: a range value, built by the emitter from its bounds. A range typed as a
+/// member of a union is the one member that is a range of its kind.
+pub(super) fn lower_range_expr(expr: &Arc<Expr>, node: &ast::RangeExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let (ir, range) = lower_range_bounds(node, ctx);
+    let value = ctx.fresh_temp_value("range");
+    let kind = range.kind;
+    ctx.register_derived_value(&value, DerivedValueInfo { range, ..DerivedValueInfo::new(DerivedKind::RangeLit) });
+    if let Some(mut range_type) = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten() {
+        if let Some(TypeNode::Union(members)) = strip_perm(&Some(range_type.clone())).as_deref().map(|ty| &ty.node) {
+            let is_kind = |member: &Arc<uv_analysis::typing::types::Type>| {
+                let stripped = strip_perm(&Some(member.clone()));
+                matches!(
+                    (kind, stripped.as_deref().map(|ty| &ty.node)),
+                    (IrRangeKind::To, Some(TypeNode::RangeTo(_)))
+                        | (IrRangeKind::ToInclusive, Some(TypeNode::RangeToInclusive(_)))
+                        | (IrRangeKind::Full, Some(TypeNode::RangeFull))
+                        | (IrRangeKind::From, Some(TypeNode::RangeFrom(_)))
+                        | (IrRangeKind::Exclusive, Some(TypeNode::Range(_)))
+                        | (IrRangeKind::Inclusive, Some(TypeNode::RangeInclusive(_)))
+                )
+            };
+            let matching: Vec<_> = members.iter().flatten().filter(|member| is_kind(member)).collect();
+            if let [only] = matching[..] {
+                range_type = only.clone();
+            }
+        }
+        ctx.register_value_type(&value, Some(range_type));
+    }
+    LowerResult { ir, value }
 }

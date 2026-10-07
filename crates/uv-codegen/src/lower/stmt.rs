@@ -305,6 +305,25 @@ pub(super) fn binding_initializer_has_responsibility(init: &Arc<Expr>, ctx: &Low
     }
 }
 
+/// `BindProvInfo` of the provenance of an initializer: a binding takes the provenance of its
+/// initializer, and a value whose provenance is bottom lives on the stack.
+pub(super) fn bind_prov_info(init: &Arc<Expr>, ctx: &LowerCtx) -> (ProvenanceKind, Option<String>, Option<String>) {
+    let init_key = Arc::as_ptr(init) as usize;
+    let init_kind = ctx.expr_prov.as_ref().and_then(|maps| maps.prov.get(&init_key).copied()).unwrap_or(ProvenanceKind::Bottom);
+    if init_kind == ProvenanceKind::Bottom {
+        (ProvenanceKind::Stack, None, None)
+    } else if init_kind == ProvenanceKind::Region {
+        let maps = ctx.expr_prov.as_ref();
+        let region = maps.and_then(|maps| maps.region_targets.get(&init_key)).cloned();
+        let tag = maps.and_then(|maps| maps.region_tags.get(&init_key)).cloned();
+        // `StableRegionProv`: the region is named by the stable name of its binding.
+        let region = region.map(|name| ctx.binding_state(&name).map_or(name, |state| state.stable_name.clone()));
+        (init_kind, region, tag)
+    } else {
+        (init_kind, None, None)
+    }
+}
+
 /// `LowerLetStmt` and `LowerVarStmt`: they differ only in the implicit introduction of an Outcome.
 pub(super) fn lower_binding_stmt(binding: &ast::Binding, is_let: bool, ctx: &mut LowerCtx) -> IrPtr {
     let Some(init) = &binding.init else {
@@ -333,22 +352,7 @@ pub(super) fn lower_binding_stmt(binding: &ast::Binding, is_let: bool, ctx: &mut
     if matches!(stripped.as_deref().map(|ty| &ty.node), Some(TypeNode::Dynamic(_))) {
         ctx.unported("widening to a dynamic class type");
     }
-    // `BindProvInfo`: a binding takes the provenance of its initializer, and a value whose
-    // provenance is bottom lives on the stack.
-    let init_key = Arc::as_ptr(init) as usize;
-    let init_kind = ctx.expr_prov.as_ref().and_then(|maps| maps.prov.get(&init_key).copied()).unwrap_or(ProvenanceKind::Bottom);
-    let (prov, prov_region, prov_region_tag) = if init_kind == ProvenanceKind::Bottom {
-        (ProvenanceKind::Stack, None, None)
-    } else if init_kind == ProvenanceKind::Region {
-        let maps = ctx.expr_prov.as_ref();
-        let region = maps.and_then(|maps| maps.region_targets.get(&init_key)).cloned();
-        let tag = maps.and_then(|maps| maps.region_tags.get(&init_key)).cloned();
-        // `StableRegionProv`: the region is named by the stable name of its binding.
-        let region = region.map(|name| ctx.binding_state(&name).map_or(name, |state| state.stable_name.clone()));
-        (init_kind, region, tag)
-    } else {
-        (init_kind, None, None)
-    };
+    let (prov, prov_region, prov_region_tag) = bind_prov_info(init, ctx);
     let has_responsibility = binding_initializer_has_responsibility(init, ctx);
     let mut bind_ir = empty_ir();
     let mut checked_value = init_result.value.clone();

@@ -36,6 +36,7 @@ use uv_core::symbols::{mangle, string_of_path};
 
 mod call;
 mod method;
+mod pattern;
 mod cleanup;
 mod drop;
 mod expr;
@@ -47,7 +48,7 @@ mod proc;
 mod statics;
 mod stmt;
 
-use self::{call::*, cleanup::*, drop::*, expr::*, keys::*, loops::*, method::*, place::*, proc::*, statics::*, stmt::*};
+use self::{call::*, cleanup::*, drop::*, expr::*, keys::*, loops::*, method::*, pattern::*, place::*, proc::*, statics::*, stmt::*};
 
 pub use self::module::{lower_module, LoweredModule};
 
@@ -148,6 +149,7 @@ pub enum DerivedKind {
     AddrIndex,
     LoadFromAddr,
     EnumLit,
+    RangeLit,
 }
 
 /// One run of an array literal: a single element, or an element repeated.
@@ -172,11 +174,12 @@ pub struct DerivedValueInfo {
     pub static_path: Vec<String>,
     pub payload_elems: Vec<IrValue>,
     pub payload_fields: Vec<(String, IrValue)>,
+    pub range: IrRange,
 }
 
 impl DerivedValueInfo {
     fn new(kind: DerivedKind) -> Self {
-        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), tuple_index: 0, index: IrValue::default(), fields: Vec::new(), elements: Vec::new(), array_segments: Vec::new(), variant: String::new(), static_path: Vec::new(), payload_elems: Vec::new(), payload_fields: Vec::new() }
+        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), tuple_index: 0, index: IrValue::default(), fields: Vec::new(), elements: Vec::new(), array_segments: Vec::new(), variant: String::new(), static_path: Vec::new(), payload_elems: Vec::new(), payload_fields: Vec::new(), range: IrRange::default() }
     }
 }
 
