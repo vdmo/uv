@@ -1,0 +1,3 @@
+error[E-OUT-0403]: Failed to emit IR/bitcode (codegen, assemble, tool resolution, or write) (`Out-IR-Err`)
+
+1 error emitted

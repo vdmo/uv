@@ -1,0 +1,7 @@
+warning[W-CON-0011]: Access to potentially stale binding after release
+warning[W-CON-0009]: Closure captures `shared` data
+  --> /tmp/llwork/Source/Main.uv:5:48
+5 |     let producer = || -> Async<i32, (), (), !> {
+5 |                                                
+
+2 warnings emitted

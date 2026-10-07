@@ -1,0 +1,6 @@
+warning[W-SRC-0101]: UTF-8 BOM present at the start of the file
+  --> /tmp/llwork/Source/Main.uv:1:1
+1 | ﻿//! Diagnostic source-loading specimen for leading BOM warnings.
+1 | ^
+
+1 warning emitted

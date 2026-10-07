@@ -1,0 +1,6 @@
+warning[W-CON-0401]: `#dynamic` present but all proofs succeed statically
+  --> /tmp/llwork/Source/Main.uv:5:8
+5 | public procedure rawPointerNullWritePanicValue(pointer: *mut i32, value: i32) -> i32 {
+5 |        
+
+1 warning emitted

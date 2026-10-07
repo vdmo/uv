@@ -1,0 +1,6 @@
+warning[W-CON-0020]: Speculative block on large struct (may be inefficient)
+  --> /tmp/llwork/Source/Main.uv:11:24
+11 |     %speculative write payload {
+11 |                        ^^^^^^^
+
+1 warning emitted

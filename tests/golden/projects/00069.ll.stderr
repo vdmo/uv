@@ -1,0 +1,6 @@
+warning[W-SAF-0100]: `transmute` target type is known to admit invalid bit patterns
+  --> /tmp/llwork/Source/Main.uv:4:21
+4 |     return unsafe { transmute<u8, bool>(2u8) }
+4 |                     ^^^^^^^^^^^^^^^^^^^^^^^^
+
+1 warning emitted

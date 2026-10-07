@@ -1,0 +1,6 @@
+warning[W-CON-0001]: Fine-grained keys in tight loop (performance hint)
+  --> /tmp/llwork/Source/Main.uv:17:15
+17 |         %read container.leaf.value {
+17 |               ^^^^^^^^^^^^^^^^^^^^
+
+1 warning emitted

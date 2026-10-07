@@ -1,0 +1,10 @@
+[uv] ABICall failed in <no-func> ret_null=0 param_count=2 ret_type=i32
+[uv]   param[0] mode=-1 type_null=0 type=opaque LlvmTypeMappingFailure::LlvmTypeMappingOpaqueClass
+[uv]   param[1] mode=0 type_null=0 type=* mut PanicRecord
+[uv] codegen failure at /home/runner/work/ultraviolet/ultraviolet/Bootstrap/Ultraviolet/src/05_codegen/llvm/llvm_call.cpp:2643
+[uv] codegen failure at /home/runner/work/ultraviolet/ultraviolet/Bootstrap/Ultraviolet/src/05_codegen/llvm/emit/module_emit.cpp:334
+[uv] EmitObjForModule: module=LlvmTypeMappingFailure LLVM module emission failed before object generation
+error[E-OUT-0410]: LLVM type mapping failed
+error[E-OUT-0402]: Failed to emit object file (codegen or write) (`Out-Obj-Err`)
+
+2 errors emitted
