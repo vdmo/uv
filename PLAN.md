@@ -908,6 +908,24 @@ Simplifications, each of which leaves a declaration pending rather than wrong:
   and monomorphization, vtables and dynamic dispatch, then async (race, sync, parallel,
   all, closures, async returns, stream and sequence combinators) last.
 
+### Backend decision: textual LLVM IR, `llvm-as`, `ld.lld`
+
+The reference emits machine code through the LLVM C++ API (46k lines under
+`05_codegen/llvm`). No LLVM development files exist on this machine, and the release the
+reference ships (`reference/ultraviolet/linux/tools`) has only `ld.lld`, `llvm-ar` and
+`llvm-as`. That is enough: `llvm-as` turns textual IR into bitcode and `ld.lld` links
+bitcode with LTO (it needs a `target datalayout`), so the Rust backend can emit textual
+LLVM IR from the lowered IR and finish with those two tools, no LLVM library in the
+build. Checked in the oracle image (`tools/oracle/Dockerfile.link`, which adds
+`libxml2` that `ld.lld` needs): a hand-written `.ll` built and ran, and the reference
+`uvc build` of a `main` returning 7 builds and runs there (exit code 7), with
+`--runtime-lib reference/ultraviolet/UltravioletRT.a`. Its object holds `main`, the
+lifecycle procedures (`__cx_lifecycle_init_<Assembly>`), the module init and deinit,
+the poison flag and the literal data; the runtime start object calls `main`.
+
+The gate for emission is behavioural: the same program built by the reference (in the
+oracle image) and by the Rust `uvc` must give the same exit status and output.
+
 ### What is left to use it as a compiler and a language service
 
 The language service (M4) and the editors (M5) already run on the ported front end, so
