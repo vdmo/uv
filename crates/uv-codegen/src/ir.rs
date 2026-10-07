@@ -385,7 +385,27 @@ pub enum IrDecl {
 
 pub type IrDecls = Vec<IrDecl>;
 
-/// A sequence node; flattening rules of `SeqIR` are in `seq_ir*`.
-pub fn seq_ir(items: Vec<IrPtr>) -> IrPtr {
-    Arc::new(Ir::Seq { items })
+/// `SeqIR(items)`: no items is `nop`, one item is that item, more is a sequence.
+pub fn seq_ir(items: Vec<Option<IrPtr>>) -> IrPtr {
+    let mut items: Vec<IrPtr> = items.into_iter().flatten().collect();
+    match items.len() {
+        0 => empty_ir(),
+        1 => items.remove(0),
+        _ => Arc::new(Ir::Seq { items }),
+    }
+}
+
+/// `EmptyIR()`.
+pub fn empty_ir() -> IrPtr {
+    Arc::new(Ir::Opaque)
+}
+
+/// `SeqIR(a, b)`: a two-item sequence that is never flattened, and an absent side yields the other.
+pub fn seq_pair(a: Option<IrPtr>, b: Option<IrPtr>) -> IrPtr {
+    match (a, b) {
+        (None, None) => Arc::new(Ir::Seq { items: Vec::new() }),
+        (Some(a), None) => a,
+        (None, Some(b)) => b,
+        (Some(a), Some(b)) => Arc::new(Ir::Seq { items: vec![a, b] }),
+    }
 }
