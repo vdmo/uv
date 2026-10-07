@@ -189,6 +189,8 @@ pub struct Module {
     pub(crate) dtors: Vec<(u32, String)>,
     /// `@llvm.used` entries (globals or functions kept).
     pub(crate) used: Vec<String>,
+    /// Whether the constructor and destructor lists are hidden.
+    pub(crate) ctor_lists_hidden: bool,
 }
 
 impl Module {
@@ -249,6 +251,33 @@ impl Module {
 
     pub fn set_global_section(&mut self, id: GlobalId, section: &str) {
         self.globals[id.0].section = Some(section.to_string());
+    }
+
+    pub fn set_global_hidden(&mut self, id: GlobalId) {
+        self.globals[id.0].hidden = true;
+    }
+
+    pub fn set_ctor_lists_hidden(&mut self) {
+        self.ctor_lists_hidden = true;
+    }
+
+    /// The names of the globals and of the defined functions that are not local.
+    pub fn defined_non_local_symbols(&self) -> (Vec<String>, Vec<String>) {
+        let globals = self.globals.iter().filter(|global| global.init.is_some() && !matches!(global.linkage, Linkage::Internal | Linkage::Private)).map(|global| global.name.clone()).collect();
+        let funcs = self.funcs.iter().filter(|func| !func.blocks.is_empty() && !matches!(func.linkage, Linkage::Internal | Linkage::Private)).map(|func| func.name.clone()).collect();
+        (globals, funcs)
+    }
+
+    pub fn set_function_hidden_by_name(&mut self, name: &str) {
+        if let Some(index) = self.func_index.get(name) {
+            self.funcs[*index].hidden = true;
+        }
+    }
+
+    pub fn set_global_hidden_by_name(&mut self, name: &str) {
+        if let Some(id) = self.global_index.get(name) {
+            self.globals[id.0].hidden = true;
+        }
     }
 
     pub fn set_global_unnamed_addr(&mut self, id: GlobalId) {
@@ -339,7 +368,8 @@ impl Module {
             return;
         }
         let items: Vec<String> = entries.iter().map(|(priority, function)| format!("{{ i32, ptr, ptr }} {{ i32 {priority}, ptr @{}, ptr null }}", quote(function))).collect();
-        let _ = writeln!(out, "@{name} = appending global [{} x {{ i32, ptr, ptr }}] [{}]", items.len(), items.join(", "));
+        let hidden = if self.ctor_lists_hidden { "hidden " } else { "" };
+        let _ = writeln!(out, "@{name} = appending {hidden}global [{} x {{ i32, ptr, ptr }}] [{}]", items.len(), items.join(", "));
     }
 
     fn print_function(&self, out: &mut String, func: &Function) {
@@ -372,7 +402,9 @@ impl Module {
                         let _ = write!(out, " %{}", quote(name));
                     }
                     None => {
-                        let _ = write!(out, " %{index}");
+                        // Unnamed arguments are numbered among themselves.
+                        let number = func.param_names[..index].iter().filter(|name| name.is_none()).count();
+                        let _ = write!(out, " %{number}");
                     }
                 }
             }

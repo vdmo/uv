@@ -132,7 +132,7 @@ impl Builder {
         let function = &self.module.funcs[func.0];
         let text = match function.param_names.get(index).and_then(Option::as_ref) {
             Some(name) => format!("%{}", quote(name)),
-            None => format!("%{index}"),
+            None => format!("%{}", function.param_names[..index].iter().filter(|name| name.is_none()).count()),
         };
         Value::new(text, function.ty.params[index].clone())
     }
@@ -285,6 +285,18 @@ impl Builder {
     }
 
     fn gep_flags(&mut self, inbounds: bool, ty: &Ty, ptr: &Value, indices: &[Value], name: &str) -> Value {
+        // `ConstantFolder`: the address of a global plus constants is a constant expression, and
+        // the global itself when every index is zero.
+        if ptr.text.starts_with('@') || ptr.text.starts_with("getelementptr") {
+            if indices.iter().all(|index| index.const_bits().is_some()) {
+                if indices.iter().all(|index| index.const_bits() == Some(0)) {
+                    return ptr.clone();
+                }
+                let flag = if inbounds { "inbounds " } else { "" };
+                let typed: Vec<String> = indices.iter().map(Value::typed).collect();
+                return Value::new(format!("getelementptr {flag}({ty}, ptr {}, {})", ptr.text, typed.join(", ")), Ty::Ptr);
+            }
+        }
         let indices: Vec<String> = indices.iter().map(Value::typed).collect();
         let ptr = ptr.clone();
         let flag = if inbounds { "inbounds " } else { "" };
@@ -415,8 +427,12 @@ impl Builder {
 
     pub fn switch(&mut self, value: &Value, default: BlockId, cases: &[(Value, BlockId)]) {
         let default = quote(self.block_name(default));
-        let cases: Vec<String> = cases.iter().map(|(case, block)| format!("{}, label %{}", case.typed(), quote(self.block_name(*block)))).collect();
-        self.push(format!("switch {}, label %{default} [ {} ]", value.typed(), cases.join(" ")), true);
+        let mut text = format!("switch {}, label %{default} [", value.typed());
+        for (case, block) in cases {
+            text.push_str(&format!("\n    {}, label %{}", case.typed(), quote(self.block_name(*block))));
+        }
+        text.push_str("\n  ]");
+        self.push(text, true);
     }
 
     pub fn ret(&mut self, value: &Value) {

@@ -32,6 +32,7 @@ use crate::control_flow::ir_flow_may_fall_through;
 use crate::ir::*;
 use crate::symbols::{deinit_sym, init_sym, item_path_proc, scoped_sym};
 use uv_core::symbols::{mangle, string_of_path};
+use uv_project::language_profile::runtime_path_sig;
 
 
 mod call;
@@ -233,6 +234,9 @@ pub struct LowerCtx<'a, 'b> {
     record_ctors: std::collections::HashSet<String>,
     /// Whether each procedure of the program is visible to the linker.
     proc_linkages: HashMap<String, bool>,
+    /// The visibility each procedure was declared with, and the module that owns it.
+    proc_visibility: HashMap<String, ast::Visibility>,
+    proc_modules: HashMap<String, Vec<String>>,
     /// The entry procedure of the program, once the module that has it is lowered.
     pub main_symbol: Option<String>,
     /// Whether the assembly being built is an executable.
@@ -249,6 +253,8 @@ pub struct LowerCtx<'a, 'b> {
     /// The modules of the program and what each needs initialised before it (dependent, dependency).
     init_modules: Vec<Vec<String>>,
     init_eager_edges: Vec<(usize, usize)>,
+    /// The order modules are initialised in, from the initialisation plan.
+    init_order: Vec<Vec<String>>,
     /// The first construct met that is not ported, which stops the declaration.
     pub pending: Option<String>,
 }
@@ -284,6 +290,8 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             proc_sigs: HashMap::new(),
             record_ctors: std::collections::HashSet::new(),
             proc_linkages: HashMap::new(),
+            proc_visibility: HashMap::new(),
+            proc_modules: HashMap::new(),
             main_symbol: None,
             executable_project: false,
             export_unwind_modes: HashMap::new(),
@@ -293,6 +301,7 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             active_static_init_module: None,
             init_modules: Vec::new(),
             init_eager_edges: Vec::new(),
+            init_order: Vec::new(),
             pending: None,
         }
     }
@@ -323,6 +332,8 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
     /// `IsExternalVisibility` of the procedure: the linker sees what is public or internal.
     fn register_linkage(&mut self, symbol: &str, vis: ast::Visibility) {
         self.proc_linkages.insert(symbol.to_string(), matches!(vis, ast::Visibility::Public | ast::Visibility::Internal));
+        self.proc_visibility.insert(symbol.to_string(), vis);
+        self.proc_modules.insert(symbol.to_string(), self.module_path.clone());
     }
 
     /// A construct that is not ported is skipped. What it would have bound is not counted, so the
@@ -445,6 +456,37 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
     pub fn set_init_plan(&mut self, modules: Vec<Vec<String>>, eager_edges: Vec<(usize, usize)>) {
         self.init_modules = modules;
         self.init_eager_edges = eager_edges;
+    }
+
+    /// `FilterInitPlanForProject`: the initialisation plan, reduced to the modules of the
+    /// project that has lifecycle procedures. `graph_modules` and `edges` are the plan's own,
+    /// `order` is its initialisation order.
+    pub fn set_project_init_plan(&mut self, graph_modules: &[Vec<String>], edges: &[(usize, usize)], order: &[Vec<String>], project_modules: &std::collections::HashSet<String>) {
+        let key = |path: &Vec<String>| string_of_path(path);
+        self.init_modules.clear();
+        self.init_eager_edges.clear();
+        self.init_order.clear();
+        let mut remapped: HashMap<String, usize> = HashMap::new();
+        for module in graph_modules {
+            if !project_modules.contains(&key(module)) {
+                continue;
+            }
+            remapped.insert(key(module), self.init_modules.len());
+            self.init_modules.push(module.clone());
+        }
+        for &(from, to) in edges {
+            let (Some(from_path), Some(to_path)) = (graph_modules.get(from), graph_modules.get(to)) else {
+                continue;
+            };
+            if let (Some(&from), Some(&to)) = (remapped.get(&key(from_path)), remapped.get(&key(to_path))) {
+                self.init_eager_edges.push((from, to));
+            }
+        }
+        for module in order {
+            if project_modules.contains(&key(module)) {
+                self.init_order.push(module.clone());
+            }
+        }
     }
 
     /// `PoisonSetFor`: the modules that cannot run once the initialisation of one fails: it, and
@@ -648,6 +690,42 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
         (&self.init_modules, &self.init_eager_edges)
     }
 
+    /// The initialisation order of the modules of the project.
+    pub fn init_order(&self) -> &[Vec<String>] {
+        &self.init_order
+    }
+
+    /// The symbols of the procedures a shared library exports (`ComputeSharedLibraryExportSymbols`):
+    /// public, visible to the linker, and not one of the compiler's own.
+    pub fn exported_proc_symbols(&self, project_modules: &std::collections::HashSet<String>) -> Vec<String> {
+        let mut out: Vec<String> = self
+            .proc_linkages
+            .iter()
+            .filter(|(_, external)| **external)
+            .map(|(symbol, _)| symbol)
+            .filter(|symbol| self.proc_visibility.get(*symbol) == Some(&ast::Visibility::Public))
+            .filter(|symbol| !is_hidden_shared_library_symbol(symbol))
+            .filter(|symbol| self.proc_modules.get(*symbol).is_some_and(|owner| !owner.is_empty() && project_modules.contains(&string_of_path(owner))))
+            .cloned()
+            .collect();
+        out.sort();
+        out.dedup();
+        out
+    }
+
+    /// What was learned about the values of the module just lowered, kept for emitting it
+    /// after the other modules are lowered.
+    pub fn module_values(&self) -> HashMap<String, TypeRef> {
+        self.value_types.clone()
+    }
+
+    /// Sets the context up for emitting a module that was lowered earlier.
+    pub fn begin_emission(&mut self, module_path: &[String], values: HashMap<String, TypeRef>) {
+        self.scope = self.scope_for(module_path);
+        self.module_path = module_path.to_vec();
+        self.value_types = values;
+    }
+
     /// The type a local was bound with.
     pub fn binding_type(&self, name: &str) -> TypeRef {
         self.binding_state(name).and_then(|state| state.ty.clone())
@@ -657,4 +735,9 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
     pub fn derived_value(&self, value: &IrValue) -> Option<&DerivedValueInfo> {
         self.derived_values.get(&value.name)
     }
+}
+
+/// `TargetIsHiddenSharedLibraryExportSymbol`: symbols a shared library keeps to itself.
+fn is_hidden_shared_library_symbol(symbol: &str) -> bool {
+    symbol == "__ultraviolet_library_entry" || symbol.starts_with("__cx_") || symbol.starts_with(&runtime_path_sig(&["init"])) || symbol.starts_with(&runtime_path_sig(&["deinit"])) || symbol.ends_with("$resume")
 }

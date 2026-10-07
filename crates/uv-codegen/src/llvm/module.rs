@@ -78,8 +78,19 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             }
         }
         self.emit_lifecycle_bridges();
+        let elf_like = !matches!(uv_project::target_profile::object_format_of(self.profile), uv_project::target_profile::ObjectFormat::Coff);
+        if self.config_shared_library && self.config_entry_module {
+            self.emit_library_entry_point();
+            if elf_like {
+                self.emit_ctor_dtor_hooks();
+            }
+        }
         if self.main_symbol.is_some() {
             self.emit_entry_point();
+        }
+        if self.config_shared_library && !self.config_exports.is_empty() && elf_like {
+            let exports = self.config_exports.clone();
+            self.apply_shared_library_visibility(&exports);
         }
     }
 

@@ -34,6 +34,7 @@ use crate::lower::{LowerCtx, PANIC_OUT_NAME};
 mod abi;
 mod entry;
 mod eval;
+mod library;
 mod literals;
 mod module;
 mod panic;
@@ -50,6 +51,11 @@ pub struct EmitConfig {
     pub profile: TargetProfile,
     /// The entry procedure when this module holds the program's entry point.
     pub main_symbol: Option<String>,
+    /// Whether the assembly is a shared library, and whether this module is its root module.
+    pub shared_library: bool,
+    pub entry_module: bool,
+    /// The symbols the shared library exports; the others it defines are hidden.
+    pub export_symbols: Vec<String>,
 }
 
 /// `LLVMEmitter`: the module being written and what is known about it while writing.
@@ -58,6 +64,9 @@ pub struct Emitter<'e, 'a, 'b> {
     pub(super) ctx: &'e mut LowerCtx<'a, 'b>,
     pub(super) profile: TargetProfile,
     pub(super) main_symbol: Option<String>,
+    pub(super) config_shared_library: bool,
+    pub(super) config_entry_module: bool,
+    pub(super) config_exports: std::collections::HashSet<String>,
     type_cache: HashMap<String, Ty>,
     active_types: Vec<String>,
     /// The functions made so far, by symbol.
@@ -82,6 +91,9 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             ctx,
             profile: config.profile,
             main_symbol: config.main_symbol.clone(),
+            config_shared_library: config.shared_library,
+            config_entry_module: config.entry_module,
+            config_exports: config.export_symbols.iter().cloned().collect(),
             type_cache: HashMap::new(),
             active_types: Vec::new(),
             functions: HashMap::new(),

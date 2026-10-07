@@ -21,6 +21,7 @@ use uv_analysis::typing::typecheck::typecheck_modules;
 use uv_comptime::{execute_comptime, ComptimePassOptions};
 use uv_core::diagnostic_messages::make_diagnostic_by_id;
 use uv_core::diagnostics::{emit, has_error, DiagnosticStream};
+use uv_core::symbols::string_of_path;
 use uv_project::project::Project;
 use uv_project::target_profile::TargetProfile;
 use uv_source::ast::ASTModule;
@@ -157,7 +158,7 @@ pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: Target
     let checked = typecheck_modules(&mut ctx, &name_maps.name_maps);
     let typecheck_ok = checked.ok;
     let checked_stores = checked.stores.clone();
-    let init_plan = checked.init_plan.as_ref().map(|plan| (plan.graph.modules.clone(), plan.graph.eager_edges.clone()));
+    let init_plan = checked.init_plan.as_ref().map(|plan| (plan.graph.modules.clone(), plan.graph.eager_edges.clone(), plan.init_order.clone()));
     let incomplete = !checked.pending_items.is_empty() || checked.pending_tail.is_some();
     for diag in checked.diags {
         emit(diags, diag);
@@ -200,23 +201,49 @@ pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: Target
     let mut base = ctx.clone();
     base.stores = checked_stores.clone();
     let mut lower_ctx = uv_codegen::lower::LowerCtx::new(&base, &name_maps.name_maps);
-    if let Some((modules, edges)) = init_plan {
-        lower_ctx.set_init_plan(modules, edges);
-    }
     lower_ctx.executable_project = project.assembly.kind == "executable";
-    let mut llvm_modules = Vec::new();
+    let project_modules: HashSet<String> = project.modules.iter().map(|module| module.path.clone()).collect();
+    if let Some((modules, edges, order)) = init_plan {
+        let lifecycle = if project.lifecycle_modules.is_empty() { &project.modules } else { &project.lifecycle_modules };
+        let lifecycle_keys: HashSet<String> = lifecycle.iter().map(|module| module.path.clone()).collect();
+        if emit_llvm {
+            lower_ctx.set_project_init_plan(&modules, &edges, &order, &lifecycle_keys);
+        } else {
+            lower_ctx.set_init_plan(modules, edges);
+        }
+    }
+    // Every module is lowered first: what a shared library exports is known only then.
+    let mut lowered_modules = Vec::new();
     for module in ctx.sigma.mods.iter() {
         let lowered = uv_codegen::lower::lower_module(module, &mut lower_ctx);
-        if emit_llvm && lowered.pending.is_empty() {
-            let config = uv_codegen::llvm::EmitConfig { module_name: uv_core::symbols::string_of_path(&module.path), profile: target_profile, main_symbol: lowered.main_symbol.clone() };
-            let emitted = uv_codegen::llvm::emit_module(&lowered.decls, &mut lower_ctx, &config);
-            llvm_modules.push(LlvmModule { path: module.path.clone(), text: emitted.text, failure: emitted.failure });
-        }
-        decls.extend(lowered.decls);
+        let values = lower_ctx.module_values();
+        decls.extend(lowered.decls.iter().cloned());
         if first_pending.is_none() {
             first_pending = lowered.pending.first().map(|(_, what)| format!("the lowerability check ({what})"));
         }
-        pending_decls.extend(lowered.pending);
+        pending_decls.extend(lowered.pending.iter().cloned());
+        lowered_modules.push((module.path.clone(), lowered, values));
+    }
+    let mut llvm_modules = Vec::new();
+    if emit_llvm {
+        let shared_library = project.assembly.is_shared_library();
+        let export_symbols = if shared_library { lower_ctx.exported_proc_symbols(&project_modules) } else { Vec::new() };
+        let has_root = lowered_modules.iter().any(|(path, ..)| string_of_path(path) == project.assembly.name);
+        // The program's entry procedure: the first module that has one.
+        let project_main = project.modules.iter().find_map(|info| lowered_modules.iter().find(|(path, ..)| string_of_path(path) == info.path).and_then(|(_, lowered, _)| lowered.main_symbol.clone()));
+        for (path, lowered, values) in lowered_modules {
+            if !lowered.pending.is_empty() {
+                continue;
+            }
+            let module_name = string_of_path(&path);
+            let is_root = module_name == project.assembly.name;
+            let with_entry = project.assembly.kind == "executable" && (is_root || (!has_root && lowered.main_symbol.is_some()));
+            let main_symbol = if with_entry { project_main.clone().or_else(|| lowered.main_symbol.clone()) } else { None };
+            lower_ctx.begin_emission(&path, values);
+            let config = uv_codegen::llvm::EmitConfig { module_name, profile: target_profile, main_symbol, shared_library, entry_module: is_root || !has_root, export_symbols: export_symbols.clone() };
+            let emitted = uv_codegen::llvm::emit_module(&lowered.decls, &mut lower_ctx, &config);
+            llvm_modules.push(LlvmModule { path, text: emitted.text, failure: emitted.failure });
+        }
     }
     SemaOutcome { pending: first_pending, ir: Some(decls), pending_decls, llvm_modules }
 }
