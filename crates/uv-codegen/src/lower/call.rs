@@ -3,12 +3,22 @@
 use super::*;
 
 /// `MangleProcInModule`: the symbol of a procedure; procedures of one name in a module get
-/// the index of the declaration as a suffix. Procedures with attributes are not ported.
+/// the index of the declaration as a suffix.
 pub(super) fn mangle_proc_in_module(module: &ASTModule, proc: &ProcedureDecl) -> String {
-    let participates = |decl: &ProcedureDecl| decl.name != "main" && decl.attrs.is_empty();
+    let participates = |decl: &ProcedureDecl| decl.name != "main" && !has_attr(&decl.attrs, "host_export") && link_name(&decl.attrs, &decl.name).is_none();
     let base = item_path_proc(&module.path, &proc.name);
+    // `MangleProc`: a hosted export has the symbol of its body, a `mangle` attribute names the symbol.
+    let plain = |proc: &ProcedureDecl| {
+        if has_attr(&proc.attrs, "host_export") {
+            return scoped_sym(&[scoped_sym(&base), "__host_body".to_string()]);
+        }
+        if let Some(name) = link_name(&proc.attrs, &proc.name) {
+            return name;
+        }
+        scoped_sym(&base)
+    };
     if !participates(proc) {
-        return scoped_sym(&base);
+        return plain(proc);
     }
     let mut overload_count = 0;
     let mut overload_index = 0;
@@ -25,7 +35,7 @@ pub(super) fn mangle_proc_in_module(module: &ASTModule, proc: &ProcedureDecl) ->
         overload_count += 1;
     }
     if overload_count <= 1 {
-        return scoped_sym(&base);
+        return plain(proc);
     }
     let mut path = base;
     path.push("$overload".to_string());
@@ -235,9 +245,6 @@ pub(super) fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut Lower
             (module, decl)
         }
     };
-    if !decl.attrs.is_empty() {
-        return failed(ctx, "calls of procedures with attributes");
-    }
     if decl.contract.is_some() {
         return failed(ctx, "calls of procedures with contracts");
     }
@@ -248,7 +255,9 @@ pub(super) fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut Lower
     ensure_source_signature(&callee, decl, ctx);
     let sig = ctx.proc_sigs.get(&callee.symbol).cloned().unwrap_or_default();
     let source_params: Vec<&IrParam> = sig.params.iter().filter(|param| param.name != PANIC_OUT_NAME).collect();
-    let modes: Vec<Option<ParamMode>> = source_params.iter().map(|param| param.mode).collect();
+    // A procedure exported for C callers takes every argument by value.
+    let raw_export_abi = ctx.export_unwind_modes.contains_key(&callee.symbol);
+    let modes: Vec<Option<ParamMode>> = source_params.iter().map(|param| if raw_export_abi { Some(ParamMode::Move) } else { param.mode }).collect();
     let types: Vec<TypeRef> = source_params.iter().map(|param| param.ty.clone()).collect();
     let (args_ir, arg_values) = lower_args(&modes, &types, &call.args, ctx);
     let result_value = ctx.fresh_temp_value("call");

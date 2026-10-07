@@ -209,6 +209,8 @@ pub struct LowerCtx<'a, 'b> {
     expr_prov: Option<ExprProvMaps>,
     proc_sigs: HashMap<String, ProcSig>,
     record_ctors: std::collections::HashSet<String>,
+    /// The procedures exported with a C-callable signature, and whether each catches unwinding.
+    export_unwind_modes: HashMap<String, bool>,
     static_types: HashMap<String, TypeRef>,
     /// `ctx.active_static_init_module`: the module whose statics are being initialised.
     active_static_init_module: Option<String>,
@@ -249,6 +251,7 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             expr_prov: None,
             proc_sigs: HashMap::new(),
             record_ctors: std::collections::HashSet::new(),
+            export_unwind_modes: HashMap::new(),
             static_types: HashMap::new(),
             active_static_init_module: None,
             init_modules: Vec::new(),
@@ -454,6 +457,55 @@ fn inline_mode_for(attr: &ast::AttributeItem) -> IrInlineMode {
         };
     }
     IrInlineMode::Default
+}
+
+/// `NormalizeAttrLiteral`: a written literal without its quotes.
+fn normalize_attr_literal(text: &str) -> String {
+    let quoted = text.len() >= 2 && ((text.starts_with('"') && text.ends_with('"')) || (text.starts_with('\'') && text.ends_with('\'')));
+    if quoted { text[1..text.len() - 1].to_string() } else { text.to_string() }
+}
+
+fn has_attr(attrs: &[ast::AttributeItem], name: &str) -> bool {
+    attrs.iter().any(|attr| attr.name.full_name == name)
+}
+
+/// `GetAttributeValue`: the token of the first argument of an attribute, as written.
+fn attr_value(attrs: &[ast::AttributeItem], name: &str) -> Option<uv_source::lexer::token::Token> {
+    attrs.iter().filter(|attr| attr.name.full_name == name).find_map(|attr| {
+        attr.args.iter().find_map(|arg| match (&arg.key, &arg.value) {
+            (None, ast::AttributeArgValue::Token(token)) => Some(token.clone()),
+            _ => None,
+        })
+    })
+}
+
+/// `LinkName`: the symbol a `mangle` attribute asks for.
+fn link_name(attrs: &[ast::AttributeItem], raw_name: &str) -> Option<String> {
+    let attr = attrs.iter().find(|attr| attr.name.full_name == "mangle")?;
+    let mode_arg = attr.args.iter().find(|arg| arg.key.as_deref().is_none_or(|key| key == "mode"))?;
+    let ast::AttributeArgValue::Token(token) = &mode_arg.value else {
+        return None;
+    };
+    let mode = normalize_attr_literal(&token.lexeme);
+    if mode.is_empty() {
+        return None;
+    }
+    if mode == "none" && token.kind != TokenKind::StringLiteral {
+        return Some(raw_name.to_string());
+    }
+    (token.kind == TokenKind::StringLiteral).then_some(mode)
+}
+
+/// `ExportUnwindModeFor`: whether an exported procedure catches what unwinds out of it.
+fn export_unwind_catches(attrs: &[ast::AttributeItem]) -> bool {
+    let Some(attr) = attrs.iter().find(|attr| attr.name.full_name == "unwind") else {
+        return false;
+    };
+    let token = attr.args.first().and_then(|arg| match &arg.value {
+        ast::AttributeArgValue::Token(token) => Some(token),
+        ast::AttributeArgValue::AttributeArgList(_) => None,
+    });
+    token.is_some_and(|token| normalize_attr_literal(&token.lexeme) == "catch")
 }
 
 /// The name of an enum variant, for what is reported as not ported.

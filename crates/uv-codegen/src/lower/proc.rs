@@ -16,9 +16,12 @@ pub(super) fn lower_proc(decl: &ProcedureDecl, module_path: &[String], symbol: S
             "inline" => ir.inline_mode = inline_mode_for(attr),
             "cold" => ir.cold = true,
             "dynamic" => ctx.dynamic_checks = true,
+            // These change the symbol, the signature or the unwinding, and are read below.
+            "export" | "host_export" | "mangle" | "unwind" => {}
             other => ctx.unported(&format!("attribute {other} on procedures")),
         }
     }
+    let is_export_proc = has_attr(&decl.attrs, "export");
     if decl.contract.is_some() {
         ctx.unported("procedure contracts");
     }
@@ -42,8 +45,18 @@ pub(super) fn lower_proc(decl: &ProcedureDecl, module_path: &[String], symbol: S
         None => ctx.unported("procedures without a return type"),
     }
     ctx.proc_ret_type = ir.ret.clone();
-    // An exported procedure keeps its declared signature; none is ported.
-    ir.params.push(panic_out_param());
+    // An exported procedure is called from outside: its parameters are passed by value, it
+    // keeps the signature it declares and takes no panic out-parameter.
+    if is_export_proc {
+        for param in &mut ir.params {
+            param.mode = Some(ParamMode::Move);
+        }
+        ir.abi = attr_value(&decl.attrs, "export").map(|token| normalize_attr_literal(&token.lexeme));
+        let symbol = ir.symbol.clone();
+        ctx.export_unwind_modes.insert(symbol, export_unwind_catches(&decl.attrs));
+    } else if needs_panic_out_for_symbol(&ir.symbol, ctx) {
+        ir.params.push(panic_out_param());
+    }
     let Some(body) = &decl.body else {
         ctx.unported("procedures without a body");
         ctx.pop_scope();
