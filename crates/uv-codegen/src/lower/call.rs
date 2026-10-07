@@ -1,6 +1,8 @@
 //! Lowering: call.
 
 use super::*;
+use uv_analysis::caps::builtin_paths::lookup_builtin_record_ctor_path;
+use uv_analysis::context::TypeDecl;
 
 /// `MangleProcInModule`: the symbol of a procedure; procedures of one name in a module get
 /// the index of the declaration as a suffix.
@@ -150,11 +152,80 @@ pub(super) fn lower_args(modes: &[Option<ParamMode>], types: &[TypeRef], args: &
     (seq_ir(parts), values)
 }
 
+/// `ResolveRecordCtor`: the record a call without arguments names, when it names one.
+fn resolve_record_ctor(call: &ast::CallExpr, ctx: &LowerCtx) -> Option<(Vec<String>, Option<ast::RecordDecl>)> {
+    let callee = call.callee.as_ref()?;
+    if !call.args.is_empty() {
+        return None;
+    }
+    let lookup = |path: &Vec<String>| match ctx.scope.sigma.types.get(&path_key_of(path)) {
+        Some(TypeDecl::Record(record)) => Some((path.clone(), Some(record.clone()))),
+        _ => None,
+    };
+    match &callee.node {
+        ExprNode::IdentifierExpr(ident) => {
+            if let Some(path) = lookup_builtin_record_ctor_path(&ident.name) {
+                // A built-in record whose declaration is not in the program has its defaults
+                // synthesized, which is not ported.
+                return lookup(&path).or(Some((path, None)));
+            }
+            if let Some(entity) = ctx.scope.module_scope().get(&id_key_of(&ident.name)) {
+                if entity.kind == EntityKind::Type {
+                    if let Some(origin) = &entity.origin_opt {
+                        let mut full = origin.clone();
+                        full.push(entity.target_opt.clone().unwrap_or_else(|| ident.name.clone()));
+                        return lookup(&full);
+                    }
+                }
+            }
+            let mut path = ctx.module_path.clone();
+            path.push(ident.name.clone());
+            lookup(&path)
+        }
+        ExprNode::PathExpr(node) => {
+            let mut path = node.path.clone();
+            path.push(node.name.clone());
+            lookup(&path)
+        }
+        _ => None,
+    }
+}
+
+/// The call of the constructor of a record whose fields all have defaults.
+fn lower_record_ctor(path: Vec<String>, record: Option<ast::RecordDecl>, ctx: &mut LowerCtx) -> LowerResult {
+    let Some(record) = record else {
+        ctx.unported("synthesized defaults of built-in records");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("record_ctor_err") };
+    };
+    let mut inits = Vec::new();
+    for member in &record.members {
+        let ast::RecordMember::FieldDecl(field) = member else {
+            continue;
+        };
+        if field.init_opt.is_none() {
+            ctx.unported("record constructors of records with fields without defaults");
+            return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("record_ctor_err") };
+        }
+        inits.push(ast::FieldInit { name: field.name.clone(), value: field.init_opt.clone(), span: field.span.clone() });
+    }
+    let saved_module = ctx.module_path.clone();
+    ctx.module_path = path[..path.len() - 1].to_vec();
+    let (ir, field_values) = lower_field_inits(&inits, ctx);
+    ctx.module_path = saved_module;
+    let value = ctx.fresh_temp_value("record_ctor");
+    ctx.register_derived_value(&value, DerivedValueInfo { fields: field_values, ..DerivedValueInfo::new(DerivedKind::RecordLit) });
+    ctx.register_value_type(&value, make_type_path(path));
+    LowerResult { ir, value }
+}
+
 pub(super) fn lower_call(call: &ast::CallExpr, ctx: &mut LowerCtx) -> LowerResult {
     let failed = |ctx: &mut LowerCtx, what: &str| {
         ctx.unported(what);
         LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("call") }
     };
+    if let Some((path, record)) = resolve_record_ctor(call, ctx) {
+        return lower_record_ctor(path, record, ctx);
+    }
     if let Some(callee_expr) = &call.callee {
         let callee_type = stored_expr_type(&ctx.scope, &Some(callee_expr.clone())).flatten();
         if matches!(strip_perm(&callee_type).as_deref().map(|ty| &ty.node), Some(TypeNode::Closure { .. })) {

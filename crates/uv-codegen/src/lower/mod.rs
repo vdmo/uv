@@ -12,7 +12,7 @@ use uv_analysis::memory::calls::has_source_provenance;
 use uv_analysis::memory::region_prov::{compute_expr_provenance_map, ExprProvMaps};
 use uv_analysis::layout::value_bits::encode_const;
 use uv_analysis::memory::regions::ProvenanceKind;
-use uv_analysis::memory::return_responsibility::call_result_has_responsibility;
+use uv_analysis::memory::return_responsibility::{call_result_has_responsibility, method_call_result_has_responsibility};
 use uv_analysis::resolve::scopes::{id_eq, id_key_of, path_key_of, universe_bindings};
 use uv_analysis::typing::expr::small::is_place_expr;
 use uv_analysis::typing::expr_store::{selected_call_target, stored_expr_type};
@@ -35,6 +35,7 @@ use uv_core::symbols::{mangle, string_of_path};
 
 
 mod call;
+mod method;
 mod cleanup;
 mod drop;
 mod expr;
@@ -45,7 +46,7 @@ mod proc;
 mod statics;
 mod stmt;
 
-use self::{call::*, cleanup::*, drop::*, expr::*, keys::*, place::*, proc::*, statics::*, stmt::*};
+use self::{call::*, cleanup::*, drop::*, expr::*, keys::*, method::*, place::*, proc::*, statics::*, stmt::*};
 
 pub use self::module::{lower_module, LoweredModule};
 

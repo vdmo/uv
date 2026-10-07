@@ -80,17 +80,11 @@ pub(super) fn lower_proc(decl: &ProcedureDecl, module_path: &[String], symbol: S
         body_seq.push(Some(Arc::new(Ir::Return { value: body_res.value })));
     }
     ir.body = Some(seq_ir(body_seq));
-    // `FinalizeProcIR`: the copy elision analysis and the async state machine are
-    // not ported; a procedure that returns an aggregate or an async type is pending.
+    // `FinalizeProcIR`: the async state machine is not ported. The aggregate copy elision
+    // analysis (`AnalyzeAggregateCopyElision`) only fills a field of the procedure that the
+    // IR dump does not print and that LLVM emission reads, so it is ported with the emitter.
     if async_sig_of(&ctx.scope, &ir.ret).is_some() {
         ctx.unported("async procedures");
-    }
-    // `AnalyzeAggregateCopyElision` looks into procedures that return an aggregate copied bit
-    // by bit, and gives up at once on any other. Its analysis is not ported.
-    let stripped = strip_perm(&ir.ret).or_else(|| ir.ret.clone());
-    let aggregate = matches!(stripped.as_deref().map(|ty| &ty.node), Some(TypeNode::Array { .. } | TypeNode::Tuple(_) | TypeNode::Union(_) | TypeNode::Path { .. } | TypeNode::Apply { .. } | TypeNode::ModalState(_)));
-    if ir.abi.is_none() && aggregate && bitcopy_type(&ctx.scope, &ir.ret) {
-        ctx.unported("aggregate copy elision of returns");
     }
     ctx.dynamic_checks = false;
     ctx.current_proc_symbol = None;
@@ -293,7 +287,7 @@ fn path_of_type(ty: &TypeRef) -> Vec<String> {
 }
 
 /// `MangleDefaultImpl`: the symbol of a class method's default body for one implementing type.
-fn mangle_default_impl(ty: &TypeRef, class_path: &[String], method_name: &str) -> String {
+pub(super) fn mangle_default_impl(ty: &TypeRef, class_path: &[String], method_name: &str) -> String {
     let mut path = vec!["default".to_string()];
     path.extend(path_of_type(ty));
     path.push("cl".to_string());

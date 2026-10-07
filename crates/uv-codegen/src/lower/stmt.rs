@@ -300,6 +300,7 @@ pub(super) fn binding_initializer_has_responsibility(init: &Arc<Expr>, ctx: &Low
         ExprNode::LiteralExpr(_) => false,
         _ if is_place_expr(&Some(init.clone())) => false,
         ExprNode::CallExpr(call) => call_result_has_responsibility(&ctx.scope, call).unwrap_or(true),
+        ExprNode::MethodCallExpr(call) => method_call_result_has_responsibility(&ctx.scope, call).unwrap_or(true),
         _ => true,
     }
 }

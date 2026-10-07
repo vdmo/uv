@@ -502,12 +502,13 @@ pub(super) fn lower_array_repeat_expr(node: &ast::ArrayRepeatExpr, ctx: &mut Low
 }
 
 /// `LowerReadPlaceFieldAccess`: the base is lowered as an expression and the field is read from it.
-pub(super) fn lower_field_access_expr(expr: &Arc<Expr>, node: &ast::FieldAccessExpr, ctx: &mut LowerCtx) -> LowerResult {
+pub(super) fn lower_field_access_expr(expr: &Arc<Expr>, node: &ast::FieldAccessExpr, read_base: bool, ctx: &mut LowerCtx) -> LowerResult {
     let Some(base) = &node.base else {
         ctx.unported("field accesses without a base");
         return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("place_field") };
     };
-    let base_result = lower_expr(base, ctx);
+    // Read as a place (`LowerReadPlace`), the base is read by its name in the source.
+    let base_result = if read_base { lower_read_place(base, ctx) } else { lower_expr(base, ctx) };
     let field_value = ctx.fresh_temp_value("place_field");
     let mut type_of_field = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten();
     if type_of_field.is_none() {
@@ -732,7 +733,7 @@ pub(super) fn lower_read_place(place: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerRe
             let key_ir = lower_implicit_key_access(place, ast::KeyMode::Read, ctx);
             LowerResult { ir: seq_ir(vec![Some(key_ir), Some(Arc::new(Ir::ReadVar { name: ident.name.clone() }))]), value }
         }
-        ExprNode::FieldAccessExpr(node) => lower_field_access_expr(place, node, ctx),
+        ExprNode::FieldAccessExpr(node) => lower_field_access_expr(place, node, true, ctx),
         ExprNode::TupleAccessExpr(node) => lower_tuple_access_expr(place, node, ctx),
         other => {
             ctx.unported(&format!("reads of the place {}", variant_name(other)));
@@ -760,7 +761,7 @@ fn mark_moved_place(place: &Arc<Expr>, ctx: &mut LowerCtx) -> IrPtr {
 }
 
 /// `LowerMovePlace`.
-fn lower_move_place(place: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResult {
+pub(super) fn lower_move_place(place: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResult {
     let read_result = lower_read_place(place, ctx);
     let move_state = mark_moved_place(place, ctx);
     LowerResult { ir: seq_ir(vec![Some(read_result.ir), Some(move_state)]), value: read_result.value }
@@ -788,7 +789,7 @@ pub(super) fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResu
         ExprNode::RecordExpr(node) => lower_record_expr(expr, node, ctx),
         ExprNode::IfExpr(node) => lower_if_expr(expr, node, ctx),
         ExprNode::TupleExpr(node) => lower_tuple_expr(expr, node, ctx),
-        ExprNode::FieldAccessExpr(node) => lower_field_access_expr(expr, node, ctx),
+        ExprNode::FieldAccessExpr(node) => lower_field_access_expr(expr, node, false, ctx),
         ExprNode::TupleAccessExpr(node) => lower_tuple_access_expr(expr, node, ctx),
         ExprNode::IndexAccessExpr(node) => lower_index_access(expr, node, ctx),
         ExprNode::ArrayExpr(node) => lower_array_expr(node, ctx),
@@ -817,12 +818,7 @@ pub(super) fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResu
             ir: empty_ir(),
             value: IrValue { kind: IrValueKind::Immediate, name: "null".to_string(), bytes: vec![0; 8], ..Default::default() },
         },
-        ExprNode::MethodCallExpr(call) => {
-            let receiver = stored_expr_type(&ctx.scope, &Some(call.receiver.clone().unwrap_or_default())).flatten();
-            let kind = strip_perm(&receiver).map(|ty| variant_name(&ty.node)).unwrap_or_default();
-            ctx.unported(&format!("method call {} on {kind}", call.name));
-            LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") }
-        }
+        ExprNode::MethodCallExpr(call) => lower_method_call(expr, call, ctx),
         _ => {
             ctx.unported(&format!("expression {}", variant_name(&expr.node)));
             LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") }
