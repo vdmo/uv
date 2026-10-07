@@ -290,6 +290,7 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
         selected_target_profile = resolve_selected_target_profile(opts, project, &mut diags);
     }
     let mut sema_pending: Option<String> = None;
+    let mut lowered_ir: Option<uv_codegen::ir::IrDecls> = None;
     if let (false, Some(project), Some(target_profile)) =
         (has_error(&diags), &project, selected_target_profile)
     {
@@ -359,6 +360,10 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
         if phase1_ok && !opts.phase1_only {
             let outcome = sema::run_sema(project, &phase1, target_profile, &mut diags, |verb, what| log.progress(verb, what, Color::BoldGreen));
             sema_pending = outcome.pending;
+            lowered_ir = outcome.ir;
+            if lowered_ir.is_some() && sema_pending.is_none() && !has_error(&diags) && !opts.check_only && !opts.emit_ir {
+                sema_pending = Some("code generation".to_string());
+            }
         }
     }
     let reached_unimplemented_phase = sema_pending.is_some();
@@ -389,6 +394,11 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
         let summary = diagnostic_summary(&ordered, use_color);
         if !summary.is_empty() {
             eprintln!("\n{summary}");
+        }
+    }
+    if opts.emit_ir {
+        if let Some(decls) = &lowered_ir {
+            print!("{}", uv_codegen::ir_dump::dump_ir(decls));
         }
     }
     if reached_unimplemented_phase {

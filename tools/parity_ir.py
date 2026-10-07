@@ -4,8 +4,9 @@
 The goldens are tests/golden/<dir>/<id>.ir, recorded by tools/oracle/run_reference_ir.sh
 for every project the reference accepts. A dump is a list of declarations, each starting
 at a line that begins with `proc @`, `global_const @`, `global_zero @`, `vtable @` or
-`extern_proc @`. A project for which the Rust `uvc` stops with status 3 is pending; for
-the others, every reference declaration is compared by name and text.
+`extern_proc @`. When the Rust `uvc` stops with status 3 (a construct that is not ported), the
+declarations it printed are compared and the others are counted as pending; otherwise every
+reference declaration is compared by name and text.
 """
 from __future__ import annotations
 
@@ -51,12 +52,15 @@ def main() -> int:
             stats["projects"] += 1
             proc = subprocess.run([str(UVC), "build", "Ultraviolet.toml", *ARGS], cwd=(ROOT / manifest).parent,
                                   capture_output=True, text=True, timeout=600)
-            if proc.returncode == 3:
+            pending = proc.returncode == 3
+            if pending:
                 stats["pending_projects"] += 1
-                continue
             want, got = declarations(reference.read_text()), declarations(proc.stdout.replace(str(ROOT) + "/", "/w/"))
             for key, text in want.items():
                 if key not in got:
+                    if pending:
+                        stats["pending_declarations"] += 1
+                        continue
                     stats["missing"] += 1
                     problems.append(f"{name}/{ident}: missing {key}")
                 elif got[key] != text:
