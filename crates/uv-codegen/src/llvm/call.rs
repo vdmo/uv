@@ -22,7 +22,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             return;
         }
         let symbol = self.symbol_aliases.get(&callee.name).cloned().unwrap_or_else(|| callee.name.clone());
-        let sig = self.ctx.proc_sig(&symbol).or_else(|| self.ctx.proc_sig(&callee.name)).cloned();
+        let sig = runtime_func_info(&symbol).or_else(|| self.ctx.proc_sig(&symbol).or_else(|| self.ctx.proc_sig(&callee.name)).cloned());
         let Some(sig) = sig else {
             self.fail(&format!("calls of {symbol}, which has no known signature"));
             return;

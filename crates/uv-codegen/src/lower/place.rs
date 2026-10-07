@@ -62,7 +62,7 @@ fn collect_ref_syms(out: &mut BTreeSet<String>, ir: &Option<IrPtr>) {
 }
 
 /// `RefSyms`: the symbols an IR fragment refers to, sorted and without repeats.
-pub(super) fn ref_syms(parts: &[Option<IrPtr>]) -> Vec<String> {
+pub(crate) fn ref_syms(parts: &[Option<IrPtr>]) -> Vec<String> {
     let mut out = BTreeSet::new();
     for part in parts {
         collect_ref_syms(&mut out, part);

@@ -52,6 +52,7 @@ mod stmt;
 use self::{call::*, cleanup::*, drop::*, expr::*, keys::*, loops::*, method::*, pattern::*, place::*, proc::*, statics::*, stmt::*};
 
 pub use self::module::{lower_module, LoweredModule};
+pub(crate) use self::place::ref_syms;
 
 pub const PANIC_OUT_NAME: &str = "__panic";
 

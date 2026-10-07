@@ -352,14 +352,35 @@ impl Module {
         if !self.globals.is_empty() {
             out.push('\n');
         }
+        let mut groups: Vec<String> = Vec::new();
         for func in self.funcs.iter().filter(|func| !func.removed) {
-            self.print_function(&mut out, func);
+            let group = if func.attrs.is_empty() {
+                None
+            } else {
+                let mut texts: Vec<String> = func.attrs.iter().map(FuncAttr::text).collect();
+                texts.sort();
+                let text = texts.join(" ");
+                Some(match groups.iter().position(|known| *known == text) {
+                    Some(index) => index,
+                    None => {
+                        groups.push(text);
+                        groups.len() - 1
+                    }
+                })
+            };
+            self.print_function(&mut out, func, group);
         }
         self.print_list(&mut out, "llvm.global_ctors", &self.ctors);
         self.print_list(&mut out, "llvm.global_dtors", &self.dtors);
         if !self.used.is_empty() {
             let entries: Vec<String> = self.used.iter().map(|symbol| format!("ptr @{}", quote(symbol))).collect();
             let _ = writeln!(out, "@llvm.used = appending global [{} x ptr] [{}], section \"llvm.metadata\"", entries.len(), entries.join(", "));
+        }
+        if !groups.is_empty() {
+            out.push('\n');
+        }
+        for (index, text) in groups.iter().enumerate() {
+            let _ = writeln!(out, "attributes #{index} = {{ {text} }}");
         }
         out
     }
@@ -373,7 +394,7 @@ impl Module {
         let _ = writeln!(out, "@{name} = appending {hidden}global [{} x {{ i32, ptr, ptr }}] [{}]", items.len(), items.join(", "));
     }
 
-    fn print_function(&self, out: &mut String, func: &Function) {
+    fn print_function(&self, out: &mut String, func: &Function, group: Option<usize>) {
         let defined = !func.blocks.is_empty();
         out.push_str(if defined { "define " } else { "declare " });
         out.push_str(func.linkage.text());
@@ -414,8 +435,8 @@ impl Module {
             out.push_str(if func.ty.params.is_empty() { "..." } else { ", ..." });
         }
         out.push(')');
-        for attr in &func.attrs {
-            let _ = write!(out, " {}", attr.text());
+        if let Some(group) = group {
+            let _ = write!(out, " #{group}");
         }
         if !defined {
             out.push_str("\n\n");

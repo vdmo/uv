@@ -30,7 +30,7 @@ use uv_project::target_profile::{llvm_data_layout_of, llvm_triple_of, ptr_size_b
 use uv_source::ast;
 
 use crate::ir::*;
-use crate::lower::{LowerCtx, PANIC_OUT_NAME};
+use crate::lower::{LowerCtx, ProcSig, PANIC_OUT_NAME};
 use crate::symbols::scoped_sym;
 use uv_core::symbols::string_of_path;
 
@@ -43,10 +43,12 @@ mod literals;
 mod module;
 mod panic;
 mod proc;
+mod runtime;
 mod types;
 
 pub use self::module::emit_module;
 use self::abi::*;
+use self::runtime::runtime_func_info;
 use self::types::*;
 
 /// What a module is emitted with.

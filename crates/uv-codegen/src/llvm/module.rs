@@ -58,6 +58,15 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
         let module_path = self.ctx.module_path.clone();
         self.poison_flag(&module_path);
 
+        let mut refs = std::collections::BTreeSet::new();
+        for decl in decls {
+            if let IrDecl::Proc(proc) = decl {
+                refs.extend(crate::lower::ref_syms(std::slice::from_ref(&proc.body)));
+            }
+        }
+        let refs: Vec<String> = refs.into_iter().collect();
+        self.declare_runtime(&refs);
+
         // First every procedure is declared, in order, so calls can name any of them.
         for decl in decls {
             if let IrDecl::Proc(proc) = decl {
