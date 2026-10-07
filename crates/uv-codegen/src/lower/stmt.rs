@@ -76,6 +76,67 @@ pub(super) fn lower_return_stmt(stmt: &ast::ReturnStmt, ctx: &mut LowerCtx) -> I
     seq_ir(parts)
 }
 
+/// `LowerWritePlace` of a local: the binding holds a value again, and the old one is dropped by the store.
+fn lower_write_place(place: &Arc<Expr>, value: &IrValue, ctx: &mut LowerCtx) -> IrPtr {
+    let ExprNode::IdentifierExpr(ident) = &place.node else {
+        ctx.unported(&format!("writes to the place {}", variant_name(&place.node)));
+        return empty_ir();
+    };
+    if ctx.binding_state(&ident.name).is_none() {
+        ctx.unported("writes to places that are not local");
+        return empty_ir();
+    }
+    if let Some(state) = ctx.binding_states.get_mut(&ident.name).and_then(|states| states.last_mut()) {
+        state.is_moved = false;
+        state.moved_fields.clear();
+    }
+    let key_ir = lower_implicit_key_access(place, ast::KeyMode::Write, ctx);
+    seq_ir(vec![Some(key_ir), Some(Arc::new(Ir::StoreVar { name: ident.name.clone(), value: value.clone() }))])
+}
+
+/// `LowerAssignStmt`.
+fn lower_assign_stmt(stmt: &ast::AssignStmt, ctx: &mut LowerCtx) -> IrPtr {
+    let (Some(place), Some(value)) = (&stmt.place, &stmt.value) else {
+        ctx.unported("assignments without a place or a value");
+        return empty_ir();
+    };
+    let rhs_result = lower_expr(value, ctx);
+    // A bare value assigned to a place of an Outcome type is introduced into it.
+    let place_type = stored_expr_type(&ctx.scope, &Some(place.clone())).flatten();
+    if outcome_sig_of(&place_type).is_some() {
+        ctx.unported("assigning into a place of an Outcome type");
+    }
+    let write_ir = lower_write_place(place, &rhs_result.value, ctx);
+    seq_ir(vec![Some(rhs_result.ir), Some(write_ir)])
+}
+
+/// `LowerCompoundAssignStmt`: the place is read, combined, and written back.
+fn lower_compound_assign_stmt(stmt: &ast::CompoundAssignStmt, ctx: &mut LowerCtx) -> IrPtr {
+    let (Some(place), Some(value)) = (&stmt.place, &stmt.value) else {
+        ctx.unported("assignments without a place or a value");
+        return empty_ir();
+    };
+    let lhs_result = lower_read_place(place, ctx);
+    let rhs_result = lower_expr(value, ctx);
+    let op = stmt.op.strip_suffix('=').unwrap_or(&stmt.op);
+    let new_value = ctx.fresh_temp_value("binop");
+    let mut op_parts: Vec<Option<IrPtr>> = Vec::new();
+    let reason = match op {
+        "/" | "%" => Some("DivZero"),
+        "<<" | ">>" => Some("Shift"),
+        "+" | "-" | "*" | "**" => Some("Overflow"),
+        _ => None,
+    };
+    if let Some(reason) = reason {
+        op_parts.push(Some(Arc::new(Ir::CheckOp { op: op.to_string(), reason: reason.to_string(), lhs: lhs_result.value.clone(), rhs: Some(rhs_result.value.clone()) })));
+        op_parts.push(Some(panic_check(ctx)));
+    }
+    op_parts.push(Some(Arc::new(Ir::BinaryOp { op: op.to_string(), lhs: lhs_result.value, rhs: rhs_result.value.clone(), result: new_value.clone() })));
+    let op_ir = seq_ir(op_parts);
+    let write_ir = lower_write_place(place, &new_value, ctx);
+    seq_ir(vec![Some(lhs_result.ir), Some(rhs_result.ir), Some(op_ir), Some(write_ir)])
+}
+
 pub(super) fn lower_expr_stmt(stmt: &ast::ExprStmt, ctx: &mut LowerCtx) -> IrPtr {
     let Some(value) = &stmt.value else {
         return empty_ir();
@@ -195,6 +256,8 @@ pub(super) fn lower_stmt(stmt: &Stmt, ctx: &mut LowerCtx) -> IrPtr {
         Stmt::LetStmt(node) => lower_binding_stmt(&node.binding, true, ctx),
         Stmt::VarStmt(node) => lower_binding_stmt(&node.binding, false, ctx),
         Stmt::KeyBlockStmt(node) => lower_key_block_stmt(node, ctx),
+        Stmt::AssignStmt(node) => lower_assign_stmt(node, ctx),
+        Stmt::CompoundAssignStmt(node) => lower_compound_assign_stmt(node, ctx),
         _ => {
             ctx.unported(&format!("statement {}", variant_name(stmt)));
             empty_ir()

@@ -1,29 +1,141 @@
 //! Lowering: expr.
 
 use super::*;
+use uv_analysis::layout::value_bits::decode_string_literal_bytes;
 
-pub(super) fn lower_literal(expr: &Arc<Expr>, lit: &ast::LiteralExpr, ctx: &mut LowerCtx) -> LowerResult {
-    let kind = match lit.literal.kind {
-        TokenKind::StringLiteral => {
-            ctx.unported("string literals");
-            Some(IrImmediateLiteralKind::String)
+const INT_SUFFIXES: [&str; 12] = ["i128", "u128", "isize", "usize", "i64", "u64", "i32", "u32", "i16", "u16", "i8", "u8"];
+
+fn strip_int_suffix(text: &str) -> &str {
+    INT_SUFFIXES.iter().find_map(|suffix| text.strip_suffix(suffix)).unwrap_or(text)
+}
+
+fn match_int_suffix(text: &str) -> Option<&'static str> {
+    INT_SUFFIXES.iter().find(|suffix| text.len() > suffix.len() && text.ends_with(*suffix)).copied()
+}
+
+/// `UniquePrimitiveUnionMember`: the one member of a union that is the primitive named.
+fn unique_primitive_union_member(contextual: &TypeRef, primitive: &str) -> TypeRef {
+    let stripped = strip_perm(contextual);
+    let Some(TypeNode::Union(members)) = stripped.as_deref().map(|ty| &ty.node) else {
+        return None;
+    };
+    let mut found: TypeRef = None;
+    for member in members {
+        let member_stripped = strip_perm(member);
+        if !matches!(member_stripped.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(name)) if name == primitive) {
+            continue;
         }
+        if found.is_some() {
+            return None;
+        }
+        found = member.clone();
+    }
+    found
+}
+
+/// `ParseIntLiteralLexeme`: the value of an integer literal, with its prefix and underscores.
+fn parse_int_literal_lexeme(lexeme: &str) -> Option<u64> {
+    let text = strip_int_suffix(lexeme);
+    let digits = |body: &str, radix: u32| -> Option<u64> {
+        if body.is_empty() {
+            return None;
+        }
+        let mut out = 0u64;
+        for c in body.chars() {
+            if c == '_' {
+                continue;
+            }
+            let digit = c.to_digit(radix)?;
+            out = out.wrapping_mul(u64::from(radix)).wrapping_add(u64::from(digit));
+        }
+        Some(out)
+    };
+    let lower = text.as_bytes();
+    if lower.len() >= 2 && lower[0] == b'0' {
+        match lower[1] {
+            b'b' | b'B' => return digits(&text[2..], 2),
+            b'o' | b'O' => return digits(&text[2..], 8),
+            b'x' | b'X' => return digits(&text[2..], 16),
+            _ => {}
+        }
+    }
+    let cleaned: String = text.chars().filter(|c| *c != '_').collect();
+    if cleaned.is_empty() {
+        return None;
+    }
+    cleaned.parse::<u64>().ok()
+}
+
+/// `EncodeU64LE`: little-endian bytes without the zeros at the top, and one byte for zero.
+pub(super) fn encode_u64_le(mut value: u64) -> Vec<u8> {
+    if value == 0 {
+        return vec![0];
+    }
+    let mut bytes = Vec::new();
+    while value > 0 {
+        bytes.push((value & 0xFF) as u8);
+        value >>= 8;
+    }
+    bytes
+}
+
+/// `LowerLiteral`: an immediate value; a literal has no IR of its own.
+pub(super) fn lower_literal(expr: &Arc<Expr>, lit: &ast::LiteralExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let literal_kind = match lit.literal.kind {
+        TokenKind::StringLiteral => Some(IrImmediateLiteralKind::String),
         TokenKind::CharLiteral => Some(IrImmediateLiteralKind::Char),
         TokenKind::IntLiteral => Some(IrImmediateLiteralKind::Int),
         TokenKind::FloatLiteral => Some(IrImmediateLiteralKind::Float),
         _ => None,
     };
-    let mut value = IrValue { kind: IrValueKind::Immediate, name: lit.literal.lexeme.clone(), literal_id: ctx.next_literal_id(), literal_kind: kind, ..Default::default() };
-    let lit_type = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten();
-    match &lit_type {
-        Some(ty) if matches!(ty.node, TypeNode::Union(_)) => ctx.unported("literals typed by a union"),
-        Some(_) => {
-            if let Some(bytes) = encode_const(&lit_type, &lit.literal) {
-                value.bytes = bytes;
-            }
-            ctx.register_value_type(&value, lit_type.clone());
+    let mut value = IrValue { kind: IrValueKind::Immediate, name: lit.literal.lexeme.clone(), literal_id: ctx.next_literal_id(), literal_kind, ..Default::default() };
+    // A string literal is its text with the escapes decoded.
+    if lit.literal.kind == TokenKind::StringLiteral {
+        match decode_string_literal_bytes(&lit.literal.lexeme) {
+            Some(bytes) => value.bytes = bytes,
+            None => ctx.unported("string literals that do not decode"),
         }
-        None => ctx.unported("literals without a recorded type"),
+    }
+    // With the type typing gave it, the literal is encoded as a value of that type; inside a
+    // union, an integer with a suffix is encoded as the member that suffix names.
+    let mut lit_type = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten();
+    if lit.literal.kind == TokenKind::IntLiteral {
+        if let Some(suffix) = match_int_suffix(&lit.literal.lexeme) {
+            if let Some(source) = unique_primitive_union_member(&lit_type, suffix) {
+                lit_type = Some(source);
+            }
+        }
+    }
+    if lit_type.is_some() {
+        if let Some(bytes) = encode_const(&lit_type, &lit.literal) {
+            value.bytes = bytes;
+        }
+        ctx.register_value_type(&value, lit_type);
+    }
+    // Without bytes from the type: integers by their digits, floats as `f32` unless the suffix
+    // says otherwise, booleans and null by their words.
+    if value.bytes.is_empty() && lit.literal.kind == TokenKind::IntLiteral {
+        if let Some(parsed) = parse_int_literal_lexeme(&lit.literal.lexeme) {
+            value.bytes = encode_u64_le(parsed);
+        }
+    } else if value.bytes.is_empty() && lit.literal.kind == TokenKind::FloatLiteral {
+        let lexeme = lit.literal.lexeme.as_str();
+        let fallback = if lexeme.ends_with("f16") {
+            "f16"
+        } else if lexeme.ends_with("f64") {
+            "f64"
+        } else {
+            "f32"
+        };
+        let fallback_type = make_type_prim(fallback);
+        if let Some(bytes) = encode_const(&fallback_type, &lit.literal) {
+            value.bytes = bytes;
+            ctx.register_value_type(&value, fallback_type);
+        }
+    } else if value.bytes.is_empty() && lit.literal.kind == TokenKind::BoolLiteral {
+        value.bytes = vec![u8::from(lit.literal.lexeme == "true")];
+    } else if value.bytes.is_empty() && lit.literal.kind == TokenKind::NullLiteral {
+        value.bytes = vec![0];
     }
     LowerResult { ir: empty_ir(), value }
 }
@@ -307,7 +419,7 @@ pub(super) fn lower_layout_constant(written: &Option<Arc<ast::Type>>, align: boo
         return LowerResult { ir: empty_ir(), value: IrValue::default() };
     };
     let number = if align { layout.align } else { layout.size };
-    let value = IrValue { kind: IrValueKind::Immediate, name: number.to_string(), bytes: number.to_le_bytes().to_vec(), ..Default::default() };
+    let value = IrValue { kind: IrValueKind::Immediate, name: number.to_string(), bytes: encode_u64_le(number), ..Default::default() };
     LowerResult { ir: empty_ir(), value }
 }
 
