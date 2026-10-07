@@ -169,7 +169,7 @@ pub(super) fn lower_args(modes: &[Option<ParamMode>], types: &[TypeRef], args: &
     (seq_ir(parts), values)
 }
 
-pub(super) fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut LowerCtx) -> LowerResult {
+pub(super) fn lower_call(call: &ast::CallExpr, ctx: &mut LowerCtx) -> LowerResult {
     let failed = |ctx: &mut LowerCtx, what: &str| {
         ctx.unported(what);
         LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("call") }
@@ -186,6 +186,8 @@ pub(super) fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut Lower
     let sigma = ctx.scope.sigma.clone();
     // The procedure the call names: the one typing selected, or the one the callee names.
     let mut callee_ir = empty_ir();
+    // What the call names: a procedure of the program, or a foreign one declared by an extern block.
+    let mut foreign_symbol: Option<(String, Vec<String>)> = None;
     let (module, decl) = match selected_call_target(&ctx.scope, call) {
         Some(target) => {
             if target.generic {
@@ -235,7 +237,29 @@ pub(super) fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut Lower
                 })
             });
             let Some((module, decl)) = found else {
-                return failed(ctx, "calls of names that are not procedures of the program");
+                // A foreign procedure: found in an extern block of the module.
+                let module = sigma.mods.iter().find(|module| module.path == origin);
+                let foreign = module.and_then(|module| {
+                    module.items.iter().filter_map(|item| if let ASTItem::ExternBlock(block) = item { Some(block) } else { None }).find_map(|block| {
+                        block.items.iter().find_map(|item| {
+                            let ast::ExternItem::ExternProcDecl(proc) = item;
+                            id_eq(&proc.name, &name).then(|| match link_name(&proc.attrs, &proc.name) {
+                                Some(link) => link,
+                                None if extern_abi_uses_raw_name(&block.abi_opt) => proc.name.clone(),
+                                None => scoped_sym(&item_path_proc(&module.path, &proc.name)),
+                            })
+                        })
+                    })
+                });
+                let Some(symbol) = foreign else {
+                    return failed(ctx, "calls of names that are not procedures of the program");
+                };
+                if !ctx.proc_sigs.contains_key(&symbol) {
+                    return failed(ctx, "calls of foreign procedures declared later");
+                }
+                callee_ir = lower_expr(callee_expr, ctx).ir;
+                foreign_symbol = Some((symbol, origin));
+                return lower_resolved_call(call, ctx, callee_ir, None, foreign_symbol);
             };
             if decl.generic_params.as_ref().is_some_and(|params| !params.params.is_empty()) {
                 return failed(ctx, "calls of generic procedures");
@@ -253,10 +277,21 @@ pub(super) fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut Lower
     }
     let callee = Callee { symbol: mangle_proc_in_module(module, decl), module_path: module.path.clone() };
     ensure_source_signature(&callee, decl, ctx);
+    lower_resolved_call(call, ctx, callee_ir, Some(callee), foreign_symbol)
+}
+
+/// The rest of a call once its callee is known: the arguments by what the signature asks,
+/// the call, and what follows it.
+fn lower_resolved_call(call: &ast::CallExpr, ctx: &mut LowerCtx, callee_ir: IrPtr, source: Option<Callee>, foreign: Option<(String, Vec<String>)>) -> LowerResult {
+    let callee = match (source, foreign) {
+        (Some(callee), _) => callee,
+        (None, Some((symbol, module_path))) => Callee { symbol, module_path },
+        (None, None) => unreachable!("a call has a callee"),
+    };
     let sig = ctx.proc_sigs.get(&callee.symbol).cloned().unwrap_or_default();
     let source_params: Vec<&IrParam> = sig.params.iter().filter(|param| param.name != PANIC_OUT_NAME).collect();
     // A procedure exported for C callers takes every argument by value.
-    let raw_export_abi = ctx.export_unwind_modes.contains_key(&callee.symbol);
+    let raw_export_abi = ctx.export_unwind_modes.contains_key(&callee.symbol) || ctx.ffi_imports.contains(&callee.symbol);
     let modes: Vec<Option<ParamMode>> = source_params.iter().map(|param| if raw_export_abi { Some(ParamMode::Move) } else { param.mode }).collect();
     let types: Vec<TypeRef> = source_params.iter().map(|param| param.ty.clone()).collect();
     let (args_ir, arg_values) = lower_args(&modes, &types, &call.args, ctx);
@@ -274,6 +309,5 @@ pub(super) fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut Lower
     if needs_panic_out {
         parts.push(Some(panic_check(ctx)));
     }
-    let _ = expr;
     LowerResult { ir: seq_ir(parts), value: result_value }
 }

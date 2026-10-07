@@ -697,7 +697,7 @@ pub(super) fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResu
                 LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") }
             }
         },
-        ExprNode::CallExpr(call) => lower_call(expr, call, ctx),
+        ExprNode::CallExpr(call) => lower_call(call, ctx),
         ExprNode::MethodCallExpr(call) => {
             let receiver = stored_expr_type(&ctx.scope, &Some(call.receiver.clone().unwrap_or_default())).flatten();
             let kind = strip_perm(&receiver).map(|ty| variant_name(&ty.node)).unwrap_or_default();

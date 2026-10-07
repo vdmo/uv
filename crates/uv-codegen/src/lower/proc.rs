@@ -202,3 +202,65 @@ pub(super) fn lower_record_method(record: &ast::RecordDecl, method: &ast::Method
     }
     Some(proc)
 }
+
+// ----------------------------------------------------------------------------- extern
+
+/// `NormalizeExternAbi` of the ABI an extern block names.
+fn extern_abi_name(abi: &Option<ast::ExternAbi>) -> String {
+    match abi {
+        None => "C".to_string(),
+        Some(ast::ExternAbi::ExternAbiString(abi)) => normalize_attr_literal(&abi.literal.lexeme),
+        Some(ast::ExternAbi::ExternAbiIdent(abi)) => abi.name.clone(),
+    }
+}
+
+/// `ExternAbiUsesRawName`: the C ABIs use the name as written.
+pub(super) fn extern_abi_uses_raw_name(abi: &Option<ast::ExternAbi>) -> bool {
+    matches!(extern_abi_name(abi).as_str(), "C" | "C-unwind")
+}
+
+/// Whether a `library` attribute asks for a raw dynamic library, which is not ported.
+fn names_raw_dylib(attrs: &[ast::AttributeItem]) -> bool {
+    attrs.iter().filter(|attr| attr.name.full_name == "library").any(|attr| {
+        attr.args.iter().any(|arg| arg.key.as_deref() == Some("kind") && matches!(&arg.value, ast::AttributeArgValue::Token(token) if normalize_attr_literal(&token.lexeme) == "raw-dylib"))
+    })
+}
+
+/// `LowerModule` of an extern block: the declaration of each foreign procedure, and its
+/// signature for the calls that follow.
+pub(super) fn lower_extern_block(block: &ast::ExternBlock, module_path: &[String], ctx: &mut LowerCtx) -> IrDecls {
+    let block_attrs = block.attrs_opt.clone().unwrap_or_default();
+    if names_raw_dylib(&block_attrs) {
+        ctx.unported("extern blocks of raw dynamic libraries");
+    }
+    let mut decls = Vec::new();
+    for item in &block.items {
+        let ast::ExternItem::ExternProcDecl(proc) = item;
+        if proc.foreign_contracts_opt.as_ref().is_some_and(|clauses| !clauses.is_empty()) {
+            ctx.unported("foreign contracts");
+        }
+        let symbol = match link_name(&proc.attrs, &proc.name) {
+            Some(name) => name,
+            None if extern_abi_uses_raw_name(&block.abi_opt) => proc.name.clone(),
+            None => scoped_sym(&item_path_proc(module_path, &proc.name)),
+        };
+        let self_type: TypeRef = None;
+        let mut params: Vec<IrParam> = proc.params.iter().map(|param| lower_param(param, &self_type, ctx)).collect();
+        // The visible parameters of a foreign declaration are passed by value.
+        for param in &mut params {
+            param.mode = Some(ParamMode::Move);
+        }
+        let ret = match &proc.return_type_opt {
+            None => make_type_prim("()"),
+            Some(written) => match lower_type(&ctx.scope, &Some(written.clone())) {
+                Ok(ty) if ty.is_some() => ty,
+                _ => None,
+            },
+        };
+        let abi = Some(extern_abi_name(&block.abi_opt));
+        ctx.proc_sigs.insert(symbol.clone(), ProcSig { params: params.clone(), ret: ret.clone() });
+        ctx.ffi_imports.insert(symbol.clone());
+        decls.push(IrDecl::ExternProc(ExternProcIr { symbol, params, ret, abi, ..Default::default() }));
+    }
+    decls
+}

@@ -211,6 +211,8 @@ pub struct LowerCtx<'a, 'b> {
     record_ctors: std::collections::HashSet<String>,
     /// The procedures exported with a C-callable signature, and whether each catches unwinding.
     export_unwind_modes: HashMap<String, bool>,
+    /// The foreign procedures declared so far.
+    ffi_imports: std::collections::HashSet<String>,
     static_types: HashMap<String, TypeRef>,
     /// `ctx.active_static_init_module`: the module whose statics are being initialised.
     active_static_init_module: Option<String>,
@@ -252,6 +254,7 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             proc_sigs: HashMap::new(),
             record_ctors: std::collections::HashSet::new(),
             export_unwind_modes: HashMap::new(),
+            ffi_imports: std::collections::HashSet::new(),
             static_types: HashMap::new(),
             active_static_init_module: None,
             init_modules: Vec::new(),

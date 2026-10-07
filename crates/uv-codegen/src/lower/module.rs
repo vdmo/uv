@@ -87,7 +87,14 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                     out.pending.push((scoped_sym(&item_path_proc(&module.path, &decl.name)), "default methods of classes".to_string()));
                 }
             }
-            ASTItem::ExternBlock(_) => out.pending.push((scoped_sym(&module.path), "extern blocks".to_string())),
+            ASTItem::ExternBlock(block) => {
+                ctx.pending = None;
+                let decls = lower_extern_block(block, &module.path, ctx);
+                match ctx.pending.take() {
+                    None => out.decls.extend(decls),
+                    Some(what) => out.pending.push((scoped_sym(&module.path), what)),
+                }
+            }
             ASTItem::ComptimeProcedureDecl(_) | ASTItem::DeriveTargetDecl(_) => {}
         }
         if out.pending.len() > pending_before {
