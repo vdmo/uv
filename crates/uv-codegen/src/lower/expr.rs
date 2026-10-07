@@ -811,6 +811,12 @@ pub(super) fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResu
             }
         },
         ExprNode::CallExpr(call) => lower_call(call, ctx),
+        ExprNode::EnumLiteralExpr(node) => lower_enum_literal(expr, node, ctx),
+        // `LowerPtrNull`: the null pointer is the immediate of eight zero bytes.
+        ExprNode::PtrNullExpr(_) => LowerResult {
+            ir: empty_ir(),
+            value: IrValue { kind: IrValueKind::Immediate, name: "null".to_string(), bytes: vec![0; 8], ..Default::default() },
+        },
         ExprNode::MethodCallExpr(call) => {
             let receiver = stored_expr_type(&ctx.scope, &Some(call.receiver.clone().unwrap_or_default())).flatten();
             let kind = strip_perm(&receiver).map(|ty| variant_name(&ty.node)).unwrap_or_default();
@@ -848,4 +854,32 @@ pub(super) fn lower_expr(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResult {
         ctx.unported("checks of refinement types");
     }
     apply_effective_ordering(expr, result, ctx)
+}
+
+/// `LowerEnumLiteral`: the payload, and a value the emitter builds from the variant.
+pub(super) fn lower_enum_literal(expr: &Arc<Expr>, node: &ast::EnumLiteralExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let variant = node.path.last().cloned().unwrap_or_default();
+    let static_path = if node.path.len() >= 2 { node.path[..node.path.len() - 1].to_vec() } else { Vec::new() };
+    let mut info = DerivedValueInfo::new(DerivedKind::EnumLit);
+    info.variant = variant;
+    info.static_path = static_path;
+    let (ir, prefix) = match &node.payload_opt {
+        None => (empty_ir(), "enum_unit"),
+        Some(ast::EnumPayload::EnumPayloadParen(payload)) => {
+            let (ir, values) = lower_list(&payload.elements, ctx);
+            info.payload_elems = values;
+            (ir, "enum_tuple")
+        }
+        Some(ast::EnumPayload::EnumPayloadBrace(payload)) => {
+            let (ir, values) = lower_field_inits(&payload.fields, ctx);
+            info.payload_fields = values;
+            (ir, "enum_record")
+        }
+    };
+    let value = ctx.fresh_temp_value(prefix);
+    ctx.register_derived_value(&value, info);
+    if let Some(ty) = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten() {
+        ctx.register_value_type(&value, Some(ty));
+    }
+    LowerResult { ir, value }
 }

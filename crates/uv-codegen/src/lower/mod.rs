@@ -143,6 +143,7 @@ pub enum DerivedKind {
     AddrTuple,
     AddrIndex,
     LoadFromAddr,
+    EnumLit,
 }
 
 /// One run of an array literal: a single element, or an element repeated.
@@ -163,11 +164,15 @@ pub struct DerivedValueInfo {
     pub fields: Vec<(String, IrValue)>,
     pub elements: Vec<IrValue>,
     pub array_segments: Vec<DerivedArraySegment>,
+    pub variant: String,
+    pub static_path: Vec<String>,
+    pub payload_elems: Vec<IrValue>,
+    pub payload_fields: Vec<(String, IrValue)>,
 }
 
 impl DerivedValueInfo {
     fn new(kind: DerivedKind) -> Self {
-        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), tuple_index: 0, index: IrValue::default(), fields: Vec::new(), elements: Vec::new(), array_segments: Vec::new() }
+        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), tuple_index: 0, index: IrValue::default(), fields: Vec::new(), elements: Vec::new(), array_segments: Vec::new(), variant: String::new(), static_path: Vec::new(), payload_elems: Vec::new(), payload_fields: Vec::new() }
     }
 }
 
