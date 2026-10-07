@@ -212,8 +212,8 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
                 continue;
             }
             let entry_bb = self.b.block(hook, "entry");
-            let ok_bb = self.b.block(hook, &ok_label.to_string());
-            let fail_bb = self.b.block(hook, &fail_label.to_string());
+            let ok_bb = self.b.block(hook, ok_label);
+            let fail_bb = self.b.block(hook, fail_label);
             self.b.set_insert_point(entry_bb);
             let ty = self.b.func_ty(entry_fn).clone();
             let cc = self.b.func_cc(entry_fn);

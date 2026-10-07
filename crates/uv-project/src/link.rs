@@ -143,7 +143,7 @@ pub fn startup_object(project: &Project, profile: TargetProfile, runtime_lib: &P
 /// The directories libraries are searched in (`PosixLibrarySearchDirs`).
 fn library_search_dirs(profile: TargetProfile) -> Vec<PathBuf> {
     let mut out: Vec<PathBuf> = Vec::new();
-    let mut add = |dir: PathBuf, out: &mut Vec<PathBuf>| {
+    let add = |dir: PathBuf, out: &mut Vec<PathBuf>| {
         if dir.is_dir() && !out.contains(&dir) {
             out.push(dir);
         }

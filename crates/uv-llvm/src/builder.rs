@@ -287,15 +287,13 @@ impl Builder {
     fn gep_flags(&mut self, inbounds: bool, ty: &Ty, ptr: &Value, indices: &[Value], name: &str) -> Value {
         // `ConstantFolder`: the address of a global plus constants is a constant expression, and
         // the global itself when every index is zero.
-        if ptr.text.starts_with('@') || ptr.text.starts_with("getelementptr") {
-            if indices.iter().all(|index| index.const_bits().is_some()) {
-                if indices.iter().all(|index| index.const_bits() == Some(0)) {
-                    return ptr.clone();
-                }
-                let flag = if inbounds { "inbounds " } else { "" };
-                let typed: Vec<String> = indices.iter().map(Value::typed).collect();
-                return Value::new(format!("getelementptr {flag}({ty}, ptr {}, {})", ptr.text, typed.join(", ")), Ty::Ptr);
+        if (ptr.text.starts_with('@') || ptr.text.starts_with("getelementptr")) && indices.iter().all(|index| index.const_bits().is_some()) {
+            if indices.iter().all(|index| index.const_bits() == Some(0)) {
+                return ptr.clone();
             }
+            let flag = if inbounds { "inbounds " } else { "" };
+            let typed: Vec<String> = indices.iter().map(Value::typed).collect();
+            return Value::new(format!("getelementptr {flag}({ty}, ptr {}, {})", ptr.text, typed.join(", ")), Ty::Ptr);
         }
         let indices: Vec<String> = indices.iter().map(Value::typed).collect();
         let ptr = ptr.clone();

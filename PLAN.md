@@ -926,16 +926,36 @@ the poison flag and the literal data; the runtime start object calls `main`.
 The gate for emission is behavioural: the same program built by the reference (in the
 oracle image) and by the Rust `uvc` must give the same exit status and output.
 
-### What is left to use it as a compiler and a language service
+### M6 progress: LLVM emission and linking
 
+`crates/uv-llvm` is the textual IR builder (types with LLVM's data layout rules, IRBuilder's
+defaults and constant folding, the module printer). `crates/uv-codegen/src/llvm` is the port of
+`05_codegen/llvm`: the type mapping (`GetLLVMType`), the calling convention (`ComputeCallABI`),
+modules, procedures, the entry point and its lifecycle procedures, the entry points of shared
+libraries and their visibility. `crates/uv-project/src/link.rs` finds the tools, makes an object
+of each module (`llvm-as`, then `ld.lld -r`, which runs the code generator) and links an
+executable with the runtime. `uvc build` of an executable now builds a program that runs
+(`main` returning 7 exits 7). Libraries are not linked yet.
+
+The gate is `tools/parity_ll.py`: the `.ll` the reference writes (`emit_ir = "ll"`, recorded by
+`tools/oracle/run_reference_ll.sh` into `tests/golden/projects/<id>.ll`) against the one the
+Rust `uvc` writes, per function, global and declaration, with registers renamed by order of
+definition and comments dropped. A procedure with a form of IR that is not emitted yet is
+left out and counted as pending, as in the IR gate. State: 227 entities identical, none
+different, 2228 pending, in 81 projects.
+
+Emitted so far: `Seq`, `Block`, `Return` of immediates and locals, poison checks, the panic
+record, `Opaque`. Everything else of the IR (calls, binary operations, variables, `if`, loops,
+aggregates, checks, ...) is next, in the order the goldens need it; async comes last, and
+parameter attributes beyond the ones the ABI sets are not ported.
+
+### What is left to use it as a compiler and a language service
 The language service (M4) and the editors (M5) already run on the ported front end, so
 editing, diagnostics, hover, completion and navigation work today without code
 generation. What stops `uvc build` from producing a program is the rest of M6, in order:
 
 1. Finish lowering the pending constructs above until every golden declaration is
    identical (the IR gate at 859 of 859).
-2. `RegisterModuleSignatures` / `BuildCodegenCache` for the non `--emit-ir` path, so a
-   build lowers every module instead of the `--emit-ir` one.
-3. LLVM emission (`llvm`, 46k lines of C++) behind a backend trait, then the linker driver
-   and platform tool resolution; goal: `Tools/RunHelloVerification.py` passes.
-4. M7: packaging.
+2. Emit every form of the IR as LLVM (the `.ll` gate), then link libraries and dependencies;
+   goal: `Tools/RunHelloVerification.py` passes.
+3. M7: packaging.
