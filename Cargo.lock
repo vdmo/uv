@@ -216,6 +216,7 @@ version = "0.4.0-alpha"
 dependencies = [
  "uv-analysis",
  "uv-core",
+ "uv-llvm",
  "uv-project",
  "uv-source",
 ]
@@ -239,6 +240,10 @@ dependencies = [
  "unicode-script",
  "unicode-security",
 ]
+
+[[package]]
+name = "uv-llvm"
+version = "0.4.0-alpha"
 
 [[package]]
 name = "uv-lsp"

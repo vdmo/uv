@@ -292,6 +292,7 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
     let mut sema_pending: Option<String> = None;
     let mut lowered_ir: Option<uv_codegen::ir::IrDecls> = None;
     let mut pending_decls: Vec<(String, String)> = Vec::new();
+    let mut llvm_modules: Vec<sema::LlvmModule> = Vec::new();
     if let (false, Some(project), Some(target_profile)) =
         (has_error(&diags), &project, selected_target_profile)
     {
@@ -359,14 +360,22 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
             }
         }
         if phase1_ok && !opts.phase1_only {
-            let outcome = sema::run_sema(project, &phase1, target_profile, &mut diags, |verb, what| log.progress(verb, what, Color::BoldGreen));
+            let outcome = sema::run_sema(project, &phase1, target_profile, !opts.check_only && !opts.emit_ir, &mut diags, |verb, what| log.progress(verb, what, Color::BoldGreen));
             sema_pending = outcome.pending;
             lowered_ir = outcome.ir;
             pending_decls = outcome.pending_decls;
+            llvm_modules = outcome.llvm_modules;
             if lowered_ir.is_some() && sema_pending.is_none() && !has_error(&diags) && !opts.check_only && !opts.emit_ir {
-                sema_pending = Some("code generation".to_string());
+                let failure = llvm_modules.iter().find_map(|module| module.failure.clone());
+                sema_pending = Some(match failure {
+                    Some(what) => format!("code generation ({what})"),
+                    None => "code generation".to_string(),
+                });
             }
         }
+    }
+    if let (Some(project), false) = (&project, llvm_modules.is_empty()) {
+        write_llvm_ir(project, &llvm_modules, &mut diags);
     }
     let reached_unimplemented_phase = sema_pending.is_some();
     truncate_diagnostics_to_error_cap(&mut diags, error_policy);
@@ -508,4 +517,29 @@ fn main() {
         .unwrap_or(101);
     Conformance::flush();
     std::process::exit(status);
+}
+
+/// The LLVM IR of each module, written where the assembly asks for it (`emit_ir`): libraries
+/// write it unless told not to, executables only when told to.
+fn write_llvm_ir(project: &uv_project::project::Project, modules: &[sema::LlvmModule], diags: &mut DiagnosticStream) {
+    let mode = match project.assembly.emit_ir.as_deref() {
+        Some(mode) => mode.to_string(),
+        None => if project.assembly.kind == "executable" { "none" } else { "ll" }.to_string(),
+    };
+    if mode == "none" {
+        return;
+    }
+    for module in modules {
+        let path = string_of_path(&module.path);
+        let Some(info) = project.modules.iter().find(|info| info.path == path) else {
+            continue;
+        };
+        let file = uv_project::outputs::ir_path(project, info, &mode);
+        if let Some(parent) = std::path::Path::new(&file).parent() {
+            let _ = std::fs::create_dir_all(parent);
+        }
+        if std::fs::write(&file, &module.text).is_err() {
+            emit_internal_diagnostic(diags, None, &format!("The LLVM IR could not be written to {file}"));
+        }
+    }
 }

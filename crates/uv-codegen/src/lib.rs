@@ -3,5 +3,6 @@
 pub mod control_flow;
 pub mod ir;
 pub mod ir_dump;
+pub mod llvm;
 pub mod lower;
 pub mod symbols;

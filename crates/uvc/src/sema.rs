@@ -34,6 +34,16 @@ pub struct SemaOutcome {
     pub ir: Option<uv_codegen::ir::IrDecls>,
     /// Each declaration that could not be lowered, with what stopped it.
     pub pending_decls: Vec<(String, String)>,
+    /// The LLVM IR of each module, when it was asked for.
+    pub llvm_modules: Vec<LlvmModule>,
+}
+
+/// One module as LLVM IR.
+pub struct LlvmModule {
+    pub path: Vec<String>,
+    pub text: String,
+    /// Why the text is not the whole module, when it is not.
+    pub failure: Option<String>,
 }
 
 fn comptime_options(project: &Project) -> ComptimePassOptions {
@@ -45,10 +55,10 @@ fn comptime_options(project: &Project) -> ComptimePassOptions {
 }
 
 fn pending(what: &str) -> SemaOutcome {
-    SemaOutcome { pending: Some(what.to_string()), ir: None, pending_decls: Vec::new() }
+    SemaOutcome { pending: Some(what.to_string()), ir: None, pending_decls: Vec::new(), llvm_modules: Vec::new() }
 }
 
-pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: TargetProfile, diags: &mut DiagnosticStream, mut progress: impl FnMut(&str, &str)) -> SemaOutcome {
+pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: TargetProfile, emit_llvm: bool, diags: &mut DiagnosticStream, mut progress: impl FnMut(&str, &str)) -> SemaOutcome {
     // Phase 2: the compile-time pass over every parsed module.
     let signature_diags = {
         let mut signature_project = project.clone();
@@ -193,15 +203,22 @@ pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: Target
     if let Some((modules, edges)) = init_plan {
         lower_ctx.set_init_plan(modules, edges);
     }
+    lower_ctx.executable_project = project.assembly.kind == "executable";
+    let mut llvm_modules = Vec::new();
     for module in ctx.sigma.mods.iter() {
         let lowered = uv_codegen::lower::lower_module(module, &mut lower_ctx);
+        if emit_llvm && lowered.pending.is_empty() {
+            let config = uv_codegen::llvm::EmitConfig { module_name: uv_core::symbols::string_of_path(&module.path), profile: target_profile, main_symbol: lowered.main_symbol.clone() };
+            let emitted = uv_codegen::llvm::emit_module(&lowered.decls, &mut lower_ctx, &config);
+            llvm_modules.push(LlvmModule { path: module.path.clone(), text: emitted.text, failure: emitted.failure });
+        }
         decls.extend(lowered.decls);
         if first_pending.is_none() {
             first_pending = lowered.pending.first().map(|(_, what)| format!("the lowerability check ({what})"));
         }
         pending_decls.extend(lowered.pending);
     }
-    SemaOutcome { pending: first_pending, ir: Some(decls), pending_decls }
+    SemaOutcome { pending: first_pending, ir: Some(decls), pending_decls, llvm_modules }
 }
 
 /// A diagnostic of the registry with the message of the check that found it; the

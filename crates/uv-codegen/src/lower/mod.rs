@@ -231,6 +231,12 @@ pub struct LowerCtx<'a, 'b> {
     expr_prov: Option<ExprProvMaps>,
     proc_sigs: HashMap<String, ProcSig>,
     record_ctors: std::collections::HashSet<String>,
+    /// Whether each procedure of the program is visible to the linker.
+    proc_linkages: HashMap<String, bool>,
+    /// The entry procedure of the program, once the module that has it is lowered.
+    pub main_symbol: Option<String>,
+    /// Whether the assembly being built is an executable.
+    pub executable_project: bool,
     /// The procedures exported with a C-callable signature, and whether each catches unwinding.
     export_unwind_modes: HashMap<String, bool>,
     /// The foreign procedures declared so far.
@@ -277,6 +283,9 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             expr_prov: None,
             proc_sigs: HashMap::new(),
             record_ctors: std::collections::HashSet::new(),
+            proc_linkages: HashMap::new(),
+            main_symbol: None,
+            executable_project: false,
             export_unwind_modes: HashMap::new(),
             ffi_imports: std::collections::HashSet::new(),
             local_preconditions: std::collections::HashSet::new(),
@@ -309,6 +318,11 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
         self.suppress_temp_at_depth = None;
         self.temp_sink = None;
         self.current_proc_symbol = None;
+    }
+
+    /// `IsExternalVisibility` of the procedure: the linker sees what is public or internal.
+    fn register_linkage(&mut self, symbol: &str, vis: ast::Visibility) {
+        self.proc_linkages.insert(symbol.to_string(), matches!(vis, ast::Visibility::Public | ast::Visibility::Internal));
     }
 
     /// A construct that is not ported is skipped. What it would have bound is not counted, so the
@@ -599,5 +613,48 @@ impl LowerCtx<'_, '_> {
         self.next_binding_id = snapshot.next_binding_id;
         self.temp_depth = snapshot.temp_depth;
         self.suppress_temp_at_depth = snapshot.suppress_temp_at_depth;
+    }
+}
+
+/// What emission asks of the lowering context.
+impl<'a, 'b> LowerCtx<'a, 'b> {
+    /// The type registered for a value.
+    pub fn value_type(&self, value: &IrValue) -> TypeRef {
+        self.lookup_value_type(value)
+    }
+
+    /// The signature registered for a procedure.
+    pub fn proc_sig(&self, symbol: &str) -> Option<&ProcSig> {
+        self.proc_sigs.get(symbol)
+    }
+
+    /// Whether the procedure has a linkage the linker sees, when it is known.
+    pub fn proc_is_external(&self, symbol: &str) -> Option<bool> {
+        self.proc_linkages.get(symbol).copied()
+    }
+
+    /// The type of a static or a literal.
+    pub fn static_type(&self, symbol: &str) -> TypeRef {
+        self.static_types.get(symbol).cloned().flatten()
+    }
+
+    /// `NeedsPanicOutForSymbol`.
+    pub fn needs_panic_out_for_symbol(&self, symbol: &str) -> bool {
+        needs_panic_out_for_symbol(symbol, self)
+    }
+
+    /// The modules to initialise and the edges between them: (dependent, dependency).
+    pub fn init_plan(&self) -> (&[Vec<String>], &[(usize, usize)]) {
+        (&self.init_modules, &self.init_eager_edges)
+    }
+
+    /// The type a local was bound with.
+    pub fn binding_type(&self, name: &str) -> TypeRef {
+        self.binding_state(name).and_then(|state| state.ty.clone())
+    }
+
+    /// The registered derived value of an opaque IR value.
+    pub fn derived_value(&self, value: &IrValue) -> Option<&DerivedValueInfo> {
+        self.derived_values.get(&value.name)
     }
 }

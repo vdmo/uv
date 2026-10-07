@@ -22,6 +22,8 @@ pub(super) fn module_deinit_fn(module_path: &[String], module: &ASTModule, ctx: 
 pub struct LoweredModule {
     pub decls: IrDecls,
     pub pending: Vec<(String, String)>,
+    /// The symbol of the procedure `main`, when the module of an executable has one.
+    pub main_symbol: Option<String>,
 }
 
 pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
@@ -37,6 +39,10 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                 }
                 let symbol = mangle_proc_in_module(module, decl);
                 let proc = lower_proc(decl, &module.path, symbol.clone(), ctx);
+                ctx.register_linkage(&symbol, decl.vis);
+                if ctx.executable_project && decl.name == "main" {
+                    out.main_symbol = Some(symbol.clone());
+                }
                 // What later calls check before the call: the precondition, as the callee declares it.
                 if decl.contract.as_ref().is_some_and(|contract| contract.precondition.is_some()) {
                     ctx.local_preconditions.insert(symbol.clone());
@@ -71,6 +77,7 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                     let symbol = scoped_sym(&item_path_proc(&item_path_proc(&module.path, &decl.name), &method.name));
                     if let Some(proc) = &proc {
                         ctx.proc_sigs.insert(symbol.clone(), ProcSig { params: proc.params.clone(), ret: proc.ret.clone() });
+                        ctx.register_linkage(&symbol, method.vis);
                     }
                     match (proc, ctx.pending.take()) {
                         (Some(proc), None) => out.decls.push(IrDecl::Proc(proc)),
@@ -87,7 +94,7 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                 modal_path.push(decl.name.clone());
                 for state in &decl.states {
                     // The methods of a state first, then its transitions.
-                    let mut lowered: Vec<(String, Option<ProcIr>, Option<String>)> = Vec::new();
+                    let mut lowered: Vec<(String, Option<ProcIr>, Option<String>, ast::Visibility)> = Vec::new();
                     for member in &state.members {
                         if let ast::StateMember::StateMethodDecl(method) = member {
                             ctx.pending = None;
@@ -95,7 +102,7 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                             let mut symbol_path = modal_path.clone();
                             symbol_path.push(state.name.clone());
                             symbol_path.push(method.name.clone());
-                            lowered.push((scoped_sym(&symbol_path), proc, ctx.pending.take()));
+                            lowered.push((scoped_sym(&symbol_path), proc, ctx.pending.take(), method.vis));
                         }
                     }
                     for member in &state.members {
@@ -105,12 +112,13 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                             let mut symbol_path = modal_path.clone();
                             symbol_path.push(state.name.clone());
                             symbol_path.push(trans.name.clone());
-                            lowered.push((scoped_sym(&symbol_path), proc, ctx.pending.take()));
+                            lowered.push((scoped_sym(&symbol_path), proc, ctx.pending.take(), trans.vis));
                         }
                     }
-                    for (symbol, proc, pending) in lowered {
+                    for (symbol, proc, pending, vis) in lowered {
                         if let Some(proc) = &proc {
                             ctx.proc_sigs.insert(symbol.clone(), ProcSig { params: proc.params.clone(), ret: proc.ret.clone() });
+                            ctx.register_linkage(&symbol, vis);
                         }
                         match (proc, pending) {
                             (Some(proc), None) => out.decls.push(IrDecl::Proc(proc)),
@@ -129,6 +137,7 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                     let pending = ctx.pending.take();
                     for (symbol, proc) in procs {
                         ctx.proc_sigs.insert(symbol.clone(), ProcSig { params: proc.params.clone(), ret: proc.ret.clone() });
+                        ctx.register_linkage(&symbol, method.vis);
                         match &pending {
                             None => out.decls.push(IrDecl::Proc(proc)),
                             Some(what) => out.pending.push((symbol, what.clone())),
