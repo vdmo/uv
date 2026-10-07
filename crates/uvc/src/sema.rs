@@ -45,6 +45,8 @@ pub struct LlvmModule {
     pub text: String,
     /// Why the text is not the whole module, when it is not.
     pub failure: Option<String>,
+    /// Each procedure that could not be emitted, and why.
+    pub failed_procs: Vec<(String, String)>,
 }
 
 fn comptime_options(project: &Project) -> ComptimePassOptions {
@@ -232,17 +234,14 @@ pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: Target
         // The program's entry procedure: the first module that has one.
         let project_main = project.modules.iter().find_map(|info| lowered_modules.iter().find(|(path, ..)| string_of_path(path) == info.path).and_then(|(_, lowered, _)| lowered.main_symbol.clone()));
         for (path, lowered, values) in lowered_modules {
-            if !lowered.pending.is_empty() {
-                continue;
-            }
             let module_name = string_of_path(&path);
             let is_root = module_name == project.assembly.name;
             let with_entry = project.assembly.kind == "executable" && (is_root || (!has_root && lowered.main_symbol.is_some()));
             let main_symbol = if with_entry { project_main.clone().or_else(|| lowered.main_symbol.clone()) } else { None };
             lower_ctx.begin_emission(&path, values);
-            let config = uv_codegen::llvm::EmitConfig { module_name, profile: target_profile, main_symbol, shared_library, entry_module: is_root || !has_root, export_symbols: export_symbols.clone() };
+            let config = uv_codegen::llvm::EmitConfig { module_name, profile: target_profile, main_symbol, shared_library, entry_module: is_root || !has_root, export_symbols: export_symbols.clone(), complete: lowered.pending.is_empty() };
             let emitted = uv_codegen::llvm::emit_module(&lowered.decls, &mut lower_ctx, &config);
-            llvm_modules.push(LlvmModule { path, text: emitted.text, failure: emitted.failure });
+            llvm_modules.push(LlvmModule { path, text: emitted.text, failure: emitted.failure.or_else(|| lowered.pending.first().map(|(_, what)| format!("lowering: {what}"))), failed_procs: emitted.failed_procs });
         }
     }
     SemaOutcome { pending: first_pending, ir: Some(decls), pending_decls, llvm_modules }

@@ -154,6 +154,10 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
         let Some(main_symbol) = self.main_symbol.clone() else {
             return;
         };
+        // An entry procedure that could not be emitted leaves no program to start.
+        if self.failed_symbols.contains(&main_symbol) {
+            return;
+        }
         let main_ty = Ty::func(Ty::i32(), Vec::new(), false);
         let main_fn = self.b.function("main", main_ty, Linkage::External);
         let entry = self.b.block(main_fn, "entry");

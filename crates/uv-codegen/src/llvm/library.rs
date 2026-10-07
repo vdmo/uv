@@ -61,6 +61,10 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             crate::symbols::deinit_sym(module_path)
         };
         let target = if is_init { crate::symbols::init_sym(module_path) } else { crate::symbols::deinit_sym(module_path) };
+        if self.failed_symbols.contains(&target) {
+            self.fail("a lifecycle procedure that could not be emitted");
+            return;
+        }
         let sig = self.ctx.proc_sig(&symbol).or_else(|| self.ctx.proc_sig(&target)).cloned();
         let func = match self.b.find_function(&symbol) {
             Some(func) => func,
@@ -86,6 +90,18 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
 
     /// `EmitLibraryEntryPoint`.
     pub(super) fn emit_library_entry_point(&mut self) {
+        let was_failed = self.proc_failed;
+        self.emit_library_entry_point_inner();
+        // The entry point is not a procedure of the program: when it cannot be made it is dropped.
+        if self.proc_failed && !was_failed {
+            if let Some(func) = self.b.find_function(LIBRARY_ENTRY_SYMBOL) {
+                self.b.remove_function(func);
+            }
+            self.proc_failed = false;
+        }
+    }
+
+    fn emit_library_entry_point_inner(&mut self) {
         let entry_ty = Ty::func(Ty::i32(), vec![Ty::Ptr, Ty::i32(), Ty::Ptr], false);
         let entry_fn = self.b.function(LIBRARY_ENTRY_SYMBOL, entry_ty, Linkage::External);
         self.b.set_call_conv(entry_fn, CallConv::C);

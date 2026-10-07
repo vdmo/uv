@@ -86,6 +86,7 @@ impl fmt::Display for Ty {
             Ty::Ptr => f.write_str("ptr"),
             Ty::Array(count, element) => write!(f, "[{count} x {element}]"),
             Ty::Vector(count, element) => write!(f, "<{count} x {element}>"),
+            Ty::Struct { fields, packed } if fields.is_empty() => f.write_str(if *packed { "<{}>" } else { "{}" }),
             Ty::Struct { fields, packed } => {
                 f.write_str(if *packed { "<{ " } else { "{ " })?;
                 for (index, field) in fields.iter().enumerate() {
@@ -217,14 +218,19 @@ impl Value {
         Value { text: format!("@{}", quote(name)), ty: Ty::Ptr }
     }
 
-    /// A double constant written in the hexadecimal form LLVM requires for exact bits.
+    /// A double constant, written as LLVM writes it.
     pub fn double(value: f64) -> Value {
-        Value { text: format!("0x{:016X}", value.to_bits()), ty: Ty::Double }
+        Value { text: format_fp(value), ty: Ty::Double }
     }
 
     /// A float constant: LLVM writes the double that equals it.
     pub fn float(value: f32) -> Value {
-        Value { text: format!("0x{:016X}", f64::from(value).to_bits()), ty: Ty::Float }
+        Value { text: format_fp(f64::from(value)), ty: Ty::Float }
+    }
+
+    /// A half constant from its bits.
+    pub fn half_bits(bits: u16) -> Value {
+        Value { text: format!("0xH{bits:04X}"), ty: Ty::Half }
     }
 
     /// `ty text`, as an operand is written.
@@ -447,4 +453,24 @@ fn round_up(value: u64, align: u64) -> u64 {
     } else {
         value.div_ceil(align) * align
     }
+}
+
+/// How LLVM writes a floating point constant (`writeAPFloatInternal`): the shortest of six digits
+/// that reads back as the same value, else the bits in hexadecimal.
+pub fn format_fp(value: f64) -> String {
+    if value.is_finite() {
+        let text = scientific(value);
+        if text.parse::<f64>().is_ok_and(|parsed| parsed == value) {
+            return text;
+        }
+    }
+    format!("0x{:016X}", value.to_bits())
+}
+
+/// `%.6e` as C writes it: a sign and at least two digits of exponent.
+fn scientific(value: f64) -> String {
+    let text = format!("{value:.6e}");
+    let (mantissa, exponent) = text.split_once('e').unwrap_or((&text, "0"));
+    let exponent: i32 = exponent.parse().unwrap_or(0);
+    format!("{mantissa}e{}{:02}", if exponent < 0 { '-' } else { '+' }, exponent.abs())
 }

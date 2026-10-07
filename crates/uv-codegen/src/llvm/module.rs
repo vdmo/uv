@@ -17,6 +17,7 @@ pub(super) fn lifecycle_bridge_symbol(module_path: &[String], is_init: bool) -> 
 pub struct EmittedModule {
     pub text: String,
     pub failure: Option<String>,
+    pub failed_procs: Vec<(String, String)>,
 }
 
 /// `ExpandIR`: the declarations with the data of the literals they use.
@@ -47,7 +48,8 @@ pub fn emit_module(decls: &IrDecls, ctx: &mut LowerCtx, config: &EmitConfig) -> 
     let mut emitter = Emitter::new(ctx, config);
     emitter.emit_decls(&expanded);
     let failure = emitter.failure.clone();
-    EmittedModule { text: emitter.b.finish(), failure }
+    let failed_procs = std::mem::take(&mut emitter.failed_procs);
+    EmittedModule { text: emitter.b.finish(), failure, failed_procs }
 }
 
 impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
@@ -85,7 +87,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
                 self.emit_ctor_dtor_hooks();
             }
         }
-        if self.main_symbol.is_some() {
+        if self.main_symbol.is_some() && self.config_complete {
             self.emit_entry_point();
         }
         if self.config_shared_library && !self.config_exports.is_empty() && elf_like {
@@ -186,7 +188,9 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
         for (target, is_init) in [(crate::symbols::init_sym(&module_path), true), (crate::symbols::deinit_sym(&module_path), false)] {
             let bridge = lifecycle_bridge_symbol(&module_path, is_init);
             let Some(&target_fn) = self.functions.get(&target) else {
-                self.fail("a lifecycle procedure that is not declared");
+                if !self.failed_symbols.contains(&target) {
+                    self.fail("a lifecycle procedure that is not declared");
+                }
                 continue;
             };
             let ty = self.b.func_ty(target_fn).clone();
@@ -241,9 +245,9 @@ fn constant_bytes_as_llvm(ty: &Ty, bytes: &[u8]) -> Option<String> {
                 raw |= u64::from(*byte) << (index * 8);
             }
             Some(match ty {
-                Ty::Double => format!("0x{raw:016X}"),
-                Ty::Float => format!("0x{:016X}", f64::from(f32::from_bits(raw as u32)).to_bits()),
-                _ => format!("0xH{:04X}", raw as u16),
+                Ty::Double => Value::double(f64::from_bits(raw)).text,
+                Ty::Float => Value::float(f32::from_bits(raw as u32)).text,
+                _ => Value::half_bits(raw as u16).text,
             })
         }
         Ty::Ptr if bytes.iter().all(|byte| *byte == 0) => Some("null".to_string()),

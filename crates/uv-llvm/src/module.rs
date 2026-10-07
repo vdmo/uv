@@ -171,6 +171,7 @@ pub(crate) struct Function {
     pub hidden: bool,
     pub next_reg: usize,
     pub param_names: Vec<Option<String>>,
+    pub removed: bool,
 }
 
 /// A module of LLVM IR.
@@ -351,7 +352,7 @@ impl Module {
         if !self.globals.is_empty() {
             out.push('\n');
         }
-        for func in &self.funcs {
+        for func in self.funcs.iter().filter(|func| !func.removed) {
             self.print_function(&mut out, func);
         }
         self.print_list(&mut out, "llvm.global_ctors", &self.ctors);

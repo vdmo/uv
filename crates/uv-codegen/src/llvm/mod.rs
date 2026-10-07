@@ -56,6 +56,9 @@ pub struct EmitConfig {
     pub entry_module: bool,
     /// The symbols the shared library exports; the others it defines are hidden.
     pub export_symbols: Vec<String>,
+    /// Whether every declaration of the module was lowered. An incomplete module is not given
+    /// the entry point of the program.
+    pub complete: bool,
 }
 
 /// `LLVMEmitter`: the module being written and what is known about it while writing.
@@ -66,6 +69,7 @@ pub struct Emitter<'e, 'a, 'b> {
     pub(super) main_symbol: Option<String>,
     pub(super) config_shared_library: bool,
     pub(super) config_entry_module: bool,
+    pub(super) config_complete: bool,
     pub(super) config_exports: std::collections::HashSet<String>,
     type_cache: HashMap<String, Ty>,
     active_types: Vec<String>,
@@ -79,6 +83,11 @@ pub struct Emitter<'e, 'a, 'b> {
     pub(super) values: HashMap<String, Value>,
     /// The first thing that could not be emitted.
     pub failure: Option<String>,
+    /// Each procedure that could not be emitted, and why.
+    pub failed_procs: Vec<(String, String)>,
+    pub(super) failed_symbols: std::collections::HashSet<String>,
+    /// What stopped the procedure being emitted.
+    pub(super) proc_failure: Option<String>,
     /// Whether something could not be emitted since the current procedure began.
     pub(super) proc_failed: bool,
 }
@@ -93,6 +102,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             main_symbol: config.main_symbol.clone(),
             config_shared_library: config.shared_library,
             config_entry_module: config.entry_module,
+            config_complete: config.complete,
             config_exports: config.export_symbols.iter().cloned().collect(),
             type_cache: HashMap::new(),
             active_types: Vec::new(),
@@ -101,6 +111,9 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             local_types: HashMap::new(),
             values: HashMap::new(),
             failure: None,
+            failed_procs: Vec::new(),
+            failed_symbols: std::collections::HashSet::new(),
+            proc_failure: None,
             proc_failed: false,
         }
     }
@@ -108,6 +121,9 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
     /// `ReportCodegenFailure`: something could not be emitted; the first one is kept.
     pub(super) fn fail(&mut self, what: &str) {
         self.proc_failed = true;
+        if self.proc_failure.is_none() {
+            self.proc_failure = Some(what.to_string());
+        }
         if self.failure.is_none() {
             self.failure = Some(what.to_string());
         }

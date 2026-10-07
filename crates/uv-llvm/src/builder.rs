@@ -45,20 +45,18 @@ impl Builder {
         }
         let index = self.module.funcs.len();
         let params = ty.params.len();
-        self.module.funcs.push(Function { name: name.to_string(), ty, linkage, cc: CallConv::C, attrs: Vec::new(), param_attrs: vec![Vec::new(); params], ret_attrs: Vec::new(), blocks: Vec::new(), hidden: false, next_reg: 0, param_names: vec![None; params] });
+        self.module.funcs.push(Function { name: name.to_string(), ty, linkage, cc: CallConv::C, attrs: Vec::new(), param_attrs: vec![Vec::new(); params], ret_attrs: Vec::new(), blocks: Vec::new(), hidden: false, next_reg: 0, param_names: vec![None; params], removed: false });
         self.module.func_index.insert(name.to_string(), index);
         FuncId(index)
     }
 
-    /// Removes a function and everything it holds (a function that could not be emitted).
+    /// Removes a function and everything it holds (a function that could not be emitted). The
+    /// function is not printed and its name is free again; other functions keep their ids.
     pub fn remove_function(&mut self, func: FuncId) {
         let name = self.module.funcs[func.0].name.clone();
-        self.module.funcs.remove(func.0);
-        self.module.func_index.clear();
-        for (index, function) in self.module.funcs.iter().enumerate() {
-            self.module.func_index.insert(function.name.clone(), index);
-        }
-        let _ = name;
+        self.module.funcs[func.0].removed = true;
+        self.module.funcs[func.0].blocks.clear();
+        self.module.func_index.remove(&name);
         self.cur = None;
     }
 

@@ -87,9 +87,9 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
                 raw |= u64::from(*byte) << (8 * index);
             }
             match &llvm {
-                Ty::Double => return Some(Value::new(format!("0x{raw:016X}"), Ty::Double)),
+                Ty::Double => return Some(Value::double(f64::from_bits(raw))),
                 Ty::Float => return Some(Value::float(f32::from_bits(raw as u32))),
-                Ty::Half => return Some(Value::new(format!("0xH{:04X}", raw as u16), Ty::Half)),
+                Ty::Half => return Some(Value::half_bits(raw as u16)),
                 Ty::Int(bits) => {
                     let mut wide: u128 = 0;
                     for (index, byte) in value.bytes.iter().take(16).enumerate() {

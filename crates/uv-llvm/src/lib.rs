@@ -10,7 +10,7 @@ mod types;
 
 pub use builder::{BlockId, Builder, FuncId};
 pub use module::{CallConv, FuncAttr, GlobalId, Linkage, Module, ParamAttr};
-pub use types::{DataLayout, FnTy, Ty, Value};
+pub use types::{format_fp, DataLayout, FnTy, Ty, Value};
 
 #[cfg(test)]
 mod tests {

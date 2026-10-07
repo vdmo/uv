@@ -382,6 +382,13 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
             }
         }
     }
+    if std::env::var_os("UV_EMIT_REPORT").is_some() {
+        for module in &llvm_modules {
+            for (symbol, why) in &module.failed_procs {
+                eprintln!("emit-pending: {symbol}: {why}");
+            }
+        }
+    }
     if let (Some(project), false, false) = (&project, llvm_modules.is_empty(), llvm_modules_written) {
         write_llvm_ir(project, &llvm_modules, &mut diags);
     }

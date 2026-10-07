@@ -9,6 +9,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             return;
         };
         self.proc_failed = false;
+        self.proc_failure = None;
         let generated = is_generated_proc_symbol(&proc.symbol);
         let saved_module = if proc.defining_module_path.is_empty() || self.ctx.module_path == proc.defining_module_path {
             None
@@ -62,6 +63,9 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             self.b.remove_function(func);
             self.functions.remove(&proc.symbol);
             self.proc_failed = false;
+            let why = self.proc_failure.take().unwrap_or_default();
+            self.failed_symbols.insert(proc.symbol.clone());
+            self.failed_procs.push((proc.symbol.clone(), why));
         }
     }
 
