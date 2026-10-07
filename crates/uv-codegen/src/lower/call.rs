@@ -77,7 +77,7 @@ pub(super) fn ensure_source_signature(callee: &Callee, decl: &ProcedureDecl, ctx
 /// `NeedsPanicOut` of a symbol of a user procedure: every symbol made from a module path
 /// differs from the entry symbol, is not a runtime symbol and is not a record constructor.
 pub(super) fn needs_panic_out_for_symbol(symbol: &str, ctx: &LowerCtx) -> bool {
-    symbol != "main" && !ctx.record_ctors.contains(symbol)
+    symbol != "main" && !ctx.record_ctors.contains_key(symbol)
 }
 
 /// `LowerRefArgExprWithTemp` and `LowerMoveArgExprWithTemp`: a value that is not a place is

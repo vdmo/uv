@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use std::sync::Arc;
 
 use uv_analysis::context::{ScopeContext, TypeDecl};
+use uv_analysis::memory::regions::ProvenanceKind;
 use uv_analysis::generics::monomorphize::{build_substitution, instantiate_type, TypeSubst};
 use uv_analysis::layout::{
     align_of, enum_layout_of, layout_of, lower_type_for_layout, modal_layout_of, record_layout_of, resolve_enum_layout_options, resolve_record_layout_options, size_of, tuple_layout_of, union_layout_of, Layout,
@@ -30,6 +31,8 @@ use uv_source::ast;
 
 use crate::ir::*;
 use crate::lower::{LowerCtx, PANIC_OUT_NAME};
+use crate::symbols::scoped_sym;
+use uv_core::symbols::string_of_path;
 
 mod abi;
 mod entry;
@@ -81,6 +84,8 @@ pub struct Emitter<'e, 'a, 'b> {
     pub(super) local_types: HashMap<String, TypeRef>,
     /// The values of the IR values that have no name in the source, by the name they have in the IR.
     pub(super) values: HashMap<String, Value>,
+    /// `SetSymbolAlias`: the symbol a path read in the IR stands for.
+    pub(super) symbol_aliases: HashMap<String, String>,
     /// The first thing that could not be emitted.
     pub failure: Option<String>,
     /// Each procedure that could not be emitted, and why.
@@ -110,6 +115,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             locals: HashMap::new(),
             local_types: HashMap::new(),
             values: HashMap::new(),
+            symbol_aliases: HashMap::new(),
             failure: None,
             failed_procs: Vec::new(),
             failed_symbols: std::collections::HashSet::new(),

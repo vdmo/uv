@@ -251,6 +251,18 @@ impl Builder {
         Value::new(reg, Ty::Ptr)
     }
 
+    /// An entry-block `alloca` whose alignment is the given one, raised to what the reference
+    /// requires of every alloca.
+    pub fn alloca_entry_aligned(&mut self, func: FuncId, ty: &Ty, align: u64, name: &str) -> Value {
+        let align = align.max(self.layout.required_alloca_align(ty));
+        let reg = self.reg(name);
+        let text = format!("{reg} = alloca {ty}, align {align}");
+        if let Some(entry) = self.module.funcs[func.0].blocks.first_mut() {
+            entry.insts.insert(0, text);
+        }
+        Value::new(reg, Ty::Ptr)
+    }
+
     /// A load aligned as the ABI aligns the type.
     pub fn load(&mut self, ty: &Ty, ptr: &Value, name: &str) -> Value {
         let align = self.layout.abi_align(ty);

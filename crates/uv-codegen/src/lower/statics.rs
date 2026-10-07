@@ -55,6 +55,7 @@ pub(super) fn emit_global(item: &ast::StaticDecl, module_path: &[String], ctx: &
     let init_type = static_init_type(item, module_path, ctx);
     if init_type.is_some() {
         ctx.static_types.insert(symbol.clone(), init_type.clone());
+        ctx.static_modules.insert(symbol.clone(), module_path.to_vec());
     }
     let scope = layout_scope(ctx, module_path);
     let (Some(size), Some(align)) = (size_of(&scope, &init_type), align_of(&scope, &init_type)) else {

@@ -142,8 +142,96 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
                 self.set_result(value);
             }
             Ir::Return { value } => self.emit_return_ir(value),
+            Ir::ReadVar { .. } => {}
+            Ir::ReadPath { path, name } => self.emit_read_path(path, name),
+            Ir::BindVar { name, stable_name, value, ty, prov, prov_region, prov_region_tag } => self.emit_bind_var(name, stable_name, value, ty, *prov, prov_region, prov_region_tag),
             other => self.fail(&format!("the IR form {}", ir_form_name(other))),
         }
+    }
+
+    /// `IRReadPath`: the symbol a path names, after the poison check of the module that owns it.
+    fn emit_read_path(&mut self, path: &[String], name: &str) {
+        let mut full = path.to_vec();
+        full.push(name.to_string());
+        let mangled = scoped_sym(&full);
+        let qualified = string_of_path(&full);
+        let known_proc = self.ctx.proc_sig(&mangled).is_some();
+        let known_static = self.ctx.static_type(&mangled).is_some();
+        if let Some(owner) = self.ctx.record_ctor_module(&mangled).cloned() {
+            self.emit_poison_check_of_user_module(&owner);
+            self.alias_symbol(name, &qualified, &mangled);
+            return;
+        }
+        if self.functions.contains_key(&mangled) || self.b.find_function(&mangled).is_some() || self.b.module.global(&mangled).is_some() || known_proc || known_static {
+            if known_proc {
+                if let Some(owner) = self.ctx.proc_module(&mangled).cloned() {
+                    self.emit_poison_check_of_user_module(&owner);
+                }
+            } else if known_static {
+                if let Some(owner) = self.ctx.static_module(&mangled).cloned() {
+                    self.emit_poison_check_of_user_module(&owner);
+                }
+            }
+            self.alias_symbol(name, &qualified, &mangled);
+            return;
+        }
+        if self.functions.contains_key(name) || self.b.find_function(name).is_some() || self.b.module.global(name).is_some() {
+            self.alias_symbol(name, &qualified, name);
+        }
+    }
+
+    fn emit_poison_check_of_user_module(&mut self, module_path: &[String]) {
+        if !module_path.is_empty() {
+            self.emit_poison_check(module_path);
+        }
+    }
+
+    fn alias_symbol(&mut self, name: &str, qualified: &str, symbol: &str) {
+        self.symbol_aliases.insert(name.to_string(), symbol.to_string());
+        self.symbol_aliases.insert(qualified.to_string(), symbol.to_string());
+    }
+
+    /// `EmitBindVar`, for bindings whose storage is a stack slot of a scalar.
+    #[allow(clippy::too_many_arguments)]
+    fn emit_bind_var(&mut self, name: &str, stable_name: &str, value: &IrValue, bind_ty: &TypeRef, prov: ProvenanceKind, region: &Option<String>, region_tag: &Option<String>) {
+        let source_type = self.lookup_value_type(value);
+        let slot_ty = bind_ty.clone().or(source_type.clone());
+        let handle = matches!(strip_perm(&slot_ty).or(slot_ty.clone()).as_deref().map(|ty| &ty.node), Some(TypeNode::Path { path, .. }) if path.len() == 1 && path[0] == "Region");
+        let region_slot = !handle && prov == ProvenanceKind::Region && region.as_deref().is_some_and(|r| !r.is_empty()) && region_tag.as_deref().is_some_and(|t| !t.is_empty());
+        if region_slot {
+            self.fail("bindings in a region slot");
+            return;
+        }
+        if slot_ty.is_none() {
+            self.fail("a binding without a type");
+            return;
+        }
+        let mut llvm_ty = self.llvm_type(bind_ty);
+        if llvm_ty.is_void() {
+            llvm_ty = Ty::i64();
+        }
+        if matches!(llvm_ty, Ty::Struct { .. } | Ty::Array(..) | Ty::Named(_)) {
+            self.fail("bindings of aggregates");
+            return;
+        }
+        let Some(func) = self.b.current_func() else {
+            return;
+        };
+        let align = bind_ty.as_ref().and_then(|_| align_of(&self.ctx.scope, bind_ty)).map_or(1, |align| align.max(1));
+        let slot = self.b.alloca_entry_aligned(func, &llvm_ty, align, name);
+        let pointer_valued = is_pointer_value_type(&source_type) || is_pointer_value_type(bind_ty);
+        let source_storage = if value.kind == IrValueKind::Local { self.locals.get(&value.name).cloned() } else { None };
+        let init = match source_storage {
+            Some(storage) if !pointer_valued => Some(self.b.load_aligned(&llvm_ty, &storage, 1, "")),
+            Some(_) => self.evaluate(value),
+            None => self.evaluate(value),
+        };
+        let init = match init {
+            Some(init) => self.coerce_to(&init, &llvm_ty).unwrap_or_else(|| Value::zero(llvm_ty.clone())),
+            None => Value::zero(llvm_ty.clone()),
+        };
+        self.b.store(&init, &slot);
+        self.register_local(name, stable_name, slot, bind_ty);
     }
 
     /// `SetForwardedOrMaterializedResult`.
@@ -170,6 +258,16 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
         let value = self.evaluate_or_default(ret);
         let value = self.coerce_to(&value, &ret_ty).unwrap_or_else(|| Value::zero(ret_ty.clone()));
         self.b.ret(&value);
+    }
+}
+
+/// `IsPointerValueType`.
+fn is_pointer_value_type(ty: &TypeRef) -> bool {
+    let ty = strip_perm(ty).or(ty.clone());
+    match ty.as_deref().map(|ty| &ty.node) {
+        Some(TypeNode::Ptr { .. } | TypeNode::RawPtr { .. }) => true,
+        Some(TypeNode::Path { path, .. }) => path.last().is_some_and(|tail| tail == "Ptr" || tail == "RawPtr" || tail == "GpuPtr"),
+        _ => false,
     }
 }
 

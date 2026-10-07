@@ -67,7 +67,7 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
             // A record, a modal or a class gives declarations only through its methods.
             ASTItem::RecordDecl(decl) => {
                 let record_symbol = scoped_sym(&item_path_proc(&module.path, &decl.name));
-                ctx.record_ctors.insert(record_symbol);
+                ctx.record_ctors.insert(record_symbol, module.path.clone());
                 for member in &decl.members {
                     let ast::RecordMember::MethodDecl(method) = member else {
                         continue;

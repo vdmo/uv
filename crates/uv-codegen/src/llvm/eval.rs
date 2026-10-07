@@ -55,7 +55,8 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
                 Some(self.b.load(&llvm, &storage, ""))
             }
             IrValueKind::Symbol => {
-                let symbol = value.name.as_str();
+                let symbol = self.symbol_aliases.get(&value.name).map_or(value.name.as_str(), String::as_str).to_string();
+                let symbol = symbol.as_str();
                 if let Some(func) = self.functions.get(symbol).copied().or_else(|| self.b.find_function(symbol)) {
                     return Some(self.b.func_value(func));
                 }

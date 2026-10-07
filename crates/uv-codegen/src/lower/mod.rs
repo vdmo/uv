@@ -231,7 +231,8 @@ pub struct LowerCtx<'a, 'b> {
     /// The provenance of the expressions of the procedure being lowered.
     expr_prov: Option<ExprProvMaps>,
     proc_sigs: HashMap<String, ProcSig>,
-    record_ctors: std::collections::HashSet<String>,
+    record_ctors: HashMap<String, Vec<String>>,
+    static_modules: HashMap<String, Vec<String>>,
     /// Whether each procedure of the program is visible to the linker.
     proc_linkages: HashMap<String, bool>,
     /// The visibility each procedure was declared with, and the module that owns it.
@@ -288,7 +289,8 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             derived_values: HashMap::new(),
             expr_prov: None,
             proc_sigs: HashMap::new(),
-            record_ctors: std::collections::HashSet::new(),
+            record_ctors: HashMap::new(),
+            static_modules: HashMap::new(),
             proc_linkages: HashMap::new(),
             proc_visibility: HashMap::new(),
             proc_modules: HashMap::new(),
@@ -678,6 +680,21 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
     /// The type of a static or a literal.
     pub fn static_type(&self, symbol: &str) -> TypeRef {
         self.static_types.get(symbol).cloned().flatten()
+    }
+
+    /// The module that owns a procedure.
+    pub fn proc_module(&self, symbol: &str) -> Option<&Vec<String>> {
+        self.proc_modules.get(symbol)
+    }
+
+    /// The module that owns a static.
+    pub fn static_module(&self, symbol: &str) -> Option<&Vec<String>> {
+        self.static_modules.get(symbol)
+    }
+
+    /// The module that owns a record whose constructor the symbol names.
+    pub fn record_ctor_module(&self, symbol: &str) -> Option<&Vec<String>> {
+        self.record_ctors.get(symbol)
     }
 
     /// `NeedsPanicOutForSymbol`.
