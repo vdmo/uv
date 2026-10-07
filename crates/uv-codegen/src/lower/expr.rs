@@ -790,6 +790,7 @@ pub(super) fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResu
         ExprNode::TupleExpr(node) => lower_tuple_expr(expr, node, ctx),
         ExprNode::FieldAccessExpr(node) => lower_field_access_expr(expr, node, ctx),
         ExprNode::TupleAccessExpr(node) => lower_tuple_access_expr(expr, node, ctx),
+        ExprNode::IndexAccessExpr(node) => lower_index_access(expr, node, ctx),
         ExprNode::ArrayExpr(node) => lower_array_expr(node, ctx),
         ExprNode::ArrayRepeatExpr(node) => lower_array_repeat_expr(node, ctx),
         ExprNode::SizeofExpr(node) => lower_layout_constant(&node.r#type, false, ctx),

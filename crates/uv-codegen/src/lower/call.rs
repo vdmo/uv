@@ -78,30 +78,11 @@ pub(super) fn needs_panic_out_for_symbol(symbol: &str, ctx: &LowerCtx) -> bool {
     symbol != "main" && !ctx.record_ctors.contains(symbol)
 }
 
-/// `LowerAddrOf` of a local name used for the duration of a call (`TransientNoEscape`).
-pub(super) fn lower_addr_of_local(place: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResult {
-    let ExprNode::IdentifierExpr(ident) = &place.node else {
-        ctx.unported(&format!("addresses of {}", variant_name(&place.node)));
-        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("addr_of") };
-    };
-    let Some(state) = ctx.binding_state(&ident.name).cloned() else {
-        ctx.unported("addresses of names that are not local");
-        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("addr_of") };
-    };
-    let ptr_value = ctx.fresh_temp_value("addr_of");
-    let pointee = state.ty.clone().or_else(|| stored_expr_type(&ctx.scope, &Some(place.clone())).flatten());
-    if pointee.is_some() {
-        ctx.register_value_type(&ptr_value, make_type_ptr(pointee, Some(PtrState::Valid)));
-    }
-    let addr = Ir::AddrOf { place: IrPlace { repr: ident.name.clone() }, result: ptr_value.clone(), ref_syms: Vec::new() };
-    LowerResult { ir: seq_ir(vec![Some(Arc::new(addr))]), value: ptr_value }
-}
-
 /// `LowerRefArgExprWithTemp` and `LowerMoveArgExprWithTemp`: a value that is not a place is
 /// bound to a temporary and its address is passed.
 pub(super) fn lower_arg_with_temp(expr: &Arc<Expr>, prefix: &str, expected: &TypeRef, by_move: bool, ctx: &mut LowerCtx) -> LowerResult {
     if !by_move && has_source_provenance(&Some(expr.clone())) {
-        return lower_addr_of_local(expr, ctx);
+        return lower_addr_of(expr, ctx);
     }
     let prev_suppress = ctx.suppress_temp_at_depth;
     ctx.suppress_temp_at_depth = Some(ctx.temp_depth + 1);
@@ -130,7 +111,7 @@ pub(super) fn lower_arg_with_temp(expr: &Arc<Expr>, prefix: &str, expected: &Typ
         ctx.register_temp_value(&temp_value, &temp_type, has_responsibility);
     }
     let temp_ident = Arc::new(Expr { span: expr.span.clone(), node: ExprNode::IdentifierExpr(ast::IdentifierExpr { name: temp_name, from_splice: false }) });
-    let addr_result = lower_addr_of_local(&temp_ident, ctx);
+    let addr_result = lower_addr_of(&temp_ident, ctx);
     LowerResult { ir: seq_ir(vec![Some(value_result.ir), Some(bind), Some(addr_result.ir)]), value: addr_result.value }
 }
 

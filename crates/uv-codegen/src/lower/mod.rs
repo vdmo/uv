@@ -31,6 +31,7 @@ use uv_source::lexer::token::TokenKind;
 use crate::control_flow::ir_flow_may_fall_through;
 use crate::ir::*;
 use crate::symbols::{deinit_sym, init_sym, item_path_proc, scoped_sym};
+use uv_core::symbols::{mangle, string_of_path};
 
 
 mod call;
@@ -38,11 +39,12 @@ mod cleanup;
 mod expr;
 mod keys;
 mod module;
+mod place;
 mod proc;
 mod statics;
 mod stmt;
 
-use self::{call::*, cleanup::*, expr::*, keys::*, proc::*, statics::*, stmt::*};
+use self::{call::*, cleanup::*, expr::*, keys::*, place::*, proc::*, statics::*, stmt::*};
 
 pub use self::module::{lower_module, LoweredModule};
 
@@ -134,6 +136,10 @@ pub enum DerivedKind {
     AddrField,
     Field,
     Tuple,
+    Index,
+    AddrTuple,
+    AddrIndex,
+    LoadFromAddr,
 }
 
 /// One run of an array literal: a single element, or an element repeated.
@@ -150,6 +156,7 @@ pub struct DerivedValueInfo {
     pub base: IrValue,
     pub field: String,
     pub tuple_index: usize,
+    pub index: IrValue,
     pub fields: Vec<(String, IrValue)>,
     pub elements: Vec<IrValue>,
     pub array_segments: Vec<DerivedArraySegment>,
@@ -157,7 +164,7 @@ pub struct DerivedValueInfo {
 
 impl DerivedValueInfo {
     fn new(kind: DerivedKind) -> Self {
-        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), tuple_index: 0, fields: Vec::new(), elements: Vec::new(), array_segments: Vec::new() }
+        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), tuple_index: 0, index: IrValue::default(), fields: Vec::new(), elements: Vec::new(), array_segments: Vec::new() }
     }
 }
 
