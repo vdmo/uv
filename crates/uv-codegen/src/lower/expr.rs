@@ -812,6 +812,9 @@ pub(super) fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResu
             }
         },
         ExprNode::CallExpr(call) => lower_call(call, ctx),
+        ExprNode::CastExpr(node) => lower_cast_expr(node, ctx),
+        ExprNode::LoopConditionalExpr(node) => lower_loop_conditional(expr, node, ctx),
+        ExprNode::LoopInfiniteExpr(node) => lower_loop_infinite(expr, node, ctx),
         ExprNode::EnumLiteralExpr(node) => lower_enum_literal(expr, node, ctx),
         // `LowerPtrNull`: the null pointer is the immediate of eight zero bytes.
         ExprNode::PtrNullExpr(_) => LowerResult {
@@ -878,4 +881,29 @@ pub(super) fn lower_enum_literal(expr: &Arc<Expr>, node: &ast::EnumLiteralExpr, 
         ctx.register_value_type(&value, Some(ty));
     }
     LowerResult { ir, value }
+}
+
+/// `LowerCastExpr` and `LowerCast`: the checked conversion of a value to the type written.
+pub(super) fn lower_cast_expr(node: &ast::CastExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let Some(value) = &node.value else {
+        ctx.unported("casts without a value");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("cast") };
+    };
+    let target = node.r#type.as_ref().and_then(|written| lower_type_for_layout(&ctx.scope, &Some(written.clone())).flatten());
+    if matches!(strip_perm(&target).as_deref().map(|ty| &ty.node), Some(TypeNode::Dynamic { .. })) {
+        ctx.unported("casts to dynamic types");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("dyn") };
+    }
+    let value_result = lower_expr(value, ctx);
+    let result_value = ctx.fresh_temp_value("cast");
+    if target.is_none() {
+        return LowerResult { ir: value_result.ir, value: result_value };
+    }
+    let parts = vec![
+        Some(value_result.ir),
+        Some(Arc::new(Ir::CheckCast { target: target.clone(), value: value_result.value.clone() })),
+        Some(panic_check(ctx)),
+        Some(Arc::new(Ir::Cast { target, value: value_result.value, result: result_value.clone() })),
+    ];
+    LowerResult { ir: seq_ir(parts), value: result_value }
 }

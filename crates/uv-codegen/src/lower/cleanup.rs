@@ -80,6 +80,18 @@ pub(super) fn cleanup_plan_current_scope(ctx: &LowerCtx) -> Vec<CleanupAction> {
     plan
 }
 
+/// `ComputeCleanupPlanToLoopScope`: the scopes from the innermost to the nearest loop's.
+pub(super) fn cleanup_plan_to_loop_scope(ctx: &LowerCtx) -> Vec<CleanupAction> {
+    let mut plan = Vec::new();
+    for scope in ctx.scope_stack.iter().rev() {
+        append_scope_cleanup(scope, ctx, &mut plan);
+        if scope.is_loop {
+            break;
+        }
+    }
+    plan
+}
+
 /// `ComputeCleanupPlanToFunctionRoot`.
 pub(super) fn cleanup_plan_to_function_root(ctx: &LowerCtx) -> Vec<CleanupAction> {
     let mut plan = Vec::new();

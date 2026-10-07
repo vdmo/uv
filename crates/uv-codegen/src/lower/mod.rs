@@ -40,13 +40,14 @@ mod cleanup;
 mod drop;
 mod expr;
 mod keys;
+mod loops;
 mod module;
 mod place;
 mod proc;
 mod statics;
 mod stmt;
 
-use self::{call::*, cleanup::*, drop::*, expr::*, keys::*, method::*, place::*, proc::*, statics::*, stmt::*};
+use self::{call::*, cleanup::*, drop::*, expr::*, keys::*, loops::*, method::*, place::*, proc::*, statics::*, stmt::*};
 
 pub use self::module::{lower_module, LoweredModule};
 
@@ -66,6 +67,8 @@ struct ScopeInfo {
     cleanup_items: Vec<CleanupItem>,
     /// The number the runtime knows the scope by.
     runtime_scope_id: u64,
+    /// Whether `break` and `continue` stop at this scope.
+    is_loop: bool,
 }
 
 /// What leaving a scope owes: a binding that holds responsibility is dropped, a held key
@@ -315,9 +318,14 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
     }
 
     fn push_scope(&mut self) {
+        self.push_scope_kind(false);
+    }
+
+    /// `PushScope(is_loop, false)`.
+    fn push_scope_kind(&mut self, is_loop: bool) {
         let runtime_scope_id = self.next_runtime_scope_id;
         self.next_runtime_scope_id += 1;
-        self.scope_stack.push(ScopeInfo { runtime_scope_id, ..Default::default() });
+        self.scope_stack.push(ScopeInfo { runtime_scope_id, is_loop, ..Default::default() });
     }
 
     /// `CurrentRuntimeScopeId`.

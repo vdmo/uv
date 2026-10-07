@@ -383,6 +383,44 @@ pub(super) fn lower_binding_stmt(binding: &ast::Binding, is_let: bool, ctx: &mut
     seq_ir(vec![Some(init_result.ir), Some(bind_ir), Some(refine_ir)])
 }
 
+/// `LowerBreakStmt`: the value, the drops of the statement's temporaries and of the scopes
+/// the loop is left through, and the break.
+pub(super) fn lower_break_stmt(stmt: &ast::BreakStmt, ctx: &mut LowerCtx) -> IrPtr {
+    let mut parts = Vec::new();
+    let mut break_value = None;
+    if let Some(value) = &stmt.value_opt {
+        let prev_suppress = ctx.suppress_temp_at_depth;
+        ctx.suppress_temp_at_depth = Some(ctx.temp_depth + 1);
+        let result = lower_expr(value, ctx);
+        ctx.suppress_temp_at_depth = prev_suppress;
+        parts.push(Some(result.ir));
+        break_value = Some(result.value);
+    }
+    parts.extend(transfer_cleanup(ctx));
+    parts.push(Some(Arc::new(Ir::Break { value: break_value })));
+    seq_ir(parts)
+}
+
+/// `LowerContinueStmt`.
+pub(super) fn lower_continue_stmt(ctx: &mut LowerCtx) -> IrPtr {
+    let mut parts = transfer_cleanup(ctx);
+    parts.push(Some(Arc::new(Ir::Continue)));
+    seq_ir(parts)
+}
+
+/// What `break` and `continue` do before they transfer control.
+fn transfer_cleanup(ctx: &mut LowerCtx) -> Vec<Option<IrPtr>> {
+    let mut parts = Vec::new();
+    let temps = ctx.temp_sink.take().unwrap_or_default();
+    ctx.temp_sink = Some(Vec::new());
+    if !temps.is_empty() {
+        parts.push(Some(temp_cleanup(&temps, ctx)));
+    }
+    let plan = cleanup_plan_to_loop_scope(ctx);
+    parts.push(Some(emit_cleanup(&plan, false, ctx)));
+    parts
+}
+
 pub(super) fn lower_stmt(stmt: &Stmt, ctx: &mut LowerCtx) -> IrPtr {
     let prev_sink = ctx.temp_sink.replace(Vec::new());
     let mut temps_handled = false;
@@ -390,6 +428,14 @@ pub(super) fn lower_stmt(stmt: &Stmt, ctx: &mut LowerCtx) -> IrPtr {
         Stmt::ReturnStmt(node) => {
             temps_handled = true;
             lower_return_stmt(node, ctx)
+        }
+        Stmt::BreakStmt(node) => {
+            temps_handled = true;
+            lower_break_stmt(node, ctx)
+        }
+        Stmt::ContinueStmt(_) => {
+            temps_handled = true;
+            lower_continue_stmt(ctx)
         }
         Stmt::ExprStmt(node) => lower_expr_stmt(node, ctx),
         Stmt::LetStmt(node) => lower_binding_stmt(&node.binding, true, ctx),
