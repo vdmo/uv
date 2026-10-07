@@ -6,7 +6,7 @@ use std::collections::HashMap;
 use std::sync::Arc;
 
 use uv_analysis::context::{EntityKind, NameMapTable, Scope, ScopeContext};
-use uv_analysis::layout::{align_of, lower_type_for_layout, size_of};
+use uv_analysis::layout::{align_of, layout_of, lower_type_for_layout, size_of};
 use uv_analysis::memory::calls::has_source_provenance;
 use uv_analysis::memory::region_prov::{compute_expr_provenance_map, ExprProvMaps};
 use uv_analysis::layout::value_bits::encode_const;
@@ -15,13 +15,15 @@ use uv_analysis::memory::return_responsibility::call_result_has_responsibility;
 use uv_analysis::resolve::scopes::{id_eq, id_key_of, path_key_of, universe_bindings};
 use uv_analysis::typing::expr::small::is_place_expr;
 use uv_analysis::typing::expr_store::{selected_call_target, stored_expr_type};
-use uv_analysis::typing::type_predicates::{perm_of_type, strip_perm};
+use uv_analysis::typing::type_predicates::{bitcopy_type, perm_of_type, strip_perm};
 use uv_analysis::typing::types::Permission;
 use uv_analysis::typing::outcome::outcome_sig_of;
 use uv_analysis::typing::type_lookup::async_sig_of;
 use uv_analysis::typing::type_lower::lower_type;
 use uv_analysis::typing::type_lookup::{field_type, lookup_record_decl};
-use uv_analysis::typing::types::{applied_type_args, applied_type_path, make_type_modal_state, make_type_path, make_type_prim, make_type_ptr, make_type_raw_ptr, make_type_tuple, ParamMode, PtrState, RawPtrQual, TypeNode, TypeRef};
+use uv_analysis::typing::type_equiv::type_equiv;
+use uv_analysis::composite::record_methods::{recv_mode_of, recv_type_for_receiver};
+use uv_analysis::typing::types::{is_self_var_path, make_type_closure, make_type_func, make_type_perm, make_type_refine, make_type_slice, make_type_union, make_type_array, applied_type_args, applied_type_path, make_type_modal_state, make_type_path, make_type_prim, make_type_ptr, make_type_raw_ptr, make_type_tuple, ParamMode, PtrState, RawPtrQual, TypeNode, TypeRef};
 use uv_source::ast::{self, ASTItem, ASTModule, Expr, ExprNode, ProcedureDecl, Stmt};
 use uv_source::lexer::token::TokenKind;
 
@@ -77,8 +79,19 @@ struct CleanupAction {
 pub enum DerivedKind {
     RecordLit,
     TupleLit,
+    ArraySegments,
     AddrDeref,
     AddrField,
+    Field,
+    Tuple,
+}
+
+/// One run of an array literal: a single element, or an element repeated.
+#[derive(Debug, Clone)]
+pub struct DerivedArraySegment {
+    pub repeat: bool,
+    pub value: IrValue,
+    pub count: IrValue,
 }
 
 #[derive(Debug, Clone)]
@@ -86,13 +99,15 @@ pub struct DerivedValueInfo {
     pub kind: DerivedKind,
     pub base: IrValue,
     pub field: String,
+    pub tuple_index: usize,
     pub fields: Vec<(String, IrValue)>,
     pub elements: Vec<IrValue>,
+    pub array_segments: Vec<DerivedArraySegment>,
 }
 
 impl DerivedValueInfo {
     fn new(kind: DerivedKind) -> Self {
-        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), fields: Vec::new(), elements: Vec::new() }
+        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), tuple_index: 0, fields: Vec::new(), elements: Vec::new(), array_segments: Vec::new() }
     }
 }
 
@@ -141,6 +156,9 @@ pub struct LowerCtx<'a, 'b> {
     static_types: HashMap<String, TypeRef>,
     /// `ctx.active_static_init_module`: the module whose statics are being initialised.
     active_static_init_module: Option<String>,
+    /// The modules of the program and what each needs initialised before it (dependent, dependency).
+    init_modules: Vec<Vec<String>>,
+    init_eager_edges: Vec<(usize, usize)>,
     /// The first construct met that is not ported, which stops the declaration.
     pub pending: Option<String>,
 }
@@ -172,6 +190,8 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             record_ctors: std::collections::HashSet::new(),
             static_types: HashMap::new(),
             active_static_init_module: None,
+            init_modules: Vec::new(),
+            init_eager_edges: Vec::new(),
             pending: None,
         }
     }
@@ -276,6 +296,40 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
 
     fn lookup_value_type(&self, value: &IrValue) -> TypeRef {
         self.value_types.get(&Self::value_key(value)).cloned().flatten()
+    }
+
+    pub fn set_init_plan(&mut self, modules: Vec<Vec<String>>, eager_edges: Vec<(usize, usize)>) {
+        self.init_modules = modules;
+        self.init_eager_edges = eager_edges;
+    }
+
+    /// `PoisonSetFor`: the modules that cannot run once the initialisation of one fails: it, and
+    /// every module that depends on it, however indirectly.
+    fn poison_set_for(&self, module: &str) -> Vec<String> {
+        let alone = || vec![module.to_string()];
+        let names: Vec<String> = self.init_modules.iter().map(|path| path.join("::")).collect();
+        let Some(target) = names.iter().position(|name| name == module) else {
+            return alone();
+        };
+        let mut dependents: Vec<Vec<usize>> = vec![Vec::new(); names.len()];
+        for &(dependent, dependency) in &self.init_eager_edges {
+            if dependent < names.len() && dependency < names.len() {
+                dependents[dependency].push(dependent);
+            }
+        }
+        let mut visited = vec![false; names.len()];
+        let mut stack = vec![target];
+        visited[target] = true;
+        while let Some(current) = stack.pop() {
+            for &next in &dependents[current] {
+                if !visited[next] {
+                    visited[next] = true;
+                    stack.push(next);
+                }
+            }
+        }
+        let out: Vec<String> = names.into_iter().enumerate().filter(|(index, _)| visited[*index]).map(|(_, name)| name).collect();
+        if out.is_empty() { alone() } else { out }
     }
 
     /// `RegisterDerivedValue`: only opaque and local values carry one.
@@ -434,11 +488,11 @@ fn needs_panic_out_for_symbol(symbol: &str, ctx: &LowerCtx) -> bool {
 }
 
 /// `InitPanicHandle`: in the initialisation of a module, a panic poisons the modules that
-/// depend on it. The set is the module alone: the reference never fills the dependencies.
+/// depend on it.
 fn init_panic_handle(module: &str, ctx: &mut LowerCtx) -> IrPtr {
     let trace_ir = emit_runtime_trace(ctx);
     let cleanup_ir = emit_cleanup(&[], true, ctx);
-    let handle = Arc::new(Ir::InitPanicHandle { module: module.to_string(), poison_modules: vec![module.to_string()], cleanup_ir: Some(cleanup_ir) });
+    let handle = Arc::new(Ir::InitPanicHandle { module: module.to_string(), poison_modules: ctx.poison_set_for(module), cleanup_ir: Some(cleanup_ir) });
     seq_ir(vec![Some(trace_ir), Some(handle)])
 }
 
@@ -578,20 +632,27 @@ fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut LowerCtx) -> Low
             let Some(callee_expr) = &call.callee else {
                 return failed(ctx, "calls without a callee");
             };
-            let ExprNode::IdentifierExpr(ident) = &callee_expr.node else {
-                let kind = variant_name(&callee_expr.node);
-                return failed(ctx, &format!("calls through {kind}"));
-            };
-            if ctx.binding_state(&ident.name).is_some() {
-                return failed(ctx, "calls of local function values");
-            }
-            // `resolve_name`: the origin and the name of a value entity of the module.
-            let (origin, name) = match ctx.scope.module_scope().get(&id_key_of(&ident.name)) {
-                Some(entity) if entity.kind == EntityKind::Value => match &entity.origin_opt {
-                    Some(origin) => (origin.clone(), entity.target_opt.clone().unwrap_or_else(|| ident.name.clone())),
-                    None => return failed(ctx, "calls of names without an origin"),
-                },
-                _ => (ctx.module_path.clone(), ident.name.clone()),
+            // `ExtractCalleePath`: the path a callee names, and `LowerExpr` of it.
+            let (origin, name) = match &callee_expr.node {
+                ExprNode::IdentifierExpr(ident) => {
+                    if ctx.binding_state(&ident.name).is_some() {
+                        return failed(ctx, "calls of local function values");
+                    }
+                    // `resolve_name`: the origin and the name of a value entity of the module.
+                    let (origin, name) = match ctx.scope.module_scope().get(&id_key_of(&ident.name)) {
+                        Some(entity) if entity.kind == EntityKind::Value => match &entity.origin_opt {
+                            Some(origin) => (origin.clone(), entity.target_opt.clone().unwrap_or_else(|| ident.name.clone())),
+                            None => return failed(ctx, "calls of names without an origin"),
+                        },
+                        _ => (ctx.module_path.clone(), ident.name.clone()),
+                    };
+                    (origin, name)
+                }
+                ExprNode::PathExpr(path) => (path.path.clone(), path.name.clone()),
+                other => {
+                    let kind = variant_name(other);
+                    return failed(ctx, &format!("calls through {kind}"));
+                }
             };
             let found = sigma.mods.iter().find(|module| module.path == origin).and_then(|module| {
                 module.items.iter().find_map(|item| match item {
@@ -606,10 +667,7 @@ fn lower_call(expr: &Arc<Expr>, call: &ast::CallExpr, ctx: &mut LowerCtx) -> Low
                 return failed(ctx, "calls of generic procedures");
             }
             // `LowerExpr` of the callee: a read of the path of the procedure.
-            let callee_type = stored_expr_type(&ctx.scope, &Some(callee_expr.clone())).flatten();
-            let callee_value = IrValue { kind: IrValueKind::Symbol, name: name.clone(), ..Default::default() };
-            ctx.register_value_type(&callee_value, callee_type);
-            callee_ir = seq_ir(vec![Some(empty_ir()), Some(Arc::new(Ir::ReadPath { path: origin, name }))]);
+            callee_ir = lower_expr(callee_expr, ctx).ir;
             (module, decl)
         }
     };
@@ -961,6 +1019,164 @@ fn lower_unary_expr(node: &ast::UnaryExpr, ctx: &mut LowerCtx) -> LowerResult {
     LowerResult { ir: seq_ir(parts), value: result_value }
 }
 
+/// `Lower-Expr-Sizeof` and `Lower-Expr-Alignof`: the size or the alignment of a type, as a constant.
+fn lower_layout_constant(written: &Option<Arc<ast::Type>>, align: bool, ctx: &mut LowerCtx) -> LowerResult {
+    let lowered = lower_type_for_layout(&ctx.scope, written).flatten();
+    let Some(layout) = layout_of(&ctx.scope, &lowered) else {
+        ctx.unported("sizes of types whose layout is not known");
+        return LowerResult { ir: empty_ir(), value: IrValue::default() };
+    };
+    let number = if align { layout.align } else { layout.size };
+    let value = IrValue { kind: IrValueKind::Immediate, name: number.to_string(), bytes: number.to_le_bytes().to_vec(), ..Default::default() };
+    LowerResult { ir: empty_ir(), value }
+}
+
+/// `LowerArrayLiteral`: the segments left to right, and a value the emitter builds from them.
+fn lower_array_expr(node: &ast::ArrayExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let mut parts = Vec::new();
+    let mut segments = Vec::new();
+    for segment in &node.elements {
+        let prev_suppress = ctx.suppress_temp_at_depth;
+        ctx.suppress_temp_at_depth = Some(ctx.temp_depth + 1);
+        match segment {
+            ast::ArraySegment::ArrayElemSegment(element) => {
+                let Some(value) = &element.value else {
+                    ctx.unported("array elements without a value");
+                    continue;
+                };
+                let result = lower_expr(value, ctx);
+                parts.push(Some(result.ir));
+                segments.push(DerivedArraySegment { repeat: false, value: result.value, count: IrValue::default() });
+            }
+            ast::ArraySegment::ArrayRepeatSegment(repeat) => {
+                let (Some(value), Some(count)) = (&repeat.value, &repeat.count) else {
+                    ctx.unported("repeated array elements without a value");
+                    continue;
+                };
+                let value_result = lower_expr(value, ctx);
+                let count_result = lower_expr(count, ctx);
+                parts.push(Some(value_result.ir));
+                parts.push(Some(count_result.ir));
+                segments.push(DerivedArraySegment { repeat: true, value: value_result.value, count: count_result.value });
+            }
+        }
+        ctx.suppress_temp_at_depth = prev_suppress;
+    }
+    let ir = if segments.is_empty() { empty_ir() } else { seq_ir(parts) };
+    let array_value = ctx.fresh_temp_value("array");
+    // The concrete array type, when every element has one and they agree.
+    let mut element_type: TypeRef = None;
+    let mut homogeneous = true;
+    let mut element_count = 0u64;
+    for segment in &segments {
+        let Some(current) = ctx.lookup_value_type(&segment.value) else {
+            homogeneous = false;
+            break;
+        };
+        match &element_type {
+            None => element_type = Some(current),
+            Some(first) => {
+                if !type_equiv(&Some(first.clone()), &Some(current)) {
+                    homogeneous = false;
+                    break;
+                }
+            }
+        }
+        if segment.repeat {
+            homogeneous = false;
+            break;
+        }
+        element_count += 1;
+    }
+    ctx.register_derived_value(&array_value, DerivedValueInfo { array_segments: segments, ..DerivedValueInfo::new(DerivedKind::ArraySegments) });
+    if homogeneous && element_type.is_some() {
+        ctx.register_value_type(&array_value, make_type_array(element_type, element_count, None));
+    }
+    LowerResult { ir, value: array_value }
+}
+
+/// `LowerArrayRepeat`: `[value; count]` as one repeated segment.
+fn lower_array_repeat_expr(node: &ast::ArrayRepeatExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let (Some(value), Some(count)) = (&node.value, &node.count) else {
+        ctx.unported("repeated arrays without a value");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("array_repeat") };
+    };
+    let value_result = lower_expr(value, ctx);
+    let count_result = lower_expr(count, ctx);
+    let array_value = ctx.fresh_temp_value("array_repeat");
+    let segment = DerivedArraySegment { repeat: true, value: value_result.value, count: count_result.value };
+    ctx.register_derived_value(&array_value, DerivedValueInfo { array_segments: vec![segment], ..DerivedValueInfo::new(DerivedKind::ArraySegments) });
+    LowerResult { ir: seq_ir(vec![Some(value_result.ir), Some(count_result.ir)]), value: array_value }
+}
+
+/// `LowerReadPlaceFieldAccess`: the base is lowered as an expression and the field is read from it.
+fn lower_field_access_expr(expr: &Arc<Expr>, node: &ast::FieldAccessExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let Some(base) = &node.base else {
+        ctx.unported("field accesses without a base");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("place_field") };
+    };
+    let base_result = lower_expr(base, ctx);
+    let field_value = ctx.fresh_temp_value("place_field");
+    let mut type_of_field = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten();
+    if type_of_field.is_none() {
+        // `InferRecordFieldTypeFromBase`.
+        let base_type = ctx.lookup_value_type(&base_result.value);
+        let mut stripped = base_type;
+        while let Some(TypeNode::Perm { base, .. } | TypeNode::Refine { base, .. }) = stripped.as_deref().map(|ty| &ty.node) {
+            stripped = base.clone();
+        }
+        if let Some(ty) = &stripped {
+            if let Some(path) = applied_type_path(ty) {
+                if let Some(record) = lookup_record_decl(&ctx.scope, path) {
+                    let args: Vec<TypeRef> = applied_type_args(ty).map(<[TypeRef]>::to_vec).unwrap_or_default();
+                    type_of_field = field_type(record, &node.name, &ctx.scope, &args).flatten();
+                }
+            }
+        }
+    }
+    if type_of_field.is_some() {
+        ctx.register_value_type(&field_value, type_of_field.clone());
+    }
+    let mut info = DerivedValueInfo::new(DerivedKind::Field);
+    info.base = base_result.value.clone();
+    info.field = node.name.clone();
+    ctx.register_derived_value(&field_value, info);
+    if perm_of_type(&stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten()) == Permission::Shared {
+        ctx.unported("implicit key access");
+    }
+    LowerResult { ir: seq_ir(vec![Some(base_result.ir), Some(empty_ir())]), value: field_value }
+}
+
+/// `LowerReadPlaceTupleAccess` of a local: the base is read by its name in the source.
+fn lower_tuple_access_expr(expr: &Arc<Expr>, node: &ast::TupleAccessExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let base_ident = node.base.as_ref().and_then(|base| match &base.node {
+        ExprNode::IdentifierExpr(ident) => Some((base.clone(), ident.clone())),
+        _ => None,
+    });
+    let Some((base, ident)) = base_ident else {
+        ctx.unported("tuple accesses on bases that are not local names");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("place_tuple_elem") };
+    };
+    let Some(state) = ctx.binding_state(&ident.name).cloned() else {
+        ctx.unported("tuple accesses on names that are not local");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("place_tuple_elem") };
+    };
+    let base_value = IrValue { kind: IrValueKind::Local, name: ident.name.clone(), ..Default::default() };
+    let base_type = stored_expr_type(&ctx.scope, &Some(base)).flatten();
+    ctx.register_value_type(&base_value, if state.ty.is_some() { state.ty.clone() } else { base_type.clone() });
+    if perm_of_type(&base_type) == Permission::Shared {
+        ctx.unported("implicit key access");
+    }
+    let base_ir = seq_ir(vec![Some(empty_ir()), Some(Arc::new(Ir::ReadVar { name: ident.name.clone() }))]);
+    let elem_value = ctx.fresh_temp_value("place_tuple_elem");
+    ctx.register_value_type(&elem_value, stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten());
+    let mut info = DerivedValueInfo::new(DerivedKind::Tuple);
+    info.base = base_value;
+    info.tuple_index = usize::try_from(node.index).unwrap_or(usize::MAX);
+    ctx.register_derived_value(&elem_value, info);
+    LowerResult { ir: base_ir, value: elem_value }
+}
+
 fn is_bool_binop(op: &str) -> bool {
     matches!(op, "==" | "===" | "!=" | "<" | "<=" | ">" | ">=" | "&&" | "||")
 }
@@ -1080,14 +1296,27 @@ fn lower_record_expr(expr: &Arc<Expr>, node: &ast::RecordExpr, ctx: &mut LowerCt
     LowerResult { ir, value: record_value }
 }
 
+/// `LowerPath`: a read of the path of an item.
+fn lower_path_expr(node: &ast::PathExpr) -> LowerResult {
+    let value = IrValue { kind: IrValueKind::Symbol, name: node.name.clone(), ..Default::default() };
+    LowerResult { ir: Arc::new(Ir::ReadPath { path: node.path.clone(), name: node.name.clone() }), value }
+}
+
 fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResult {
     match &expr.node {
         ExprNode::LiteralExpr(lit) => lower_literal(expr, lit, ctx),
         ExprNode::IdentifierExpr(ident) => lower_identifier(expr, ident, ctx),
+        ExprNode::PathExpr(node) => lower_path_expr(node),
         ExprNode::BinaryExpr(node) => lower_binary_expr(node, ctx),
         ExprNode::RecordExpr(node) => lower_record_expr(expr, node, ctx),
         ExprNode::IfExpr(node) => lower_if_expr(expr, node, ctx),
         ExprNode::TupleExpr(node) => lower_tuple_expr(expr, node, ctx),
+        ExprNode::FieldAccessExpr(node) => lower_field_access_expr(expr, node, ctx),
+        ExprNode::TupleAccessExpr(node) => lower_tuple_access_expr(expr, node, ctx),
+        ExprNode::ArrayExpr(node) => lower_array_expr(node, ctx),
+        ExprNode::ArrayRepeatExpr(node) => lower_array_repeat_expr(node, ctx),
+        ExprNode::SizeofExpr(node) => lower_layout_constant(&node.r#type, false, ctx),
+        ExprNode::AlignofExpr(node) => lower_layout_constant(&node.r#type, true, ctx),
         ExprNode::UnaryExpr(node) => lower_unary_expr(node, ctx),
         ExprNode::BlockExpr(node) => match &node.block {
             Some(block) => lower_block(block, ctx),
@@ -1264,7 +1493,12 @@ fn lower_return_stmt(stmt: &ast::ReturnStmt, ctx: &mut LowerCtx) -> IrPtr {
                         ctx.unported("returning a binding that holds responsibility");
                     }
                 }
-                ExprNode::FieldAccessExpr(_) | ExprNode::TupleAccessExpr(_) | ExprNode::IndexAccessExpr(_) | ExprNode::DerefExpr(_) => ctx.unported("returning a place"),
+                ExprNode::FieldAccessExpr(_) | ExprNode::TupleAccessExpr(_) | ExprNode::IndexAccessExpr(_) | ExprNode::DerefExpr(_) => {
+                    let root = place_root(expr);
+                    if root.is_none_or(|name| ctx.binding_state(&name).is_none_or(|state| state.has_responsibility)) {
+                        ctx.unported("returning a place of a binding that holds responsibility");
+                    }
+                }
                 _ => {}
             }
             let prev_suppress = ctx.suppress_temp_at_depth;
@@ -1289,10 +1523,17 @@ fn lower_return_stmt(stmt: &ast::ReturnStmt, ctx: &mut LowerCtx) -> IrPtr {
     if async_sig_of(&ctx.scope, &ctx.proc_ret_type).is_some() {
         ctx.unported("returns of async procedures");
     }
-    // A value that is not immediate is snapshotted when it is not copied bit by bit; the
-    // returned values ported so far are immediates, or results of calls of primitive type.
-    if value.kind != IrValueKind::Immediate && !matches!(value_type.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) && !is_unit_type(&value_type) {
-        ctx.unported("snapshots of returned values");
+    // `SnapshotReturnValueForPostcondition`: a value that is not copied bit by bit is bound to
+    // a local before the cleanup that may drop what it was made from. There is no
+    // postcondition to read it.
+    let mut value = value;
+    let needs_snapshot = value_type.is_some() && !is_unit_type(&value_type) && !bitcopy_type(&ctx.scope, &value_type);
+    if needs_snapshot && value.kind != IrValueKind::Immediate {
+        let name = ctx.fresh_temp_value("return_snapshot").name;
+        let stable_name = ctx.register_var(&name, value_type.clone(), false, ProvenanceKind::Bottom, None, None);
+        parts.push(Some(Arc::new(Ir::BindVar { name: name.clone(), stable_name, value: value.clone(), ty: value_type.clone(), prov: ProvenanceKind::Stack, prov_region: None, prov_region_tag: None })));
+        value = IrValue { kind: IrValueKind::Local, name, ..Default::default() };
+        ctx.register_value_type(&value, value_type.clone());
     }
     if stmt.value_opt.is_some() {
         // The check for a refinement of the returned expression: `nop` when there is none.
@@ -1319,6 +1560,19 @@ fn lower_expr_stmt(stmt: &ast::ExprStmt, ctx: &mut LowerCtx) -> IrPtr {
         ctx.unported("method calls as statements");
     }
     lower_expr(value, ctx).ir
+}
+
+/// `PlaceRoot`: the name a place starts from.
+fn place_root(expr: &Arc<Expr>) -> Option<String> {
+    match &expr.node {
+        ExprNode::AttributedExpr(node) => node.expr.as_ref().and_then(place_root),
+        ExprNode::IdentifierExpr(node) => Some(node.name.clone()),
+        ExprNode::FieldAccessExpr(node) => node.base.as_ref().and_then(place_root),
+        ExprNode::TupleAccessExpr(node) => node.base.as_ref().and_then(place_root),
+        ExprNode::IndexAccessExpr(node) => node.base.as_ref().and_then(place_root),
+        ExprNode::DerefExpr(node) => node.value.as_ref().and_then(place_root),
+        _ => None,
+    }
 }
 
 /// `BindingInitializerHasResponsibility`.
@@ -1541,6 +1795,121 @@ fn lower_proc(decl: &ProcedureDecl, module_path: &[String], symbol: String, ctx:
     ir
 }
 
+// ------------------------------------------------------------- record methods
+
+/// `SubstSelfType` of the lowering: `Self` replaced by the type of the record, through the
+/// forms the reference walks.
+fn subst_self(self_type: &TypeRef, ty: &TypeRef) -> TypeRef {
+    let (Some(_), Some(node)) = (self_type, ty.as_deref()) else {
+        return ty.clone();
+    };
+    let sub = |inner: &TypeRef| subst_self(self_type, inner);
+    match &node.node {
+        TypeNode::Path { path, .. } if is_self_var_path(path) => self_type.clone(),
+        TypeNode::Perm { perm, base } => make_type_perm(*perm, sub(base)),
+        TypeNode::Tuple(elements) => make_type_tuple(elements.iter().map(sub).collect()),
+        TypeNode::Array { element, length, .. } => make_type_array(sub(element), *length, None),
+        TypeNode::Slice(element) => make_type_slice(sub(element)),
+        TypeNode::Union(members) => make_type_union(members.iter().map(sub).collect()),
+        TypeNode::Func { params, ret } => make_type_func(params.iter().map(|param| uv_analysis::typing::types::TypeFuncParam { mode: param.mode, r#type: sub(&param.r#type) }).collect(), sub(ret)),
+        TypeNode::Closure { params, ret, deps_opt } => make_type_closure(
+            params.iter().map(|(is_move, ty)| (*is_move, sub(ty))).collect(),
+            sub(ret),
+            deps_opt.as_ref().map(|deps| deps.iter().map(|dep| uv_analysis::typing::types::SharedDep { name: dep.name.clone(), r#type: sub(&dep.r#type) }).collect()),
+        ),
+        TypeNode::Ptr { element, state } => make_type_ptr(sub(element), *state),
+        TypeNode::RawPtr { qual, element } => make_type_raw_ptr(*qual, sub(element)),
+        TypeNode::Refine { base, predicate } => make_type_refine(sub(base), predicate.clone()),
+        _ => ty.clone(),
+    }
+}
+
+/// `LowerParam`: the parameter as the IR declares it.
+fn lower_param(param: &ast::Param, self_type: &TypeRef, ctx: &LowerCtx) -> IrParam {
+    let mut out = IrParam { mode: param.mode.map(|_| ParamMode::Move), name: param.name.clone(), stable_name: param.name.clone(), ty: None };
+    if param.r#type.is_some() {
+        if let Ok(ty) = lower_type(&ctx.scope, &param.r#type) {
+            out.ty = subst_self(self_type, &ty);
+        }
+    }
+    out
+}
+
+/// `LowerProcLike`: a procedure made of parts: a method or a transition. It reads no
+/// attributes and has no contract, and the expressions have no provenance map.
+fn lower_proc_like(symbol: &str, params: &[IrParam], ret_type: &TypeRef, body: &ast::Block, module_path: &[String], ctx: &mut LowerCtx) -> ProcIr {
+    let mut ir = ProcIr { symbol: symbol.to_string(), ..Default::default() };
+    ctx.module_path = module_path.to_vec();
+    ctx.current_proc_symbol = Some(symbol.to_string());
+    ctx.expr_prov = None;
+    ctx.push_scope();
+    for param in params {
+        let mut lowered = param.clone();
+        lowered.stable_name = ctx.register_var(&param.name, param.ty.clone(), param.mode.is_some(), ProvenanceKind::Bottom, None, None);
+        ir.params.push(lowered);
+    }
+    ir.ret = if ret_type.is_some() { ret_type.clone() } else { make_type_prim("()") };
+    ctx.proc_ret_type = ir.ret.clone();
+    ir.params.push(panic_out_param());
+    let body_res = lower_block(body, ctx);
+    let scope_enter_ir = empty_ir();
+    let plan = cleanup_plan_current_scope(ctx);
+    let cleanup_ir = emit_cleanup(&plan, false, ctx);
+    ctx.pop_scope();
+    let mut body_seq: Vec<Option<IrPtr>> = vec![Some(scope_enter_ir), Some(body_res.ir.clone())];
+    let may_fall_through = ir_flow_may_fall_through(&Some(body_res.ir.clone()));
+    if may_fall_through {
+        body_seq.push(Some(cleanup_ir));
+    }
+    if body.tail_opt.is_some() || (may_fall_through && is_unit_type(&ir.ret)) {
+        body_seq.push(Some(Arc::new(Ir::Return { value: body_res.value })));
+    }
+    ir.body = Some(seq_ir(body_seq));
+    ctx.current_proc_symbol = None;
+    ir
+}
+
+/// `LowerRecordMethod`.
+fn lower_record_method(record: &ast::RecordDecl, method: &ast::MethodDecl, module_path: &[String], ctx: &mut LowerCtx) -> Option<ProcIr> {
+    let Some(body) = &method.body else {
+        ctx.unported("methods without a body");
+        return None;
+    };
+    if method.attrs.iter().chain(&record.attrs).any(|attr| attr.name.full_name == "dynamic") {
+        ctx.unported("dynamic checks in methods");
+    }
+    let mut record_path = module_path.to_vec();
+    record_path.push(record.name.clone());
+    let self_type = make_type_path(record_path.clone());
+    let recv_type = recv_type_for_receiver(&self_type, &method.receiver, |written| match lower_type_for_layout(&ctx.scope, written).flatten() {
+        Some(ty) => Ok(Some(ty)),
+        None => Err(None),
+    });
+    let recv_mode = recv_mode_of(&method.receiver);
+    let mut params = vec![IrParam { mode: recv_mode, name: "self".to_string(), stable_name: "self".to_string(), ty: recv_type.ok().filter(Option::is_some).unwrap_or_else(|| self_type.clone()) }];
+    for param in &method.params {
+        params.push(lower_param(param, &self_type, ctx));
+    }
+    let ret_type = match &method.return_type_opt {
+        None => make_type_prim("()"),
+        Some(written) => match lower_type(&ctx.scope, &Some(written.clone())) {
+            Ok(ty) if ty.is_some() => subst_self(&self_type, &ty),
+            _ => None,
+        },
+    };
+    let symbol = scoped_sym(&item_path_proc(&record_path, &method.name));
+    let mut proc = lower_proc_like(&symbol, &params, &ret_type, body, module_path, ctx);
+    // `ApplyProcAttrs`.
+    for attr in &method.attrs {
+        match attr.name.full_name.as_str() {
+            "inline" => proc.inline_mode = inline_mode_for(attr),
+            "cold" => proc.cold = true,
+            other => ctx.unported(&format!("attribute {other} on methods")),
+        }
+    }
+    Some(proc)
+}
+
 // --------------------------------------------------------------------- statics
 
 /// `StaticName`: the one name a static binds, when it binds one.
@@ -1740,9 +2109,21 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
             // A record, a modal or a class gives declarations only through its methods.
             ASTItem::RecordDecl(decl) => {
                 let record_symbol = scoped_sym(&item_path_proc(&module.path, &decl.name));
-                ctx.record_ctors.insert(record_symbol.clone());
-                if decl.members.iter().any(|member| matches!(member, ast::RecordMember::MethodDecl(_))) {
-                    out.pending.push((record_symbol, "record methods".to_string()));
+                ctx.record_ctors.insert(record_symbol);
+                for member in &decl.members {
+                    let ast::RecordMember::MethodDecl(method) = member else {
+                        continue;
+                    };
+                    ctx.pending = None;
+                    let proc = lower_record_method(decl, method, &module.path, ctx);
+                    let symbol = scoped_sym(&item_path_proc(&item_path_proc(&module.path, &decl.name), &method.name));
+                    if let Some(proc) = &proc {
+                        ctx.proc_sigs.insert(symbol.clone(), ProcSig { params: proc.params.clone(), ret: proc.ret.clone() });
+                    }
+                    match (proc, ctx.pending.take()) {
+                        (Some(proc), None) => out.decls.push(IrDecl::Proc(proc)),
+                        (_, what) => out.pending.push((symbol, what.unwrap_or_else(|| "record methods".to_string()))),
+                    }
                 }
             }
             ASTItem::ModalDecl(decl) => {

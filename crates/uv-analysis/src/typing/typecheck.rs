@@ -50,6 +50,8 @@ pub struct TypecheckResult {
     pub ok: bool,
     pub diags: DiagnosticStream,
     pub has_init_plan: bool,
+    /// The modules, their eager dependencies and the order they start in, when the plan was built.
+    pub init_plan: Option<crate::memory::init_planner::InitPlan>,
     pub pending_items: Vec<PendingItem>,
     /// Set when the passes over the whole project could not be run or trusted.
     pub pending_tail: Option<String>,
@@ -345,6 +347,9 @@ pub fn typecheck_modules(ctx: &mut ScopeContext<'_>, name_maps: &NameMapTable) -
         let init_plan = build_init_plan(ctx, name_maps);
         result.diags.extend(init_plan.diags);
         result.has_init_plan = init_plan.ok;
+        if init_plan.ok {
+            result.init_plan = Some(init_plan.plan);
+        }
     }
     if !uv_core::diagnostics::has_error(&result.diags) && ctx.project.is_none_or(|project| project.assembly.is_executable()) {
         main_check_project(ctx, &sigma.mods, name_maps, &mut result.diags);

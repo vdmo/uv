@@ -147,6 +147,7 @@ pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: Target
     let checked = typecheck_modules(&mut ctx, &name_maps.name_maps);
     let typecheck_ok = checked.ok;
     let checked_stores = checked.stores.clone();
+    let init_plan = checked.init_plan.as_ref().map(|plan| (plan.graph.modules.clone(), plan.graph.eager_edges.clone()));
     let incomplete = !checked.pending_items.is_empty() || checked.pending_tail.is_some();
     for diag in checked.diags {
         emit(diags, diag);
@@ -189,6 +190,9 @@ pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: Target
     let mut base = ctx.clone();
     base.stores = checked_stores.clone();
     let mut lower_ctx = uv_codegen::lower::LowerCtx::new(&base, &name_maps.name_maps);
+    if let Some((modules, edges)) = init_plan {
+        lower_ctx.set_init_plan(modules, edges);
+    }
     for module in ctx.sigma.mods.iter() {
         let lowered = uv_codegen::lower::lower_module(module, &mut lower_ctx);
         decls.extend(lowered.decls);
