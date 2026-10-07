@@ -291,6 +291,7 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
     }
     let mut sema_pending: Option<String> = None;
     let mut lowered_ir: Option<uv_codegen::ir::IrDecls> = None;
+    let mut pending_decls: Vec<(String, String)> = Vec::new();
     if let (false, Some(project), Some(target_profile)) =
         (has_error(&diags), &project, selected_target_profile)
     {
@@ -361,6 +362,7 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
             let outcome = sema::run_sema(project, &phase1, target_profile, &mut diags, |verb, what| log.progress(verb, what, Color::BoldGreen));
             sema_pending = outcome.pending;
             lowered_ir = outcome.ir;
+            pending_decls = outcome.pending_decls;
             if lowered_ir.is_some() && sema_pending.is_none() && !has_error(&diags) && !opts.check_only && !opts.emit_ir {
                 sema_pending = Some("code generation".to_string());
             }
@@ -399,6 +401,9 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
     if opts.emit_ir {
         if let Some(decls) = &lowered_ir {
             print!("{}", uv_codegen::ir_dump::dump_ir(decls));
+        }
+        for (symbol, what) in &pending_decls {
+            eprintln!("pending: {symbol}: {what}");
         }
     }
     if reached_unimplemented_phase {

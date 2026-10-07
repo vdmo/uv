@@ -32,6 +32,8 @@ pub struct SemaOutcome {
     pub pending: Option<String>,
     /// The IR of the declarations that lower, when the run got that far.
     pub ir: Option<uv_codegen::ir::IrDecls>,
+    /// Each declaration that could not be lowered, with what stopped it.
+    pub pending_decls: Vec<(String, String)>,
 }
 
 fn comptime_options(project: &Project) -> ComptimePassOptions {
@@ -43,7 +45,7 @@ fn comptime_options(project: &Project) -> ComptimePassOptions {
 }
 
 fn pending(what: &str) -> SemaOutcome {
-    SemaOutcome { pending: Some(what.to_string()), ir: None }
+    SemaOutcome { pending: Some(what.to_string()), ir: None, pending_decls: Vec::new() }
 }
 
 pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: TargetProfile, diags: &mut DiagnosticStream, mut progress: impl FnMut(&str, &str)) -> SemaOutcome {
@@ -183,21 +185,19 @@ pub fn run_sema(project: &Project, phase1: &Phase1Result, target_profile: Target
     // Lowering every module; a declaration that is not ported yet leaves the check pending.
     let mut decls = Vec::new();
     let mut first_pending: Option<String> = None;
-    let universe_scope = uv_analysis::resolve::scopes::universe_bindings();
+    let mut pending_decls = Vec::new();
+    let mut base = ctx.clone();
+    base.stores = checked_stores.clone();
+    let mut lower_ctx = uv_codegen::lower::LowerCtx::new(&base, &name_maps.name_maps);
     for module in ctx.sigma.mods.iter() {
-        let mut scope_ctx = ctx.clone();
-        scope_ctx.current_module = module.path.clone();
-        let module_scope = name_maps.name_maps.get(&uv_analysis::resolve::scopes::path_key_of(&module.path)).cloned().unwrap_or_default();
-        scope_ctx.scopes = vec![Scope::new(), module_scope, universe_scope.clone()];
-        scope_ctx.stores = checked_stores.clone();
-        let mut lower_ctx = uv_codegen::lower::LowerCtx::new(&scope_ctx);
         let lowered = uv_codegen::lower::lower_module(module, &mut lower_ctx);
         decls.extend(lowered.decls);
         if first_pending.is_none() {
-            first_pending = lowered.pending.into_iter().next().map(|(_, what)| format!("the lowerability check ({what})"));
+            first_pending = lowered.pending.first().map(|(_, what)| format!("the lowerability check ({what})"));
         }
+        pending_decls.extend(lowered.pending);
     }
-    SemaOutcome { pending: first_pending, ir: Some(decls) }
+    SemaOutcome { pending: first_pending, ir: Some(decls), pending_decls }
 }
 
 /// A diagnostic of the registry with the message of the check that found it; the
