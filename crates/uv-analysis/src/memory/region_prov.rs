@@ -640,10 +640,13 @@ thread_local! {
     static CALL_RETURN_STACK: RefCell<Vec<(Vec<IdKey>, usize)>> = const { RefCell::new(Vec::new()) };
 }
 
+/// The provenance recorded for an expression, and the region it is allocated in.
+type RecordedProv = (Tag, Option<IdKey>);
+
 struct Prov<'d> {
     diags: Option<&'d Rc<RefCell<DiagnosticStream>>>,
     /// Where the provenance of each expression is recorded, when it is wanted.
-    map: Option<&'d RefCell<HashMap<usize, (Tag, Option<IdKey>)>>>,
+    map: Option<&'d RefCell<HashMap<usize, RecordedProv>>>,
 }
 
 impl Prov<'_> {

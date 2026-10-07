@@ -6,7 +6,7 @@ use std::collections::HashMap;
 use std::sync::Arc;
 
 use uv_analysis::context::{EntityKind, NameMapTable, Scope, ScopeContext};
-use uv_analysis::layout::lower_type_for_layout;
+use uv_analysis::layout::{align_of, lower_type_for_layout, size_of};
 use uv_analysis::memory::calls::has_source_provenance;
 use uv_analysis::memory::region_prov::{compute_expr_provenance_map, ExprProvMaps};
 use uv_analysis::layout::value_bits::encode_const;
@@ -21,7 +21,7 @@ use uv_analysis::typing::outcome::outcome_sig_of;
 use uv_analysis::typing::type_lookup::async_sig_of;
 use uv_analysis::typing::type_lower::lower_type;
 use uv_analysis::typing::type_lookup::{field_type, lookup_record_decl};
-use uv_analysis::typing::types::{applied_type_args, applied_type_path, make_type_modal_state, make_type_path, make_type_prim, make_type_ptr, ParamMode, PtrState, TypeNode, TypeRef};
+use uv_analysis::typing::types::{applied_type_args, applied_type_path, make_type_modal_state, make_type_path, make_type_prim, make_type_ptr, make_type_raw_ptr, make_type_tuple, ParamMode, PtrState, RawPtrQual, TypeNode, TypeRef};
 use uv_source::ast::{self, ASTItem, ASTModule, Expr, ExprNode, ProcedureDecl, Stmt};
 use uv_source::lexer::token::TokenKind;
 
@@ -76,12 +76,24 @@ struct CleanupAction {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum DerivedKind {
     RecordLit,
+    TupleLit,
+    AddrDeref,
+    AddrField,
 }
 
 #[derive(Debug, Clone)]
 pub struct DerivedValueInfo {
     pub kind: DerivedKind,
+    pub base: IrValue,
+    pub field: String,
     pub fields: Vec<(String, IrValue)>,
+    pub elements: Vec<IrValue>,
+}
+
+impl DerivedValueInfo {
+    fn new(kind: DerivedKind) -> Self {
+        DerivedValueInfo { kind, base: IrValue::default(), field: String::new(), fields: Vec::new(), elements: Vec::new() }
+    }
 }
 
 /// The signature a call is lowered against: the parameters (with the panic out-parameter
@@ -126,6 +138,9 @@ pub struct LowerCtx<'a, 'b> {
     expr_prov: Option<ExprProvMaps>,
     proc_sigs: HashMap<String, ProcSig>,
     record_ctors: std::collections::HashSet<String>,
+    static_types: HashMap<String, TypeRef>,
+    /// `ctx.active_static_init_module`: the module whose statics are being initialised.
+    active_static_init_module: Option<String>,
     /// The first construct met that is not ported, which stops the declaration.
     pub pending: Option<String>,
 }
@@ -155,6 +170,8 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             expr_prov: None,
             proc_sigs: HashMap::new(),
             record_ctors: std::collections::HashSet::new(),
+            static_types: HashMap::new(),
+            active_static_init_module: None,
             pending: None,
         }
     }
@@ -317,9 +334,9 @@ fn panic_out_param() -> IrParam {
     IrParam { mode: Some(ParamMode::Move), name: PANIC_OUT_NAME.to_string(), stable_name: String::new(), ty: panic_out_type() }
 }
 
+/// `PanicOutType`: `rawptr[mut, PanicRecord]`.
 fn panic_out_type() -> TypeRef {
-    // `PanicOutType()`: a pointer to the panic record.
-    make_type_prim("()")
+    make_type_raw_ptr(RawPtrQual::Mut, make_type_path(vec!["PanicRecord".to_string()]))
 }
 
 // ---------------------------------------------------------------- expressions
@@ -416,8 +433,20 @@ fn needs_panic_out_for_symbol(symbol: &str, ctx: &LowerCtx) -> bool {
     symbol != "main" && !ctx.record_ctors.contains(symbol)
 }
 
-/// `PanicCheck`: after a call, control leaves through the cleanup when a panic is set.
+/// `InitPanicHandle`: in the initialisation of a module, a panic poisons the modules that
+/// depend on it. The set is the module alone: the reference never fills the dependencies.
+fn init_panic_handle(module: &str, ctx: &mut LowerCtx) -> IrPtr {
+    let trace_ir = emit_runtime_trace(ctx);
+    let cleanup_ir = emit_cleanup(&[], true, ctx);
+    let handle = Arc::new(Ir::InitPanicHandle { module: module.to_string(), poison_modules: vec![module.to_string()], cleanup_ir: Some(cleanup_ir) });
+    seq_ir(vec![Some(trace_ir), Some(handle)])
+}
+
+/// `PanicFollowup`.
 fn panic_check(ctx: &mut LowerCtx) -> IrPtr {
+    if let Some(module) = ctx.active_static_init_module.clone() {
+        return init_panic_handle(&module, ctx);
+    }
     let trace_ir = emit_runtime_trace(ctx);
     let plan = cleanup_plan_to_function_root(ctx);
     let cleanup_ir = emit_cleanup(&plan, true, ctx);
@@ -623,11 +652,38 @@ fn needs_refinement_check(expr: &Arc<Expr>, ctx: &LowerCtx) -> bool {
     ctx.scope.stores.as_ref().is_some_and(|stores| stores.dynamic_refine_checks.borrow().contains_key(&key))
 }
 
+/// `resolve_name` of the reference's driver: the path of a value entity of the module.
+fn resolve_value_path(name: &str, ctx: &LowerCtx) -> Option<Vec<String>> {
+    let entity = ctx.scope.module_scope().get(&id_key_of(name))?;
+    if entity.kind != EntityKind::Value {
+        return None;
+    }
+    let resolved = entity.target_opt.clone().unwrap_or_else(|| name.to_string());
+    let mut full = entity.origin_opt.clone()?;
+    full.push(resolved);
+    Some(full)
+}
+
+/// `LowerStaticIdentifierRead`: a name of the program that is not a local, read through its path.
+fn lower_static_identifier_read(expr: &Arc<Expr>, ident: &ast::IdentifierExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let Some(mut full) = resolve_value_path(&ident.name, ctx) else {
+        ctx.unported("reads of names that do not resolve to a path");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") };
+    };
+    let name = full.pop().unwrap_or_default();
+    let value = IrValue { kind: IrValueKind::Symbol, name: name.clone(), ..Default::default() };
+    let expr_type = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten();
+    ctx.register_value_type(&value, expr_type.clone());
+    if perm_of_type(&expr_type) == Permission::Shared {
+        ctx.unported("implicit key access");
+    }
+    LowerResult { ir: seq_ir(vec![Some(empty_ir()), Some(Arc::new(Ir::ReadPath { path: full, name }))]), value }
+}
+
 /// `LowerIdentifier` for a name bound in the procedure: `ReadVar` of its stable name.
 fn lower_identifier(expr: &Arc<Expr>, ident: &ast::IdentifierExpr, ctx: &mut LowerCtx) -> LowerResult {
     let Some(state) = ctx.binding_state(&ident.name).cloned() else {
-        ctx.unported("reads of names that are not local");
-        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") };
+        return lower_static_identifier_read(expr, ident, ctx);
     };
     let ir_name = if state.stable_name.is_empty() { ident.name.clone() } else { state.stable_name.clone() };
     let value = IrValue { kind: IrValueKind::Local, name: ir_name.clone(), ..Default::default() };
@@ -738,6 +794,171 @@ fn lower_short_circuit_chain(op: &str, operands: &[Arc<Expr>], ctx: &mut LowerCt
         current = result_value;
     }
     LowerResult { ir: seq_ir(parts), value: current }
+}
+
+/// `CleanupTemps`: the drops of the temporaries of a condition or of a branch.
+fn cleanup_temps_ir(temps: &[TempValue], ctx: &mut LowerCtx) -> IrPtr {
+    if temps.is_empty() {
+        return empty_ir();
+    }
+    let plan: Vec<CleanupAction> = temps.iter().rev().filter(|temp| temp.has_responsibility).map(|temp| CleanupAction { ty: temp.ty.clone() }).collect();
+    emit_cleanup(&plan, false, ctx)
+}
+
+fn is_noop_ir(ir: &IrPtr) -> bool {
+    matches!(ir.as_ref(), Ir::Opaque)
+}
+
+/// Lowers an expression into a branch of the context, with temporaries of its own.
+fn lower_in_branch(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResult {
+    let snapshot = ctx.begin_branch();
+    let prev_sink = ctx.temp_sink.replace(Vec::new());
+    let prev_suppress = ctx.suppress_temp_at_depth;
+    ctx.suppress_temp_at_depth = Some(ctx.temp_depth + 1);
+    let mut result = lower_expr(expr, ctx);
+    ctx.suppress_temp_at_depth = prev_suppress;
+    let temps = ctx.temp_sink.take().unwrap_or_default();
+    ctx.temp_sink = prev_sink;
+    let cleanup = cleanup_temps_ir(&temps, ctx);
+    if !is_noop_ir(&cleanup) && ir_flow_may_fall_through(&Some(result.ir.clone())) {
+        result.ir = seq_ir(vec![Some(result.ir), Some(cleanup)]);
+    }
+    ctx.end_branch(snapshot);
+    result
+}
+
+/// `LowerIfExpr`: the condition, then each branch in a copy of the context.
+fn lower_if_expr(expr: &Arc<Expr>, node: &ast::IfExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let (Some(cond), Some(then_expr)) = (&node.cond, &node.then_expr) else {
+        ctx.unported("conditionals without a condition or a branch");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("if") };
+    };
+    let prev_sink = ctx.temp_sink.replace(Vec::new());
+    let prev_suppress = ctx.suppress_temp_at_depth;
+    ctx.suppress_temp_at_depth = Some(ctx.temp_depth + 1);
+    let cond_result = lower_expr(cond, ctx);
+    ctx.suppress_temp_at_depth = prev_suppress;
+    let cond_temps = ctx.temp_sink.take().unwrap_or_default();
+    ctx.temp_sink = prev_sink;
+    let mut cond_cleanup = cleanup_temps_ir(&cond_temps, ctx);
+    if is_noop_ir(&cond_cleanup) {
+        cond_cleanup = empty_ir();
+    }
+    let then_result = lower_in_branch(then_expr, ctx);
+    let else_result = match &node.else_expr {
+        Some(else_expr) => lower_in_branch(else_expr, ctx),
+        None => {
+            let value = ctx.fresh_temp_value("unit");
+            ctx.register_value_type(&value, make_type_prim("()"));
+            LowerResult { ir: empty_ir(), value }
+        }
+    };
+    let result_value = ctx.fresh_temp_value("if");
+    let mut result_type = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten();
+    if result_type.is_none() && node.else_expr.is_none() {
+        result_type = make_type_prim("()");
+    }
+    if result_type.is_some() {
+        ctx.register_value_type(&result_value, result_type);
+    }
+    let if_ir = Arc::new(Ir::If { cond: cond_result.value, then_ir: Some(then_result.ir), then_value: then_result.value, else_ir: Some(else_result.ir), else_value: else_result.value, result: result_value.clone() });
+    LowerResult { ir: seq_ir(vec![Some(cond_result.ir), Some(cond_cleanup), Some(if_ir)]), value: result_value }
+}
+
+/// `LowerList`: the expressions left to right, each kept out of the temporaries of the statement.
+fn lower_list(exprs: &[Option<Arc<Expr>>], ctx: &mut LowerCtx) -> (IrPtr, Vec<IrValue>) {
+    if exprs.is_empty() {
+        return (empty_ir(), Vec::new());
+    }
+    let mut parts = Vec::new();
+    let mut values = Vec::new();
+    for expr in exprs {
+        let Some(expr) = expr else {
+            ctx.unported("lists with a missing expression");
+            continue;
+        };
+        let prev_suppress = ctx.suppress_temp_at_depth;
+        ctx.suppress_temp_at_depth = Some(ctx.temp_depth + 1);
+        let result = lower_expr(expr, ctx);
+        ctx.suppress_temp_at_depth = prev_suppress;
+        parts.push(Some(result.ir));
+        values.push(result.value);
+    }
+    (seq_ir(parts), values)
+}
+
+/// `LowerTuple`: the elements, and a value the emitter builds from them.
+fn lower_tuple_expr(expr: &Arc<Expr>, node: &ast::TupleExpr, ctx: &mut LowerCtx) -> LowerResult {
+    if node.elements.is_empty() {
+        let unit_value = ctx.fresh_temp_value("unit");
+        ctx.register_value_type(&unit_value, make_type_prim("()"));
+        return LowerResult { ir: empty_ir(), value: unit_value };
+    }
+    let contextual = stored_expr_type(&ctx.scope, &Some(expr.clone())).flatten();
+    let (ir, values) = lower_list(&node.elements, ctx);
+    let tuple_value = ctx.fresh_temp_value("tuple");
+    ctx.register_derived_value(&tuple_value, DerivedValueInfo { elements: values.clone(), ..DerivedValueInfo::new(DerivedKind::TupleLit) });
+    let mut tuple_type: TypeRef = None;
+    let stripped = strip_perm(&contextual).or(contextual);
+    if let Some(TypeNode::Tuple(elements)) = stripped.as_deref().map(|ty| &ty.node) {
+        if elements.len() == values.len() {
+            tuple_type = stripped.clone();
+            for (value, element) in values.iter().zip(elements) {
+                ctx.register_value_type(value, element.clone());
+            }
+        }
+    }
+    if tuple_type.is_none() {
+        let element_types: Vec<TypeRef> = values.iter().map(|value| ctx.lookup_value_type(value)).collect();
+        if element_types.iter().all(Option::is_some) {
+            tuple_type = make_type_tuple(element_types);
+        }
+    }
+    if tuple_type.is_some() {
+        ctx.register_value_type(&tuple_value, tuple_type);
+    }
+    LowerResult { ir, value: tuple_value }
+}
+
+fn is_signed_integer_operand(ty: &TypeRef) -> bool {
+    prim_name(ty).is_some_and(|name| matches!(name.as_str(), "i8" | "i16" | "i32" | "i64" | "i128" | "isize"))
+}
+
+/// `LowerUnOp`: the operand, the check that negating can overflow, the operation.
+fn lower_unary_expr(node: &ast::UnaryExpr, ctx: &mut LowerCtx) -> LowerResult {
+    let Some(operand) = &node.value else {
+        ctx.unported("unary expressions without an operand");
+        return LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unop") };
+    };
+    let op = node.op.as_str();
+    let prev_suppress = ctx.suppress_temp_at_depth;
+    ctx.suppress_temp_at_depth = Some(ctx.temp_depth + 1);
+    let operand_result = lower_expr(operand, ctx);
+    ctx.suppress_temp_at_depth = prev_suppress;
+    let operand_type = ctx.lookup_value_type(&operand_result.value).or_else(|| stored_expr_type(&ctx.scope, &Some(operand.clone())).flatten());
+    if operand_type.is_some() {
+        ctx.register_value_type(&operand_result.value, operand_type.clone());
+    }
+    let result_value = ctx.fresh_temp_value("unop");
+    let stripped = strip_perm(&operand_type).or_else(|| operand_type.clone());
+    let result_type = match op {
+        "widen" => {
+            ctx.unported("the operator widen");
+            None
+        }
+        "!" | "-" | "~" => stripped,
+        _ => None,
+    };
+    let mut parts = vec![Some(operand_result.ir)];
+    if op == "-" && is_signed_integer_operand(&operand_type) {
+        parts.push(Some(Arc::new(Ir::CheckOp { op: op.to_string(), reason: "Overflow".to_string(), lhs: operand_result.value.clone(), rhs: None })));
+        parts.push(Some(panic_check(ctx)));
+    }
+    parts.push(Some(Arc::new(Ir::UnaryOp { op: op.to_string(), operand: operand_result.value.clone(), result: result_value.clone(), operand_type, result_type: result_type.clone() })));
+    if result_type.is_some() {
+        ctx.register_value_type(&result_value, result_type);
+    }
+    LowerResult { ir: seq_ir(parts), value: result_value }
 }
 
 fn is_bool_binop(op: &str) -> bool {
@@ -852,7 +1073,7 @@ fn lower_record_expr(expr: &Arc<Expr>, node: &ast::RecordExpr, ctx: &mut LowerCt
         ctx.unported("record fields of an Outcome type");
     }
     let record_value = ctx.fresh_temp_value("record");
-    ctx.register_derived_value(&record_value, DerivedValueInfo { kind: DerivedKind::RecordLit, fields: field_values });
+    ctx.register_derived_value(&record_value, DerivedValueInfo { fields: field_values, ..DerivedValueInfo::new(DerivedKind::RecordLit) });
     if record_type.is_some() {
         ctx.register_value_type(&record_value, record_type);
     }
@@ -865,7 +1086,30 @@ fn lower_expr_impl(expr: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResult {
         ExprNode::IdentifierExpr(ident) => lower_identifier(expr, ident, ctx),
         ExprNode::BinaryExpr(node) => lower_binary_expr(node, ctx),
         ExprNode::RecordExpr(node) => lower_record_expr(expr, node, ctx),
+        ExprNode::IfExpr(node) => lower_if_expr(expr, node, ctx),
+        ExprNode::TupleExpr(node) => lower_tuple_expr(expr, node, ctx),
+        ExprNode::UnaryExpr(node) => lower_unary_expr(node, ctx),
+        ExprNode::BlockExpr(node) => match &node.block {
+            Some(block) => lower_block(block, ctx),
+            None => {
+                ctx.unported("block expressions without a block");
+                LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") }
+            }
+        },
+        ExprNode::UnsafeBlockExpr(node) => match &node.block {
+            Some(block) => lower_block(block, ctx),
+            None => {
+                ctx.unported("unsafe blocks without a block");
+                LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") }
+            }
+        },
         ExprNode::CallExpr(call) => lower_call(expr, call, ctx),
+        ExprNode::MethodCallExpr(call) => {
+            let receiver = stored_expr_type(&ctx.scope, &Some(call.receiver.clone().unwrap_or_default())).flatten();
+            let kind = strip_perm(&receiver).map(|ty| variant_name(&ty.node)).unwrap_or_default();
+            ctx.unported(&format!("method call {} on {kind}", call.name));
+            LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") }
+        }
         _ => {
             ctx.unported(&format!("expression {}", variant_name(&expr.node)));
             LowerResult { ir: empty_ir(), value: ctx.fresh_temp_value("unported") }
@@ -940,17 +1184,45 @@ fn cleanup_plan_to_function_root(ctx: &LowerCtx) -> Vec<CleanupAction> {
     plan
 }
 
+/// `BuildPanicAccess`: the addresses of the fields of the panic record behind `__panic`.
+fn build_panic_access(ctx: &mut LowerCtx) -> (IrValue, IrValue) {
+    let panic_ptr = ctx.fresh_temp_value("panic_ptr");
+    let mut deref = DerivedValueInfo::new(DerivedKind::AddrDeref);
+    deref.base = IrValue { kind: IrValueKind::Local, name: PANIC_OUT_NAME.to_string(), ..Default::default() };
+    ctx.register_derived_value(&panic_ptr, deref);
+    ctx.register_value_type(&panic_ptr, panic_out_type());
+    let field_ptr = |ctx: &mut LowerCtx, prefix: &str, field: &str, element: &str| {
+        let ptr = ctx.fresh_temp_value(prefix);
+        let mut info = DerivedValueInfo::new(DerivedKind::AddrField);
+        info.base = panic_ptr.clone();
+        info.field = field.to_string();
+        ctx.register_derived_value(&ptr, info);
+        ctx.register_value_type(&ptr, make_type_raw_ptr(RawPtrQual::Mut, make_type_prim(element)));
+        ptr
+    };
+    let flag_ptr = field_ptr(ctx, "panic_flag_ptr", "panic", "bool");
+    let code_ptr = field_ptr(ctx, "panic_code_ptr", "code", "u32");
+    (flag_ptr, code_ptr)
+}
+
 /// `EmitCleanup`, and `EmitCleanupOnPanic` when `on_panic`. An empty plan is a trace. Of a
 /// plan, only drops of primitive values are ported, which emit nothing, so what remains
-/// is the traces that open and close the cleanup.
+/// is the traces that open and close the cleanup, and on a panic the read of the record.
 fn emit_cleanup(plan: &[CleanupAction], on_panic: bool, ctx: &mut LowerCtx) -> IrPtr {
     if plan.is_empty() {
         return emit_runtime_trace(ctx);
     }
+    let (flag_ptr, code_ptr) = build_panic_access(ctx);
+    let mut parts = Vec::new();
     if on_panic {
-        ctx.unported("cleanup on panic");
+        let flag = ctx.fresh_temp_value("panic_flag");
+        ctx.register_value_type(&flag, make_type_prim("bool"));
+        let code = ctx.fresh_temp_value("panic_code");
+        ctx.register_value_type(&code, make_type_prim("u32"));
+        let snapshot = seq_ir(vec![Some(Arc::new(Ir::ReadPtr { ptr: flag_ptr, result: flag })), Some(Arc::new(Ir::ReadPtr { ptr: code_ptr, result: code }))]);
+        parts.push(Some(snapshot));
     }
-    let mut parts = vec![Some(emit_runtime_trace(ctx))];
+    parts.push(Some(emit_runtime_trace(ctx)));
     for action in plan {
         if !matches!(action.ty.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) {
             ctx.unported("drops of bindings of this type");
@@ -986,14 +1258,14 @@ fn lower_return_stmt(stmt: &ast::ReturnStmt, ctx: &mut LowerCtx) -> IrPtr {
     let (value, value_type) = match &stmt.value_opt {
         Some(expr) => {
             match &expr.node {
-                ExprNode::LiteralExpr(_) | ExprNode::CallExpr(_) | ExprNode::BinaryExpr(_) => {}
                 // `ReturnDestExpr`: a place is returned as a move unless its binding holds no responsibility.
                 ExprNode::IdentifierExpr(ident) => {
                     if ctx.binding_state(&ident.name).is_none_or(|state| state.has_responsibility) {
                         ctx.unported("returning a binding that holds responsibility");
                     }
                 }
-                _ => ctx.unported(&format!("returning {}", variant_name(&expr.node))),
+                ExprNode::FieldAccessExpr(_) | ExprNode::TupleAccessExpr(_) | ExprNode::IndexAccessExpr(_) | ExprNode::DerefExpr(_) => ctx.unported("returning a place"),
+                _ => {}
             }
             let prev_suppress = ctx.suppress_temp_at_depth;
             ctx.suppress_temp_at_depth = Some(ctx.temp_depth + 1);
@@ -1269,22 +1541,162 @@ fn lower_proc(decl: &ProcedureDecl, module_path: &[String], symbol: String, ctx:
     ir
 }
 
+// --------------------------------------------------------------------- statics
+
+/// `StaticName`: the one name a static binds, when it binds one.
+fn static_name(binding: &ast::Binding) -> Option<String> {
+    match binding.pat.as_deref().map(|pat| &pat.node) {
+        Some(ast::PatternNode::IdentifierPattern(pat)) => Some(pat.name.clone()),
+        Some(ast::PatternNode::TypedPattern(pat)) if pat.name != "_" => Some(pat.name.clone()),
+        _ => None,
+    }
+}
+
+/// The scope the reference reads layouts in: the program and the module, no names.
+fn layout_scope<'b>(ctx: &LowerCtx<'_, 'b>, module_path: &[String]) -> ScopeContext<'b> {
+    let mut scope = ctx.base.clone();
+    scope.current_module = module_path.to_vec();
+    scope.scopes.clear();
+    scope.name_resolution_tables = None;
+    scope
+}
+
+/// `StaticInitTypeForGlobal`: the written type of a static, or the type of its initializer.
+fn static_init_type(item: &ast::StaticDecl, module_path: &[String], ctx: &LowerCtx) -> TypeRef {
+    let scope = layout_scope(ctx, module_path);
+    let annotation = ast::binding_annotation_type_opt(&item.binding);
+    if annotation.is_some() {
+        return lower_type_for_layout(&scope, &annotation).flatten();
+    }
+    item.binding.init.as_ref().and_then(|init| stored_expr_type(&ctx.scope, &Some(init.clone())).flatten())
+}
+
+fn is_unit_type_ref(ty: &TypeRef) -> bool {
+    let mut current = ty.clone();
+    loop {
+        match current.as_deref().map(|ty| &ty.node) {
+            Some(TypeNode::Prim(name)) => return name == "()",
+            Some(TypeNode::Perm { base, .. }) | Some(TypeNode::Refine { base, .. }) => current = base.clone(),
+            _ => return false,
+        }
+    }
+}
+
+/// `EmitGlobal`: the storage of a static; a constant initializer of an immutable static
+/// is stored in the declaration, any other is set when the module starts.
+fn emit_global(item: &ast::StaticDecl, module_path: &[String], ctx: &mut LowerCtx) -> Vec<IrDecl> {
+    let binding = &item.binding;
+    let Some(name) = static_name(binding) else {
+        ctx.unported("statics that bind several names");
+        return Vec::new();
+    };
+    let symbol = scoped_sym(&item_path_proc(module_path, &name));
+    let externally_visible = matches!(item.vis, ast::Visibility::Public | ast::Visibility::Internal);
+    let export_from_shared_library = item.vis == ast::Visibility::Public;
+    let init_type = static_init_type(item, module_path, ctx);
+    if init_type.is_some() {
+        ctx.static_types.insert(symbol.clone(), init_type.clone());
+    }
+    let scope = layout_scope(ctx, module_path);
+    let (Some(size), Some(align)) = (size_of(&scope, &init_type), align_of(&scope, &init_type)) else {
+        ctx.unported("statics whose layout is not known");
+        return Vec::new();
+    };
+    if let (Some(init), ast::Mutability::Let) = (&binding.init, item.r#mut) {
+        let bytes = match &init.node {
+            ExprNode::LiteralExpr(lit) => encode_const(&init_type, &lit.literal),
+            ExprNode::TupleExpr(tuple) if tuple.elements.is_empty() && is_unit_type_ref(&init_type) => Some(Vec::new()),
+            _ => None,
+        };
+        if let Some(bytes) = bytes {
+            return vec![IrDecl::GlobalConst(GlobalConst { symbol, bytes, align, externally_visible, export_from_shared_library })];
+        }
+    }
+    vec![IrDecl::GlobalZero(GlobalZero { symbol, size, align, externally_visible, export_from_shared_library })]
+}
+
+/// `StaticHasResponsibility`.
+fn static_has_responsibility(item: &ast::StaticDecl) -> bool {
+    match &item.binding.init {
+        None => true,
+        Some(init) => !is_place_expr(&Some(init.clone())) || matches!(init.node, ExprNode::MoveExpr(_)),
+    }
+}
+
+/// `LowerStaticInitItem`: the initializer, the stores into the statics, the panic handling.
+fn lower_static_init_item(module_path: &[String], item: &ast::StaticDecl, ctx: &mut LowerCtx) -> IrPtr {
+    let Some(init) = &item.binding.init else {
+        return empty_ir();
+    };
+    let mut parts = Vec::new();
+    let init_result = lower_expr(init, ctx);
+    parts.push(Some(init_result.ir));
+    // `PatternBindingValuesInOrder` and `StaticStoreIR`.
+    match static_name(&item.binding) {
+        Some(name) => {
+            let symbol = scoped_sym(&item_path_proc(module_path, &name));
+            parts.push(Some(Arc::new(Ir::StoreGlobal { symbol, value: init_result.value.clone() })));
+            if static_has_responsibility(item) && !matches!(static_init_type(item, module_path, ctx).as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) {
+                ctx.unported("statics whose values need a drop");
+            }
+        }
+        None => ctx.unported("statics that bind several names"),
+    }
+    let module = module_path.join("::");
+    parts.push(Some(init_panic_handle(&module, ctx)));
+    seq_ir(parts)
+}
+
+/// `LowerStaticInit`.
+fn lower_static_init(module_path: &[String], module: &ASTModule, ctx: &mut LowerCtx) -> IrPtr {
+    let items: Vec<&ast::StaticDecl> = module.items.iter().filter_map(|item| if let ASTItem::StaticDecl(decl) = item { Some(decl) } else { None }).collect();
+    if items.is_empty() {
+        return empty_ir();
+    }
+    let parts = items.into_iter().map(|item| Some(lower_static_init_item(module_path, item, ctx))).collect();
+    seq_ir(parts)
+}
+
+/// `LowerStaticDeinit`: the statics are dropped in the reverse order of their declaration.
+fn lower_static_deinit(module_path: &[String], module: &ASTModule, ctx: &mut LowerCtx) -> IrPtr {
+    let items: Vec<&ast::StaticDecl> = module.items.iter().filter_map(|item| if let ASTItem::StaticDecl(decl) = item { Some(decl) } else { None }).collect();
+    if items.is_empty() {
+        return empty_ir();
+    }
+    let mut item_parts = Vec::new();
+    for item in items.into_iter().rev() {
+        let mut drops = Vec::new();
+        if let Some(name) = static_name(&item.binding) {
+            if static_has_responsibility(item) {
+                let ty = static_init_type(item, module_path, ctx);
+                if !matches!(ty.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) {
+                    ctx.unported("drops of statics of this type");
+                }
+                let _ = name;
+                drops.push(Some(empty_ir()));
+            }
+        } else {
+            ctx.unported("statics that bind several names");
+        }
+        item_parts.push(Some(if drops.is_empty() { empty_ir() } else { seq_ir(drops) }));
+    }
+    seq_ir(item_parts)
+}
+
 // --------------------------------------------------------------------- modules
 
 fn module_init_fn(module_path: &[String], module: &ASTModule, ctx: &mut LowerCtx) -> Option<ProcIr> {
     ctx.pending = None;
-    if module.items.iter().any(|item| matches!(item, ASTItem::StaticDecl(_))) {
-        ctx.unported("module initialisation of statics");
-    }
-    ctx.pending.is_none().then(|| ProcIr { symbol: init_sym(module_path), params: vec![panic_out_param()], ret: make_type_prim("()"), body: Some(empty_ir()), ..Default::default() })
+    let saved = ctx.active_static_init_module.replace(module_path.join("::"));
+    let body = lower_static_init(module_path, module, ctx);
+    ctx.active_static_init_module = saved;
+    ctx.pending.is_none().then(|| ProcIr { symbol: init_sym(module_path), params: vec![panic_out_param()], ret: make_type_prim("()"), body: Some(body), ..Default::default() })
 }
 
 fn module_deinit_fn(module_path: &[String], module: &ASTModule, ctx: &mut LowerCtx) -> Option<ProcIr> {
     ctx.pending = None;
-    if module.items.iter().any(|item| matches!(item, ASTItem::StaticDecl(_))) {
-        ctx.unported("module deinitialisation of statics");
-    }
-    ctx.pending.is_none().then(|| ProcIr { symbol: deinit_sym(module_path), params: vec![panic_out_param()], ret: make_type_prim("()"), body: Some(empty_ir()), ..Default::default() })
+    let body = lower_static_deinit(module_path, module, ctx);
+    ctx.pending.is_none().then(|| ProcIr { symbol: deinit_sym(module_path), params: vec![panic_out_param()], ret: make_type_prim("()"), body: Some(body), ..Default::default() })
 }
 
 /// What lowering a module gave: the declarations that are ported, and for each that
@@ -1317,7 +1729,14 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                     }
                 }
             }
-            ASTItem::StaticDecl(_) => out.pending.push((scoped_sym(&module.path), "statics".to_string())),
+            ASTItem::StaticDecl(decl) => {
+                ctx.pending = None;
+                let decls = emit_global(decl, &module.path, ctx);
+                match ctx.pending.take() {
+                    None => out.decls.extend(decls),
+                    Some(what) => out.pending.push((scoped_sym(&module.path), what)),
+                }
+            }
             // A record, a modal or a class gives declarations only through its methods.
             ASTItem::RecordDecl(decl) => {
                 let record_symbol = scoped_sym(&item_path_proc(&module.path, &decl.name));
