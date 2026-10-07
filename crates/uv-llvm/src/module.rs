@@ -64,6 +64,23 @@ pub enum FuncAttr {
     Other(String),
 }
 
+impl Function {
+    /// `ValueSymbolTable::makeUniqueName`: the name, or the name with the next number of the
+    /// function's counter appended until nothing has it.
+    pub fn unique_name(&mut self, name: &str) -> String {
+        if self.names.insert(name.to_string()) {
+            return name.to_string();
+        }
+        loop {
+            self.last_unique += 1;
+            let candidate = format!("{name}{}", self.last_unique);
+            if self.names.insert(candidate.clone()) {
+                return candidate;
+            }
+        }
+    }
+}
+
 impl FuncAttr {
     fn text(&self) -> String {
         match self {
@@ -98,7 +115,7 @@ pub enum ParamAttr {
 impl ParamAttr {
     /// The place LLVM's printer gives an attribute: attributes are printed in the order of
     /// their kinds, whatever order they were added in.
-    fn rank(&self) -> u8 {
+    pub fn rank(&self) -> u8 {
         match self {
             ParamAttr::NoAlias => 0,
             ParamAttr::NoUndef => 1,
@@ -170,6 +187,10 @@ pub(crate) struct Function {
     pub blocks: Vec<Block>,
     pub hidden: bool,
     pub next_reg: usize,
+    /// The names taken in the function and the counter that makes colliding ones unique, as
+    /// LLVM's symbol table does (one counter for blocks, arguments and values).
+    pub names: std::collections::HashSet<String>,
+    pub last_unique: usize,
     pub param_names: Vec<Option<String>>,
     pub removed: bool,
 }

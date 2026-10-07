@@ -45,7 +45,7 @@ impl Builder {
         }
         let index = self.module.funcs.len();
         let params = ty.params.len();
-        self.module.funcs.push(Function { name: name.to_string(), ty, linkage, cc: CallConv::C, attrs: Vec::new(), param_attrs: vec![Vec::new(); params], ret_attrs: Vec::new(), blocks: Vec::new(), hidden: false, next_reg: 0, param_names: vec![None; params], removed: false });
+        self.module.funcs.push(Function { name: name.to_string(), ty, linkage, cc: CallConv::C, attrs: Vec::new(), param_attrs: vec![Vec::new(); params], ret_attrs: Vec::new(), blocks: Vec::new(), hidden: false, next_reg: 0, names: std::collections::HashSet::new(), last_unique: 0, param_names: vec![None; params], removed: false });
         self.module.func_index.insert(name.to_string(), index);
         FuncId(index)
     }
@@ -136,8 +136,10 @@ impl Builder {
 
     /// `Argument::setName`.
     pub fn set_param_name(&mut self, func: FuncId, index: usize, name: &str) {
-        if let Some(slot) = self.module.funcs[func.0].param_names.get_mut(index) {
+        let function = &mut self.module.funcs[func.0];
+        if let Some(slot) = function.param_names.get_mut(index) {
             *slot = Some(name.to_string());
+            function.unique_name(name);
         }
     }
 
@@ -154,14 +156,8 @@ impl Builder {
 
     /// A new block, at the end of the function. Names are made unique.
     pub fn block(&mut self, func: FuncId, name: &str) -> BlockId {
-        let blocks = &self.module.funcs[func.0].blocks;
-        let mut unique = name.to_string();
-        let mut suffix = 0;
-        while blocks.iter().any(|block| block.name == unique) {
-            suffix += 1;
-            unique = format!("{name}{suffix}");
-        }
-        let index = blocks.len();
+        let unique = self.module.funcs[func.0].unique_name(name);
+        let index = self.module.funcs[func.0].blocks.len();
         self.module.funcs[func.0].blocks.push(Block { name: unique, insts: Vec::new(), terminated: false });
         BlockId { func: func.0, block: index }
     }
@@ -219,6 +215,9 @@ impl Builder {
         let func = &mut self.module.funcs[block.func];
         let n = func.next_reg;
         func.next_reg += 1;
+        if !hint.is_empty() {
+            func.unique_name(hint);
+        }
         if hint.is_empty() {
             format!("%v{n}")
         } else {
@@ -420,7 +419,9 @@ impl Builder {
         let mut parts = Vec::new();
         for (index, arg) in args.iter().enumerate() {
             let mut text = arg.ty.to_string();
-            for attr in arg_attrs.get(index).into_iter().flatten() {
+            let mut attrs: Vec<&ParamAttr> = arg_attrs.get(index).into_iter().flatten().collect();
+            attrs.sort_by_key(|attr| attr.rank());
+            for attr in attrs {
                 text.push(' ');
                 text.push_str(&attr.text());
             }

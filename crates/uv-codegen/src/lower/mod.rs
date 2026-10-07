@@ -683,6 +683,11 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
         self.static_types.get(symbol).cloned().flatten()
     }
 
+    /// Whether the procedure is exported with a C-callable signature, and if so whether it catches.
+    pub fn export_unwind_mode(&self, symbol: &str) -> Option<bool> {
+        self.export_unwind_modes.get(symbol).copied()
+    }
+
     /// The module that owns a procedure.
     pub fn proc_module(&self, symbol: &str) -> Option<&Vec<String>> {
         self.proc_modules.get(symbol)

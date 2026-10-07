@@ -146,6 +146,10 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             }
             Ir::Return { value } => self.emit_return_ir(value),
             Ir::ReadVar { .. } => {}
+            Ir::ClearPanic => self.clear_panic_record_at(None),
+            Ir::PanicCheck => self.emit_panic_check(&None),
+            Ir::CleanupPanicCheck { cleanup_ir } => self.emit_panic_check(cleanup_ir),
+            Ir::LowerPanic { reason, cleanup_ir } => self.emit_lower_panic(reason, cleanup_ir),
             Ir::Call { callee, args, result } => self.emit_call(callee, args, result),
             Ir::ReadPath { path, name } => self.emit_read_path(path, name),
             Ir::BindVar { name, stable_name, value, ty, prov, prov_region, prov_region_tag } => self.emit_bind_var(name, stable_name, value, ty, *prov, prov_region, prov_region_tag),

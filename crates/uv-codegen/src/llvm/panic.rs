@@ -138,6 +138,9 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
         let Some(func) = self.b.current_func() else {
             return;
         };
+        if self.ctx.export_unwind_mode(self.b.func_name(func)).is_some() {
+            self.fail("returns from procedures exported with an unwind mode");
+        }
         let ret_ty = self.b.func_ty(func).ret.clone();
         if ret_ty.is_void() {
             self.b.ret_void();
@@ -215,5 +218,44 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             self.emit_return();
         }
         self.b.set_insert_point(cont_bb);
+    }
+
+    /// `EmitPanicCheckImpl`: leaves the procedure, after the cleanup, when the panic flag is set.
+    pub(super) fn emit_panic_check(&mut self, cleanup: &Option<IrPtr>) {
+        let Some(panic_ptr) = self.load_panic_out_ptr() else {
+            return;
+        };
+        let Some(has_panic) = self.load_panic_flag(Some(&panic_ptr)) else {
+            return;
+        };
+        let Some(func) = self.b.current_func() else {
+            return;
+        };
+        if self.b.func_name(func) == "main" && self.ctx.executable_project {
+            self.fail("panic checks in the entry procedure");
+            return;
+        }
+        let panic_bb = self.b.block(func, "panic.take");
+        let cont_bb = self.b.block(func, "panic.cont");
+        self.b.cond_br(&has_panic, panic_bb, cont_bb);
+        self.b.set_insert_point(panic_bb);
+        if cleanup.is_some() {
+            self.emit_ir(cleanup);
+        }
+        if !self.b.current_terminated() {
+            self.emit_return();
+        }
+        self.b.set_insert_point(cont_bb);
+    }
+
+    /// `IRLowerPanic`.
+    pub(super) fn emit_lower_panic(&mut self, reason: &str, cleanup: &Option<IrPtr>) {
+        self.store_panic_record(panic_code(reason));
+        if cleanup.is_some() {
+            self.emit_ir(cleanup);
+        }
+        if !self.b.current_terminated() {
+            self.emit_return();
+        }
     }
 }
