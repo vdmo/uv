@@ -4,6 +4,7 @@ pub mod assemblies;
 pub mod deterministic_order;
 pub mod fs_path;
 pub mod language_profile;
+pub mod link;
 pub mod load_project;
 pub mod manifest;
 pub mod module_discovery;

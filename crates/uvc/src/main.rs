@@ -293,6 +293,7 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
     let mut lowered_ir: Option<uv_codegen::ir::IrDecls> = None;
     let mut pending_decls: Vec<(String, String)> = Vec::new();
     let mut llvm_modules: Vec<sema::LlvmModule> = Vec::new();
+    let mut llvm_modules_written = false;
     if let (false, Some(project), Some(target_profile)) =
         (has_error(&diags), &project, selected_target_profile)
     {
@@ -367,14 +368,21 @@ fn run_build(opts: &CliOptions, color_override: ColorOverride, error_policy: &Er
             llvm_modules = outcome.llvm_modules;
             if lowered_ir.is_some() && sema_pending.is_none() && !has_error(&diags) && !opts.check_only && !opts.emit_ir {
                 let failure = llvm_modules.iter().find_map(|module| module.failure.clone());
-                sema_pending = Some(match failure {
-                    Some(what) => format!("code generation ({what})"),
-                    None => "code generation".to_string(),
-                });
+                match failure {
+                    Some(what) => sema_pending = Some(format!("code generation ({what})")),
+                    None => {
+                        write_llvm_ir(project, &llvm_modules, &mut diags);
+                        llvm_modules_written = true;
+                        let selected = target_profile;
+                        if !build_outputs(project, selected, &llvm_modules, opts, &log, &mut diags) && !has_error(&diags) {
+                            sema_pending = Some("code generation".to_string());
+                        }
+                    }
+                }
             }
         }
     }
-    if let (Some(project), false) = (&project, llvm_modules.is_empty()) {
+    if let (Some(project), false, false) = (&project, llvm_modules.is_empty(), llvm_modules_written) {
         write_llvm_ir(project, &llvm_modules, &mut diags);
     }
     let reached_unimplemented_phase = sema_pending.is_some();
@@ -540,6 +548,52 @@ fn write_llvm_ir(project: &uv_project::project::Project, modules: &[sema::LlvmMo
         }
         if std::fs::write(&file, &module.text).is_err() {
             emit_internal_diagnostic(diags, None, &format!("The LLVM IR could not be written to {file}"));
+        }
+    }
+}
+
+/// The objects of the modules and the program made of them. Returns whether the outputs of
+/// the assembly were made.
+fn build_outputs(project: &uv_project::project::Project, profile: uv_project::target_profile::TargetProfile, modules: &[sema::LlvmModule], opts: &cli::CliOptions, log: &BuildLog, diags: &mut DiagnosticStream) -> bool {
+    use uv_core::diagnostic_messages::emit_external_diagnostic;
+    use uv_project::link::{compile_ir_to_object, link_executable, linker_tool_name, resolve_tool, LinkError};
+    if project.assembly.kind != "executable" {
+        return false;
+    }
+    let (Some(llvm_as), Some(linker)) = (resolve_tool(project, profile, "llvm-as"), resolve_tool(project, profile, linker_tool_name(profile))) else {
+        emit_external_diagnostic(diags, "E-OUT-0405");
+        return false;
+    };
+    log.progress("Compiling", &format!("{} ({} modules)", project.assembly.name, modules.len()), Color::BoldGreen);
+    let opt_level = opts.opt_level.clone().unwrap_or_else(|| "O0".to_string());
+    let mut objects = Vec::new();
+    for module in modules {
+        let path = string_of_path(&module.path);
+        let Some(info) = project.modules.iter().find(|info| info.path == path) else {
+            continue;
+        };
+        let object = std::path::PathBuf::from(uv_project::outputs::obj_path(project, profile, info));
+        if let Err(what) = compile_ir_to_object(&llvm_as, &linker, &module.text, &object, &opt_level) {
+            emit_internal_diagnostic(diags, None, &format!("Code generation failed for module {path}: {what}"));
+            return false;
+        }
+        objects.push(object);
+    }
+    log.progress("Linking", &project.assembly.name, Color::BoldGreen);
+    let output = std::path::PathBuf::from(uv_project::outputs::exe_path(project, profile));
+    match link_executable(project, profile, &objects, &output) {
+        Ok(()) => true,
+        Err(LinkError::LinkerNotFound) => {
+            emit_external_diagnostic(diags, "E-OUT-0405");
+            false
+        }
+        Err(LinkError::RuntimeMissing(_)) => {
+            emit_external_diagnostic(diags, "E-OUT-0407");
+            false
+        }
+        Err(LinkError::Failed { .. }) => {
+            emit_external_diagnostic(diags, "E-OUT-0404");
+            false
         }
     }
 }
