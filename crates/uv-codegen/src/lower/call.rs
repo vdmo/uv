@@ -106,7 +106,7 @@ pub(super) fn lower_arg_with_temp(expr: &Arc<Expr>, prefix: &str, expected: &Typ
     if !by_move {
         ctx.register_value_type(&temp_value, temp_type.clone());
         let call_like = matches!(expr.node, ExprNode::CallExpr(_) | ExprNode::MethodCallExpr(_));
-        let no_cleanup = matches!(temp_type.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_)));
+        let no_cleanup = temp_type.is_some() && !type_needs_drop(&temp_type, ctx);
         let has_responsibility = !(call_like && no_cleanup) && binding_initializer_has_responsibility(expr, ctx);
         ctx.register_temp_value(&temp_value, &temp_type, has_responsibility);
     }
@@ -250,13 +250,14 @@ pub(super) fn lower_call(call: &ast::CallExpr, ctx: &mut LowerCtx) -> LowerResul
             (module, decl)
         }
     };
-    if decl.contract.is_some() {
-        return failed(ctx, "calls of procedures with contracts");
-    }
     if module.path.len() == 1 && (module.path[0].eq_ignore_ascii_case("string") || module.path[0].eq_ignore_ascii_case("bytes")) {
         return failed(ctx, "calls of built-in procedures");
     }
     let callee = Callee { symbol: mangle_proc_in_module(module, decl), module_path: module.path.clone() };
+    // `EmitLocalPreDynamicChecks`: a procedure that checks as it runs tests the precondition of what it calls.
+    if ctx.dynamic_checks && ctx.local_preconditions.contains(&callee.symbol) {
+        return failed(ctx, "calls that check the precondition of the callee");
+    }
     ensure_source_signature(&callee, decl, ctx);
     lower_resolved_call(call, ctx, callee_ir, Some(callee), foreign_symbol)
 }

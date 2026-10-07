@@ -1,6 +1,9 @@
 //! Lowering: proc.
 
 use super::*;
+use uv_analysis::composite::classes::type_implements_class;
+use uv_analysis::composite::record_methods::lookup_method_static;
+use uv_analysis::typing::types::type_key_of;
 
 pub(super) fn lower_proc(decl: &ProcedureDecl, module_path: &[String], symbol: String, ctx: &mut LowerCtx) -> ProcIr {
     let mut ir = ProcIr { symbol: symbol.clone(), defining_module_path: module_path.to_vec(), ..Default::default() };
@@ -22,8 +25,9 @@ pub(super) fn lower_proc(decl: &ProcedureDecl, module_path: &[String], symbol: S
         }
     }
     let is_export_proc = has_attr(&decl.attrs, "export");
-    if decl.contract.is_some() {
-        ctx.unported("procedure contracts");
+    // A contract is checked as the procedure runs only under `#dynamic`.
+    if decl.contract.is_some() && ctx.dynamic_checks {
+        ctx.unported("dynamic contract checks");
     }
     ctx.expr_prov = compute_expr_provenance_map(&ctx.scope, module_path, &decl.params, &decl.body, None);
     ctx.push_scope();
@@ -81,8 +85,12 @@ pub(super) fn lower_proc(decl: &ProcedureDecl, module_path: &[String], symbol: S
     if async_sig_of(&ctx.scope, &ir.ret).is_some() {
         ctx.unported("async procedures");
     }
-    if !matches!(ir.ret.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) {
-        ctx.unported("aggregate copy elision for non-primitive returns");
+    // `AnalyzeAggregateCopyElision` looks into procedures that return an aggregate copied bit
+    // by bit, and gives up at once on any other. Its analysis is not ported.
+    let stripped = strip_perm(&ir.ret).or_else(|| ir.ret.clone());
+    let aggregate = matches!(stripped.as_deref().map(|ty| &ty.node), Some(TypeNode::Array { .. } | TypeNode::Tuple(_) | TypeNode::Union(_) | TypeNode::Path { .. } | TypeNode::Apply { .. } | TypeNode::ModalState(_)));
+    if ir.abi.is_none() && aggregate && bitcopy_type(&ctx.scope, &ir.ret) {
+        ctx.unported("aggregate copy elision of returns");
     }
     ctx.dynamic_checks = false;
     ctx.current_proc_symbol = None;
@@ -263,4 +271,173 @@ pub(super) fn lower_extern_block(block: &ast::ExternBlock, module_path: &[String
         decls.push(IrDecl::ExternProc(ExternProcIr { symbol, params, ret, abi, ..Default::default() }));
     }
     decls
+}
+
+// ------------------------------------------------------------------- class defaults
+
+/// `PathOfType`: the path a type is named by in a symbol.
+fn path_of_type(ty: &TypeRef) -> Vec<String> {
+    let state_name = |view: bool| if view { "view" } else { "managed" };
+    match ty.as_deref().map(|ty| &ty.node) {
+        Some(TypeNode::Prim(name)) => vec!["prim".to_string(), name.clone()],
+        Some(TypeNode::String(state)) => vec!["string".to_string(), state.map_or("modal", |state| state_name(state == uv_analysis::typing::types::StringState::View)).to_string()],
+        Some(TypeNode::Bytes(state)) => vec!["bytes".to_string(), state.map_or("modal", |state| state_name(state == uv_analysis::typing::types::BytesState::View)).to_string()],
+        Some(TypeNode::Path { path, .. }) => path.clone(),
+        Some(TypeNode::ModalState(modal)) => {
+            let mut path = modal.path.clone();
+            path.push(modal.state.clone());
+            path
+        }
+        _ => Vec::new(),
+    }
+}
+
+/// `MangleDefaultImpl`: the symbol of a class method's default body for one implementing type.
+fn mangle_default_impl(ty: &TypeRef, class_path: &[String], method_name: &str) -> String {
+    let mut path = vec!["default".to_string()];
+    path.extend(path_of_type(ty));
+    path.push("cl".to_string());
+    path.extend(class_path.iter().cloned());
+    path.push(method_name.to_string());
+    scoped_sym(&path)
+}
+
+/// `DefaultUserList`: the types, in their canonical order, that take a class method's default body.
+fn default_user_list(scope: &ScopeContext<'_>, class_path: &[String], method: &ast::ClassMethodDecl) -> Vec<TypeRef> {
+    let mut types: Vec<TypeRef> = Vec::new();
+    for (key, decl) in &scope.sigma.types {
+        if !matches!(decl, uv_analysis::context::TypeDecl::Record(_) | uv_analysis::context::TypeDecl::Enum(_) | uv_analysis::context::TypeDecl::Modal(_)) {
+            continue;
+        }
+        let ty = make_type_path(key.iter().map(ToString::to_string).collect());
+        if type_implements_class(scope, &ty, class_path) {
+            types.push(ty);
+        }
+    }
+    types.sort_by_key(type_key_of);
+    types
+        .into_iter()
+        .filter(|ty| lookup_method_static(scope, ty, &method.name).is_ok_and(|lookup| lookup.class_method.is_some() && lookup.owner_class == class_path))
+        .collect()
+}
+
+/// `LowerClassMethodBody`: the default body of a method, once for each type that uses it.
+pub(super) fn lower_class_method_body(class: &ast::ClassDecl, method: &ast::ClassMethodDecl, module_path: &[String], ctx: &mut LowerCtx) -> Vec<(String, ProcIr)> {
+    let Some(body) = &method.body_opt else {
+        return Vec::new();
+    };
+    let mut class_path = module_path.to_vec();
+    class_path.push(class.name.clone());
+    let prev_dynamic_checks = ctx.dynamic_checks;
+    ctx.dynamic_checks = has_attr(&method.attrs, "dynamic") || has_attr(&class.attrs, "dynamic");
+    let scope = layout_scope(ctx, module_path);
+    let mut procs = Vec::new();
+    for self_type in default_user_list(&scope, &class_path, method) {
+        let recv_type = recv_type_for_receiver(&self_type, &method.receiver, |written| match lower_type_for_layout(&ctx.scope, written).flatten() {
+            Some(ty) => Ok(Some(ty)),
+            None => Err(None),
+        });
+        let mut params = vec![IrParam { mode: recv_mode_of(&method.receiver), name: "self".to_string(), stable_name: "self".to_string(), ty: recv_type.ok().filter(Option::is_some).unwrap_or_else(|| self_type.clone()) }];
+        for param in &method.params {
+            params.push(lower_param(param, &self_type, ctx));
+        }
+        let ret_type = match &method.return_type_opt {
+            None => make_type_prim("()"),
+            Some(written) => match lower_type(&ctx.scope, &Some(written.clone())) {
+                Ok(ty) if ty.is_some() => subst_self(&self_type, &ty),
+                _ => None,
+            },
+        };
+        let symbol = mangle_default_impl(&self_type, &class_path, &method.name);
+        let mut proc = lower_proc_like(&symbol, &params, &ret_type, body, module_path, ctx);
+        for attr in &method.attrs {
+            match attr.name.full_name.as_str() {
+                "inline" => proc.inline_mode = inline_mode_for(attr),
+                "cold" => proc.cold = true,
+                "dynamic" => {}
+                other => ctx.unported(&format!("attribute {other} on methods")),
+            }
+        }
+        procs.push((symbol, proc));
+    }
+    ctx.dynamic_checks = prev_dynamic_checks;
+    procs
+}
+
+// -------------------------------------------------------------------------- modals
+
+fn apply_method_attrs(attrs: &[ast::AttributeItem], proc: &mut ProcIr, ctx: &mut LowerCtx) {
+    for attr in attrs {
+        match attr.name.full_name.as_str() {
+            "inline" => proc.inline_mode = inline_mode_for(attr),
+            "cold" => proc.cold = true,
+            "dynamic" => {}
+            other => ctx.unported(&format!("attribute {other} on methods")),
+        }
+    }
+}
+
+/// `LowerStateMethod`: a method of one state of a modal type, which takes `self` in that state.
+pub(super) fn lower_state_method(modal: &ast::ModalDecl, state: &ast::StateBlock, method: &ast::StateMethodDecl, module_path: &[String], ctx: &mut LowerCtx) -> Option<ProcIr> {
+    let Some(body) = &method.body else {
+        ctx.unported("state methods without a body");
+        return None;
+    };
+    let mut modal_path = module_path.to_vec();
+    modal_path.push(modal.name.clone());
+    let state_type = make_type_modal_state(modal_path.clone(), &state.name, Vec::new());
+    let recv_type = recv_type_for_receiver(&state_type, &method.receiver, |written| match lower_type_for_layout(&ctx.scope, written).flatten() {
+        Some(ty) => Ok(Some(ty)),
+        None => Err(None),
+    });
+    let self_type = recv_type.ok().filter(Option::is_some).unwrap_or_else(|| make_type_perm(Permission::Const, state_type.clone()));
+    let mut params = vec![IrParam { mode: recv_mode_of(&method.receiver), name: "self".to_string(), stable_name: "self".to_string(), ty: self_type }];
+    for param in &method.params {
+        params.push(lower_param(param, &state_type, ctx));
+    }
+    let ret_type = match &method.return_type_opt {
+        None => make_type_prim("()"),
+        Some(written) => match lower_type(&ctx.scope, &Some(written.clone())) {
+            Ok(ty) if ty.is_some() => subst_self(&state_type, &ty),
+            _ => None,
+        },
+    };
+    let mut symbol_path = modal_path;
+    symbol_path.push(state.name.clone());
+    symbol_path.push(method.name.clone());
+    let symbol = scoped_sym(&symbol_path);
+    let prev_dynamic_checks = ctx.dynamic_checks;
+    ctx.dynamic_checks = has_attr(&method.attrs, "dynamic") || has_attr(&modal.attrs, "dynamic");
+    let mut proc = lower_proc_like(&symbol, &params, &ret_type, body, module_path, ctx);
+    ctx.dynamic_checks = prev_dynamic_checks;
+    apply_method_attrs(&method.attrs, &mut proc, ctx);
+    Some(proc)
+}
+
+/// `LowerTransition`: the change of a modal value from one state to another.
+pub(super) fn lower_transition(modal: &ast::ModalDecl, state: &ast::StateBlock, trans: &ast::TransitionDecl, module_path: &[String], ctx: &mut LowerCtx) -> Option<ProcIr> {
+    let Some(body) = &trans.body else {
+        ctx.unported("transitions without a body");
+        return None;
+    };
+    let mut modal_path = module_path.to_vec();
+    modal_path.push(modal.name.clone());
+    let state_type = make_type_modal_state(modal_path.clone(), &state.name, Vec::new());
+    let recv_type = make_type_perm(Permission::Unique, state_type);
+    let none: TypeRef = None;
+    let mut params = vec![IrParam { mode: Some(ParamMode::Move), name: "self".to_string(), stable_name: "self".to_string(), ty: recv_type }];
+    for param in &trans.params {
+        params.push(lower_param(param, &none, ctx));
+    }
+    let ret_type = make_type_modal_state(modal_path.clone(), &trans.target_state, Vec::new());
+    let mut symbol_path = modal_path;
+    symbol_path.push(state.name.clone());
+    symbol_path.push(trans.name.clone());
+    let symbol = scoped_sym(&symbol_path);
+    let prev_dynamic_checks = ctx.dynamic_checks;
+    ctx.dynamic_checks = has_attr(&trans.attrs, "dynamic") || has_attr(&modal.attrs, "dynamic");
+    let mut proc = lower_proc_like(&symbol, &params, &ret_type, body, module_path, ctx);
+    ctx.dynamic_checks = prev_dynamic_checks;
+    apply_method_attrs(&trans.attrs, &mut proc, ctx);
+    Some(proc)
 }

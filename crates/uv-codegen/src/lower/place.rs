@@ -188,12 +188,12 @@ pub(super) fn lower_addr_of(place: &Arc<Expr>, ctx: &mut LowerCtx) -> LowerResul
 }
 
 /// `IsRangeIndexExpr`: an index whose type is a range that can index.
-fn is_range_index_expr(index: &Arc<Expr>, ctx: &LowerCtx) -> bool {
+pub(super) fn is_range_index_expr(index: &Arc<Expr>, ctx: &LowerCtx) -> bool {
     matches!(stored_expr_type(&ctx.scope, &Some(index.clone())).flatten().as_deref().map(|ty| &ty.node), Some(TypeNode::Range(_) | TypeNode::RangeInclusive(_) | TypeNode::RangeFrom(_) | TypeNode::RangeTo(_) | TypeNode::RangeToInclusive(_) | TypeNode::RangeFull))
 }
 
 /// `NeedsIndexCheck`: an array is checked only when the procedure checks as it runs.
-fn needs_index_check(base: &Arc<Expr>, ctx: &LowerCtx) -> bool {
+pub(super) fn needs_index_check(base: &Arc<Expr>, ctx: &LowerCtx) -> bool {
     let base_type = stored_expr_type(&ctx.scope, &Some(base.clone())).flatten();
     let stripped = strip_perm(&base_type);
     if matches!(stripped.as_deref().map(|ty| &ty.node), Some(TypeNode::Array { .. })) {

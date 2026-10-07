@@ -37,6 +37,10 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
                 }
                 let symbol = mangle_proc_in_module(module, decl);
                 let proc = lower_proc(decl, &module.path, symbol.clone(), ctx);
+                // What later calls check before the call: the precondition, as the callee declares it.
+                if decl.contract.as_ref().is_some_and(|contract| contract.precondition.is_some()) {
+                    ctx.local_preconditions.insert(symbol.clone());
+                }
                 ctx.proc_sigs.insert(symbol.clone(), ProcSig { params: proc.params.clone(), ret: proc.ret.clone() });
                 match ctx.pending.take() {
                     None => out.decls.push(IrDecl::Proc(proc)),
@@ -76,15 +80,60 @@ pub fn lower_module(module: &ASTModule, ctx: &mut LowerCtx) -> LoweredModule {
             }
             ASTItem::ModalDecl(decl) => {
                 let generic = decl.generic_params.as_ref().is_some_and(|params| !params.params.is_empty());
-                let has_bodies = decl.states.iter().flat_map(|state| &state.members).any(|member| matches!(member, ast::StateMember::StateMethodDecl(_) | ast::StateMember::TransitionDecl(_)));
-                if has_bodies && !generic {
-                    out.pending.push((scoped_sym(&item_path_proc(&module.path, &decl.name)), "modal methods and transitions".to_string()));
+                if generic {
+                    continue;
+                }
+                let mut modal_path = module.path.clone();
+                modal_path.push(decl.name.clone());
+                for state in &decl.states {
+                    // The methods of a state first, then its transitions.
+                    let mut lowered: Vec<(String, Option<ProcIr>, Option<String>)> = Vec::new();
+                    for member in &state.members {
+                        if let ast::StateMember::StateMethodDecl(method) = member {
+                            ctx.pending = None;
+                            let proc = lower_state_method(decl, state, method, &module.path, ctx);
+                            let mut symbol_path = modal_path.clone();
+                            symbol_path.push(state.name.clone());
+                            symbol_path.push(method.name.clone());
+                            lowered.push((scoped_sym(&symbol_path), proc, ctx.pending.take()));
+                        }
+                    }
+                    for member in &state.members {
+                        if let ast::StateMember::TransitionDecl(trans) = member {
+                            ctx.pending = None;
+                            let proc = lower_transition(decl, state, trans, &module.path, ctx);
+                            let mut symbol_path = modal_path.clone();
+                            symbol_path.push(state.name.clone());
+                            symbol_path.push(trans.name.clone());
+                            lowered.push((scoped_sym(&symbol_path), proc, ctx.pending.take()));
+                        }
+                    }
+                    for (symbol, proc, pending) in lowered {
+                        if let Some(proc) = &proc {
+                            ctx.proc_sigs.insert(symbol.clone(), ProcSig { params: proc.params.clone(), ret: proc.ret.clone() });
+                        }
+                        match (proc, pending) {
+                            (Some(proc), None) => out.decls.push(IrDecl::Proc(proc)),
+                            (_, what) => out.pending.push((symbol, what.unwrap_or_else(|| "modal methods and transitions".to_string()))),
+                        }
+                    }
                 }
             }
             ASTItem::ClassDecl(decl) => {
-                let has_default_bodies = decl.items.iter().any(|item| matches!(item, ast::ClassItem::ClassMethodDecl(method) if method.body_opt.is_some()));
-                if has_default_bodies {
-                    out.pending.push((scoped_sym(&item_path_proc(&module.path, &decl.name)), "default methods of classes".to_string()));
+                for item in &decl.items {
+                    let ast::ClassItem::ClassMethodDecl(method) = item else {
+                        continue;
+                    };
+                    ctx.pending = None;
+                    let procs = lower_class_method_body(decl, method, &module.path, ctx);
+                    let pending = ctx.pending.take();
+                    for (symbol, proc) in procs {
+                        ctx.proc_sigs.insert(symbol.clone(), ProcSig { params: proc.params.clone(), ret: proc.ret.clone() });
+                        match &pending {
+                            None => out.decls.push(IrDecl::Proc(proc)),
+                            Some(what) => out.pending.push((symbol, what.clone())),
+                        }
+                    }
                 }
             }
             ASTItem::ExternBlock(block) => {

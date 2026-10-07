@@ -52,6 +52,16 @@ pub(super) fn lower_return_stmt(stmt: &ast::ReturnStmt, ctx: &mut LowerCtx) -> I
     // postcondition to read it.
     let mut value = value;
     let needs_snapshot = value_type.is_some() && !is_unit_type(&value_type) && !bitcopy_type(&ctx.scope, &value_type);
+    // A value that is non-bitcopy only for its permission (`unique i32`): the reference snapshots
+    // the read of a field of a unique receiver before an assignment to it, and does not after
+    // one; the type store that decides it is not reproduced.
+    if needs_snapshot {
+        if let Some(TypeNode::Perm { base, .. }) = value_type.as_deref().map(|ty| &ty.node) {
+            if bitcopy_type(&ctx.scope, base) {
+                ctx.unported("returns of values whose type is a permission over a bitcopy type");
+            }
+        }
+    }
     if needs_snapshot && value.kind != IrValueKind::Immediate {
         let name = ctx.fresh_temp_value("return_snapshot").name;
         let stable_name = ctx.register_var(&name, value_type.clone(), false, ProvenanceKind::Bottom, None, None);
@@ -76,22 +86,144 @@ pub(super) fn lower_return_stmt(stmt: &ast::ReturnStmt, ctx: &mut LowerCtx) -> I
     seq_ir(parts)
 }
 
-/// `LowerWritePlace` of a local: the binding holds a value again, and the old one is dropped by the store.
-fn lower_write_place(place: &Arc<Expr>, value: &IrValue, ctx: &mut LowerCtx) -> IrPtr {
-    let ExprNode::IdentifierExpr(ident) = &place.node else {
-        ctx.unported(&format!("writes to the place {}", variant_name(&place.node)));
-        return empty_ir();
+/// `DropOnAssignRoot`: whether writing into a place drops what was there: its binding owns the value and cannot move.
+fn drop_on_assign_root(place: &Arc<Expr>, ctx: &mut LowerCtx) -> bool {
+    let Some(root) = place_root(place) else {
+        return false;
     };
-    if ctx.binding_state(&ident.name).is_none() {
-        ctx.unported("writes to places that are not local");
-        return empty_ir();
+    match ctx.binding_state(&root) {
+        Some(state) => state.has_responsibility && state.is_immovable,
+        None => {
+            ctx.unported("writes through names that are not local");
+            false
+        }
     }
-    if let Some(state) = ctx.binding_states.get_mut(&ident.name).and_then(|states| states.last_mut()) {
-        state.is_moved = false;
-        state.moved_fields.clear();
+}
+
+/// `UpdateBindingAfterFieldAssign`: a field written again is not moved out any more.
+fn update_binding_after_field_assign(place: &Arc<Expr>, ctx: &mut LowerCtx) {
+    let (Some(root), Some(head)) = (place_root(place), field_head(place)) else {
+        return;
+    };
+    if let Some(state) = ctx.binding_states.get_mut(&root).and_then(|states| states.last_mut()) {
+        if !state.is_moved {
+            state.moved_fields.retain(|field| *field != head);
+        }
     }
-    let key_ir = lower_implicit_key_access(place, ast::KeyMode::Write, ctx);
-    seq_ir(vec![Some(key_ir), Some(Arc::new(Ir::StoreVar { name: ident.name.clone(), value: value.clone() }))])
+}
+
+/// The IR that reads the old value of a place and drops it.
+fn drop_old_value(ptr: &IrValue, ty: &TypeRef, prefix: &str, ctx: &mut LowerCtx) -> IrPtr {
+    let old = ctx.fresh_temp_value(prefix);
+    ctx.register_value_type(&old, ty.clone());
+    let read = Arc::new(Ir::ReadPtr { ptr: ptr.clone(), result: old });
+    // `EmitDrop`: nothing for a value that has nothing to drop.
+    if type_needs_drop(ty, ctx) {
+        ctx.unported("drops of values of this type");
+    }
+    seq_ir(vec![Some(read), Some(empty_ir())])
+}
+
+fn register_pointer_to(value: &IrValue, ty: &TypeRef, ctx: &mut LowerCtx) {
+    if ty.is_some() {
+        ctx.register_value_type(value, make_type_ptr(ty.clone(), Some(PtrState::Valid)));
+    }
+}
+
+/// `LowerWritePlace`: the value is written to a place of a local, a field, a tuple element or an element.
+pub(super) fn lower_write_place(place: &Arc<Expr>, value: &IrValue, ctx: &mut LowerCtx) -> IrPtr {
+    let place_type = stored_expr_type(&ctx.scope, &Some(place.clone())).flatten();
+    match &place.node {
+        ExprNode::AttributedExpr(node) => match &node.expr {
+            Some(inner) => lower_write_place(inner, value, ctx),
+            None => empty_ir(),
+        },
+        ExprNode::IdentifierExpr(ident) => {
+            if ctx.binding_state(&ident.name).is_none() {
+                ctx.unported("writes to places that are not local");
+                return empty_ir();
+            }
+            if let Some(state) = ctx.binding_states.get_mut(&ident.name).and_then(|states| states.last_mut()) {
+                state.is_moved = false;
+                state.moved_fields.clear();
+            }
+            let key_ir = lower_implicit_key_access(place, ast::KeyMode::Write, ctx);
+            seq_ir(vec![Some(key_ir), Some(Arc::new(Ir::StoreVar { name: ident.name.clone(), value: value.clone() }))])
+        }
+        ExprNode::FieldAccessExpr(node) => {
+            let Some(base) = &node.base else {
+                ctx.unported("field writes without a base");
+                return empty_ir();
+            };
+            let base_addr = lower_addr_of(base, ctx);
+            let ptr_value = ctx.fresh_temp_value("addr_of_field");
+            register_pointer_to(&ptr_value, &place_type, ctx);
+            let mut info = DerivedValueInfo::new(DerivedKind::AddrField);
+            info.base = base_addr.value.clone();
+            info.field = node.name.clone();
+            ctx.register_derived_value(&ptr_value, info);
+            let drop_ir = if drop_on_assign_root(base, ctx) { drop_old_value(&ptr_value, &place_type, "place_field_old", ctx) } else { empty_ir() };
+            let addr_marker = Arc::new(Ir::AddrOf { place: IrPlace { repr: build_place_repr(place) }, result: ptr_value.clone(), ref_syms: Vec::new() });
+            let write = Arc::new(Ir::WritePtr { ptr: ptr_value, value: value.clone() });
+            update_binding_after_field_assign(place, ctx);
+            let key_ir = lower_implicit_key_access(place, ast::KeyMode::Write, ctx);
+            seq_ir(vec![Some(base_addr.ir), Some(key_ir), Some(addr_marker), Some(drop_ir), Some(write)])
+        }
+        ExprNode::TupleAccessExpr(node) => {
+            let Some(base) = &node.base else {
+                ctx.unported("tuple writes without a base");
+                return empty_ir();
+            };
+            let base_addr = lower_addr_of(base, ctx);
+            let ptr_value = ctx.fresh_temp_value("addr_of_tuple");
+            register_pointer_to(&ptr_value, &place_type, ctx);
+            let mut info = DerivedValueInfo::new(DerivedKind::AddrTuple);
+            info.base = base_addr.value.clone();
+            info.tuple_index = usize::try_from(node.index).unwrap_or(usize::MAX);
+            ctx.register_derived_value(&ptr_value, info);
+            let drop_ir = if drop_on_assign_root(base, ctx) { drop_old_value(&ptr_value, &place_type, "place_tuple_old", ctx) } else { empty_ir() };
+            let addr_marker = Arc::new(Ir::AddrOf { place: IrPlace { repr: build_place_repr(place) }, result: ptr_value.clone(), ref_syms: Vec::new() });
+            let write = Arc::new(Ir::WritePtr { ptr: ptr_value, value: value.clone() });
+            let key_ir = lower_implicit_key_access(place, ast::KeyMode::Write, ctx);
+            seq_ir(vec![Some(base_addr.ir), Some(key_ir), Some(addr_marker), Some(drop_ir), Some(write)])
+        }
+        ExprNode::IndexAccessExpr(node) => {
+            let (Some(base), Some(index)) = (&node.base, &node.index) else {
+                ctx.unported("element writes without a base or an index");
+                return empty_ir();
+            };
+            let base_addr = lower_addr_of(base, ctx);
+            if matches!(index.node, ExprNode::RangeExpr(_)) || is_range_index_expr(index, ctx) {
+                ctx.unported("writes to ranges of elements");
+                return empty_ir();
+            }
+            let index_result = lower_expr(index, ctx);
+            let needs_check = needs_index_check(base, ctx);
+            let ptr_value = ctx.fresh_temp_value("addr_of_index");
+            register_pointer_to(&ptr_value, &place_type, ctx);
+            let mut info = DerivedValueInfo::new(DerivedKind::AddrIndex);
+            info.base = base_addr.value.clone();
+            info.index = index_result.value.clone();
+            ctx.register_derived_value(&ptr_value, info);
+            let drop_ir = if drop_on_assign_root(base, ctx) { drop_old_value(&ptr_value, &place_type, "place_index_old", ctx) } else { empty_ir() };
+            let addr_marker = Arc::new(Ir::AddrOf { place: IrPlace { repr: build_place_repr(place) }, result: ptr_value.clone(), ref_syms: Vec::new() });
+            let write = Arc::new(Ir::WritePtr { ptr: ptr_value, value: value.clone() });
+            let mut seq = vec![Some(base_addr.ir), Some(index_result.ir)];
+            seq.push(Some(lower_implicit_key_access(place, ast::KeyMode::Write, ctx)));
+            if needs_check {
+                seq.push(Some(Arc::new(Ir::CheckIndex { base: base_addr.value, index: index_result.value })));
+                seq.push(Some(panic_check(ctx)));
+            }
+            seq.push(Some(addr_marker));
+            seq.push(Some(drop_ir));
+            seq.push(Some(write));
+            seq_ir(seq)
+        }
+        other => {
+            ctx.unported(&format!("writes to the place {}", variant_name(other)));
+            empty_ir()
+        }
+    }
 }
 
 /// `LowerAssignStmt`.
@@ -222,6 +354,9 @@ pub(super) fn lower_binding_stmt(binding: &ast::Binding, is_let: bool, ctx: &mut
     match binding.pat.as_deref().map(|pat| &pat.node) {
         Some(ast::PatternNode::IdentifierPattern(pat)) => {
             let stable_name = ctx.register_var(&pat.name, var_type.clone(), has_responsibility, prov, prov_region.clone(), prov_region_tag.clone());
+            if binding.op.lexeme == ":=" {
+                ctx.mark_last_binding_immovable(&pat.name);
+            }
             bind_ir = Arc::new(Ir::BindVar { name: pat.name.clone(), stable_name, value: init_result.value.clone(), ty: var_type.clone(), prov, prov_region: prov_region.clone(), prov_region_tag: prov_region_tag.clone() });
             checked_value = IrValue { kind: IrValueKind::Local, name: pat.name.clone(), ..Default::default() };
             ctx.register_value_type(&checked_value, var_type.clone());
@@ -231,6 +366,9 @@ pub(super) fn lower_binding_stmt(binding: &ast::Binding, is_let: bool, ctx: &mut
                 ctx.unported("binding a union value to a typed pattern");
             }
             let stable_name = ctx.register_var(&pat.name, var_type.clone(), has_responsibility, prov, prov_region.clone(), prov_region_tag.clone());
+            if binding.op.lexeme == ":=" {
+                ctx.mark_last_binding_immovable(&pat.name);
+            }
             bind_ir = Arc::new(Ir::BindVar { name: pat.name.clone(), stable_name, value: init_result.value.clone(), ty: var_type.clone(), prov, prov_region: prov_region.clone(), prov_region_tag: prov_region_tag.clone() });
             checked_value = IrValue { kind: IrValueKind::Local, name: pat.name.clone(), ..Default::default() };
             ctx.register_value_type(&checked_value, var_type.clone());

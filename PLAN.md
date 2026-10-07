@@ -868,30 +868,56 @@ reported as pending, as the typing was.
 
 ### M6 progress: lowering
 
-`crates/uv-codegen/src/lower.rs` lowers procedures and modules. A construct that is not
-ported yet is recorded and its declaration is left out of the output; `uvc --emit-ir`
+`crates/uv-codegen/src/lower/` (`mod`, `expr`, `call`, `place`, `stmt`, `proc`, `module`,
+`statics`, `cleanup`, `keys`, `drop`) lowers procedures and modules. A construct that is
+not ported yet is recorded and its declaration is left out of the output; `uvc --emit-ir`
 prints what lowered and exits 3 when anything did not, with one `pending:` line per
 declaration on stderr (`tools/pending_ir.py` counts them over the golden projects).
 `tools/parity_ir.py` compares the declarations that were printed and counts the others
-as pending. Ported so far: literals, identifier reads of locals, `let`/`var` of simple
-names, `return`, blocks, expression statements, calls of procedures of the program
-(selected, or named by an identifier) with by-reference and by-move arguments of locals
-and temporaries, binary operators including `&&` and `||`, record expressions,
-parameters, the `inline` and `cold` attributes, the module initialisation and
-deinitialisation procedures of modules without statics, and the expression provenance
-map (`compute_expr_provenance_map`, in `uv-analysis/src/memory/region_prov.rs`).
+as pending. State of the gate: 90 projects, 318 of 859 declarations identical, 0
+different, 0 extra; the driver gate has 638 of 685 projects identical.
+
+Ported: literals (full), identifier reads, binary/unary/short-circuit operators, `if`,
+tuples, arrays, records, field and tuple access, `sizeof`/`alignof`, moves, calls of
+procedures of the program (selected, identifier, path; by-reference and by-move
+arguments; panic-out), extern blocks and calls to foreign procedures, `export`,
+`host_export`, `mangle`, `unwind`, `inline`, `cold` and `dynamic` attributes, `let`/`var`,
+assignments to locals and to fields, tuple elements and scalar indexes, addresses of
+places, index access, `return` (with the snapshot of values that are not bitcopy), the
+key system (key blocks, implicit key access, ordering fences), statics with their
+initialisation and deinitialisation, record methods, class default methods, modal state
+methods and transitions, `TypeNeedsDrop`, cleanup plans and the expression provenance
+map.
 
 Simplifications, each of which leaves a declaration pending rather than wrong:
 
 - The numbering of bindings (`__bind_<n>_<name>`) is one counter over the whole program.
-  Once a declaration is left out, later declarations that bind names are left out too,
-  because the counter would no longer match the reference's.
-- `NeedsPanicOut` is `symbol != "main"` and not a record constructor; the catalogue of
-  runtime symbols, which the reference also excludes, is not ported. It is exact for the
-  symbols of procedures of the program.
-- Drops are ported for values of primitive types only (their drop is `nop`).
-- `BuiltinSym` is not ported, so a user module named `string` or `bytes` is refused.
-- The derived-value table holds record literals only; the other kinds come with the
-  expressions that make them.
-- `LowerTypeForLayout` is used for annotations of `let` and `var`; a callee's signature
-  is read with `lower_type`.
+  Once a construct is skipped, later declarations that bind names are left out too.
+- Drops are ported for values that need no drop; any other drop (drop glue) is pending.
+- Contracts are only lowered when inert (outside `#dynamic`); dynamic contract checks,
+  calls from dynamic code to a callee with a precondition, and the aggregate copy elision
+  analysis (`AnalyzeAggregateCopyElision`) are pending.
+- A returned value whose type is a permission over a bitcopy type (`unique i32`) is
+  pending: the reference snapshots the read of a field of a unique receiver, but not after
+  an assignment to it, and the type store behind that is not reproduced.
+- `BuiltinSym` and the catalogue of runtime symbols are not ported.
+- The derived-value table holds the kinds the ported expressions need.
+- Speculative key blocks, raw-dylib externs and foreign contracts are pending.
+- Pending constructs, by order of work: ranges and slices, enum literals, casts,
+  `transmute`, pointer null, propagate (`?`), loops, `if case`, yield, `#test`, generics
+  and monomorphization, vtables and dynamic dispatch, then async (race, sync, parallel,
+  all, closures, async returns, stream and sequence combinators) last.
+
+### What is left to use it as a compiler and a language service
+
+The language service (M4) and the editors (M5) already run on the ported front end, so
+editing, diagnostics, hover, completion and navigation work today without code
+generation. What stops `uvc build` from producing a program is the rest of M6, in order:
+
+1. Finish lowering the pending constructs above until every golden declaration is
+   identical (the IR gate at 859 of 859).
+2. `RegisterModuleSignatures` / `BuildCodegenCache` for the non `--emit-ir` path, so a
+   build lowers every module instead of the `--emit-ir` one.
+3. LLVM emission (`llvm`, 46k lines of C++) behind a backend trait, then the linker driver
+   and platform tool resolution; goal: `Tools/RunHelloVerification.py` passes.
+4. M7: packaging.

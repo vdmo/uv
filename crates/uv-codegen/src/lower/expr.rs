@@ -685,7 +685,7 @@ pub(super) fn lower_record_expr(expr: &Arc<Expr>, node: &ast::RecordExpr, ctx: &
 }
 
 /// `FieldHead`: the first field a place goes through.
-fn field_head(expr: &Arc<Expr>) -> Option<String> {
+pub(super) fn field_head(expr: &Arc<Expr>) -> Option<String> {
     match &expr.node {
         ExprNode::AttributedExpr(node) => node.expr.as_ref().and_then(field_head),
         ExprNode::IdentifierExpr(_) | ExprNode::DerefExpr(_) => None,

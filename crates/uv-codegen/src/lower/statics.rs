@@ -95,7 +95,7 @@ pub(super) fn lower_static_init_item(module_path: &[String], item: &ast::StaticD
         Some(name) => {
             let symbol = scoped_sym(&item_path_proc(module_path, &name));
             parts.push(Some(Arc::new(Ir::StoreGlobal { symbol, value: init_result.value.clone() })));
-            if static_has_responsibility(item) && !matches!(static_init_type(item, module_path, ctx).as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) {
+            if static_has_responsibility(item) && type_needs_drop(&static_init_type(item, module_path, ctx), ctx) {
                 ctx.unported("statics whose values need a drop");
             }
         }
@@ -128,7 +128,7 @@ pub(super) fn lower_static_deinit(module_path: &[String], module: &ASTModule, ct
         if let Some(name) = static_name(&item.binding) {
             if static_has_responsibility(item) {
                 let ty = static_init_type(item, module_path, ctx);
-                if !matches!(ty.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) {
+                if type_needs_drop(&ty, ctx) {
                     ctx.unported("drops of statics of this type");
                 }
                 let _ = name;

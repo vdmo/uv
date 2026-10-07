@@ -121,7 +121,9 @@ fn emit_cleanup_action(action: &CleanupAction, ctx: &mut LowerCtx) -> IrPtr {
     };
     match action {
         CleanupAction::DropVar { ty, .. } | CleanupAction::DropTemp { ty } => {
-            if !matches!(ty.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) {
+            // A value that has nothing to drop is released by doing nothing; any other needs the
+            // drop glue of its type, which is not ported.
+            if type_needs_drop(ty, ctx) {
                 ctx.unported("drops of values of this type");
             }
             empty_ir()
@@ -169,7 +171,7 @@ pub(super) fn temp_cleanup(temps: &[TempValue], ctx: &mut LowerCtx) -> IrPtr {
     let mut parts = Vec::new();
     for temp in temps.iter().rev() {
         if temp.has_responsibility && temp.ty.is_some() {
-            if !matches!(temp.ty.as_deref().map(|ty| &ty.node), Some(TypeNode::Prim(_))) {
+            if type_needs_drop(&temp.ty, ctx) {
                 ctx.unported("drops of temporaries of this type");
             }
             parts.push(Some(empty_ir()));

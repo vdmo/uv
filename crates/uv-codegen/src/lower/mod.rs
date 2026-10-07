@@ -36,6 +36,7 @@ use uv_core::symbols::{mangle, string_of_path};
 
 mod call;
 mod cleanup;
+mod drop;
 mod expr;
 mod keys;
 mod module;
@@ -44,7 +45,7 @@ mod proc;
 mod statics;
 mod stmt;
 
-use self::{call::*, cleanup::*, expr::*, keys::*, place::*, proc::*, statics::*, stmt::*};
+use self::{call::*, cleanup::*, drop::*, expr::*, keys::*, place::*, proc::*, statics::*, stmt::*};
 
 pub use self::module::{lower_module, LoweredModule};
 
@@ -109,6 +110,8 @@ struct BindingState {
     stable_name: String,
     binding_id: u64,
     has_responsibility: bool,
+    /// Whether an assignment drops what the binding held: it owns the value and cannot move.
+    is_immovable: bool,
     is_moved: bool,
     /// Fields moved out of the binding, which are not dropped with it.
     moved_fields: Vec<String>,
@@ -220,6 +223,8 @@ pub struct LowerCtx<'a, 'b> {
     export_unwind_modes: HashMap<String, bool>,
     /// The foreign procedures declared so far.
     ffi_imports: std::collections::HashSet<String>,
+    /// The procedures lowered so far that declare a precondition.
+    local_preconditions: std::collections::HashSet<String>,
     static_types: HashMap<String, TypeRef>,
     /// `ctx.active_static_init_module`: the module whose statics are being initialised.
     active_static_init_module: Option<String>,
@@ -262,6 +267,7 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
             record_ctors: std::collections::HashSet::new(),
             export_unwind_modes: HashMap::new(),
             ffi_imports: std::collections::HashSet::new(),
+            local_preconditions: std::collections::HashSet::new(),
             static_types: HashMap::new(),
             active_static_init_module: None,
             init_modules: Vec::new(),
@@ -293,7 +299,10 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
         self.current_proc_symbol = None;
     }
 
+    /// A construct that is not ported is skipped. What it would have bound is not counted, so the
+    /// numbers of the bindings that follow, anywhere in the program, are no longer the reference's.
     fn unported(&mut self, what: &str) {
+        self.binding_ids_exact = false;
         if self.pending.is_none() {
             self.pending = Some(what.to_string());
         }
@@ -357,8 +366,8 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
     /// `RegisterVar`: a name bound in the current scope; the stable name it is known by in the IR.
     /// A binding that holds responsibility is released when the scope ends.
     fn register_var(&mut self, name: &str, ty: TypeRef, has_responsibility: bool, prov: ProvenanceKind, prov_region: Option<String>, prov_region_tag: Option<String>) -> String {
-        if !self.binding_ids_exact {
-            self.unported("numbering of bindings after a declaration that is not ported");
+        if !self.binding_ids_exact && self.pending.is_none() {
+            self.pending = Some("numbering of bindings after a declaration that is not ported".to_string());
         }
         let binding_id = self.next_binding_id;
         self.next_binding_id += 1;
@@ -369,8 +378,15 @@ impl<'a, 'b> LowerCtx<'a, 'b> {
                 scope.cleanup_items.push(CleanupItem::DropBinding { name: name.to_string(), binding_id });
             }
         }
-        self.binding_states.entry(name.to_string()).or_default().push(BindingState { ty, stable_name: stable_name.clone(), binding_id, has_responsibility, is_moved: false, moved_fields: Vec::new(), prov, prov_region, prov_region_tag });
+        self.binding_states.entry(name.to_string()).or_default().push(BindingState { ty, stable_name: stable_name.clone(), binding_id, has_responsibility, is_immovable: false, is_moved: false, moved_fields: Vec::new(), prov, prov_region, prov_region_tag });
         stable_name
+    }
+
+    /// `RegisterVar` with `is_immovable`: the last binding registered cannot move.
+    fn mark_last_binding_immovable(&mut self, name: &str) {
+        if let Some(state) = self.binding_states.get_mut(name).and_then(|states| states.last_mut()) {
+            state.is_immovable = true;
+        }
     }
 
     fn next_literal_id(&mut self) -> u64 {
