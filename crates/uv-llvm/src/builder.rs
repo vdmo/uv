@@ -60,6 +60,21 @@ impl Builder {
         self.cur = None;
     }
 
+    pub fn function_count(&self) -> usize {
+        self.module.funcs.len()
+    }
+
+    /// Removes the functions made from the given count on, which are declarations of what a
+    /// function that could not be emitted called.
+    pub fn remove_declarations_since(&mut self, count: usize) {
+        for index in count..self.module.funcs.len() {
+            let name = self.module.funcs[index].name.clone();
+            self.module.funcs[index].removed = true;
+            self.module.funcs[index].blocks.clear();
+            self.module.func_index.remove(&name);
+        }
+    }
+
     pub fn find_function(&self, name: &str) -> Option<FuncId> {
         self.module.func_index.get(name).map(|index| FuncId(*index))
     }

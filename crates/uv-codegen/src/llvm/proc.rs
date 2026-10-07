@@ -10,6 +10,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
         };
         self.proc_failed = false;
         self.proc_failure = None;
+        let declared_before = self.b.function_count();
         let generated = is_generated_proc_symbol(&proc.symbol);
         let saved_module = if proc.defining_module_path.is_empty() || self.ctx.module_path == proc.defining_module_path {
             None
@@ -19,6 +20,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
         self.locals.clear();
         self.local_types.clear();
         self.values.clear();
+        self.scratch_slots.clear();
         let entry = self.b.block(func, "entry");
         self.b.set_insert_point(entry);
         let abi_params = self.build_proc_abi_params(&proc.symbol, &proc.params);
@@ -61,6 +63,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
         if self.proc_failed {
             // A procedure that could not be emitted leaves nothing behind.
             self.b.remove_function(func);
+            self.b.remove_declarations_since(declared_before);
             self.functions.remove(&proc.symbol);
             self.proc_failed = false;
             let why = self.proc_failure.take().unwrap_or_default();
@@ -143,6 +146,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             }
             Ir::Return { value } => self.emit_return_ir(value),
             Ir::ReadVar { .. } => {}
+            Ir::Call { callee, args, result } => self.emit_call(callee, args, result),
             Ir::ReadPath { path, name } => self.emit_read_path(path, name),
             Ir::BindVar { name, stable_name, value, ty, prov, prov_region, prov_region_tag } => self.emit_bind_var(name, stable_name, value, ty, *prov, prov_region, prov_region_tag),
             other => self.fail(&format!("the IR form {}", ir_form_name(other))),

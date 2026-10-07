@@ -35,6 +35,7 @@ use crate::symbols::scoped_sym;
 use uv_core::symbols::string_of_path;
 
 mod abi;
+mod call;
 mod entry;
 mod eval;
 mod library;
@@ -84,6 +85,8 @@ pub struct Emitter<'e, 'a, 'b> {
     pub(super) local_types: HashMap<String, TypeRef>,
     /// The values of the IR values that have no name in the source, by the name they have in the IR.
     pub(super) values: HashMap<String, Value>,
+    /// The scratch slots of the procedure, by name and type (`AcquireReusableEntryAlloca`).
+    pub(super) scratch_slots: HashMap<(String, Ty), Vec<Value>>,
     /// `SetSymbolAlias`: the symbol a path read in the IR stands for.
     pub(super) symbol_aliases: HashMap<String, String>,
     /// The first thing that could not be emitted.
@@ -115,6 +118,7 @@ impl<'e, 'a, 'b> Emitter<'e, 'a, 'b> {
             locals: HashMap::new(),
             local_types: HashMap::new(),
             values: HashMap::new(),
+            scratch_slots: HashMap::new(),
             symbol_aliases: HashMap::new(),
             failure: None,
             failed_procs: Vec::new(),

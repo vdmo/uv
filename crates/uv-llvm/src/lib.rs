@@ -51,9 +51,9 @@ mod tests {
         if let Ok(path) = std::env::var("UV_LLVM_SAMPLE_OUT") {
             std::fs::write(path, &text).unwrap();
         }
-        assert!(text.contains("define i32 @pick(i32 %arg0, i1 %arg1) {"));
+        assert!(text.contains("define i32 @pick(i32 %0, i1 %1) {"));
         assert!(text.contains("%slot.0 = alloca i32, align 4"));
         assert!(text.contains("= phi i32 [ %sum.2, %yes ], [ 0, %no ]"), "{text}");
-        assert!(text.contains("ret i32 %merged."));
+        assert!(text.contains("ret i32 %merged.3"));
     }
 }
